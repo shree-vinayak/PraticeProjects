@@ -1,0 +1,19 @@
+package com.astute.api.adaptor;
+
+import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
+
+import com.astute.api.NotFoundException;
+
+@Transactional
+public class SubDivisionApiAdaptor {
+
+	/*
+	 * public Response addSubDivision(SubDivision subDivision) throws
+	 * NotFoundException { return null; }
+	 * 
+	 * public Response updateSubDivision(SubDivision subDivision) throws
+	 * NotFoundException { return null; }
+	 */
+    
+}

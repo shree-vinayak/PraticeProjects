@@ -1,0 +1,19 @@
+package com.astute.api.adaptor;
+
+import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
+
+import com.astute.api.NotFoundException;
+import com.astute.api.model.Region;
+
+@Transactional
+public class RegionApiAdaptor {
+
+	public Response addRegion(Region region) throws NotFoundException {
+        return null;
+    }
+
+    public Response updateRegion(Region region) throws NotFoundException {
+        return null;
+    }
+}

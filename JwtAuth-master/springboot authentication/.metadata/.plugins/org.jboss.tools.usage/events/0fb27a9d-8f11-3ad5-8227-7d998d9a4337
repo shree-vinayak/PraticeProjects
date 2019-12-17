@@ -1,0 +1,11 @@
+#Tue May 28 17:47:41 IST 2019
+vl=How many times the 'Finish' button pressed during the day
+l=Wizard class name
+ct=jbt
+d=1559045861532
+c=0
+cmp=usage
+a=finishWizard
+cl=org.eclipse.equinox.internal.p2.ui.dialogs.UninstallWizard
+v=2.2.202
+s=2

@@ -1,0 +1,76 @@
+package com.astute.api.adaptor;
+
+import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.astute.api.NotFoundException;
+import com.astute.api.model.Address;
+import com.astute.api.model.Circle;
+import com.astute.api.model.Company;
+import com.astute.dao.CircleDao;
+import com.astute.dto.AddressDto;
+import com.astute.dto.CircleDto;
+import com.astute.dto.CompanyDto;
+
+@Transactional
+public class CircleApiAdaptor {
+
+	@Autowired
+	private CircleDao circleDao;
+
+	public Response addCircle(Circle circle) throws NotFoundException {
+		return null;
+	}
+
+	public Response updateCircle(Circle circle) throws NotFoundException {
+		return null;
+	}
+
+	private CircleDto copyRequestObjectForCircle(Circle circle) {
+		CircleDto circleDto = new CircleDto();
+		if (circle != null) {
+			if (circle.getIdCircle() != null) {
+				circleDto.setIdCircle(circle.getIdCircle());
+			}
+			circleDto.setName(circle.getName());
+			circleDto.setEmail(circle.getEmail());
+			circleDto.setContact(circle.getContact());
+
+			if (circle.getAddress() != null) {
+				AddressDto addressDto = new AddressDto();
+				if (circle.getAddress().getIdAddress() != null) {
+					addressDto.setIdAddress(circle.getAddress().getIdAddress());
+				}
+				addressDto.setAddress(circle.getAddress().getAddress());
+				circleDto.setAddressDto(addressDto);
+			}
+		}
+		return circleDto;
+	}
+
+	private Circle copyResponseObjectForCircle(CircleDto circleDto) {
+		Circle circle = new Circle();
+		if (circleDto != null) {
+			if (circleDto.getIdCircle() != null) {
+				circle.setIdCircle(circleDto.getIdCircle());
+			}
+
+			circle.setName(circleDto.getName());
+			circle.setEmail(circleDto.getEmail());
+			circle.setContact(circleDto.getContact());
+
+			if (circleDto.getAddressDto() != null) {
+				Address address = new Address();
+				if (circleDto.getAddressDto().getIdAddress() != null) {
+					address.setIdAddress(circleDto.getAddressDto().getIdAddress());
+				}
+				address.setAddress(circleDto.getAddressDto().getAddress());
+				circle.setAddress(address);
+			}
+		}
+		return circle;
+	}
+}

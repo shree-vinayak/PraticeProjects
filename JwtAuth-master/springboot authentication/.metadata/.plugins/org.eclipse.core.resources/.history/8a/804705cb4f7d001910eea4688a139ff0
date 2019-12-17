@@ -1,0 +1,5 @@
+package com.test.SpringMappingExample.repo;
+
+public class DtrDeviceRepo {
+
+}

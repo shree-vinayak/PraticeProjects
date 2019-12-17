@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="/Data/Ankit_work1/ankush/"/>
+			<item value="/Data/Ankit_work1/ankush/astute-contract"/>
+			<item value="/Data/Ankit_work1/spring Boot example/Swagger Contract poc/spring-server-final"/>
+			<item value="/Data/Ankit_work1/spring Boot example/Swagger Contract poc/jaxrs-jersey-server-generated"/>
+			<item value="/Data/Ankit_work1/spring Boot example/Swagger Contract poc/spring-server electrical"/>
+			<item value="/Data/Ankit_work1/spring Boot example/Swagger Contract poc/FOR ELECTRICAL"/>
+			<item value="/Data/Ankit_work1/spring Boot example/Swagger Contract poc/spring-server-generated 2"/>
+			<item value="/Data/Ankit_work1/spring Boot example/Swagger Contract poc/spring-server-generated  electrical"/>
+			<item value="/Data/Ankit_work1/spring Boot example/Swagger Contract poc/spring-server-generated"/>
+			<item value="/Data/Ankit_work1/spring Boot example/Swagger Contract poc/spring-server-generated-1"/>
+			<item value="/Data/Ankit_work1/spring Boot example/Swagger Contract poc/TestSwagger1"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+</section>

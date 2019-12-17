@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1558941319531_0" label="Java Main Sources" name="Java Main Sources">
+<item elementID="=TestSwagger1/src\/main\/java" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=TestSwagger1/src\/main\/resources" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=spring-server-generated-1/src\/main\/java" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=spring-server-generated-1/src\/main\/resources" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=spring-server-generated/src\/main\/java" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=spring-server-generated/src\/main\/resources" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSet>
+<workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1558941319544_1" label="Java Test Sources" name="Java Test Sources">
+<item elementID="=spring-server-generated-1/src\/test\/java" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=spring-server-generated/src\/test\/java" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSet>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1559399751571_3" label="astute-contract" name="astute-contract">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/astute-server" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/astute" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/astute-contract" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/astute-client" type="4"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1558941321139_2" label="Window Working Set" name="Aggregate for window 1558941321139"/>
+</workingSetManager>

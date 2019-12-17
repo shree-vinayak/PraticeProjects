@@ -1,0 +1,1484 @@
+openapi: 3.0.0
+info:
+  title: Astute Energy API Specification.
+  description: Rest enpoints to be used with the Angular application for Astute Energy.
+  version: 0.0.1
+servers:
+  - url: /api/v1
+    description: API server.
+tags: 
+  - name: discom
+    description: Entities & their operations belonging to discom hierarchy.
+  - name: general
+    description: General Entities & their operations.
+security:
+  - BearerAuth: []
+  
+paths:
+  /circle:
+    get:
+      tags:
+        - discom
+      summary: returns a circle
+      operationId: getAllCircle
+      description: get details about all circle
+      parameters:
+        - name: idRegion
+          in: query
+          required: true
+          description: idRegion of the region to fetch.
+          schema:
+            type: integer
+            minimum: 0
+        - name: name
+          in: query
+          required: false
+          description: if provided, returns the circles that match this name.
+          schema:
+            type: string
+        - name: populate
+          in: query
+          required: false
+          description: if true, populates all nested entities.
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Circle'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    post:
+      tags:
+        - discom
+      summary: returns a circle
+      operationId: addCircle
+      description: add details about a circle
+      parameters:
+        - name: idRegion
+          in: query
+          required: true
+          description: idRegion of the region to fetch.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Circle'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Circle'
+    put:
+      tags:
+        - discom
+      summary: returns a circle
+      operationId: updateCircle
+      description: update details about a circle
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Circle'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Circle'
+    
+  /circle/count:
+    get:
+      tags:
+        - discom
+      summary: returns number of circles in a region
+      operationId: getCirclesCount
+      description: get number of circles in a region
+      parameters:
+        - name: idRegion
+          in: query
+          required: true
+          description: Region Id of the region to count circles for.
+          schema:
+            type: integer
+            minimum: 0
+        - name: name
+          in: query
+          required: false
+          description: if provided, returns the region that matches this name.
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Count'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        
+  /circle/{id}:
+    get:
+      tags:
+        - discom
+      summary: returns a circle
+      operationId: getCircle
+      description: get details about a circle
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the circle to fetch.
+          schema:
+            type: integer
+            minimum: 0
+        - name: populate
+          in: query
+          required: false
+          description: if true, populates all nested entities.
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Circle'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      tags:
+        - discom
+      summary: returns a circle
+      operationId: deleteCircle
+      description: delete details about a circle
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the circle to fetch.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Circle'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /company:
+    get:
+      tags:
+        - discom
+      summary: returns a company
+      operationId: getAllCompany
+      description: get details about all company
+      parameters:
+        - name: idState
+          in: query
+          required: true
+          description: idState of the state to fetch companies for.
+          schema:
+            type: integer
+            minimum: 0
+        - name: name
+          in: query
+          required: false
+          description: if provided, returns the companies that match this name.
+          schema:
+            type: string
+        - name: populate
+          in: query
+          required: false
+          description: if true, populates all nested entities.
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Company'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    
+    post:
+      tags:
+        - discom
+      summary: returns a company
+      operationId: addCompany
+      description: add details about a company
+      parameters:
+        - name: idState
+          in: query
+          required: true
+          description: idState of the state to fetch companies for.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+    put:
+      tags:
+        - discom
+      summary: returns a company
+      operationId: updateCompany
+      description: update details about a company
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+  /company/count:
+    get:
+      tags:
+        - discom
+      summary: returns number of companies
+      operationId: getCompaniesCount
+      description: get number of companies
+      responses:
+        '200':
+          $ref: '#/components/responses/Count'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+          
+  /company/{id}:
+    get:
+      tags:
+        - discom
+      summary: returns a company
+      operationId: getCompany
+      description: get details about a company
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the company to fetch.
+          schema:
+            type: integer
+            minimum: 0
+        - name: populate
+          in: query
+          required: false
+          description: if true, populates all nested entities.
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    
+    delete:
+      tags:
+        - discom
+      summary: returns a company
+      operationId: deleteCompany
+      description: delete details about a company
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the company to fetch.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  
+  /country:
+    get:
+      tags:
+        - general
+      summary: returns all countries.
+      operationId: getAllCountries
+      description: get list of all countries
+      parameters:
+        - name: name
+          in: query
+          required: false
+          description: if provided, returns the countries that match this name.
+          schema:
+            type: string
+        - name: populate
+          in: query
+          required: false
+          description: if true, populates all nested entities.
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Country'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  
+  /country/{id}:
+    get:
+      tags:
+        - general
+      summary: returns a country
+      operationId: getCountry()
+      description: get details about a country
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the country to fetch.
+          schema:
+            type: integer
+            minimum: 0
+        - name: populate
+          in: query
+          required: false
+          description: if true, populates all nested entities.
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Country'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    
+  /division:
+    get:
+      tags:
+        - discom
+      summary: returns a division
+      operationId: getAllDivision
+      description: get details about all division
+      parameters:
+        - name: idCircle
+          in: query
+          required: true
+          description: idCircle of the circle to fetch.
+          schema:
+            type: integer
+            minimum: 0
+        - name: name
+          in: query
+          required: false
+          description: if provided, returns the divisions that match this name.
+          schema:
+            type: string
+        - name: populate
+          in: query
+          required: false
+          description: if true, populates all nested entities.
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Division'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    post:
+      tags:
+        - discom
+      summary: returns a division
+      operationId: addDivision
+      description: add details about a division
+      parameters:
+        - name: idCircle
+          in: query
+          required: true
+          description: idCircle of the circle to fetch.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Division'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Division'
+    put:
+      tags:
+        - discom
+      summary: returns a division
+      operationId: updateDivision
+      description: update details about a division
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Division'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Division'
+    
+  /division/count:
+    get:
+      tags:
+        - discom
+      summary: returns number of divisions in a circle.
+      operationId: getDivisionsCount
+      description: get number of divisions in a circle.
+      parameters:
+        - name: idCircle
+          in: query
+          required: true
+          description: Circle Id of the circle to count divisions for.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          $ref: '#/components/responses/Count'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+          
+  /division/{id}:
+    get:
+      tags:
+        - discom
+      summary: returns a division
+      operationId: getDivision
+      description: get details about a division
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the division to fetch.
+          schema:
+            type: integer
+            minimum: 0
+        - name: populate
+          in: query
+          required: false
+          description: if true, populates all nested entities.
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Division'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    
+    delete:
+      tags:
+        - discom
+      summary: returns a division
+      operationId: deleteDivision
+      description: delete details about a division
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the division to fetch.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Division'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  
+  /region:
+    get:
+      tags:
+        - discom
+      summary: returns a region
+      operationId: getAllRegion
+      description: get details about all region
+      parameters:
+        - name: idCompany
+          in: query
+          required: true
+          description: idCompany of the company to fetch.
+          schema:
+            type: integer
+            minimum: 0
+        - name: name
+          in: query
+          required: false
+          description: if provided, returns the regions that match this name.
+          schema:
+            type: string
+        - name: populate
+          in: query
+          required: false
+          description: if true, populates all nested entities.
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Region'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+          
+    post:
+      tags:
+        - discom
+      summary: returns a region
+      operationId: addRegion
+      description: add details about a region
+      parameters:
+        - name: idCompany
+          in: query
+          required: true
+          description: idCompany of the company to fetch.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Region'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Region'
+    
+    put:
+      tags:
+        - discom
+      summary: returns a region
+      operationId: updateRegion
+      description: update details about a region
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Region'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Region'
+  
+  /region/count:
+    get:
+      tags:
+        - discom
+      summary: returns number of regions in a company.
+      operationId: getRegionsCount
+      description: get number of regions in a company.
+      parameters:
+        - name: idCompany
+          in: query
+          required: true
+          description: Company Id of the company to count regions for.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          $ref: '#/components/responses/Count'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+          
+  /region/{id}:
+    get:
+      tags:
+        - discom
+      summary: returns a region
+      operationId: getRegion
+      description: get details about a region
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the region to fetch.
+          schema:
+            type: integer
+            minimum: 0
+        - name: populate
+          in: query
+          required: false
+          description: if true, populates all nested entities.
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Region'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    
+    delete:
+      tags:
+        - discom
+      summary: returns a region
+      operationId: deleteRegion
+      description: delete details about a region
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the region to fetch.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Region'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  
+  /subdivision:
+    get:
+      tags:
+        - discom
+      summary: returns a Subdivision
+      operationId: getAllSubDivision
+      description: get details about all Subdivision
+      parameters:
+        - name: idDivision
+          in: query
+          required: true
+          description: idDivision of the division to fetch.
+          schema:
+            type: integer
+            minimum: 0
+        - name: name
+          in: query
+          required: false
+          description: if provided, returns the subdivisions that match this name.
+          schema:
+            type: string
+        - name: populate
+          in: query
+          required: false
+          description: if true, populates all nested entities.
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subdivision'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+          
+    post:
+      tags:
+        - discom
+      summary: returns a Subdivision
+      operationId: addSubDivision
+      description: add details about a Subdivision
+      parameters:
+        - name: idDivision
+          in: query
+          required: true
+          description: idDivision of the division to fetch.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subdivision'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subdivision'
+
+    put:
+      tags:
+        - discom
+      summary: returns a Subdivision
+      operationId: updateSubDivision
+      description: update details about a subSubDivision
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subdivision'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subdivision'
+   
+  /subdivision/count:
+    get:
+      tags:
+        - discom
+      summary: returns number of subdivisions in a division.
+      operationId: getSubdivisionsCount
+      description: get number of subdivisions in a division.
+      parameters:
+        - name: idDivision
+          in: query
+          required: true
+          description: Division Id of the division to count subdivisions for.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          $ref: '#/components/responses/Count'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  
+  /subdivision/{id}:
+    get:
+      tags:
+        - discom
+      summary: returns a subSubDivision
+      operationId: getSubDivision
+      description: get details about a subSubDivision
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the subSubDivision to fetch.
+          schema:
+            type: integer
+            minimum: 0
+        - name: populate
+          in: query
+          required: false
+          description: if true, populates all nested entities.
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subdivision'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    
+    delete:
+      tags:
+        - discom
+      summary: returns a Subdivision
+      operationId: deleteSubDivision
+      description: delete details about a Subdivision
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the Subdivision to fetch.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subdivision'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /state:
+    get:
+      tags:
+        - general
+      summary: returns all states.
+      operationId: getAllStates
+      description: get list of all states
+      parameters:
+        - name: idCountry
+          in: query
+          required: true
+          description: idCountry of the country to fetch states for.
+          schema:
+            type: integer
+            minimum: 0
+        - name: name
+          in: query
+          required: false
+          description: if provided, returns the states that match this name.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/State'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  
+  /state/{id}:
+    get:
+      tags:
+        - general
+      summary: returns a state
+      operationId: getState()
+      description: get details about a state
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the state to fetch.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/State'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+          
+  /zone:
+    get:
+      tags:
+        - discom
+      summary: returns a zone
+      operationId: getAllZone
+      description: get details about all zone
+      parameters:
+        - name: idSubdivision
+          in: query
+          required: true
+          description: idSubdivision of the Subdivision to fetch.
+          schema:
+            type: integer
+            minimum: 0
+        - name: name
+          in: query
+          required: false
+          description: if provided, returns the zones that match this name.
+          schema:
+            type: string
+        - name: populate
+          in: query
+          required: false
+          description: if true, populates all nested entities.
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zone'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    post:
+      tags:
+        - discom
+      summary: returns a zone
+      operationId: addZone
+      description: add details about a zone
+      parameters:
+        - name: idSubdivision
+          in: query
+          required: true
+          description: idSubdivision of the Subdivision to fetch.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zone'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zone'
+    
+    put:
+      tags:
+        - discom
+      summary: returns a zone
+      operationId: updateZone
+      description: update details about a zone
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zone'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zone'
+  /zone/count:
+    get:
+      tags:
+        - discom
+      summary: returns number of zones in a subdivision.
+      operationId: getZonesCount
+      description: get number of zones in a circle.
+      parameters:
+        - name: idSubdivision
+          in: query
+          required: true
+          description: Subdivison Id of the subdivisoin to count zones for.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          $ref: '#/components/responses/Count'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+          
+  /zone/{id}:
+    get:
+      tags:
+        - discom
+      summary: returns a zone
+      operationId: getZone
+      description: get details about a zone
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the zone to fetch.
+          schema:
+            type: integer
+            minimum: 0
+        - name: populate
+          in: query
+          required: false
+          description: if true, populates all nested entities.
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zone'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    
+    delete:
+      tags:
+        - discom
+      summary: returns a zone
+      operationId: deleteZone
+      description: delete details about a zone
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the zone to fetch.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zone'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  
+  responses:
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Access token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Count:
+      description: Count for the requested entity.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CountResponse'
+
+  schemas:
+    Address:
+      type: object
+      properties:
+        idAddress:
+          type: integer
+          example: 2005
+        address:
+          type: string
+          example: 'full address.'
+    Circle:
+      type: object
+      properties:
+        idCircle:
+          type: integer
+          example: 2003
+        name:
+          type: string
+          example: 'Jabalupur Circle'
+        email:
+          type: string
+          format: email
+          example: 'ankit@gmail.com'
+        contact:
+          type: integer
+          example: 9893042451
+        address:
+          $ref: '#/components/schemas/Address'
+        division:
+          type: array
+          items:
+            $ref: '#/components/schemas/Division' 
+    Company:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2001
+        name:
+          type: string
+          example: 'Madhya Pradesh Paschim Kshetra Vidyut Vitaran Company Ltd'
+        logo:
+          type: string
+          example: "dfjkldsfkhsdjfhldksjhhfslkjdhfjklsdhflkhdsjkfhsdbflbxcvkjlhsljfhdsklflsbfldfkjldshfjkhvljkfhksjdfhjksdbfklbfkjldshfkldsbvlkafhklsdjhflvblakjslahfklsfkjlasdlfkbsdflashflkjsdhflksdhflkshadfklhsdlfkhsalkjfsfhlsadkj"
+        initials:
+          type: string
+          example: 'MPWZ'
+        email:
+          type: string
+          format: email
+          example: 'ankit@gmail.com'
+        contact:
+          type: integer
+          example: 9893042451
+        address:
+          $ref: '#/components/schemas/Address'
+        region:
+          type: array
+          items:
+            $ref: '#/components/schemas/Region'
+      required:
+        - name
+        - email
+        - contact
+        - address
+    Country:
+      type: object
+      properties:
+        countryId:
+          type: integer
+          example: 2001
+        countryName:
+          type: string
+          example: 'Madhya Pradesh Paschim Kshetra Vidyut Vitaran Company Ltd'
+        stateId:
+          type: array
+          items:
+            $ref: '#/components/schemas/State'
+    Division:
+      type: object
+      properties:
+        idDivision:
+          type: integer
+          example: 2004
+        name:
+          type: string
+          example: 'Indore Division'
+        email:
+          type: string
+          format: email
+          example: 'ankit@gmail.com'
+        contact:
+          type: integer
+          example: 9893042451
+        address:
+          $ref: '#/components/schemas/Address'
+        subDivision:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subdivision'         
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          example: 4001
+        message:
+          type: string
+          example: 'Some error message.'
+      required:
+        - code
+        - message 
+    CountResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 15
+      required:
+        - count
+    Region:
+      type: object
+      properties:
+        idRegion:
+          type: integer
+          example: 2001
+        name:
+          type: string
+          example: 'Indore Region'
+        email:
+          type: string
+          format: email
+          example: 'ankit@gmail.com'
+        contact:
+          type: integer
+          example: 9893042451
+        address:
+          $ref: '#/components/schemas/Address'
+        circle:
+          type: array
+          items:
+            $ref: '#/components/schemas/Circle'
+    Role:
+      type: object
+      properties:
+        idRole:
+          type: integer
+          example: 2006
+        create:
+          type: integer
+          example: 3252
+        read:
+          type: integer
+          example: 235
+        update:
+          type: integer
+          example: 234
+        delete:
+          type: integer
+          example: 325
+        execute:
+          type: integer
+          example: 452
+        name:
+          type: string
+          example: 'Aditya'
+        nameShort:
+          type: string
+          example: 'adu'
+    State:
+      type: object
+      properties:
+        stateId:
+          type: integer
+          example: 2005
+        stateName:
+          type: string
+          example: 'Indore Sub Division'
+    Subdivision:
+      type: object
+      properties:
+        idSubdivision:
+          type: integer
+          example: 2005
+        name:
+          type: string
+          example: 'Indore Sub Division'
+        email:
+          type: string
+          format: email
+          example: 'ankit@gmail.com'
+        contact:
+          type: integer
+          example: 9893042451
+        address:
+          $ref: '#/components/schemas/Address'
+        zone:
+          type: array
+          items:
+            $ref: '#/components/schemas/Zone'
+    User:
+      type: object
+      properties:
+        idUser:
+          type: integer
+          example: 12345
+        name:
+          type: string
+          example: 'Ashish'
+        mobile:
+          type: integer
+          format: '1234567890'
+          example: 9893454201
+        phone:
+          type: integer
+          format: '+91-0731-2557771'
+          example: +91-0731-2557771
+        password:
+          type: string
+          example: 'A@34!fe'
+        email:
+          type: string
+          format: email
+          example: 'ankit@gmail.com'      
+    Zone:
+      type: object
+      properties:
+        idDivision:
+          type: integer
+          example: 2005
+        name:
+          type: string
+          example: 'Satya Sai Zone'
+        email:
+          type: string
+          format: email
+          example: 'ankit@gmail.com'
+        contact:
+          type: integer
+          example: 9893042451
+        address:
+          $ref: '#/components/schemas/Address'
+        subDivision:
+          $ref: '#/components/schemas/Subdivision'

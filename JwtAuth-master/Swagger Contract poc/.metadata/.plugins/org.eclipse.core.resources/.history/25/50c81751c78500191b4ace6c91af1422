@@ -1,0 +1,9 @@
+package com.astute.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.astute.dto.RegionDto;
+
+public interface RegionDao extends JpaRepository<RegionDto, Integer> {
+
+}

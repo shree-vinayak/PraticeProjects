@@ -1,0 +1,70 @@
+package com.astute.api.adaptor;
+
+import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
+
+import com.astute.api.NotFoundException;
+import com.astute.api.model.Address;
+import com.astute.api.model.Division;
+import com.astute.api.model.Zone;
+import com.astute.dto.AddressDto;
+import com.astute.dto.DivisionDto;
+import com.astute.dto.ZoneDto;
+
+@Transactional
+public class ZonApiAdaptor {
+
+	public Response addZone(Zone zone) throws NotFoundException {
+		return null;
+	}
+
+	public Response updateZone(Zone zone) throws NotFoundException {
+		return null;
+	}
+
+	private ZoneDto copyRequestObjectForZone(Zone zone) {
+		ZoneDto zoneDto = new ZoneDto();
+		if (zone != null) {
+			if (zone.getIdDivision() != null) {
+				zoneDto.setIdZone(zone.getIdDivision());
+			}
+			zoneDto.setName(zone.getName());
+			zoneDto.setEmail(zone.getEmail());
+			zoneDto.setContact(zone.getContact());
+
+			if (zone.getAddress() != null) {
+				AddressDto addressDto = new AddressDto();
+				if (zone.getAddress().getIdAddress() != null) {
+					addressDto.setIdAddress(zone.getAddress().getIdAddress());
+				}
+				addressDto.setAddress(zone.getAddress().getAddress());
+				zoneDto.setAddressDto(addressDto);
+			}
+		}
+		return zoneDto;
+	}
+
+	private Zone copyResponseObjectForZone(ZoneDto zoneDto) {
+		Zone zone = new Zone();
+		if (zoneDto != null) {
+			if (zoneDto.getIdZone() != null) {
+				zone.setIdDivision(zoneDto.getIdZone());
+			}
+
+			zone.setName(zoneDto.getName());
+			zone.setEmail(zoneDto.getEmail());
+			zone.setContact(zoneDto.getContact());
+
+			if (zoneDto.getAddressDto() != null) {
+				Address address = new Address();
+				if (zoneDto.getAddressDto().getIdAddress() != null) {
+					address.setIdAddress(zoneDto.getAddressDto().getIdAddress());
+				}
+				address.setAddress(zoneDto.getAddressDto().getAddress());
+				zone.setAddress(address);
+			}
+		}
+		return zone;
+	}
+
+}

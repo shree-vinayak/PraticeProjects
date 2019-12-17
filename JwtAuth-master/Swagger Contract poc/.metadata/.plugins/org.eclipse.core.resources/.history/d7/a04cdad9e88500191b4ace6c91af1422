@@ -1,0 +1,46 @@
+package com.astute.api.adaptor;
+
+import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
+
+import com.astute.api.NotFoundException;
+import com.astute.api.model.Circle;
+import com.astute.api.model.Division;
+import com.astute.dto.AddressDto;
+import com.astute.dto.CircleDto;
+import com.astute.dto.DivisionDto;
+
+@Transactional
+public class DivisionApiAdaptor {
+	
+	public Response addDivision(Division division) throws NotFoundException {
+        return null;
+    }
+
+    public Response updateDivision(Division division) throws NotFoundException {
+        return null;
+    }
+    
+    private DivisionDto copyRequestObjectForDivision(Division division) {
+    	DivisionDto divisionDto = new DivisionDto();
+		if (division != null) {
+			if (division.getIdDivision() != null) {
+				divisionDto.setIdDivision(division.getIdDivision());
+			}
+			divisionDto.setName(division.getName());
+			divisionDto.setEmail(division.getEmail());
+			divisionDto.setContact(division.getContact());
+		
+
+			if (division.getAddress() != null) {
+				AddressDto addressDto = new AddressDto();
+				if (division.getAddress().getIdAddress() != null) {
+					addressDto.setIdAddress(division.getAddress().getIdAddress());
+				}
+				addressDto.setAddress(division.getAddress().getAddress());
+				divisionDto.setAddressDto(addressDto);
+			}
+		}
+		return divisionDto;
+	}
+}

@@ -1,0 +1,28 @@
+package com.astute.dto;
+
+public class RoleDto  {
+
+  private Integer idRole;
+
+
+  private Integer create;
+
+
+  private Integer read;
+
+
+  private Integer update;
+
+
+  private Integer delete;
+
+
+  private Integer execute;
+
+
+  private String name;
+
+
+  private String nameShort;
+}
+

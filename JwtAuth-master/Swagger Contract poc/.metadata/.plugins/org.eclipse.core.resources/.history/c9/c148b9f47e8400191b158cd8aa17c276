@@ -1,0 +1,23 @@
+package com.astute.dto;
+
+public class UserDto {
+
+  private Integer idUser;
+
+
+  private String name;
+
+
+  private Integer mobile;
+
+
+  private Integer phone;
+
+
+  private String password;
+
+
+  private String email;
+
+}
+

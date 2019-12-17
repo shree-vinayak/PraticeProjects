@@ -1,0 +1,90 @@
+package com.astute.api.adaptor;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
+
+import com.astute.api.NotFoundException;
+import com.astute.api.model.Address;
+import com.astute.api.model.Circle;
+import com.astute.api.model.Division;
+import com.astute.api.model.Region;
+import com.astute.dto.AddressDto;
+import com.astute.dto.CircleDto;
+import com.astute.dto.DivisionDto;
+import com.astute.dto.RegionDto;
+import com.astute.dto.SubdivisionDto;
+
+@Transactional
+public class DivisionApiAdaptor {
+
+	public Response addDivision(Division division) throws NotFoundException {
+		return null;
+	}
+
+	public Response updateDivision(Division division) throws NotFoundException {
+		return null;
+	}
+
+	private DivisionDto copyRequestObjectForDivision(Division division) {
+		DivisionDto divisionDto = new DivisionDto();
+		if (division != null) {
+			if (division.getIdDivision() != null) {
+				divisionDto.setIdDivision(division.getIdDivision());
+			}
+			divisionDto.setName(division.getName());
+			divisionDto.setEmail(division.getEmail());
+			divisionDto.setContact(division.getContact());
+
+			if (division.getAddress() != null) {
+				AddressDto addressDto = new AddressDto();
+				if (division.getAddress().getIdAddress() != null) {
+					addressDto.setIdAddress(division.getAddress().getIdAddress());
+				}
+				addressDto.setAddress(division.getAddress().getAddress());
+				divisionDto.setAddressDto(addressDto);
+			}
+		}
+		return divisionDto;
+	}
+
+	public Division copyResponseObjectForDivision(DivisionDto divisionDto) {
+		Division division = new Division();
+		if (divisionDto != null) {
+			if (divisionDto.getIdDivision() != null) {
+				division.setIdDivision(divisionDto.getIdDivision());
+			}
+
+			division.setName(divisionDto.getName());
+			division.setEmail(divisionDto.getEmail());
+			division.setContact(divisionDto.getContact());
+
+			if (divisionDto.getAddressDto() != null) {
+				Address address = new Address();
+				if (divisionDto.getAddressDto().getIdAddress() != null) {
+					address.setIdAddress(divisionDto.getAddressDto().getIdAddress());
+				}
+				address.setAddress(divisionDto.getAddressDto().getAddress());
+				division.setAddress(address);
+			}
+			
+			if (divisionDto.getSubDivisionDto() != null && divisionDto.getSubDivisionDto().size() > 0) {
+				List<SubdivisionDto> listSubdivisionDto = divisionDto.getSubDivisionDto();
+				List<Region> listRegion = new ArrayList<Region>();
+				Iterator<RegionDto> itr = listRegionDto.iterator();
+				Region region = new Region();
+				while (itr.hasNext()) {
+					RegionDto regionDto = itr.next();
+					region=regionApiAdaptor.copyResponseObjectForRegion(regionDto);
+					listRegion.add(region);
+
+				}
+				company.setRegion(listRegion);
+			}
+		}
+		return division;
+	}
+}

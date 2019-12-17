@@ -1,0 +1,8 @@
+package com.astute.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.astute.dto.UserDto;
+
+public interface UserDao extends JpaRepository<UserDto, Long> {
+}

@@ -1,0 +1,49 @@
+package com.astute.api.adaptor;
+
+import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
+
+import com.astute.api.NotFoundException;
+import com.astute.api.model.Company;
+import com.astute.api.model.Region;
+import com.astute.dto.AddressDto;
+import com.astute.dto.CompanyDto;
+import com.astute.dto.RegionDto;
+
+@Transactional
+public class RegionApiAdaptor {
+
+	public Response addRegion(Region region) throws NotFoundException {
+        return null;
+    }
+
+    public Response updateRegion(Region region) throws NotFoundException {
+        return null;
+    }
+    
+    
+    private RegionDto copyRequestObjectForRegion(Region region) {
+    	
+    	RegionDto dto = new RegionDto();
+		if (region != null) {
+			if (region.getAddress() != null) {
+				AddressDto addressDto = new AddressDto();
+				if (region.getAddress().getIdAddress() != null) {
+					addressDto.setIdAddress(region.getAddress().getIdAddress());
+				}
+				addressDto.setAddress(region.getAddress().getAddress());
+				dto.setAddressDto(addressDto);
+			}
+
+			dto.setContact(region.getContact());
+			dto.setEmail(region.getEmail());
+			if (region.getIdRegion() != null) {
+				dto.setIdRegion(region.getIdRegion());
+			}
+
+			
+			dto.setName(region.getName());
+		}
+		return dto;
+	}
+}

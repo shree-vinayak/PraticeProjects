@@ -1,0 +1,70 @@
+package com.astute.api.adaptor;
+
+import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
+
+import com.astute.api.NotFoundException;
+import com.astute.api.model.Address;
+import com.astute.api.model.Circle;
+import com.astute.api.model.Subdivision;
+import com.astute.dto.AddressDto;
+import com.astute.dto.CircleDto;
+import com.astute.dto.SubdivisionDto;
+
+@Transactional
+public class SubDivisionApiAdaptor {
+
+	/*
+	 * public Response addSubDivision(SubDivision subDivision) throws
+	 * NotFoundException { return null; }
+	 * 
+	 * public Response updateSubDivision(SubDivision subDivision) throws
+	 * NotFoundException { return null; }
+	 */
+
+	private SubdivisionDto copyRequestObjectForSubdivision(Subdivision subdivision) {
+		SubdivisionDto subdivisionDto = new SubdivisionDto();
+		if (subdivision != null) {
+			if (subdivision.getIdSubdivision() != null) {
+				subdivisionDto.setIdSubdivision(subdivision.getIdSubdivision());
+			}
+			subdivisionDto.setName(subdivision.getName());
+			subdivisionDto.setEmail(subdivision.getEmail());
+			subdivisionDto.setContact(subdivision.getContact());
+
+			if (subdivision.getAddress() != null) {
+				AddressDto addressDto = new AddressDto();
+				if (subdivision.getAddress().getIdAddress() != null) {
+					addressDto.setIdAddress(subdivision.getAddress().getIdAddress());
+				}
+				addressDto.setAddress(subdivision.getAddress().getAddress());
+				subdivisionDto.setAddressDto(addressDto);
+			}
+		}
+		return subdivisionDto;
+	}
+
+	public Subdivision copyResponseObjectForCircle(SubdivisionDto subdivisionDto) {
+		Subdivision subdivision = new Subdivision();
+		if (subdivisionDto != null) {
+			if (subdivisionDto.getIdSubdivision() != null) {
+				subdivision.setIdSubdivision(subdivisionDto.getIdSubdivision());
+			}
+
+			subdivision.setName(subdivisionDto.getName());
+			subdivision.setEmail(subdivisionDto.getEmail());
+			subdivision.setContact(subdivisionDto.getContact());
+
+			if (subdivisionDto.getAddressDto() != null) {
+				Address address = new Address();
+				if (subdivisionDto.getAddressDto().getIdAddress() != null) {
+					address.setIdAddress(subdivisionDto.getAddressDto().getIdAddress());
+				}
+				address.setAddress(subdivisionDto.getAddressDto().getAddress());
+				subdivision.setAddress(address);
+			}
+		}
+		return subdivision;
+	}
+
+}

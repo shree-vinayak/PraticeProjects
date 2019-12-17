@@ -1,0 +1,9 @@
+package com.astute.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.astute.dto.CircleDto;
+
+public interface CircleDao extends JpaRepository<CircleDto, Long> {
+
+}

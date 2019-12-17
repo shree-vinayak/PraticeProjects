@@ -1,0 +1,173 @@
+package com.astute.api;
+
+import com.astute.api.model.*;
+import com.astute.api.CircleApiService;
+import com.astute.api.factories.CircleApiServiceFactory;
+
+import io.swagger.annotations.ApiParam;
+import io.swagger.jaxrs.*;
+
+import com.astute.api.model.Circle;
+import com.astute.api.model.CountResponse;
+import com.astute.api.model.ErrorResponse;
+
+import java.util.Map;
+import java.util.List;
+import com.astute.api.NotFoundException;
+
+import java.io.InputStream;
+
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+
+import javax.servlet.ServletConfig;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
+import javax.ws.rs.*;
+import javax.validation.constraints.*;
+import javax.validation.Valid;
+
+@Path("/circle")
+
+
+@io.swagger.annotations.Api(description = "the circle API")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2019-06-01T21:39:44.778+05:30[Asia/Kolkata]")
+public class CircleApi  {
+   private final CircleApiService delegate;
+
+   public CircleApi(@Context ServletConfig servletContext) {
+      CircleApiService delegate = null;
+
+      if (servletContext != null) {
+         String implClass = servletContext.getInitParameter("CircleApi.implementation");
+         if (implClass != null && !"".equals(implClass.trim())) {
+            try {
+               delegate = (CircleApiService) Class.forName(implClass).newInstance();
+            } catch (Exception e) {
+               throw new RuntimeException(e);
+            }
+         } 
+      }
+
+      if (delegate == null) {
+         delegate = CircleApiServiceFactory.getCircleApi();
+      }
+
+      this.delegate = delegate;
+   }
+
+    @POST
+    
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "returns a circle", notes = "add details about a circle", response = Circle.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "BearerAuth")
+    }, tags={ "discom", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 201, message = "Created", response = Circle.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 404, message = "The specified resource was not found.", response = ErrorResponse.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 401, message = "Access token is missing or invalid.", response = ErrorResponse.class) })
+    public Response addCircle(@ApiParam(value = "idRegion of the region to fetch.",required=true)@QueryParam("idRegion") Integer idRegion
+,@ApiParam(value = "" ) @Valid Circle circle
+,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.addCircle(idRegion, circle, securityContext);
+    }
+    @DELETE
+    @Path("/{id}")
+    
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "returns a circle", notes = "delete details about a circle", response = Circle.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "BearerAuth")
+    }, tags={ "discom", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 202, message = "Accepted", response = Circle.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 404, message = "The specified resource was not found.", response = ErrorResponse.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 401, message = "Access token is missing or invalid.", response = ErrorResponse.class) })
+    public Response deleteCircle(@ApiParam(value = "id of the circle to fetch.",required=true) @PathParam("id") Integer id
+,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.deleteCircle(id, securityContext);
+    }
+    @GET
+    
+    
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "returns a circle", notes = "get details about all circle", response = Circle.class, responseContainer = "List", authorizations = {
+        @io.swagger.annotations.Authorization(value = "BearerAuth")
+    }, tags={ "discom", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Ok", response = Circle.class, responseContainer = "List"),
+        
+        @io.swagger.annotations.ApiResponse(code = 404, message = "The specified resource was not found.", response = ErrorResponse.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 401, message = "Access token is missing or invalid.", response = ErrorResponse.class) })
+    public Response getAllCircle(@ApiParam(value = "idRegion of the region to fetch.",required=true)@QueryParam("idRegion") Integer idRegion
+,@ApiParam(value = "if provided, returns the circles that match this name.")@QueryParam("name") String name
+,@ApiParam(value = "if true, populates all nested entities.", defaultValue="true") @DefaultValue("true")@QueryParam("populate") Boolean populate
+,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.getAllCircle(idRegion, name, populate, securityContext);
+    }
+    @GET
+    @Path("/{id}")
+    
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "returns a circle", notes = "get details about a circle", response = Circle.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "BearerAuth")
+    }, tags={ "discom", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Ok", response = Circle.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 404, message = "The specified resource was not found.", response = ErrorResponse.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 401, message = "Access token is missing or invalid.", response = ErrorResponse.class) })
+    public Response getCircle(@ApiParam(value = "id of the circle to fetch.",required=true) @PathParam("id") Integer id
+,@ApiParam(value = "if true, populates all nested entities.", defaultValue="true") @DefaultValue("true")@QueryParam("populate") Boolean populate
+,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.getCircle(id, populate, securityContext);
+    }
+    @GET
+    @Path("/count")
+    
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "returns number of circles in a region", notes = "get number of circles in a region", response = CountResponse.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "BearerAuth")
+    }, tags={ "discom", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Count for the requested entity.", response = CountResponse.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 404, message = "The specified resource was not found.", response = ErrorResponse.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 401, message = "Access token is missing or invalid.", response = ErrorResponse.class) })
+    public Response getCirclesCount(@ApiParam(value = "Region Id of the region to count circles for.",required=true)@QueryParam("idRegion") Integer idRegion
+,@ApiParam(value = "if provided, returns the region that matches this name.")@QueryParam("name") String name
+,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.getCirclesCount(idRegion, name, securityContext);
+    }
+    @PUT
+    
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "returns a circle", notes = "update details about a circle", response = Circle.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "BearerAuth")
+    }, tags={ "discom", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 202, message = "Accepted", response = Circle.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 404, message = "The specified resource was not found.", response = ErrorResponse.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 401, message = "Access token is missing or invalid.", response = ErrorResponse.class) })
+    public Response updateCircle(@ApiParam(value = "" ) @Valid Circle circle
+,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.updateCircle(circle, securityContext);
+    }
+}

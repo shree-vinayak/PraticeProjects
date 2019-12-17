@@ -1,0 +1,171 @@
+package com.astute.api;
+
+import com.astute.api.model.*;
+import com.astute.api.CompanyApiService;
+import com.astute.api.factories.CompanyApiServiceFactory;
+
+import io.swagger.annotations.ApiParam;
+import io.swagger.jaxrs.*;
+
+import com.astute.api.model.Company;
+import com.astute.api.model.CountResponse;
+import com.astute.api.model.ErrorResponse;
+
+import java.util.Map;
+import java.util.List;
+import com.astute.api.NotFoundException;
+
+import java.io.InputStream;
+
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+
+import javax.servlet.ServletConfig;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
+import javax.ws.rs.*;
+import javax.validation.constraints.*;
+import javax.validation.Valid;
+
+@Path("/company")
+
+
+@io.swagger.annotations.Api(description = "the company API")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2019-06-03T12:26:19.755+05:30[Asia/Kolkata]")
+public class CompanyApi  {
+   private final CompanyApiService delegate;
+
+   public CompanyApi(@Context ServletConfig servletContext) {
+      CompanyApiService delegate = null;
+
+      if (servletContext != null) {
+         String implClass = servletContext.getInitParameter("CompanyApi.implementation");
+         if (implClass != null && !"".equals(implClass.trim())) {
+            try {
+               delegate = (CompanyApiService) Class.forName(implClass).newInstance();
+            } catch (Exception e) {
+               throw new RuntimeException(e);
+            }
+         } 
+      }
+
+      if (delegate == null) {
+         delegate = CompanyApiServiceFactory.getCompanyApi();
+      }
+
+      this.delegate = delegate;
+   }
+
+    @POST
+    
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "returns a company", notes = "add details about a company", response = Company.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "BearerAuth")
+    }, tags={ "discom", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 201, message = "Created", response = Company.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 404, message = "The specified resource was not found.", response = ErrorResponse.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 401, message = "Access token is missing or invalid.", response = ErrorResponse.class) })
+    public Response addCompany(@ApiParam(value = "idState of the state to fetch companies for.",required=true)@QueryParam("idState") Integer idState
+,@ApiParam(value = "" ) @Valid Company company
+,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.addCompany(idState, company, securityContext);
+    }
+    @DELETE
+    @Path("/{id}")
+    
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "returns a company", notes = "delete details about a company", response = Company.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "BearerAuth")
+    }, tags={ "discom", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 202, message = "Accepted", response = Company.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 404, message = "The specified resource was not found.", response = ErrorResponse.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 401, message = "Access token is missing or invalid.", response = ErrorResponse.class) })
+    public Response deleteCompany(@ApiParam(value = "id of the company to fetch.",required=true) @PathParam("id") Integer id
+,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.deleteCompany(id, securityContext);
+    }
+    @GET
+    
+    
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "returns a company", notes = "get details about all company", response = Company.class, responseContainer = "List", authorizations = {
+        @io.swagger.annotations.Authorization(value = "BearerAuth")
+    }, tags={ "discom", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Ok", response = Company.class, responseContainer = "List"),
+        
+        @io.swagger.annotations.ApiResponse(code = 404, message = "The specified resource was not found.", response = ErrorResponse.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 401, message = "Access token is missing or invalid.", response = ErrorResponse.class) })
+    public Response getAllCompany(@ApiParam(value = "idState of the state to fetch companies for.",required=true)@QueryParam("idState") Integer idState
+,@ApiParam(value = "if provided, returns the companies that match this name.")@QueryParam("name") String name
+,@ApiParam(value = "if true, populates all nested entities.", defaultValue="true") @DefaultValue("true")@QueryParam("populate") Boolean populate
+,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.getAllCompany(idState, name, populate, securityContext);
+    }
+    @GET
+    @Path("/count")
+    
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "returns number of companies", notes = "get number of companies", response = CountResponse.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "BearerAuth")
+    }, tags={ "discom", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Count for the requested entity.", response = CountResponse.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 404, message = "The specified resource was not found.", response = ErrorResponse.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 401, message = "Access token is missing or invalid.", response = ErrorResponse.class) })
+    public Response getCompaniesCount(@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.getCompaniesCount(securityContext);
+    }
+    @GET
+    @Path("/{id}")
+    
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "returns a company", notes = "get details about a company", response = Company.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "BearerAuth")
+    }, tags={ "discom", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "Ok", response = Company.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 404, message = "The specified resource was not found.", response = ErrorResponse.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 401, message = "Access token is missing or invalid.", response = ErrorResponse.class) })
+    public Response getCompany(@ApiParam(value = "id of the company to fetch.",required=true) @PathParam("id") Integer id
+,@ApiParam(value = "if true, populates all nested entities.", defaultValue="true") @DefaultValue("true")@QueryParam("populate") Boolean populate
+,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.getCompany(id, populate, securityContext);
+    }
+    @PUT
+    
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "returns a company", notes = "update details about a company", response = Company.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "BearerAuth")
+    }, tags={ "discom", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 202, message = "Accepted", response = Company.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 404, message = "The specified resource was not found.", response = ErrorResponse.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 401, message = "Access token is missing or invalid.", response = ErrorResponse.class) })
+    public Response updateCompany(@ApiParam(value = "" ) @Valid Company company
+,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.updateCompany(company, securityContext);
+    }
+}

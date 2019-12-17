@@ -1,0 +1,10 @@
+package com.demo.spring.springSecurity.security;
+
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
+
+
+@Service
+public class JwtUserDetailsServiceImpl  implements UserDetailsService{
+
+}

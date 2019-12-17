@@ -1,0 +1,24 @@
+
+
+spring.jpa.hibernate.show_sql=true
+#spring.jpa.hibernate.format_sql=false
+#spring.jpa.hibernate.generate_statistics=false
+#spring.jpa.properties.javax.persistence.validation.mode=none
+
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/AstuteTest1
+spring.datasource.username=postgres
+spring.datasource.password=12345
+
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto= create-drop
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQL9Dialect
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+
+
+
+
+
+
+
+

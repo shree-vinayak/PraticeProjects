@@ -1,0 +1,31 @@
+package com.astute.api.impl;
+
+import com.astute.api.*;
+import com.astute.api.model.*;
+
+import com.astute.api.model.ErrorResponse;
+import com.astute.api.model.Zone;
+
+import java.util.List;
+import com.astute.api.NotFoundException;
+
+import java.io.InputStream;
+
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
+import javax.validation.constraints.*;
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2019-05-25T15:33:05.989+05:30[Asia/Calcutta]")
+public class ZoneApiServiceImpl extends ZoneApiService {
+    @Override
+    public Response addZone(Zone zone, SecurityContext securityContext) throws NotFoundException {
+        // do some magic!
+        return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+    }
+    @Override
+    public Response updateZone(Zone zone, SecurityContext securityContext) throws NotFoundException {
+        // do some magic!
+        return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+    }
+}

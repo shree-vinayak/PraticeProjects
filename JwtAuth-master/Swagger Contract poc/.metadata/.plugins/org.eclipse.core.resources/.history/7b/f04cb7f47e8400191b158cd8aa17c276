@@ -1,0 +1,25 @@
+package com.astute.dto;
+
+public class AddressDto {
+
+	  private Integer idAddress;
+
+
+	  private String line1;
+
+
+	  private String line2;
+
+
+	  private String state;
+
+
+	  private String country;
+
+
+	  private Integer pin;
+
+
+	  private String district;
+
+}

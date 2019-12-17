@@ -1,0 +1,56 @@
+package com.astute.api.impl;
+
+import com.astute.api.*;
+import com.astute.api.model.*;
+
+import com.astute.api.model.Company;
+import com.astute.api.model.CountResponse;
+import com.astute.api.model.ErrorResponse;
+
+import java.util.List;
+import com.astute.api.NotFoundException;
+import com.astute.api.adaptor.CompanyApiAdaptor;
+
+import java.io.InputStream;
+
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.springframework.stereotype.Component;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
+import javax.validation.constraints.*;
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2019-06-01T20:18:58.637+05:30[Asia/Kolkata]")
+@Component
+public class CompanyApiServiceImpl extends CompanyApiService {
+	
+    @Override
+    public Response addCompany( @NotNull  @Min(0)Integer idState, Company company, SecurityContext securityContext) throws NotFoundException {
+    	CompanyApiAdaptor apiAdaptor =  new CompanyApiAdaptor();
+    	Company companyResponse = apiAdaptor.addCompany(company);
+        return Response.ok().entity(new Company()).build();  //new Company()
+    }
+    @Override
+    public Response deleteCompany( @Min(0)Integer id, SecurityContext securityContext) throws NotFoundException {
+        // do some magic!
+        return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+    }
+    @Override
+    public Response getAllCompany( @NotNull  @Min(0)Integer idState, String name, Boolean populate, SecurityContext securityContext) throws NotFoundException {
+        return Response.ok().entity(new Company()).build();
+    }
+    @Override
+    public Response getCompaniesCount(SecurityContext securityContext) throws NotFoundException {
+        // do some magic!
+        return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+    }
+    @Override
+    public Response getCompany( @Min(0)Integer id, Boolean populate, SecurityContext securityContext) throws NotFoundException {
+        // do some magic!
+        return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+    }
+    @Override
+    public Response updateCompany(Company company, SecurityContext securityContext) throws NotFoundException {
+        // do some magic!
+        return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+    }
+}

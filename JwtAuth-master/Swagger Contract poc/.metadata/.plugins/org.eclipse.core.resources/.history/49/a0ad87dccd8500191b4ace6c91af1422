@@ -1,0 +1,171 @@
+package com.astute.api.adaptor;
+
+import javax.transaction.Transactional;
+import javax.validation.constraints.Min;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.astute.api.NotFoundException;
+import com.astute.api.model.Address;
+import com.astute.api.model.Company;
+import com.astute.dao.CompanyDao;
+import com.astute.dto.AddressDto;
+import com.astute.dto.CompanyDto;
+
+@Transactional
+@Component
+public class CompanyApiAdaptor {
+
+	@Autowired
+	private CompanyDao companyDao;
+
+	public Company addCompany(Company company) throws NotFoundException {
+		CompanyDto companyDto = copyRequestObjectForCompany(company);
+		//System.out.println("OBject value of companyDao : " + companyDao);
+		return copyResponseObjectForCompany(companyDao.save(companyDto));
+	}
+
+	public Response deleteCircle(@Min(0) Integer idCompany, @Min(0) Integer idRegion, @Min(0) Integer id)
+			throws NotFoundException {
+		return null;
+	}
+
+	public Response deleteCompany(@Min(0) Integer id) throws NotFoundException {
+		return null;
+	}
+
+	public Response deleteDivision(@Min(0) Integer idCompany, @Min(0) Integer idRegion, @Min(0) Integer idCircle,
+			@Min(0) Integer id) throws NotFoundException {
+		return null;
+	}
+
+	public Response deleteRegion(@Min(0) Integer idCompany, @Min(0) Integer id) throws NotFoundException {
+		return null;
+	}
+
+	public Response deleteSubDivision(@Min(0) Integer idCompany, @Min(0) Integer idRegion, @Min(0) Integer idCircle,
+			@Min(0) Integer idDivision, @Min(0) Integer id) throws NotFoundException {
+		return null;
+	}
+
+	public Response deleteZone(@Min(0) Integer idCompany, @Min(0) Integer idRegion, @Min(0) Integer idCircle,
+			@Min(0) Integer idDivision, @Min(0) Integer idSubdivision, @Min(0) Integer id) throws NotFoundException {
+		return null;
+	}
+
+	public Response getAllCircle(@Min(0) Integer idCompany, @Min(0) Integer idRegion) throws NotFoundException {
+		return null;
+	}
+
+	public Response getAllCompany(SecurityContext securityContext) throws NotFoundException {
+		return null;
+	}
+
+	public Response getAllDivision(@Min(0) Integer idCompany, @Min(0) Integer idRegion, @Min(0) Integer idCircle)
+			throws NotFoundException {
+		return null;
+	}
+
+	public Response getAllRegion(@Min(0) Integer idCompany) throws NotFoundException {
+		return null;
+	}
+
+	public Response getAllSubDivision(@Min(0) Integer idCompany, @Min(0) Integer idRegion, @Min(0) Integer idCircle,
+			@Min(0) Integer idDivision) throws NotFoundException {
+		return null;
+	}
+
+	public Response getAllZone(@Min(0) Integer idCompany, @Min(0) Integer idRegion, @Min(0) Integer idCircle,
+			@Min(0) Integer idDivision, @Min(0) Integer idSubdivision) throws NotFoundException {
+		return null;
+	}
+
+	public Response getCircle(@Min(0) Integer idCompany, @Min(0) Integer idRegion, @Min(0) Integer id)
+			throws NotFoundException {
+		return null;
+	}
+
+	public Response getCompany(@Min(0) Integer id) throws NotFoundException {
+		return null;
+	}
+
+	public Response getDivision(@Min(0) Integer idCompany, @Min(0) Integer idRegion, @Min(0) Integer idCircle,
+			@Min(0) Integer id) throws NotFoundException {
+		return null;
+	}
+
+	public Response getRegion(@Min(0) Integer idCompany, @Min(0) Integer id) throws NotFoundException {
+		return null;
+	}
+
+	public Response getSubDivision(@Min(0) Integer idCompany, @Min(0) Integer idRegion, @Min(0) Integer idCircle,
+			@Min(0) Integer idDivision, @Min(0) Integer id) throws NotFoundException {
+		return null;
+	}
+
+	public Response getZone(@Min(0) Integer idCompany, @Min(0) Integer idRegion, @Min(0) Integer idCircle,
+			@Min(0) Integer idDivision, @Min(0) Integer idSubdivision, @Min(0) Integer id) throws NotFoundException {
+		return null;
+	}
+
+	public Response updateCompany(Company company) throws NotFoundException {
+		return null;
+	}
+
+	private CompanyDto copyRequestObjectForCompany(Company company) {
+		CompanyDto dto = new CompanyDto();
+		if (company != null) {
+			if (company.getAddress() != null) {
+				AddressDto addressDto = new AddressDto();
+				if (company.getAddress().getIdAddress() != null) {
+					addressDto.setIdAddress(company.getAddress().getIdAddress());
+				}
+
+				addressDto.setAddress(company.getAddress().getAddress());
+
+				dto.setAddressDto(addressDto);
+			}
+
+			dto.setContact(company.getContact());
+			dto.setEmail(company.getEmail());
+			if (company.getId() != null) {
+				dto.setId(company.getId());
+			}
+
+			dto.setInitials(company.getInitials());
+			dto.setLogo(company.getLogo());
+			dto.setName(company.getName());
+		}
+		return dto;
+	}
+
+	private Company copyResponseObjectForCompany(CompanyDto companyDto) {
+		Company company = new Company();
+		if (companyDto != null) {
+			if (companyDto.getAddressDto() != null) {
+				Address address = new Address();
+				if (companyDto.getAddressDto().getIdAddress() != null) {
+					address.setIdAddress(companyDto.getAddressDto().getIdAddress());
+				}
+
+				address.setAddress(companyDto.getAddressDto().getAddress());
+
+				company.setAddress(address);
+			}
+
+			company.setContact(companyDto.getContact());
+			company.setEmail(companyDto.getEmail());
+			if (companyDto.getId() != null) {
+				company.setId(companyDto.getId());
+			}
+
+			company.setInitials(companyDto.getInitials());
+			company.setLogo(companyDto.getLogo());
+			company.setName(companyDto.getName());
+		}
+		return company;
+	}
+}

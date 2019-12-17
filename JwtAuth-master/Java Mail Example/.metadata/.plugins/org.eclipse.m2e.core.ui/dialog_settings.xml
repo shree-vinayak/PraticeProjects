@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="/Data/Ankit_work1/spring Boot example/Java Mail Example/SpringDemo_Send_Email_host_Provider"/>
+			<item value="/Data/Ankit_work1/spring Boot example/Java Mail Example/SpringDemo_Email_attachment"/>
+			<item value="/Data/Ankit_work1/spring Boot example/Java Mail Example/SpringDemo_Define_an_E-mail_template"/>
+			<item value="/Data/Ankit_work1/spring Boot example/Java Mail Example/SpringDemo_Gmail_MimeMessagePreparator"/>
+			<item value="/Data/Ankit_work1/spring Boot example/Java Mail Example/SpringDemo_Gmail_MailSender_Multiple_Receivers"/>
+			<item value="/Data/Ankit_work1/spring Boot example/Java Mail Example/SpringDemo_Gmail_MailSender"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+</section>

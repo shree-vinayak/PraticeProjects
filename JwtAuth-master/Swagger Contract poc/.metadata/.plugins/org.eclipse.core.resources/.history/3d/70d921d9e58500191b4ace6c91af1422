@@ -1,0 +1,75 @@
+package com.astute.api.adaptor;
+
+import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
+
+import com.astute.api.NotFoundException;
+import com.astute.api.model.Address;
+import com.astute.api.model.Company;
+import com.astute.api.model.Region;
+import com.astute.dto.AddressDto;
+import com.astute.dto.CompanyDto;
+import com.astute.dto.RegionDto;
+
+@Transactional
+public class RegionApiAdaptor {
+
+	public Response addRegion(Region region) throws NotFoundException {
+        return null;
+    }
+
+    public Response updateRegion(Region region) throws NotFoundException {
+        return null;
+    }
+    
+    
+    
+    private RegionDto copyRequestObjectForCompany(Region region) {
+		RegionDto regionDto = new RegionDto();
+		if (region != null) {
+			if (region.getIdRegion() != null) {
+				regionDto.setIdRegion(region.getIdRegion());
+			}
+			
+			regionDto.setName(region.getName());
+			regionDto.setEmail(region.getEmail());
+			regionDto.setContact(region.getContact());
+			
+
+			if (region.getAddress() != null) {
+				AddressDto addressDto = new AddressDto();
+				if (region.getAddress().getIdAddress() != null) {
+					addressDto.setIdAddress(region.getAddress().getIdAddress());
+				}
+				addressDto.setAddress(region.getAddress().getAddress());
+				regionDto.setAddressDto(addressDto);
+			}
+		}
+		return regionDto;
+	}
+    
+    private Region copyResponseObjectForCompany(RegionDto regionDto) {
+		Region region = new Region();
+		if (regionDto != null) {
+			if (regionDto.getIdRegion() != null) {
+				region.setIdRegion(regionDto.getIdRegion());
+			}
+
+			region.setName(regionDto.getName());
+			region.setEmail(regionDto.getEmail());
+			region.setContact(regionDto.getContact());
+
+			if (regionDto.getAddressDto() != null) {
+				Address address = new Address();
+				if (regionDto.getAddressDto().getIdAddress() != null) {
+					address.setIdAddress(regionDto.getAddressDto().getIdAddress());
+				}
+				address.setAddress(regionDto.getAddressDto().getAddress());
+				region.setAddress(address);
+
+			}
+
+		}
+		return region;
+	}
+}

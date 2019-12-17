@@ -1,0 +1,18 @@
+package com.astute.api.impl;
+
+import com.astute.api.SubdivisionApiService;
+
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2019-05-25T15:33:05.989+05:30[Asia/Calcutta]")
+public class SubDivisionApiServiceImpl extends SubdivisionApiService {
+	/*
+	 * @Override public Response addSubDivision(SubDivision subDivision,
+	 * SecurityContext securityContext) throws NotFoundException { // do some magic!
+	 * return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK,
+	 * "magic!")).build(); }
+	 * 
+	 * @Override public Response updateSubDivision(SubDivision subDivision,
+	 * SecurityContext securityContext) throws NotFoundException { // do some magic!
+	 * return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK,
+	 * "magic!")).build(); }
+	 */
+}

@@ -1,0 +1,10 @@
+
+
+spring.jpa.hibernate.show_sql=false
+spring.jpa.hibernate.use_sql_comments=false
+spring.jpa.hibernate.format_sql=false
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.hibernate.generate_statistics=false
+spring.jpa.properties.javax.persistence.validation.mode=none
+org.hibernate.envers.store_data_at_delete=true
+org.hibernate.envers.global_with_modified_flag=true

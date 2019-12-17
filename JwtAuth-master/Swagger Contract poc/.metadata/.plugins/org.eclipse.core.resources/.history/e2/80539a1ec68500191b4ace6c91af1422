@@ -1,0 +1,11 @@
+package com.astute.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.astute.dto.CompanyDto;
+
+@Repository
+public interface CompanyDao extends JpaRepository<CompanyDto, Integer> {
+
+}

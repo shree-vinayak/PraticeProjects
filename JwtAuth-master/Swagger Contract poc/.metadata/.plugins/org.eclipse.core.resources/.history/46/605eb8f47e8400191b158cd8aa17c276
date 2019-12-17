@@ -1,0 +1,19 @@
+package com.astute.dto;
+
+import com.astute.api.model.Address;
+import com.astute.api.model.Circle;
+
+public class DivisionDto {
+
+	  private Integer idDivision;
+
+
+	  private String name;
+
+
+	  private Address address = null;
+
+
+	  private Circle circle = null;
+
+}

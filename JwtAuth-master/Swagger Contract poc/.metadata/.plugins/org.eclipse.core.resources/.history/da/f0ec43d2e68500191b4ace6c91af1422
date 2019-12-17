@@ -1,0 +1,55 @@
+package com.astute.api.adaptor;
+
+import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.astute.api.NotFoundException;
+import com.astute.api.model.Circle;
+import com.astute.api.model.Company;
+import com.astute.dao.CircleDao;
+import com.astute.dto.AddressDto;
+import com.astute.dto.CircleDto;
+import com.astute.dto.CompanyDto;
+
+@Transactional
+public class CircleApiAdaptor {
+
+	@Autowired
+	private CircleDao circleDao;
+	
+	public Response addCircle(Circle circle) throws NotFoundException {
+        return null;
+    }
+
+	public Response updateCircle(Circle circle) throws NotFoundException {
+        return null;
+    }
+	
+	
+	private CircleDto copyRequestObjectForCompany(Circle circle) {
+		CircleDto circleDto = new CircleDto();
+		if (circle != null) {
+			if (circle.getIdCircle() != null) {
+				circleDto.setIdCircle(circle.getIdCircle());
+			}
+			circleDto.setName(company.getName());
+			circleDto.setInitials(company.getInitials());
+			circleDto.setLogo(company.getLogo());
+			circleDto.setContact(company.getContact());
+			circleDto.setEmail(company.getEmail());
+
+			if (company.getAddress() != null) {
+				AddressDto addressDto = new AddressDto();
+				if (company.getAddress().getIdAddress() != null) {
+					addressDto.setIdAddress(company.getAddress().getIdAddress());
+				}
+				addressDto.setAddress(company.getAddress().getAddress());
+				companydto.setAddressDto(addressDto);
+			}
+		}
+		return companydto;
+	}
+}

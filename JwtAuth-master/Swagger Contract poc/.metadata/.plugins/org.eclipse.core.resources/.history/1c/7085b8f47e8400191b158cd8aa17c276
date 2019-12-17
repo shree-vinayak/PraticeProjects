@@ -1,0 +1,16 @@
+package com.astute.dto;
+
+import com.astute.api.model.Address;
+import com.astute.api.model.Company;
+
+public class RegionDto {
+
+	  private Integer idRegion;
+
+	  private String name;
+
+	  private Address address = null;
+
+
+	  private Company company = null;
+}

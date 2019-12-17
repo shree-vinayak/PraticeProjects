@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.fasterxml.jackson.databind.ObjectMapper"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+<fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="org.hibernate.validator.internal.util.logging.LoggerFactory"/>
+<fullyQualifiedTypeName name="org.apache.log4j.spi.LoggerFactory"/>
+<fullyQualifiedTypeName name="org.slf4j.Logger"/>
+<fullyQualifiedTypeName name="org.slf4j.LoggerFactory"/>
+<fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
+<fullyQualifiedTypeName name="javax.persistence.Table"/>
+<fullyQualifiedTypeName name="javax.persistence.Column"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
+<fullyQualifiedTypeName name="io.swagger.repo.EmployeeRepo"/>
+<fullyQualifiedTypeName name="org.springframework.boot.autoconfigure.domain.EntityScan"/>
+<fullyQualifiedTypeName name="com.test.model.Employee"/>
+<fullyQualifiedTypeName name="com.astute.api.SubdivisionApiService"/>
+<fullyQualifiedTypeName name="javax.persistence.OneToOne"/>
+<fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
+<fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
+<fullyQualifiedTypeName name="javax.persistence.FetchType"/>
+<fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
+<fullyQualifiedTypeName name="com.astute.dto.RegionDto"/>
+<fullyQualifiedTypeName name="javax.persistence.IdClass"/>
+<fullyQualifiedTypeName name="javax.persistence.Entity"/>
+<fullyQualifiedTypeName name="javax.persistence.Id"/>
+<fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
+<fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
+<fullyQualifiedTypeName name="com.astute.dto.CircleDto"/>
+<fullyQualifiedTypeName name="com.astute.api.model.Circle"/>
+<fullyQualifiedTypeName name="com.astute.api.adaptor.RegionApiAdaptor"/>
+<fullyQualifiedTypeName name="com.astute.api.adaptor.CircleApiAdaptor"/>
+<fullyQualifiedTypeName name="com.astute.dto.DivisionDto"/>
+<fullyQualifiedTypeName name="com.astute.api.model.Division"/>
+<fullyQualifiedTypeName name="com.astute.api.adaptor.DivisionApiAdaptor"/>
+<fullyQualifiedTypeName name="com.astute.dto.SubdivisionDto"/>
+<fullyQualifiedTypeName name="com.astute.api.model.Subdivision"/>
+<fullyQualifiedTypeName name="com.astute.api.adaptor.SubDivisionApiAdaptor"/>
+<fullyQualifiedTypeName name="com.astute.dto.ZoneDto"/>
+<fullyQualifiedTypeName name="com.astute.api.model.Zone"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="com.astute.api.adaptor.ZonApiAdaptor"/>
+</qualifiedTypeNameHistroy>

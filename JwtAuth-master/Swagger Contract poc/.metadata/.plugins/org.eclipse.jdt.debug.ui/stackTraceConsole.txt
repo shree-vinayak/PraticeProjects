@@ -1,0 +1,6 @@
+
+    private static final Logger log = LoggerFactory.getLogger(FindEmployeeDetailsApiController.class);
+ 
+    private final ObjectMapper objectMapper;
+ 
+    private final HttpServletRequest request;

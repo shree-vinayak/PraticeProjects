@@ -1,0 +1,26 @@
+package com.astute.api.adaptor;
+
+import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.astute.api.NotFoundException;
+import com.astute.api.model.Circle;
+import com.astute.dao.CircleDao;
+
+@Transactional
+public class CircleApiAdaptor {
+
+	@Autowired
+	private CircleDao circleDao;
+	
+	public Response addCircle(Circle circle) throws NotFoundException {
+        return null;
+    }
+
+	public Response updateCircle(Circle circle) throws NotFoundException {
+        return null;
+    }
+}

@@ -1,0 +1,46 @@
+package com.astute.api.adaptor;
+
+import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
+
+import com.astute.api.NotFoundException;
+import com.astute.api.model.Circle;
+import com.astute.api.model.Zone;
+import com.astute.dto.AddressDto;
+import com.astute.dto.CircleDto;
+import com.astute.dto.ZoneDto;
+
+@Transactional
+public class ZonApiAdaptor {
+
+	public Response addZone(Zone zone) throws NotFoundException {
+        return null;
+    }
+	
+    public Response updateZone(Zone zone) throws NotFoundException {
+        return null;
+    }
+    
+
+	private ZoneDto copyRequestObjectForZone(Zone zone) {
+		ZoneDto zoneDto = new ZoneDto();
+		if (zone != null) {
+			if (zone.getIdDivision() != null) {
+				zoneDto.setIdZone(zone.getIdDivision());
+			}
+			circleDto.setName(circle.getName());
+			circleDto.setEmail(circle.getEmail());
+			circleDto.setContact(circle.getContact());
+
+			if (circle.getAddress() != null) {
+				AddressDto addressDto = new AddressDto();
+				if (circle.getAddress().getIdAddress() != null) {
+					addressDto.setIdAddress(circle.getAddress().getIdAddress());
+				}
+				addressDto.setAddress(circle.getAddress().getAddress());
+				circleDto.setAddressDto(addressDto);
+			}
+		}
+		return circleDto;
+	}
+}

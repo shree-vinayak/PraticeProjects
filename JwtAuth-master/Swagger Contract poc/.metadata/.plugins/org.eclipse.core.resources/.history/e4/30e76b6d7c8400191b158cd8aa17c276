@@ -1,0 +1,23 @@
+package com.astute.api.impl;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
+
+import com.astute.api.ApiResponseMessage;
+import com.astute.api.CircleApiService;
+import com.astute.api.NotFoundException;
+import com.astute.api.model.Circle;
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJerseyServerCodegen", date = "2019-05-25T15:33:05.989+05:30[Asia/Calcutta]")
+public class CircleApiServiceImpl extends CircleApiService {
+	
+    @Override
+    public Response addCircle(Circle circle, SecurityContext securityContext) throws NotFoundException {
+        // do some magic!
+        return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+    }
+    @Override
+    public Response updateCircle(Circle circle, SecurityContext securityContext) throws NotFoundException {
+        // do some magic!
+        return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+    }
+}

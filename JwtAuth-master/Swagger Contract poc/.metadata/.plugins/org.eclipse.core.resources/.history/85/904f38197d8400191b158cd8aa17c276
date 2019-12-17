@@ -1,0 +1,18 @@
+package com.astute.dto;
+
+import com.astute.api.model.Address;
+import com.astute.api.model.SubDivision;
+
+public class ZoneDto {
+
+	  private Integer idDivision;
+
+
+	  private String name;
+
+
+	  private Address address = null;
+
+
+	  private SubDivision subDivision = null;
+}

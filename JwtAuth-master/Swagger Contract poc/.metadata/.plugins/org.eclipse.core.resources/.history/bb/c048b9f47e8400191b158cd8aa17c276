@@ -1,0 +1,18 @@
+package com.astute.dto;
+
+import com.astute.api.model.Region;
+
+public class CircleDto {
+
+	  private Integer idCircle;
+
+
+	  private String name;
+
+
+	  private AddressDto address = null;
+
+
+	  private Region region = null;
+
+}
