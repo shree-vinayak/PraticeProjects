@@ -1,0 +1,20 @@
+<header>
+  <nav class ="navbar navbar-expand-md navbar-dark bg-dark">
+  <div><a href="https://www.aartek.co.in/" class="navbar-brand">Student Portal</a></div>
+  
+  <ul class="navbar-nav">
+     
+    <li><a *ngIf="loginService.isUserLoggedIn() && loginService.isUserType()"  routerLink="/showStudent"  class="nav-link">View Student</a></li>
+    <li><a *ngIf="loginService.isUserLoggedIn() && loginService.isUserType()"  routerLink="/studentRegister"  class="nav-link">Add New Student</a></li>
+    <li><a *ngIf="loginService.isUserLoggedIn() && loginService.isUserType()" routerLink="/uploadQuestion"  class="nav-link">Upload Question</a></li>
+    <li><a *ngIf="loginService.isUserLoggedIn() " routerLink="/showQuestion"  class="nav-link">Show Question</a></li>
+    
+    <li><a *ngIf="loginService.isUserLoggedIn() " routerLink="/addAssignment"  class="nav-link">Add Assignment</a></li>
+
+    <li><a *ngIf="loginService.isUserLoggedIn() " routerLink="/showAssignment" class="nav-link">showAssignment</a></li>
+    <li><a *ngIf="loginService.isUserLoggedIn() " routerLink="/logout" class="nav-link">LogOut</a></li>
+    
+  
+  </ul>
+    </nav>
+  </header>

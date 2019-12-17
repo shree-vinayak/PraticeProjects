@@ -1,0 +1,52 @@
+<div class="col-md-3">
+  <h2 class="text-center">Registration</h2>
+
+  <form>
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" class="form-control" [(ngModel)]="student.userFirstName" name="userFirstName">
+    </div>
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" class="form-control" [(ngModel)]="student.userLastName" name="userLastName">
+    </div>
+
+
+    <div class="form-group">
+      <label>EmailId</label>
+      <input type="email" class="form-control" [(ngModel)]="student.userEmailId" name="userEmailId">
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" [(ngModel)]="student.userPassword" name="userPassword">
+    </div>
+    <div class="form-group">
+      <label>Confirm Password</label>
+      <input type="password" class="form-control" [(ngModel)]="student.userConfirmPassword" name="userConfirmPassword">
+    </div>
+    <div class="form-group">
+      <label>Mobile No</label>
+      <input type="number" class="form-control" [(ngModel)]="student.userMobileNo" name="userMobileNo">
+    </div>
+
+    <div class="form-group">
+        <label>Question</label>
+        <input type="text" class="form-control" [(ngModel)]="student.userQuestion" name="userQuestion">
+      </div>
+
+      <div class="form-group">
+          <label>Answer</label>
+          <input type="text" class="form-control" [(ngModel)]="student.userAnswer" name="userAnswer">
+        </div>
+
+
+      <div class="form-group">
+          <label>UserType</label>
+          <input type="text" class="form-control" [(ngModel)]="student.userType" name="userType">
+        </div>
+    <button class="btn btn-primary" (click)="registerStudent()">submit</button>
+  </form>
+
+</div>

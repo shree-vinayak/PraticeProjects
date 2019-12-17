@@ -1,0 +1,43 @@
+<!-- <div>
+    <ngx-datatable
+      [rows]="user"
+      [columns]="columns">
+    </ngx-datatable>
+  </div> -->
+<ngx-datatable class='material' [rows]='user' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+  [rowHeight]="50" [limit]="2"
+  >
+
+  <ngx-datatable-column name="userId" >
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{value}}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="userFirstName" >
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+
+      {{row.userFirstName}}
+    </ng-template>
+  </ngx-datatable-column>
+
+
+  <ngx-datatable-column name="Student Last Name" prop="userLastName" >
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Student Email Id" prop="userEmailId">
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Student Mobile No" prop="userMobileNo" >
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Delete" >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button (click)="deleteStudent(row.userId)">Delete</button>
+        </ng-template>
+      </ngx-datatable-column>
+
+</ngx-datatable>
+
+
+

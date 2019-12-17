@@ -1,0 +1,61 @@
+
+  <h1>Upload Assignment</h1>
+  <!-- 
+  <div *ngIf="currentFileUpload" class="progress">
+    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+      attr.aria-valuenow="{{progress.percentage}}" aria-valuemin="0" aria-valuemax="100"
+      [ngStyle]="{width:progress.percentage+'%'}">
+      {{progress.percentage}}%</div>
+  </div> -->
+
+  <!-- <div>
+    <label class="btn btn-default">
+      <input type="file" (change)="selectFile($event)">
+    </label>
+    <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+
+    <span>
+      <p><label *ngIf="this.Fail">File is Empty</label></p>
+    </span>
+    <span>
+      <p><label *ngIf="this.Same">File is allready present</label></p>
+    </span>
+  </div> -->
+
+  
+<!-- 
+  <h1 mat-dialog-title>Hi {{user.userFirstName}}</h1>
+<div mat-dialog-content>
+ 
+  <mat-form-field>
+
+
+    <input type="file" (change)="selectFile($event)" >
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.file" cdkFocusInitial>Ok</button>
+</div> -->
+
+    <!-- <input matInputFile [(ngModel)]="data.file"> -->
+
+
+  <div>
+    <label>
+      <input type="file" (change)="selectFile($event)">
+    </label>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">No Thanks</button>
+      <button mat-button [mat-dialog-close]="data.file" cdkFocusInitial>Ok</button>
+    </div> 
+    
+    
+
+    
+  </div>
+
+    
+    
+

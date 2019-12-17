@@ -1,0 +1,43 @@
+<p>
+  show-question works!
+</p>
+
+<ngx-datatable class='material' [rows]='question' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+  [rowHeight]="50" [limit]="5">
+
+  <ngx-datatable-column name="id">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{value}}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="discription">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+
+      {{row.discription}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="question">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{value}}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+
+
+
+  <ngx-datatable-column *ngIf="loginService.isUserType()" name="Delete">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <button  (click)="deleteQuestion(row.id)">Delete</button>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column *ngIf="!(loginService.isUserType())" name="Upload">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button  (click)="addAssignment(row.id)"  >File Upload</button>       <!--  (click)="openDialog()  "-->
+      </ng-template>
+    </ngx-datatable-column>
+
+
+</ngx-datatable>

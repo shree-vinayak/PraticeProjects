@@ -1,0 +1,24 @@
+<p>
+  upload-question works!
+</p>
+<div class="col-md-3">
+  <h2 class="text-center">Registration</h2>
+
+  <form>
+
+
+    <div class="form-group">
+      <label>Enter Discription</label>
+      <input type="text" class="form-control" [(ngModel)]="question.discription" name="discription">
+    </div>
+
+
+    <div class="form-group">
+      <label>Enter Question</label>
+      <input type="text" class="form-control" [(ngModel)]="question.question" name="question">
+    </div>
+
+    <button class="btn btn-primary" (click)="uploadQuestion()">submit</button>
+  </form>
+
+</div>
