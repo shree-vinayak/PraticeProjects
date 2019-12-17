@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.astute</groupId>
+		<artifactId>astute-backend</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>astute-iot</artifactId>
+	<packaging>war</packaging>
+	<name>astute-iot Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+
+	<properties>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<springframework.version>2.1.4.RELEASE</springframework.version>
+		<lombok.version>1.18.8</lombok.version>
+		<postgre.version>42.2.5</postgre.version>
+	</properties>
+	<dependencies>
+
+		<dependency>
+			<groupId>com.astute</groupId>
+			<artifactId>astute-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+		</plugins>
+		<finalName>AstuteIot</finalName>
+	</build>
+</project>
