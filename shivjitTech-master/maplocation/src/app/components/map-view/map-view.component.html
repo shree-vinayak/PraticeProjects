@@ -1,0 +1,38 @@
+<header>
+    <h3>Location Map</h3>
+</header>
+<main>
+    <section class="map-sec">
+        <div class="map" id="map"></div>
+    </section>
+    <section class="update-sec">
+        <div class="btn-inr">
+            <button *ngIf="!isEditable" (click)="onSave()" [disabled]="isClicked">Save</button>
+            <button *ngIf="isEditable" (click)="onUpdate(selectedLocation)" [disabled]="isClicked">
+                update
+            </button>
+            <a class="btn" (click)="onReset()">Reset</a>
+        </div>
+    </section>
+    <section class="list-sec">
+        <div class="list-int">
+            <div class="list-header">
+                <h3>All Location List</h3>
+            </div>
+            <div class="scroll">
+                <ul>
+                    <li class="flex" *ngFor="let list of lists">
+                        <div class="location-name">
+                            <h4>{{list.locationName}}</h4>
+                        </div>
+                        <div class="location-action">
+                            <a (click)="onEdit(list.id)" class="btn">Edit</a>
+                            <a (click)="onDelete(list.id)" class="btn">Delete</a>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </section>
+</main>

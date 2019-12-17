@@ -1,0 +1,85 @@
+<div class="main container-fluid">
+  <div class="form">
+    <form [formGroup]="adminForm">
+      <div class="form-group">
+        <label>
+          Name
+        </label>
+        <input type="text" [class.is-invalid]="adminForm.get('name').invalid && adminForm.get('name').touched"
+          class="form-control" placeholder="enter name" formControlName="name">
+        <!-- 
+        <small [class.d-none]="adminForm.get('name').valid || adminForm.get('name').untouched" class="text-danger">name
+          is required</small> -->
+        <!-- <div *ngIf="adminForm.get('name').invalid && adminForm.get('name').touched">
+          <small *ngIf="adminForm.get('name').errors?.required " class="text-danger">name is required</small>
+          <small *ngIf="adminForm.get('name').errors?.minlength " class="text-danger">name must be 5 character
+            long</small>
+        </div> -->
+        <div *ngIf="name.invalid && name.touched">
+          <small *ngIf="name.errors?.required " class="text-danger">name is required</small>
+          <small *ngIf="name.errors?.minlength " class="text-danger">name must be 1 character
+            long</small>
+          <small *ngIf="name.errors?.forbiddenName " class="text-danger"> {{ name.errors?.forbiddenName.value}}username
+            not allowed</small>
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label>
+          Username
+        </label>
+        <input type="email" class="form-control" placeholder="enter email" formControlName="username">
+      </div>
+      <div class="form-group">
+        <label>
+          Password
+        </label>
+        <input type="password" class="form-control" placeholder="enter password" formControlName="password">
+      </div>
+
+      <div class="form-group">
+        <label>
+          Confirm Password
+        </label>
+        <input [class.is-invalid]='adminForm.errors?.misMatch' type="password" class="form-control"
+          placeholder="enter confirm password" formControlName="confirmPassword">
+        <small *ngIf="adminForm.errors?.misMatch" class="text-danger"> password does not match</small>
+      </div>
+      <div class="form-group">
+        <label>
+          Select Role
+        </label>
+        <select class="select form-control" formControlName="role">
+          <option disabled>Select Roles</option>
+          <!-- <option>SUPERADMIN</option> -->
+          <option>ADMIN</option>
+          <!-- <option>USER</option> -->
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>
+          Select Services
+        </label>
+        <select class="select form-control" formControlName="services" multiple>
+          <option disabled>Select Services</option>
+          <option *ngFor='let service of servicesdb' value={{service.id}}>{{service.serviceName}}</option>
+
+        </select>
+      </div>
+
+      <div>
+        <ul>
+          <li>
+            <input type="submit" class="btn btn-primary" (click)="addAdmin()" [disabled]="adminForm.invalid"
+              value="Save">
+          </li>
+          <li>
+            <input type="reset" value="Reset">
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+
+</div>

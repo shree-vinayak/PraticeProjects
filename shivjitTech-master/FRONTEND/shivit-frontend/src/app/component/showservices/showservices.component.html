@@ -1,0 +1,15 @@
+<div>
+  <table border="1" cellspacing="" cellpadding="10px">
+    <tr>
+      <th>Service ID</th>
+      <th>Service Name</th>
+    </tr>
+    <tr *ngFor="let service of services">
+      <td class="text-align-center">{{service.id}}</td>
+      <td class="text-align-center">{{service.serviceName}}</td>
+    </tr>
+  </table>
+  <!-- <ul>
+    <li>{{service.id}}&nbsp;&nbsp;&nbsp;&nbsp;{{service.serviceName}}</li>
+  </ul> -->
+</div>

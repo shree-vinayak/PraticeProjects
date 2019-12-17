@@ -1,0 +1,27 @@
+<div class="packageHeader">
+    <h4>List of Packages</h4>
+</div>
+<table border="1">
+    <thead>
+        <tr>
+            <th> Package Name</th>
+            <th> Description</th>
+            <th> Version</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let package of packages">
+            <td>{{package.pkgName}}</td>
+            <td>{{package.description}}</td>
+            <td><input type="radio" value="Trial" name="pack" (change)="radioChangeHandler($event)">Trial
+                <input type="radio" value="Paid" name="pack" (change)="radioChangeHandler($event)">Paid</td>
+            <td>
+                <input type="button" class="btn btn-primary" (click)="subscribe(package)" value="Subscribe">
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+    <!-- routerLink="/registerUser"   routerLinkActive="active"-->
+</table>

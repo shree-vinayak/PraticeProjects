@@ -1,0 +1,38 @@
+<div class="main">
+  <div class="form">
+    <form [formGroup]="packageForm">
+      <div>
+        <label>
+          Package Name
+        </label>
+        <input type="text" placeholder="Enter Package Name" formControlName="pkgName">
+      </div>
+      <div>
+        <label>
+          Description
+        </label>
+        <input type="text" placeholder="Enter Description" formControlName="description">
+      </div>
+      <div>
+        <label>
+          File Name
+        </label>
+        <input type="text" placeholder="Enter File Name" formControlName="sqlFileName">
+      </div>
+
+
+      <div>
+        <ul>
+          <li>
+            <input type="submit" class="btn btn-primary" (click)="addPackage()" [disabled]="packageForm.invalid"
+              value="Save">
+          </li>
+          <li>
+            <input type="reset" value="Reset">
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+
+</div>

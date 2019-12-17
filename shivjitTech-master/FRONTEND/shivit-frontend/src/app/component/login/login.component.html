@@ -1,0 +1,17 @@
+<div class="loginForm">
+  <form align="center" [formGroup]=loginForm>
+    <div class='formField'>
+      <label class="align-left">Email address</label>
+      <input formControlName="username" type="email" placeholder="Enter email">
+    </div>
+    <div class='formField'>
+      <label class="align-left">Password</label>
+      <input formControlName="password" type="password" placeholder="password">
+    </div>
+    <div class='formField' align="center">
+      <button type="button" class="btn btn-dark" (click)="login()">Log in</button>
+      <button type="button" class="btn btn-secondary" (click)="moveToRegister()">Register</button>
+    </div>
+  </form>
+
+</div>

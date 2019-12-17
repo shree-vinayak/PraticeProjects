@@ -1,0 +1,11 @@
+.form {
+    background-color: white;
+    text-align: center;
+    width: auto;
+    padding: 20px;
+}
+
+.main li {
+    list-style: none;
+    display: inline;
+}

@@ -1,0 +1,21 @@
+<div class="main">
+  <div class="header">
+    <div class="margin-0-auto">
+      <div class="menu">
+        <ul>
+          <li><a *ngIf="!_authService.loggedIn() " routerLink="/home" routerLinkActive="active">Home</a></li>
+          <li><a *ngIf="!_authService.loggedIn() " routerLink="/login" routerLinkActive="active">Login</a></li>
+          <li><a *ngIf="_authService.loggedIn() && _authService.isSuperAdmin() " routerLink="/activatedUsers"
+              routerLinkActive="active">Activated Users</a></li>
+          <li><a *ngIf="_authService.loggedIn() && _authService.isSuperAdmin()" routerLink="/unActivatedUsers"
+              routerLinkActive="active">Unactivated Users</a></li>
+          <li><a *ngIf="_authService.loggedIn() && _authService.isSuperAdmin() " routerLink="/createPackage"
+              routerLinkActive="active">Create Package</a></li>
+          <li><a *ngIf="_authService.loggedIn() && _authService.isSuperAdmin()" routerLink="/showPackages"
+              routerLinkActive="active">Show Packages</a></li>
+          <li><a *ngIf="_authService.loggedIn()" routerLinkActive="active" (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

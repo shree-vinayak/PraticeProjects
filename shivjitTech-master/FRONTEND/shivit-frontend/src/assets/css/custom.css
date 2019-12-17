@@ -1,0 +1,52 @@
+.logo {
+    /* margin-left: 113px; */
+    width: 30%;
+    float: left;
+}
+.logo img{
+    width:200px;
+}
+
+.menu li {
+    margin: 15px 0px;
+    display: inline-block;
+    padding: 0 25px;
+}
+
+
+app-header .header {
+    background-color: #fff;
+    top: 0;
+    position: fixed;
+    display: inline-block;
+    width: 100%;
+    box-shadow: 0 0 10px 0px #868686;
+}
+
+.margin-0-auto {
+    margin: 0px auto;
+}
+
+
+.menu {
+    float: right;
+    /* margin-right: 20px; */
+}
+
+.container {
+    margin: 70px auto;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.color-grey {
+    color:  #dddddd;
+}
+
+
