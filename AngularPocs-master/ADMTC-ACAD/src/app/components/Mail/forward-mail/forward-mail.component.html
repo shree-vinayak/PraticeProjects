@@ -1,0 +1,73 @@
+<div>
+    <form [formGroup]="forwardMailForm">
+
+        <md-card-actions class="compose-mail-actions mb-1">
+            <!--[disabled]="!forwardMailForm.valid"-->
+            <button md-button [title]=" 'MailBox.forwardMail.send' | translate " (click)="sendMail()">
+                <i class="fa fa-paper-plane"></i>
+            </button>
+            <label class="file-upload" [title]=" 'MailBox.replyMail.attach_file' | translate ">
+                <i class="fa fa-paperclip"></i>
+                <input type="file" name="file" multiple (change)="handleInputChange($event)">
+            </label>
+            <div class="btn-close" (click)="closeDialog()">X</div>
+        </md-card-actions>
+
+        <md-card-content class="compose-mail">
+
+            <!--<div fxLayout="row" fxLayoutWrap="wrap">
+          <md-input-container>
+            <input mdInput  [placeholder]="'MailBox.forwardMail.to' | translate " type="text" formControlName="forwardTo">
+          </md-input-container>
+      </div>-->
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <md-input-container>
+                    <input mdInput [placeholder]="'MailBox.forwardMail.to' | translate " [mdAutocomplete]="autoCompTo" [formControl]="forwardMailForm.controls['search_receiver']"
+                        type="search">
+                </md-input-container>
+                <md-autocomplete #autoCompTo="mdAutocomplete" [displayWith]="recepientDisplayFunction.bind(this)">
+                    <md-option *ngFor="let res of recepientsList | async" [value]="res">
+                        <span>{{ res.display }}</span>
+                    </md-option>
+                </md-autocomplete>
+            </div>
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <md-chip-list class="mail-selected-res-list" [ngClass]="selectedRecepientsList.length ? 'mb-1' : '' ">
+                    <md-chip *ngFor="let _selRec of selectedRecepientsList; let _index = index">
+                        {{_selRec.display}}
+                        <i class="fa fa-times" (click)="removeSelectedRecepient(_index)"></i>
+                    </md-chip>
+                </md-chip-list>
+            </div>
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <md-input-container>
+                    <input mdInput [(ngModel)]="subject" [placeholder]="'MailBox.composeMail.subject' | translate " [formControl]="forwardMailForm.controls['subject']">
+                </md-input-container>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap" class="file-section">
+                <div class="mb-2" fxFlex *ngFor="let img of imageSrc">
+                    <label class="uploader" ondragover="return false;" [class.loaded]="loaded" [style.outlineColor]="dragging ? activeColor : baseColor"
+                        (dragenter)="handleDragEnter()" (dragleave)="handleDragLeave()" (drop)="handleDrop($event)">
+                        <i class="fa fa-file-image-o fa-icon" aria-hidden="true" *ngIf="img.type=='image/jpeg'"></i>
+                        <i class="fa fa-file-text fa-icon" aria-hidden="true" *ngIf="img.type=='text/plain'"></i>
+                        <i class="fa fa-file-pdf-o fa-icon" aria-hidden="true" *ngIf="img.type=='application/pdf'"></i>
+                    </label>
+                </div>
+            </div>
+            <!--<div fxLayout="row" fxLayoutWrap="wrap">
+        <md-input-container>
+          <textarea maxlength="500" mdInput [placeholder]="'MailBox.forwardMail.message' | translate " rows="10" value="{{forwardMessage}}" formControlName="message"></textarea>
+        </md-input-container>
+      </div>-->
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <quill-editor [(ngModel)]="forwardMailMessage" debounce="500" [formControl]="forwardMailForm.controls['message']"></quill-editor>
+            </div>
+
+        </md-card-content>
+    </form>
+
+</div>

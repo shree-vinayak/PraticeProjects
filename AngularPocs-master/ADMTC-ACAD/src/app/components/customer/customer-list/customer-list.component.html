@@ -1,0 +1,112 @@
+<div fxLayout="column" fxLayoutWrap="wrap" fxLayoutGap="5px">
+    <md-card>
+        <md-card-content>
+            <div fxLayout="row" fxLayoutWrap="wrap" class="top-bar schoolListComponent">
+                <div fxFlex="28" *ngIf="!utility.isJustProbCorrector()">
+                    <!-- (change)="changeSelection($event)" -->
+                    <md-radio-group style="float: left !important" [(ngModel)]="searchBy">
+                        <md-radio-button (change)="filterStudent(false,event,'RNCPType', selection.value)" *ngFor="let selection of CertifierSelection | orderBy : 'selection.view'"
+                            [value]='selection.value'>
+                            {{ 'USERS.' + selection.view | translate }}
+                        </md-radio-button>
+                    </md-radio-group>
+                </div>
+                <div fxFlex="35">
+                    <div class="px-1 select-input-container">
+                        <!-- (data)="ChangeRNCPTitle($event)" -->
+                        <ng-select [(ngModel)]="changeRNCPTitleModel" style="margin-top:2px;" fxFlex="65" (selected)="filterStudent(false,$event,'RNCP')"
+                            [multiple]="false" [items]="RNCPTitles" [placeholder]="'USERS.SELECTRNCPTITLE' | translate"></ng-select>
+                    </div>
+                </div>
+                <div fxFlex="28">
+                    <!-- (keyup)="searchSchoolList($event)" -->
+                    <md-input-container class="schoolList" style="margin-left: 5.30px;" dividerColor="accent">
+                        <input mdInput #searchText type="text" placeholder="{{ 'Search.SCHOOL_SEARCH' | translate }}" [(ngModel)]="SchoolListSearchItem"
+                            name="SchoolListSearchItem" (keyup)="filterStudent(true,$event,'default')">
+                    </md-input-container>
+                </div>
+                <div fxFlex="05">
+                    <!-- <div fxFlex="57" dividerColor="accent">
+                <button md-raised-button fxFlex type="button" class="btnSearch" color="primary" (click)="searchUserList(true)"><md-icon>search</md-icon>{{'USERS.SEARCH' | translate}}</button>
+            </div> -->
+                    <div fxFlex="40" dividerColor="accent">
+                        <button style="margin-left: 31px;" md-raised-button fxFlex type="button" class="btnSearch" color="primary" (click)="resetSearch()">
+                            <md-icon>restore</md-icon>Reset</button>
+                    </div>
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
+    <div fxFlex="100">
+        <button color="primary" style="margin-left: 5.30px;" md-raised-button (click)="onAddSchool()" *ngIf="!utility.checkUserIsAdminOrDirectorOfCertifier() && !utility.isJustProbCorrector()">{{'NEW_SCHOOL.ADD_SCHOOL' | translate}}</button>
+        <button color="primary" md-raised-button (click)="onAddRncp()" *ngIf="!utility.checkUserIsAdminOrDirectorOfCertifier() && !utility.isJustProbCorrector()">{{'NEW_SCHOOL.ADD_RNCP_TITLE' | translate}}</button>
+    </div>
+    <div fxFlex="100"  class="schoolList">
+        <ngx-datatable class="material rncp-table schoolListMainDivision" [rows]="customers" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
+            [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [reorderable]="reorderable" [count]="page.totalElements"
+            [offset]="page.pageNumber" [limit]="" (page)="changePage($event)" [messages]="{emptyMessage: 'NoDataToDisplay' | translate }"
+            [externalSorting]="true" (sort)="sortPage($event)" [cssClasses]="ngxDtCssClasses" [sorts]="[{prop: 'shortName', dir: 'asc'},{prop: 'addresses[0].city.cityName', dir: 'asc'}]"
+            #table [selectionType]="'checkbox'">
+
+            <ngx-datatable-column [flexGrow]="1" [width]="40" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false"
+                [headerCheckboxable]="true" [checkboxable]="true">
+            </ngx-datatable-column>
+            <ngx-datatable-column name="School" [flexGrow]="5" prop="shortName" [sortable]="true" [resizeable]="false">
+                <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">{{ 'USERLISTTABLE.SCHOOL' | translate}}</ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <a class="scName" (click)="onEdit(row._id, row.shortName)"> {{row.shortName}} </a>
+                </ng-template>
+            </ngx-datatable-column>
+            <!-- <ngx-datatable-column name="addresses[0].city.cityName" [flexGrow]="4" prop="addresses[0].city.cityName" [sortable]="true"
+                [resizeable]="false">
+                <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">{{ 'STUDENT.CITY.title' | translate}}</ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div *ngIf="row.addresses.length>0">
+                        <span *ngIf="row.addresses[0].city">
+                            {{row.addresses[0].city.cityName}}
+                        </span>
+                    </div>
+                </ng-template>
+            </ngx-datatable-column> -->
+            <ngx-datatable-column name="city" [flexGrow]="5" prop="city" [sortable]="true"
+                [resizeable]="false">
+                <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">{{ 'STUDENT.CITY.title' | translate}}</ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row?.schoolAddress?.city}}
+                </ng-template>
+            </ngx-datatable-column>
+            <!-- <ngx-datatable-column name="Phone Number" [flexGrow]="5" prop="PhoneNumber" [sortable]="false" [resizeable]="false">
+                <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">{{ 'STUDENT.TELEPHONE.title' | translate}}</ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <span *ngFor="let address of row.addresses">{{ address.phoneNumber }}</span>
+                </ng-template>
+            </ngx-datatable-column> -->
+            <ngx-datatable-column name="RNCPTitles" [flexGrow]="10" prop="RNCPTitles" [sortable]="false" [resizeable]="false">
+                <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">{{ 'RNCPTITLES' | translate}}</ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <span *ngFor="let title of row.rncpTitles;let i=index">
+                      <span (click)="openEditRNCP(title)" class="tags">
+                        {{ title.shortName }}
+                      </span>
+                    </span>
+                    <ng-template #AllRNCP>
+                        <span class="tags">{{ 'USERS.ALL_RNCP_TITLES' | translate }}</span>
+                    </ng-template>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Action" [flexGrow]="1.5" prop="Action" [sortable]="false" [resizeable]="false" *ngIf="!utility.checkUserIsAdminOrDirectorOfCertifier() && !utility.isJustProbCorrector()">
+                <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn"> {{'USERLISTTABLE.ACTIONS.TITLE' | translate}}</ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+
+                    <button md-icon-button md-button-sm md-raised-button class="grid-button" (click)="editSchoolDislog(row)">
+                        <md-icon>edit</md-icon>
+                    </button>
+                    <button md-icon-button md-button-sm md-raised-button class="grid-button" (click)="sendMail(row)">
+                        <md-icon>mail</md-icon>
+                    </button>
+
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+<form class="student-form" [formGroup]="studentRegistrationForm" (ngSubmit)="registerStudent(studentRegistrationForm.value)">
+    <div fxFlex="50" >
+        <md-card class="primary-background dark-header">
+            <md-card-content>
+                <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust" style="margin-top: 4%">
+                    <div fxFlex="80" fxFlex.lt-sm="100" class="label-text">
+                        <label style="font-size:15px;font-weight: bold;">
+                            {{'STUDENT.MYPHOTO.title' | translate}}
+                        </label>
+                            <br>
+                            <span style="font-size: 12px;color: gray;">
+                                {{'STUDENT.MYPHOTO.subtitle' | translate}}
+                            </span>
+                    </div>
+                    <div fxFlex="20" fxFlex.lt-sm="100">
+                        <div class="px-1">
+                            <div class="photo-upload" style="text-align: right">
+                                <input #userphoto style="display: none;" type="file" ng2FileSelect [uploader]="uploader" disableMultipart="true" />
+                                <button style="margin-top:10px" (click)="openUploadWindow()" fxFlexAlign="end" md-raised-button md-button-sm color="primary" type="button">
+                                  <md-icon>add</md-icon>
+                                  {{'DOCUMENT.FILE' | translate}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+        <md-card class="primary-background dark-header">
+            <md-card-content>
+                <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust" style="margin-top: 15px;">
+                    <div fxFlex="80" fxFlex.lt-sm="100" class="label-text">
+                        <label style="font-size:15px;font-weight: bold;">
+                            {{'STUDENT.LASTDEPLOMA.title' | translate}}
+                        </label>
+                        <br>
+                        <span style="font-size: 12px;color: gray;text-align: right">
+                            {{'STUDENT.LASTDEPLOMA.subtitle' | translate}}
+                        </span>
+                    </div>
+                    <!-- <div fxFlex="20" fxFlex.lt-md="20">
+                        <div class="px-1">
+                            <div class="photo-upload" style="text-align: right">
+                                <input #deplomaphoto style="display: none;" type="file" ng2FileSelect [uploader]="uploaderDeploma" disableMultipart="true" />
+                                <button style="margin-top:10px" (click)="openUploadWindowDeploma()" fxFlexAlign="end" md-raised-button md-button-sm color="primary" type="button">
+                                  <md-icon>add</md-icon>
+                                  {{'DOCUMENT.FILE' | translate}}
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust" style="margin-top: 15px;">
+                    <div fxFlex="83" fxFlex.lt-sm="100" class="label-text">
+                        <div class="select-input-container">
+                            <md-input-container color="accent" style="width: 80%" class="student-lastname-input">
+                                <!-- formControlName="lastName" #lastName pattern="[a-zA-ZÀ-Ÿà-ÿ][a-zA-ZÀ-Ÿà-ÿ\s]*"     -->
+                                <input mdInput [(ngModel)]="lastDiplomaObtainedTitle" formControlName="lastObtainedDiploma" [placeholder]="'STUDENT.LASTDEPLOMA.inputTitle'| translate" mdInput maxlength="30" type="text" />
+                            </md-input-container>
+                            <small *ngIf="false" class="mat-text-warn"> {{'STUDENT.LASTNAME.validation1' | translate}}
+                    </small>
+                        </div>
+                    </div>
+                    <div fxFlex="15" fxFlex.lt-sm="100">
+                        <div class="px-1" style="padding-right: 0px !important;padding-left: 0px !important;">
+                            <div class="photo-upload" style="text-align: right">
+                                <input #deplomaphoto style="display: none;" type="file" ng2FileSelect [uploader]="uploaderDeploma" disableMultipart="true" />
+                                <!-- *ngIf="uploaderDeploma.queue.length === 0" [disabled]="lastDiplomaObtainedTitle === '' "  -->
+                                <button (click)="openUploadWindowDeploma()" [disabled]="lastDiplomaObtainedTitle === '' " style="margin-top:10px" fxFlexAlign="end" md-raised-button md-button-sm color="primary" type="button">
+                      <md-icon>add</md-icon>
+                      {{'DOCUMENT.FILE' | translate}}
+                    </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+                    <div fxFlex="100" fxFlex.lt-sm="100" class="label-text" style="text-align:center">
+                        <label style="font-size:15px;font-weight: bold;">{{ lastDiplomaObtainedFile }}</label>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+        <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust" style="margin-top: 15px;">
+            <div fxFlex="96" fxFlex.lt-md="96" class="label-text">
+                    <!-- class="mr-24 text-right" style="margin-right: 5%" -->
+                <div style="float:right"> <button md-button md-raised-button color="primary" type="submit">{{'USERS.ADDEDITUSER.SUBMIT'| translate}}</button> </div>
+            </div>
+        </div>
+    </div>
+    <div fxFlex="10">
+        <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust" style="padding: 5px;height: 28%;">
+            <div fxFlex="20" fxFlex.lt-md="20" class="label-text">
+                <div class="photo-preview" style="margin-top: 5px;">
+                    <img [src]="filePreviewPath" width="115" height="115" *ngIf="filePreviewPath" />
+                </div>
+            </div>
+        </div>
+        <br>
+        <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust" style="padding: 5px;margin-top:23%">
+            <div fxFlex="20" fxFlex.lt-md="20" class="label-text">
+                <div class="photo-preview" (click)="viewDocument()">
+                    <img [src]="filePreviewPathDeploma" width="115" height="115" style="margin-top: 30%" *ngIf="filePreviewPathDeploma" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

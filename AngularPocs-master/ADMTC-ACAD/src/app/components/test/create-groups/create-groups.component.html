@@ -1,0 +1,151 @@
+<div fxLayout="row wrap" style="height: 100%">
+    <div fxFlex="100">
+        <div fxLayout="column wrap" fxLayoutAlign="space-between stretch" style="height: 50px;">
+            <div fxLayout="row wrap" fxFlex>
+                <div fxFlex="30" fxLayout="column" fxLayoutAlign="space-between stretch">
+                    <div class="TitleOfCardDiv">
+                        <h6> {{selectedRncpTitle?.shortName}} / {{testDetails?.name}} /    {{ getTranslatedDate(testDetails?.date) }}  </h6>
+                    </div>
+                </div>
+                <div fxFlex="70" fxLayout="column" fxLayoutAlign="space-between stretch">
+                    <div class="TitleOfCardDiv">
+                        <h6>   {{'TESTCORRECTIONS.GROUP.AllocationofGroups' | translate }} : &nbsp;&nbsp; {{'TESTCORRECTIONS.GROUP.Manual' | translate}}
+                            <md-slide-toggle labelPosition="after" [checked]="toggle" (change)="toggleChange($event)"></md-slide-toggle>
+                            {{'TESTCORRECTIONS.GROUP.Automatic' | translate}}
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="column wrap" fxLayoutAlign="space-between stretch" class="full-height-95">
+
+            <div fxLayout="row wrap" fxFlex>
+                <div fxFlex="30" fxLayout="column" fxLayoutAlign="space-between stretch" *ngIf="!toggle">
+
+                    <md-card fxFlex class="primary-background dark-header" fxLayout="column">
+                        <md-card-title>
+                            <span class="text-xl"> {{'TEST.GROUPTEST' | translate }}
+                              <span style="float: right" *ngIf="!isADMTCDirOrAdmin">
+                                  {{'TESTCORRECTIONS.GROUP.Min' | translate}}. {{testDetails?.correctionGrid.groupDetails.minNoOfStudents}} &nbsp;&nbsp;&nbsp; {{'TESTCORRECTIONS.GROUP.Max' | translate}}. {{testDetails?.correctionGrid.groupDetails.noOfStudents}}
+                              </span>
+                            </span>
+                        </md-card-title>
+                        <md-card-content fxFlex style="overflow: auto">
+                            <md-input-container dividerColor="accent" style="margin: 4px; width:100%">
+                                <input mdInput placeholder="{{'TESTCORRECTIONS.SEARCHSTUDENT' | translate}}" type="text" [(ngModel)]="SearchStudent" [ngModelOptions]="{standalone: true}" (keyup)="searchStudentsTable($event)">
+                            </md-input-container>
+                            <ngx-datatable class="material rncp-table students-correction-table" [rows]="searchedStudents" [footerHeight]="30" [headerHeight]="50" [rowHeight]="'auto'" [columnMode]="'flex'" [externalSorting]="true" (sort)="sortPage($event)" [cssClasses]="ngxDtCssClasses"
+                                [columnMode]="'force'">
+                                <ngx-datatable-column [flexGrow]="7">
+                                    <ng-template ngx-datatable-header-template>
+                                        {{'STUDENT.STUDENTNAME' | translate }}
+                                    </ng-template>
+                                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                        <a (click)="studentSelected(row)">{{row['lastName'] ? row['lastName'] : ''}} {{row['firstName'] ? row['firstName'] : ""}}  </a>
+                                    </ng-template>
+                                </ngx-datatable-column>
+
+                                <ngx-datatable-column cellClass="studentScore" [flexGrow]="8" *ngIf='cards.length'>
+                                    <ng-template ngx-datatable-header-template>
+                                        {{'TESTCORRECTIONS.GROUP.Group' | translate }}
+                                    </ng-template>
+                                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                        <!-- <div class="px-1 select-input-container" *ngIf="form.controls['studentGroup'+row._id] && !this.manualFirst">
+                                            <md-select [(ngModel)]="form.value['studentGroup'+row._id]" [formControl]="form.controls['studentGroup'+row._id]" (change)="changeStudentGroup($event,row,'studentGroup'+row._id,row._id)">
+                                                <md-option *ngFor="let group of cards; index as i" [value]="i">{{ group.name }}</md-option>
+                                            </md-select>
+                                        </div> -->
+                                        <div class="px-1 select-input-container" *ngIf="form.controls['studentGroup'+row._id]">
+                                            <md-select [(ngModel)]="form.value['studentGroup'+row._id]"  [formControl]="form.controls['studentGroup'+row._id]"  (change)="changeStudentGroup($event,row,'studentGroup'+row._id,row._id)">
+                                                <md-option *ngFor="let group of cards; index as i" value="std-{{i}}">{{ group.name }}</md-option>
+                                            </md-select>
+                                        </div>
+                                    </ng-template>
+                                </ngx-datatable-column>
+
+                                <ngx-datatable-footer>
+                                    <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize" let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset">
+                                        <div style="padding: 5px 10px">
+                                            {{rowCount}} {{'TESTCORRECTIONS.Students' | translate }}
+                                        </div>
+                                    </ng-template>
+                                </ngx-datatable-footer>
+
+                            </ngx-datatable>
+                        </md-card-content>
+                    </md-card>
+                </div>
+                <div fxFlex="{{!toggle ? 70 : 100 }}" fxLayout="column" fxLayoutAlign="space-between stretch">
+
+                    <md-card fxFlex class="dark-header" fxLayout="column wrap" fxLayoutAlign="space-between stretch">
+                        <md-card-title>
+                            <span class="text-xl">{{getTitleForGeneratedGroup()}}</span>
+                            <span class="text-xl" style="float: right;">
+                              <button *ngIf="!toggle" type="button" (click)="deleteSelected()" md-raised-button color="warn"><i class="fa fa-trash-o"></i> {{'TESTCORRECTIONS.GROUP.Delete' | translate }} </button>
+                              <button *ngIf="!toggle" type="button" (click)="addNewGroup()" md-raised-button color="accent"><i class="fa fa-plus"></i> {{'TESTCORRECTIONS.GROUP.AddGroup' | translate }} </button>
+
+
+                              <button type="button" [disabled]="!toggle" (click)="generateGroup()" md-raised-button color="accent"><i class="fa fa-gear"></i> {{'TESTCORRECTIONS.GROUP.GenerateGroups' | translate }} </button>
+                            </span>
+                        </md-card-title>
+                        <md-card-content fxFlex style="overflow: auto">
+                            <div fxLayout="row wrap">
+                                <div fxFlex="25" *ngFor="let data of cards; index as i">
+                                    <div fxLayout="column wrap" style="padding: 3px;height: 100%">
+                                        <md-card fxFlex class="primary-background dark-header text-center rncp-title-tile">
+                                            <md-card-content>
+                                                <md-checkbox *ngIf="!toggle" style="float: right;" [(ngModel)]="cards[i]['checked']"></md-checkbox>
+                                                <md-input-container class="no-bottom-margin cardTitleInput" style="width: 100%">
+                                                    <input
+                                                          style="text-align: center;font-size: 28px;font-weight: bold;"
+                                                          mdInput
+                                                          type="text"
+                                                          [(ngModel)]="cards[i].name" >
+                                                </md-input-container>
+                                                <h6 style="margin-top: 10px;" *ngFor="let student of data.students | orderBy: 'lastName'; index as StudentIndex">
+                                                    <b>{{student.lastName ? student.lastName : ""}} {{student.firstName ? student.firstName : ""}}</b>
+                                                </h6>
+                                            </md-card-content>
+                                        </md-card>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </div>
+
+
+            <span style="text-align: right;margin-right: 5px;">
+                <button (click)="cancleClick()" type="button" (click)="deleteSelected()" md-raised-button color="warn" style="vertical-align: middle;" md-button>
+                  <md-icon>reply</md-icon>
+                  {{'TESTCORRECTIONS.SUBMIT.CANCEL' | translate}}
+                </button>
+
+              <button name="single-click" *ngIf="toggle" [disabled]="!checkIsReadyToSave() || checkIfCorrectionStartedBtn" type="submit" md-raised-button color="accent" style="vertical-align: middle;" md-button>
+                <md-icon>save</md-icon>
+                {{'TESTCORRECTIONS.GROUP.SaveAsDraft' | translate }}
+              </button>
+
+              <button name="single-click" *ngIf="toggle" [disabled]="!checkIsReadyToSave() || checkIfCorrectionStartedBtn" type="submit" (click)="saveGroups()" md-raised-button color="accent" style="vertical-align: middle;" md-button>
+                  <i class="fa fa-users"></i>
+                  {{'TESTCORRECTIONS.GROUP.SaveAndSubmitGroups' | translate }}
+              </button>
+
+              <button name="single-click" *ngIf="!toggle" [disabled]="!checkIsReadyToSubmitManual() || checkIfCorrectionStartedBtn" type="button" (click)="submitManual(true)" md-raised-button color="accent" style="vertical-align: middle;" md-button>
+                <md-icon>save</md-icon>
+                {{'TESTCORRECTIONS.GROUP.SaveAsDraft' | translate }}
+              </button>
+
+              <button name="single-click" *ngIf="!toggle" [disabled]="!checkIsReadyToSubmitManual() || checkIfCorrectionStartedBtn" type="button" (click)="submitManual()" md-raised-button color="accent" style="vertical-align: middle;" md-button>
+                <i class="fa fa-users"></i>
+                {{'TESTCORRECTIONS.GROUP.SaveAndSubmitGroups' | translate }}
+              </button>
+
+            </span>
+
+
+        </div>
+
+    </div>
+</div>

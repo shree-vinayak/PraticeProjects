@@ -1,0 +1,31 @@
+.radio-group {
+  display: inline-block !important;
+  float: left !important;
+}
+
+
+.place-svg-icon {
+  width: 26px;
+  height: 26px;
+  transform: translateY(5px);
+}
+.final-transcript-container {
+  width: 100%;
+  height: 100%;
+}
+:host /deep/ .final-transcript-container {
+  .mat-radio-label {
+    margin-right: 10px !important;
+    white-space: normal !important;
+  }
+
+  .md-radio-group {
+    float: left !important;
+  }
+
+  .multi-list-length .ui-select-multiple .ui-select-choices {
+    max-height: 256px !important;
+    overflow-y: scroll !important;
+  }
+}
+

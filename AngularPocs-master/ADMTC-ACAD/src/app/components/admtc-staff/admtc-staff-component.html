@@ -1,0 +1,206 @@
+<md-card>
+    <md-card-content>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" fxFlex.lt-md="100">
+                <a href="javascript:void(0);" class="text-xl mr-2" style="margin-left: 1%;"> {{'USERS.USERS' | translate}} </a>
+            </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap">
+
+            <div fxFlex="33" fxFlex.lt-md="33">
+                <div class="px-1 select-input-container">
+                    <md-radio-group style="float: left !important" [(ngModel)]="searchBy">
+                        <md-radio-button (change)="changeSelection($event)" *ngFor="let selection of CertifierSelection | orderBy : 'selection.view'"
+                            [value]='selection.value'>
+                            {{ 'USERS.' + selection.view | translate }}
+                        </md-radio-button>
+                    </md-radio-group>
+                </div>
+            </div>
+
+            <div fxFlex="33" fxFlex.lt-md="33">
+                <div class="px-1 select-input-container" class="admtcStaffComponent">
+                    <ng-select [(ngModel)]="changeRNCPTitleModel" style="margin-top:2px;" fxFlex="65" (data)="ChangeRNCPTitle($event)" [multiple]="false"
+                        [items]="RNCPTitles" [placeholder]="'USERS.SELECTRNCPTITLE' | translate"></ng-select>
+                </div>
+            </div>
+            <div fxFlex="33" fxFlex.lt-md="33" fxFlexAlign="end end">
+                <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutGap="10px">
+                    <md-input-container fxFlex="50" dividerColor="accent">
+                        <input mdInput [(ngModel)]="searchText" maxlength="30" [placeholder]="'USERS.SEARCH' | translate" type="text" (keypress)="KeyPressSearchUserList($event)">
+                    </md-input-container>
+                    <div fxFlex="47" dividerColor="accent">
+                        <div fxLayout="row" fxLayoutWrap="wrap">
+                            <div fxFlex="57" dividerColor="accent" class="searchButton">
+                                <button md-raised-button fxFlex type="button" class="btnSearch" color="primary" (click)="searchUserList(true)">
+                                    <md-icon>search</md-icon>
+                                    {{'USERS.SEARCH' | translate}}
+                                </button>
+                            </div>
+                            <div fxFlex="40" style="max-width: 42%;" dividerColor="accent">
+                                <button [disabled]="!isSearching" style="margin-left: 5px;" md-raised-button fxFlex type="button" class="btnSearch" color="primary"
+                                    (click)="resetSearch()">
+                                    <md-icon>restore</md-icon>
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="33" fxFlex.lt-md="33">
+                <div class="px-1 select-input-container" *ngIf="prepOrCertitfierDisp">
+                    <md-input-container fxFlex="65">
+                        <input type="text" placeholder="{{'USERS.ADDEDITUSER.SELECTSCHOOL' | translate}}" mdInput [(ngModel)]="preparationcenterSearchString"
+                            [mdAutocomplete]="auto" (keyup)="searchSchoolList($event)">
+                        <md-autocomplete #auto="mdAutocomplete">
+                            <md-option *ngFor="let school of preparationCenter; let i = index" (click)="selectedPrepcentre(school)" [value]="school.shortName">
+                                {{ school.shortName }}
+                            </md-option>
+                        </md-autocomplete>
+                    </md-input-container>
+                </div>
+            </div>
+            <div fxFlex="33" fxFlex.lt-md="100" class="admtcStaffComponent">
+                <div class="px-1 select-input-container" style="padding-left: 0px !important">
+                    <ng-select [(ngModel)]="changeUserTyepModel" fxFlex="68" (data)="ChangeUserTitle($event)" [multiple]="false" [items]="userTypes"
+                        [placeholder]="'USERS.SELECTUSERTYPE' | translate"></ng-select>
+                </div>
+            </div>
+            
+            <div fxFlex="34" fxFlex.lt-md="100" fxFlexAlign="end end" class="">
+                <div fxFlex="51.5" dividerColor="accent">
+                    <md-select placeholder="{{'USERS.ADDEDITUSER.STATUS' | translate}}" style="width: 95%" [(ngModel)]="statusFilterSelection" class="full-width" (change)="getUserAsPerStatus()">
+                        <md-option *ngFor="let status of statusoptions" [value]="status.value">
+                            <span>{{'STUDENT.MESSAGE.' + status.text  | translate }}</span>
+                            <i *ngIf="status.value !== 'all'"  [style.color]="status.color" class="fa fa-check-circle registration-icon status-filter-icon"
+                                aria-hidden="true"></i>
+                        </md-option>
+                    </md-select>
+                </div>
+                <div fxFlex="48" fxLayout="row" fxLayoutWrap="wrap" fxLayoutGap="5px">
+                    <button fxFlex="55" style="float: right;" class="btnSearch" md-raised-button color="accent" (click)="ADMTCStaffDialog(null)">
+                        <md-icon style="margin-bottom: 5px;"> person_add</md-icon> {{'IDEAS.USER' | translate}}
+                    </button>
+                    <button fxFlex="35" style="float: right;" class="btnSearch" md-raised-button color="primary" (click)="onExportCSV()">
+                        <i class="fa fa-file-excel-o" style="font-size: 16px" aria-hidden="true"></i> Export
+                    </button>
+                </div>
+            </div>
+        </div>
+    </md-card-content>
+</md-card>
+<div>
+    <!-- [scrollbarV]="true" [scrollbarH]="true" -->
+    <ngx-datatable class="material rncp-table no-scroll" [rows]="userList" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
+        [rowHeight]="50" [reorderable]="reorderable" [scrollbarV]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+        [limit]="page.size" (page)="changePage($event)" [messages]="{emptyMessage: 'NoDataToDisplay' | translate }" [externalSorting]="true"
+        (sort)="sortPage($event)" [cssClasses]="ngxDtCssClasses" [sorts]="[{prop: 'lastName', dir: 'asc'},{prop: 'assignedRncpTitles[0].shortName', dir: 'asc'},{prop: 'types[0].name', dir: 'asc'},{prop: 'entity', dir: 'asc'},{prop: 'entity.type', dir: 'asc'}]">
+
+        <ngx-datatable-column [flexGrow]="15" name="lastName" prop="lastName" [sortable]="true" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                <span (click)="sort()"> {{'USERLISTTABLE.NAME' | translate}}</span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{ (row.sex == 'M' ? 'USERLISTTABLE.CIVILITY.MR' : 'USERLISTTABLE.CIVILITY.MRS') | translate }} {{row.firstName}} {{row.lastName}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [flexGrow]="15" name="entity" prop="entity" [sortable]="true" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                {{'USERLISTTABLE.SCHOOL' | translate}}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <div *ngIf="( row?.entity?.groupOfSchools?.length > 0 ); else OneSchool" style="word-break: break-word;">
+                    <span *ngFor="let school of row.entity.groupOfSchools" (click)="goToSelectedSchool(school?._id)" style="cursor:pointer" class="tags">
+                       {{ school?.shortName }}
+                    </span>
+                </div>
+                <ng-template #OneSchool>
+                    <span class="tags" *ngIf="row?.entity?.school" (click)="goToSelectedSchool(row?.entity?.school?._id)" style="cursor:pointer">{{ row.entity.school.shortName }}</span>
+                </ng-template>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [flexGrow]="25" name="assignedRncpTitles[0].shortName" [sortable]="true" prop="assignedRncpTitles[0].shortName"
+            [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                {{'USERLISTTABLE.TITLE' | translate}}
+            </ng-template>
+
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                <div *ngIf="(row?.assignedRncpTitles?.length < countRNCPTitles ); else AllRNCP" style="word-break: break-word;">
+                    <span *ngFor="let RNCP of row.assignedRncpTitles" (click)="goToRNCPDashboard(RNCP._id)" style="cursor:pointer" class="tags">{{ RNCP?.shortName }}</span>
+                </div>
+                <ng-template #AllRNCP>
+                    <span class="tags">{{ 'USERS.ALL_RNCP_TITLES' | translate }}</span>
+                </ng-template>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [flexGrow]="27" name="types[0].name" [sortable]="true" prop="types[0].name" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                {{'USERLISTTABLE.USERTYPE' | translate}}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span *ngFor="let type of row.types" class="tags">{{ getTranslateUserType(type.name)}}</span>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [flexGrow]="9" name="entity.type" prop="entity.type" [sortable]="true" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                {{ 'USERLISTTABLE.ENTITY' | translate }}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{ row?.entity?.type ? getTranslateENTITY(row?.entity?.type) : '' }}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [flexGrow]="4" name="isRegistered" prop="isRegistered" [sortable]="false" [resizeable]="false"  [cellClass]="'icon-align'">
+            <ng-template let-column="column" ngx-datatable-header-template>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <div style="text-align: center;">
+                    <i *ngIf="row?.incorrectEmail" style="color: red;" class="fa fa-check-circle registration-icon" aria-hidden="true"></i>
+                    <i *ngIf="!row?.incorrectEmail" [ngStyle]="{ 'color': row?.isRegistered ? 'greenyellow' : 'black' }" [mdTooltip]=" row?.isRegistered ? ('STUDENT.MESSAGE.ACTIVE_STATUS' | translate) : ('STUDENT.MESSAGE.PENDING' | translate)"
+                        mdTooltipPosition="after" class="fa fa-check-circle registration-icon" aria-hidden="true"></i>
+                </div>
+                    <!-- <i *ngIf="student.status === 'pending'" style="font-size:25px;cursor: pointer;color:grey; float:right" mdTooltip="{{'STUDENT.MESSAGE.PENDING' | translate}}" mdTooltipPosition="after" color="green" class="fa fa-check-circle" aria-hidden="true"></i> -->
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Actions" [flexGrow]="13" [sortable]="false" [resizeable]="false" [cellClass]="'text-center'">
+            <ng-template let-column="column" ngx-datatable-header-template>
+                {{'USERLISTTABLE.ACTIONS.TITLE' | translate}}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span class="buttonFlex">
+                    <button (click)="superUserMode(row._id)" md-icon-button md-button-sm md-raised-button mdTooltip="{{ 'TOOLTIP_FOR_ICON.CONNECT AS THIS USER' | translate }}" class="grid-button custom-margin" >
+                     <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                       <path fill="#ffffff" d="M12,3C9.31,3 7.41,4.22 7.41,4.22L6,9H18L16.59,4.22C16.59,4.22 14.69,3 12,3M12,11C9.27,11 5.39,11.54 5.13,11.59C4.09,11.87 3.25,12.15 2.59,12.41C1.58,12.75 1,13 1,13H23C23,13 22.42,12.75 21.41,12.41C20.75,12.15 19.89,11.87 18.84,11.59C18.84,11.59 14.82,11 12,11M7.5,14A3.5,3.5 0 0,0 4,17.5A3.5,3.5 0 0,0 7.5,21A3.5,3.5 0 0,0 11,17.5C11,17.34 11,17.18 10.97,17.03C11.29,16.96 11.63,16.9 12,16.91C12.37,16.91 12.71,16.96 13.03,17.03C13,17.18 13,17.34 13,17.5A3.5,3.5 0 0,0 16.5,21A3.5,3.5 0 0,0 20,17.5A3.5,3.5 0 0,0 16.5,14C15.03,14 13.77,14.9 13.25,16.19C12.93,16.09 12.55,16 12,16C11.45,16 11.07,16.09 10.75,16.19C10.23,14.9 8.97,14 7.5,14M7.5,15A2.5,2.5 0 0,1 10,17.5A2.5,2.5 0 0,1 7.5,20A2.5,2.5 0 0,1 5,17.5A2.5,2.5 0 0,1 7.5,15M16.5,15A2.5,2.5 0 0,1 19,17.5A2.5,2.5 0 0,1 16.5,20A2.5,2.5 0 0,1 14,17.5A2.5,2.5 0 0,1 16.5,15Z" />
+                     </svg>
+                   </button>
+                    <button (click)="requestEmailCorrection(row)"  mdTooltip="{{ 'TOOLTIP_FOR_ICON.INFORM ERROR IN EMAIL' | translate }}"  md-icon-button md-button-sm md-raised-button class="grid-button custom-margin"
+                     *ngIf="displayUserN6Icon" >
+                        <md-icon>block</md-icon>
+                    </button>
+                    <button [disabled]="row._id === loggedInUserId" mdTooltip="{{ 'TOOLTIP_FOR_ICON.DELETE USER' | translate }}" md-icon-button md-button-sm md-raised-button class="grid-button custom-margin" (click)="deleteRegisteredUser(row['_id'], row['sex'], row['firstName'], row['lastName'])">
+                        <md-icon>close</md-icon>
+                    </button>
+                    <button md-icon-button md-button-sm md-raised-button mdTooltip="{{ 'TOOLTIP_FOR_ICON.VIEW OR EDIT USER' | translate }}" class="grid-button custom-margin" (click)="openPopUpForEditDialog(row['_id'])">
+                        <md-icon>edit</md-icon>
+                    </button>
+                    <button md-icon-button mdTooltip="{{ 'TOOLTIP_FOR_ICON.SEND EMAIL TO USER' | translate }}" md-button-sm md-raised-button class="grid-button custom-margin" (click)="sendMail(row)">
+                        <md-icon>mail</md-icon>
+                    </button>
+                </span>
+            </ng-template>
+        </ngx-datatable-column>
+
+    </ngx-datatable>
+
+</div>

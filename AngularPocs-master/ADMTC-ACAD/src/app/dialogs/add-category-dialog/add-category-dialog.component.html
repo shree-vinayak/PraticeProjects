@@ -1,0 +1,20 @@
+﻿<form [formGroup]="form" (ngSubmit)="continue()">
+  <div>
+    <h3>Add a Folder</h3>
+  </div>
+    <div>
+        <md-input-container color="accent" style="width: 100%">
+            <input mdInput formControlName="title" type="text" #name [placeholder]="'DASHBOARD.NEWCATEGORYNAME' | translate" [required]="true" (blur)="onBlurMethod($event,'title')" />
+        </md-input-container>
+        <small *ngIf="form.controls['title'].hasError('required')" class="mat-text-warn" style="margin-left: 0px;"> {{'DASHBOARD.ERRORS.REQUIREDFIELD' | translate}} </small>
+        <small *ngIf="form.controls['title'].hasError('pattern') " class="mat-text-warn" style="margin-left: 0px;">Invalid Input</small>
+
+        <md-input-container color="accent" style="width: 100%">
+            <textarea mdInput formControlName="description" [placeholder]="'DASHBOARD.CATEGORYDESCRIPTION' | translate"></textarea>
+        </md-input-container>
+    </div>
+    <div>
+        <button md-raised-button color="warn" type="button" (click)="cancel()" id="BtnCloseDialog">{{'CANCEL' | translate}}</button>
+        <button md-raised-button color="primary" type="submit">{{'CONTINUE' | translate}}</button>
+    </div>
+</form>

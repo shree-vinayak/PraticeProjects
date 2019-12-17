@@ -1,0 +1,104 @@
+<form id="form" [formGroup]="form">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="100">
+                    <div class="address-container">
+                        <div class="px-1" style="margin-top:10px">
+                            <span>{{'SETTINGS.TITLES.INVOICE' | translate}}</span>
+                        </div>
+                        <div class="panel-body">
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="95" fxFlex.lt-md="95">
+                                    <div class="px-1 select-input-container">
+                                        <md-input-container color="accent" style="width: 100%">
+                                            <input mdInput type="text" formControlName="VatTaxRate" [placeholder]="'SETTINGS.INVOICE.VATTAXRATE' | translate" />
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                                <div fxFlex="5" fxFlex.lt-md="5">
+                                    <div class="px-1 select-input-container">
+                                        <span>%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1 select-input-container">
+                                        <md-input-container color="accent" style="width: 100%">
+                                            <textarea mdInput id="icon_prefix2" formControlName="InvoiceAddress" [placeholder]="'SETTINGS.INVOICE.INVOICEADDRESS' | translate" class="materialize-textarea"></textarea>
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1 select-input-container">
+                                        <md-input-container color="accent" style="width: 100%">
+                                            <input mdInput type="number" formControlName="InvoiceSequenceNumber" [placeholder]="'SETTINGS.INVOICE.INVOICESEQUENCENUMBER' | translate" />
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <p class="px-1"><span>{{'SETTINGS.INVOICE.BANKACCOUNTDETAILSFORTRANSFAR' | translate}}</span></p>
+
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1 select-input-container">
+                                        <md-input-container color="accent" style="width: 100%">
+                                            <input mdInput type="text" formControlName="AccountHolder" [placeholder]="'SETTINGS.INVOICE.ACCOUNTHOLDER' | translate" />
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1 select-input-container">
+                                        <md-input-container color="accent" style="width: 100%">
+                                            <input mdInput type="text" formControlName="Domicilation" [placeholder]="'SETTINGS.INVOICE.DOMICILATION' | translate" />
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1 select-input-container">
+                                        <md-input-container color="accent" style="width: 100%">
+                                            <input mdInput type="text" formControlName="Iban" [placeholder]="'SETTINGS.INVOICE.IBAN' | translate" />
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1 select-input-container">
+                                        <md-input-container color="accent" style="width: 100%">
+                                            <input mdInput type="text" formControlName="BICCode" [placeholder]="'SETTINGS.INVOICE.BICCODE' | translate" />
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col_s12" fxLayoutWrap="wrap" style="margin-top:5px;">
+                <div>
+                    <div class="px-1 pull-right">
+                        <button md-raised-button color="primary">
+
+                            {{'USERS.ADDEDITUSER.SUBMIT' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,93 @@
+<form>
+    <div class="px-1 select-input-container" [formGroup]="form" style="width: 40%;">
+        <md-input-container fxFlex="70">
+            <input type="text" placeholder="{{'SETTINGS.SCHOLERSEASON.SEASON' | translate}}" mdInput #myControl formControlName="text" [mdAutocomplete]="auto">
+            <md-autocomplete #auto="mdAutocomplete">
+                <md-option *ngFor="let list of filteredOptions |  async" [value]="list.scholarseason" (click)="OnSelectScolar(list)">
+                    {{ list.scholarseason }}
+                </md-option>
+            </md-autocomplete>
+        </md-input-container>
+    </div>
+</form>
+<md-card *ngIf="selectedRNCP" style="max-width: 69vw;">
+    <md-card-content>
+        <div [fxFlex]="expanded ? '100' : '100'" class="document-view mat-grey-50 pa-1">
+            <div class="ql-editor document-parent">
+                <div #pagesElement style="overflow: auto;">
+                    <div class="document" [ngStyle]="block" [ngClass]="orientation-portrait">
+                        <div style="height:93%">
+                            <div class="doc-rncp-title" style="text-align: center;">
+                                <span>{{'PARAMETERS-RNCP.PDF.StudentMarkTitle' | translate}}</span>
+                            </div>
+                            <div class="doc-rncp-title" style="text-align: center;">
+                                <span>{{student.sex == 'Male' ? 'Mr.' : 'Mrs.'}} {{student.firstName ? student.firstName : ''}} {{student.lastName ? student.lastName : ''}}</span>
+                            </div>
+                            <div class="doc-grid">
+
+                                <table width="100%" class="doc-table">
+                                    <tbody>
+                                        <tr class="section" style="border: 2px solid #000;">
+                                            <td class="text-center font-weight-bold" [width]="'40%'">&nbsp;</td>
+                                            <td class="text-center font-weight-bold" [width]="'15%'">{{'PARAMETERS-RNCP.PDF.CountForFinal' | translate}} </td>
+                                            <td class="text-center font-weight-bold" [width]="'15%'">{{'PARAMETERS-RNCP.PDF.NumberOfPointsMax' | translate}} </td>
+                                            <td class="text-center font-weight-bold" [width]="'15%'">{{'PARAMETERS-RNCP.PDF.MinScore' | translate}} </td>
+                                            <td class="text-center font-weight-bold" [width]="'15%'">{{'PARAMETERS-RNCP.PDF.Score' | translate}} </td>
+                                        </tr>
+                                        <ng-template ngFor let-section let-sectionIndex="index" [ngForOf]="expertiseList">
+                                            <tr class="sub-section" style="border: 2px solid #000;">
+                                                <td class="font-weight-bold">
+                                                    <b> {{section.blockOfExperise}}</b>
+                                                </td>
+                                                <td class="text-center font-weight-bold">
+                                                    <span *ngIf="section.countForTitleFinalScore">&#10004;</span>
+                                                </td>
+                                                <td class="text-center font-weight-bold">{{section.title}}</td>
+                                                <td class="text-center font-weight-bold">{{section.maximumRating}}</td>
+                                                <td class="text-center font-weight-bold">{{section.Score ? section.Score : ''}}</td>
+                                            </tr>
+                                            <tr class="sub-section" style="border: 1px solid #000;border-left: 2px solid #000;border-right: 2px solid #000">
+                                                <td class="">{{'PARAMETERS-RNCP.PDF.Subject&Test' | translate}}</td>
+                                                <td class="text-center">{{'PARAMETERS-RNCP.PDF.Coef' | translate}} </td>
+                                                <td class="text-center">{{'PARAMETERS-RNCP.PDF.Weight' | translate}} </td>
+                                                <td class="text-center">{{'PARAMETERS-RNCP.PDF.MinScore' | translate}} </td>
+                                                <td class="text-center">&nbsp; </td>
+                                            </tr>
+                                            <ng-template ngFor let-subject let-subjectIndex="index" [ngForOf]="section.subject">
+                                                <tr class="sub-section comment-section" style="border-top: 1px solid #000;border-left: 2px solid #000;border-right: 2px solid #000">
+                                                    <td class="text-left"> {{subject.subjectName}}</td>
+                                                    <td class="text-center">{{subject.coefficient}}</td>
+                                                    <td class="text-center">&nbsp;</td>
+                                                    <td class="text-center">{{subject.minimumScoreForCertification}}</td>
+                                                    <td class="text-center">&nbsp;</td>
+                                                </tr>
+                                                <tr class="sub-section comment-section" *ngFor="let subSection of subject.subjectTest" style="border-left: 2px solid #000;border-right: 2px solid #000">
+                                                    <td align="right"> {{subSection.evaluation}}</td>
+                                                    <td class="">&nbsp;</td>
+                                                    <td class="text-center">
+                                                        <span *ngIf="subSection.weight">{{subSection.weight}}%</span>
+                                                    </td>
+                                                    <td class="">&nbsp;</td>
+                                                    <td class=""> <span *ngIf="subSection.score">{{subSection.score}}</span></td>
+                                                </tr>
+                                            </ng-template>
+                                        </ng-template>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div *ngIf="docFooterText" style="text-align: center;">{{docFooterText}}</div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </md-card-content>
+</md-card>
+
+
+
+
+

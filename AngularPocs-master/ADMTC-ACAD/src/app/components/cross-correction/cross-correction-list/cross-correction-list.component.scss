@@ -1,0 +1,43 @@
+.cross-correction-table .datatable-row-center{
+  height: 40px !important;
+}
+
+.overflowVisible {
+  overflow: visible;
+}
+
+.ui-select-match > .btn {
+  text-align: left !important;
+  padding: 0px !important;
+}
+
+:host /deep/ {
+  .cross-correction-table .datatable-row-center{
+    height: 40px !important;
+  }
+
+  .btn-default, .btn-default:active{
+    color: white  !important;
+    border-color: transparent  !important;
+    background: transparent  !important;
+    border-bottom: 1px solid white !important;
+  }
+  .form-control{
+    color: white  !important;
+    border-color: transparent  !important;
+    background: transparent  !important;
+    height: 20px !important;
+  }
+  .text-muted, .btn-default:active{
+    color: white  !important;
+  }
+  .ui-select-match > .btn {
+    text-align: left !important;
+    padding: 0px !important;
+  }
+
+  .overflowVisible {
+    overflow: visible;
+  }
+}
+

@@ -1,0 +1,29 @@
+.full-width {
+    width: 100%;
+}
+
+.full-width {
+    .mat-input-wrapper {
+        margin-left: 0px;
+    }
+}
+
+.px-1 {
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+}
+
+.pull-right {
+    float: right !important;
+    padding-right: 1px !important;
+}
+
+.fileNametext {
+    max-width: 85%;
+    float: left;
+    text-overflow: ellipsis !important;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 14px;
+    margin-top: 5px;
+}

@@ -1,0 +1,115 @@
+<div fxLayout="column" fxLayoutAlign="start" style="width: 100%; height: 100%;">
+  <div style="margin-left:-24px; margin-right: -24px; margin-top: -24px;">
+    <div class="pa-1">
+      <div fxLayout="row wrap" fxLayoutAlign="start center">
+        <div fxFlex style="margin-left: 0.5%;">
+          <md-icon class="middle" style="margin-top: -3px;">receipt</md-icon>
+          <span class="text-xl">{{ 'TEST.AUTOTASK.ASSIGN ANIMATOR BUSINESS GAME' | translate }}</span>
+
+        </div>
+        <!--  -->
+        <button md-icon-button (click)="closeDialog(false)" style="padding-left: 10px;">
+          <md-icon>close</md-icon>
+        </button>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <br>
+  <div fxLayout="row wrap">
+    <div fxFlex="21.5">
+      <label> {{'DASHBOARD.ASSIGN_CORRECTOR.RNCP_TITLE' | translate }} </label>
+    </div>
+    <div fxFlex="78">
+      : &nbsp;&nbsp; {{ task?.rncp?.shortName + ' ' + task?.rncp?.longName }}
+    </div>
+  </div>
+  <div fxLayout="row wrap">
+    <div fxFlex="21.5">
+      <label> {{'USERS.ADDEDITUSER.CLASS' | translate}} </label>
+    </div>
+    <div fxFlex="78">
+      : &nbsp;&nbsp; {{ task?.test?.class?.name }}
+    </div>
+  </div>
+  <div fxLayout="row wrap">
+    <div fxFlex="21.5">
+      <label> {{'PARAMETERS-RNCP.TEST.SUBJECTNAME' | translate}} </label>
+    </div>
+    <div fxFlex="78">
+      : &nbsp;&nbsp; {{ task?.test?.subjectId?.subjectName }}
+    </div>
+  </div>
+  <div fxLayout="row wrap">
+    <div fxFlex="21.5">
+      <label> {{'PARAMETERS-RNCP.TEST.TESTNAME' | translate}} </label>
+    </div>
+    <div fxFlex="78">
+      : &nbsp;&nbsp; {{ task?.test?.name }}
+    </div>
+  </div>
+  <br>
+
+  <div fxLayout="row wrap" *ngFor="let businessGame of businessGameArray; let i = index">
+    <div fxFlex="20" style="margin-top: 2%;">
+      <md-select [(ngModel)]="businessGame.userId" style="width:100%;">
+        <md-option *ngFor="let user of users" [value]="user.id">
+          {{ user.name }}
+        </md-option>
+        </md-select>
+    </div>
+    <div fxFlex="25">
+      <label class="labelMargin"> Session Formation 1 </label>
+      <md-list class="md-list-rule" role="list">
+        <md-list-item style="margin: -10px 0px;" role="listitem">
+          <i class="fa fa-circle-o font-icon-rule"></i>
+          {{businessGame.session_1.startDate}}</md-list-item>
+        <md-list-item style="margin: -10px 0px;" role="listitem">
+          <i class="fa fa-circle-o font-icon-rule" ></i>
+          {{businessGame.session_1.endDate}}</md-list-item>
+      </md-list>
+    </div>
+    <div fxFlex="25">
+      <label class="labelMargin"> Session Formation 2 </label>
+      <md-list class="md-list-rule" role="list">
+        <md-list-item style="margin: -10px 0px;" role="listitem">
+          <i class="fa fa-circle-o font-icon-rule" ></i>
+          {{businessGame.session_2.startDate}}</md-list-item>
+        <md-list-item style="margin: -10px 0px;" role="listitem">
+          <i class="fa fa-circle-o font-icon-rule" ></i>
+          {{businessGame.session_2.endDate}}</md-list-item>
+      </md-list>
+    </div>
+    <div fxFlex="25">
+      <label class="labelMargin"> Session Practice </label>
+      <md-list class="md-list-rule" role="list">
+        <md-list-item style="margin: -10px 0px;" role="listitem">
+          <i class="fa fa-circle-o font-icon-rule" ></i>
+          {{businessGame.test_session.startDate}}</md-list-item>
+        <md-list-item style="margin: -10px 0px;" role="listitem">
+          <i class="fa fa-circle-o font-icon-rule" ></i>
+          {{businessGame.test_session.endDate}}</md-list-item>
+      </md-list>
+    </div>
+    <div fxFlex="5" style="text-align: right;">
+        <button *ngIf="i===0"  style="margin-top: 40px;" color="primary" type="button" md-icon-button md-button-sm md-raised-button class="grid-button">
+            <md-icon>add</md-icon>
+        </button>
+        <button *ngIf="i===1"  style="margin-top: 40px;" color="primary" type="button" md-icon-button md-button-sm md-raised-button class="grid-button">
+            <md-icon>remove</md-icon>
+        </button>
+    </div>
+  </div>
+
+  <br>
+  <div fxLayout="row" fxLayoutAlign="end" style="margin-left: 17px !important; width:100% !important;">
+    <div fxFlex="100" fxFlex.lt-md="100" fxLayoutAlign="end">
+      <button md-raised-button md-button-sm class="mr-1" color="warn" type="button" (click)="closeDialog(false)">
+        {{ 'TESTCORRECTIONS.SUBMIT.CANCEL' | translate }}
+      </button>
+      <!-- (click)="submit()"  [disabled]="disableSubmit"  [color]="disableSubmit ? 'grey' : 'green'"-->
+      <button md-raised-button md-button-sm class="mr-1" color="green" type="button">
+        {{ 'TESTCORRECTIONS.SUBMIT.SUBMIT' | translate }}
+      </button>
+    </div>
+  </div>

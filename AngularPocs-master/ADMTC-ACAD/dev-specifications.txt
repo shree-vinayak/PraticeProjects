@@ -1,0 +1,109 @@
+Project Structure:
+
+  1. Services (src/app/services)
+
+    - App Service
+      > app.service.ts
+      > overall service for Application
+
+    - Move Item Service
+      > move-item.service.ts
+      > service which handles moving of folders/documents/tests in Academic Kit
+
+    - Test Service
+      > test.service.ts
+      > service which handles creation/editing of test in Academic Kit
+
+  2. Routes (src/app/app.routing.ts)
+
+    - /rncp-titles (RNCP Titles List)
+        Component: RncpTitlesComponent
+
+    - /dashboard (Dashboard of specific RNCP Title)
+        Component: DashboardComponent
+
+    - /create-test (Parent route for 4 step Test Creation and edit)
+        Component: CreateTestComponent
+        Child Routes:
+          > /create-test/first (First Step)
+              Component: FirstStepComponent
+          > /create-test/second (Second Step)
+              Component: SecondStepComponent
+          > /create-test/third (Third Step)
+              Component: ThirdStepComponent
+          > /create-test/fourth (Fourth Step)
+              Component: FourthStepComponent
+
+  3. Models (src/app/models)
+
+    - Page Model
+      > page.model.ts
+      > Model for defining a page in ngx-DataTable
+
+    - Sort Model
+      > sort.model.ts
+      > Model for defining sort queries in ngx-DataTable
+
+    - Category Model
+      > category.model.ts
+      > Model for defining Schema of Categories/Folders in Academic Kit.
+      > Keep in mind that -
+        in programing we treat it as "Category", but
+        in user interface treat it as a "Folder".
+      > Category === Folder
+      > Category contains:
+          i. Sub Categories (same Schema as Category)
+          ii. Documents (Document Model)
+          iii. Tests (Test Model)
+
+    - Test Model
+      > test.model.ts
+      > Model for definig Schema of Tests in Academic Kit
+
+    - Document Model
+      > document.model.ts
+      > Model for defining schema of Documents uploaded by the User
+      > Documents are used in two places:
+        i. Categories/Folders can contain Documents
+        ii. Tests will also have Test specific Documents
+
+
+  3. Components (src/app && src/app/components)
+  Note: We have dialogs/modals as components but we will categorise them in separate category of "Dialogs"
+
+    - AppComponent
+      > src/app/app.component.ts
+      > Overall Component with Menu bar and routed components contatiner
+      > Contatins <router-outlet>
+
+    - RncpTitlesComponent
+      > src/app/components/rncp-title.component.ts
+      > Shows a list of RNCPTitles
+
+    - DashboardComponent
+      > src/app/components/dashboard/dashboard.component.ts
+      > Shows Dashboard of Selected RNCP Title
+      > Upcoming Tasks and Events
+      > Management of Academic Kit
+
+    - CategoryComponent
+      > src/app/components/dashboard/category.component.ts
+      > Component to show categories/folders as tree view
+      > With functionality of selecting folders
+
+    - ModifyCategoriesComponent
+      > src/app/components/dashboard/modify-categories.component.ts
+      > Component to show Managing view of cateogries/folders
+      > Functionalities like going through all categories/folders
+      > manage categories/folders
+      > Documents and Tests in a Category
+      > Kind of file manager concept
+
+    - CreateTestComponent
+      > src/app/components/test/create-test.component.ts
+      > Entry point to Create Test Form
+      > Contains 4 Step Wizard of Create Test Form functionality
+      > Contains <router-outlet> for displaying all different 4 components for each step.
+      > Contains "TestDocumentComponent" as child component ofr preview of Notation Grill
+
+

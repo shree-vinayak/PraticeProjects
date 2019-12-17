@@ -1,0 +1,587 @@
+<div fxLayout="column wrap" fxLayoutAlign="start" style="width: 100%; height: 100%;">
+    <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px;">
+        <div class="pa-1">
+            <div fxLayout="row wrap" fxLayoutAlign="start center">
+                <div fxFlex>
+                    <md-icon class="middle">receipt</md-icon>
+                    <span class="text-xl">{{'STUDENT.STUDENTDETAILS' | translate}}</span>
+                </div>
+                <button md-icon-button (click)="cancel()"><md-icon>close</md-icon></button>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <md-tab-group fxFlex headerPosition="center" class="mb-1 student-details" style="margin-top: 10px;" [selectedIndex]="selectedIndex" (selectChange)="onLinkClick($event)">
+        <md-tab label="{{ 'STUDENT.COURSE' | translate }}">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="100" fxFlex.lt-md="100">
+                    <form [formGroup]="formCourse" (ngSubmit)="addCourse(formCourse.value)">
+
+                        <div fxLayout="row" fxLayoutWrap="wrap">
+                            <div fxFlex="100" fxFlex.lt-md="100">
+                                <md-card>
+                                    <md-card-content>
+                                        <div fxLayoutWrap="wrap">
+                                            <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                                <label>{{'STUDENT.SCHOLERSEASON.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="40" fxFlex.lt-md="40">
+                                                <div class="px-1 select-input-container">
+                                                    <md-select color="accent" formControlName="scholerSeason" #scholerSeason style="width: 100%" (change)="selectScholerSeason(formCourse.controls['scholerSeason'].value)">
+                                                        <md-option *ngFor="let name of scholerSeasonData; let i = index" [value]="name._id">
+                                                             {{ name.scholarseason }}
+                                                        </md-option>
+                                                    </md-select>
+                                                    <small *ngIf="formCourse.controls['scholerSeason'].hasError('required') && (formCourse.controls['scholerSeason'].touched || formCourseSubmit)"
+                                                        class="mat-text-warn"> {{'STUDENT.SELECTRNCPTITLE.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Select RNCP Title -->
+                                        <div fxLayoutWrap="wrap">
+                                            <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                                <label>{{'STUDENT.SELECTRNCPTITLE.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="40" fxFlex.lt-md="40">
+                                                <div class="px-1 select-input-container">
+                                                    <md-select color="accent" formControlName="rncpTitle" #rncpTitle style="width: 100%" (change)="changeRNCPTitles($event)">
+                                                        <md-option *ngFor="let rncptitle of RNCPfilterTitles" [value]="rncptitle._id">
+                                                            {{ rncptitle.shortName }}
+                                                        </md-option>
+                                                    </md-select>
+                                                    <small *ngIf="formCourse.controls['rncpTitle'].hasError('required') && (formCourse.controls['rncpTitle'].touched || formCourseSubmit)" class="mat-text-warn"> {{'STUDENT.SELECTRNCPTITLE.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Select Class -->
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+                                            <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                                <label>{{'STUDENT.CLASSES.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="40" fxFlex.lt-md="40">
+                                                <div class="px-1 select-input-container">
+                                                    <md-select color="accent" formControlName="currentClass" #currentClass style="width: 100%">
+                                                        <md-option *ngFor="let class of classType" [value]="class._id">
+                                                            {{ class.name }}
+                                                        </md-option>
+                                                    </md-select>
+                                                    <small *ngIf="formCourse.controls['currentClass'].hasError('required') && (formCourse.controls['currentClass'].touched || formCourseSubmit)" class="mat-text-warn"> {{'STUDENT.CLASSES.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </md-card-content>
+                                </md-card>
+
+                            </div>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+                            <div fxFlex="100" fxFlex.lt-md="100">
+                                <div class="px-1 pull-right">
+                                    <button md-raised-button color="warn" type="button" (click)="cancel()">{{'CANCEL' | translate}}</button>
+                                    <button md-raised-button color="accent" type="submit">{{'STUDENT.CONTINUE' | translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </md-tab>
+        <md-tab label="{{ 'STUDENT.IDENTITY' | translate }}">
+
+            <form [formGroup]="formIdentity" (ngSubmit)="addIdentity(formIdentity.value)">
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="100" fxFlex.lt-md="100">
+                        <md-card>
+                            <md-card-content>
+                                <div fxLayout="row" fxLayoutWrap="wrap">
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+
+                                        <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+                                            <div fxFlex="50" fxFlex.lt-md="50">
+                                                <div class="px-1">
+                                                    <img src="{{ serverimgPath + student.photo}}" width="100" height="100" *ngIf="student.photo && !filePreviewPath" />
+                                                    <img src="/assets/images/noimage.png" width="100" height="100" *ngIf="!student.photo && !filePreviewPath" />
+                                                    <img [src]="filePreviewPath" width="100" height="100" *ngIf="filePreviewPath" />
+                                                </div>
+                                            </div>
+                                            <div fxFlex="50" fxFlex.lt-md="50">
+                                                <div class="px-1">
+                                                    <input #userphoto type="file" ng2FileSelect [uploader]="uploader" disableMultipart="true" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+                                            <div fxFlex="20" fxFlex.lt-md="20" class="label-text">
+                                                <label>{{'STUDENT.ADDRESS1.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="80" fxFlex.lt-md="80" formGroupName="address">
+                                                <div class="px-1 select-input-container">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="line1" maxlength="30" #line1 type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*" />
+                                                    </md-input-container>
+                                                    <!-- <small *ngIf="formIdentity.controls['address'].controls['line1'].hasError('required') && (formIdentity.controls['address'].controls['line1'].touched || formIdentitySubmit)" class="mat-text-warn"> {{'STUDENT.ADDRESS1.validation1' | translate}}</small> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+
+                                            <div fxFlex="20" fxFlex.lt-md="20" class="label-text">
+                                                <label>{{'STUDENT.ADDRESS2.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="80" fxFlex.lt-md="80" formGroupName="address">
+                                                <div class="px-1 select-input-container">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="line2" #line2 maxlength="30" type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*" />
+                                                    </md-input-container>
+                                                    <!-- <small *ngIf="formIdentity.controls['address'].controls['line2'].hasError('required') && (formIdentity.controls['address'].controls['line2'].touched || formIdentitySubmit)" class="mat-text-warn"> {{'STUDENT.ADDRESS2.validation1' | translate}}</small> -->
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+
+
+                                            <div fxFlex="20" fxFlex.lt-md="20" class="label-text">
+                                                <label>{{'STUDENT.ZIPCODE.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="30" fxFlex.lt-md="30" formGroupName="address">
+                                                <div class="px-1">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="postalCode" maxlength="5" type="number">
+                                                    </md-input-container>
+                                                    <!-- <small *ngIf="formIdentity.controls['address'].controls['postalCode'].hasError('required') && (formIdentity.controls['address'].controls['postalCode'].touched || formIdentitySubmit)" class="mat-text-warn"> {{'STUDENT.ZIPCODE.validation1' | translate}}</small>
+                                            <small *ngIf="formIdentity.controls['address'].controls['postalCode'].hasError('maxlength') && (formIdentity.controls['address'].controls['postalCode'].touched || formSubmit)" class="mat-text-warn">{{ 'STUDENT.ZIPCODE.validation2' | translate}}</small> -->
+                                                </div>
+                                            </div>
+                                            <div fxFlex="20" fxFlex.lt-md="20" class="label-text">
+                                                <label>{{'STUDENT.CITY.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="30" fxFlex.lt-md="30" formGroupName="address">
+                                                <div class="px-1">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="city" maxlength="50" type="text">
+                                                    </md-input-container>
+                                                    <!-- <small *ngIf="formIdentity.controls['address'].controls['city'].hasError('required') && (formIdentity.controls['address'].controls['city'].touched || formIdentitySubmit)" class="mat-text-warn"> {{'STUDENT.CITY.validation1' | translate}}</small> -->
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+
+                                            <div fxFlex="20" fxFlex.lt-md="20" class="label-text">
+                                                <label>{{'STUDENT.COUNTRY.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="80" fxFlex.lt-md="80" formGroupName="address">
+                                                <div class="px-1">
+                                                    <md-select color="accent" formControlName="country" style="width: 100%">
+                                                        <md-option *ngFor="let country of countryList" [value]="country.id">
+                                                            {{ 'NATIONALITY.' + country.countryName | translate}}
+                                                        </md-option>
+                                                    </md-select>
+                                                    <!-- <small *ngIf="formIdentity.controls['address'].controls['country'].hasError('required') && (formIdentity.controls['address'].controls['country'].touched || formIdentitySubmit)" class="mat-text-warn"> {{'STUDENT.COUNTRY.validation1' | translate}}</small> -->
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+
+                                        <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust" style="margin-bottom: 15px;">
+                                            <div fxFlex="20" fxFlex.lt-md="20" class="label-text">
+                                                <label>{{'STUDENT.CIVILITY.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="80" fxFlex.lt-md="80">
+                                                <div class="px-1">
+                                                    <md-radio-group formControlName="sex">
+                                                        <md-radio-button value="Male" class="rdmark">{{ 'STUDENT.MR' | translate}}</md-radio-button>
+                                                        <md-radio-button value="Female" class="rdmark">{{ 'STUDENT.MRS' | translate}}</md-radio-button>
+                                                        <!-- <md-radio-button value="ms" class="rdmark">{{ 'Customer.AddContact.Ms' | translate}}</md-radio-button> -->
+                                                    </md-radio-group>
+                                                    <small *ngIf="formIdentity.controls['sex'].hasError('required') && (formIdentity.controls['sex'].touched || formIdentitySubmit)" class="mat-text-warn"> {{'STUDENT.CIVILITY.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+                                            <div fxFlex="20" fxFlex.lt-md="20" class="label-text">
+                                                <label>{{'STUDENT.LASTNAME.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="80" fxFlex.lt-md="80">
+                                                <div class="px-1 select-input-container">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="lastName" #lastName maxlength="30" type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*" />
+                                                    </md-input-container>
+                                                    <small *ngIf="formIdentity.controls['lastName'].hasError('required') && (formIdentity.controls['lastName'].touched || formIdentitySubmit)" class="mat-text-warn"> {{'STUDENT.LASTNAME.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+                                            <div fxFlex="20" fxFlex.lt-md="20" class="label-text">
+                                                <label>{{'STUDENT.FIRSTNAME.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="80" fxFlex.lt-md="80">
+                                                <div class="px-1 select-input-container">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="firstName" maxlength="30" #firstName type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*" />
+                                                    </md-input-container>
+                                                    <small *ngIf="formIdentity.controls['firstName'].hasError('required') && (formIdentity.controls['firstName'].touched || formIdentitySubmit)" class="mat-text-warn"> {{'STUDENT.FIRSTNAME.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+                                            <div fxFlex="20" fxFlex.lt-md="20" class="label-text">
+                                                <label>{{'STUDENT.TELEPHONE.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="80" fxFlex.lt-md="80">
+                                                <div class="px-1 select-input-container">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="telePhone" maxlength="30" #firstName type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*" />
+                                                    </md-input-container>
+                                                    <small *ngIf="formIdentity.controls['telePhone'].hasError('required') && (formIdentity.controls['telePhone'].touched || formIdentitySubmit)" class="mat-text-warn"> {{'STUDENT.TELEPHONE.validation1' | translate}}</small>
+                                                    <small *ngIf="formIdentity.controls['telePhone'].hasError('maxlength') && (formIdentity.controls['telePhone'].touched || formIdentitySubmit)" class="mat-text-warn">{{ 'STUDENT.TELEPHONE.validation2' | translate}}</small>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+                                            <div fxFlex="20" fxFlex.lt-md="20" class="label-text">
+                                                <label>{{'STUDENT.EMAIL.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="80" fxFlex.lt-md="80">
+                                                <div class="px-1">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="email" maxlength="50" type="email">
+                                                    </md-input-container>
+                                                    <small *ngIf="formIdentity.controls['email'].hasError('required') && (formIdentity.controls['email'].touched || formIdentitySubmit)" class="mat-text-warn"> {{'STUDENT.EMAIL.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+                                            <div fxFlex="20" fxFlex.lt-md="20" class="label-text">
+                                                <label>{{'STUDENT.DATEOFBIRTH.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="80" fxFlex.lt-md="80">
+                                                <div class="px-1">
+                                                    <md-input-container dividerColor="accent" style="width: 100%">
+                                                        <input mdInput type="text" [mdDatepicker]="dateOfBirth" [formControl]="formIdentity.controls['dateOfBirth']">
+                                                        <button mdSuffix [mdDatepickerToggle]="dateOfBirth" class="white-datepicker-button" style="background-color: grey !important;"></button>
+                                                    </md-input-container>
+                                                    <md-datepicker #dateOfBirth [touchUi]="true"></md-datepicker>
+                                                    <small *ngIf="formIdentity.controls['dateOfBirth'].hasError('required') && (formIdentity.controls['dateOfBirth'].touched || formIdentitySubmit)" class="mat-text-warn"> {{'STUDENT.DATEOFBIRTH.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+                                            <div fxFlex="20" fxFlex.lt-md="20" class="label-text">
+                                                <label>{{'STUDENT.NATIONALITY.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="80" fxFlex.lt-md="80">
+                                                <div class="px-1">
+                                                    <md-select color="accent" formControlName="nationality" style="width: 100%">
+                                                        <md-option *ngFor="let country of countryList" [value]="country.id">
+                                                            {{ 'NATIONALITY.' + country.countryName | translate }}
+                                                        </md-option>
+                                                    </md-select>
+                                                    <small *ngIf="formIdentity.controls['nationality'].hasError('required') && (formIdentity.controls['nationality'].touched || formIdentitySubmit)" class="mat-text-warn"> {{'STUDENT.NATIONALITY.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+                    <div fxFlex="100" fxFlex.lt-md="100">
+                        <div class="px-1 pull-right">
+                            <button md-raised-button color="warn" type="button" (click)="cancel()">{{'CANCEL' | translate}}</button>
+                            <button md-raised-button color="accent" type="submit">{{'STUDENT.CONTINUE' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </md-tab>
+
+        <md-tab label="{{ 'STUDENT.PARENTS' | translate }}">
+
+            <form [formGroup]="formParents" (ngSubmit)="addParents(formParents.value)">
+
+                <div fxLayout="row" fxLayoutWrap="wrap">
+
+                    <div fxFlex="100" fxFlex.lt-md="100">
+                        <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+                            <div fxFlex="100" fxFlex.lt-md="100">
+                                <md-card *ngFor="let item of formParents['controls'];let i=index" [formGroupName]="i">
+                                    <md-card-content>
+
+                                        <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+                                            <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                                <label>{{'STUDENT.RELATIONS.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="40" fxFlex.lt-md="40">
+                                                <div class="px-1">
+                                                    <md-select formControlName="relation" #relation class="full-width">
+                                                        <md-option *ngFor="let relation of relations" [value]="relation.value">
+                                                            {{relation.viewValue}}
+                                                        </md-option>
+                                                    </md-select>
+                                                    <small *ngIf="item.controls['relation'].hasError('required') && (item.controls['relation'].touched || formParentsSubmit)" class="mat-text-warn"> {{'STUDENT.RELATIONS.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+                                            <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                                &nbsp;
+                                            </div>
+                                            <div fxFlex="40" fxFlex.lt-md="40">
+                                                <div class="px-1">
+                                                    <md-slide-toggle class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled" (change)="sameAddressChange($event)" formControlName="sameAddress">
+                                                        {{ 'STUDENT.SAMEADDRESS' | translate}}
+                                                    </md-slide-toggle>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+                                            <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                                <label>{{'STUDENT.CIVILITY.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="90" fxFlex.lt-md="90">
+                                                <div class="px-1">
+                                                    <md-radio-group formControlName="sex">
+                                                        <md-radio-button value="Male" class="rdmark">{{ 'STUDENT.MR' | translate}}</md-radio-button>
+                                                        <md-radio-button value="Female" class="rdmark">{{ 'STUDENT.MRS' | translate}}</md-radio-button>
+                                                        <!-- <md-radio-button value="ms" class="rdmark">{{ 'Customer.AddContact.Ms' | translate}}</md-radio-button> -->
+                                                    </md-radio-group>
+                                                    <small *ngIf="item.controls['sex'].hasError('required') && (item.controls['sex'].touched || formParentsSubmit)" class="mat-text-warn"> {{'STUDENT.CIVILITY.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+
+                                            <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                                <label>{{'STUDENT.LASTNAME.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="40" fxFlex.lt-md="40">
+                                                <div class="px-1 select-input-container">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="familyName" #familyName maxlength="30" type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*" />
+                                                    </md-input-container>
+                                                    <small *ngIf="item.controls['familyName'].hasError('required') && (item.controls['familyName'].touched || formParentsSubmit)" class="mat-text-warn"> {{'STUDENT.LASTNAME.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+                                            <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                                <label>{{'STUDENT.ADDRESS1.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="40" fxFlex.lt-md="40" formGroupName="address">
+                                                <div class="px-1 select-input-container">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="line1" maxlength="30" #line1 type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*" />
+                                                    </md-input-container>
+                                                    <small *ngIf="item.controls['address'].controls['line1'].hasError('required') && (item.controls['address'].controls['line1'].touched || formParentsSubmit)" class="mat-text-warn"> {{'STUDENT.ADDRESS1.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+                                            <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                                <label>{{'STUDENT.FIRSTNAME.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="40" fxFlex.lt-md="40">
+                                                <div class="px-1 select-input-container">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="name" maxlength="30" #firstName type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*" />
+                                                    </md-input-container>
+                                                    <small *ngIf="item.controls['name'].hasError('required') && (item.controls['name'].touched || formParentsSubmit)" class="mat-text-warn"> {{'STUDENT.FIRSTNAME.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+                                            <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                                <label>{{'STUDENT.ADDRESS2.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="40" fxFlex.lt-md="40" formGroupName="address">
+                                                <div class="px-1 select-input-container">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="line2" #line2 maxlength="30" type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*" />
+                                                    </md-input-container>
+                                                    <small *ngIf="item.controls['address'].controls['line2'].hasError('required') && (item.controls['address'].controls['line2'].touched || formParentsSubmit)" class="mat-text-warn"> {{'STUDENT.ADDRESS2.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+                                            <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                                <label>{{'STUDENT.TELEPHONE.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="40" fxFlex.lt-md="40">
+                                                <div class="px-1 select-input-container">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="telePhone" maxlength="10" #telePhone type="number" />
+                                                    </md-input-container>
+                                                    <small *ngIf="item.controls['telePhone'].hasError('required') && (item.controls['telePhone'].touched || formParentsSubmit)" class="mat-text-warn"> {{'STUDENT.TELEPHONE.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+
+                                            <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                                <label>{{'STUDENT.ZIPCODE.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="10" fxFlex.lt-md="10" formGroupName="address">
+                                                <div class="px-1">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="postalCode" maxlength="5" type="number">
+                                                    </md-input-container>
+                                                    <small *ngIf="item.controls['address'].controls['postalCode'].hasError('required') && (item.controls['address'].controls['postalCode'].touched || formParentsSubmit)" class="mat-text-warn"> {{'STUDENT.ZIPCODE.validation1' | translate}}</small>
+                                                    <small *ngIf="item.controls['address'].controls['postalCode'].hasError('maxlength') && (item.controls['address'].controls['postalCode'].touched || formSubmit)" class="mat-text-warn">{{ 'STUDENT.ZIPCODE.validation2' | translate}}</small>
+                                                </div>
+                                            </div>
+                                            <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                                <label>{{'STUDENT.CITY.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="20" fxFlex.lt-md="20" formGroupName="address">
+                                                <div class="px-1">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="city" maxlength="50" type="text">
+                                                    </md-input-container>
+                                                    <small *ngIf="item.controls['address'].controls['city'].hasError('required') && (item.controls['address'].controls['city'].touched || formParentsSubmit)" class="mat-text-warn"> {{'STUDENT.CITY.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+                                            <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                                <label>{{'STUDENT.EMAIL.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="40" fxFlex.lt-md="40">
+                                                <div class="px-1">
+                                                    <md-input-container color="accent" style="width: 100%">
+                                                        <input mdInput formControlName="email" maxlength="50" type="email">
+                                                    </md-input-container>
+                                                    <small *ngIf="item.controls['email'].hasError('required') && (item.controls['email'].touched || formParentsSubmit)" class="mat-text-warn"> {{'STUDENT.EMAIL.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+
+                                            <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                                <label>{{'STUDENT.COUNTRY.title' | translate}}</label>
+                                            </div>
+                                            <div fxFlex="40" fxFlex.lt-md="40" formGroupName="address">
+                                                <div class="px-1">
+                                                    <md-select color="accent" formControlName="country" style="width: 100%">
+                                                        <md-option *ngFor="let country of countryList" [value]="country.id">
+                                                            {{ 'NATIONALITY.' + country.countryName | translate}}
+                                                        </md-option>
+                                                    </md-select>
+                                                    <small *ngIf="item.controls['address'].controls['country'].hasError('required') && (item.controls['address'].controls['country'].touched || formParentsSubmit)" class="mat-text-warn"> {{'STUDENT.COUNTRY.validation1' | translate}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+                                            <div fxFlex="100" fxFlex.lt-md="100">
+                                                <div class="px-1 pull-right">
+                                                    <div style="text-align: right;">
+                                                        {{'STUDENT.ANOTHERPARENT' | translate}}
+                                                        <button color="green" type="button" (click)="addGuardian(guardianNumber)" md-icon-button md-button-sm md-raised-button class="grid-button"><md-icon>add</md-icon></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </md-card-content>
+                                </md-card>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+                    <div fxFlex="100" fxFlex.lt-md="100">
+                        <div class="px-1 pull-right">
+                            <button md-raised-button color="warn" type="button" (click)="cancel()">{{'CANCEL' | translate}}</button>
+                            <button md-raised-button color="accent" type="submit">{{'STUDENT.CONTINUE' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </md-tab>
+        <md-tab label="{{ 'STUDENT.COMPANY' | translate }}">
+
+            <form [formGroup]="formCompany" (ngSubmit)="addCompany(formCompany.value)">
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="100" fxFlex.lt-md="100">
+                        <md-card>
+                            <md-card-content>
+                                <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+                                    <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                        <label>{{'STUDENT.COMPMAYNAME.title' | translate}}</label>
+                                    </div>
+                                    <div fxFlex="40" fxFlex.lt-md="40">
+                                        <div class="px-1">
+                                            <md-select color="accent" style="width: 100%" [(ngModel)]="selectedCompany" formControlName="companies" #companies [placeholder]="'USERS.ADDEDITUSER.COMPANY' | translate" (change)="changeCompanySelect($event)">
+                                                    <!-- (click)="getcompanyName(company.companyName)" -->
+                                                <md-option *ngFor="let company of companylist" [value]="company" >
+                                                    {{ company.companyName }}
+                                                </md-option>
+                                                <md-option [value]="">
+                                                    <span (click)="addNewCompany()" style="margin-right:10px;">{{'USERS.ADDEDITUSER.ADDNEWCOMPANY' | translate}}</span><i class="fa fa-plus"></i>
+                                                </md-option>
+                                            </md-select>
+                                            <small *ngIf="formCompany.controls['companies'].hasError('required') && (formCompany.controls['companies'].touched || formCompanySubmit)" class="mat-text-warn"> {{'STUDENT.COMPMAYNAME.validation1' | translate}}</small>
+                                        </div>
+                                    </div>
+                                    <div fxFlex="10" fxFlex.lt-md="10" class="label-text">
+                                        <label>{{'STUDENT.MENTOR.title' | translate}}</label>
+                                    </div>
+                                    <div fxFlex="40" fxFlex.lt-md="40">
+                                        <div class="px-1">
+                                            <md-select formControlName="mentors" #relation class="full-width">
+                                                <md-option *ngFor="let user of userList" [value]="user._id">
+                                                    {{user.firstName}} {{user.lastName}}
+                                                </md-option>
+                                                <md-option [value]="">
+                                                    <span (click)="addNewMentor()" style="margin-right:10px;">{{'USERS.ADDEDITUSER.ADDNEWMENTOR' | translate}}</span><i class="fa fa-plus"></i>
+                                                </md-option>
+                                            </md-select>
+
+                                            <small *ngIf="formCompany.controls['mentors'].hasError('required') && (formCompany.controls['mentors'].touched || formCompanySubmit)" class="mat-text-warn"> {{'STUDENT.MENTOR.validation1' | translate}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+                                        <md-card>
+                                            <md-card-content>
+                                                <label>{{'STUDENT.ACTIVITY.title' | translate}}</label><br>
+                                                <div>{{ActivityText}}</div>
+                                            </md-card-content>
+                                        </md-card>
+                                    </div>
+                                </div>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="100" fxFlex.lt-md="100">
+                        <div class="px-1 pull-right">
+                            <button md-raised-button color="warn" type="button" (click)="cancel()">{{'CANCEL' | translate}}</button>
+                            <button md-raised-button color="primary" type="submit">{{'STUDENT.SUBMIT' | translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </md-tab>
+    </md-tab-group>
+
+
+</div>

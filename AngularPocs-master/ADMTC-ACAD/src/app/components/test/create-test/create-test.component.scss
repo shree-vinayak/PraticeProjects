@@ -1,0 +1,44 @@
+:host /deep/ md-hint {
+  line-height: 1.8em;
+  //font-size: 80%;
+}
+
+:host /deep/ .mat-input-subscript-wrapper {
+  font-size: 80%;
+}
+
+:host /deep/ form *[fxFlex] {
+  margin-bottom: 1.5em;
+}
+.tab-button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.active-tab {
+  background-color: #ffd740 !important;
+  color: black !important;
+}
+.completed-tab {
+  color: black !important;
+}
+.tab-span {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  display: inline-block;
+  line-height: 30px;
+  margin-right: 10px;
+  font-weight: bold;
+  background-color: #ffd740;
+  color: black;
+
+}
+.active-tab{
+  .tab-span {
+    background-color: #607d8b;
+  }
+}
+
+

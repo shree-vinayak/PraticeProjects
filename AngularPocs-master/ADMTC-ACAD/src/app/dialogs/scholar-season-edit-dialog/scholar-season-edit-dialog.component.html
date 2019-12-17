@@ -1,0 +1,81 @@
+<form [formGroup]="editScholerForm" (ngSubmit)="editScholerSeason()">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100">
+            <h5>{{ 'SETTINGS.SCHOLERSEASON.EDITSCHOLAR' | translate }}</h5>
+            <hr/>
+            <br/>
+        </div>
+        <div fxFlex="100" fxFlex.lt-md="100">
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <md-input-container style="width: 100%">
+                    <input mdInput placeholder="{{ 'SETTINGS.SCHOLERSEASON.SEASON' | translate }}" formControlName="scholerseason" type="text"
+                        value="{{editseason.scholarseason}}">
+                </md-input-container>
+            </div>
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <md-input-container style="width: 100%">
+                    <input mdInput placeholder="{{'SETTINGS.SCHOLERSEASON.DESCRIPTION' | translate}}" formControlName="description" type="text"
+                        value="{{ editseason.description }}">
+                </md-input-container>
+            </div>
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <!-- <md-input-container style="width: 100%">
+                    <input mdInput formControlName="fromdate" type="date" placeholder="{{'SETTINGS.SCHOLERSEASON.FROM' | translate}} " ngui-datetime-picker
+                        [date-only]="true" value="{{ editseason.from | date}}" (valueChanged)="fromDateChange($event)" [close-on-select]="false"
+                        date-format="DD-MM-YYYY" />
+                </md-input-container> -->
+
+                <md-input-container style="width: 100%">
+                    <input mdInput formControlName="fromdate" [mdDatepicker]="fromdate" [placeholder]="'SETTINGS.SCHOLERSEASON.FROM'|translate"
+                        type="text" date>
+                    <button mdSuffix class="datepicker-button" [mdDatepickerToggle]="fromdate"></button>
+                </md-input-container>
+                <md-datepicker #fromdate [touchUi]="false"></md-datepicker>
+
+            </div>
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <!-- <md-input-container dividerColor="accent" style="width: 100%">
+                    <input mdInput formControlName="todate" type="date" placeholder="{{'SETTINGS.SCHOLERSEASON.TO' | translate}}" ngui-datetime-picker [date-only]="true" value="{{ editseason.to | date}}" (valueChanged)="toDateChange($event)" [close-on-select]="false" date-format="DD-MM-YYYY"
+                    />
+                </md-input-container> -->
+                <md-input-container style="width: 100%">
+                    <input mdInput formControlName="todate" [mdDatepicker]="todate" [placeholder]="'SETTINGS.SCHOLERSEASON.TO'|translate" type="text"
+                        date>
+                    <button mdSuffix class="datepicker-button" [mdDatepickerToggle]="todate"></button>
+                </md-input-container>
+                <md-datepicker #todate [touchUi]="false"></md-datepicker>
+            </div>
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="100" fxFlex.lt-md="100">
+                    <div class="px-1 select-input-container">
+                        <md-checkbox *ngFor="let rncp of rncpTitles" [checked]="rncp.selected" (change)="toCheck(rncp,$event)" class="mdcheck">
+                          <span [mdTooltip]="rncp?.shortName" [mdTooltipPosition]="'after'">{{ rncp?.shortName | limitTo:4 }}</span>
+                        </md-checkbox>
+
+                        <!--
+                            <md-select multiple formControlName="rncptitles"  fxFlex="100"  placeholder="{{ 'SETTINGS.SCHOLERSEASON.RNCPTITLES' | translate }}">
+                                 <md-option *ngFor="let user of rncpTitles" value="{{ editseason.rncptitles}}">
+                                    {{ user.longName }}
+                                </md-option>
+                            </md-select>
+						-->
+
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutWrap="wrap" style="float: right;margin-top: 20px;">
+                <button md-raised-button md-button-sm color="red" class="mr-1" type="button" (click)="cancel()">{{ 'SETTINGS.USERTYPES.CANCEL' | translate }}</button>
+                <button md-raised-button md-button-sm color="green" class="mr-1" type="submit">{{ 'SETTINGS.USERTYPES.SAVE' | translate }}</button>
+            </div>
+
+
+        </div>
+    </div>
+
+</form>

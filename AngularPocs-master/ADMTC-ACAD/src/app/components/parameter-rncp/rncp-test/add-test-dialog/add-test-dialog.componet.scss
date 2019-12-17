@@ -1,0 +1,9 @@
+:host /deep/ {
+  .create-test .mat-tab-label {
+      display: none !important;
+  }
+  md-radio-group {
+      float: left !important;
+      height: 35px;
+  }
+}

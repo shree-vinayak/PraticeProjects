@@ -1,0 +1,60 @@
+<form id="form" [formGroup]="form">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="100">
+                    <div class="address-container">
+                        <div class="px-1" style="margin-top:10px">
+                            <span>{{'SETTINGS.TITLES.CONTRACTDEFAULTS' | translate}}</span>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div fxLayout="row" fxLayoutWrap="wrap">
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+                                        <div class="px-1 select-input-container">
+                                            <md-input-container color="accent" style="width: 100%">
+                                                <input mdInput type="text" formControlName="StudentNess" [placeholder]="'SETTINGS.CONTRACTDETAILS.STUDENTFESS' | translate" />
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+                                        <div class="px-1 select-input-container">
+                                            <md-select color="accent" style="width: 100%" formControlName="Currency" [placeholder]="'SETTINGS.CONTRACTDETAILS.CURRENCY' | translate">
+                                                <md-option *ngFor="let currency of currencyList" [value]="currency.value">
+                                                    {{ currency.view }}
+                                                </md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div fxLayout="row" fxLayoutWrap="wrap">
+                                    <div fxFlex="100" fxFlex.lt-md="100">
+                                        <div class="px-1 select-input-container">
+                                            <md-input-container color="accent" style="width: 50%">
+                                                <input mdInput type="text" formControlName="StandaredShareOfCertified" [placeholder]="'SETTINGS.CONTRACTDETAILS.STANDARDSHAREOFCERTIFIER' | translate" />
+                                            </md-input-container>%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col_s12" fxLayoutWrap="wrap">
+                <div>
+                    <div class="px-1 pull-right">
+                        <button md-raised-button color="primary">
+
+                            {{'USERS.ADDEDITUSER.SUBMIT' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

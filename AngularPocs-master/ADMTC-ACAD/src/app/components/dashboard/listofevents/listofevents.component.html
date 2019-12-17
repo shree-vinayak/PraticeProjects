@@ -1,0 +1,59 @@
+<a>
+    <ngx-datatable class="material rncp-table" [rows]="listofEvents" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [columnMode]="'force'" [externalSorting]="true" (sort)="sortPage($event)" [cssClasses]="ngxDtCssClasses"
+        [selectionType]="'single'" [messages]="{emptyMessage: 'NoDataToDisplayCalenderEvent' | translate }" [sorts]="[{prop: 'toDate', dir: 'asc'},{prop: 'fromDate', dir: 'asc'},{prop: 'name', dir: 'asc'},{prop: 'shortName', dir: 'asc'}]"  (activate)="onSelect(listofEvents)" [selected]="selected">
+        <ngx-datatable-column [width]="200" name="fromDate" prop="fromDate" [sortable]="true" [resizeable]="false">
+            <ng-template ngx-datatable-header-template>
+                {{ 'DASHBOARD.UPCOMINGEVENT.FROM' | translate}}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                {{row['fromDate'] | date: 'dd/MM/yyyy'}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="200" name="toDate" prop="toDate" [sortable]="true" [resizeable]="false">
+            <ng-template ngx-datatable-header-template>
+                {{ 'DASHBOARD.UPCOMINGEVENT.TO' | translate }}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                {{row['toDate'] | date: 'dd/MM/yyyy'}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="375" name="name" prop="name" [sortable]="true" [resizeable]="false">
+            <ng-template ngx-datatable-header-template>
+                {{'DASHBOARD.EVENTNAME' | translate}}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                <!-- <a (click)="openTestDetailsDialog(row.test, row)">   -->
+                {{row['name']}}
+                <!-- </a> -->
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="375" name="shortName" prop="shortName" [sortable]="true" [resizeable]="false">
+            <ng-template ngx-datatable-header-template>
+                {{'DASHBOARD.SCHOOLNAME' | translate}}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                <div *ngIf="row.isAllSchools === false">
+                    <span *ngFor="let school of row.schools" class="tags">{{ school?.shortName }}</span>
+                </div>
+                <span *ngIf="row.isAllSchools === true" class="tags"> {{ 'DASHBOARD.UPCOMINGEVENT.ALL_SCHOOLS' | translate }}</span>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [width]="200" [resizeable]="false">
+            <ng-template ngx-datatable-header-template>
+                Action
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                <div style="text-align:center;">
+                    <button (click)="edit(row)" md-icon-button md-button-sm md-raised-button class="grid-button" *ngIf="loggedInUserId === row?.createdBy">
+                    <md-icon>edit</md-icon>
+                </button>
+                    <button (click)="delete(row)" md-icon-button md-button-sm md-raised-button class="grid-button" *ngIf="loggedInUserId === row?.createdBy">
+                    <md-icon>delete</md-icon>
+                </button>
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+
+    </ngx-datatable>
+</a>

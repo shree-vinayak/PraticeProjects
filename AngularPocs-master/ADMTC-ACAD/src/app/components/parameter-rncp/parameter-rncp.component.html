@@ -1,0 +1,39 @@
+<md-card>
+    <md-card-content>
+        <div>
+            <md-button-toggle-group [(ngModel)]="activatedTag" (change)="changeRoute()" style="background-color: #212121; border: 1px solid #607d8b;" #group="mdButtonToggleGroup">
+                <md-button-toggle value="activation" >
+                    <span>{{'PARAMETERS-RNCP.Activation.MenuTitle' | translate}}</span>
+                </md-button-toggle>
+
+                <md-button-toggle value="rncp-class">
+                    <span>{{'PARAMETERS-RNCP.CLASS' | translate}}</span>
+                </md-button-toggle>
+
+                <md-button-toggle value="rncp-documents">
+                    <span>{{'PARAMETERS-RNCP.Documents' | translate}}</span>
+                </md-button-toggle>
+
+                <md-button-toggle value="rncp-test">
+                    <span>{{'PARAMETERS-RNCP.Conditions' | translate}}</span>
+                </md-button-toggle>
+            </md-button-toggle-group>
+
+            <!-- <a class="{{ checkIsActive('activation') }}" md-button [routerLink]="['activation']">
+                <span>{{'PARAMETERS-RNCP.Activation.MenuTitle' | translate}}</span>
+            </a>
+            <a class="{{ checkIsActive('rncp-class') }}" md-button [routerLink]="['rncp-class']">
+                <span>{{'PARAMETERS-RNCP.CLASS' | translate}}</span>
+            </a>
+            <a class="{{ checkIsActive('rncp-test') }}" md-button [routerLink]="['rncp-test']">
+                <span>{{'PARAMETERS-RNCP.Conditions' | translate}}</span>
+            </a> -->
+        </div>
+        <div>
+            <hr>
+            <br>
+            <router-outlet></router-outlet>
+        </div>
+    </md-card-content>
+</md-card>
+

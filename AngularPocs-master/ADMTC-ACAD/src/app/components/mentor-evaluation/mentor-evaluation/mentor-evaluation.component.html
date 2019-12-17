@@ -1,0 +1,20 @@
+<!-- <div fxLayout="row wrap" fxLayoutWrap="wrap">
+    <h3> {{'MENTOREVALUATION.TITLE' | translate}}</h3>
+</div>
+<div style="margin-top:15px;"></div> -->
+<div fxLayout="row wrap" fxLayoutWrap="wrap">
+  <md-tab-group fxFlex>
+    <!-- The code has been commented by Ketan Solanki on 02-01-2018 -->
+    <!-- <md-tab [label]="'MENTOREVALUATION.EMAILTEMPLATE.TITLE' | translate">
+      <app-mentor-email-template></app-mentor-email-template>
+    </md-tab> -->
+    <!-- Code commented by ketan solanki ends here -->
+    <!-- <md-tab [label]="'MENTOREVALUATION.QUESTIONNAIRE.TITLE' | translate">
+      <app-questionnaire></app-questionnaire>
+    </md-tab> -->
+    <md-tab [label]="'MENTOREVALUATION.QUESTIONNAIRE.TITLE' | translate">
+      <!-- <md-tab [label]="'MENTOREVALUATION.QUESTIONNAIRE.METITLE' | translate"> -->
+      <app-me-questionnare></app-me-questionnare>
+    </md-tab>
+  </md-tab-group>
+</div>

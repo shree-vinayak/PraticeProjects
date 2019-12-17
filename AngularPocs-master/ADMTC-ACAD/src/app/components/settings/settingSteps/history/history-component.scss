@@ -1,0 +1,126 @@
+:host /deep/ {
+  .hideScroller .ngx-datatable.scroll-horz .datatable-body {
+    overflow-x: hidden;
+  }
+
+  .hideScroller {
+    .ngx-datatable.scroll-horz .datatable-body {
+      overflow-x: hidden;
+    }
+  }
+  .addTaskButton {
+    margin-right: -15px;
+  }
+  .taskListNgSelect ng-select select-dropdown > div .options {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .taskListNgSelect .ui-select-placeholder {
+    color: #dddddd;
+    float: left;
+    font-weight: 700;
+    font-size: 14px;
+    margin-left: -11px;
+  }
+  .taskListNgSelect .form-control:focus {
+    box-shadow: #424242;
+    border-left-color: #424242 !important;
+    border-right-color: #424242 !important;
+    border-top: none !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+      0 0 8px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.6);
+  }
+
+  .taskListNgSelect .btn {
+    background-color: #424242 !important;
+    border-left-color: #424242 !important;
+    border-right-color: #424242 !important;
+    border-top: none !important;
+  }
+  .taskListNgSelect .ui-select-match-text {
+    color: white;
+    margin-left: -11px;
+  }
+
+  .taskListNgSelect input {
+    color: white !important;
+    background-color: #424242 !important;
+    border-left-color: #424242 !important;
+    border-right-color: #424242 !important;
+    border-top: none !important;
+  }
+  .taskListNgSelect {
+    input {
+      background-color: #424242 !important;
+    }
+  }
+  .ui-disabled {
+    background-color: #424242 !important;
+  }
+}
+
+.tags {
+  background-color: #ffd740;
+  color: black;
+  padding: 3px 5px 3px 5px;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+.btnSearch {
+  margin-left: 5px;
+  height: 37px;
+  min-width: auto !important;
+}
+
+.taskListNgSelect ng-select select-dropdown > div .options {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.taskListNgSelect .text-muted {
+  color: white !important;
+}
+.btn-default {
+  color: white;
+}
+
+.taskListNgSelect {
+  margin: 5px;
+}
+
+.taskListNgSelect .btn {
+  background-color: #353535;
+}
+
+.taskListNgSelect input {
+  background-color: #353535;
+}
+.taskListNgSelect {
+  input {
+    background-color: #353535;
+  }
+}
+
+.hideScroller .ngx-datatable.scroll-horz .datatable-body {
+  overflow-x: hidden;
+}
+
+.hideScroller {
+  .ngx-datatable.scroll-horz .datatable-body {
+    overflow-x: hidden;
+  }
+}
+
+:host /deep/ .page-count span {
+  display: none !important;
+}
+.selected-row-table {
+  background: lightgray !important;
+  color: black;
+}
+
+.text-trail-container {
+  text-overflow: ellipsis !important;
+  overflow: hidden;
+  white-space: nowrap
+}

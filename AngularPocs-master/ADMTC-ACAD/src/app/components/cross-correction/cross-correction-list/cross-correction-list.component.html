@@ -1,0 +1,190 @@
+<md-card>
+  <md-card-content>
+    <div fxLayout="row" fxLayoutWrap="wrap" class="top-bar schoolListComponent">
+      <h3 fxFlex="100">
+        <i class="fa fa-recycle" aria-hidden="true"></i>
+        <span style="font-size: 100%">{{'CrossCorrection.Cross_Correction' | translate}} for {{SelectedTitleName}} - {{classDetails?.name}} - {{testDetails?.name}}</span>
+      </h3>
+    </div>
+    <div fxLayout="row" fxLayoutWrap="wrap" class="top-bar schoolListComponent">
+      <div fxFlex="20">
+        <md-input-container dividerColor="accent" fxFlex="100">
+          <input type="text" placeholder="{{'Search.SCHOOL_ORIGIN' | translate}}" (type)="openSchoolSuggestionList()" (focus)="openSchoolSuggestionList()"
+            mdInput [formControl]="form.controls['school']" [mdAutocomplete]="autoschool">
+          <md-autocomplete #autoschool="mdAutocomplete">
+            <md-option *ngFor="let list of filteredOptionsSchool |  async" [value]="list.shortName" (click)="OnSelectSchool(list)">
+              <span [ngStyle]="{'color': list?.showGreen ? 'green;' : ''}">
+                {{ list.shortName }}
+              </span>
+            </md-option>
+          </md-autocomplete>
+        </md-input-container>
+      </div>
+      <div fxFlex="2"></div>
+      <div fxFlex="20">
+        <md-input-container dividerColor="accent" fxFlex="100">
+          <input type="text" placeholder="{{'Search.SCHOOL_CORRECTOR' | translate}}" (type)="openSchoolCorrectingSuggestionList()"
+            (click)="openSchoolCorrectingSuggestionList()" mdInput [formControl]="form.controls['schoolCorrectingFilter']"
+            [mdAutocomplete]="autoCross">
+          <md-autocomplete #autoCross="mdAutocomplete">
+            <md-option *ngFor="let sc of filteredOptionsSchoolCorrecting |  async" [value]="sc.shortName" (click)="OnSelectSchoolCorrecting(sc)">
+              {{ sc.shortName }} </md-option>
+          </md-autocomplete>
+        </md-input-container>
+        <!-- <ng-select style="margin-top: 3px;" [(ngModel)]="selectedCorrectorFilter" fxFlex="100" (selected)="onSelectAssignCrossCorrectorFilter($event)"
+            [multiple]="false" [items]="assignedCrossCorrectorList"></ng-select> -->
+      </div>
+      <div fxFlex="5">
+        <div dividerColor="accent">
+          <button style="margin-left: 31px;" md-raised-button fxFlex type="button" class="btnSearch" color="primary" (click)="resetSearch()">
+            <md-icon>restore</md-icon>Reset</button>
+        </div>
+      </div>
+      <div fxFlex="26.5">
+      </div>
+      <div fxFlex="15">
+          <div class="px-1 select-input-container">
+              <md-select [(ngModel)]="delimiterSelected" color="accent"  style="width: 100%" placeholder="{{ 'STUDENT_IMPORT.DELIMETER.TITLE' | translate}}">
+                  <md-option *ngFor="let delimeter of delimeterList" [value]="delimeter.value" (click)="selectDelimiter(delimeter)">
+                      {{ 'STUDENT_IMPORT.DELIMETER.' + delimeter.key  | translate}}
+                  </md-option>
+              </md-select>
+          </div>
+      </div>
+      <div fxFlex="10">
+        <div dividerColor="accent">
+          <button md-raised-button fxFlex type="button" class="btnSearch" color="primary" (click)="exportCSV()">
+            <i class="fa fa-file-excel-o" style="font-size: 16px" aria-hidden="true" style="padding-right: 5px;"></i>Export CSV</button>
+        </div>
+      </div>
+    </div>
+  </md-card-content>
+</md-card>
+<div fxLayout="row wrap" fxLayoutWrap="wrap" style="padding:1em;">
+  <md-card style="width:100%">
+    <md-card-content>
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="60">
+          <h6 style="margin-left: 10px;">{{'CrossCorrection.List_of_ALL_Students_preparing' | translate}} {{SelectedTitleName}}</h6>
+        </div>
+        <div fxFlex="40">
+          <h6 style="margin-left: 10px;">{{'CrossCorrection.List_of_All_Schools' | translate}} {{SelectedTitleName}}</h6>
+        </div>
+      </div>
+      <!-- [sorts]="[{prop: 'schoolOriginId.shortName', dir: 'asc'},{prop: 'studentId.lastName', dir: 'asc'}]" -->
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="60">
+          <ngx-datatable #crossCorrectionList class="material rncp-table cross-correction-table List_of_ALL_Students_preparing overflowVisible"
+            [rows]="searchedStudents" [footerHeight]="30" [headerHeight]="50" [rowHeight]="'auto'" [columnMode]="'flex'" [externalSorting]="true"
+            (sort)="sortPage($event)" [cssClasses]="ngxDtCssClasses" [limit]="20" [reorderable]="reorderable" [sorts]="[{prop: 'schoolOriginId.shortName', dir: 'asc'},{prop: 'studentId.lastName', dir: 'asc'}]">
+            <ngx-datatable-column [flexGrow]="5" [sortable]="true" prop="studentId.lastName" name="studentId.lastName">
+              <ng-template ngx-datatable-header-template let-sort="sortFn"> {{'CrossCorrection.Students' | translate }} </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row['studentId'] && row['studentId']['lastName'] ? row['studentId']['lastName'] : ''}} {{row['studentId'] && row['studentId']['firstName']
+                ? row['studentId']['firstName'] : ""}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="4" [sortable]="true" prop="schoolOriginId.shortName" name="schoolOriginId.shortName">
+              <ng-template ngx-datatable-header-template let-sort="sortFn"> {{'CrossCorrection.School_Origin' | translate }} </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row['schoolOriginId'] && row['schoolOriginId']['shortName'] ? row['schoolOriginId']['shortName'] : ''}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="4">
+              <ng-template ngx-datatable-header-template> {{'CrossCorrection.School_Correcting' | translate }} </ng-template>
+              <ng-template let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+
+                <div class="select-input-container" fxFlex="90" *ngIf="formSchoolCorrecting.controls['school'+rowIndex]">
+                  <ng-select style="margin-top: 3px;" [(ngModel)]="selectedSchoolText[rowIndex]" fxFlex="100" (selected)="changeSchoolCorrectingList($event,row,rowIndex)"
+                    [multiple]="false" [items]="getSchoolCorrectingList(row['schoolOriginId']?._id)"></ng-select>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="5">
+              <ng-template ngx-datatable-header-template> {{'CrossCorrection.Cross_Corrector' | translate }} </ng-template>
+              <ng-template let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+                <div class="px-1 select-input-container" *ngIf="formSchoolCorrecting.value && formSchoolCorrecting.value['school'+rowIndex] && formSchoolCorrecting.controls['corrector'+rowIndex]">
+                  <span *ngFor="let school of schoolCorrectingList">
+                    <md-select [formControl]="formSchoolCorrecting.controls['corrector'+rowIndex]" *ngIf="school._id === formSchoolCorrecting.value['school'+rowIndex]"
+                      style="width:100%" (change)="changeCorrectorEvent($event, row)">
+                      <md-option *ngFor="let corrector of school.correctors" [value]="corrector._id" (click)="changeCorrector(corrector, row?.studentId?._id, row)">
+                        {{corrector['lastName'] ? corrector['lastName'] : ''}} {{corrector['firstName'] ? corrector['firstName'] : ""}}
+                      </md-option>
+                    </md-select>
+                  </span>
+
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-footer>
+              <ng-template ngx-datatable-footer-template let-curPage="curPage">
+                <div style="padding: 5px 10px">
+                  <div>
+                    {{ AllStudentsLists.length + ' total / '}} {{ getUnAssignedCorrectors() }} {{ 'CrossCorrection.REMAINING_TO_ASSIGN' | translate
+                    }}
+                  </div>
+                </div>
+
+                <div fxFlex fxFlexAlign="end end">
+                  <datatable-pager style="float: right;" [pagerLeftArrowIcon]="'icon-left'" [pagerRightArrowIcon]="'icon-right'" [pagerPreviousIcon]="'icon-prev'"
+                    [pagerNextIcon]="'icon-skip'" [size]="20" [count]="searchedStudents.length" [hidden]="!((searchedStudents.length / 20) > 1)"
+                    [page]="curPage" (change)="crossCorrectionList.onFooterPage($event)">
+                  </datatable-pager>
+                </div>
+              </ng-template>
+            </ngx-datatable-footer>
+          </ngx-datatable>
+        </div>
+        <div fxFlex="40">
+          <ngx-datatable class="material rncp-table cross-correction-table List_of_All_Schools" [rows]="allSchools" [footerHeight]="30"
+            [headerHeight]="50" [rowHeight]="'auto'" [columnMode]="'flex'" [externalSorting]="true" (sort)="sortPageForSchools($event)"
+            [cssClasses]="ngxDtCssClasses" [reorderable]="reorderable" [sorts]="[{prop: 'students', dir: 'asc'},{prop: 'correction', dir: 'asc'},{prop: 'shortName',
+                  dir: 'asc'}]">
+            <ngx-datatable-column [flexGrow]="4" [sortable]="true" name="shortName" prop="shortName">
+              <ng-template ngx-datatable-header-template let-sort="sortFn"> {{'CrossCorrection.Schools' | translate }} </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row.shortName}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1.5" [sortable]="true" name="students" prop="students">
+              <ng-template ngx-datatable-header-template let-sort="sortFn"> {{'CrossCorrection.Students' | translate }} </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <div style="width: 100%;text-align: center;">{{row.students}} </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1.5" [sortable]="true" name="correction" prop="correction">
+              <ng-template ngx-datatable-header-template let-sort="sortFn" name="correction" prop="correction"> {{'CrossCorrection.Correction' | translate }} </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <div style="width: 100%;text-align: center;"> {{row.correction}}</div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [flexGrow]="1">
+              <ng-template ngx-datatable-header-template> {{'CrossCorrection.Diff' | translate }} </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <div style="width: 100%;text-align: center;">{{row.diff}}</div>
+              </ng-template>
+            </ngx-datatable-column>
+
+          </ngx-datatable>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100%" fxFlex.lt-md="100%" style="overflow: hidden">
+          <div style="text-align: right; padding-bottom:4px;">
+            <button md-raised-button color="accent" (click)="save(false)">
+              <md-icon>save</md-icon>{{'CrossCorrection.Save' | translate}}
+            </button>&nbsp;&nbsp;
+            <button md-raised-button color="accent" (click)="save(true)">
+              <md-icon>reply</md-icon>{{'CrossCorrection.Save&Leave' | translate}}
+            </button>&nbsp;&nbsp;
+            <button name="single-click" [disabled]="!CheckAllStudentAssigned()" md-raised-button color="accent" (click)="sendNotification()">
+              <md-icon>send</md-icon>{{'CrossCorrection.Send_Notifications' | translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>
+
+</div>

@@ -1,0 +1,151 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" style="width: 100%; height: 100%;">
+    <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px;">
+        <div class="pa-1">
+            <div fxLayout="row wrap" fxLayoutAlign="start center">
+                <div fxFlex>
+                    <md-icon class="middle">receipt</md-icon>
+                    <span class="text-xl">{{'TEST.TEST' | translate}}</span>
+                </div>
+                <button md-icon-button (click)="closeDialog()">
+                    <md-icon>close</md-icon>
+                </button>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <md-tab-group fxFlex headerPosition="center" class="mb-1" md-stretch-tabs style="min-height: 300px">
+        <md-tab [label]="'TEST.IDENTITY' | translate">
+            <div fxLayout="row wrap" class="pa-2 mat-grey-50">
+                <div fxFlex="50">
+                    <div class="mb-1">
+                        <div class="text-md">{{'TEST.TESTNAME' | translate}} :</div>
+                        <div class="text-xl">{{test.name}}</div>
+                    </div>
+                    <div class="mb-1">
+                        <div class="text-md">{{'TEST.TESTTYPE' | translate}} :</div>
+                        <div class="text-xl">{{'PARAMETERS-RNCP.TEST.TYPE.' + test.type | translate}}</div>
+                    </div>
+                    <div class="mb-1">
+                        <div class="text-md">{{'TEST.TESTDATE' | translate}} :</div>
+                        <div class="text-xl">{{getTranslatedDate(test.date)}}</div>
+                    </div>
+                    <div class="mb-1">
+                        <div class="text-md">{{'TEST.DATETYPE' | translate}} :</div>
+                        <div class="text-xl">
+                            {{'TEST.DATETYPES.' + this.test.dateType.toUpperCase() | translate}}
+                        </div>
+                    </div>
+                </div>
+                <div fxFlex="50">
+                    <div class="mb-1">
+                        <div class="text-md">{{'TEST.MAXSCORE' | translate}} :</div>
+                        <div class="text-xl">{{test.maxScore}}</div>
+                    </div>
+                    <div class="mb-1">
+                        <div class="text-md">{{'TEST.COEFFICIENT' | translate}} :</div>
+                        <div class="text-xl">{{test.coefficient}}</div>
+                    </div>
+                    <div class="mb-1">
+                        <div class="text-md">{{'TEST.CORRECTIONTYPE' | translate}} :</div>
+                        <div class="text-xl">{{'TEST.CORRECTIONTYPES.' + test.correctionType.toUpperCase() | translate}}</div>
+                    </div>
+                    <div class="mb-1">
+                        <div class="text-md">{{'TEST.ORGANISER' | translate}} :</div>
+                        <div class="text-xl">{{'USERS.' + test.organiser | translate}}</div>
+                    </div>
+                </div>
+            </div>
+        </md-tab>
+        <md-tab [label]="'TEST.CALENDERSTEPS' | translate">
+            <div fxLayout="row wrap" class="mat-grey-50">
+                <ng-template #noSteps>
+                    <div fxFlex class="text-center pa-1">
+                        {{'TEST.NOSTEPS' | translate}}
+                    </div>
+                </ng-template>
+                <div fxFlex *ngIf="test.calendar.steps.length > 0; else noSteps">
+                    <md-nav-list dense>
+                        <a md-list-item style="border-bottom: 1px solid rgba(0, 0, 0, 0.4)" *ngFor="let step of test.calendar.steps; index as i">
+                            <md-icon md-list-icon>date_range</md-icon>
+                            <div class="text-xl" md-line>{{getTranslateWhat(step?.text)}}</div>
+                            <div md-line *ngIf="step.date.type === 'fixed'">{{getTranslatedDate(step.date.value)}}</div>
+                            <div md-line *ngIf="step.date.type === 'relative'">{{step.date.before ? ('BEFORE' | translate) : ('AFTER' | translate)}} {{step.date.days}} {{'DAYS'
+                                | translate}}</div>
+                        </a>
+                    </md-nav-list>
+                </div>
+            </div>
+        </md-tab>
+        <md-tab [label]="'DOCUMENT.DOCUMENTS' | translate">
+            <div fxLayout="row wrap" class="mat-grey-50">
+                <ng-template #noDocs>
+                    <div fxFlex class="text-center pa-1">
+                        {{'DOCUMENT.NODOCUMENTS' | translate}}
+                    </div>
+                </ng-template>
+                <div fxFlex *ngIf="test.documents.length > 0; else noDocs">
+                    <md-nav-list dense>
+                      <div *ngFor="let document of test.documents; index as i">
+                        <a md-list-item style="border-bottom: 1px solid rgba(0, 0, 0, 0.4)" *ngIf="!acadService.checkToDisplayDocForSchoolUser(document)">
+                          <md-icon md-list-icon>insert_drive_file</md-icon>
+                          <span md-line>{{'DOCUMENT.NAME' | translate}} : {{ document.name }}</span>
+                          <span md-line>{{'DOCUMENT.TYPE' | translate}} : {{ document.type }}</span>
+                        </a>
+                      </div>
+                    </md-nav-list>
+                </div>
+            </div>
+        </md-tab>
+        <md-tab [label]="'TEST.DOCUMENTSEXPECTED' | translate">
+            <div fxLayout="row wrap" class="mat-grey-50">
+                <ng-template #noDocs>
+                    <div fxFlex class="text-center pa-1">
+                        {{'EXPECTEDDOCUMENT.NODOCUMENTS' | translate}}
+                    </div>
+                </ng-template>
+                <div fxFlex *ngIf="test.expectedDocuments.length > 0; else noDocs">
+                    <md-nav-list dense>
+                        <a md-list-item style="border-bottom: 1px solid rgba(0, 0, 0, 0.4)" *ngFor="let expectedDoc of test.expectedDocuments; index as i">
+                            <md-icon md-list-icon>insert_drive_file</md-icon>
+                            <span md-line>{{'DOCUMENT.NAME' | translate}} : {{ expectedDoc.documentName }}</span>
+                            <span md-line>
+                                <ng-template [ngIf]="expectedDoc.deadlineDate.type === 'fixed'">
+                                    <div>{{'EXPECTEDDOCUMENT.DEADLINE' | translate}} : {{getTranslatedDate(expectedDoc?.deadlineDate?.deadline)}}</div>
+                                </ng-template>
+                                <ng-template [ngIf]="expectedDoc.deadlineDate.type === 'relative'">
+                                    <div>{{'EXPECTEDDOCUMENT.DEADLINE' | translate}} : {{expectedDoc.deadlineDate.before ? ('BEFORE' | translate) : ('AFTER' |
+                                        translate)}} {{expectedDoc.deadlineDate.days}} {{'DAYS' | translate}}
+                                    </div>
+                                </ng-template>
+                            </span>
+                            <span md-line>
+                                <ng-template [ngIf]="expectedDoc.isForAllStudents">
+                                    <div>{{'EXPECTEDDOCUMENT.FOREACH' | translate}}</div>
+                                </ng-template>
+                            </span>
+                        </a>
+                    </md-nav-list>
+                </div>
+            </div>
+        </md-tab>
+    </md-tab-group>
+
+    <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="1rem" fxFlexAlign="end" style="width: 100%">
+        <button md-raised-button color="warn" (click)="removeTest()" *ngIf="user.entity.type === 'admtc'">
+            <md-icon>delete</md-icon>
+            {{"DELETE" | translate}}
+        </button>
+        <button md-raised-button color="accent" (click)="moveTest()" *ngIf="user.entity.type === 'admtc'">
+            <md-icon>format_indent_increase</md-icon>
+            {{"MOVE" | translate}}
+        </button>
+        <button md-raised-button color="orange" (click)="editTest()" *ngIf="user.entity.type === 'admtc'">
+            <md-icon>edit</md-icon>
+            {{"EDIT" | translate}}
+        </button>
+        <button md-raised-button color="green" (click)="viewTest()" *ngIf="user.entity.type === 'academic' || user.entity.type === 'admtc' || showViewButton">
+            <md-icon>fullscreen</md-icon>
+            {{"TEST.VIEW" | translate}}
+        </button>
+    </div>
+</div>

@@ -1,0 +1,193 @@
+<div>
+    <form [formGroup]="mailForm">
+        <md-card-actions class="compose-mail-actions">
+            <div fxLayout="row">
+                <div fxFlex="40">
+                    <label class="mat-button">
+                        <md-icon>edit</md-icon>
+                    </label>
+                    <h5 style="line-height: 1;" class="mat-button">
+                        {{ 'MailBox.composeMail.title' | translate }}
+                    </h5>
+                </div>
+                <div fxFlex="60" fxLayoutAlign="end end">
+                    <button md-button (click)="closeDialog()">
+                        <md-icon>close</md-icon>
+                    </button>
+
+                    <label md-button class="mat-button" style="line-height: 1;" (click)="showCCInput=! showCCInput"  *ngIf="!displayCC"  >
+                        <span> {{'MailBox.composeMail.cc' | translate}} </span>
+                    </label>
+                    <label md-button class="mat-button" style="line-height: 1;" (click)="showBCCInput=! showBCCInput" *ngIf="!displayBCC" >
+                        <span> {{'MailBox.composeMail.bcc' | translate}} </span>
+                    </label>
+
+
+                    <!-- <label md-button class="mat-button" style="line-height: 1;" (click)="showCCInput=! showCCInput" [style.pointer-events]=" disableAddEditing ? 'none' : 'all'">
+                        <span> {{'MailBox.composeMail.cc' | translate}} </span>
+                    </label>
+                    <label md-button class="mat-button" style="line-height: 1;" (click)="showBCCInput=! showBCCInput" [style.pointer-events]=" disableAddEditing ? 'none' : 'all'">
+                        <span> {{'MailBox.composeMail.bcc' | translate}} </span>
+                    </label> -->
+                    <label md-button class="mat-button" [title]=" 'MailBox.composeMail.attach_file' | translate" >
+                        <md-icon>attachment_file</md-icon>
+                        <input type="file" #myInput style="display:none;" accept="image/*" name="file" multiple (change)="handleInputChange($event)">
+                    </label>
+                    <button md-button [title]=" 'MailBox.composeMail.send' | translate" (click)="sendMail()" [disabled]="mailForm?.invalid">
+                        <md-icon>send</md-icon>
+                    </button>
+                </div>
+            </div>
+            <!-- <button>
+                <md-
+            </button>
+            <button md-button [title]=" 'MailBox.composeMail.send' | translate" (click)="sendMail()" [disabled]="!mailForm.valid">
+                <i class="fa fa-paper-plane"></i>
+            </button>
+
+            <label md-button class="mat-button" [title]=" 'MailBox.composeMail.attach_file' | translate">
+                <i class="fa fa-paperclip"></i>
+                <input type="file" style="display:none;" name="file" multiple (change)="handleInputChange($event)">
+            </label>
+
+            <!--<button md-button>
+            <i class="fa fa-download"></i>
+            </button>-->
+
+            <!-- <div class="btn-close" (click)="closeDialog()">X</div> -->
+        </md-card-actions>
+
+        <md-card-content class="compose-mail">
+
+            <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="isGroupEmail">
+                <div fxFlex="100" style="margin: 15px 0px;">
+                    <ng-select formControlName="rncp" fxFlex="100" [multiple]="true"
+                    [items]="rncpTitleList" placeholder="{{ 'TASK.ADDEDITTASK.RNCPTITLE' | translate }}*"></ng-select>
+                    <div  style="margin-left: 15px;"  *ngIf="mailForm.get('rncp').invalid && submitForm">
+                        <small class="mat-text-warn"> {{'STUDENT.SELECTRNCPTITLE.validation1' | translate}}</small>
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="isGroupEmail">
+                <div fxFlex="100">
+                    <div class="px-1 select-input-container">
+                        <span>{{'TASK.ADDEDITTASK.USER' | translate}}</span>
+                        <md-slide-toggle [checked]="userTypeToggle" labelPosition="after" formControlName="userTypeSelection"></md-slide-toggle>
+                        <span>{{'TASK.ADDEDITTASK.CATEGORYOFUSERS' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="isGroupEmail && mailForm.get('userTypeSelection').value">
+                <div fxFlex="100" style="margin: 10px 0px;">
+                    <ng-select formControlName="userTypes" [multiple]="true" [items]="userTypeList"
+                    placeholder="{{ 'USERS.ADDEDITUSER.SELECTUSERTYPE' | translate }}*"></ng-select>
+                </div>
+            </div>
+
+            <!-- <div fxLayout="row" fxLayoutWrap="wrap" [style.pointer-events]=" disableAddEditing ? 'none' : 'all'"> -->
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <md-input-container *ngIf="showSubject">
+                    <input mdInput [placeholder]=" 'MailBox.composeMail.to' | translate" [mdAutocomplete]="autoCompTo" [formControl]="mailForm.controls[ 'search_receiver']"
+                        type="search">
+                </md-input-container>
+                <md-autocomplete #autoCompTo="mdAutocomplete" [displayWith]="recepientDisplayFunction.bind(this)">
+                    <md-option *ngFor="let res of recepientsList | async" [value]="res">
+                        <span>{{ getCivility(res?.sex) }} {{ res?.display }}</span>
+                    </md-option>
+                </md-autocomplete>
+                <md-chip-list class="mail-selected-res-list" [ngClass]="selectedRecepientsList.length ? 'mb-1' : ''">
+                    <md-chip *ngFor="let _selRec of selectedRecepientsList; let _index=index">
+                        {{ getCivility(_selRec?.sex) }} {{_selRec?.display}}
+                        <i *ngIf="showSubject" class="fa fa-times" (click)="removeSelectedRecepient(_index, 'to')"></i>
+                    </md-chip>
+                </md-chip-list>
+            </div>
+
+            <!-- <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="!showCCInput"  [style.pointer-events]=" disableAddEditing ? 'none' : 'all'"> -->
+            <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="showCCInput && !displayCC"  >
+                <md-input-container>
+                    <input mdInput [placeholder]=" 'MailBox.composeMail.cc' | translate" [mdAutocomplete]="autoCompToCC" [formControl]="mailForm.controls[ 'cc']"
+                        type="search">
+                </md-input-container>
+                <md-autocomplete #autoCompToCC="mdAutocomplete" [displayWith]="ccrecepientDisplayFunction.bind(this)">
+                    <md-option *ngFor="let res of ccrecepientsList | async" [value]="res">
+                        <span>{{ getCivility(res?.sex) }} {{ res?.display }}</span>
+                    </md-option>
+                </md-autocomplete>
+                <md-chip-list class="mail-selected-res-list" [ngClass]="selectedRecepientsList.length ? 'mb-1' : ''">
+                    <md-chip *ngFor="let _selRec of ccselectedRecepientsList; let _index=index">
+                        {{ getCivility(_selRec?.sex) }} {{_selRec?.display}}
+                        <i class="fa fa-times" (click)="removeSelectedRecepient(_index, 'cc')"></i>
+                    </md-chip>
+                </md-chip-list>
+            </div>
+            <!-- <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="showBCCInput"  [style.pointer-events]=" disableAddEditing ? 'none' : 'all'">  -->
+                    <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="showBCCInput && !displayBCC"  >
+                <md-input-container>
+                    <input mdInput [placeholder]=" 'MailBox.composeMail.bcc' | translate" [mdAutocomplete]="autoCompToBCC" [formControl]="mailForm.controls[ 'bcc']"
+                        type="search">
+                </md-input-container>
+                <md-autocomplete #autoCompToBCC="mdAutocomplete" [displayWith]="bccrecepientDisplayFunction.bind(this)">
+                    <md-option *ngFor="let res of bccrecepientsList | async" [value]="res">
+                        <span>{{ getCivility(res?.sex) }} {{ res?.display }}</span>
+                    </md-option>
+                </md-autocomplete>
+                <md-chip-list class="mail-selected-res-list" [ngClass]="selectedRecepientsList.length ? 'mb-1' : ''">
+                    <md-chip *ngFor="let _selRec of bccselectedRecepientsList; let _index=index">
+                        {{ getCivility(_selRec?.sex) }} {{_selRec.display}}
+                        <i class="fa fa-times" (click)="removeSelectedRecepient(_index, 'bcc')"></i>
+                    </md-chip>
+                </md-chip-list>
+            </div>
+
+            <!-- <div fxLayout="row" fxLayoutWrap="wrap">
+                <a (click)="showCCInput=! showCCInput">+ {{'MailBox.composeMail.add_cc' | translate }}</a>&nbsp;&nbsp;&nbsp;
+                <a (click)="showBCCInput=! showBCCInput">+ {{'MailBox.composeMail.add_bcc' | translate }}</a>
+            </div> -->
+
+            <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="showSubject">
+                <md-input-container>
+                    <input mdInput [placeholder]="'MailBox.composeMail.subject' | translate" [formControl]="mailForm.controls['subject']">
+                </md-input-container>
+            </div>
+
+            <!--<div fxLayout="row" fxLayoutWrap="wrap">
+        <md-input-container>
+          <textarea maxlength="500" mdInput [placeholder]=" 'MailBox.composeMail.message' | translate" rows="10
+                   " [formControl]="mailForm.controls[ 'message']"></textarea>
+          <input mdInput [placeholder]=" 'MailBox.composeMail.subject' | translate" [formControl]="mailForm.controls[
+                    'subject']">
+        </md-input-container>
+      </div>-->
+
+            <div fxLayout="row" fxLayoutWrap="wrap" class="file-section">
+                <div *ngFor="let file of attachmnetsPaths" class="fileInfo">
+                    <button md-icon-button type="button">
+                        <md-icon>insert_drive_file</md-icon>
+                    </button>
+                    <label>{{file.name}}</label>
+                    <button md-icon-button type="button" (click)="removeAttachment(file)">
+                        <md-icon> close </md-icon>
+                    </button>
+                    <!-- <i class="fa fa-trash fa-icon attachmentRemove" aria-hidden="true"></i> -->
+                    <!-- <label class="uploader" ondragover="return false;" [class.loaded]="loaded" [style.outlineColor]="dragging ? activeColor : baseColor"
+                        (dragenter)="handleDragEnter()" (dragleave)="handleDragLeave()" (drop)="handleDrop($event)">
+                        <i class="fa fa-file-image-o fa-icon" aria-hidden="true" *ngIf="img.type=='image/jpeg'"></i>
+                        <i class="fa fa-file-text fa-icon" aria-hidden="true" *ngIf="img.type=='text/plain'"></i>
+                        <i class="fa fa-file-pdf-o fa-icon" aria-hidden="true" *ngIf="img.type=='application/pdf'"></i>
+                    </label> -->
+
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <quill-editor [(ngModel)]="composeMailMessage" [placeholder]=" 'STUDENT.INSERTTEXT' | translate" debounce="500" [formControl]="mailForm.controls[ 'message']"></quill-editor>
+            </div>
+            <!--<file-uploader [activeColor]=" 'orangered'" [baseColor]=" 'lightgray'"></file-uploader>-->
+        </md-card-content>
+
+    </form>
+
+</div>

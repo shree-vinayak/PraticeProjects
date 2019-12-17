@@ -1,0 +1,13 @@
+ul,h1,h2,h3,h4,h5,h6 {
+    margin:0;
+    padding:0;
+}
+.header {
+    padding: 10px 0 10px;
+    background: #eee;
+    box-shadow: 0px 3px 12px 0px #b7b7b7;
+}
+.nav-right li {
+    display: inline-block;
+    padding: 0 5px;
+}

@@ -1,0 +1,89 @@
+<form [formGroup]="form">
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="30" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container">
+        <md-select color="accent" [placeholder]="'DOCUMENT.TYPE' | translate" [formControl]="form.controls['type']" style="width: 100%;">
+          <md-option *ngFor="let documentType of documentTypes" [value]="documentType.view">
+            {{ ('DOCUMENTTYPES.' + documentType.value.toUpperCase()) | translate }}
+            <!-- {{documentType}} -->
+          </md-option>
+        </md-select>
+        <!--<md-hint class="text-md">Types de document.</md-hint>-->
+      </div>
+    </div>
+    <div fxFlex="70" fxFlex.lt-md="100">
+      <div class="px-1">
+        <md-input-container color="accent" style="width: 100%">
+          <input mdInput [placeholder]="'DOCUMENT.NAME' | translate" [formControl]="form.controls['documentName']" type="text">
+          <!--<md-hint>Ecrire nom du document.</md-hint>-->
+        </md-input-container>
+      </div>
+    </div>
+  </div>
+
+  <!-- Publish for Student Check-box div -->
+  <div *ngIf="showPublishForStudentCheckBox" fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container">
+        <md-checkbox labelPosition="after" color="accent" [checked]="isPublishedForStudent" (change)="toggleStudentPublish($event)">
+          {{'PUBLISHABLE_FOR_STUDENTS.TITLE' | translate}}
+        </md-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <md-card *ngIf="uploader.queue.length > 0 && !document">
+    <md-card-content>
+      <div class="pt-1" style="display: inline-block;">
+        <md-icon style="vertical-align: middle">insert_drive_file</md-icon>
+        {{uploader.queue[0].file?.name}}
+      </div>
+      <div>
+        <div class="mt-1">
+          <button md-raised-button md-button-sm color="primary" (click)="upload()" type="button" [disabled]="uploader.queue[0].isReady || uploader.queue[0].isUploading || uploader.queue[0].isSuccess">
+            <md-icon>file_upload</md-icon>
+            {{'DOCUMENT.ADDTHISFILE' | translate}}
+          </button>
+          <button md-raised-button md-button-sm color="warn" type="button" (click)="clearUploadQueue()">
+            <md-icon>delete</md-icon>
+            {{'REMOVE' | translate}}
+          </button>
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>
+  <md-card *ngIf="document">
+    <md-card-content>
+      <div class="pt-1" style="display: inline-block;">
+        <md-icon style="vertical-align: middle">insert_drive_file</md-icon>
+        {{document.fileName}}
+      </div>
+      <div *ngIf="uploader.queue.length > 0">
+        <div class="mt-1">
+          <button md-raised-button md-button-sm color="primary" (click)="upload()" type="button" [disabled]="uploader.queue[0].isReady || uploader.queue[0].isUploading || uploader.queue[0].isSuccess">
+            <md-icon>file_upload</md-icon>
+            {{'DOCUMENT.ADDTHISFILE' | translate}}
+          </button>
+          <button md-raised-button md-button-sm color="warn" type="button" (click)="clearUploadQueue()">
+            <md-icon>delete</md-icon>
+            {{'REMOVE' | translate}}
+          </button>
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>
+  <div style="text-align: right">
+    <input #uploadFileControl style="display: none" type="file" ng2FileSelect [uploader]="uploader" disableMultipart="true" />
+
+    <button md-raised-button md-button-sm color="warn" type="button" (click)="cancel()">
+      {{'CANCEL' | translate}}
+    </button>
+    <button *ngIf="document" md-raised-button md-button-sm color="primary" type="button" (click)="submit()">
+      {{'SUBMIT' | translate}}
+    </button>
+    <button fxFlexAlign="end" md-raised-button md-button-sm color="primary" type="button" (click)="openUploadWindow()" *ngIf="uploader.queue.length === 0">
+      <md-icon>add</md-icon>
+      {{'DOCUMENT.FILE' | translate}}
+    </button>
+  </div>
+</form>

@@ -1,0 +1,69 @@
+.mt-16{
+	margin-top: 16px;
+}
+.ml-10{
+	margin-left: 10px;
+}
+
+.mat-tooltip {
+    font-size: 15px !important;
+}
+
+.btnHeight{
+	height: 37px;
+}
+
+.trans{
+	-ms-transform: translate(0, -40px); /* IE 9 */
+    -webkit-transform: translate(0, -40px); /* Safari */
+	transform: translate(0, -40px);
+	margin-top: 1px; 
+	margin-left: 2px;
+	max-width: 450px;
+	@media screen and (max-width: 1450px){
+		max-width: 390px;
+	} 
+}
+
+.add-student-button {
+	float: right;
+	margin-top: 10px;
+	margin-right: 1.2%; 
+
+	@media screen and (max-width: 1450px) {
+		margin-right: 0.4%; 
+	} 
+  
+	@media screen and (min-width: 1650px) {
+		margin-right: 6.1%;
+	}
+
+  }
+
+   .button-align {
+	width: 190px;
+	margin-left: 14%;
+
+	@media screen and (max-width: 1400px){
+		// margin-left: 9%; 
+	} 
+  
+	@media screen and (min-width: 1600px) {
+		// margin-left: 9%;
+	}
+
+  }
+
+
+// @media screen and (min-width: 800px) and (max-width: 1000px) {
+// 	.add-student-button{
+// 		margin-right: 1.15% ; 
+// 		}
+// }
+
+// @media screen and (max-width: 800px) {
+// 	.add-student-button{
+// 		margin-right: 0.4% ; 
+// 		}
+// }
+

@@ -1,0 +1,25 @@
+.card-font {
+  font-size: 20px;
+}
+
+:host /deep/ {
+  .selection-container {
+      .mat-select-value {
+        font-size: 20px;
+      }
+  }
+}
+
+.selection-base {
+    width: 100%;
+}
+
+.selection-base-margin {
+    width: 100%;
+    margin-top: -15px;
+}
+
+.status {
+  font-weight: 500;
+  font-size: 17px;
+}

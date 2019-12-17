@@ -1,0 +1,28 @@
+<form [formGroup]="studentReactivateForm" (ngSubmit)="reactivateStudent()" class="suggestion-form">
+  <a class="close_icon">
+     <i style="float: right;margin-top: 4px;" class="material-icons" (click)="cancelReactivation(false)">close</i>
+ </a>
+ <h3 md-dialog-title>
+     <md-icon style="transform: translateY(5px);" class="icon-middle">indeterminate_check_box </md-icon>
+     <span class="suggestion-title">{{'STUDENT.MESSAGE.ENTERDATEOFREACTIVE' | translate}}</span>
+ </h3>
+ <md-dialog-content>
+     <div>
+         <md-input-container class="full-width">
+             <input mdInput mdTextareaAutosize type="text" [mdDatepicker]="dateOfReactivation" 
+             placeholder="{{ 'STUDENT.MESSAGE.REACTIVATIONDATE' | translate }}" formControlName="dateOfReactivation">
+             <button mdSuffix [mdDatepickerToggle]="dateOfReactivation" class="white-datepicker-button" style="background-color: grey !important;"></button>
+         </md-input-container>
+         <md-datepicker #dateOfReactivation [touchUi]="true"></md-datepicker>
+     </div>
+     <div>
+         <md-input-container class="full-width">
+             <textarea class="inputBox" rows="1" maxLength="300" mdInput mdTextareaAutosize formControlName="reasonForReactivation" placeholder="{{ 'STUDENT.MESSAGE.REASON_REACTIVATION' | translate }}"></textarea>
+         </md-input-container>
+     </div>
+ </md-dialog-content>
+ <md-dialog-actions class="pull-right">
+     <button md-button md-raised-button color="warn" md-dialog-close class="mr-12" (click)="cancelReactivation(false)">{{'SUGGESTION.CANCEL' | translate}}</button>
+     <button md-button md-raised-button color="primary" type="submit" [disabled]="studentReactivateForm.invalid">{{'SUBMIT' | translate}}</button>
+ </md-dialog-actions>
+</form>

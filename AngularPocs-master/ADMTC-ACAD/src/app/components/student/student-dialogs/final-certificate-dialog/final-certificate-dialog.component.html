@@ -1,0 +1,89 @@
+<div fxLayout="column wrap" class="final-certificate-container" fxLayoutAlign="start">
+  <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px;">
+    <div class="pa-1">
+      <div fxLayout="row wrap" fxLayoutAlign="start center">
+        <h3 fxFlex>
+          <img class="certi-img" [src]="certiDegreeImgUrl">
+        </h3>
+        <button md-icon-button style="margin-top: -90px" (click)="closeDialog()">
+          <md-icon>close</md-icon>
+        </button>
+      </div>
+      <div fxLayout="row wrap" fxLayoutAlign="start center">
+        <div fxFlex style="margin: 0;">
+          <span>
+            <svg class="place-svg-icon" viewBox="0 0 24 24">
+              <path fill="#000000" d="M15.2,10.7L16.6,16L12,12.2L7.4,16L8.8,10.8L4.6,7.3L10,7L12,2L14,7L19.4,7.3L15.2,10.7M14,19.1H13V16L12,15L11,16V19.1H10A2,2 0 0,0 8,21.1V22.1H16V21.1A2,2 0 0,0 14,19.1Z"
+              />
+            </svg>
+          </span>
+          <span style="font-size: 22px;">{{'CERTIFICATE_ISSUANCE.OFFICIAL_CERTI' | translate}} </span>
+        </div>
+      </div>
+    </div>
+    <hr> </div>
+  <div fxLayout="row" fxLayoutWrap="wrap" fxFlex="100" style="margin-top:10px;">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      <form [formGroup]="form">
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px;">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <md-input-container fxFlex="100">
+              <input type="text" placeholder="{{'CrossCorrection.Select_RNCP_Title.title' | translate}}" mdInput formControlName="rncpTitle"
+                [mdAutocomplete]="autoTitle">
+              <md-autocomplete #autoTitle="mdAutocomplete">
+                <md-option *ngFor="let list of filteredOptionsRNCPTitle |  async" [value]="list.shortName" (click)="OnSelectRNCPTitle(list)">
+                  {{ list.shortName }}
+                </md-option>
+              </md-autocomplete>
+            </md-input-container>
+          </div>
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <small *ngIf="form.controls['rncpTitle'].hasError('required') && (form.controls['rncpTitle'].touched)" class="mat-text-warn">
+              {{'CrossCorrection.Select_RNCP_Title.validation1' | translate}}</small>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px; ">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <md-input-container fxFlex="100">
+              <input type="text" placeholder="{{'CrossCorrection.Select_a_Class.title' | translate}}" mdInput formControlName="class" [mdAutocomplete]="autoClass">
+              <md-autocomplete #autoClass="mdAutocomplete">
+                <md-option *ngFor="let list of filteredOptionsClass |  async" [value]="list.name" (click)="OnSelectClass(list)">
+                  {{ list.name }}
+                </md-option>
+              </md-autocomplete>
+            </md-input-container>
+          </div>
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <small *ngIf="form.controls['class'].hasError('required') && (form.controls['class'].touched)" class="mat-text-warn">
+              {{'CrossCorrection.Select_a_Class.validation1' | translate}}</small>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px; ">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <md-input-container fxFlex="100">
+              <input type="text" placeholder="{{'STUDENT.SCHOLERSEASON.title' | translate}}" mdInput formControlName="scholarSeason" [mdAutocomplete]="autoScholarSeason">
+              <md-autocomplete #autoScholarSeason="mdAutocomplete">
+                <md-option *ngFor="let singleScholarseason of filteredOptionsScholarSeason |  async" [value]="singleScholarseason.scholarseason"
+                  (click)="OnSelectScholarSeason(singleScholarseason)">
+                  {{ singleScholarseason.scholarseason }}
+                </md-option>
+              </md-autocomplete>
+            </md-input-container>
+          </div>
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <small *ngIf="form.controls['scholarSeason'].hasError('required') &&
+                  (form.controls['scholarSeason'].touched)" class="mat-text-warn">
+              {{'STUDENT.SCHOLERSEASON.validation1' | translate}}</small>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="end end" fxLayoutGap="5px" fxFlexAlign="end" style="width: 100%">
+    <button md-raised-button color="red" (click)="closeDialog()">{{"CrossCorrection.Cancel" | translate}}</button>
+    <button md-raised-button color="primary" [disabled]="form.invalid" (click)="submitCertificationSelections()">{{"CrossCorrection.Enter" | translate}}</button>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div>
+  <ngx-datatable
+    class="material rncp-table"
+    [rows]="rncpTitles"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [columnMode]="'force'"
+    [reorderable]="reorderable"
+    [externalPaging]="true"
+    [count]="page.totalElements"
+    [offset]="page.pageNumber"
+    [limit]="page.size"
+    (page)="changePage($event)"
+    [externalSorting]="true"
+    (sort)="sortPage($event)"
+    [cssClasses]= "ngxDtCssClasses">
+    <ngx-datatable-column>
+      <ng-template ngx-datatable-header-template>
+        {{'CERTIFIER' | translate}}
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['certifier'].shortName}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column>
+      <ng-template ngx-datatable-header-template>
+        {{'LONGNAME' | translate}}
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['longName']}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column>
+      <ng-template ngx-datatable-header-template>
+        {{'SHORTNAME' | translate}}
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['shortName']}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column>
+      <ng-template ngx-datatable-header-template>
+        {{'LEVELRNCP' | translate}}
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['rncpLevel']}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [maxWidth]="80" [sortable]="false" [cellClass]="'text-center'">
+      <ng-template ngx-datatable-header-template>
+        {{'ACTIONS' | translate}}
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <button md-icon-button md-button-sm md-raised-button class="grid-button" (click)="goToRncpTitle(row['_id'])">
+          <md-icon>edit</md-icon>
+          <!--{{'OPEN' | translate }}-->
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>

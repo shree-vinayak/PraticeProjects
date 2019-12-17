@@ -1,0 +1,220 @@
+<form class="student-form" [formGroup]="studentRegistrationForm" (ngSubmit)="registerStudent(studentRegistrationForm.value)">
+  <div class="row wrap" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+    <div fxFlex="30">
+      <md-card class="primary-background dark-header">
+        <md-card-title>{{ 'STUDENT_INFORMATION.TITLE' | translate }}</md-card-title>
+        <md-card-content>
+          <!-- RNCP TITLE -->
+          <div class="form-group">
+            <label class="col-sm-2 col-form-label">{{'USERS.RNCPTITLE' | translate}}</label>
+            <div class="col-sm-10 form-control-plaintext">
+              {{studInformation.rncpTitle}}
+            </div>
+          </div>
+          <!-- CLASS TITLE -->
+          <div class="form-group">
+            <label class="col-sm-2 col-form-label">{{'USERS.ADDEDITUSER.CLASS' | translate}}</label>
+            <div class="col-sm-10 form-control-plaintext">
+              {{studInformation.currentClass}}
+            </div>
+          </div>
+          <!-- FIRST NAME -->
+          <div class="form-group">
+            <label class="col-sm-2 col-form-label">{{'STUDENT_INFORMATION.FIRSTNAME' | translate}}</label>
+            <div class="col-sm-10 form-control-plaintext">
+              {{studInformation.firstName}}
+            </div>
+          </div>
+          <!-- FIRST NAME -->
+          <div class="form-group">
+            <label class="col-sm-2 col-form-label">{{'STUDENT_INFORMATION.LASTNAME' | translate}}</label>
+            <div class="col-sm-10 form-control-plaintext">
+              {{studInformation.lastName}}
+            </div>
+          </div>
+          <!-- GENDER -->
+          <div class="form-group">
+            <label class="col-sm-2 col-form-label">{{'STUDENT_INFORMATION.GENDER.TITLE' | translate}}</label>
+            <div class="col-sm-10 form-control-plaintext">
+              {{studInformation.sex}}
+            </div>
+          </div>
+          <!-- EMAIL -->
+          <div class="form-group">
+            <label class="col-sm-2 col-form-label">{{'STUDENT_INFORMATION.EMAIL' | translate}}</label>
+            <div class="col-sm-10 form-control-plaintext">
+              {{studInformation.email}}
+            </div>
+          </div>
+          <!-- DOB -->
+          <div class="form-group">
+            <label class="col-sm-2 col-form-label">{{'STUDENT_INFORMATION.DATEOFBIRTH'| translate}}</label>
+            <div class="col-sm-10 form-control-plaintext">
+              {{studInformation.dateOfBirth | date:'dd-MM-y'}}
+            </div>
+          </div>
+          <!-- POB -->
+          <div class="form-group">
+            <label class="col-sm-2 col-form-label">{{'STUDENT_INFORMATION.PLACEOFBIRTH'| translate}}</label>
+            <div class="col-sm-10 form-control-plaintext">
+              {{studInformation.placeOfBirth}}
+            </div>
+          </div>
+          <!-- NATIONALITY -->
+          <div class="form-group">
+            <label class="col-sm-2 col-form-label">{{'STUDENT_INFORMATION.NATIONALITY' | translate}}</label>
+            <div class="col-sm-10 form-control-plaintext">
+              {{studInformation.nationality}}
+            </div>
+          </div>
+          <!-- Student Reference ID -->
+          <div class="form-group">
+            <label class="col-sm-2 col-form-label">{{'STUDENT_INFORMATION.STUDENT_REF_ID' | translate}}</label>
+            <div class="col-sm-10 form-control-plaintext">
+              {{studInformation.studentRefId}}
+            </div>
+          </div>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div fxFlex="70">
+      <md-card class="primary-background dark-header">
+        <md-card-title>{{ 'FORM_INSTRUCTION' | translate }}</md-card-title>
+        <md-card-content>
+          <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+            <div fxFlex="50">
+              <div class="form-title">{{ 'MY_INFORMATION.TITLE' | translate }}</div>
+              <div class="mt-18">
+                <label>{{'MY_INFORMATION.PHYSICALDISABILITY.LABEL' | translate}}</label>
+                <md-radio-group ng-required="true" formControlName="handicapped" #handicapped>
+                  <md-radio-button value="true">{{'MY_INFORMATION.PHYSICALDISABILITY.YES' | translate}}</md-radio-button>
+                  <md-radio-button value="false">{{'MY_INFORMATION.PHYSICALDISABILITY.NO' | translate}}</md-radio-button>
+                </md-radio-group>
+              </div>
+              <div formGroupName="address">
+                <md-input-container class="full-width">
+                  <input formControlName="line1" #line1 mdInput [placeholder]="'USERS.ADDRESSLINE1'| translate">
+                </md-input-container>
+                <md-input-container class="full-width">
+                  <input formControlName="line2" #line2 mdInput [placeholder]="'USERS.ADDRESSLINE2'| translate">
+                </md-input-container>
+                <md-input-container class="full-width">
+                  <input formControlName="postalCode" #postalCode mdInput [placeholder]="'USERS.ZIPCODE'| translate">
+                </md-input-container>
+                <md-input-container class="full-width">
+                  <input formControlName="city" #city mdInput [placeholder]="'USERS.CITY'| translate">
+                </md-input-container>
+                <md-input-container class="full-width">
+                  <input formControlName="country" #country mdInput [placeholder]="'USERS.COUNTRY'| translate">
+                </md-input-container>
+              </div>
+              <div>
+                <md-input-container class="full-width">
+                  <input formControlName="telePhone" #telePhone mdInput [placeholder]="'USERS.ADDEDITUSER.TELEPHONE'| translate">
+                </md-input-container>
+                <md-input-container class="full-width">
+                  <input formControlName="cellPhone" #cellPhone mdInput [placeholder]="'USERS.ADDEDITUSER.CELLPHONE'| translate">
+                </md-input-container>
+              </div>
+              <md-input-container class="full-width">
+                <input formControlName="password" #password mdInput [placeholder]="'USERS.ADDEDITUSER.PASSWORD'| translate" type="password"
+                  pattern=".*[a-zA-Z]+.*">
+              </md-input-container>
+              <md-input-container class="full-width">
+                <input formControlName="confirmPassword" #confirmPassword mdInput [placeholder]="'USERS.ADDEDITUSER.CONFIRMPASSWORD'| translate"
+                  type="password">
+              </md-input-container>
+
+              <div class='form-text error' *ngIf="studentRegistrationForm.controls.confirmPassword.touched">
+                <div *ngIf="studentRegistrationForm.hasError('mismatchedPasswords')" style="color:#ff5722;">Passwords do not match.</div>
+              </div>
+
+              <md-select formControlName="studiesFinancedBy" #studiesFinancedBy [placeholder]="'MY_INFORMATION.STUDIES'| translate" class="full-width">
+                <md-option *ngFor="let studiescategory of studiescategories" [value]="studiescategory.value">
+                  {{studiescategory.viewValue}}
+                </md-option>
+              </md-select>
+              <!--   <div class="photo-upload">
+                <label class="left-label-photo-upload">{{'MY_INFORMATION.PHOTOGRAPH'| translate}}</label>
+                <image-upload [max]="20" [buttonCaption]="''" [dropBoxMessage]="'Drop your image here!'" (onFileUploadFinish)="imageUploaded($event)"></image-upload>
+              </div> -->
+              <div class="photo-upload" style="text-align: left">
+                <label class="left-label-photo-upload">{{'MY_INFORMATION.PHOTOGRAPH'| translate}}</label>
+                <input #userphoto style="display: none" type="file" ng2FileSelect [uploader]="uploader" disableMultipart="true" />
+                <div class="photo-preview">
+                  <img [src]="filePreviewPath" width="200" *ngIf="filePreviewPath" />
+                </div>
+                <div class="photo-upload-icon" (click)="openUploadWindow()">
+                  <md-icon>file_upload</md-icon>
+                </div>
+              </div>
+            </div>
+            <div fxFlex="50">
+              <div class="form-title">{{ 'GUARDIAN_INFORMATION.TITLE' | translate }}</div>
+              <div formArrayName="parents">
+                <div *ngFor="let item of studentRegistrationForm['controls'].parents['controls'];let i=index" [formGroupName]="i">
+                  <div class="separator-guardian">
+                    <p class="pull-left">Guardian {{i+1}}</p>
+                    <p class="pull-right" *ngIf="i>0">
+                      <md-icon (click)="removeGuardian(i)" class="cursor-pointer">remove_circle_outline</md-icon>
+                    </p>
+                  </div>
+                  <md-select formControlName="relation" #relation [placeholder]="'GUARDIAN_INFORMATION.RELATIONS'| translate" class="full-width">
+                    <md-option *ngFor="let relation of relations" [value]="relation.value">
+                      {{relation.viewValue}}
+                    </md-option>
+                  </md-select>
+                  <md-input-container class="full-width">
+                    <input formControlName="familyName" maxlength="30" #familyName mdInput [placeholder]="'USERS.ADDEDITUSER.FAMILYNAME' | translate">
+                  </md-input-container>
+                  <md-input-container class="full-width">
+                    <input formControlName="name" maxlength="30" #name mdInput [placeholder]="'USERS.ADDEDITUSER.FIRSTNAME' | translate">
+                  </md-input-container>
+                  <md-input-container class="full-width">
+                    <input formControlName="profession" maxlength="30" #profession mdInput [placeholder]="'GUARDIAN_INFORMATION.PROFESSION' | translate">
+                  </md-input-container>
+                  <div>
+                    <label>{{'GUARDIAN_INFORMATION.GENDER.TITLE' | translate}}</label>
+                    <md-radio-group ng-required="true" formControlName="sex" #sex>
+                      <md-radio-button value="M">{{'GUARDIAN_INFORMATION.GENDER.MALE' | translate}}</md-radio-button>
+                      <md-radio-button value="F">{{'GUARDIAN_INFORMATION.GENDER.FEMALE' | translate}}</md-radio-button>
+                    </md-radio-group>
+                  </div>
+                  <div formGroupName="address">
+                    <md-input-container class="full-width">
+                      <input formControlName="line1" #line1 mdInput [placeholder]="'USERS.ADDRESSLINE1'| translate">
+                    </md-input-container>
+                    <md-input-container class="full-width">
+                      <input formControlName="line2" #line2 mdInput [placeholder]="'USERS.ADDRESSLINE2'| translate">
+                    </md-input-container>
+                    <md-input-container class="full-width">
+                      <input formControlName="postalCode" #postalCode mdInput [placeholder]="'USERS.ZIPCODE'| translate">
+                    </md-input-container>
+                    <md-input-container class="full-width">
+                      <input formControlName="city" #city mdInput [placeholder]="'USERS.CITY'| translate">
+                    </md-input-container>
+                    <md-input-container class="full-width">
+                      <input formControlName="country" #country mdInput [placeholder]="'USERS.COUNTRY'| translate">
+                    </md-input-container>
+                  </div>
+                  <md-input-container class="full-width">
+                    <input formControlName="telePhone" #telePhone mdInput [placeholder]="'USERS.ADDEDITUSER.TELEPHONE'| translate">
+                  </md-input-container>
+                  <md-input-container class="full-width">
+                    <input formControlName="email" #email mdInput [placeholder]="'USERS.ADDEDITUSER.EMAIL'| translate">
+                  </md-input-container>
+                </div>
+              </div>
+              <div class="text-right">
+                <button type="button" md-button md-raised-button color="primary" (click)="addGuardian(guardianNumber)">{{'GUARDIAN_INFORMATION.ADD_PARENT'| translate}}</button>
+              </div>
+            </div>
+          </div>
+        </md-card-content>
+      </md-card>
+    </div>
+  </div>
+  <div class="mr-24 text-right">
+    <button md-button md-raised-button color="primary" type="submit">{{'USERS.ADDEDITUSER.SUBMIT'| translate}}</button>
+  </div>
+</form>

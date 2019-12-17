@@ -1,0 +1,14 @@
+<div style="text-align: center">
+  <h2>{{'ADDTEXT' | translate}}</h2>
+  <br>
+  <md-card>
+    <form [formGroup]="form">
+      <quill-editor #editor formControlName="editor"></quill-editor>
+    </form>
+  </md-card>
+  <br>
+  <div style="float: right;">
+    <button md-raised-button color="primary" (click)="closeDialog()">{{'CLOSE' | translate}}</button>
+    <button md-raised-button color="accent" (click)="register()" name="single-click">{{'SUBMIT' | translate}}</button>
+  </div>
+</div>

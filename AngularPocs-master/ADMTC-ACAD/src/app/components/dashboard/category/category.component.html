@@ -1,0 +1,249 @@
+<div *ngIf="showEdit && checkFolderPermission(category.title,'view')">
+  <md-card>
+    <md-card-content>
+      <div fxLayout="row wrap" fxLayoutAlign="start start">
+        <div fxFlex>
+          <b class="text-lg"> {{ category.title }}</b>
+          <ul class="document-list" *ngIf="category.documents?.length > 0">
+
+            <li>
+              <a (click)="expandedFields.documents = !expandedFields.documents">
+                <i class="fa" [ngClass]="expandedFields.documents ? 'fa-caret-down': 'fa-caret-right'"></i>
+                <md-icon style="vertical-align: middle;">library_books</md-icon>
+                Documents
+              </a>
+              <ul class="document-list" *ngIf="expandedFields.documents">
+                <li *ngFor="let document of getSortedDocuments(category.documents); index as i;">
+                  <a (click)="openDocumentDetails(document, category)">
+                    <md-icon style="vertical-align: middle;">insert_drive_file</md-icon>
+                    {{document.name}}
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="sub-category-list">
+            <app-category [parent]="getParentObject()" *ngFor="let subCat of category.subCategories; index as i" [category]="subCat"
+              [index]="i" [parentFolderName]="parentFolderName"></app-category>
+          </ul>
+          <ul class="test-list" *ngIf="category.tests?.length > 0">
+            <li>
+              <a (click)="expandedFields.tests = !expandedFields.tests">
+                <i class="fa" [ngClass]="expandedFields.tests ? 'fa-caret-down': 'fa-caret-right'"></i>
+                <md-icon style="vertical-align: middle;">toc</md-icon>
+                {{'TEST.TESTS' | translate}}
+              </a>
+              <ul class="test-list" *ngIf="expandedFields.tests">
+                <ng-template ngFor let-test [ngForOf]="getPublishedTestsIfAcadDir(category.tests, '')" let-i="index">
+                  <li>
+                    <a (click)="expandedFields.testDoc[i] = !expandedFields.testDoc[i]" [ngClass]="{'test-incomplete' : test.incompleteCreation}">
+                      <i class="fa" [ngClass]="expandedFields.testDoc[i] ? 'fa-caret-down': 'fa-caret-right'"></i>
+                      <span *ngIf="parentFolderName === '06. EPREUVES DE LA CERTIFICATION' ">
+                        <md-icon style="vertical-align: middle;">format_align_justify</md-icon>
+                      </span>
+                      <span *ngIf="parentFolderName !== '06. EPREUVES DE LA CERTIFICATION' ">
+                        <md-icon style="vertical-align: middle;">format_align_justify</md-icon>
+                      </span>
+                      {{test.name}}
+                    </a>
+                    <ul class="test-list" *ngIf="expandedFields.testDoc[i]">
+                      <li>
+                        <!-- <a *ngIf="checkIsRetakeMode(test)" (click)="openTestDetails(test)" [ngClass]="{'test-incomplete' : test.incompleteCreation,'textYellow':checkIsRetakeMode(test)}">
+                              <md-icon style="vertical-align: middle;">*</md-icon>
+                              {{test.name}}
+                            </a> -->
+                        <a (click)="openTestDetails(test)" [ngClass]="{'test-incomplete' : test.incompleteCreation}">
+                          <md-icon style="vertical-align: middle;">mode_edit</md-icon>
+                          {{test.name}}
+                        </a>
+                      </li>
+                      <li *ngFor="let doc of test.documents; index as i" [hidden]="acadService.checkToDisplayDocForSchoolUser(doc)">
+                        <a (click)="openDocumentDetails(doc, category)">
+                          <md-icon style="vertical-align: middle;">description</md-icon>
+                          {{doc.name}}
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ng-template>
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <button md-mini-fab color="accent" (click)="manageThisCategory()" *ngIf="user.entity.type === 'admtc' && checkFolderPermission(category.title,'update')">
+          <md-icon>edit</md-icon>
+        </button>
+      </div>
+    </md-card-content>
+  </md-card>
+</div>
+<ng-template [ngIf]="!showEdit && !selectItem && showSchool">
+  <li>
+    <a (click)="getStudentsCount(category, parentFolderName)">
+      <i class="fa" [ngClass]="expandedFields.category ? 'fa-caret-down': 'fa-caret-right'"></i>
+      <md-icon style="vertical-align: middle;">folder</md-icon>
+      {{category.title}}
+    </a>
+    <div *ngIf="expandedFields.category">
+      <!-- 06. Folder Documents -->
+      <ul *ngIf="category.documents?.length > 0 && parentFolderName === '06. EPREUVES DE LA CERTIFICATION' && getDocumentsLengthBasedOnDocumentType(category.documents) > 0"
+        class="document-list">
+        <li>
+          <a (click)="expandedFields.documents = !expandedFields.documents" (contextmenu)="onRightClickToDownloadAllDocs($event)">
+            <i class="fa" [ngClass]="expandedFields.documents ? 'fa-caret-down': 'fa-caret-right'"></i>
+            <md-icon style="vertical-align: middle;">library_books</md-icon>
+            Documents
+            <button md-icon-button md-button-sm md-raised-button class="grid-button" [ngClass]="getDocumentsLengthBasedOnDocumentType(category.documents) === category?.numberOfStudentsOrGroups ? 'gray-count-badge' : 'red-count-badge'"
+              *ngIf="category?.documents && category?.numberOfStudentsOrGroups > -1">
+              <span>{{category.documents.length > 0 ? getDocumentsLengthBasedOnDocumentType(category.documents) : 0}} {{'/'}} {{category?.numberOfStudentsOrGroups}}</span>
+            </button>
+          </a>
+          <!-- When Right Clicking on "Documents" inside "06. EPREUVES DE LA CERTIFICATION" folder => below given menu will be opened -->
+          <md-menu #contextMenu="mdMenu" [mdMenuTriggerFor]="contextMenu" [ngStyle]="{'padding': trigger?.menuOpen ? '150px' : '0px'}">
+            <button md-menu-item (click)="downloadAllDocs(category._id)">{{'DOCUMENT.DOWNLOAD_ALL' | translate}}</button>
+          </md-menu>
+          <ul class="document-list" *ngIf="expandedFields.documents">
+            <li *ngFor="let document of sortDocsBasedOnStudentLastName(category?.documents); index as i">
+
+              <a (click)="openDocumentDetails(document, category)" *ngIf="document.documentType === 'documentExpected'">
+                <md-icon style="vertical-align: middle;">insert_drive_file</md-icon>
+                <span *ngIf="document?.uploadedForStudent">{{document?.uploadedForStudent?.lastName + ' ' + document?.uploadedForStudent?.firstName + ' ' + document?.parentTest?.expectedDocuments[0]?.documentName}}</span>
+                <span *ngIf="document?.uploadedForOtherUser">{{document?.uploadedForOtherUser?.lastName + ' ' + document?.uploadedForOtherUser?.firstName + ' ' + document?.parentTest?.expectedDocuments[0]?.documentName}}</span>
+                <span *ngIf="document?.uploadedForGroup">{{document?.uploadedForGroup?.name + ' ' + document?.parentTest?.expectedDocuments[0]?.documentName}}</span>
+                <span *ngIf="!document?.uploadedForStudent && !document?.uploadedForOtherUser && !document?.uploadedForGroup">
+                  {{document.name}} {{ document.schoolShortName ? document.schoolShortName : '' }}
+                </span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <!-- 06. Folder Documents Ends Here-->
+
+      <!-- Documenst For Folder Other Than 06. Folder -->
+      <ul *ngIf="category.documents?.length > 0 && parentFolderName !== '06. EPREUVES DE LA CERTIFICATION'" class="document-list">
+        <li>
+          <a (click)="expandedFields.documents = !expandedFields.documents">
+            <i class="fa" [ngClass]="expandedFields.documents ? 'fa-caret-down': 'fa-caret-right'"></i>
+            <md-icon style="vertical-align: middle;">library_books</md-icon>
+            Documents
+          </a>
+          <ul class="document-list" *ngIf="expandedFields.documents">
+            <li *ngFor="let document of getSortedDocuments(category.documents); index as i">
+              <a (click)="openDocumentDetails(document, category)">
+                <md-icon style="vertical-align: middle;">insert_drive_file</md-icon>
+                {{document.name}}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <!-- Documenst For Folder Other Than 06. Folder Ends Here -->
+
+      <ul class="sub-category-list">
+        <app-category [parent]="getParentObject()" *ngFor="let subCat of category.subCategories; index as i" [index]="i" [category]="subCat"
+          [parentFolderName]="parentFolderName"></app-category>
+      </ul>
+      <ul class="test-list" *ngIf="category.tests?.length > 0">
+        <li>
+          <a (click)="expandedFields.tests = !expandedFields.tests" *ngIf="parentFolderName !== '06. EPREUVES DE LA CERTIFICATION'">
+            <!-- Show Tests If not 06. Folder -->
+            <i class="fa" [ngClass]="expandedFields.tests ? 'fa-caret-down': 'fa-caret-right'"></i>
+            <md-icon style="vertical-align: middle;">toc</md-icon>
+            <span>
+              {{'TEST.TESTS' | translate}}
+            </span>
+          </a>
+
+          <a (click)="expandedFields.tests = !expandedFields.tests" *ngIf="parentFolderName === '06. EPREUVES DE LA CERTIFICATION'">
+            <!-- Show Results If 06. Folder -->
+            <i class="fa" [ngClass]="expandedFields.tests ? 'fa-caret-down': 'fa-caret-right'"></i>
+            <md-icon style="vertical-align: middle;">toc</md-icon>
+            <span>
+              {{'Results' | translate}}
+            </span>
+          </a>
+
+          <ul class="test-list" *ngIf="expandedFields.tests">
+            <ng-template ngFor let-test [ngForOf]="getPublishedTestsIfAcadDir(category?.tests, parentFolderName)" let-i="index">
+              <li>
+                <a (click)="expandedFields.testDoc = !expandedFields.testDoc" [ngClass]="{'test-incomplete' : test.incompleteCreation}">
+                  <i class="fa" [ngClass]="expandedFields.testDoc ? 'fa-caret-down': 'fa-caret-right'"></i>
+                  <span *ngIf="parentFolderName === '06. EPREUVES DE LA CERTIFICATION' ">
+                    <md-icon style="vertical-align: middle;">format_align_justify</md-icon>
+                  </span>
+                  <span *ngIf="parentFolderName !== '06. EPREUVES DE LA CERTIFICATION' ">
+                    <md-icon style="vertical-align: middle;">format_align_justify</md-icon>
+                  </span>
+
+                  {{test.name}}
+                </a>
+                <ul class="test-list" *ngIf="expandedFields.testDoc">
+                  <li>
+                    <!-- <a *ngIf="checkIsRetakeMode(test)" (click)="openTestDetails(test)" [ngClass]="{'test-incomplete' : test.incompleteCreation,'textYellow':checkIsRetakeMode(test)}">
+                          <md-icon style="vertical-align: middle;">*</md-icon>
+                          {{test.name}}
+                        </a> -->
+                    <a (click)="openTestDetails(test)" [ngClass]="{'test-incomplete' : test.incompleteCreation}">
+                      <md-icon style="vertical-align: middle;">mode_edit</md-icon>
+                      {{test.name}}
+                    </a>
+                  </li>
+                  <li *ngFor="let doc of test.documents; index as i" [hidden]="acadService.checkToDisplayDocForSchoolUser(doc)">
+                    <a (click)="openDocumentDetails(doc, category, test)">
+                      <md-icon style="vertical-align: middle;">description</md-icon>
+                      {{doc.name}}
+                    </a>
+                  </li>
+
+                  <li *ngFor="let docUnderResult of getDocumentsUnderResult(category?.documents); index as i">
+                    <a (click)="openDocumentDetails(docUnderResult, category, test)">
+                      <md-icon *ngIf="docUnderResult?.uploadedForStudent || docUnderResult?.uploadedForGroup" style="vertical-align: middle;">description</md-icon>
+                      <span *ngIf="docUnderResult?.uploadedForStudent">{{docUnderResult?.uploadedForStudent?.lastName + ' ' + docUnderResult?.uploadedForStudent?.firstName}}</span>
+                      <!-- AA-3136
+[RNCP Title] [Acad Kit] Replace the name of PDF result for Group test in Academic Kit to EN: Result for all groups and FR: Résultats des groupes -->
+
+                      <!-- <span *ngIf="docUnderResult?.uploadedForGroup">{{docUnderResult?.uploadedForGroup?.name}}</span> -->
+                      <span *ngIf="docUnderResult?.uploadedForGroup">{{'SETTINGS.USERTYPES.PDFResultForGroupTest' | translate}}</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ng-template>
+
+          </ul>
+        </li>
+      </ul>
+
+      <ul class="test-list" *ngIf="category.tests?.length > 0 && parentFolderName === '06. EPREUVES DE LA CERTIFICATION'">
+        <li *ngFor="let test of category.tests; index as i">
+          <ng-template [ngIf]="test.groupTest">
+            <a (click)="test.groupTest ? redirectToCreateGroupsUI(test, category?.parentCategory) : ''">
+              <i class="fa" [ngClass]="'fa-caret-down'" style="visibility: hidden;"></i>
+              <md-icon style="vertical-align: middle;  margin-right: 0.35rem;">group</md-icon>
+              <span *ngIf="parentFolderName === '06. EPREUVES DE LA CERTIFICATION' ">
+                {{'Groups'}}
+              </span>
+            </a>
+          </ng-template>
+        </li>
+      </ul>
+
+    </div>
+  </li>
+</ng-template>
+<ng-template [ngIf]="selectItem">
+  <li *ngIf="!hidden">
+    <a (click)="selectCategory(category)" [ngClass]="{'selected': selected}">
+      <i class="fa" [ngClass]="expandedFields.category ? 'fa-caret-down': 'fa-caret-right'"></i>
+      <md-icon style="vertical-align: middle;">folder</md-icon>
+      {{category.title}}
+    </a>
+    <div *ngIf="expandedFields.category">
+      <ul class="sub-category-list">
+        <app-category [parent]="getParentObject()" *ngFor="let subCat of category.subCategories; index as i" [index]="i" [category]="subCat"
+          [selectItem]="true" [parentFolderName]="parentFolderName"></app-category>
+      </ul>
+    </div>
+  </li>
+</ng-template>

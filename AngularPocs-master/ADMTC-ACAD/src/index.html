@@ -1,0 +1,127 @@
+﻿<!doctype html>
+<html>
+
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADMTC - ACADEMIC</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="assets/vendor/pace/themes/green/pace-theme-flash.css" />
+  <link rel="stylesheet" href="assets/vendor/pace/themes/green/pace-theme-flash.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700|Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="assets/styles/style.css">
+  <link rel="stylesheet" href="assets/styles/ng2-select.css"> -->
+  <!--<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700|Material+Icons" rel="stylesheet">-->
+  <script src="https://cdn.ckeditor.com/4.5.11/full/ckeditor.js"></script>
+  <style type="text/css">
+    .pace .pace-activity {
+      top: 70px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: none;
+    }
+
+    .loading::before,
+    .loading::after {
+      position: fixed;
+      z-index: 3000;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .loading::before {
+      content: '';
+      background-color: #fff;
+    }
+
+    .loading::after {
+      font-family: "Helvetica Neue", Helvetica, sans-serif;
+      content: url(./assets/images/logo.png);
+      text-align: center;
+      white-space: pre;
+      font-weight: normal;
+      font-size: 24px;
+      letter-spacing: 0.04rem;
+      color: #000;
+      opacity: 0.95;
+      animation: animation 1s alternate infinite;
+    }
+
+    @keyframes animation {
+      to {
+        opacity: 0.2;
+      }
+    }
+
+  </style>
+  <script type="text/javascript">
+    window.paceOptions = {
+      document: true,
+      eventLag: true,
+      restartOnPushState: true,
+      restartOnRequestAfter: true,
+      ajax: {
+        trackMethods: ['POST', 'GET', 'DELETE', 'PUT', 'OPTIONS']
+      }
+    };
+
+  </script>
+  <script src="assets/vendor/pace/pace.js"></script>
+  <script type="text/javascript">
+      Pace.on('start', function () {
+        buttonsTemp = [];
+        var buttons = [].slice.call(document.getElementsByTagName('button'));
+        var count = 0;
+        for (const b of buttons) {
+          if (!b.disabled && b.name === 'single-click') {
+            count ++;
+            b.disabled = true;
+            b.id = count;
+            buttonsTemp.push(b);
+          }
+        }
+      });
+  
+      Pace.on('done', function () {
+        var buttons = [].slice.call(document.getElementsByTagName('button'));
+        for (const b of buttons) {
+          if (b.id && b.name === 'single-click') {
+            b.disabled = false;
+          }
+        }
+      });
+    </script>
+</head>
+
+<body id="body">
+  <app-root>
+    <div class="loading"></div>
+  </app-root>
+
+  <!-- <script src="//cdn.trackduck.com/toolbar/prod/td.js" async data-trackduck-id="594241d7245d8e4810d2f1aa"></script> -->
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+      var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+      (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src='https://embed.tawk.to/5869b75d7418a41587c73738/1b5em9j61';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
+      })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+
+</html>

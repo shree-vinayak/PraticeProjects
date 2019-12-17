@@ -1,0 +1,53 @@
+.document-list, .test-list, .sub-category-list {
+  list-style: none;
+  padding-left: 2rem;
+  margin: auto;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  md-icon {
+    margin-right: 0.5rem;
+  }
+}
+li a {
+  transition: color .02s, font-size .02s;
+}
+li a:hover {
+  font-size: 0.88rem;
+  color: #ffd740;
+}
+li.root-category {
+  list-style: none;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+li a.selected {
+  font-size: 1rem;
+  color: #ffd740;
+}
+.test-incomplete {
+  color: red;
+}
+
+.cdk-overlay-pane {
+  padding-left: 150px !important;
+}
+
+.gray-count-badge {
+  width:50px;
+  height:34px;
+  background-color: #607d8b;
+  vertical-align:middle;
+  line-height:1;
+}
+
+.red-count-badge {
+  width:50px;
+  height:34px;
+  background-color: #f44336;
+  vertical-align:middle;
+  line-height:1;
+}
+
+.textYellow{
+  color: #ffd740 !important;
+}
+

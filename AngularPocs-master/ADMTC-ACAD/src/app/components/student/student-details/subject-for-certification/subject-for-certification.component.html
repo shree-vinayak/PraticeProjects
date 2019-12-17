@@ -1,0 +1,89 @@
+<div class="category-list">
+  <!-- <app-category (updateKit)="updateCurrentKit()" *ngFor="let category of academicKit?.categories | orderBy: 'title'; index as i" [category]="category" [showEdit]="true"
+    [index]="i" (manageCategory)="manageCategory($event)"></app-category> -->
+  <md-card>
+    <md-card-content>
+      <div fxLayout="row wrap" fxLayoutAlign="start start">
+        <div fxFlex>
+
+            <ul class="document-list">
+                <li *ngFor="let subject of subjects; index as i;">
+                    <a (click)="subject.sub = !subject.sub">
+                        <i class="fa" [ngClass]="subject.sub ? 'fa-caret-down': 'fa-caret-right'"></i>
+                        <md-icon style="vertical-align: middle;">folder</md-icon>
+                        {{subject.subjectName}}
+                    </a>
+                    <ul class="document-list" *ngIf="subject.sub">
+                        <li *ngFor="let test of subject.tests; index as i;">
+                            <a (click)="test.test = !test.test">
+                                <i class="fa" [ngClass]="test.test ? 'fa-caret-down': 'fa-caret-right'"></i>
+                                <md-icon style="vertical-align: middle;">folder</md-icon>
+                                {{test.testName}}
+                            </a>
+                            <ul class="document-list" *ngIf="test.test">
+                                <li *ngIf="getExpectedDocuments(test.documents).length > 0">
+                                    <a (click)="test.document = !test.document">
+                                        <i class="fa" [ngClass]="test.document ? 'fa-caret-down': 'fa-caret-right'"></i>
+                                        <md-icon style="vertical-align: middle;">library_books</md-icon>
+                                        Documents
+                                    </a>
+                                    <ul class="document-list" *ngIf="test.document">
+                                        <li *ngFor="let document of getExpectedDocuments(test.documents); index as i;">
+                                            <a (click)="openDocumentDetails(document)">
+                                                <md-icon style="vertical-align: middle;">insert_drive_file</md-icon>
+                                                <span *ngIf="document?.uploadedForStudent">{{document?.uploadedForStudent?.lastName + ' ' + document?.uploadedForStudent?.firstName + ' ' + document?.parentTest?.expectedDocuments[0]?.documentName}}</span>
+                                                <span *ngIf="document?.uploadedForGroup">{{document?.uploadedForGroup?.name + ' ' + document?.parentTest?.expectedDocuments[0]?.documentName}}</span>
+                                            </a>
+
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a (click)="test.result = !test.result">
+                                        <i class="fa" [ngClass]="test.result ? 'fa-caret-down': 'fa-caret-right'"></i>
+                                        <md-icon style="vertical-align: middle;">toc</md-icon>
+                                        {{'Results' | translate}}
+                                    </a>
+                                    <!-- <ul class="document-list" *ngIf="test.result">
+                                        <li>
+                                            <a (click)="openTestDetails(test)">
+                                                {{test.testName}}</a>
+                                        </li>
+                                    </ul> -->
+                                    <ul class="document-list" *ngIf="test.result">
+                                        <li *ngFor="let doc of getDocumentsUnderResult(test?.documents); index as i">
+                                            <a (click)="openDocumentDetails(doc, test)">
+                                              <md-icon style="vertical-align: middle;">description</md-icon>
+                                              <span *ngIf="doc?.uploadedForStudent">{{doc?.uploadedForStudent?.lastName + ' ' + doc?.uploadedForStudent?.firstName}}</span>
+                                              <span *ngIf="doc?.uploadedForGroup">{{doc?.uploadedForGroup?.name}}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+          <!-- <ul class="document-list">
+            <li>
+              <a (click)="expandedFields.documents = !expandedFields.documents">
+                <i class="fa" [ngClass]="expandedFields.documents ? 'fa-caret-down': 'fa-caret-right'"></i>
+                <md-icon style="vertical-align: middle;">library_books</md-icon>
+                Documents
+              </a>
+              <ul class="document-list" *ngIf="expandedFields.documents">
+                <li *ngFor="let document of documents; index as i;">
+                  <a (click)="openDocumentDetails(document?.name, document?.fieName, document?.filePath)">
+                    <md-icon style="vertical-align: middle;">insert_drive_file</md-icon>
+                    {{document.name}}</a>
+                </li>
+              </ul>
+            </li>
+          </ul> -->
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>
+</div>

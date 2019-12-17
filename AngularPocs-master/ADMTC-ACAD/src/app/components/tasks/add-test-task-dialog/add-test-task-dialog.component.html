@@ -1,0 +1,71 @@
+<div id="frmAddTask" style="max-height:570px;">
+
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="92" fxFlex.lt-md="92" style="padding-left: 2.5%; margin-bottom: 20px;">
+                <span style="float: left"><svg style="width:30x;height:30px" viewBox="0 0 24 24">
+                    <path fill="#000000"
+                        d="M19,19H5V5H15V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V11H19M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z" />
+                </svg> </span>
+                <h5 style="float: left; transform: translateY(-5px);"> 
+                    {{'TASK.ADDTESTTASK' | translate}}
+            </h5>
+        </div>
+        <div fxFlex="8" fxFlex.lt-md="8" style="margin-bottom: 20px; align-self: center;">
+            <i class="material-icons" (click)="closeDialog(false)">close</i>
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100" style="margin-bottom: 20px;">
+            <div class="px-1 select-input-container">
+                <ng-select fxFlex="100" [(ngModel)]="selectedRNCP" (data)="ChangeRNCPTitle($event)" [multiple]="false" [items]="RNCPTitles" placeholder="{{ 'TASK.ADDEDITTASK.RNCPTITLE' | translate }}"></ng-select>
+            </div>
+            <!-- <small style="margin-left: 15px;" class="mat-text-warn"> {{'STUDENT.SELECTRNCPTITLE.validation1' | translate}}</small> -->
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100" style="margin-bottom: 20px;">
+            <div class="px-1 select-input-container">
+                <ng-select [disabled]="selectedRNCP.length < 1" fxFlex="100" [(ngModel)]="selectedClass" (data)="ChangeClass($event)" [multiple]="false" [items]="Classes" placeholder="{{ 'TOOLS_DOCTEST.Class' | translate }}*"></ng-select>
+            </div>
+            <!-- <small style="margin-left: 15px;" class="mat-text-warn"> {{'STUDENT.SELECTRNCPTITLE.validation1' | translate}}</small> -->
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100" style="margin-bottom: 20px;">
+            <div class="px-1 select-input-container">
+                <ng-select [disabled]="selectedClass.length < 1" fxFlex="100" [(ngModel)]="selectedTest" (data)="ChangeTest($event)" [multiple]="false" [items]="Tests" placeholder="{{ 'TOOLS_DOCTEST.Test' | translate }}*"></ng-select>
+            </div>
+            <!-- <small style="margin-left: 15px;" class="mat-text-warn"> {{'STUDENT.SELECTRNCPTITLE.validation1' | translate}}</small> -->
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100" style="margin-bottom: 20px;">
+            <div class="px-1 select-input-container">
+                <ng-select fxFlex="100" [disabled]="selectedTest.length < 1" [(ngModel)]="selectedTask" (data)="ChangeTask($event)" [multiple]="false" [items]="Tasks" placeholder="{{ 'TASKS' | translate }}*"></ng-select>
+            </div>
+            <!-- <small style="margin-left: 15px;" class="mat-text-warn"> {{'STUDENT.SELECTRNCPTITLE.validation1' | translate}}</small> -->
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" fxFlex.lt-md="100" style="margin-bottom: 20px;">
+                <div class="px-1 select-input-container">
+                    <ng-select fxFlex="100" [disabled]="selectedTask.length < 1" [(ngModel)]="selectedUser" (data)="ChangeUser($event)" [multiple]="true" [items]="Users" placeholder="{{ 'USERS.USERS' | translate }}*"></ng-select>
+                </div>
+                <!-- <small style="margin-left: 15px;" class="mat-text-warn"> {{'STUDENT.SELECTRNCPTITLE.validation1' | translate}}</small> -->
+            </div>
+    </div>    
+    
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="56.8" fxFlex.lt-md="56.8"></div>
+        <div fxFlex="43.2" fxFlex.lt-md="43.2">
+            <button md-raised-button color="warn" type="button" (click)="closeDialog(false)">{{'CANCEL' | translate}}</button>
+            <button md-raised-button color="primary" (click)="createManualTestTask()">{{'USERS.ADDEDITUSER.SUBMIT' | translate}}</button>
+        </div>
+    </div>  
+
+  </div>

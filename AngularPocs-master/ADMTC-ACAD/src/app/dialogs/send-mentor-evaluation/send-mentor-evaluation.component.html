@@ -1,0 +1,946 @@
+<div fxLayout="column wrap" fxLayoutAlign="start" style="width: 100%; height: 100%;">
+    <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px;">
+        <div class="pa-1">
+            <div fxLayout="row wrap" fxLayoutAlign="start center">
+                <div fxFlex>
+                    <md-icon class="middle">receipt</md-icon>
+                    <span class="text-xl">{{'MENTOREVALUATION.TITLE' | translate}}</span>
+                </div>
+                <i style="font-size: 30px;margin-right: 20px;cursor: pointer; color: #ffd740;" (click)="downloadPDF()" class="fa fa-file-pdf-o"></i>
+                <i style="font-size: 30px;margin-right: 20px;cursor: pointer; color: #4caf50;" (click)="print()" class="fa fa-print"></i>
+                <button md-icon-button (click)="closeDialog()">
+          <md-icon>close</md-icon>
+        </button>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <md-tab-group fxFlex headerPosition="center" class="mb-1 send-mentor" md-stretch-tabs style="min-height: 300px">
+        <md-tab [label]="'TEST.IDENTITY' | translate">
+            <div fxFlex.gt-sm="100%" fxFlex="100">
+                <form [formGroup]="questionnaireForm">
+                    <md-card>
+                        <md-card-content>
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="50" fxFlex.lt-md="50">
+                                    <div class="px-1 select-input-container">
+                                        <md-input-container dividerColor="accent" style="width: 99%">
+                                            <input mdInput type="text" [formControl]="questionnaireForm.controls['date']" [mdDatepicker]="evaluationdate" [placeholder]="'MENTOREVALUATION.SELECTDATEOFEVALUATION.title' | translate">
+                                            <button mdSuffix [mdDatepickerToggle]="evaluationdate" class="white-datepicker-button" style="background-color: grey !important;"></button>
+                                        </md-input-container>
+                                        <md-datepicker #evaluationdate [touchUi]="true"></md-datepicker>
+                                        <small *ngIf="questionnaireForm.controls['date'].hasError('required') && (questionnaireForm.controls['date'].touched || formSubmit)" class="mat-text-warn"> {{'MENTOREVALUATION.SELECTDATEOFEVALUATION.validation1' | translate}}</small>
+                                    </div>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-md="50">
+                                    <!-- <div class="px-1 select-input-container"> -->
+                                    <!-- <md-select (change)="changeQuestionnaire($event)" [formControl]="questionnaireForm.controls['questionnaire']" color="accent" style="width: 100%" [placeholder]="'MENTOREVALUATION.SELECTQUESTIONNAIRE.title' | translate">
+                                            <md-option *ngFor="let questionnaire of questionnaires" [value]="questionnaire._id">
+                                                {{ questionnaire.questionnaireName}}
+                                            </md-option>
+                                        </md-select> -->
+                                    <!--
+                                        <md-input-container dividerColor="accent" style="width: 100%">
+                                            <input type="text" [(ngModel)]="questionareSearchString" (keyup)="changeQuestionnaire($event)" color="accent" style="width: 100%" [formControl]="questionnaireForm.controls['questionnaire']" placeholder="{{'MENTOREVALUATION.SELECTQUESTIONNAIRE.title' | translate}}"
+                                                mdInput [mdAutocomplete]="autoQuestionnaire">
+                                            <md-autocomplete #autoQuestionnaire="mdAutocomplete">
+                                                <md-option *ngFor="let questionnaire of filteredQuestionare; let i = index" [value]="questionnaire.questionnaireName">
+                                                    {{ questionnaire.questionnaireName }}
+                                                </md-option>
+                                            </md-autocomplete>
+                                        </md-input-container>
+
+                                        <small *ngIf="questionnaireForm.controls['questionnaire'].hasError('required') && (questionnaireForm.controls['questionnaire'].touched || formSubmit)" class="mat-text-warn"> {{'MENTOREVALUATION.SELECTQUESTIONNAIRE.validation1' | translate}}</small> -->
+                                    <!-- </div> -->
+
+                                    <md-input-container dividerColor="accent" style="width: 92%;margin-top: 8px;padding-right: 1em right !important;padding-right: 1rem !important;padding-left: 1rem !important;">
+                                        <input type="text" [(ngModel)]="questionareSearchString"  (keyup)="changeQuestionnaire($event)" color="accent" style="width: 100%" placeholder="{{'MENTOREVALUATION.SELECTQUESTIONNAIRE.title' | translate}}" mdInput [mdAutocomplete]="autoQuestionnaire" [ngModelOptions]="{standalone: true}">
+                                        <md-autocomplete #autoQuestionnaire="mdAutocomplete">
+                                            <md-option *ngFor="let questionnaire of filteredQuestionare; let i = index" (click)="onSelectQuestionare(questionnaire)" [value]="questionnaire.questionnaireName"  (onSelectionChange)="changeQuestionnaireData(questionnaire)">
+                                                {{ questionnaire.questionnaireName }}
+                                            </md-option>
+                                        </md-autocomplete>
+                                    </md-input-container>
+
+                                    <small *ngIf="questionnaireForm.controls['questionnaire'].hasError('required') && (questionnaireForm.controls['questionnaire'].touched || formSubmit)" class="mat-text-warn"> {{'MENTOREVALUATION.SELECTQUESTIONNAIRE.validation1' | translate}}</small>
+
+
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="50" fxFlex.lt-md="50">
+                                    <div class="px-1 select-input-container">
+                                        <!-- <md-select (change)="changeMailTemplate($event)" [formControl]="questionnaireForm.controls['template']" color="accent" style="width: 100%" [placeholder]="'MENTOREVALUATION.SELECTMAILTEMPATE.title' | translate">
+                                            <md-option *ngFor="let template of mailTemplateList" [value]="template._id">
+                                                {{ template.name }}
+                                            </md-option>
+                                        </md-select> -->
+
+                                        <!-- <md-input-container dividerColor="accent" style="width: 100%">
+                                            <input type="text" [(ngModel)]="mailTemplateSearchString" (keyup)="changeMailTemplate($event)" color="accent" style="width: 100%" [formControl]="questionnaireForm.controls['template']" placeholder="{{'MENTOREVALUATION.SELECTMAILTEMPATE.title' | translate}}"
+                                                mdInput [mdAutocomplete]="autoMailTemplate">
+                                            <md-autocomplete #autoMailTemplate="mdAutocomplete">
+                                                <md-option *ngFor="let template of filteredMailTemplete; let i = index" [value]="template.name">
+                                                    {{ template.name }}
+                                                </md-option>
+                                            </md-autocomplete>
+                                        </md-input-container>
+
+                                        <small *ngIf="questionnaireForm.controls['template'].hasError('required') && (questionnaireForm.controls['template'].touched || formSubmit)" class="mat-text-warn"> {{'MENTOREVALUATION.SELECTMAILTEMPATE.validation1' | translate}}</small> -->
+
+                                        <!-- <md-input-container dividerColor="accent" style="width: 100%">
+                                            <input type="text" [(ngModel)]="questionareSearchString" (keyup)="changeQuestionnaire($event)" color="accent" style="width: 100%" [formControl]="questionnaireForm.controls['questionnaire']" placeholder="{{'MENTOREVALUATION.SELECTQUESTIONNAIRE.title' | translate}}"
+                                                mdInput [mdAutocomplete]="autoQuestionnaire">
+                                            <md-autocomplete #autoQuestionnaire="mdAutocomplete">
+                                                <md-option *ngFor="let questionnaire of filteredQuestionare; let i = index" [value]="questionnaire.questionnaireName">
+                                                    {{ questionnaire.questionnaireName }}
+                                                </md-option>
+                                            </md-autocomplete>
+                                        </md-input-container>
+
+                                        <small *ngIf="questionnaireForm.controls['questionnaire'].hasError('required') && (questionnaireForm.controls['questionnaire'].touched || formSubmit)" class="mat-text-warn"> {{'MENTOREVALUATION.SELECTQUESTIONNAIRE.validation1' | translate}}</small> -->
+
+                                    </div>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-md="50">
+                                    <div class="px-1 select-input-container">
+                                        <!-- <md-select (change)="changeGrid($event)" [formControl]="questionnaireForm.controls['grid']" color="accent" style="width: 100%" [placeholder]="'MENTOREVALUATION.SELCECTEVELUATIONGRID.title' | translate">
+                                            <md-option *ngFor="let grid of GridList" [value]="grid._id">
+                                                {{ grid.name }}
+                                            </md-option>
+                                        </md-select> -->
+
+                                        <!-- <md-input-container dividerColor="accent" style="width: 100%">
+                                            <input type="text" [(ngModel)]="gridSearchString" (keyup)="changeGrid($event)" color="accent" style="width: 100%" [formControl]="questionnaireForm.controls['grid']" placeholder="{{'MENTOREVALUATION.SELCECTEVELUATIONGRID.title' | translate}}" mdInput [mdAutocomplete]="autoGrid">
+                                            <md-autocomplete #autoGrid="mdAutocomplete">
+                                                <md-option *ngFor="let grid of filteredGrid; let i = index" [value]="grid._id">
+                                                    {{ grid.name}}
+                                                </md-option>
+                                            </md-autocomplete>
+                                        </md-input-container>
+
+                                        <small *ngIf="questionnaireForm.controls['grid'].hasError('required') && (questionnaireForm.controls['grid'].touched || formSubmit)" class="mat-text-warn"> {{'MENTOREVALUATION.SELCECTEVELUATIONGRID.validation1' | translate}}</small> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="50" fxFlex.lt-md="50">
+                                    <div class="px-1 select-input-container">
+                                        <!-- <md-select (change)="changeRemainderMailTemplate($event)" [formControl]="questionnaireForm.controls['remainder']" color="accent" style="width: 100%" [placeholder]="'MENTOREVALUATION.SELECTREMAIDERMAIL.title' | translate">
+                                            <md-option *ngFor="let template of mailTemplateList" [value]="template._id">
+                                                {{ template.name }}
+                                            </md-option>
+                                        </md-select> -->
+
+                                        <!-- <md-input-container dividerColor="accent" style="width: 100%">
+                                            <input type="text" [(ngModel)]="remainderMailSearchString" (keyup)="changeRemainderMailTemplate($event)" color="accent" style="width: 100%" [formControl]="questionnaireForm.controls['remainder']" placeholder="{{'MENTOREVALUATION.SELECTREMAIDERMAIL.title' | translate}}"
+                                                mdInput [mdAutocomplete]="autoRemainderMailTemplate">
+                                            <md-autocomplete #autoRemainderMailTemplate="mdAutocomplete">
+                                                <md-option *ngFor="let template of filteredmailRemainder; let i = index" [value]="template.name">
+                                                    {{ template.name }}
+                                                </md-option>
+                                            </md-autocomplete>
+                                        </md-input-container> -->
+
+
+                                        <!-- <small *ngIf="questionnaireForm.controls['remainder'].hasError('required') && (questionnaireForm.controls['remainder'].touched || formSubmit)" class="mat-text-warn"> {{'MENTOREVALUATION.SELECTREMAIDERMAIL.validation1' | translate}}</small> -->
+
+                                        <md-input-container dividerColor="accent" style="width: 99%">
+                                            <input type="text" [(ngModel)]="gridSearchString" (keyup)="changeGrid($event)" color="accent" style="width: 100%" [ngModelOptions]="{standalone: true}" placeholder="{{'MENTOREVALUATION.SELCECTEVELUATIONGRID.title' | translate}}" mdInput [mdAutocomplete]="autoGrid">
+                                            <md-autocomplete #autoGrid="mdAutocomplete">
+                                                <md-option *ngFor="let grid of filteredGrid; let i = index" (click)="onSelectGrid(grid)" [value]="grid.name">
+                                                    {{ grid.name}}
+                                                </md-option>
+                                            </md-autocomplete>
+                                        </md-input-container>
+
+                                        <small *ngIf="questionnaireForm.controls['grid'].hasError('required') && (questionnaireForm.controls['grid'].touched || formSubmit)" class="mat-text-warn"> {{'MENTOREVALUATION.SELCECTEVELUATIONGRID.validation1' | translate}}</small>
+
+                                    </div>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-md="50">
+                                    <div class="px-1">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="50" fxFlex.lt-md="50">
+
+                                    <!-- <md-card>
+                                        <md-card-content>
+                                            <label><b>{{'MENTOREVALUATION.EMAILTEMPLATE.TITLE' | translate}}</b></label>
+                                            <md-input-container style="width: 100%">
+                                                <input mdInput [formControl]="questionnaireForm.controls['subject']" [placeholder]="'MENTOREVALUATION.EMAILTEMPLATE.SUBJECT.title' | translate" />
+                                            </md-input-container>
+                                            <small *ngIf="questionnaireForm.controls['subject'].hasError('required') && (questionnaireForm.controls['subject'].touched || formSubmit)" class="mat-text-warn"> {{'MENTOREVALUATION.EMAILTEMPLATE.SUBJECT.validation1' | translate}}</small>
+                                            <quill-editor [formControl]="questionnaireForm.controls['message']"></quill-editor>
+                                        </md-card-content>
+                                    </md-card> -->
+
+                                    <div class="px-1 ">
+                                        <!-- <md-card>
+                                            <md-card-content>
+                                                <label><b>{{'MENTOREVALUATION.EVALUATIONGRID.title' | translate}}</b></label>
+                                                <div style="height: 230px;">
+                                                    <div fxLayout="row wrap" fxLayoutAlign="space-between" *ngIf="test._id">
+                                                        <div [fxFlex]="expanded ? '100' : '100'" class="document-view background-primary pa-1">
+                                                            <div fxLayout="row wrap" fxLayoutAlign="center center" class="mb-1">
+                                                                <button type="button" md-raised-button md-icon-button md-button-sm (click)="showPreviousPage()"><md-icon>chevron_left</md-icon></button>
+                                                                <div fxFlex class="text-right">
+                                                                    <span class="text-xl">Page {{visiblePage}} / {{ pages }}&nbsp;&nbsp;</span>
+                                                                </div>
+                                                                <button type="button" md-raised-button md-icon-button md-button-sm (click)="showNextPage()">
+                                                       <md-icon>chevron_right</md-icon>
+                                                     </button>
+                                                            </div>
+                                                            <div class="ql-editor document-parent">
+                                                                <div #pagesElement style="overflow: auto;">
+                                                                    <div class="document" [ngStyle]="{display: (visiblePage === 1) ? 'block' : 'none'}" [ngClass]="('orientation-' + test.correctionGrid.orientation)">
+                                                                        <div class="pa-1" style="height:93%">
+                                                                            <div class="doc-page-no" style="text-align:right;">1 / {{ pages }}</div>
+                                                                            <div class="doc-rncp-title">
+                                                                                <span>{{rncpTitle ? rncpTitle.longName : ''}}</span>
+                                                                            </div>
+                                                                            <div class="doc-header">
+                                                                                <div class="doc-header-top" [innerHtml]="test.correctionGrid.header.text | safeHtml">
+                                                                                </div>
+                                                                                <div class="doc-header-fields">
+                                                                                    <div fxLayout="row wrap" fxLayoutAlign="start center">
+                                                                                        <div class="lineme pr-1" fxFlex="50">Etablissement :</div>
+                                                                                        <div style="text-align: right;" fxFlex="50">{{test.name}}</div>
+                                                                                        <div class="lineme pr-1" fxFlex="50">Nom :</div>
+                                                                                        <div style="text-align: right;" fxFlex="50">{{rncpTitle.shortName}} - {{rncpTitle.longName}}</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="doc-header-fields" *ngIf="test.correctionGrid.header.fields.length > 0">
+                                                                                    <div fxLayout="row wrap" fxLayoutAlign="start center">
+                                                                                        <ng-template ngFor let-i="index" let-c="count" let-field [ngForOf]="test.correctionGrid.header.fields">
+                                                                                            <ng-template [ngIf]="field.dataType === 'longtext'">
+                                                                                                <div class="lineme" fxFlex="100">
+                                                                                                    {{field.value}} :
+                                                                                                </div>
+                                                                                            </ng-template>
+                                                                                            <ng-template [ngIf]="field.dataType != 'longtext' && field.align === 'left'">
+                                                                                                <div [ngClass]="{
+                                                                      'lineme': field.dataType != 'signature',
+                                                                      'signature': field.dataType === 'signature',
+                                                                      'pr-1': (field.align === 'left')
+                                                                      }" fxFlex="50">
+                                                                                                    {{field.value}} :
+                                                                                                </div>
+                                                                                                <ng-template [ngIf]="i === c-1 || test.correctionGrid.header.fields[i+1].align === 'left'">
+                                                                                                    <div fxFlex="50"></div>
+                                                                                                </ng-template>
+                                                                                            </ng-template>
+                                                                                            <ng-template [ngIf]="field.dataType != 'longtext' && field.align === 'right'">
+                                                                                                <ng-template [ngIf]="i === 0 ||
+                                                                     test.correctionGrid.header.fields[i-1].align === 'right' ||
+                                                                     test.correctionGrid.header.fields[i-1].dataType === 'longtext'">
+                                                                                                    <div fxFlex="50"></div>
+                                                                                                </ng-template>
+                                                                                                <div [ngClass]="{
+                                                                      'lineme': field.dataType != 'signature',
+                                                                      'signature': field.dataType === 'signature'
+                                                                       }" fxFlex="50">
+                                                                                                    {{field.value}} :
+                                                                                                </div>
+                                                                                            </ng-template>
+
+                                                                                        </ng-template>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="doc-group-details" *ngIf="test.groupTest">
+                                                                                <div class="group-header">
+                                                                                    {{test.correctionGrid.groupDetails.headerText}}
+                                                                                </div>
+                                                                                <table class="group-table">
+                                                                                    <tbody>
+                                                                                        <tr class="header">
+                                                                                            <th width="10%" class="text-center font-weight-bold"></th>
+                                                                                            <th class="text-center font-weight-bold">{{'TEST.NAMEOFSTUDENT' | translate }}</th>
+                                                                                        </tr>
+                                                                                        <tr *ngFor="let s of students; index as i">
+                                                                                            <td>{{i+1}}. </td>
+                                                                                            <td></td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="doc-grid">
+                                                                                <div *ngIf="test.correctionGrid.correction.showAsList">
+                                                                                    <ng-template ngFor let-section [ngForOf]="pageSectionsArray[0]">
+                                                                                        <div fxLayout="row wrap" fxFlexAlign="space-between center" class="text-lg px-1 list-header">
+                                                                                            <b fxFlex [innerHTML]="section.title"></b>
+                                                                                            <b> / {{section.maximumRating}}</b>
+                                                                                        </div>
+                                                                                        <ul class="my-1 px-1 fix-ql-ul">
+                                                                                            <li fxLayout="row wrap" *ngFor="let notation of section.subSections">
+                                                                                                <div fxFlex [innerHTML]="notation.title">
+                                                                                                </div>
+                                                                                                <span *ngIf="test.correctionGrid.correction.showNotationsMarks"> / {{notation.maximumRating}}
+                                                                     </span>
+                                                                                        </ul>
+                                                                                        <div *ngIf="test.correctionGrid.correction.commentArea" class="mb-2">
+                                                                                            <span class="text-lg"><b>{{test.correctionGrid.correction.commentsHeader}} :</b></span>
+                                                                                            <div class="comment-section"></div>
+                                                                                            <div class="comment-section"></div>
+                                                                                        </div>
+                                                                                    </ng-template>
+                                                                                </div>
+
+                                                                                <table width="100%" *ngIf="!test.correctionGrid.correction.showAsList" class="doc-table">
+                                                                                    <tbody>
+                                                                                        <ng-template ngFor let-section let-sectionIndex="index" [ngForOf]="pageSectionsArray[0]">
+                                                                                            <tr class="section">
+                                                                                                <td [width]="getTitleWidth()" [innerHTML]="section.title"></td>
+                                                                                                <td class="text-center font-weight-bold" *ngIf="test.correctionGrid.correction.showDirectionsColumn">
+                                                                                                    {{test.correctionGrid.correction.directionsColumnHeader}}
+                                                                                                </td>
+                                                                                                <td class="text-center font-weight-bold" [width]="'10%'" *ngIf="test.correctionGrid.correction.showNumberMarksColumn">
+                                                                                                    {{test.correctionGrid.correction.numberMarksColumnHeader}}
+                                                                                                </td>
+                                                                                                <td class="text-center font-weight-bold" [width]="'10%'" *ngIf="test.correctionGrid.correction.showLetterMarksColumn">
+                                                                                                    {{test.correctionGrid.correction.letterMarksColumnHeader}}
+                                                                                                </td>
+                                                                                                <td class="text-center font-weight-bold" *ngIf="test.correctionGrid.correction.commentArea">
+                                                                                                    {{test.correctionGrid.correction.commentsHeader}}
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr class="sub-section" *ngFor="let subSection of section.subSections">
+                                                                                                <td [innerHTML]="subSection.title"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showDirectionsColumn" [innerHTML]="subSection.direction"></td>
+                                                                                                <td align="right" *ngIf="test.correctionGrid.correction.showNumberMarksColumn">
+                                                                                                    <u>/ {{subSection.maximumRating}}</u>
+                                                                                                </td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showLetterMarksColumn"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.commentArea"></td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td class="no-border"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showDirectionsColumn"></td>
+                                                                                                <td align="right" *ngIf="test.correctionGrid.correction.showNumberMarksColumn">
+                                                                                                    <u>/ {{section.maximumRating}}</u>
+                                                                                                </td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showLetterMarksColumn"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.commentArea"></td>
+                                                                                            </tr>
+                                                                                        </ng-template>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                                <div *ngIf="showBottomGrid(1);then bottomGrid"></div>
+                                                                            </div>
+                                                                            <div *ngIf="showBottomGrid(1);then gridFooter"></div>
+                                                                        </div>
+                                                                        <div *ngIf="docFooterText" style="text-align: center;">{{docFooterText}}</div>
+                                                                    </div>
+                                                                    <div *ngFor="let pageArray of getArrayExceptFirst(); index as pageArrayIndex" [ngStyle]="{display: (visiblePage === pageArrayIndex + 2) ? 'block' : 'none'}" class="document" [ngClass]="('orientation-' + test.correctionGrid.orientation)">
+                                                                        <div class="pa-1" style="height: 93%;">
+                                                                            <div class="doc-page-no" style="text-align:right;">{{pageArrayIndex + 2}} / {{ pages }}</div>
+                                                                            <div class="doc-rncp-title">
+                                                                                <span>{{rncpTitle ? rncpTitle.longName : ''}}</span>
+                                                                            </div>
+                                                                            <div class="doc-grid">
+                                                                                <div *ngIf="test.correctionGrid.correction.showAsList">
+                                                                                    <ng-template ngFor let-section [ngForOf]="pageSectionsArray[pageArrayIndex + 1]">
+                                                                                        <div fxLayout="row wrap" fxFlexAlign="space-between center" class="text-lg px-1 list-header">
+                                                                                            <b fxFlex [innerHTML]="section.title"></b>
+                                                                                            <b> / {{section.maximumRating}}</b>
+                                                                                        </div>
+                                                                                        <ul class="my-1 px-1 fix-ql-ul">
+                                                                                            <li fxLayout="row wrap" *ngFor="let notation of section.subSections">
+                                                                                                <div fxFlex [innerHTML]="notation.title">
+                                                                                                </div>
+                                                                                                <span *ngIf="test.correctionGrid.correction.showNotationsMarks"> / {{notation.maximumRating}}
+                                                                     </span>
+                                                                                        </ul>
+                                                                                        <div *ngIf="test.correctionGrid.correction.commentArea" class="mb-2">
+                                                                                            <span class="text-lg"><b>{{test.correctionGrid.correction.commentsHeader}} :</b></span>
+                                                                                            <div class="comment-section"></div>
+                                                                                            <div class="comment-section"></div>
+                                                                                        </div>
+                                                                                    </ng-template>
+                                                                                </div>
+                                                                                <table width="100%" *ngIf="!test.correctionGrid.correction.showAsList" class="doc-table">
+                                                                                    <tbody>
+                                                                                        <ng-template ngFor let-section let-sectionIndex="index" [ngForOf]="pageSectionsArray[pageArrayIndex + 1]">
+                                                                                            <tr class="section">
+                                                                                                <td [width]="getTitleWidth()" [innerHTML]="section.title"></td>
+                                                                                                <td class="text-center font-weight-bold" *ngIf="test.correctionGrid.correction.showDirectionsColumn">
+                                                                                                    {{test.correctionGrid.correction.directionsColumnHeader}}
+                                                                                                </td>
+                                                                                                <td class="text-center font-weight-bold" [width]="'10%'" *ngIf="test.correctionGrid.correction.showNumberMarksColumn">
+                                                                                                    {{test.correctionGrid.correction.numberMarksColumnHeader}}
+                                                                                                </td>
+                                                                                                <td class="text-center font-weight-bold" [width]="'10%'" *ngIf="test.correctionGrid.correction.showLetterMarksColumn">
+                                                                                                    {{test.correctionGrid.correction.letterMarksColumnHeader}}
+                                                                                                </td>
+                                                                                                <td class="text-center font-weight-bold" *ngIf="test.correctionGrid.correction.commentArea">
+                                                                                                    {{test.correctionGrid.correction.commentsHeader}}
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr class="sub-section" *ngFor="let subSection of section.subSections">
+                                                                                                <td [innerHTML]="subSection.title"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showDirectionsColumn" [innerHTML]="subSection.direction"></td>
+                                                                                                <td align="right" *ngIf="test.correctionGrid.correction.showNumberMarksColumn">
+                                                                                                    <u>/ {{subSection.maximumRating}}</u>
+                                                                                                </td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showLetterMarksColumn"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.commentArea"></td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td class="no-border"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showDirectionsColumn"></td>
+                                                                                                <td align="right" *ngIf="test.correctionGrid.correction.showNumberMarksColumn">
+                                                                                                    <u>/ {{section.maximumRating}}</u>
+                                                                                                </td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showLetterMarksColumn"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.commentArea"></td>
+                                                                                            </tr>
+                                                                                        </ng-template>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                                <div *ngIf="showBottomGrid(pageArrayIndex + 2);then bottomGrid"></div>
+                                                                            </div>
+                                                                            <div *ngIf="showBottomGrid(pageArrayIndex + 2);then gridFooter"></div>
+                                                                        </div>
+                                                                        <div *ngIf="docFooterText" style="text-align: center;">{{docFooterText}}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </md-card-content>
+                                        </md-card> -->
+                                    </div>
+
+
+
+                                </div>
+
+                                <div fxFlex="50" fxFlex.lt-md="50">
+                                    <div class="px-1 ">
+                                        <md-card>
+                                            <md-card-content class="autoHeightAdjust">
+                                                <label><b>{{'MENTOREVALUATION.QUESTIONNAIRE.TITLE' | translate}}</b></label><br><br>
+                                                <div *ngIf="questionairedata.length > 0">
+
+                                                    <div *ngFor="let questionaire of questionairedata; let i = index ">
+                                                        <label>Questionnaire Name: {{ questionaire.questionnaireName }}</label>
+
+                                                        <div *ngIf="questionaire.competence.length > 0">
+
+                                                            <div *ngFor="let Comp of questionaire.competence; let j = index ">
+                                                                <label> CompetenceName:  {{ Comp.competenceName }} </label>
+
+
+
+                                                                <div *ngFor="let seg of Comp.segment; let k = index ">
+                                                                    <label> SegmentName: {{ seg.segmentName }} </label>
+
+
+                                                                    <div *ngFor="let segs of seg.question; let l = index ">
+
+                                                                        <label> {{ segs.questionName }} </label>
+                                                                        <div fxFlex="100" class="flex_3" fxFlex.lt-md="100">
+
+                                                                            <div class="px-1" *ngIf="segs.answerType == 'Numeric'">
+                                                                                <label>
+                                                                                                <b>{{l + 1}}) {{segs.questionName}}</b>
+                                                                                            </label>
+                                                                                <md-input-container dividerColor="accent" style="width: 100%">
+                                                                                    <input mdInput placeholder="Answer..." type="number" readonly>
+                                                                                </md-input-container>
+                                                                            </div>
+                                                                            <div class="px-1" *ngIf="segs.answerType == 'Date'">
+                                                                                <label>
+                                                                                                <b>{{l + 1}}) {{segs.questionName}}</b>
+                                                                                            </label>
+                                                                                <md-input-container dividerColor="accent" style="width: 100%">
+                                                                                    <input mdInput type="text" readonly [mdDatepicker]="dateOfBirth" placeholder="DD/MM/YYYY">
+                                                                                    <button mdSuffix [mdDatepickerToggle]="dateOfBirth" class="white-datepicker-button" style="background-color: grey !important;"></button>
+                                                                                </md-input-container>
+                                                                                <md-datepicker #dateOfBirth [touchUi]="false"></md-datepicker>
+                                                                            </div>
+                                                                            <div class="px-1" *ngIf="segs.answerType == 'Text'">
+                                                                                <label>
+                                                                                                <b>{{l + 1}}) {{segs.questionName}}</b>
+                                                                                            </label>
+                                                                                <md-input-container dividerColor="accent" style="width: 100%">
+                                                                                    <input mdInput placeholder="Answer..." type="text" readonly>
+                                                                                </md-input-container>
+                                                                            </div>
+                                                                            <div class="px-1" *ngIf="segs.answerType == 'SingleOption'">
+                                                                                <label>
+                                                                                                <b>{{l + 1}}) {{segs.questionName}}</b>
+                                                                                            </label>
+                                                                                <br>
+                                                                                <md-radio-group style="float:left !important;">
+                                                                                    <md-radio-button *ngFor="let option of segs.options;" ng-disabled="true" value="{{option}}" class="rdmark">{{ option | translate }}</md-radio-button>
+                                                                                </md-radio-group>
+                                                                            </div>
+                                                                            <div class="px-1" *ngIf="segs.answerType == 'MultipleOptions'" style="margin-bottom: 10px;">
+                                                                                <label>
+                                                                                                <b>{{l + 1}}) {{segs.questionName}}</b>
+                                                                                            </label>
+                                                                                <br>
+                                                                                <md-checkbox name="{{option}}" disabled class="mt-1" *ngFor="let option of segs.options;" color="accent" align="start"> {{option}}</md-checkbox>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- <div fxFlex="100" class="flex_3" fxFlex.lt-md="100" *ngFor="let questionaire of questionairedata; let i = index ">
+
+                                                    <div *ngIf="questionaire.competence.length > 0">
+
+                                                    <div fxFlex="100" class="flex_3" fxFlex.lt-md="100" *ngFor="let Comp of questionaire.competence; let j = index ">
+                                                        <label>{{ Comp[j].competenceName }}</label>
+                                                        <div *ngIf="Comp.segment.length > 0">
+                                                        <div fxFlex="100" class="flex_3" fxFlex.lt-md="100"*ngFor="let seg of Comp.segment; let k = index ">
+                                                            <label>{{ seg.segmentName }}</label>
+                                                            <div *ngIf="seg[k].question[i].length > 0">
+                                                            <div fxFlex="100" class="flex_3" fxFlex.lt-md="100"  *ngFor="let segs of seg.question; let l = index ">
+                                                                <label>{{ segs.questionName }}</label>
+                                                                <div class="px-1" *ngIf="segs.answerType == 'Numeric'">
+                                                                    <label for="{{segs.questionName}}">
+                                                                        <b>{{l + 1}}) {{segs.questionName}}</b>
+                                                                    </label>
+                                                                    <md-input-container dividerColor="accent" style="width: 100%">
+                                                                        <input mdInput placeholder="Answer..." type="number">
+                                                                    </md-input-container>
+                                                                </div>
+                                                                <div class="px-1" *ngIf="segs.answerType == 'Date'">
+                                                                    <label for="{{question.question}}">
+                                                                        <b>{{l + 1}}) {{question.question}}</b>
+                                                                    </label>
+                                                                    <md-input-container dividerColor="accent" style="width: 100%">
+                                                                        <input mdInput type="text" [mdDatepicker]="dateOfBirth" placeholder="DD/MM/YYYY">
+                                                                        <button mdSuffix [mdDatepickerToggle]="dateOfBirth" class="white-datepicker-button" style="background-color: grey !important;"></button>
+                                                                    </md-input-container>
+                                                                    <md-datepicker #dateOfBirth [touchUi]="true"></md-datepicker>
+                                                                </div>
+                                                                <div class="px-1" *ngIf="segs.answerType == 'Text'">
+                                                                    <label for="{{question[i].questionName}}">
+                                                                        <b>{{l + 1}}) {{question[i].questionName}}</b>
+                                                                    </label>
+                                                                    <md-input-container dividerColor="accent" style="width: 100%">
+                                                                        <input mdInput placeholder="Answer..." type="text">
+                                                                    </md-input-container>
+                                                                </div>
+                                                                <div class="px-1" *ngIf="segs.answerType == 'SingleOption'">
+                                                                    <label for="{{segs.questionName}}">
+                                                                        <b>{{l + 1}}) {{segs.questionName}}</b>
+                                                                    </label>
+                                                                    <br>
+                                                                    <md-radio-group style="float:left !important;">
+                                                                        <md-radio-button *ngFor="let option of question.options;" value="{{option}}" class="rdmark">{{ option | translate }}</md-radio-button>
+                                                                    </md-radio-group>
+                                                                </div>
+                                                                <div class="px-1" *ngIf="segs.answerType == 'MultipleOptions'" style="margin-bottom: 10px;">
+                                                                    <label for="{{segs.questionName}}">
+                                                                        <b>{{l + 1}}) {{segs.questionName}}</b>
+                                                                    </label>
+                                                                    <br>
+                                                                    <md-checkbox name="{{option}}" class="mt-1" *ngFor="let option of segs.options;" color="accent" align="start"> {{option}}</md-checkbox>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+
+                                                    </div>
+                                                </div> -->
+
+                                            </md-card-content>
+                                        </md-card>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="50" fxFlex.lt-md="50">
+                                    <!-- <md-card>
+                                        <md-card-content>
+                                            <label><b>{{'MENTOREVALUATION.REMAINDEREMAILTEMPLATE.title' | translate}}</b></label>
+                                            <md-input-container style="width: 100%">
+                                                <input mdInput [formControl]="questionnaireForm.controls['remaindersubject']" [placeholder]="'MENTOREVALUATION.EMAILTEMPLATE.SUBJECT.title' | translate" />
+                                            </md-input-container>
+                                            <small *ngIf="questionnaireForm.controls['subject'].hasError('required') && (questionnaireForm.controls['subject'].touched || formSubmit)" class="mat-text-warn"> {{'MENTOREVALUATION.EMAILTEMPLATE.SUBJECT.validation1' | translate}}</small>
+                                            <quill-editor [formControl]="questionnaireForm.controls['remaindermessage']"></quill-editor>
+                                        </md-card-content>
+                                    </md-card> -->
+                                </div>
+                                <!-- <div fxFlex="50" fxFlex.lt-md="50">
+                                    <div class="px-1 ">
+                                        <md-card>
+                                            <md-card-content>
+                                                <label><b>{{'MENTOREVALUATION.EVALUATIONGRID.title' | translate}}</b></label>
+                                                <div style="min-height: 55vh">
+                                                    <div fxLayout="row wrap" fxLayoutAlign="space-between" *ngIf="test._id">
+                                                        <div [fxFlex]="expanded ? '100' : '100'" class="document-view background-primary pa-1">
+                                                            <div fxLayout="row wrap" fxLayoutAlign="center center" class="mb-1">
+                                                                <button type="button" md-raised-button md-icon-button md-button-sm (click)="showPreviousPage()"><md-icon>chevron_left</md-icon></button>
+                                                                <div fxFlex class="text-right">
+                                                                    <span class="text-xl">Page {{visiblePage}} / {{ pages }}&nbsp;&nbsp;</span>
+                                                                </div>
+                                                                <button type="button" md-raised-button md-icon-button md-button-sm (click)="showNextPage()">
+                                                       <md-icon>chevron_right</md-icon>
+                                                     </button>
+                                                            </div>
+                                                            <div class="ql-editor document-parent">
+                                                                <div #pagesElement style="overflow: auto;">
+                                                                    <div class="document" [ngStyle]="{display: (visiblePage === 1) ? 'block' : 'none'}" [ngClass]="('orientation-' + test.correctionGrid.orientation)">
+                                                                        <div class="pa-1" style="height:93%">
+                                                                            <div class="doc-page-no" style="text-align:right;">1 / {{ pages }}</div>
+                                                                            <div class="doc-rncp-title">
+                                                                                <span>{{rncpTitle ? rncpTitle.longName : ''}}</span>
+                                                                            </div>
+                                                                            <div class="doc-header">
+                                                                                <div class="doc-header-top" [innerHtml]="test.correctionGrid.header.text | safeHtml">
+                                                                                </div>
+                                                                                <div class="doc-header-fields">
+                                                                                    <div fxLayout="row wrap" fxLayoutAlign="start center">
+                                                                                        <div class="lineme pr-1" fxFlex="50">Etablissement :</div>
+                                                                                        <div style="text-align: right;" fxFlex="50">{{test.name}}</div>
+                                                                                        <div class="lineme pr-1" fxFlex="50">Nom :</div>
+                                                                                        <div style="text-align: right;" fxFlex="50">{{rncpTitle.shortName}} - {{rncpTitle.longName}}</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="doc-header-fields" *ngIf="test.correctionGrid.header.fields.length > 0">
+                                                                                    <div fxLayout="row wrap" fxLayoutAlign="start center">
+                                                                                        <ng-template ngFor let-i="index" let-c="count" let-field [ngForOf]="test.correctionGrid.header.fields">
+                                                                                            <ng-template [ngIf]="field.dataType === 'longtext'">
+                                                                                                <div class="lineme" fxFlex="100">
+                                                                                                    {{field.value}} :
+                                                                                                </div>
+                                                                                            </ng-template>
+                                                                                            <ng-template [ngIf]="field.dataType != 'longtext' && field.align === 'left'">
+                                                                                                <div [ngClass]="{
+                                                                      'lineme': field.dataType != 'signature',
+                                                                      'signature': field.dataType === 'signature',
+                                                                      'pr-1': (field.align === 'left')
+                                                                      }" fxFlex="50">
+                                                                                                    {{field.value}} :
+                                                                                                </div>
+                                                                                                <ng-template [ngIf]="i === c-1 || test.correctionGrid.header.fields[i+1].align === 'left'">
+                                                                                                    <div fxFlex="50"></div>
+                                                                                                </ng-template>
+                                                                                            </ng-template>
+                                                                                            <ng-template [ngIf]="field.dataType != 'longtext' && field.align === 'right'">
+                                                                                                <ng-template [ngIf]="i === 0 ||
+                                                                     test.correctionGrid.header.fields[i-1].align === 'right' ||
+                                                                     test.correctionGrid.header.fields[i-1].dataType === 'longtext'">
+                                                                                                    <div fxFlex="50"></div>
+                                                                                                </ng-template>
+                                                                                                <div [ngClass]="{
+                                                                      'lineme': field.dataType != 'signature',
+                                                                      'signature': field.dataType === 'signature'
+                                                                       }" fxFlex="50">
+                                                                                                    {{field.value}} :
+                                                                                                </div>
+                                                                                            </ng-template>
+
+                                                                                        </ng-template>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="doc-group-details" *ngIf="test.groupTest">
+                                                                                <div class="group-header">
+                                                                                    {{test.correctionGrid.groupDetails.headerText}}
+                                                                                </div>
+                                                                                <table class="group-table">
+                                                                                    <tbody>
+                                                                                        <tr class="header">
+                                                                                            <th width="10%" class="text-center font-weight-bold"></th>
+                                                                                            <th class="text-center font-weight-bold">{{'TEST.NAMEOFSTUDENT' | translate }}</th>
+                                                                                        </tr>
+                                                                                        <tr *ngFor="let s of students; index as i">
+                                                                                            <td>{{i+1}}. </td>
+                                                                                            <td></td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <div class="doc-grid">
+                                                                                <div *ngIf="test.correctionGrid.correction.showAsList">
+                                                                                    <ng-template ngFor let-section [ngForOf]="pageSectionsArray[0]">
+                                                                                        <div fxLayout="row wrap" fxFlexAlign="space-between center" class="text-lg px-1 list-header">
+                                                                                            <b fxFlex [innerHTML]="section.title"></b>
+                                                                                            <b> / {{section.maximumRating}}</b>
+                                                                                        </div>
+                                                                                        <ul class="my-1 px-1 fix-ql-ul">
+                                                                                            <li fxLayout="row wrap" *ngFor="let notation of section.subSections">
+                                                                                                <div fxFlex [innerHTML]="notation.title">
+                                                                                                </div>
+                                                                                                <span *ngIf="test.correctionGrid.correction.showNotationsMarks"> / {{notation.maximumRating}}
+                                                                     </span>
+                                                                                        </ul>
+                                                                                        <div *ngIf="test.correctionGrid.correction.commentArea" class="mb-2">
+                                                                                            <span class="text-lg"><b>{{test.correctionGrid.correction.commentsHeader}} :</b></span>
+                                                                                            <div class="comment-section"></div>
+                                                                                            <div class="comment-section"></div>
+                                                                                        </div>
+                                                                                    </ng-template>
+                                                                                </div>
+
+                                                                                <table width="100%" *ngIf="!test.correctionGrid.correction.showAsList" class="doc-table">
+                                                                                    <tbody>
+                                                                                        <ng-template ngFor let-section let-sectionIndex="index" [ngForOf]="pageSectionsArray[0]">
+                                                                                            <tr class="section">
+                                                                                                <td [width]="getTitleWidth()" [innerHTML]="section.title"></td>
+                                                                                                <td class="text-center font-weight-bold" *ngIf="test.correctionGrid.correction.showDirectionsColumn">
+                                                                                                    {{test.correctionGrid.correction.directionsColumnHeader}}
+                                                                                                </td>
+                                                                                                <td class="text-center font-weight-bold" [width]="'10%'" *ngIf="test.correctionGrid.correction.showNumberMarksColumn">
+                                                                                                    {{test.correctionGrid.correction.numberMarksColumnHeader}}
+                                                                                                </td>
+                                                                                                <td class="text-center font-weight-bold" [width]="'10%'" *ngIf="test.correctionGrid.correction.showLetterMarksColumn">
+                                                                                                    {{test.correctionGrid.correction.letterMarksColumnHeader}}
+                                                                                                </td>
+                                                                                                <td class="text-center font-weight-bold" *ngIf="test.correctionGrid.correction.commentArea">
+                                                                                                    {{test.correctionGrid.correction.commentsHeader}}
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr class="sub-section" *ngFor="let subSection of section.subSections">
+                                                                                                <td [innerHTML]="subSection.title"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showDirectionsColumn" [innerHTML]="subSection.direction"></td>
+                                                                                                <td align="right" *ngIf="test.correctionGrid.correction.showNumberMarksColumn">
+                                                                                                    <u>/ {{subSection.maximumRating}}</u>
+                                                                                                </td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showLetterMarksColumn"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.commentArea"></td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td class="no-border"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showDirectionsColumn"></td>
+                                                                                                <td align="right" *ngIf="test.correctionGrid.correction.showNumberMarksColumn">
+                                                                                                    <u>/ {{section.maximumRating}}</u>
+                                                                                                </td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showLetterMarksColumn"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.commentArea"></td>
+                                                                                            </tr>
+                                                                                        </ng-template>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                                <div *ngIf="showBottomGrid(1);then bottomGrid"></div>
+                                                                            </div>
+                                                                            <div *ngIf="showBottomGrid(1);then gridFooter"></div>
+                                                                        </div>
+                                                                        <div *ngIf="docFooterText" style="text-align: center;">{{docFooterText}}</div>
+                                                                    </div>
+                                                                    <div *ngFor="let pageArray of getArrayExceptFirst(); index as pageArrayIndex" [ngStyle]="{display: (visiblePage === pageArrayIndex + 2) ? 'block' : 'none'}" class="document" [ngClass]="('orientation-' + test.correctionGrid.orientation)">
+                                                                        <div class="pa-1" style="height: 93%;">
+                                                                            <div class="doc-page-no" style="text-align:right;">{{pageArrayIndex + 2}} / {{ pages }}</div>
+                                                                            <div class="doc-rncp-title">
+                                                                                <span>{{rncpTitle ? rncpTitle.longName : ''}}</span>
+                                                                            </div>
+                                                                            <div class="doc-grid">
+                                                                                <div *ngIf="test.correctionGrid.correction.showAsList">
+                                                                                    <ng-template ngFor let-section [ngForOf]="pageSectionsArray[pageArrayIndex + 1]">
+                                                                                        <div fxLayout="row wrap" fxFlexAlign="space-between center" class="text-lg px-1 list-header">
+                                                                                            <b fxFlex [innerHTML]="section.title"></b>
+                                                                                            <b> / {{section.maximumRating}}</b>
+                                                                                        </div>
+                                                                                        <ul class="my-1 px-1 fix-ql-ul">
+                                                                                            <li fxLayout="row wrap" *ngFor="let notation of section.subSections">
+                                                                                                <div fxFlex [innerHTML]="notation.title">
+                                                                                                </div>
+                                                                                                <span *ngIf="test.correctionGrid.correction.showNotationsMarks"> / {{notation.maximumRating}}
+                                                                     </span>
+                                                                                        </ul>
+                                                                                        <div *ngIf="test.correctionGrid.correction.commentArea" class="mb-2">
+                                                                                            <span class="text-lg"><b>{{test.correctionGrid.correction.commentsHeader}} :</b></span>
+                                                                                            <div class="comment-section"></div>
+                                                                                            <div class="comment-section"></div>
+                                                                                        </div>
+                                                                                    </ng-template>
+                                                                                </div>
+                                                                                <table width="100%" *ngIf="!test.correctionGrid.correction.showAsList" class="doc-table">
+                                                                                    <tbody>
+                                                                                        <ng-template ngFor let-section let-sectionIndex="index" [ngForOf]="pageSectionsArray[pageArrayIndex + 1]">
+                                                                                            <tr class="section">
+                                                                                                <td [width]="getTitleWidth()" [innerHTML]="section.title"></td>
+                                                                                                <td class="text-center font-weight-bold" *ngIf="test.correctionGrid.correction.showDirectionsColumn">
+                                                                                                    {{test.correctionGrid.correction.directionsColumnHeader}}
+                                                                                                </td>
+                                                                                                <td class="text-center font-weight-bold" [width]="'10%'" *ngIf="test.correctionGrid.correction.showNumberMarksColumn">
+                                                                                                    {{test.correctionGrid.correction.numberMarksColumnHeader}}
+                                                                                                </td>
+                                                                                                <td class="text-center font-weight-bold" [width]="'10%'" *ngIf="test.correctionGrid.correction.showLetterMarksColumn">
+                                                                                                    {{test.correctionGrid.correction.letterMarksColumnHeader}}
+                                                                                                </td>
+                                                                                                <td class="text-center font-weight-bold" *ngIf="test.correctionGrid.correction.commentArea">
+                                                                                                    {{test.correctionGrid.correction.commentsHeader}}
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr class="sub-section" *ngFor="let subSection of section.subSections">
+                                                                                                <td [innerHTML]="subSection.title"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showDirectionsColumn" [innerHTML]="subSection.direction"></td>
+                                                                                                <td align="right" *ngIf="test.correctionGrid.correction.showNumberMarksColumn">
+                                                                                                    <u>/ {{subSection.maximumRating}}</u>
+                                                                                                </td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showLetterMarksColumn"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.commentArea"></td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td class="no-border"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showDirectionsColumn"></td>
+                                                                                                <td align="right" *ngIf="test.correctionGrid.correction.showNumberMarksColumn">
+                                                                                                    <u>/ {{section.maximumRating}}</u>
+                                                                                                </td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.showLetterMarksColumn"></td>
+                                                                                                <td *ngIf="test.correctionGrid.correction.commentArea"></td>
+                                                                                            </tr>
+                                                                                        </ng-template>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                                <div *ngIf="showBottomGrid(pageArrayIndex + 2);then bottomGrid"></div>
+                                                                            </div>
+                                                                            <div *ngIf="showBottomGrid(pageArrayIndex + 2);then gridFooter"></div>
+                                                                        </div>
+                                                                        <div *ngIf="docFooterText" style="text-align: center;">{{docFooterText}}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </md-card-content>
+                                        </md-card>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </md-card-content>
+                    </md-card>
+                </form>
+                <!-- <div fxLayout="row">
+                    <app-test-document (expandView)="expand($event)" [expanded]="false"></app-test-document>
+                </div>  (expandView)="expand($event)" [expanded]="false"-->
+            </div>
+            <!-- <app-test-document (expandView)="expand($event)" [expanded]="false"></app-test-document> -->
+        </md-tab>
+    </md-tab-group>
+    <div fxLayout="row wrap" fxLayoutAlign="flex-end" fxLayoutGap="1rem" fxFlexAlign="end" style="width: 100%">
+        <button md-raised-button class="mat-green" (click)="closeDialog()">{{"MENTOREVALUATION.QUESTIONNAIRE.CANCEL" | translate}}</button>
+        <button md-raised-button color="accent" (click)="save()">{{"MENTOREVALUATION.QUESTIONNAIRE.SUBMIT" | translate}}</button>
+    </div>
+</div>
+
+
+
+<ng-template #bottomGrid>
+    <div fxLayout="row wrap" class="doc-penalties mt-1" *ngIf="test.correctionGrid.correction.showPenalties || test.correctionGrid.correction.showBonuses">
+        <div fxFlex>
+            <table>
+                <ng-template [ngIf]="test.correctionGrid.correction.showPenalties">
+                    <tr>
+                        <td class="pr-1 font-weight-bold">{{test.correctionGrid.correction.penaltiesHeader}}</td>
+                        <td align="center" class="font-weight-bold" width="10%"></td>
+                    </tr>
+                    <tr *ngFor="let penalty of test.correctionGrid.correction.penalties; index as i">
+                        <td class="text-justify">{{penalty.title}}</td>
+                        <td align="center"> - {{penalty.count}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template [ngIf]="test.correctionGrid.correction.showBonuses">
+                    <tr>
+                        <td class="pr-1 font-weight-bold">{{test.correctionGrid.correction.bonusesHeader}}</td>
+                        <td align="center" class="font-weight-bold" width="10%"></td>
+                    </tr>
+                    <tr *ngFor="let bonus of test.correctionGrid.correction.bonuses; index as i">
+                        <td class="text-justify">{{bonus.title}}</td>
+                        <td align="center"> + {{bonus.count}}</td>
+                    </tr>
+                </ng-template>
+            </table>
+        </div>
+    </div>
+    <div style="overflow: hidden" *ngIf="test.correctionGrid.correction.displayFinalTotal">
+        <table class="doc-table mt-1" style="float: right">
+            <tbody>
+                <tr>
+                    <td class="head px-1">Total /{{test.maxScore}}</td>
+                    <td class="px-3"></td>
+                </tr>
+                <tr *ngIf="test.correctionGrid.correction.totalZone.displayAdditionalTotal">
+                    <td class="head px-1">Total /{{getMaxCustomScore()}}</td>
+                    <td class="px-3"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div fxLayout="row wrap" *ngIf="test.correctionGrid.correction.showFinalComments">
+        <div fxFlex>
+            <div class="mt-1">
+                <span class="text-lg"><b>{{test.correctionGrid.correction.finalCommentsHeader}} :</b></span>
+                <div class="comment-section"></div>
+                <div class="comment-section"></div>
+                <div class="comment-section"></div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #gridFooter>
+    <div class="doc-footer">
+        <div class="doc-footer-text" *ngIf="!test.correctionGrid.footer.textBelow" [innerHtml]="test.correctionGrid.footer.text | safeHtml">
+        </div>
+        <div class="doc-footer-fields" *ngIf="test.correctionGrid.footer.fields.length > 0">
+            <div fxLayout="row wrap" fxLayoutAlign="start center">
+                <ng-template ngFor let-i="index" let-c="count" let-field [ngForOf]="test.correctionGrid.footer.fields">
+                    <ng-template [ngIf]="field.dataType === 'longtext'">
+                        <div class="lineme" fxFlex="100">
+                            {{field.value}} :
+                        </div>
+                    </ng-template>
+                    <ng-template [ngIf]="field.dataType != 'longtext' && field.align === 'left'">
+                        <div [ngClass]="{
+                             'lineme': field.dataType != 'signature',
+                             'signature': field.dataType === 'signature',
+                             'pr-1': (field.align === 'left')
+                             }" fxFlex="50">
+                            {{field.value}} :
+                        </div>
+                        <ng-template [ngIf]="i === c-1 || test.correctionGrid.footer.fields[i+1].align === 'left'">
+                            <div fxFlex="50"></div>
+                        </ng-template>
+                    </ng-template>
+                    <ng-template [ngIf]="field.dataType != 'longtext' && field.align === 'right'">
+                        <ng-template [ngIf]="i === 0 ||
+                            test.correctionGrid.footer.fields[i-1].align === 'right' ||
+                            test.correctionGrid.footer.fields[i-1].dataType === 'longtext'">
+                            <div fxFlex="50"></div>
+                        </ng-template>
+                        <div [ngClass]="{
+                             'lineme': field.dataType != 'signature',
+                             'signature': field.dataType === 'signature'
+                             }" fxFlex="50">
+                            {{field.value}} :
+                        </div>
+                    </ng-template>
+
+                </ng-template>
+            </div>
+        </div>
+        <div class="doc-footer-text" *ngIf="test.correctionGrid.footer.textBelow" [innerHtml]="test.correctionGrid.footer.text | safeHtml">
+        </div>
+    </div>
+</ng-template>

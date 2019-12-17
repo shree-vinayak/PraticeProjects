@@ -1,0 +1,83 @@
+<ngx-datatable class="material material rncp-table" [rows]="questionnaires" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
+  [rowHeight]="50" [scrollbarH]="false" [scrollbarV]="false" [reorderable]="reorderable" [count]="page.totalElements" [offset]="page.pageNumber"
+  [limit]="page.size" [externalSorting]="true" (page)="changePage($event)" [messages]="{emptyMessage: 'NoDataToDisplay' | translate }" (sort)="sortPage($event)"
+   [externalPaging]="true" [sorts]="[
+   {prop: 'createdAt', dir: 'asc'},
+   {prop: 'questionnaireName', dir: 'asc'},
+   {prop: 'questionnaireType', dir: 'asc'}]"
+   (select)="onSelect($event)" [selected]="selected"
+  [cssClasses]="ngxDtCssClasses">
+
+  <ngx-datatable-column [flexGrow]="2" name="questionnaireName" prop="questionnaireName" [sortable]="true" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+      {{'QUESTIONNAIRE_TOOLS.TEMPLATE_NAME' | translate}}
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{row?.questionnaireName}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column [flexGrow]="1" name="createdAt" prop="createdAt" [sortable]="true" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+      {{'QUESTIONNAIRE_TOOLS.CREATE_DATE' | translate}}
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{row?.createdAt | date: 'dd/MM/yyyy'}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column [flexGrow]="0.3" name="firstName" prop="firstName" [sortable]="true" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+      {{'QUESTIONNAIRE_TOOLS.BY' | translate}}
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+     <span  mdTooltip="{{row?.createdBy.firstName +' '+ row?.createdBy.lastName}}" mdTooltipPosition="below">
+         {{row?.createdBy.firstName[0] + row?.createdBy.lastName[0]}}
+     </span>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column [flexGrow]="1.3" name="questionnaireType" prop="questionnaireType" [sortable]="true" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+      {{'QUESTIONNAIRE_TOOLS.QUESTIONNAIRE_TYPE' | translate}}
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{row?.questionnaireType}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column [flexGrow]="1.3" name="Actions" [sortable]="false" [cellClass]="'text-center'" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      <span mdTooltip="Action" mdTooltipPosition="above">
+        Action
+      </span>
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      <span mdTooltip="{{'Duplicate' | translate}}" mdTooltipPosition="above">
+        <button md-icon-button md-button-sm md-raised-button class="grid-button" (click)="cloneQuestionnaire(row._id)">
+          <md-icon>content_copy</md-icon>
+        </button>
+      </span>
+
+      <span mdTooltip="{{'Edit' | translate}}" mdTooltipPosition="above">
+        <button md-icon-button md-button-sm md-raised-button class="grid-button custom-margin" (click)="editQuestionnaire(row._id)">
+          <md-icon>edit</md-icon>
+        </button>
+      </span>
+
+      <span mdTooltip="{{'Delete' | translate}}" mdTooltipPosition="above">
+        <button md-icon-button md-button-sm md-raised-button class="grid-button" (click)="deleteQuestionnaire(row._id)">
+          <md-icon>close</md-icon>
+        </button>
+      </span>
+
+      <span mdTooltip="{{'TOOLS_DOCTEST.Action_Buttons.View' | translate}}" mdTooltipPosition="above">
+        <button md-icon-button md-button-sm md-raised-button class="grid-button">
+          <i class="fa fa-file-pdf-o fa-lg"></i>
+          <!-- <md-icon>file-pdf</md-icon> -->
+        </button>
+      </span>
+
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

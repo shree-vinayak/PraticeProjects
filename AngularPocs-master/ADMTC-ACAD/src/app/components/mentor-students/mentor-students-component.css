@@ -1,0 +1,12 @@
+.mt-16{
+	margin-top: 16px;
+}
+.ml-10{
+	margin-left: 10px;
+}
+
+.studentCardScroll {
+	overflow-x: hidden;
+	overflow-y: auto ;
+	height:71vh;
+}

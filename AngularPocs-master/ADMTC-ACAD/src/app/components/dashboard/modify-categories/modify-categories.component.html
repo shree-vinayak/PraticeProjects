@@ -1,0 +1,116 @@
+<div fxLayout="row wrap" class="modify-category-header" style="background: rgba(0, 0, 0, 0.3)">
+  <div fxFlex class="pa-1 category-path">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+      <div fxFlex class="text-xl">
+        <a *ngFor="let path of getCurrentPathArray(); index as i" (click)="goTo(i)" class="path-link">
+          {{path}}
+          <md-icon style="vertical-align: middle">chevron_right</md-icon>
+        </a>
+      </div>
+      <button md-raised-button
+              *ngIf="positionStack.length > 0"
+              (click)="goUp()">
+        <md-icon>arrow_upward</md-icon>
+        {{'DASHBOARD.GOUP' | translate}}
+      </button>
+    </div>
+  </div>
+
+  <div fxFlex="100" *ngIf="positionStack.length > 0" class="pa-1">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+      <div fxFlex>
+        <ng-template let-category [ngIf]="getCurrentCategory()">
+          <div><b class="text-xl">{{category?.title}}</b></div>
+          <div><i>{{category?.description}}</i></div>
+        </ng-template>
+      </div>
+      <button md-mini-fab
+              [mdMenuTriggerFor]="addMenu"
+              color="accent"
+              *ngIf="positionStack.length > 0"
+              class="mr-1">
+        <md-icon>add</md-icon>
+      </button>
+      <md-menu #addMenu="mdMenu">
+        <button md-menu-item (click)="addNewCategory()">
+          <md-icon>folder</md-icon>
+          {{'DASHBOARD.SUBCATEGORY' | translate}}
+        </button>
+        <button md-menu-item (click)="addNewDocument()">
+          <md-icon>insert_drive_file</md-icon>
+          Document
+        </button>
+        <button md-menu-item (click)="addNewTest()">
+          <md-icon>receipt</md-icon>
+           {{'TEST.TEST' | translate}}
+        </button>
+      </md-menu>
+      <button md-mini-fab [mdMenuTriggerFor]="categoryMenu" color="primary" *ngIf="positionStack.length > 0 && isNotBasicStructure()">
+        <md-icon>more_vert</md-icon>
+      </button>
+      <md-menu #categoryMenu="mdMenu">
+        <button md-menu-item (click)="modifyCategory()">
+          <md-icon>edit</md-icon>
+          {{'DASHBOARD.MODIFYCATEGORY' | translate}}
+        </button>
+        <button md-menu-item (click)="moveCategory()">
+          <md-icon>format_indent_increase</md-icon>
+          {{'DASHBOARD.MOVECATEGORY' | translate}}
+        </button>
+        <button md-menu-item (click)="removeCategory()">
+          <md-icon>delete</md-icon>
+          {{'DASHBOARD.REMOVECATEGORY' | translate}}
+        </button>
+      </md-menu>
+    </div>
+  </div>
+  <div fxFlex="100" class="pa-1" *ngIf="positionStack.length === 0">
+    <button md-raised-button
+            (click)="addNewCategory()">
+      <md-icon>add</md-icon>
+      {{'DASHBOARD.ADDCATEGORY' | translate}}
+    </button>
+  </div>
+</div>
+
+<div fxLayout="row wrap">
+  <div fxFlex>
+    <md-tab-group style="min-height: 200px;"  [(selectedIndex)]="selectedIndex" class="categories-tab-group dark">
+      <md-tab>
+        <ng-template md-tab-label>
+          {{positionStack.length ? ('DASHBOARD.SUBCATEGORIES' | translate) : ( 'DASHBOARD.CATEGORIES' | translate)}}
+          ({{getCurrentCategories().length}})
+        </ng-template>
+        <md-nav-list>
+          <md-list-item *ngFor="let category of getCurrentCategories() | orderBy: 'title'; index as i" (click)="openCategory(category, i)">
+            {{category.title}}
+          </md-list-item>
+        </md-nav-list>
+      </md-tab>
+      <md-tab *ngIf="positionStack.length > 0">
+        <ng-template md-tab-label>
+          {{'DOCUMENT.DOCUMENTS' | translate}}
+          ({{getCurrentDocuments()?.length}})
+        </ng-template>
+        <md-nav-list>
+          <md-list-item *ngFor="let document of getCurrentDocuments(); index as i"
+                        (click)="openDocumentDetailsDialog(document, i)">
+            {{document.name}}
+          </md-list-item>
+        </md-nav-list>
+      </md-tab>
+      <md-tab *ngIf="positionStack.length > 0">
+        <ng-template md-tab-label>
+          {{'TEST.TESTS' | translate}}
+          ({{getCurrentTests().length}})
+        </ng-template>
+        <md-nav-list>
+          <md-list-item *ngFor="let test of getCurrentTests(); index as i" (click)="openTestDetailsDialog(test, i)">
+            {{test.name}}
+          </md-list-item>
+        </md-nav-list>
+      </md-tab>
+    </md-tab-group>
+  </div>
+</div>
+

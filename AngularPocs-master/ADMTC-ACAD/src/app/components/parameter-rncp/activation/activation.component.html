@@ -1,0 +1,41 @@
+<div fxLayout="row wrap">
+    <div fxFlex="10" fxFlex.gt-sm="15" fxFlex.gt-xs="50" style="width: fit-content;">
+        <md-input-container dividerColor="accent" style="margin-left: 15px; width: 100%;"> <input [(ngModel)]="textSearch" mdInput type="text" placeholder="{{ 'Search.search' | translate }}" (keyup)="searchRNCP($event)">
+        </md-input-container>
+    </div>
+    <div fxFlex="10" fxFlex.gt-sm="15" fxFlex.gt-xs="15">
+        <button md-raised-button (click)="select('All')" style="margin-left: 20px;" color="primary">{{'ALLTITLES' |
+			translate}}</button>
+    </div>
+    <div fxFlex="80" fxFlex.gt-sm="70" fxFlex.gt-xs="70">
+        <h1 style="margin: 0;">{{'PARAMETERS-RNCP.Activation.title' | translate}}</h1>
+    </div>
+</div>
+
+<div fxLayout="row wrap" style="margin-left: 10px;">
+    <md-button-toggle-group style="background-color: #212121;border: 1px solid #607d8b;" #group="mdButtonToggleGroup">
+        <md-button-toggle *ngFor="let data of certifier; index as i" (click)="select(data && data.certifier && data.certifier.shortName ? data.certifier.shortName : '')" value="{{data && data.certifier && data.certifier.shortName ? data.certifier.shortName : ''}}"
+            style="color: white;">{{data && data.certifier && data.certifier.shortName ? data.certifier.shortName : ""}}
+        </md-button-toggle>
+    </md-button-toggle-group>
+</div>
+
+<div fxLayout="row wrap">
+    <div fxFlex="16" *ngFor="let data of rncpTitles; index as i">
+        <div fxLayout="column wrap" style="padding: 3px;">
+            <md-card fxFlex class="primary-background dark-header text-center rncp-title-tile">
+                <md-card-content>
+                    <h5><b>{{data.shortName ? data.shortName : ""}}</b></h5>
+                    <hr/>
+                    <p>{{data.longName ? data.longName : ""}} <br/></p>
+                    <span class="setposition"> {{'LEVEL' | translate}} {{data.rncpLevel}} </span>
+                    <h6 style="margin-top: 10px;"><b>{{data.certifier && data.certifier.shortName ? data.certifier.shortName : ""}} &nbsp;</b></h6>
+                    <md-slide-toggle labelPosition="after" [checked]="data.isPublished" (change)="toggleFinalScore($event,data)">
+                        <span *ngIf="data.isPublished">{{'PARAMETERS-RNCP.Activation.Published' | translate}}</span>
+                        <span *ngIf="!data.isPublished">{{'PARAMETERS-RNCP.Activation.Unpublished' | translate}}</span>
+                    </md-slide-toggle>
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+</div>

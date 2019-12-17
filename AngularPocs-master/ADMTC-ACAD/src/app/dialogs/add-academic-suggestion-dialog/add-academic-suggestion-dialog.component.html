@@ -1,0 +1,25 @@
+<form [formGroup]="form" (ngSubmit)="continue()" class="suggestion-form">
+    <a class="close_icon">
+        <i style="float: right" class="material-icons" (click)="cancel()">close</i>
+    </a>
+    <h3 md-dialog-title>
+        <md-icon class="icon-middle">markunread_mailbox</md-icon><span class="suggestion-title">{{'SUGGESTION.TITLE' | translate}}</span>
+    </h3>
+    <md-dialog-content>
+        <md-select formControlName="suggestionTitle" [placeholder]="'SUGGESTION.CATEGORY' | translate" class="full-width">
+            <md-option *ngFor="let suggestion of suggestions" [value]="suggestion.value">
+                {{suggestion.viewValue | translate}}
+            </md-option>
+        </md-select>
+        <md-input-container class="full-width">
+            <textarea rows="6" maxLength="300" mdInput mdTextareaAutosize formControlName="suggestionDescription" [placeholder]="'SUGGESTION.SUGGESTIONTEXTAREA' | translate" required></textarea>
+        </md-input-container>
+        <small *ngIf="form.get('suggestionDescription').value.length > 299" class="mat-text-warn"> 
+                {{'IDEAS.IDEAMAXCHARLENGTH' | translate}}
+        </small>
+    </md-dialog-content>
+    <md-dialog-actions class="pull-right">
+        <button md-button md-raised-button color="warn" md-dialog-close class="mr-12" (click)="cancel()">{{'SUGGESTION.CANCEL' | translate}}</button>
+        <button md-button md-raised-button color="primary" type="submit" [disabled]="submitdisabled">{{'SUGGESTION.SUBMIT' | translate}}</button>
+    </md-dialog-actions>
+</form>

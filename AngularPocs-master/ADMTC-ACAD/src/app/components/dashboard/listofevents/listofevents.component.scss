@@ -1,0 +1,25 @@
+:host /deep/ .primary-background {
+    //background-color: #607d8b;
+}
+md-card.dark-header {
+    .mat-card-title{
+        margin-bottom: 0;
+        padding-bottom: 16px;
+        background-color: #212121;
+    }
+}
+
+.tags {
+  background-color: #ffd740;
+  color: black;
+  padding: 3px 5px 3px 5px;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+
+
+  .datatable-body-row:hover {
+  cursor: pointer !important;
+}
+
+

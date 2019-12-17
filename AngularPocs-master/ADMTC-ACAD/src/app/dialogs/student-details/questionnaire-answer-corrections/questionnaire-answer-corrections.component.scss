@@ -1,0 +1,99 @@
+.scroll-y {
+  //  height: 200px;
+    overflow-y: auto;
+}
+
+:host /deep/ .primary-background {
+    background-color: #607d8b;
+}
+
+:host /deep/ span {
+    h5 {
+        margin: 10px;
+    }
+    p {
+        margin: 0px;
+    }
+}
+
+main {
+    overflow-y: auto;
+}
+
+md-card.dark-header {
+    .mat-card-title {
+        margin-bottom: 0;
+        padding-bottom: 16px;
+        background-color: #212121;
+    }
+}
+
+.mat-card-title {
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+    font-size: 13px !important;
+}
+
+.container_two {
+    padding: 15px 15px 5px 15px;
+}
+
+.flex_3 {
+    flex: 3 !important;
+    width: 33% !important;
+}
+
+.flex_3 .px-1 {
+    padding-left: 0 !important
+}
+
+.mat-input-wrapper {
+    margin-bottom: 5px !important;
+}
+
+.datatable-header .datatable-header-cell {
+    padding: 3px !important;
+}
+
+.total_number div {
+    display: inline-block;
+    margin-top: 0 !important;
+    vertical-align: top !important;
+    padding-top: 0 !important
+}
+
+.total_number {
+    width: 70%;
+    text-align: right;
+    margin: 0;
+    padding: 0 !important;
+}
+
+.mat-card-content {
+    padding-top: 7px !important;
+    padding-bottom: 7px !important
+}
+
+.ql-align-center {
+    margin: 8px 0 0 0 !important;
+    font-size: 13px;
+}
+
+.table_container .mat-input-wrapper {
+    margin: 5px 0 !important;
+}
+
+#form_container {
+    display: block !important
+}
+
+.title_pd0 {
+    padding-bottom: 14px !important;
+    padding-top: 14px !important;
+}
+
+:host /deep/ {
+    .view-test-details .mat-tab-labels {
+        display: none !important;
+    }
+}

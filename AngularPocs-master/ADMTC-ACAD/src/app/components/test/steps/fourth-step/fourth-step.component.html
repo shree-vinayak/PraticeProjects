@@ -1,0 +1,209 @@
+<form>
+  <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="card-margin">
+    <button md-raised-button color="primary" type="button" (click)="goToPreviousStep()">
+      <md-icon>chevron_left</md-icon>
+      {{'PREVIOUS' | translate}}
+    </button>
+    <!-- <button md-raised-button color="accent" type="button" (click)="submitTest()">
+      {{'REGISTERTEST' | translate}}
+      <md-icon>done</md-icon>
+    </button> -->
+    <button md-raised-button color="accent" type="button" (click)="goToNextStep()">
+      {{'CONTINUE' | translate}}
+      <md-icon>keyboard_arrow_right</md-icon>
+    </button>
+  </div>
+
+  <md-card>
+    <md-card-content>
+      <!--<button md-raised-button (click)="sortArray()" color="primary" type="button">Sort Array</button>-->
+      <!--{{date}}-->
+      <md-card style="background-color: #607d8b;">
+        <div class="pa-1">
+          <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+            <h3 style="margin: 0">{{'TASKS' | translate}}</h3>
+            <div>
+              <button md-raised-button fxFlexAlign="end" type="button" (click)="addStep()" [disabled]="newStep">
+                {{'TEST.ADDTASK' | translate}}
+              </button>
+              <button md-raised-button fxFlexAlign="end" type="button" [disabled]="test.calendar.steps.length < 2" [md-menu-trigger-for]="sortingMenu">
+                {{'TEST.SORTBY' | translate}}
+                <md-icon>arrow_drop_down</md-icon>
+              </button>
+              <md-menu xPosition="before" yPosition="below" #sortingMenu="mdMenu">
+                <div class="pa-1">
+                  <md-slide-toggle labelPosition="before" (change)="setSortOrder()" name="desToggle" [(ngModel)]="descending">Descendant?
+                  </md-slide-toggle>
+                </div>
+                <hr>
+                <div class="pa-1">
+                  Critères :
+                </div>
+                <hr>
+                <div *ngFor="let field of stepFields; index as i">
+                  <button md-menu-item (click)="sortSteps(field.value)">{{field.view}}
+                  </button>
+                </div>
+
+
+              </md-menu>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <md-card-content class="no-bottom-margin">
+          <md-card *ngIf="newStep" [formGroup]="form">
+            <md-card-content>
+              <!-- <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="end">
+                <button md-icon-button md-raised-button color="accent" type="button" class="mr-1" [disabled]="!this.form.valid" (click)="addStepToTest()">
+                  <md-icon>done</md-icon>
+                </button>
+                <button md-icon-button md-raised-button type="button" color="primary" (click)="cancelNewStep()">
+                  <md-icon>close</md-icon>
+                </button>
+              </div> -->
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="40">
+                  <div class="px-2">
+                    <md-input-container class="no-bottom-margin" fxFlex>
+                      <input type="text" placeholder="{{'TEST.CALENDAR.WHAT' | translate}}" mdInput #myControl formControlName="text" [mdAutocomplete]="auto">
+                      <md-autocomplete #auto="mdAutocomplete">
+                        <md-option *ngFor="let calendar of filteredOptions |  async" [value]="calendar.title" (click)="changeWhat(calendar)">
+                          {{ calendar.title }}
+                        </md-option>
+                      </md-autocomplete>
+                    </md-input-container>
+                  </div>
+                </div>
+                <div fxFlex="40">
+                  <div class="px-2">
+                    <div dividerColor="accent">
+                      <md-select color="accent" [placeholder]="'TEST.CALENDAR.WHO' | translate" formControlName="actor">
+                        <md-option *ngFor="let userType of userTypes" [value]="userType._id">
+                          {{getTranslateADMTCSTAFFKEY(userType.name)}}
+                        </md-option>
+                      </md-select>
+                    </div>
+                  </div>
+                </div>
+                <div fxFlex="10">
+                  <button md-icon-button md-raised-button color="accent" type="button" class="mr-1" [disabled]="!form.valid" (click)="addStepToTest()">
+                    <md-icon>done</md-icon>
+                  </button>
+                </div>
+                <div fxFlex="10">
+                  <button md-icon-button md-raised-button type="button" color="primary" (click)="cancelNewStep()">
+                    <md-icon>close</md-icon>
+                  </button>
+                </div>
+              </div>
+              <div fxLayout="row wrap">
+                <div fxFlex="65">
+                  <div fxLayout="row wrap">
+                    <div fxFlex="40" style="padding-left:20px;">
+                      <md-slide-toggle [checked]="relativeDate" style="margin-top: 0.9rem" labelPosition="before" (change)="changeDateType($event)">
+                        {{'TEST.RELATIVEDATE' | translate}}
+                      </md-slide-toggle>
+                    </div>
+                    <div fxFlex="60">
+                      <md-radio-group formControlName="daysBefore" *ngIf="relativeDate" style="margin-top: 0.9rem;">
+                        <md-radio-button value="before">{{'BEFORE' | translate}}</md-radio-button>
+                        <md-radio-button value="after">{{'AFTER' | translate}}</md-radio-button>
+                      </md-radio-group>
+                    </div>
+                  </div>
+                </div>
+                <div fxFlex="35">
+                  <div *ngIf="relativeDate" style="float: right;margin-left:10px; margin-top:4px;">
+                    <md-input-container>
+                      <input mdInput (change)="checkNumberOfDays($event)" formControlName="numberOfDays" [placeholder]="'TEST.NUMBEROFDAYS' | translate"
+                        type="number" />
+                    </md-input-container>
+                  </div>
+                  <div *ngIf="!relativeDate">
+                    <div class="px-1">
+                      <md-input-container dividerColor="accent">
+                        <input mdInput formControlName="date" [mdDatepicker]="stepDatePicker" [placeholder]="'TEST.CALENDAR.WHEN'|translate" type="text"
+                          date>
+                        <button mdSuffix class="white-datepicker-button" [mdDatepickerToggle]="stepDatePicker"></button>
+                      </md-input-container>
+                      <md-datepicker #stepDatePicker [touchUi]="true"></md-datepicker>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div fxLayout="row wrap">
+                <div fxFlex="55">
+                  <div fxLayout="row wrap">
+                    <div class="px-2">
+                      <md-select color="accent" [placeholder]="'TEST.CALENDAR.WHOREMINDER' | translate" formControlName="sender">
+                        <md-option *ngFor="let academicStaffUser of academicStaffUsers" [value]="academicStaffUser._id">
+                          {{ academicStaffUser.firstName }} {{ academicStaffUser.lastName }}
+                        </md-option>
+                        <md-option *ngFor="let acadUserType of acadUserTypes" [value]="acadUserType._id">
+                          {{ acadUserType.name }}
+                        </md-option>
+                      </md-select>
+                      <!-- </md-input-container> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+          <md-card *ngFor="let step of sortedSteps; index as i">
+            <md-card-content>
+              <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                <div fxFlex="80">
+                  <!--<div>{{step.sender}}</div>
+                  <div>{{step.actor}}</div>-->
+                  <div>{{'TEST.CALENDAR.WHO' | translate}} : {{getTranslateADMTCSTAFFKEY(getUserTypeName(step?.actor))}} </div>
+                  <div>{{'TEST.CALENDAR.WHAT' | translate}} : {{getTranslateWhat(step?.text)}}</div>
+                  <div>{{'TEST.CALENDAR.WHOREMINDER' | translate}} : {{getSenderName(step?.sender)}}</div>
+                  <ng-template [ngIf]="step.date.type === 'fixed' && test?.dateType.toLowerCase() !== 'different'">
+                    <div>{{'EXPECTEDDOCUMENT.DEADLINE' | translate}} : {{getTranslatedDate(step?.date.value)}}</div>
+                  </ng-template>
+                  <ng-template [ngIf]="step.date.type === 'relative'">
+                    <div>{{'EXPECTEDDOCUMENT.DEADLINE' | translate}} : {{step?.date.before ? ('BEFORE' | translate) : ('AFTER'
+                      | translate)}} {{step?.date.days}} {{'DAYS' | translate}}
+                    </div>
+                  </ng-template>
+                  <ng-template [ngIf]="test.dateType.toLowerCase() === 'different' && 
+                                        (step?.text.toLowerCase() === 'marks entry' || step?.text.toLowerCase() === 'send the evaluation to company\'s mentor' || step?.text.toLowerCase() === 'validation of mentor evaluation') &&
+                                        step?.createdFrom !== 'manual'">
+                      <div>{{'EXPECTEDDOCUMENT.DEADLINE' | translate}} : {{ 'TEST.CALENDAR.SAME_AS_SCHOOL_TEST_DATE' | translate }}
+                      </div>
+                    </ng-template>
+                </div>
+                <button md-icon-button (click)="removeStep(i, step)" type="button">
+                  <md-icon>cancel</md-icon>
+                </button>
+              </div>
+            </md-card-content>
+          </md-card>
+          <div class="pa-1" style="text-align: center" *ngIf="sortedSteps.length <= 0">
+            {{'TEST.NOSTEPS'| translate}}
+          </div>
+        </md-card-content>
+      </md-card>
+    </md-card-content>
+  </md-card>
+  <!--<div fxLayout="row wrap" fxLayoutAlign="space-between center" class="card-margin">-->
+  <!--<button md-raised-button-->
+  <!--color="primary"-->
+  <!--type="button"-->
+  <!--(click)="goToPreviousStep()">-->
+  <!--<md-icon>chevron_left</md-icon>-->
+  <!--{{'PREVIOUS' | translate}}-->
+  <!--</button>-->
+  <!--<button md-raised-button-->
+  <!--color="accent"-->
+  <!--type="button"-->
+  <!--(click)="submitTest()">-->
+  <!--{{'SAVETHETEST' | translate}}-->
+  <!--<md-icon>done</md-icon>-->
+  <!--</button>-->
+  <!--</div>-->
+</form>

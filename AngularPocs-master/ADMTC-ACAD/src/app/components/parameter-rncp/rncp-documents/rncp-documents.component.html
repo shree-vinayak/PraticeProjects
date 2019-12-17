@@ -1,0 +1,61 @@
+<div fxLayout="row wrap">
+  <div fxFlex="65" fxFlex.gt-md="50">
+    <form>
+      <div fxLayout="row wrap" [formGroup]="RNCPform">
+        <div fxFlex="50">
+          <div fxLayout="column wrap" class="card-margin">
+
+            <md-input-container fxFlex="70">
+              <input type="text" placeholder="{{'PARAMETERS-RNCP.TEST.RNCP-SELECT' | translate}}" mdInput #myControl formControlName="text"
+                [mdAutocomplete]="auto">
+              <md-autocomplete #auto="mdAutocomplete">
+                <md-option *ngFor="let list of filteredOptions |  async" [value]="list.shortName" (click)="OnSelectRNCPTitle(list)">
+                  {{ list.shortName }}
+                </md-option>
+              </md-autocomplete>
+            </md-input-container>
+          </div>
+        </div>
+        <div fxFlex="20"> </div>
+        <div fxFlex="30">
+          <div fxLayout="column wrap" fxLayoutAlign="end" class="card-margin">
+            <!-- <button md-raised-button color="accent" (click)="addNewClass()">
+              <md-icon>add</md-icon>
+              {{'ADDCLASS' | translate}}
+            </button> -->
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <ngx-datatable class="material rncp-table" [rows]="acadDocumentsList" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+      [columnMode]="'force'" [reorderable]="true" [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+      [limit]="page.size" [externalSorting]="true" [cssClasses]="ngxDtCssClasses"
+      [selectionType]="'single'" (select)='onSelectDocument($event)'>
+
+      <ngx-datatable-column>
+        <ng-template ngx-datatable-header-template>{{'PARAMETERS-RNCP.PUBLISH_DOC.FOLDER_IN_ACADEMIC_KIT' | translate}}</ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row?.parentCategory?.title ? row?.parentCategory?.title : ''}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column>
+        <ng-template ngx-datatable-header-template>{{'PARAMETERS-RNCP.PUBLISH_DOC.DOCUMENT_NAME' | translate}}</ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row['name']}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [flexGrow]="10" [cellClass]="'text-center'">
+        <ng-template ngx-datatable-header-template>{{'PARAMETERS-RNCP.PUBLISH_DOC.PUBLISH_STUDENT' | translate}}</ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <span *ngIf="row?.publishedForStudent else notForStudent"> {{'YES' | translate}}</span>
+          <ng-template #notForStudent > {{'NO' | translate}} </ng-template>
+        </ng-template>
+      </ngx-datatable-column>
+
+    </ngx-datatable>
+
+  </div>
+</div>

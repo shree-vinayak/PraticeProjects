@@ -1,0 +1,84 @@
+<button md-icon-button type="button" (click)="closeDialog()" style="float: right;padding-top:2px; ">
+    <md-icon> close </md-icon>
+</button>
+<div class="view-message-section" *ngIf="viewMessageData && viewMessageData._id">
+  <div class="compose-mail-actions">
+      <!-- <button md-button [title]=" 'MailBox.emailDetails.reply' | translate " (click)="OpenMailPopupRequest(viewMessageData,'reply-mail')">
+          <i class="fa fa-reply"></i>
+      </button>
+      <button md-button [title]=" 'MailBox.emailDetails.reply_all' | translate " (click)="OpenMailPopupRequest(viewMessageData,'reply-all')">
+          <i class="fa fa-reply-all"></i>
+      </button>
+      <button md-button [title]=" 'MailBox.emailDetails.forward' | translate " (click)="OpenMailPopupRequest(viewMessageData,'foward-mail')">
+          <i class="fa fa-mail-forward"></i>
+      </button> -->
+
+      <!-- <span *ngIf="viewMessageData.isUrgentMail == true">
+          <i class="fa fa-bolt"></i> {{'MailBox.URGENT_MESSAGE' | translate}}
+      </span> -->
+      <div style="float: right">
+          <button *ngIf="!checkIsPreviousBtnShow()" style="color:gray" md-button [title]=" 'MailBox.emailDetails.previous' | translate ">
+              <i class="fa fa-caret-left"></i>
+          </button>
+          <button *ngIf="checkIsPreviousBtnShow()" md-button [title]=" 'MailBox.emailDetails.previous' | translate " (click)="onPreviousMessage(viewMessageData)">
+              <i class="fa fa-caret-left"></i>
+          </button>
+          <button *ngIf="checkIsNextBtnShow()" md-button [title]=" 'MailBox.emailDetails.next' | translate " (click)="onNextMessage(viewMessageData)">
+              <i class="fa fa-caret-right"></i>
+          </button>
+          <button *ngIf="!checkIsNextBtnShow()" style="color:gray" md-button [title]=" 'MailBox.emailDetails.next' | translate ">
+              <i class="fa fa-caret-right"></i>
+          </button>
+      </div>
+
+  </div>
+
+
+  <div class="compose-mail">
+      <div style="width: 100%;clear: both;">
+          <span class="emailsubject" *ngIf="viewMessageData?.notificationSubject">
+              <b>{{viewMessageData?.notificationSubject}}</b>
+          </span>
+          <span style="float: right; margin-right: 18px;">{{ getTranslatedDate(viewMessageData?.createdAt) }}</span>
+      </div>
+      <hr>
+      <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px;font-size:12px;">
+          <!-- <label>{{ 'dashboardMessage.FROM' | translate }} : &nbsp;</label>
+          <span *ngIf="viewMessageData?.from?.sender?.email">
+              {{getCivility(viewMessageData?.from?.sender?.sex)}} {{viewMessageData?.from?.sender?.firstName}} {{viewMessageData?.from?.sender?.lastName}}
+          </span>
+          <span *ngIf="!viewMessageData?.from?.sender?.email">
+              {{viewMessageData?.from?.sender}}
+          </span> -->
+      </div>
+      <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:5px;margin-bottom:15px;font-size:12px;" *ngIf="recpList?.length > 0">
+          <div fxFlex>
+              <label>{{ 'dashboardMessage.TO' | translate }} : &nbsp;</label>
+              <span *ngFor="let recipientList of recpList; let recIndex = index">
+                  <span *ngIf="recipientList?.rank" title="{{recipientList?.rank}}">
+                      <span *ngFor="let rec of recipientList?.recipient;">
+                         <span *ngIf="rec?.email" title="{{rec?.email}}" >
+                            {{getCivility(rec?.sex)}} {{rec?.firstName}} {{rec?.lastName}}
+                           </span>
+                           <span *ngIf="!rec?.email" title="{{rec}}">
+                              {{ rec }}
+                           </span>
+                          <span *ngIf="recIndex < recpList?.length - 1">,&nbsp;&nbsp;</span>
+                         </span>
+                </span>
+            </span>
+          </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:5px">
+          <div fxFlex>
+              <p innerHTML={{viewMessageData.notificationMessage}}> </p>
+              <br/>
+              <br/>
+          </div>
+      </div>
+      <!-- <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:5px">
+
+      </div> -->
+  </div>
+</div>

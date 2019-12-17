@@ -1,0 +1,391 @@
+<div fxLayout="row wrap" style="height: 100%">
+  <div fxFlex="100">
+    <!--<form [formGroup]="form" (ngSubmit)="submit(form.value)">-->
+    <form [formGroup]="form" class="full-height">
+      <div fxLayout="column wrap" fxLayoutAlign="space-between stretch" class="full-height">
+
+        <div class="row wrap" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0" style="margin-right: 0px !important;min-height:600px;">
+          <div fxFlex="70" fxLayout="column" fxLayoutAlign="space-between stretch">
+            <div #TopLeftHeader>
+              <md-card class="dark-header" *ngIf="testDetails && testCorrect">
+                <md-card-title class="">
+                  <span> {{selectedRncpTitle?.shortName}} / {{testDetails?.name}} / {{ getTranslatedDate(testDetails?.date) }} </span>
+                  <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="50" class="flex_3" fxFlex.lt-md="100" *ngFor="let field of testDetails.correctionGrid.header.fields; let i = index ">
+                      <div class="px-1" *ngIf="testCorrect.correctionGrid.header.fields[i]">
+                        <md-input-container class="no-bottom-margin" dividerColor="accent" style="width: 100%" *ngIf="field.type == 'other'">
+                          <input mdInput [placeholder]="field.value" type="{{field.dataType}}" [formControl]="form.controls['header'+i]" [(ngModel)]="testCorrect.correctionGrid.header.fields[i].value">
+                        </md-input-container>
+                      </div>
+                    </div>
+                  </div>
+                  <div fxLayout="row wrap" *ngIf="testDetails.groupTest && selectedGroupDetails && selectedGroupDetails.students.length">
+                    <div fxFlex="50">
+                      <md-card class="primary-background dark-header">
+                        <md-card-title>
+                          <div fxLayout="row wrap" fxLayoutAlign="start center">
+                            <div fxFlex class="text-xl">
+                              {{'TESTCORRECTIONS.LISTOFSTUDENTS' | translate}}
+                            </div>
+                          </div>
+                        </md-card-title>
+                        <hr>
+                        <md-card-content class="pa-0 dark-text rncptitleCard scroll-y">
+                          <ngx-datatable class="material rncp-table" [rows]="selectedGroupDetails.students" [columnMode]="'force'" [headerHeight]="50"
+                            [footerHeight]="30" [rowHeight]="auto" [columnMode]="force" [externalSorting]="true" (sort)="sortPage($event)"
+                            [cssClasses]="ngxDtCssClasses">
+                            <ngx-datatable-column name="Name">
+                              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row['lastName']}} {{row['firstName']}}
+                              </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Score">
+                              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{row['score']}}
+                              </ng-template>
+                            </ngx-datatable-column>
+                          </ngx-datatable>
+                        </md-card-content>
+                      </md-card>
+                    </div>
+
+                    <div fxFlex="50">
+                      <md-card class="primary-background dark-header">
+                        <md-card-title>
+                          <div class="card-margin">
+                            <div fxLayout="row wrap">
+                              <div fxFlex class="text-xl">
+                                <label class="mr-1"> {{'USERS.PREPARATIONCENTER' | translate}}</label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card-margin">
+                            <div fxLayout="row wrap">
+                              <div fxFlex class="text-xl">
+                                <label class="mr-1">{{'TEST.TESTDATE' | translate}}</label> {{ getTranslatedDate(testDetails?.date) }}
+                              </div>
+                            </div>
+                          </div>
+                        </md-card-title>
+                      </md-card>
+                    </div>
+                  </div>
+                </md-card-title>
+                <md-card-content>
+                  <div fxLayout="row wrap">
+                    <div fxFlex="70">
+                      <span *ngIf="!testDetails.groupTest">
+                        <label style="text-align: right;padding-top: 15px;padding-right: 10px;">
+                          <div *ngIf="testDetails && testDetails.correctionStatus == 'corrected';else other_content_label">{{'TESTCORRECTIONS.notcorrectedliststudentvalidate' | translate}} :</div>
+                          <ng-template #other_content_label>
+                            {{studentSelect}}
+                          </ng-template>
+                        </label>
+                      </span>
+                    </div>
+                    <div fxFlex="30" style="padding-top: 12px;">
+                    </div>
+
+
+
+
+                  </div>
+                </md-card-content>
+              </md-card>
+            </div>
+            <md-card fxLayout="column wrap" fxLayoutAlign="space-between stretch" class="primary-background dark-header" *ngIf="testDetails && testDetails.type == 'free-continuous-control' && form.controls['finalTtl'] && !testCorrect.missingCopy">
+              <div class="table_container" style="overflow:auto; height:43em;">
+                <div fxFlex="80" class="px-1 select-input-container" style="text-align: left; color: white;padding: 10px;">
+                  <b> {{testDetails?.name}}</b>
+                </div>
+
+                <div fxFlex="50" class="px-1 select-input-container" style="text-align: right; color: white;padding-right: 10px;">
+                  <b>{{'TESTCORRECTIONS.Mark' | translate}} : &nbsp;&nbsp;</b>
+                  <md-input-container style="width: 50px" dividerColor="accent">
+                    <input readonly [(ngModel)]="testCorrect.correctionGrid.correction.total" mdInput (blur)="blurEventFreeControl($event,form.value)"
+                      type="number" [formControl]="form.controls['finalTtl']" *ngIf="isReadOnly" />
+                    <input [(ngModel)]="testCorrect.correctionGrid.correction.total" mdInput (blur)="blurEventFreeControl($event,form.value)"
+                      type="number" [formControl]="form.controls['finalTtl']" *ngIf="isReadOnly" />
+                  </md-input-container>
+                  / 20
+                </div>
+              </div>
+              <md-card-title class="dark-text rncptitleCard total_number" *ngIf="testDetails && !testCorrect.missingCopy">
+                <div class="px-1" style="text-align: left;float: left; color: white;">
+                  {{currentLoginUser.lastName}} {{currentLoginUser.firstName}} / {{ getTranslatedDate(today)}}
+                </div>
+                <div class="px-1 select-input-container" style="text-align: right; color: white;font-size: 14px;font-weight: bold;">
+                  <span>{{'TESTCORRECTIONS.FinalMark' | translate}}:</span> {{testCorrect.correctionGrid.correction.total}} / 20
+                </div>
+              </md-card-title>
+            </md-card>
+            <md-card fxLayout="column nowrap" fxLayoutAlign="space-between stretch" class="primary-background dark-header" *ngIf="testDetails && !testCorrect.missingCopy && testDetails.type !== 'free-continuous-control' ">
+              <div class="table_container" style="overflow:auto; height:43em;">
+
+                <md-card-content class="pa-0 dark-text rncptitleCard yellow-border" *ngFor="let section of testDetails.correctionGrid.correction.sections; let i = index ">
+                  <ngx-datatable class="material rncp-table correction-table" [rows]="section.subSections" [headerHeight]="50" [footerHeight]="30"
+                    [columnMode]="'force'" [externalSorting]="true" (sort)="sortPage($event)" [cssClasses]="ngxDtCssClasses"
+                    [rowHeight]="'auto'" id="{{i}}">
+                    <ngx-datatable-column [width]="650">
+                      <ng-template ngx-datatable-header-template>
+                        <span fxFlex [innerHTML]="section.title"></span>
+                      </ng-template>
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        <span class="TitleText" fxFlex [innerHTML]="row['title']"></span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column [width]="250" *ngIf="testDetails.correctionGrid.correction.commentArea && !testDetails.correctionGrid.correction.showAsList">
+                      <ng-template ngx-datatable-header-template>
+                        {{testDetails.correctionGrid.correction.commentsHeader}}
+                      </ng-template>
+                      <ng-template let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+                        <md-input-container color="accent" style="width: 100%" *ngIf="testCorrect.correctionGrid.correction.sections[i]">
+                          <textarea mdInput [formControl]="form.controls['comment-'+i+ '-' + rowIndex]" [(ngModel)]="testCorrect.correctionGrid.correction.sections[i].subSections[rowIndex].comments"></textarea>
+                        </md-input-container>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column [width]="250" *ngIf="testDetails.correctionGrid.correction.showDirectionsColumn && !testDetails.correctionGrid.correction.showAsList">
+                      <ng-template ngx-datatable-header-template>
+                        {{testDetails.correctionGrid.correction.directionsColumnHeader}}
+                      </ng-template>
+                      <ng-template let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+                        <span class="TitleText" fxFlex [innerHTML]="row['direction']"></span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column [width]="100" *ngIf="testDetails.correctionGrid.correction.showLetterMarksColumn && !testDetails.correctionGrid.correction.showAsList">
+                      <ng-template ngx-datatable-header-template>
+                        {{testDetails.correctionGrid.correction.letterMarksColumnHeader}}
+                      </ng-template>
+                      <ng-template let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+                        <md-input-container color="accent" style="width: 100%" *ngIf="testCorrect.correctionGrid.correction.sections[i]">
+                          <textarea mdInput [formControl]="form.controls['marksletters-'+i+ '-' + rowIndex]" [(ngModel)]="testCorrect.correctionGrid.correction.sections[i].subSections[rowIndex].marksletters"></textarea>
+                        </md-input-container>
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column [width]="150" *ngFor="let jury of listJury; let juryIndex = index ">
+                      <ng-template ngx-datatable-header-template>
+                        <span style="text-align: right;padding-right: 10px;float: right;">Jury - {{juryIndex+1}}</span>
+                      </ng-template>
+                      <ng-template style="text-align: right;" let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+                        <div class="select-input-container" style="text-align: right;padding-right: 10px;">
+                          <md-input-container style="width: 35px" dividerColor="accent" *ngIf="testCorrect.correctionGrid.correction.sections[i]">
+
+                            <input readonly (blur)="blurEventJury($event,row['maximumRating'],i,form.value,rowIndex,juryIndex)" mdInput type="number"
+                              [attr.min]="0" [attr.max]="row['maximumRating']" [min]="0" [max]="row['maximumRating']" name="{{'jury-'+i+'-'+juryIndex+'-marks'}}"
+                              [formControl]="form.controls['jury-'+i+'-'+rowIndex+'-'+juryIndex+'-marks']" *ngIf="isReadOnly"
+                            />
+                            <input (blur)="blurEventJury($event,row['maximumRating'],i,form.value,rowIndex,juryIndex)" mdInput type="number" [attr.min]="0"
+                              [attr.max]="row['maximumRating']" [min]="0" [max]="row['maximumRating']" name="{{'jury-'+i+'-'+juryIndex+'-marks'}}"
+                              [formControl]="form.controls['jury-'+i+'-'+rowIndex+'-'+juryIndex+'-marks']" *ngIf="!isReadOnly"
+                            />
+
+                          </md-input-container>
+                          / {{row['maximumRating']}}
+                        </div>
+                      </ng-template>
+                    </ngx-datatable-column>
+
+
+
+                    <ngx-datatable-column [width]="150">
+                      <ng-template ngx-datatable-header-template>
+                        <span *ngIf="testDetails.type == 'Jury' || testDetails.type == 'Memoire-ORAL'"> {{'TESTCORRECTIONS.Note' | translate}}</span>
+                        <span style="text-align: right;padding-right: 10px;float: right;">
+                          {{form.value['total'+i]}} / {{section.maximumRating}}
+                        </span>
+                      </ng-template>
+                      <ng-template style="text-align: right;" let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+                        <div class="select-input-container" style="text-align: right;padding-right: 10px;">
+                          <md-input-container style="width: 35px" dividerColor="accent" *ngIf="testCorrect.correctionGrid.correction.sections[i]">
+                            <input readonly *ngIf="testDetails.type == 'Jury' || testDetails.type == 'Memoire-ORAL' || isReadOnly" [(ngModel)]="listServiceFeature[i+'_'+rowIndex]"
+                              mdInput type="text" name="{{'subSection-'+i+'-'+rowIndex}}" [formControl]="form.controls['subSection-'+i+'-'+rowIndex]"
+                            />
+
+                            <input *ngIf="testDetails.type != 'Jury' && testDetails.type != 'Memoire-ORAL' && !isReadOnly" [(ngModel)]="listServiceFeature[i+'_'+rowIndex]"
+                              (blur)="blurEvent($event,row['maximumRating'],i,form.value,rowIndex)" mdInput type="number" step="0.1"
+                              [attr.min]="0" [attr.max]="row['maximumRating']" [min]="0" [max]="row['maximumRating']" name="{{'subSection-'+i+'-'+rowIndex}}"
+                              [formControl]="form.controls['subSection-'+i+'-'+rowIndex]" />
+
+                          </md-input-container>
+                          / {{row['maximumRating']}}
+                        </div>
+                      </ng-template>
+                    </ngx-datatable-column>
+                  </ngx-datatable>
+                  <div class="rncptitleCard" *ngIf="testCorrect.correctionGrid.correction.sections[i] && testDetails.correctionGrid.correction.showAsList">
+
+                    <div fxFlex="100" class="px-1 select-input-container" style="text-align: right; color: white;padding-right: 10px;">
+                      <md-input-container class="no-bottom-margin" style="width: 100%" dividerColor="accent" *ngIf="testDetails.correctionGrid.correction.showAsList">
+                        <textarea [formControl]="form.controls['comment'+i]" mdInput [placeholder]="'TESTCORRECTIONS.COMMENTS' | translate" [(ngModel)]="testCorrect.correctionGrid.correction.sections[i].comments"></textarea>
+                      </md-input-container>
+                    </div>
+                  </div>
+                </md-card-content>
+
+                <md-card-content class="pa-0 dark-text rncptitleCard yellow-border" style="width: 50%;float: right;" *ngIf="testDetails.correctionGrid.correction.penalties.length || testDetails.correctionGrid.correction.bonuses.length">
+                  <div *ngIf="testDetails.correctionGrid.correction.showPenalties">
+                    <ngx-datatable class="material rncp-table correction-table" [rows]="testDetails.correctionGrid.correction.penalties" [headerHeight]="0"
+                      [footerHeight]="0" [columnMode]="'force'" [externalSorting]="true" (sort)="sortPage($event)" [cssClasses]="ngxDtCssClasses"
+                      [rowHeight]="'auto'" id="{{i}}">
+                      <ngx-datatable-column [width]="100">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                          <span style="text-align: right;margin-right: 10px" class="TitleText" fxFlex>
+                            {{'TEST.PENALTIES' | translate}} - {{row['title']}}
+                          </span>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column [width]="50">
+                        <ng-template style="text-align: right;" let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+                          <div class="select-input-container" style="text-align: right;padding-right: 10px;">
+                            {{form.value['penalties-'+rowIndex] != "" ? '-' : ''}}
+                            <md-input-container style="width: 35px" dividerColor="accent" *ngIf="form.controls['penalties-'+rowIndex]">
+                              <input (blur)="blurEventPenalties($event,row['count'],i,form.value,rowIndex,rowIndex)" mdInput type="number" [attr.min]="0"
+                                [attr.max]="row['count']" [min]="0" [max]="row['count']" maxlength="{{row['count']}}" name="{{'penalties-'+rowIndex}}"
+                                [formControl]="form.controls['penalties-'+rowIndex]" />
+                            </md-input-container>
+                            / {{row['count']}}
+                          </div>
+                        </ng-template>
+                      </ngx-datatable-column>
+                    </ngx-datatable>
+                  </div>
+                  <div *ngIf="testDetails.correctionGrid.correction.showBonuses">
+                    <ngx-datatable class="material rncp-table correction-table" [rows]="testDetails.correctionGrid.correction.bonuses" [headerHeight]="0"
+                      [footerHeight]="0" [columnMode]="'force'" [externalSorting]="true" (sort)="sortPage($event)" [cssClasses]="ngxDtCssClasses"
+                      [rowHeight]="'auto'" id="{{i}}">
+                      <ngx-datatable-column [width]="100">
+                        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                          <span style="text-align: right;margin-right: 10px" class="TitleText" fxFlex>
+                            {{'TEST.BONUS' | translate}} - {{row['title']}}
+                          </span>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column [width]="50">
+                        <ngx-datatable-column [width]="50">
+                          <ng-template style="text-align: right;" let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+                            <div class="select-input-container" style="text-align: right;padding-right: 10px;">
+                              {{form.value['bonuses-'+rowIndex] != "" ? '+' : ''}}
+                              <md-input-container style="width: 35px" dividerColor="accent" *ngIf="form.controls['bonuses-'+rowIndex]">
+                                <input (blur)="blurEventBonuses($event,row['count'],i,form.value,rowIndex,rowIndex)" mdInput type="number" [attr.min]="0"
+                                  [attr.max]="row['count']" [min]="0" [max]="row['count']" maxlength="{{row['count']}}" name="{{'bonuses-'+rowIndex}}"
+                                  [formControl]="form.controls['bonuses-'+rowIndex]" />
+                              </md-input-container>
+                              / {{row['count']}}
+                            </div>
+                          </ng-template>
+                        </ngx-datatable-column>
+                      </ngx-datatable-column>
+                    </ngx-datatable>
+                  </div>
+                </md-card-content>
+
+                <md-card-content style="clear:both" *ngIf="testDetails.correctionGrid.correction.showEliminations && form.controls['elimination']">
+                  <div fxFlex="100" fxFlex.lt-md="100">
+
+                    <table style="width:100%">
+                      <tr>
+                        <th width="10%">{{'TEST.ELIMINATION' | translate}} :</th>
+                        <td width="90%">
+                          <md-checkbox color="accent" labelPosition="before" [checked]="testCorrect.correctionGrid.correction.elimination" align="start"
+                            [formControl]="form.controls['elimination']" (click)="eliminateStudent($event)" [(ngModel)]="testCorrect.correctionGrid.correction.elimination">
+
+                          </md-checkbox>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th width="10%"> {{'TEST.REASON' | translate}} :</th>
+                        <td width="90%">
+                          <md-input-container class="no-bottom-margin no-top-margin" dividerColor="accent" style="width: 100%">
+                            <textarea mdInput [formControl]="form.controls['eliminationReason']" [(ngModel)]="testCorrect.correctionGrid.correction.eliminationReason"></textarea>
+                          </md-input-container>
+                        </td>
+                      </tr>
+                    </table>
+
+                  </div>
+                </md-card-content>
+              </div>
+              <md-card-title class="dark-text rncptitleCard total_number" *ngIf="testDetails && !testCorrect.missingCopy">
+                <!--*ngIf="testDetails"-->
+                <div class="px-1" style="text-align: left;float: left; color: white;">
+                  {{currentLoginUser?.lastName}} {{currentLoginUser?.firstName}} / {{ getTranslatedDate(today) }}
+                </div>
+                <div class="px-1 select-input-container" style="text-align: right; color: white;font-size: 14px;font-weight: bold;">
+                  <span>{{'TESTCORRECTIONS.FinalMark' | translate}}:</span>
+                  &nbsp;&nbsp;{{ testDetails.type == 'Jury' || testDetails.type == 'Memoire-ORAL' ? getTotalForJury() : testCorrect.correctionGrid.correction.total}}
+                  / {{testDetails ? getMaxScore() : 0}}
+                  <span *ngIf="testDetails && testDetails.correctionGrid.correction.totalZone.displayAdditionalTotal">&nbsp; - &nbsp;{{testCorrect.correctionGrid.correction.additionalTotal}} / {{getMaxCustomScore()}}</span>
+
+                  <span *ngIf="(testDetails.type == 'Jury' || testDetails.type == 'Memoire-ORAL') && form.controls['ttlJuryAvgRating']" style="margin-top:5px;">
+                    <br> {{'PARAMETERS-RNCP.TEST.SCORE_BY_JURY' | translate}} : &nbsp;&nbsp;
+                    <md-input-container style="width: 35px" dividerColor="accent">
+                      <input [(ngModel)]="testCorrect.correctionGrid.correction.totalJuryAvgRating" mdInput type="number" [formControl]="form.controls['ttlJuryAvgRating']"
+                      />
+                    </md-input-container>
+                    / {{testDetails ? getMaxScore() : 0}}
+                  </span>
+                </div>
+
+              </md-card-title>
+
+            </md-card>
+            <div>
+              <md-card class="primary-background dark-header footer_section" *ngIf="testDetails">
+
+                <md-card-content class="rncptitleCard" *ngIf="testDetails.correctionGrid.footer">
+                  <div fxFlex="50" fxFlex.lt-md="100" *ngFor="let field of testDetails.correctionGrid.footer.fields; let i = index ">
+                    <div class="px-1" style="padding-left:0 !important" *ngIf="testCorrect.correctionGrid.footer.fields[i]">
+
+
+                      <md-checkbox signature name="Signature" class="mt-1" *ngIf="field.dataType == 'signature'" color="accent" [checked]="testCorrect.correctionGrid.footer.fields[i].value"
+                        [disabled]="isReadOnly" align="start" [formControl]="form.controls['footer'+i]" [(ngModel)]="testCorrect.correctionGrid.footer.fields[i].value">
+                        {{field.value}}
+                      </md-checkbox>
+
+                      <md-input-container class="no-bottom-margin" dividerColor="accent" style="width: 100%" *ngIf="field.dataType != 'signature'">
+                        <input readonly mdInput style="height: 1rem;" [placeholder]="field.value" type="{{field.dataType}}" [formControl]="form.controls['footer'+i]"
+                          *ngIf="isReadOnly" [(ngModel)]="testCorrect.correctionGrid.footer.fields[i].value">
+                        <input mdInput style="height: 1rem;" [placeholder]="field.value" type="{{field.dataType}}" [formControl]="form.controls['footer'+i]"
+                          *ngIf="!isReadOnly" [(ngModel)]="testCorrect.correctionGrid.footer.fields[i].value">
+                      </md-input-container>
+                    </div>
+                  </div>
+                </md-card-content>
+
+              </md-card>
+
+
+            </div>
+            <md-card class="primary-background dark-header" 
+            *ngIf="!utilityService.checkUserIsStudent() && showActionButtonCard" >
+              <md-card-title style="display: flex; justify-content: flex-end;">
+                <button style="margin-right: 1%;" [disabled]="!checkIsValidToSaveScore() || isReadOnly" type="button" md-button md-raised-button color="accent"
+                  (click)="submit('')" *ngIf="!showExpidteMentEvalButton">
+                  <md-icon>save</md-icon> {{'TESTCORRECTIONS.SUBMIT.SAVETHISSCORE_MENT' | translate}}
+                </button>
+                <button (click)="submitScoreToSchoolCheck()" type="submit" [disabled]="!checkIsReadyToSend()" md-button md-raised-button color="accent"
+                  *ngIf="testDetails && mainDataObj.mentorEvaluationStatus == 'sentToMentor' && !showExpidteMentEvalButton">
+                  <md-icon>send</md-icon>
+                  {{'TESTCORRECTIONS.SUBMIT.SUBMITTESTRESULT_MENT' | translate}}
+                </button>
+                <button type="submit" [disabled]="!checkIsReadyToSend()" (click)="validateAll()" md-button md-raised-button color="accent"
+                  *ngIf="testDetails && mainDataObj.mentorEvaluationStatus == 'filledByMentor' &&
+                  (utilityService.checkUserIsAcademicAdminDirector() || utilityService.checkUserIsDirectorSalesAdmin())">
+                  <md-icon>send</md-icon>
+                  {{'TESTCORRECTIONS.SUBMIT.VALIDATE' | translate}}
+                </button>
+                <button type="submit" [disabled]="!checkIsValidToSaveScore() || isReadOnly" (click)="submit('EXPEDITE')" md-button md-raised-button color="accent"
+                  *ngIf="testDetails && showExpidteMentEvalButton">
+                  <md-icon>send</md-icon>
+                  {{'TESTCORRECTIONS.SUBMIT.EXPEDITE' | translate}}
+                </button>
+              </md-card-title>
+            </md-card>
+          </div>
+          
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

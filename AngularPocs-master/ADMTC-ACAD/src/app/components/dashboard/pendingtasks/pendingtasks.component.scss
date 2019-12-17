@@ -1,0 +1,16 @@
+:host /deep/ .primary-background {
+    //background-color: #607d8b;
+}
+md-card.dark-header {
+    .mat-card-title{
+        margin-bottom: 0;
+        padding-bottom: 16px;
+        background-color: #212121;
+    }
+}
+
+.filter-card {
+    padding-bottom: 7.5px;
+    margin-bottom: 0px !important;
+    background-color: #212121;
+}

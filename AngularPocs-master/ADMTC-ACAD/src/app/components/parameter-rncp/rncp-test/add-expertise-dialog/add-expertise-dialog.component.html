@@ -1,0 +1,109 @@
+<div fxLayout="column wrap" fxLayoutAlign="start" style="width: 100%; height: 100%;">
+    <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px;">
+        <div class="pa-1">
+            <div fxLayout="row wrap" fxLayoutAlign="start center">
+                <div fxFlex>
+                    <span class="text-xl">{{'PARAMETERS-RNCP.EXPERTISE.ADDEXPERTISE' | translate}}</span>
+                </div>
+                <button md-icon-button (click)="cancel()">
+                    <md-icon>close</md-icon>
+                </button>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <md-tab-group fxFlex headerPosition="center" class="mb-1 create-subject" md-stretch-tabs style="min-height: 300px">
+        <md-tab [label]="'' | translate">
+            <div fxFlex.gt-sm="100%" fxFlex="100" style="margin-top: 15px;">
+                <form [formGroup]="form">
+                    <!-- <md-card>
+                        <md-card-content> -->
+                            <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top: 10px;margin-bottom: 10px;">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1">
+                                        <md-slide-toggle #spec labelPosition="after" formControlName="isSpecialization">
+                                            {{'NEW_SCHOOL.Block_Of_Specializations' | translate}}</md-slide-toggle>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1" *ngIf="spec.checked === false;">
+                                        <md-input-container dividerColor="accent" style="width: 100%">
+                                            <input mdInput formControlName="blockOfExperise" placeholder="{{ !form.value.countForTitleFinalScore ? 'Option':'PARAMETERS-RNCP.EXPERTISE.NAME.title' | translate }}" type="text" required/>
+                                        </md-input-container>
+                                        <small *ngIf="form.controls['blockOfExperise'].hasError('required') && (form.controls['blockOfExperise'].touched || formSubmit)" class="mat-text-warn">{{'PARAMETERS-RNCP.EXPERTISE.NAME.validation1' | translate}}</small>
+                                        <small *ngIf="form.controls['blockOfExperise'].hasError('maxlength') && (form.controls['blockOfExperise'].touched || formSubmit)" class="mat-text-warn">{{ 'PARAMETERS-RNCP.EXPERTISE.NAME.validation2' | translate}}</small>
+                                        <small *ngIf="form.controls['blockOfExperise'].hasError('pattern') && (form.controls['blockOfExperise'].touched || formSubmit)" class="mat-text-warn">{{ 'PARAMETERS-RNCP.EXPERTISE.NAME.validation3' | translate}}</small>
+                                    </div>
+                                    <div class="px-1" *ngIf="spec.checked === true;" style="width:70%">
+                                      <md-select formControlName="blockOfExperise" [placeholder]="'NEW_SCHOOL.Select_Specialization'| translate" required>
+                                        <md-option [value]="specialization.name" *ngFor="let specialization of specializations" (click)="selectSpecialization(specialization._id)">{{specialization.name}}</md-option>
+                                      </md-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top: 10px;margin-bottom: 10px;">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1">
+                                        <md-slide-toggle labelPosition="after" [checked]="form.value.countForTitleFinalScore" (change)="toggleFinalScore($event)" name="countForTitleFinalScore">
+                                            {{'PARAMETERS-RNCP.EXPERTISE.FINALSCORE.title' | translate}}</md-slide-toggle>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="expertiseMarkPointStatus">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1">
+
+                                        <md-input-container dividerColor="accent" style="width: 100%">
+                                            <input mdInput formControlName="maxPoints" [placeholder]="'PARAMETERS-RNCP.EXPERTISE.MAXPOINT.title' | translate" type="number" required pattern="[0-9][0-9]*" maxlength="2" />
+                                        </md-input-container>
+                                        <small *ngIf="form.controls['maxPoints'].hasError('required') && (form.controls['maxPoints'].touched || formSubmit)" class="mat-text-warn">{{'PARAMETERS-RNCP.EXPERTISE.MAXPOINT.validation1' | translate}}</small>
+                                        <small *ngIf="form.controls['maxPoints'].hasError('maxlength') && (form.controls['maxPoints'].touched || formSubmit)" class="mat-text-warn">{{ 'PARAMETERS-RNCP.EXPERTISE.MAXPOINT.validation2' | translate}}</small>
+                                        <small *ngIf="form.controls['maxPoints'].hasError('pattern') && (form.controls['maxPoints'].touched || formSubmit)" class="mat-text-warn">{{ 'PARAMETERS-RNCP.EXPERTISE.MAXPOINT.validation3' | translate}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1">
+                                        <md-input-container dividerColor="accent" style="width: 100%">
+                                            <input mdInput formControlName="minScore" [placeholder]="'PARAMETERS-RNCP.EXPERTISE.MINSCORE.title' | translate" type="number" required pattern="[0-9][0-9]*" maxlength="2" />
+                                        </md-input-container>
+                                        <small *ngIf="form.controls['minScore'].hasError('required') && (form.controls['minScore'].touched || formSubmit)" class="mat-text-warn">{{'PARAMETERS-RNCP.EXPERTISE.MINSCORE.validation1' | translate}}</small>
+                                        <small *ngIf="form.controls['minScore'].hasError('maxlength') && (form.controls['minScore'].touched || formSubmit)" class="mat-text-warn">{{ 'PARAMETERS-RNCP.EXPERTISE.MINSCORE.validation2' | translate}}</small>
+                                        <small *ngIf="form.controls['minScore'].hasError('pattern') && (form.controls['minScore'].touched || formSubmit)" class="mat-text-warn">{{ 'PARAMETERS-RNCP.EXPERTISE.MINSCORE.validation3' | translate}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1">
+                                        <md-input-container dividerColor="accent" style="width: 100%">
+                                            <textarea mdInput formControlName="description" mdInput id="icon_prefix2" [placeholder]="'PARAMETERS-RNCP.EXPERTISE.DESCRIPTION.title' | translate" class="materialize-textarea"></textarea>
+                                        </md-input-container>
+                                        <small *ngIf="form.controls['description'].hasError('required') && (form.controls['description'].touched || formSubmit)" class="mat-text-warn">{{'PARAMETERS-RNCP.EXPERTISE.DESCRIPTION.validation1' | translate}}</small>
+                                        <small *ngIf="form.controls['description'].hasError('maxlength') && (form.controls['description'].touched || formSubmit)" class="mat-text-warn">{{ 'PARAMETERS-RNCP.EXPERTISE.DESCRIPTION.validation2' | translate}}</small>
+                                        <small *ngIf="form.controls['description'].hasError('pattern') && (form.controls['description'].touched || formSubmit)" class="mat-text-warn">{{ 'PARAMETERS-RNCP.EXPERTISE.DESCRIPTION.validation3' | translate}}</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <!-- </md-card-content>
+                    </md-card> -->
+                </form>
+            </div>
+        </md-tab>
+    </md-tab-group>
+    <div fxLayout="row wrap" fxLayoutAlign="flex-end" fxLayoutGap="1rem" fxFlexAlign="end" style="width: 100%">
+        <button md-raised-button class="mat-green" (click)="cancel()">{{"CANCEL" | translate}}</button>
+        <button md-raised-button color="accent" (click)="continue()">{{"USERS.ADDEDITUSER.SUBMIT" | translate}}</button>
+    </div>
+</div>
+
+
+
+

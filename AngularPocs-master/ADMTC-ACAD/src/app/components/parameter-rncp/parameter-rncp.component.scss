@@ -1,0 +1,49 @@
+
+:host /deep/ .mat-button-toggle-checked .mat-button-toggle-label-content{
+    background-color:#607d8b !important;
+}
+
+.address-container .panel-default {
+    position: relative;
+}
+
+.address-container .panel-default:nth-child(2) {
+    margin-top: 20px;
+}
+
+.address-container .panel-heading {
+    display: inline-block;
+    position: absolute;
+    background-color: #ddd;
+    top: -9px;
+    left: 11px;
+    padding: 2px 14px;
+    font-size: 12px;
+}
+
+.address-container .panel-body {
+    border: 1px solid #ddd !important;
+    padding-top: 15px;
+}
+
+.cdk-focused, .cdk-mouse-focused {
+    background-color: rgba(0,0,0,.12);
+}
+
+.add-btn {
+    width: 25px;
+    height: 25px;
+    background-color: #ffd740;
+    display: inline-block;
+    border-radius: 50%;
+    top: 4px;
+    vertical-align: middle;
+    margin-left: 3px;
+    box-shadow: 1px 2px 4px #9e9d9d;
+}
+
+.box {
+    padding: 5px;
+    border: 1px solid;
+    margin-top: 5px;
+}

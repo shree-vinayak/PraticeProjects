@@ -1,0 +1,43 @@
+<md-card>
+  <md-card-content class="questionnaire-parent">
+    <div>
+      <md-tab-group headerPosition="center" class="mb-1 viewTemplate" md-stretch-tabs (selectChange)="tabChange($event)">
+        <md-tab [label]="'QUESTIONNAIRE_TOOLS.QUESTIONNAIRE_TEMPLATE' | translate" >
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <button style="float: left;width: 230px;" md-raised-button color="accent" (click)="addQuestionnaire()">
+              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="#000000" d="M19,19H5V5H15V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V11H19M7.91,10.08L6.5,11.5L11,16L21,6L19.59, 4.58L11,13.17L7.91,10.08Z"
+                />
+              </svg>
+              {{'Add Questionnaire' | translate}}
+            </button>
+          </div>
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="50" fxFlex.lt-md="50">
+              <span *ngIf="template"> 
+              <app-questionnaire-template></app-questionnaire-template>
+              </span>
+            </div>
+          </div>
+        </md-tab>
+
+        <md-tab [label]="'QUESTIONNAIRE_TOOLS.QUESTIONNAIRE_ISSUED' | translate">
+          <span *ngIf="issued">
+          <app-questionnaire-board ></app-questionnaire-board>
+          </span>
+        </md-tab>
+
+        <md-tab [label]="'QUESTIONNAIRE_TOOLS.RECIPIENT' | translate">
+          <span *ngIf="recipient">
+            <app-questionnaire-recipient></app-questionnaire-recipient>
+          </span>
+        </md-tab>
+      </md-tab-group>
+    </div>
+    <div>
+      <hr>
+      <br>
+      <!-- <router-outlet></router-outlet> -->
+    </div>
+  </md-card-content>
+</md-card>

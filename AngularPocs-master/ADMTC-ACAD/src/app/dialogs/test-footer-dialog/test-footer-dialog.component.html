@@ -1,0 +1,43 @@
+<div fxLayout="column wrap" fxLayoutAlign="start" style="width: 100%; height: 100%;">
+  <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px;">
+    <div class="pa-1">
+      <div fxLayout="row wrap" fxLayoutAlign="start center">
+        <div fxFlex>
+          <md-icon class="middle">receipt</md-icon>
+          <span class="text-xl">{{'TESTCORRECTIONS.FOOTERINFO' | translate}}</span>
+        </div>
+        <button md-icon-button (click)="closeDialog()">
+          <md-icon>close</md-icon>
+        </button>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="submit(form.value)">
+    <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="1rem" fxFlexAlign="end" style="width: 100%; min-height: 300px;" *ngIf="test" >
+      <div fxLayout="row" fxLayoutWrap="wrap" class="mt-1">
+        <div fxFlex="100" fxFlex.lt-md="100" *ngFor="let field of test.correctionGrid.footer.fields; let i = index ">
+          <div class="px-1">
+            <md-checkbox name="Signature"
+                     class="mt-1"
+                     *ngIf="field.value == 'Signature'"
+                     color="accent"
+                     [checked]="testCorrect.footer.fields[i].value"
+                     align="start" 
+                     [formControl]="form.controls['footer'+i]"
+                     [(ngModel)]="testCorrect.footer.fields[i].value">
+          				{{field.value}}
+        	</md-checkbox>
+		    <md-input-container dividerColor="accent" style="width: 100%" *ngIf="field.value != 'Signature'">
+		      <input mdInput [placeholder]="field.value" type="{{field.dataType}}" [formControl]="form.controls['footer'+i]" [(ngModel)]="testCorrect.footer.fields[i].value">
+		    </md-input-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align: right;">
+      <button md-raised-button color="warn" type="button" (click)="closeDialog()">{{'TESTCORRECTIONS.SUBMIT.CANCEL' | translate}}</button>
+      <button md-raised-button color="primary" type="submit">{{'TESTCORRECTIONS.SUBMIT.SUBMIT' | translate}}</button>
+    </div>
+  </form>
+</div>

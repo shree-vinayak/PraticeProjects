@@ -1,0 +1,91 @@
+.certiStudentTableComponent {
+    height: 100%;
+}
+
+.statusIcon {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.btnSearch-dark {
+    color: #000;
+}
+
+.small-marg {
+    @media screen and (max-width: 1400px) {
+        margin-left: -10px;
+    }
+}
+
+.title-max {
+    font-size: 22px;
+    font-weight: bold;
+    text-overflow: ellipsis !important;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.text-wrap {
+    text-overflow: ellipsis !important;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.sendCertificate {
+    @media screen and (max-width: 1650px) {
+        margin-left: -5%;
+    }
+}
+
+:host /deep/ {
+    .certiStudentTableComponent .ngx-datatable.material.scroll-vertical {
+        height: 81vh;
+    }
+    .certiStudNgxDiv .datatable-header .datatable-header-inner .datatable-header-cell .datatable-checkbox{
+        margin-left: -10px;
+    }
+
+    .certiStudentTableComponent ng-select select-dropdown>div .options {
+        background-color: rgba(0, 0, 0, 0.5)
+    }
+    .certiStudentTableComponent .ui-select-placeholder {
+        color: #dddddd;
+        float: left;
+        font-weight: 700;
+        font-size: 14px;
+        margin-left: -12px;
+    }
+    .certiStudentTableComponent .form-control:focus {
+        box-shadow: #424242;
+        border-left-color: #424242 !important;
+        border-right-color: #424242 !important;
+        border-top: none !important;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(0, 0, 0, .6);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(0, 0, 0, .6);
+    }
+    .certiStudentTableComponent .btn {
+        background-color: #424242 !important;
+        border-left-color: #424242 !important;
+        border-right-color: #424242 !important;
+        border-top: none !important;
+    }
+    .certiStudentTableComponent .ui-select-match-text {
+        color: white;
+        margin-left: -12px;
+    }
+    .certiStudentTableComponent input {
+        color: white !important;
+        background-color: #424242 !important;
+        border-left-color: #424242 !important;
+        border-right-color: #424242 !important;
+        border-top: none !important;
+    }
+    .certiStudentTableComponent {
+        input {
+            background-color: #424242 !important;
+        }
+    }
+    .certiStudentTableComponent .datatable-body {
+        overflow-x: hidden !important;
+    }
+}

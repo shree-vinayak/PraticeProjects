@@ -1,0 +1,54 @@
+<div fxLayout="column wrap" style="height: 100%">
+  <div class="mb-1">
+    <div fxLayout="row wrap" fxFlexAlign="start center">
+      <span fxFlex class="text-xl text-center" style="text-decoration: underline">{{'SELECTFOLDER' | translate}}</span>
+      <button md-icon-button md-button-sm (click)="cancel()">
+        <md-icon>close</md-icon>
+      </button>
+    </div>
+  </div>
+  <div fxFlex>
+    <div fxLayout="column wrap" class="py-1" style="height: 100%">
+      <div *ngIf="stack && stack.length >= 0; else noPath"
+           fxLayout="row wrap" fxLayoutAlign="space-between center" class="mb-1">
+        <div fxFlex>
+          <a *ngFor="let path of pathArray; index as i">
+            {{path}}
+            <md-icon style="vertical-align: middle">chevron_right</md-icon>
+          </a>
+        </div>
+      </div>
+      <ng-template #noPath>
+        <div class="mb-1">
+          Please select path.
+        </div>
+      </ng-template>
+      <div fxFlex class="mat-grey-50 px-1" style="overflow: scroll">
+        <ul class="category-list">
+          <li class="root-category">
+            <a (click)="selectRoot()" [ngClass]="{'selected': stack.length === 0}">
+              <i class="fa fa-caret-down"></i>
+              <md-icon style="vertical-align: middle;">folder</md-icon>
+              Root
+            </a>
+            <ul class="sub-category-list">
+              <li>
+                <app-category *ngFor="let category of academicKit?.categories; index as i"
+                              [category]="category" [index]="i" [selectItem]="true" (click)="onSelectToCategory(category)"></app-category>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="end" class="mt-1">
+    <button md-raised-button
+            color="primary"
+            (click)="move()">
+      {{'MOVE' | translate}}
+      <md-icon>call_made</md-icon>
+    </button>
+  </div>
+</div>

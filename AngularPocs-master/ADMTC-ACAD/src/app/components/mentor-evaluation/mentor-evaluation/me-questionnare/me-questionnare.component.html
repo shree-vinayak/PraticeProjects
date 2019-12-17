@@ -1,0 +1,47 @@
+<md-card>
+  <md-card-content>
+    <div fxLayout="row wrap" fxLayoutAlign="start">
+      <div fxFlex="17">
+        <!-- <button md-raised-button type="button" color="primary" (click)="createDuplidateQuestionnaireDialog()">
+          <md-icon>content_copy</md-icon>
+          {{'MENTOREVALUATION.QUESTIONNAIRE.DUPLICATE_QUESTIONNAIRE' | translate}}
+        </button> -->
+      </div>
+      <div fxFlex="1"></div>
+      <div fxFlex="17">
+        <!-- <button md-raised-button type="button" color="primary" (click)="editQuestionnaireDialog()">
+          <md-icon>edit</md-icon>
+          {{'MENTOREVALUATION.QUESTIONNAIRE.EDIT_QUESTIONAIRE' | translate}}
+        </button> -->
+      </div>
+      <div fxFlex="65" fxLayoutAlign="end">
+        <button *ngIf="readyToSave" md-raised-button type="button" color="accent" (click)="saveQuestionnaire()">
+          <md-icon>save</md-icon>{{'MENTOREVALUATION.QUESTIONNAIRE.SAVE_QUESTIONAIRE' | translate}}</button>
+        <button *ngIf="!readyToSave" md-raised-button type="button" color="default" (click)="validateQuestionnaire()">
+          <md-icon>save</md-icon>{{'MENTOREVALUATION.QUESTIONNAIRE.SAVE_QUESTIONAIRE' | translate}}</button>
+      </div>
+    </div>
+  </md-card-content>
+</md-card>
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex="50" fxFlex.lt-md="50">
+    <app-questionnaire-details [isValid]="isValid"></app-questionnaire-details>
+  </div>
+  <div fxFlex="50" fxFlex.lt-md="50">
+    <!-- <div style="text-align: right; padding-bottom:4px;">
+      <button md-raised-button color="green" (click)="cancelTest()">
+        <md-icon>cancel</md-icon>
+        {{'TEST.CANCEL' | translate}}
+      </button>&nbsp;&nbsp;
+      <button md-raised-button color="accent" (click)="saveTest(false)" style="display:none;">
+        <md-icon>save</md-icon>
+        {{'TEST.SAVE' | translate}}
+      </button>&nbsp;&nbsp;
+      <button md-raised-button color="accent" (click)="saveTest(true)">
+        <md-icon>save</md-icon>
+        {{'TEST.SAVE&LEAVE' | translate}}
+      </button> -->
+    <app-questionnaire-document></app-questionnaire-document>
+  </div>
+</div>

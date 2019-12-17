@@ -1,0 +1,4410 @@
+{
+  "HOME": "Tableau de bord",
+  "STUDENTS": "Apprenants",
+  "APPS": "Applications",
+  "CALENDAR": "Calendrier",
+  "MEDIA": "Médias",
+  "MESSAGES": "Messages",
+  "SOCIAL": "Social",
+  "CHAT": "Discuter",
+  "WIDGETS": "Widgets",
+  "MATERIAL": "Matériel",
+  "BUTTON": "Bouton",
+  "CARDS": "Cartes",
+  "SELECT": "Sélectionner",
+  "AUTOCOMPLETE": "Autocomplétion",
+  "CHIPS": "Labels",
+  "INPUT": "Données",
+  "CHECKBOX": "Case à cocher",
+  "DATEPICKER": "Choisir une date",
+  "RADIO": "Option",
+  "TOOLBAR": "Barre d'outils",
+  "LISTS": "Listes",
+  "GRID": "La grille",
+  "PROGRESS": "La progression",
+  "TABS": "Onglets",
+  "SWITCH": "Le curseur",
+  "TOOLTIP": "Info-bulle",
+  "MENU": "Le menu",
+  "SLIDER": "Curseur",
+  "SNACKBAR": "Snackbar",
+  "DIALOG": "Dialogue",
+  "FORMS": "Formes",
+  "EDITOR": "Editeur",
+  "VALIDATION": "Validation",
+  "UPLOAD": "Déposer",
+  "TREE": "Arbre",
+  "TABLES": "Les tables",
+  "FULLSCREEN": "Plein écran",
+  "EDITING": "Édition",
+  "FILTER": "Filtre",
+  "SELECTION": "Sélection",
+  "PAGING": "Pagination",
+  "SORTING": "Tri",
+  "PINNING": "Épingler",
+  "ECOMMERCE": "Commerce électronique",
+  "PRODUCTS": "Des produits",
+  "COMPACT": "Compact",
+  "DETAIL": "Vue Détaillée",
+  "CHARTS": "Graphiques",
+  "MAPS": "Cartes",
+  "GOOGLE": "Google",
+  "LEAFLET": "Brochure",
+  "DND": "Glisser Déposer",
+  "PAGES": "Pages",
+  "INVOICE": "Facture",
+  "TIMELINE": "Chronologie",
+  "USER": "Utilisateur",
+  "BLANK": "Blanc",
+  "PRICING": "Tarif",
+  "SESSION": "Session",
+  "404": "404",
+  "SIGNIN": "Connexion",
+  "SIGNUP": "Inscription",
+  "FORGOT": "Oublié",
+  "LOCKSCREEN": "Ecran de vérouillage",
+  "ERROR": "Erreur",
+  "DOCS": "Docs",
+  "ENGLISH": "Anglais",
+  "HELP": "Aide",
+  "LOGOUT": "Déconnexion",
+  "MYMESSAGES": "Mes messages",
+  "CONTACTUS": "Contactez nous",
+  "TUTORIALS": "Tutoriels",
+  "FRENCH": "Français",
+  "ADD": "Ajouter",
+  "EDIT": "Modifier",
+  "BEFORE": "Avant",
+  "AFTER": "Après",
+  "DAYS": "jours",
+  "RNCPTITLES": "Titres RNCP",
+  "SCHOOLS": "Écoles",
+  "TASKS": "Tâches",
+  "BILLING": "Facturation",
+  "MAILBOX": "boites aux lettres",
+  "1001 IDEAS": "1001 Idées",
+  "TOOLS": "Outils",
+  "EMPLOYABILITY-SURVEY": "Enquete d'Employabilité",
+  "Add Task": "Ajouter une Tâche",
+  "Edit Task": "Modifier cette Tâche",
+  "MoveToInbox": "Transferé dans la Boite de Reception",
+  "NoDataToDisplay": "Aucun résultat - changez les critères de votre recherche.",
+  "NoDataToDisplayPendingTasks": "Aucune tâche en attente!",
+  "NoDataToDisplayCalenderEvent": "Aucun Évènement à venir",
+  "1001 Ideas": "1001 Idees",
+  "COMMENTS": "Commentaires",
+  "ENTER": "Entrer",
+  "VALIDATE": "Valider",
+  "REJECT": "Rejeter",
+  "SUCCESS": "Bravo !",
+  "OR": "OU",
+  "OKAY": "D’accord",
+  "MODIFY": "Modifier",
+  "CLICK_HERE": "Cliquer Ici",
+  "SOCIAL_LOGIN": {
+    "SIGN_IN_WITH_LINKEDIN": "Se connecter avec linkedin",
+    "SIGN_IN_WITH_VIADEO": "Se connecter avec Viadeo",
+    "SOCIAL_LOGIN_USER_NOT_REGISTERED": {
+      "TITLE": "Impossible de se connecter via  linkedin",
+      "TEXT": "Pour pouvoir vous connecter avec linkedin, veuillez connecter votre compte après vous être connecter manuellement"
+    },
+    "SOCIAL_S2": {
+      "TITLE": "Bravo!",
+      "TEXT": "Vous êtes déjà connecté avec votre compte Linkedin",
+      "BUTTON": "Ok"
+    },
+    "SOCIAL_S3": {
+      "TITLE": "Compte déjà enregistré sur la plateforme  ADMTC.PRO",
+      "BUTTON": "Ok"
+    }
+  },
+  "WHEN_UNREGISTERED_STUDENTS": {
+    "TITLE": "Attention !",
+    "TEXT": "Tant que vos apprenants <br/>ne se sont pas TOUS enregistrés sur la plateforme <br/>en créant leur mot de passe, <br/>vous ne pouvez pas en utiliser <br/>les fonctionnalités principales comme <br/>l’affectation de correcteur ou la saisie de notes.<br/><br/> Merci de relancer les apprenants suivants :<br/> {{ studentlist }}",
+    "BUTTON": "Acceder a  Admtc.Pro"
+  },
+  "WHEN_UNREGISTERED_STUDENTS_IN_ONE_RNCP": {
+    "TITLE": "Desole !",
+    "TEXT": "Tant que TOUS les Apprenants n’auront pas entrer leur mot de passe <br/> vous ne pourrez pas effectuer cette tâche",
+    "BUTTON": "J’ai compris"
+  },
+  "QUESTIONNAIRE_TOOLS": {
+    "QUESTIONNAIRE_TEMPLATE": "Modèle de formulaire",
+    "QUESTIONNAIRE_BOARD": "Formulaire Envoyé",
+    "QUESTIONNAIRE_ISSUED": "Formulaires publiés",
+    "RECIPIENT": "Destinataire",
+    "QUESTIONNAIRE_TYPE": "Type",
+    "TEMPLATE_NAME": "Nom du modèle",
+    "CREATE_DATE": "Créé",
+    "BY": "par",
+    "ACTION": "Action"
+  },
+  "PARAMETERS-RNCP": {
+    "TITLE": "Paramètres du titre RNCP",
+    "CLASS": "Classes",
+    "SUBJECT": "Epreuves",
+    "Conditions": "Conditions",
+    "Documents": "Documents",
+    "CLASSES": {
+      "RNCP-SELECT": "Titre RNCP :",
+      "TITLE": "Ajouter une Classe pour",
+      "CLASS": "Classe",
+      "DESC": "Description",
+      "MESSAGE": {
+        "TITLE": "C’est Bon !",
+        "ATTENTION": "Attention",
+        "DELETECONFIRMMESSAGE": "Souhaitez vous supprimer la classe : {{CLASSNAME}} ? ",
+        "DELETESUCCESS": "La classe  : {{CLASSNAME}} ient d’être supprimée.",
+        "DELETEFAILED": "Failed to delete class.",
+        "UPDATESUCCESS": "La classe {{CLASSNAME}} vient d’être enregistrée.",
+        "UPDATEFAILED": "Failed to update class.",
+        "ALREADYERR": "Le nom de la classe existe déjà",
+        "SAVESUCCESS": "class save successfully.",
+        "SAVEFAILED": "Failed to save class.",
+        "STUDENTTITLE": "Désolé !",
+        "STUDENTEXIEST": "La classe {{CLASSNAME}}  contient déjà {{STUDENTTOTLE}} apprenants. <br/> il est donc impossible de supprimer cette classe. <br/> Souhaitez-vous consulter la liste des Apprenants pour ce titre?"
+      }
+    },
+    "TEST": {
+      "ConditionsTitleTxt": "Conditions d’attribution du Titre",
+      "RNCP-SELECT": "Sélectionnez RNCP Titre",
+      "SAVE-SCORE": "Enregistrer",
+      "ADDSUBJECT": "Ajouter une Epreuve",
+      "ADDTEST": "Ajouter une Evaluation",
+      "FINALSCORE": "Compte pour Attribution du Titre",
+      "SUBJECTNAME": "Epreuve",
+      "COEFFICIENT": "Coefficient",
+      "CREDITS": "CREDITS ECTS",
+      "MINIMUMSCORE": "Note minimum pour Attribution",
+      "TESTNAME": "Evaluation",
+      "EVALUATIONTYPE": "Type",
+      "WEIGHT": "Poids en %",
+      "SUBJECT&TEST": "Epreuves & Evaluations",
+      "SCORE_BY_JURY": "Note finale décidée par le Jury",
+      "PI": "AP",
+      "PARALLEL_INTAKE": "Admission parallèle",
+      "AUTO_MARK": "Note Auto",
+      "TYPE": {
+        "Oral": "Oral",
+        "Written": "Ecrit",
+        "Memoire-ECRIT": "Mémoire Ecrit",
+        "Memoire-ORAL": "Mémoire Oral",
+        "SkillsAssessment": "Evaluation des Compétences",
+        "Competition": "Concours",
+        "ExamenExterne": "Examen Externe (TOEIC, etc.)",
+        "free-continuous-control": "Contrôle Continu",
+        "CaseStudies": "Etude de Cas",
+        "Business-Game": "Business Game",
+        "mentor-evaluation": "Evaluation Entreprise",
+        "Jury": "Jury Certificateur",
+        "School-Mentor-Evaluation": "Référent Mémoire"
+      },
+      "addSubjectSuccess": "Epreuve ajoutée",
+      "addSubjectFail": " l’Epreuve n’a pas été ajoutée.",
+      "updateSubjectSuccess": " Epreuve vient d’être mise à jour",
+      "deletedSubjectSuccess": "l’Epreuve vient d’être supprimée ",
+      "deletedSubjectWarningMessage": "Vous êtes sur le point de supprimer une Epreuve et ses Evaluations",
+      "deletedSubjectWarningTitle": "C’est sûr?",
+      "deletedTestSuccess": " l’Evaluation vient d’être supprimée ",
+      "deletedTestWarningMessage": " Vous êtes sur le point de supprimer une Evaluation",
+      "deletedTestWarningTitle": "Etes-vous sure?",
+      "SUBJECTNAMEMESSAGE": {
+        "validation1": "Veuillez enter le nom de l'Epreuve."
+      },
+      "COEFFICIENTMESSAGE": {
+        "validation1": "Veuillez enter le nom de le Coefficient.",
+        "validation2": "2 chiffres maximum!",
+        "validation3": "un nombre uniquement!"
+      },
+      "MINIMUMSCOREMESSAGE": {
+        "validation1": "Veuillez enter la note minimum.",
+        "validation2": "2 chiffres maximum!",
+        "validation3": "un nombre uniquement!"
+      },
+      "TESTNAMEMESSAGE": {
+        "validation1": "Veuillez enter la Evaluations"
+      },
+      "EVALUATIONTYPEMESSAGE": {
+        "validation1": "Veuillez enter la type"
+      },
+      "WEIGHTMESSAGE": {
+        "validation1": "Veuillez enter la Poids en"
+      }
+    },
+    "EXPERTISE": {
+      "Marks": {
+        "title": "Notes",
+        "validation1": "Notes is required"
+      },
+      "Points": {
+        "title": "Points",
+        "validation1": "Points is required"
+      },
+      "ADDEXPERTISE": "Ajouter un Bloc de Compétences",
+      "NAME": {
+        "title": "Bloc de compétences",
+        "validation1": "Veuillez entrer le nom de Bloc de Questions"
+      },
+      "FINALSCORE": {
+        "title": "Compte pour la note finale."
+      },
+      "MAXPOINT": {
+        "title": "Max. Points",
+        "validation1": "Veuillez enter le nbre Maximum de Points."
+      },
+      "MINSCORE": {
+        "title": "Note Min.",
+        "validation1": "Veuillez enter la Note Minimale."
+      },
+      "DESCRIPTION": {
+        "title": "Description",
+        "validation1": "Veuillez enter la Description"
+      },
+      "addExpertiseSuccess": "Le Bloc de Comptence vient d'tre enregistr.",
+      "addExpertiseFail": "Le Bloc de Comptence n'a pas t enregistr!",
+      "updateExpertiseSuccessTitle": "Bravo !",
+      "updateExpertiseSuccessText": "Le Relevé de Notes pour le Titre RNCP : <br> {{name}}  <br> Vient d’être enregistré.",
+      "deletedExpertiseSuccess": "Le Bloc de compétences vient d’être supprimé.",
+      "deletedExpertiseSuccessTitle": " Supprimé!",
+      "deletedExpertiseWarningMessage": "Etes-vous sure de vouloir supprimer le Bloc de Comptence",
+      "deletedExpertiseWarningTitle": "Etes-vous sure?",
+      "WEIGHTSHOUDBEHUNDREDTitle": "Désolé",
+      "WEIGHTSHOUDBEHUNDREDText": "Vous essayez d’ajouter une Evaluation alors aue le total des Evaluations atteint déjà 100% <br> Vous devez modifier le poids total des Evaluations existantes.",
+      "WEIGHTSHOUDBEHUNDREDONSAVETitle": "Désolé",
+      "WEIGHTSHOUDBEHUNDREDONSAVEText": "Le relevé de note ne peut être enregistré tant que les tests d’une même Epreuve ne totalisent pas 100%. <br>Vous pouvez toujours entrer une Epreuve et la modifier par la suite.",
+      "MaxPointValidatiionMessageTitle": "Attention!",
+      "MaxPointValidatiionMessageText": "La totalité des points des Blocs de Compétence ne peut être supérieur à {{MAXPOINTOFTHETITLE}}. <br> Vous pouvez aussi modifier le nombre de points total pour ce Titre RNCP.",
+      "MaxPointSubjectValidatiionMessageTitle": "Désolé!",
+      "MaxPointSubjectValidatiionMessageText": "La totalité des points des Blocs de Compétence ne peut être supérieur à {{MAXPOINTOFTHETITLE}}. <br>Vous pouvez aussi modifier le nombre de points total pour cette Epreuve.",
+      "ExpertiseMathchWithMaxPointTitle": "Désolé",
+      "ExpertiseMathchWithMaxPointText": "Vous essayez d’ajouter un Bloc de Compétences alors que le total des Blocs correspond déjà au nombre total de point pour ce Titre.",
+      "SubjectMathchWithMaxPointTitle": "Désolé",
+      "SubjectMathchWithMaxPointText": "Vous essayez d’ajouter une Epreuve alors que le total des Epreuves correspond déjà au nombre total de point pour ce Bloc de Compétences.",
+      "EvaluationEnterpriseMaxOneTitle": "1 seule Évaluation Tuteur Entreprise possible!",
+      "EvaluationEnterpriseMaxOneText": "Il y a déjà 1 Évaluation Tuteur Entreprise pour ce Titre RNCP",
+      "EvaluationEnterpriseMaxOnebtn": "J’ai compris"
+    },
+    "PDF": {
+      "CountForFinal": "Compte pour la note finale",
+      "NumberOfPointsMax": "Max. Points",
+      "NumberOfMarksMax": "Max. Marks",
+      "MinScore": "Note Min.",
+      "Weight": "Poids en %",
+      "Subject&Test": "Epreuves & Evaluations",
+      "Coef": "Coef.",
+      "MarkStatementfor": "Relevé de notes",
+      "filename": "{{Titlename}} RELEVE DE NOTES {{Date}}",
+      "StudentMarkTitle": "Relevé de Notes",
+      "Score": "Score"
+    },
+    "Activation": {
+      "MenuTitle": "Publication",
+      "title": "Publication des kits Pédagogiques",
+      "Published": "Publié",
+      "Unpublished": "Non Publié",
+      "S1": {
+        "Title": "Publication du Kit Pédagogique",
+        "Text": "Souhaitez vous publier le Kit Pédagogique du Titre: <br/>{{TitleShortName}} <br/> {{TitleLongName}} <br/> Niveau {{rncpLevel}}",
+        "successTitle": "Bravo !",
+        "successMessage": "le Kit Pédagogique du Titre {{TitleShortName}}  <br/> est désormais publié."
+      },
+      "S2": {
+        "Title": "Publication du Kit Pédagogique",
+        "Text": "Vous êtes sur le point de Dépublier le Kit Pédagogique du Titre: <br/>{{TitleShortName}} <br/> {{TitleLongName}} <br/> Niveau {{rncpLevel}} <br/>Aucun utilisateur n’aura accès à ce Kit Pédagogique.",
+        "successTitle": "Kit non publié!",
+        "successMessage": "Le kit pédagogique du titre {{TitleShortName}} <br/> est maintenant non publié"
+      }
+    },
+    "DUPLICATE_CONDITION_CLASS": "Dupliquer les conditions d’une classe",
+    "DUPLICATE_EXISTING_CONDITION_CLASS_DIALOG_TITLE": "Aucune conditions existantes pour cette classe. Vous pouvez choisir l'option ci-dessous pour accélérer le processus de configuration",
+    "DUPLICATE_EXISTING_CONDITION_CLASS": "Dupliquer les conditions d’une classe",
+    "CONDITION_TAB_S2": {
+      "TITLE": "Vous êtes sur le point de dupliquer la condition de la classe {{className}}",
+      "TEXT": "Tous les blocs de compétences,épreuves et évaluations seront dupliqués",
+      "SUCCESS_BUTTON": "D’accord",
+      "SUCCESS_BUTTON_IN": "OK dans {{timer}} sec",
+      "CANCEL": "Annuler"
+    },
+    "CONDITION_TAB_S3": {
+      "TITLE": "Bravo",
+      "TEXT": "Les conditions de la classe {{classToName}} </br>blocs de compétences,épreuves et évaluations </br>ont été dupliqués",
+      "SUCCESS_BUTTON": "OK"
+    },
+    "PUBLISH_DOC": {
+      "FOLDER_IN_ACADEMIC_KIT": "DOSSIER DU KIT PÉDAGOGIQUE",
+      "DOCUMENT_NAME": "NOM DU DOCUMENT",
+      "PUBLISH_STUDENT": "PUBLIABLE POUR LES APPRENANTS"
+    }
+  },
+  "OPEN": "Ouvrir",
+  "CANCEL": "Annuler",
+  "CONTINUE": "Continuer",
+  "CONFIRM": "Confirmer",
+  "YES": "Oui",
+  "NO": "Non",
+  "LEFT": "Gauche",
+  "RIGHT": "Droite",
+  "PREVIOUS": "Précédent",
+  "REGISTERTEST": "Enregistrer cette Epreuve",
+  "REMOVE": "Supprimer",
+  "MOVE": "Déplacer",
+  "DOWNLOAD": "Télécharger",
+  "WARNING": "Attention",
+  "FIXED": "Fixe",
+  "LIMIT": "Limite",
+  "SUMMARY": "Rendu",
+  "TEXT": "Texte",
+  "CONGRATULATIONS": "Félicitations",
+  "CONFIRMDELETE": "Êtes-vous sûr de vouloir supprimer {{value}}?",
+  "SUBMIT": "Valider",
+  "ALLTITLES": "Tous les Titres",
+  "DELETE": "Supprimer",
+  "SAVE": "Sauvegarder",
+  "REVERT": "Revenir en arrière",
+  "DASHBOARD": {
+    "SCHOOLNAME": "Écoles",
+    "PENDINGTASKS": "Tâches en attente pour",
+    "ASSIGNEDTO": "Assigné à",
+    "TASK": "A Faire",
+    "SUBJECT/TEST": "Evaluation",
+    "PRIORITY": "Priorité",
+    "DUEDATE": "Date Limite",
+    "TEST": "l'Épreuve",
+    "DESCRIPTION": "Description",
+    "USERTYPE": "Type Utilisateur",
+    "EVENTNAME": "Nom de l'Évènement",
+    "UPCOMINGEVENTS": "Évènements à Venir",
+    "CALENDAR": "Calendrier",
+    "NOKIT": "Aucun Kit Pédagogique",
+    "CREATEACADEMICKIT": "Créer le Kit Pédagogique",
+    "NOCATEOGRIES": "Aucun dossier",
+    "CATEGORY": "Dossier",
+    "SUBCATEGORY": "Sous-Dossier",
+    "CATEGORIES": "Les Dossiers",
+    "SUBCATEGORIES": "Sous-Dossiers",
+    "FILENAME": "Nom du Fichier",
+    "ADDCATEGORY": "Ajouter un Dossier",
+    "ADDSUBCATEGORY": "Ajouter un Sous-Dossier",
+    "MODIFYCATEGORIES": "Modifier les Dossiers",
+    "ADDTEST": "Ajouter une Evaluation",
+    "GOBACK": "Revenir",
+    "GOUP": "Monter",
+    "NEWCATEGORYNAME": "Nom du Dossier",
+    "CATEGORYDESCRIPTION": "Description",
+    "REMOVECATEGORY": "Supprimer le Dossier",
+    "MOVECATEGORY": "Déplacer le Dossier",
+    "MODIFYCATEGORY": "Modifier ce Dossier",
+    "REGISTEREDSTUDENT": "Apprenants enregistrés",
+    "EXPECTED_DOC_TASK": {
+      "SUCCESS": "Téléchargement réussi !",
+      "BUTTON": "Merci",
+      "FOR_FINAL_RETAKE": "pour l'examen de rattrapage final"
+    },
+    "EXPECTED_DOC_TASK_UPLOAD_WARNING": {
+      "TITLE": "Vous êtes sur le point de déposer un fichier<br/> pour l'épreuve<br/>{{testName}}",
+      "TEXT": "Souhaitez-vous confirmer ce dépôt?",
+      "YES": "Oui",
+      "NO": "Non",
+      "OK_IN": "OK dans {{ timer }} sec"
+    },
+    "TASK_S7": {
+      "TITLE": "Vous êtes sur le point de déposer le document {{docName}}",
+      "TEXT": "Souhaitez-vous confirmer ce dépôt?",
+      "YES": "Oui",
+      "NO": "Non"
+    },
+    "TASK_S8": {
+      "TITLE": "Téléchargement réussi !",
+      "TEXT": "Votre document vient d'être déposé sur la plateforme.<br/>Pour accéder à ce document dans la Rubrique ÉPREUVE DE LA CERTIFICATION du kit Pédagogique"
+    },
+    "ASSIGN_CORRECTOR": {
+      "RNCP_TITLE": "Titre RNCP",
+      "ASSIGN_CORRECTOR_MESSAGE": "Vous êtes sur le point de désigner {{userName}} pour la correction de cette évaluation. {{userName}} recevra une notification avec les informations sur l’évaluation.",
+      "ASSIGN_CORRECTOR_HIMSELF_MESSAGE": "Vous êtes sur le point de vous désigner vous-même pour la correction de cette évaluation. Vous recevrez une notification avec les informations sur l’évaluation.",
+      "ASSIGN_SEVERAL_CORRECTORS1": "Vous êtes sur le point de désigner les personnes suivantes pour la correction de cette évaluation :",
+      "ASSIGN_SEVERAL_CORRECTORS2": "Tous recevront une notification avec les informations sur l’évaluation.",
+      "CORRECTORLIST_PLACEHOLDER": "Affecter un ou plusieurs Correcteurs",
+      "ASSIGNCORRECTORS_EXCEED": "Le nombre de correcteurs affectes est supérieur au nombre d'apprenants enregistrés.",
+      "ERROR": "Désolé!",
+      "TEXT": "La tâche relative au lien que vous venez de cliquer <br/> n’est plus demandée.<br/>Son initiateur l’a effacée."
+    },
+    "UPCOMINGEVENT": {
+      "ALL_SCHOOLS": "Toutes les ECOLES",
+      "ADDEVENT": "Ajouter un Evénement",
+      "UpdateEVENT": "Modifier un Evénement",
+      "FROM": "De",
+      "TO": "A",
+      "EVENTSUCCESSFUL": "Vous venez d’ajouter l’Evènement {{eventName}}",
+      "FORALLSCHOOLS": "Toutes les Écoles",
+      "deletedTitle": "Attention.",
+      "deletedMessage": "Vous êtes sur le point de supprimer cet événement du calendrier.",
+      "yes": "Oui",
+      "no": "Non",
+      "SELECT_SCHOOLS": "Sélectionner une ou plusieurs Écoles",
+      "EVENTDELETESUCCESS": "Evénement vient d'etre supprimée avec succès..",
+      "EDIT": {
+        "TITLE": "Bravo!",
+        "TEXT": "{{eventName}} a bien ete mis a jour dans le calendrier.<br/>Une notification sera envoyée à tous les utilisateurs concernés.",
+        "OK": "J’ai compris"
+      }
+    },
+    "MESSAGES": {
+      "UPLOADSUCCESS": "Document téléchargé avec succès",
+      "CONFIRMADDTEST": "Confirmer la création d'une nouvelle Épreuve?",
+      "REMOVECATEGORYSUCCESS": "Dossier supprimé avec succès.",
+      "CONFIRMREMOVEFOLDER": "Vous etes sur le point de supprimer le dossier",
+      "CONTENTSWILLBEREMOVED": "Vous allez perdre toutes les elements contenus dans ce dossier",
+      "CONFIRMREMOVEDOCUMENT": "Voulez-vous vraiment supprimer ce document ?",
+      "CONFIRMREMOVETEST": "Êtes-vous sûr de vouloir supprimer cette épreuve ?",
+      "MODIFYCATEGORYSUCCESS": "Dossier modifié avec succès.",
+      "REMOVEDOCUMENTSUCCESS": "Document supprimé avec succès.",
+      "MOVEDOCUMENTSUCCESS": {
+        "Title": "Bravo!",
+        "Text": "Le {{messageType}} <b>{{DocName}}</b> vient d’être déplacé vers le Dossier <b>{{FolderName}}</b>",
+        "Ok": "J’ai compris",
+        "Folder": "Dossier"
+      },
+      "REMOVETESTSUCCESS": "Épreuve supprimée avec succès."
+    },
+    "ERRORS": {
+      "REQUIREDFIELD": "Ce champs est requis",
+      "UPLOADERROR": "Erreur lors du téléchargement du Document.",
+      "REMOVECATEGORYERROR": "Erreur lors de la suppression du Dossier.",
+      "MODIFYCATEGORYERROR": "Erreur lors de la modification du Dossier.",
+      "REMOVEDOCUMENTERROR": "Erreur lors de la supression du Document.",
+      "MOVEDOCUMENTERROR": "Error moving the {{messageType}}.",
+      "REMOVETESTERROR": "Erreur lors de la suppresion de l'Épreuve."
+    },
+    "ACADEMICKITHELPER": {
+      "title": "Comment souhaitez vous créer le kit pédagogique ?",
+      "duplicateBtn": "Dupliquer un kit existant",
+      "basicBtn": "Créer de nouvelles conditions",
+      "DUPLICATE_NOW": "Dupliquer Maintenant"
+    }
+  },
+  "TRANSFER_STUDENT_SCHOOL": {
+    "ChangeSchool_S1": {
+      "TEXT": "Vous êtes sur le point de transférer l’apprenant {{studentFullName}} de l’école {{originSchoolshortname}} à l’école {{destinationSchoolShortname}} pour le titre : {{titleshortname}}",
+      "TITLE": "Attention",
+      "CONFIRM_BUTTON": "Confirmer"
+    }
+  },
+  "ACADEMIC KIT": "Kit Pédagogique",
+  "SELECTFOLDER": "Sélectionnez un dossier dans lequel vous souhaitez déplacer ce dossier",
+  "TEST": {
+    "SELECT_USERTYPE": "Sélectionnez le type d'utilisateur",
+    "EVALUATIONGRID": "Grille d’Evaluation",
+    "TEST": "Épreuve",
+    "TITLE": "Title",
+    "TESTS": "Épreuves",
+    "CLASS": "Classe de test",
+    "DUPLICATE": "Dupliquer",
+    "SELECTSUBJECT": "Sélectionner l’Epreuve",
+    "SELECTTEST": "Sélectionner l’Evaluation",
+    "AVAILABLETEST": "Liste des Epreuves Disponibles",
+    "TESTSEARCH": "Recherche une Epreuve",
+    "DUPLICATETEST": "Dupliquer une Evaluation",
+    "TESTNAME": "Nom de l'Epreuve",
+    "IDENTITY": "Identité",
+    "TESTIDENTITY": "Identité de l'Epreuve",
+    "TESTTYPE": "Type d'Epreuve",
+    "ORGANISER": "Organisateur de l'Epreuve",
+    "MAXSCORE": "Score Maximale de l'Epreuve",
+    "WEIGHTDESCRIPTION1": "Compte pour",
+    "WEIGHTDESCRIPTION2": "de l’Epreuve",
+    "MINSCORE": "Score Minimum de l'Epreuve",
+    "CORRECTIONTYPE": "Type de Correction",
+    "TESTDATE": "Date Saisie des Notes",
+    "DATETYPE": "Type de Date",
+    "COEFFICIENT": "Coéfficient",
+    "GROUPTEST": "Épreuve de Groupe",
+    "CONTROLLEDTEST": "Epreuve Controlée",
+    "FREETESTCONTROL": "Controle Continu",
+    "TITLETEXT": "Texte du titre",
+    "VIEWTESTSHEET": "Voir la fiche de l'Epreuve",
+    "RETURNTOFORM": "Retourner à la création de l'Epreuve",
+    "LANDSCAPE": "Paysage",
+    "NOTATIONGRID": "Grille de Notation",
+    "HEADING": "Éntete",
+    "HEADER": "Éntete Principale",
+    "DIRECTION": "DIRECTIVES",
+    "HEADERFIELDS": "Champs Entète",
+    "FOOTER": "Pied de Page",
+    "FOOTERBELOW": "Position en BAS de Pied de Page",
+    "MAINFOOTER": "Pied de Page Principal",
+    "FOOTERFIELDS": "Champs Pied de Page",
+    "GROUPDETAILS": "Détails du Groupe",
+    "NAMEOFSTUDENT": "Nom des Apprenants",
+    "NOOFSTUDENTS": "Nombre d'Elèves",
+    "NOTATION": "Notation",
+    "SHOWOPTIONS": "Afficher les options",
+    "HIDEOPTIONS": "Masquer les options",
+    "VIEW": "Voir",
+    "SHOWTOTAL": "Note Totale",
+    "SHOWEXTRATOTAL": "Note Totale Personnalisée",
+    "SHOWASLIST": "Afficher les Matiéres",
+    "SHOWNOTATIONMARKS": "Afficher les Notes",
+    "COMMENTSCOLUMN": "Colonne Observations",
+    "COMMENTS": "Observations",
+    "COMMENTSHEADER": "En-tête des Observations",
+    "FINALCOMMENTS": "Observations Générale",
+    "FINALCOMMENTSHEADER": "En-tête des Observations Générales",
+    "DIRECTIONSCOLUMN": "Colonne pour Directives",
+    "NUMBERMARKS": "Notes (en chiffres)",
+    "NUMBERMARKSCOLUMN": "Colonne de Notes (en chiffres)",
+    "DIRECTIONSHEADER": "En-tête des notes",
+    "LETTERMARKS": "Notes (en lettres)",
+    "LETTERMARKSCOLUMN": "Colonne de Notes (en lettres)",
+    "COLUMNHEADER": "En-tête de Colonne",
+    "ADDSECTION": "Ajouter Section",
+    "ADDNOTATION": "Ajouter Notation",
+    "SECTIONTITLE": "Titre de Section",
+    "NOTATIONTITLE": "Titre de Notation",
+    "ELIMINATION": "Sanction éliminatoire",
+    "REASON": "Motif",
+    "RETAKE_DATE": "Date Saisie des Notes Rattrapage",
+    "REATAKE_ALLOWED": "Rattrapable",
+    "PREVIEWTASK": "Pré Visualisation des Tâches",
+    "UPLOAD_RESTRICT_TO_PDF": {
+      "TITLE": "Désolé !",
+      "TEXT": "Votre document doit être au format PDF.",
+      "BUTTON": "J’ai compris"
+    },
+    "UPLOAD_RESTRICT_TO_IMAGE": {
+      "TITLE": "Sorry",
+      "TEXT": "Your document must be IMAGE only",
+      "BUTTON": "Thank You"
+    },
+    "UPLOAD_RESTRICT_TO_FILESIZE": {
+      "TITLE": "Désolé Fichier trop lourd ",
+      "TEXT": "Le fichier que vous souhaitez déposer <br/> dépasse la limite de 100 Mb.",
+      "BUTTON": "J’ai compris"
+    },
+    "PDF_BUTTONS": {
+      "TEST_AND_Identity": "Détail Évaluation",
+      "TEST_ONLY": "Grille Vierge",
+      "TEST_POPULATED_WITH_DATA": "Grilles Personnalisées",
+      "PDF_Personalized": "PDF Nominatif"
+    },
+    "AUTOTASK": {
+      "ASSIGN CORRECTOR": "Affecter un Correcteur",
+      "MARKS ENTRY": "Saisie des notes",
+      "CREATE GROUPS": "Créer les groupes",
+      "SEND THE EVALUATION TO COMPANY'S MENTOR": "Envoyer l'Evaluation tuteur entreprise",
+      "VALIDATION": "Validation de l'Evaluation Tuteur d'Entreprise",
+      "VALIDATION OF MENTOR EVALUATION": "Validation de l'évaluation du Tuteur d’entreprise",
+      "CREATE CROSS CORRECTOR": "Créer un Correcteur Croisé",
+      "ASSIGN CROSS CORRECTOR": "Affecter un Correcteur Croisé",
+      "VALIDATE THE TEST CORRECTION": "Valider la correction",
+      "ASSIGN ANIMATOR BUSINESS GAME": "Affecter un ou plusieurs Animateurs Business Game",
+      "SEND COPIES": "Envoyer des copies",
+      "SUBMIT STUDENTS FOR RE-TAKE TEST": "Soumettre les étudiants pour repasser l'épreuve",
+      "SUBMIT_STUDENTS_FOR_RETAKE_TEST": "Soumettre les étudiants pour repasser l'épreuve",
+      "MARK ENTRY FOR RETAKE EXAM": "Saisir les notes pour l'examen repassé",
+      "MARK ENTRY FOR FINAL RETAKE TEST": "Saisir la note pour l'examen de rattrapage final",
+      "VALIDATE FINAL RETAKE TEST CORRECTION": "Valider la correction de l'examen de rattrapage final",
+      "ASSIGN CORRECTOR TASK FOR FINAL RETAKE TEST": "Assigner un correcteur pour l'examen de rattrapage final",
+      "VALIDATECROSSCORRECTION": "Valider la Correction Croisée",
+      "ENTER JURY DECISION FOR STUDENT IN": "Entrez la décision du jury pour les apprenants de",
+      "ENTER STUDENT DECISION FOR FINAL RETAKE TEST": "Entrez la décision de l'apprenant pour l'examen de rattrapage final",
+      "CERTIFICATE DETAILS REVISION": "Révision des détails du certificat",
+      "ASSIGN QUALITY CONTROL CORRECTOR": "Affecter un Controleur Qualité",
+      "MARK ENTRY FOR QUALITY CONTROL": "Saisie des notes Contrôle Qualité",
+      "CERTIFICATE DETAILS TO CONFIRM": "Détails du Certificat à confirmer"
+    },
+    "MAXIMUMNOTATION": "Note Maximale",
+    "TYPE": "Type de test",
+    "DATETYPES": {
+      "FIXED": "Date Fixe",
+      "DIFFERENT": "Dates Différentes / Ecole",
+      "MARKS": "Dépôt des notes"
+    },
+    "TYPES": {
+      "ORAL": "Oral",
+      "WRITTEN": "Ecrit",
+      "PFE-ECRIT": "PFE Ecrit",
+      "PFE-ORAL": "PFE Oral",
+      "SKILLS-ASSESSMENT": "Evaluation de Compétences",
+      "FREE-CONTINUOUS-CONTROL": "Controle Continu",
+      "CASE-STUDIES": "Etude de Cas",
+      "EXTERNAL-REVIEW": "Epreuve Externe",
+      "COMPETITION": "Competition",
+      "Business-Game": "Business Game",
+      "COMBINED-TEST": "Combined Test",
+      "Memoire": "Mémoire",
+      "MENTOR-EVALUATION": "Evaluation par le Tuteur d’Entreprise",
+      "School-Mentor-Evaluation": "School Mentor Evaluation"
+    },
+    "CORRECTIONTYPES": {
+      "PC": "Croisée",
+      "CP": "Certificateur",
+      "FREE": "Centre de Préparation",
+      "ADMTC": "ADMTC"
+    },
+    "FIELDTYPES": {
+      "PFE Referal": "Referent PFE",
+      "Jury Member": "Membre du Jury",
+      "Date": "Date",
+      "Reason": "FR Reason",
+      "Text": "Texte",
+      "Number": "Nombre",
+      "Long Text": "Texte Long",
+      "Signature": "Signature",
+      "Corrector Name": "Nom du correcteur",
+      "Mentor Name": "Nom du Tuteur"
+    },
+    "HEADERFIELDSLIST": {
+      "Date Range": "Plage de dates",
+      "Name of the Event": "Nom de l'évènement",
+      "Date Fixed": "Date fixée",
+      "Title Name": "Nom du titre",
+      "Status": "Statut",
+      "Other": "Autre"
+    },
+    "PAGEBREAK": "Saut de page",
+    "PENALTIES": "Pénalités",
+    "PENALTY": "Pénalité",
+    "PENALTIESHEADER": "En-tête de Pénalités",
+    "PENALTYTEXT": "Texte de Pénalité",
+    "BONUSES": "Bonus",
+    "BONUS": "Bonus",
+    "BONUSESHEADER": "En-tête de Bonus",
+    "BONUSTEXT": "Texte Bonus",
+    "RELATEDDOCUMENTS": "Document Relatif",
+    "CALENDERSTEPS": "Etapes Calendaires",
+    "TASKS": "Tâches",
+    "RELATIVEDATE": "Date relative",
+    "NUMBEROFDAYS": "Nombre de Jours",
+    "DAYS": "Jours",
+    "DOCUMENTS": "des documents",
+    "EXPECTEDDOCUMENTS": "documents attendus",
+    "DOCUMENTSADDED": "Documents Ajoutés",
+    "DOCUMENTSEXPECTED": "Documents Attendus",
+    "STEP": "Étape",
+    "STEPS": "Étapes",
+    "THISSTEP": "Cette Étape",
+    "NOSTEPS": "Aucune Étape définie",
+    "CALENDAR": {
+      "WHAT": "Quoi",
+      "WHO": "Qui",
+      "WHEN": "Quand",
+      "WHOREMINDER": "Qui Rappelle",
+      "SAME_AS_SCHOOL_TEST_DATE": "Identique à la date du test scolaire"
+    },
+    "ADDTASK": "Ajouter une Tâche",
+    "ADDDOCUMENT": "Ajouter un document",
+    "ADDEXPECTEDDOCUMENT": "Ajouter un document attendu",
+    "SORTBY": "Trier par",
+    "MESSAGES": {
+      "TESTCREATIONSUCCESS": "Vous venez de créer l'épreuve : {{value}}",
+      "TESTSAVESUCCESS": "Sauvegardé avec succès",
+      "CONFIRMREMOVESECTION": "Vous souhaitez éffacer cette section?",
+      "CONFIRMREMOVESUBSECTION": "Vous souhaitez éffacer cette notation?",
+      "CLOSECONFIRM": "Souhaitez-vous annuler les modifications éventuelles apportées a cet evaluation?"
+    },
+    "TESTCREATE_S1": {
+      "TITLE": "Êtes vous sûr de vouloir publier cet examen ??",
+      "TEXT": "En publiant cette évaluation<br/> toutes les tâches relatives à cette évaluation vont être générées / re-générées",
+      "CONFIRM": "Je confirme",
+      "CONFIRM_IN": "Je confirme in {{ timer }} sec",
+      "CANCEL": "Annuler"
+    },
+    "TESTCREATE_S2": {
+      "TITLE": "Désolé !",
+      "REASON_NOT_ACAD_DIR": "L’épreuve ne peut pas être publiée pour la raison suivante :<br/>-Aucun directeur académique à l'école<br/>{{schoolShortName}}",
+      "REASON_NOT_CERT_ADMIN": "L’épreuve ne peut pas être publiée pour la raison suivante :<br/>- Aucun administrateur certificateur enregistré pour ce titre RNCP",
+      "REASONT_BOTH": "L’épreuve ne peut pas être publiée pour la raison suivante :<br/>- Aucun administrateur certificateur enregistré pour ce titre RNCP<br/> - Aucun directeur académique à l'école<br/>{{schoolShortName}}",
+      "SAVEANDLEAVE": "Sauvegarder et quitter"
+    },
+    "ERRORS": {
+      "COMPLETECURRENTSTEP": "Veuillez compléter l'étape en cours",
+      "NOTESTTYPE": "The Selected Test has no Test Type",
+      "FILLALL": "Veuillez remplir tous les détails",
+      "TESTCREATIONERROR": "Erreur lors de la création de l'épreuve.",
+      "ATLEASTHEADER": "Vous devez créer une entête.",
+      "ATLEASTONESECTION": "Vous devez créer au moins une section.",
+      "CANNOTADDMORENOTATION": "Le score maximum pour cet section est deja atteint, vous devez reduire le score max de chaque notation pour pouvoir ajouter une notation dans cette section."
+    },
+    "SAVE&LEAVE": "Enregistrer et Quitter",
+    "SAVE": "Enregistrer",
+    "CANCEL": "Annuler",
+    "PUBLISH": "Publier"
+  },
+  "DOCUMENT": {
+    "FILE": "Fichier",
+    "FILENAME": "Nom du Fichier",
+    "TYPE": "Type de Document",
+    "NAME": "Nom du Document",
+    "DATEADDED": "Date Ajoutée",
+    "THISDOCUMENT": "ce document",
+    "DOCUMENTS": "Documents",
+    "REMOVEDOCUMENT": "Supprimer le document",
+    "ADDDOCUMENT": "Ajouter un Document",
+    "ADD_DOC_PDF_ONLY": "Ajouter un Document Veuillez regrouper l’ensemble de vos documents en 1 seul fichier au format PDF",
+    "NODOCUMENTS": "Aucun document ajouté",
+    "ADDTHISFILE": "Ajouter ce Fichier",
+    "CANCELUPLOAD": "Annuler l'Ajout",
+    "FOREACHSTUDENT": "Pour Chaque Apprenant",
+    "VIEW": "Voir",
+    "IMAGE": "Ajouter la Photo",
+    "DOWNLOAD_ALL": "télécharger TOUS les documents",
+    "DATES_OF_TESTES": "Dates des épreuves"
+  },
+  "EXPECTEDDOCUMENT": {
+    "FOREACH": "Pour chaque apprenant",
+    "USERTYPE": "Qui",
+    "NAME": "Nom du Document",
+    "DEADLINE": "Date limite",
+    "THISDOCUMENT": "This document",
+    "DOCUMENTSEXPECTED": "Documents Attendus",
+    "DATEOFPUBICATION": "Date de Publication",
+    "REMOVEDOCUMENT": "Delete this Document",
+    "ADDDOCUMENT": "Add an Expected Document",
+    "NODOCUMENTS": "Aucun Document Attendu",
+    "ADDTHISFILE": "Add this File",
+    "RETAKE_DEALINE": "Date d'envoi pour repasser l'examen"
+  },
+  "TESTCORRECTIONS": {
+    "GroupTitleForStudent": "Liste des Apprenants du Groupe",
+    "ReTake": "Rattrapage",
+    "Summary": "Synthése",
+    "Details": "Détail",
+    "Results": "Résultats",
+    "Absence-justified": "Absence justifiée",
+    "AJ": "AJ",
+    "Absence-not-justified": "Absence injustifiée",
+    "ASSIGNCORRECTORFIRSTTITLE": "Attention",
+    "ASSIGNCORRECTORFIRSTTEXT": "There is no corrector assign to this test </br> Please assign corrector first!",
+    "ACCESSDENIEDMARKSENTRYTTITLE": "Access Denied!",
+    "ACCESSDENIEDMARKSENTRYTEXT": "Selected test marks entry not assign to you.",
+    "notcorrectedliststudnet": "Liste des grilles d'évaluation restant à compléter",
+    "notcorrectedliststudentvalidate": "liste des grilles d'évaluation complétées",
+    "correctedcopies": "copies traitées",
+    "Students": "Apprenants",
+    "FinalMark": "Note Finale",
+    "Subtotal": "Sous Total",
+    "SEARCHSTUDENT": "Rechercher un Apprenant",
+    "SEARCHGROUP": "Rechercher un groupe",
+    "TESTNAME": "Nom du test",
+    "TESTDATE": "Date de test",
+    "TESTIDENTITY": "Identité de l'épreuve",
+    "CORRECTEDTESTS": "Epreuves corrigés",
+    "BACKTOTITLE": "Revenir au Titre",
+    "REPORTTEST": "Envoyer l'épreuve au Certificateur",
+    "ADDSTUDENT": "Ajouter des d'Apprenants",
+    "HEADERINFO": "Information d'entete",
+    "FOOTERINFO": "Information pied de page",
+    "GROUPNAME": "Nom du groupe",
+    "ADVERTISER": "Annonceur",
+    "ESTABLISHMENT": "Etablissement",
+    "ACTIVITY": "Activité",
+    "COMPOSITION": "Composition",
+    "LISTOFSTUDENTS": "Liste des Apprenants",
+    "TESTRESULT": "Résultats de l’Epreuve",
+    "GROUPS": "Groupes",
+    "TESTDETAILS": "Details de l’Epreuve",
+    "MISSINGCOPY": "Copie Manquante",
+    "GROUP": {
+      "TITLE": "Grille D’Evaluation",
+      "NAME1": "Creativité",
+      "NAME2": "Etude d'impact",
+      "NAME3": "Recommandation",
+      "NAME4": "Etude budgétaire",
+      "NAME5": "Présentation orale",
+      "SAVESUCCESSTITLE": "Bravo!",
+      "SAVESUCCESSTEXT": "Tous les Apprenants ont bien été affectés à des groupes.",
+      "SAVESUCCESS-SAVENLEAVE": "Enregistrer et Quitter",
+      "SAVESUCCESS-SAVEONLY": "Enregistrer Seulement",
+      "SAVESUCCESSNOW": "Maintenant",
+      "SAVESUCCESSLATER": "Plus Tard",
+      "SAVENOWSuccessTitle": "Bravo!",
+      "SAVENOWSuccessText": "Chaque Apprenant recevra sa convocation avec les informations relatives à son groupe.",
+      "SAVENOWSuccessOk": "J’ai compris",
+      "CreateGroupAlertTitle": "Creation de Groupe",
+      "CreateGroupAlertText": "Avant de pouvoir entrer les notes pour cette évaluation <br> vous devez créer les groupes.",
+      "CreateGroupAlertCancle": "Annuler",
+      "CreateGroupAlertOk": "Créer les Groupes",
+      "N1": "${StudentCivility} ${StudentFirstName} ${StudentLastName},<br><br> Vous etes convoque pour l’évaluation  ${TestName} comptant pour l’épreuve ${Subjectname}.<br> IF TEST DATE IS NOT MARK ENTRY then Cette évaluation se déroule le ${TestDate} en groupe.<br> IF TEST DATE IS  MARK ENTRY then Cette évaluation se déroule en groupe.<br> Vous avez été affecté au groupe ${Groupname} dont voici la liste des participants<br> ${StudentList}<br><br> N’hésitez pas à nous contacter si vous avez besoin de notre aide.<br><br> Cordialement,<br> L’équipe ADMTC.",
+      "N1Subject": "{{TitleShortName}} : votre convocation pour {{TestName}} ",
+      "GenerateGroups": "Affecter les Groupes",
+      "Group": "Groupe",
+      "SaveAndSubmitGroups": "Enregistrer et Soumettre les Groupes",
+      "SaveAsDraft": "Enregistrer Brouillon",
+      "AllocationofGroups": "Affection des Groupes",
+      "Automatic": "Automatique",
+      "Manual": "Manuel",
+      "Min": "Min",
+      "Max": "Max",
+      "MaxNoticeTitle": "Attention",
+      "MaxNoticeText": "{{max}} Apprenants maximum pour le Groupe : {{groupname}}",
+      "MaxNoticeOk": "J’ai compris",
+      "MinNoticeTitle": "Attention",
+      "MinNoticeText": "{{min}} minimum pour le Groupe : {{groupname}}",
+      "MinNoticeOk": "J’ai compris",
+      "GroupOfStudent": "{{groups}} groupes de {{students}} Apprenants,",
+      "TestNotFoundTitle": "erreur",
+      "TestNotFoundText": "épreuve non trouvée.",
+      "TestNotFoundOk": "OK",
+      "AddGroup": "Ajouter Groupe",
+      "Delete": "Supprimee",
+      "Submit": "Submit",
+      "Group_S5": {
+        "TITLE": "Bravo!",
+        "TEXT": "Les groupes ont été enregistrés mais n’ont pas encore été validés <br/>. Vous pourrez attribuer un correcteur que lorsque vous aurez validé les groupes. <br/> Vous pouvez cliquer sur le bouton \"Enregistrer et envoyer\" pour valider les groupes créésa",
+        "BUTTON": "J’ai compris"
+      }
+    },
+    "TOTAL": "Total",
+    "POINTS": "Points",
+    "Mark": "Note",
+    "Note": "Note",
+    "NoteJury": "Note Jury",
+    "COMMENTS": "Commentaires",
+    "TESTFOOTER": "Test Pied de page",
+    "SUBMIT": {
+      "SUBMIT": "Valider",
+      "PREVIOUS": "Valider et passer à l'apprenant précédent",
+      "RETURN": "Valider and Revenir",
+      "NEXT": "Valider et passer à l'apprenant suivant",
+      "CANCEL": "Annuler",
+      "SUBMITCORRECTION": "Enregistrer cette Evaluation",
+      "VALIDATE": "Valider",
+      "SAVETHISSCORE": "Enregistrer cette Grille",
+      "SUBMITTESTRESULT": "Terminer la Correction",
+      "SAVETHISSCORE_MENT": "Enregistrer cette évaluation",
+      "SUBMITTESTRESULT_MENT": "Envoyer l’évaluation à l’établissement",
+      "EXPEDITE": "Expedier la Validation"
+    },
+    "HEADER": "Test Entête",
+    "GRANDTOTAL": "Somme Finale",
+    "ADDITIONALTOTAL": "Total supplémentaire",
+    "MESSAGE": {
+      "THANKS": "Merci",
+      "ALLCORRECTIONSSUBMITTED": "Vous venez de soumettre les évaluations à la direction pédagogique.",
+      "ALLCORRECTIONSSUBMITTEDTitle": "Merci",
+      "ALLCORRECTIONSSUBMITTEDBtn": "J’ai compris",
+      "VALIDATE-SUBMIT-TEXT": "La correction de cette évaluation est bien validée et déposée sur la plateforme. <br/> Une notification vient d'être envoyé à ADMTC.",
+      "VALIDATE-SUBMIT-TITLE": "Bravo!",
+      "VALIDATE-SUBMIT-OK": "J’ai compris",
+      "MISSINGCOPY-VALIDATE-TEXT": "Cliquez sur NON si cette absence n’est pas justifiée. <br/><br/>Cliquez sur OUI si cette absence est  justifiée.<br/> Vous devrez en indiquer le motif puis télédéposer le document de justification pour cette absence.",
+      "MISSINGCOPY-VALIDATE-TITLE": "Cette absence est-elle justifiée?",
+      "MISSINGCOPY-VALIDATE-YES": "OUI",
+      "MISSINGCOPY-VALIDATE-NO": "NON",
+      "MISSINGCOPY-VALIDATE-REASON": "Motif de l’absence",
+      "MISSINGCOPY-VALIDATE-FILE": "Télédéposer le document",
+      "ELIMINATION-WARNING-TITLE": "Attention!",
+      "ELIMINATION-WARNING-TEXT": "En cochant cette case <br/> la note totale sera ramenée à zéro <br/> Merci d’indiquer le motif.",
+      "ELIMINATION-WARNING-CANCLE": "J’annule",
+      "ELIMINATION-WARNING-CONFIRM": "Je confirme",
+      "CANCELCORRECTION": "Souhaitez vous annuler ?",
+      "REQUIREDFIELDMESSAGE": "Veuillez entrer toutes les informations",
+      "CORRECTIONSUCCESS": "La correction pour {{StudentCivility}} {{StudentFirstName}} {{StudentLastName}}  est bien enregistrée.",
+      "CORRECTIONSUCCESS_MENT": "L’evaluation de<br/>{{StudentCivility}} {{StudentFirstName}} {{StudentLastName}}<br/> est bien enregistrée<br/>Vous pourrez revenir sur évaluation pour la corriger éventuellement<br/>Puis vous devrez cliquer sur le bouton “Envoyer l’évaluation à l’établissement” pour terminer cette évaluation.",
+      "CORRECTIONSUCCESSTitle": "Bravo!",
+      "CORRECTIONADDERROR": "Une erreur est intervenue lors de la correction. <br> Veuillez vérifier votre connexion Internet et recommencer.",
+      "CORRECTIONUPDATEERROR": "Une erreur est intervenue lors de la correction. <br> Veuillez vérifier votre connexion Internet et recommencer.",
+      "MENTQUEST_S4_TITLE": "Bravo!",
+      "MENTQUEST_S4_TEXT": "Vous venez d'enregistrer le questionnaire<br/>Vous allez maintenant entrer les notes de l’évaluation.",
+      "MENTQUEST_S4_BTN": "J’ai compris",
+      "MENTQUEST_S5_TITLE": "Bravo!",
+      "MENTQUEST_S5_TEXT": "L’évaluation de   {{StudentCivility}} {{StudentFirstName}} {{StudentLastName}}<br/> vient d’être envoyée à son école..",
+      "MENTQUEST_S5_BTN": "J’ai compris",
+      "MENTQUEST_S3_TITLE": "Bravo!",
+      "MENTQUEST_S3_TEXT": "L’évaluation de   {{StudentCivility}} {{StudentFirstName}} {{StudentLastName}}<br/> vient d’être envoyée à son acad staff..",
+      "MENTQUEST_S3_BTN": "J’ai compris",
+      "MENTQUEST_S6_TITLE": "Votre évaluation est bien sauvegardée.<br/> Mais pas encore envoyée.",
+      "MENTQUEST_S6_TEXT": "Pour l’envoyer à la pédagogie de l’école<br/>vous devrez cliquer sur le bouton<br/>”Envoyer à la pédagogie”",
+      "MENTQUEST_S6_BTN": "J’ai compris",
+      "MENTQUEST_S12_TITLE": "Evaluation Tuteur d’Entreprise Envoyée !",
+      "MENTQUEST_S12_TEXT": "L’évaluation tuteur d’entreprise a été envoyée aux tuteurs qui ne l’avaient pas encore reçue.",
+      "MENTQUEST_S12_BTN": "J’ai compris",
+      "RETAKE_S1_TITLE": "Envoyer les Notifications?",
+      "RETAKE_S1_TEXT": "Vous êtes sur le point d’envoyer des instructions aux apprenants que vous avez sélectionnés pour repasser l’examen",
+      "RETAKE_S1_BTN_OK": "Confirmer",
+      "RETAKE_S1_BTN_CANCEL": "Annuler ",
+      "RETAKE_S1B_TITLE": "Bravo !",
+      "RETAKE_S1B_TEXT": "Tous les apprenants sélectionnées pour repasser l’examen vont recevoir la notification.",
+      "RETAKE_S1B_BTN": "Merci",
+      "RETAKE_S2_TITLE": "Aucun Apprenant au<br/>rattrapage ?",
+      "RETAKE_S2_TEXT": "Vous avez cliqué sur le bouton de validation<br/> sans sélectionner d’apprenant pour le rattrapage de cette évaluation.",
+      "RETAKE_S2_BTN_CANCEL": "Annuler",
+      "RETAKE_S2_BTN_OK": "Aucun apprenant au rattrapage",
+      "MENTQUEST_S6": {
+        "TITLE": "Bravo!",
+        "TEXT": "Vous venez de valider l’évaluation tuteur de <br/> {{StudentCivility}} {{StudentFirstName}} {{StudentLastName}}.",
+        "BTN": "Merci"
+      },
+      "MENTQUEST_S15": {
+        "TITLE": "Vous validez l’évaluation de<br/>{{StudentCivility}} {{StudentFirstName}} {{StudentLastName}}?",
+        "TEXT": "Une fois validée cette évaluation sera envoyé à son école<br/> et vous ne pourrez plus la modifier.<br/>Si vous n’êtes pas totalement certain<br/>vous pouvez simplement cliquer sur “Enregistrer”",
+        "BTN1": "Envoyer à l'École",
+        "BTN2": "Enregistrer"
+      },
+      "Validate_S1": {
+        "TITLE": "Vous confirmez la validation?",
+        "TEXT": "Vous êtes sur le point de valider la correction de </br> {{TestName}} - {{RNCPTitle}}</br>Les notes seront publiées dans le kit pédagogique.  </br>Une notification de cette validation </br> sera envoyée immédiatement.",
+        "BTN_OK": "Je confirme",
+        "BTN_CANCEL": "Annuler"
+      },
+      "CORR_S8": {
+        "TEXT": "Vous venez de soumettre cette correction au Certificateur."
+      }
+    },
+    "FORMCONFIRMATION": {
+      "MESSAGE": {
+        "SUBMITANDGO": "FR - Submit and go",
+        "CANCELANDGO": "FR - Cancel and go",
+        "CANCEL": "Annuler",
+        "FOMRCONFRIMMESSAGE": "FR - You have not submitted current Correction"
+      }
+    }
+  },
+  "SHORTNAME": "Nom Court",
+  "LONGNAME": "Nom Long",
+  "PROJECTMANAGER": "Chef de project",
+  "LEVELRNCP": "Niveau RNCP",
+  "LEVEL": "Niveau",
+  "ADDTEXT": "Ajouter un Texte",
+  "CLOSE": "Fermer",
+  "REGISTER": "Enregistrer",
+  "FIELDTEXT": "Texte du Champs",
+  "FIELDTYPE": "Type de Champs",
+  "ALIGNMENT": "Alignement",
+  "CERTIFIER": "Certificateur",
+  "ACTIONS": "Actions",
+  "RNCPTITLE": "Titre RNCP",
+  "DOCUMENTTYPES": {
+    "OTHER": "Autre",
+    "GUIDELINE": "Directives",
+    "STUDENTNOTIFICATION": "Information Apprenant",
+    "TEST": "Epreuve",
+    "SCORING-RULES": "Notation"
+  },
+  "SEARCHMESSAGE": "Rechercher",
+  "ADDITIONALMAXTOTAL": "Note Max. Additionnelle",
+  "DECIMALPOINTS": "Décimale",
+  "SAVETEST": "Enregistrer cette Epreuve",
+  "CUSTOMERS": "Customers",
+  "SCHOOLTITLE": "École",
+  "USERS": {
+    "ALL_RNCP_TITLES": "Tous les Titres RNCP",
+    "USERS": "Utilisateurs",
+    "Internal Task": "Tâche Interne",
+    "CERTIFIER": "Certificateur",
+    "SELECTCERTIFIER": "Sélectionnez le Certificateur",
+    "RNCPTITLE": "Titre RNCP",
+    "SELECTRNCPTITLE": "Sélectionnez RNCP Titre",
+    "SEARCH": "Rechercher",
+    "PREPARATIONCENTER": "Centre de Préparation",
+    "SELECTSCHOOL": "Sélectionnez l'école",
+    "SELECTPREPARATIONCENTER": "Sélectionnez le Centre de Préparation *",
+    "USERTYPE": "Type d'Utilisateur",
+    "SELECTUSERTYPE": "Sélectionner le Type d'Utilisateur",
+    "ADDUSER": "Ajouter un Utilisateur",
+    "COMPANYNAME": "Société",
+    "BRAND": "Enseigne",
+    "TYPEOFCOMPANY": "Type de Société",
+    "NORC": "RC No",
+    "CAPITAL": "Capital",
+    "ADDRESS": "Adresse",
+    "ADDRESSLINE1": "Addresse 1",
+    "ADDRESSLINE2": "Addresse 2",
+    "ADDLOCATION": "Ajouter une Adresse",
+    "REMOVELOCATION": "Enlever une Adresse",
+    "ZIPCODE": "Code Postal",
+    "CITY": "Ville",
+    "COUNTRY": "Pays",
+    "ACTIVITY": "Activité",
+    "NOOFEXMPLOYEE": "Nombre d'Employés en France",
+    "CURRENCY": "devise",
+    "SETPASSWORD": {
+      "PASSWORD": "Mot de passe",
+      "CHOOSEAPASSWORD": "Choisissez un mot de passe",
+      "CONFIRMPASSWORD": "Confirmez le mot de passe",
+      "CONFIRMCHOSENPASSWORD": "Confirmez votre mot de passe",
+      "MATCHERROR": "Le mot de passe et sa confirmation sont différents",
+      "PASSINVALID": "Votre mot de passe doit comporter entre 8 et 12 caractères et doit comprendre au moins 1 majuscule, 1 minuscule, 1 chiffre et 1  caractère spécial.",
+      "SETPASSWORDLINKEXPIRED": "Ce lien à expiré. cliquer sur Mot de Passe Oublié pour recevoir in nouveau lien.",
+      "RENEWPASSWORD": "Renouvellez Votre Mot de Passe.",
+      "WELCOME": "Bienvenue sur la Plateforme  de Ressources Pédagogiques",
+      "YOURLOGIN": "Votre identifiant",
+      "ERROR": {
+        "TITLE": "Désolé",
+        "EXPMSG": "Le lien sur lequel vous venez de cliquer a expiré.",
+        "FORGOTPASS": "J’ai oublié mon mot de passe",
+        "LOGIN": "Je me connecte"
+      }
+    },
+    "ADDEDITUSER": {
+      "SELECTSCHOOL": "Sélectionnez l'école",
+      "STATUS": "Statut",
+      "ENTITIES": "Sélectionner l'Entité",
+      "SELECTUSERTYPE": "Sélectionnez un Type d'Utilisateur *",
+      "SELECTRNCPTITLE": "Sélectionnez un Titre RNCP",
+      "CLASS": "Classe",
+      "TITLE": "Titre",
+      "FIRSTNAME": "Prénom *",
+      "SECONDNAME": "Nom *",
+      "THIRDNAME": "Troisième Nom",
+      "FAMILYNAME": "Nom de famille *",
+      "LASTNAME": "Nom de famille *",
+      "TELEPHONE": "Téléphone *",
+      "CELLPHONE": "Cellphone *",
+      "MOBILEPHONE": "Téléphone portable *",
+      "EMAIL": "Mél *",
+      "DATEOFBIRTH": "Date de naissance *",
+      "PLACEOFBIRTH": "Lieu de naissance *",
+      "NATIONALITY": "Nationalité *",
+      "VIEW": " Voir",
+      "ACADMICTITLE": "Titre Académique *",
+      "RESUME": "CV",
+      "SELECTUSER": "Sélectionnez l'Utilisateur *",
+      "REPORTTO": "Rapporte à *",
+      "SELECTROLE": "Sélectionnez le rôle *",
+      "SUBMIT": "Valider",
+      "ADDNEWCLASS": "Ajouter une nouvelle classe",
+      "ADDNEWCOMPANY": "Ajouter une Entreprise",
+      "ADDNEWMENTOR": "Ajouter un nouveau Tuteur",
+      "USERS>ADDUSER": "Utilisateurs> Ajouter un utilisateur",
+      "USERS>": "Utilisateurs >",
+      "ADDUSER": "Ajouter un Utilisateur",
+      "MENTOR": "Tuteur d’Entreprise ",
+      "COMPANY": "Entreprise ",
+      "ADDCOMPANY": "Ajouter une Entreprise",
+      "ADD_SCHOOL": "Ajouter une école",
+      "ADD_RNCP": "New RNCP",
+      "UPLOADRESUME": "Télécharger un CV",
+      "ADDNEWPASSWORD": "Nouveau mot de passe",
+      "TEXLEARNING": "Tax Leurning",
+      "PAYROLL": "Libération conditionnelle",
+      "OFFICEPHONE": "Téléphone Bureau",
+      "DIRECTLINE": "Ligne Directe",
+      "POSITION": "Fonction",
+      "PORTABLEPHONE": "Portable",
+      "CIVILITY": {
+        "TITLE": "Civilité",
+        "MR": "M.",
+        "MRS": "Mme"
+      },
+      "COMPANY_MISSING": "Entreprise manquante"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Bravo !",
+      "OK": "J'ai compris",
+      "ADDTITLE": "Bravo !",
+      "USERUPDATESUCCESS": "Mise à jour de l'utilisateur avec succès.",
+      "USERUPDATEFAILED": "Impossible de mettre à jour l'utilisateur.",
+      "USERSAVESUCCESS": "L'Utilisateur {{ Civility }} {{ FName }} {{ LName }} est bien enregistré !",
+      "USERSAVEFAILED": "Échec de l'enregistrement de l'utilisateur.",
+      "DELETECONFIRMMESSAGE": "Etes-vous sûr que vous voulez supprimer",
+      "DELETESUCCESS": "L'Utilisateur vient d etre supprimé avec succès.",
+      "DELETEFAILED": "Impossible de supprimer l'Utilisateur.",
+      "USERSEMAILFAILED": "Mél déjà utilisé pour un autre utilisateur",
+      "USERSEMAILPRESENT": "un autre utilisateur est déjà enregistré avec cet email",
+      "USERSPHONEPRESENT": "un Utilisateur existe déjà avec le même numéro de portable",
+      "DEACTIVATETITLE": "Confirmer la démission",
+      "DEACTIVATETEXT": "Veuillez confirmer la démission de cet Apprenant :<br/> {{StudentCivility}} {{StudentFirstName}} {{StudentLastName}}<br/> Cet Apprenant ne sera plus en mesure de prendre part aux evaluation a partir de maintenant.",
+      "DEACTIVATECONFIRM": "Demission",
+      "DEACTIVATECANCEL": "Annuler"
+    },
+    "USER_S3": {
+      "TEXT": "Le lien sur lequel vous venez de cliquer a expiré."
+    }
+  },
+  "SchoolTitles": {
+    "School": "FR - School",
+    "city": "FR - city",
+    "ContactPerson": "FR - Contact Person",
+    "position": "Position",
+    "phoneNumber": "Fr - Phone Number",
+    "RNCPTitles": "Fr - RNCP Titles"
+  },
+  "Customer": {
+    "CERTIFICATIONPOPUP": {
+      "CERTIFICATIONNAME": "FR - Certification Name",
+      "CERTIFICATIONDISCRIPTION": "FR -Certification Discription",
+      "ADDCERTIFICATION": "FR -Add Certification ",
+      "CANCEL": "FR - Cancel",
+      "SUBMIT": "FR - SUBMIT"
+    },
+    "ADDCERTIFICATION": {
+      "ADDCERTIFICATION": "FR - Add Certification "
+    },
+    "EDITTITLE": {
+      "CERTIFIER": "FR - Certifier",
+      "PREPARATIONCENTER": "FR - Preparation Center",
+      "LONGNAME": "FR - Long Name",
+      "SHORTNAME": "FR - Short Name",
+      "LEVELRNCP": "FR - Level RNCP",
+      "EXPIRATIONDATE": "FR - Expiration Date"
+    },
+    "List": {
+      "School": "Ecole ",
+      "ContactPerson": "Personne de contact",
+      "Roles": "Roles",
+      "SalesStaff": "Personnel Ventes",
+      "Deals": "Accords",
+      "SalesPerson": "Vendeur",
+      "position": "Position",
+      "PhoneNumber": "TÉL",
+      "MobileNumber": "portable"
+    },
+    "AddUser": {
+      "AddUser": "FR - AddUser"
+    },
+    "AddStudent": "Ajouter un Apprenant",
+    "JobDescriptionForm": "Fiche de poste",
+    "AddContact": {
+      "RoleAdmtc": "FR - Role Admtc",
+      "AddContact": "FR - Add Contact",
+      "EditContact": "FR - Edit Contact",
+      "Mr": "M.",
+      "Mrs": "Mme",
+      "Ms": "FR - Ms",
+      "TitleRequired": "FR - Title requis",
+      "PositionRequired": "FR - Position requis",
+      "FirstNameRequired": "FR - First Name requis",
+      "LastNameRequired": "FR - Last Name requis",
+      "PhoneRequired": "FR - Phone Number requis",
+      "PhoneLength": "FR - Phone Number length 10",
+      "ValidNumber": "FR - Must be Valid Number",
+      "MustBeNumber": "FR - Must be Number",
+      "MobilePhoneRequired": "FR - Mobile Phone Number requis",
+      "MobilePhoneLength": "FR - Mobile Phone length 10",
+      "DirectPhoneRequired": "FR - Direct Phone Number requis",
+      "DirectPhoneLength": "FR - Direct Phone Number length 10",
+      "EmailRequired": "FR - Email requis",
+      "ValidEmail": "FR - Must be valid Email",
+      "RoleRequired": "FR - ADMTC role requis"
+    },
+    "EditContact": {
+      "AddUser": "FR - Add User",
+      "NAME": "FR - Name",
+      "USERTYPE": "FR - User Type",
+      "ACTIONS": "FR - Actions",
+      "AddContact": "Ajouter le contact",
+      "Search": "Rechercher",
+      "ConfirmDeleteContact": "FR - Are you sure to delete this contact : ",
+      "ConfirmDeleteRole": "FR - Are you sure to delete this role : ",
+      "for": "FR -  for ",
+      "RoleAdmtc": "RôleAdmtc",
+      "position": "FR - position",
+      "city": "ville",
+      "Title": "Titre"
+    },
+    "Edit": {
+      "SchoolDetail": "School Detail",
+      "Company": "Company",
+      "Contact": "Contact",
+      "Title": "Title",
+      "Student": "Apprenants",
+      "StudentCards": "Fiches Apprenants",
+      "StudentTable": "Tableau Apprenants",
+      "DEACTIVATED_STUDENTS": "Apprenants Démissionnaires"
+    },
+    "EditDetail": {
+      "GroupName": "FR - Group Name",
+      "RectorateNumber": "FR - UAI - Rectorate Number",
+      "City": "FR - City",
+      "BelongToGroup": "FR - Belongs to Group",
+      "AddAddress": "FR - Add Address",
+      "Zipcode": "FR - Zip Code",
+      "WebsiteSocialMedia": "FR - Website & Social Media",
+      "WebUrl": "FR - Web URL",
+      "SocialNetwork": "FR - Social Network",
+      "Save": "FR - Save",
+      "TelePhone": "FR - TelePhone",
+      "Identity": "FR - Identity",
+      "Address": "FR - Address",
+      "Country": "FR - Country",
+      "EmailAddress": "FR - EmailAddress",
+      "FaceBook": "FR - FaceBook",
+      "twitterUrl": "FR - twitterUrl",
+      "instagramUrl": "FR - instagramUrl",
+      "youtubeUrl": "FR - youtubeUrl",
+      "linkedinUrl": "FR - linkedinUrl",
+      "viadeoUrl": "FR - viadeoUrl"
+    },
+    "EditCompany": {
+      "CompanyName": "FR - Company Name",
+      "LegalType": "FR - Legal Type",
+      "Currency": "FR - Currency",
+      "SiretNumber": "FR - SIRET Number",
+      "ProTrainingAgreeNumber": "FR - Professional Training Agreement Number",
+      "LegalRepresentative": "FR - Legal Representative",
+      "Update": "FR - Update",
+      "Identity": "FR - Identity",
+      "Certifications": "FR - Certifications",
+      "position": "FR - position",
+      "firstName": "FR - firstName",
+      "lastName": "FR - lastName",
+      "phoneNumber": "FR - phoneNumber",
+      "FAX": "FR - FAX",
+      "mobileNumber": "FR - mobileNumber",
+      "emailAddress": "FR - emailAddress",
+      "AdmcRoles": "FR - AdmcRoles"
+    },
+    "AddSchool": {
+      "Title": "Ajouter une école",
+      "schShortName": {
+        "title": "Nom court de l'école",
+        "validation1": "Nom court de l'école requis",
+        "validation2": "La taille doit etre supérieur à 3 caractères"
+      },
+      "schLongName": {
+        "title": "Nom long de l'école",
+        "validation1": "Nom long de l'école requis"
+      },
+      "Address": {
+        "title": "Addresse",
+        "validation1": "Addresse requis"
+      },
+      "City": {
+        "title": "Ville ou Code postale",
+        "validation1": "Ville requis"
+      },
+      "Country": {
+        "title": "Pays",
+        "validation1": "Pays requis"
+      },
+      "SchoolTitle": {
+        "title": "Personne à contacter",
+        "Mr": "M.",
+        "Mrs": "Mme",
+        "Ms": "FR - Ms",
+        "validation1": "Titre requis"
+      },
+      "firstName": {
+        "title": "Prénom",
+        "validation1": "Prénom requis",
+        "validation2": "Doit contenir uniquement des lettres"
+      },
+      "lastName": {
+        "title": "Nom de famille",
+        "validation1": "Nom de famille requis",
+        "validation2": "Doit contenir uniquement des lettres"
+      },
+      "phoneNumber": {
+        "title": "Numéro de téléphone",
+        "validation1": "Numéro de téléphone",
+        "validation2": "Entrer un numéro à 10 chiffres",
+        "validation3": "Entrer un numéro valide",
+        "validation4": "Doit contenir uniquement des chiffres"
+      },
+      "mobileNumber": {
+        "title": "Numéro de portable",
+        "validation1": "Numéro de portable requis",
+        "validation2": "La taille doit etre de 10 chiffres",
+        "validation3": "Merci d'entrer un numéro valide",
+        "validation4": "Entrer uniquement des chiffres"
+      },
+      "directLinePh": {
+        "title": "Numéro de ligne direct",
+        "validation1": "Numéro de ligne direct requis",
+        "validation2": "La taille doit etre de 10 chiffres",
+        "validation3": "Merci d'entrer un numéro valide",
+        "validation4": "Entrer uniquement des chiffres"
+      },
+      "email": {
+        "title": "Adresse email",
+        "validation1": "Adresse email requis",
+        "validation2": "Merci d'entrer un email valide"
+      },
+      "Position": {
+        "title": "Position",
+        "validation1": "Position Requis"
+      },
+      "userType": {
+        "title": "Type d'Utitlisateur",
+        "validation1": "Type d'Utitlisateur requis"
+      },
+      "cancle": "Annuler",
+      "submit": "Valider"
+    }
+  },
+  "USERLISTTABLE": {
+    "FNAME": "Prénom",
+    "LNAME": "Nom de famille",
+    "NAME": "Nom",
+    "SCHOOL": "Ecole",
+    "TITLE": "Titres",
+    "AFFILIATION": "Affiliation",
+    "CRPC": "CR/PC",
+    "USERTYPE": "Type Utilisateur",
+    "ENTITY": "Entité",
+    "RNCPTITLE": "Titre RNCP",
+    "CIVILITY": {
+      "MR": "M.",
+      "MRS": "Mme",
+      "TITLE": "Civilité"
+    },
+    "ACTIONS":{
+      "TITLE":"Action",
+      "DUPLICATE": "Dupliquer",
+      "EDIT": "Modifier ",
+      "USER_RESPONSES": "Réponses Utilisateurs",
+      "DELETE": "Supprimer  "
+    } ,
+    "PROBLEMATIC": "Problematique",
+    "STUDENTTABLE": "Table des apprenants",
+    "MENTOR": "Tuteur",
+    "PROB": "Prob.",
+    "JOB": "Poste",
+    "URGENT_MESSAGE": "Message urgent"
+  },
+  "LOGIN": {
+    "EMAIL": "Adresse mail",
+    "USERNAME": "Utilisateur",
+    "PASSWORD": "Mot de passe",
+    "LOGIN": "J’accède à la Plateforme",
+    "USERNAME REQUIRED": "Veuillez entrer le nom de l'Utilisateur.",
+    "PASSWORD REQUIRED": "Veuillez entrer le mot de passe",
+    "USERNAME OR PASSWORD INVALID": "Utilisateur / Mot de passe non valide",
+    "COMPANYUSERMESSAGE": "FR-You must be a ADMTC or Academic User to login"
+  },
+  "ADDIDEABTNTEXT": "Ajouter Suggestion / Idée",
+  "IDEAS": {
+    "DATE": "Date",
+    "USER": "Utilisateur",
+    "USERTYPE": "Position",
+    "SCHOOL": "École",
+    "CATEGORY": "Catégorie",
+    "SUGGESTION": "Suggestion",
+    "ACTIONS": "Actions",
+    "SEARCHTEXT": "Rechercher",
+    "REPLY": "Répondre",
+    "SHARE": "Partager",
+    "DETAILS": "Détails",
+    "IDEAMAXCHARLENGTH": "300 caractères au maximum",
+    "IDEASDELETE": {
+      "TITLE": "Supprimer cette suggestion?",
+      "TEXT": "Souhaitez-vous supprimer cette suggestion?",
+      "ONSUCCESS": "Supprimee!",
+      "DELETE": "Supprimer !",
+      "DELETED": "Supprimee!",
+      "THANK_YOU": "Merci",
+      "SORRY": "Desole !",
+      "UNDERSTOOD": "J’ai compris",
+      "ONFAIL": "La suppression n’a pas pu s’effectuer. <br/> peut être a cause du net. <br/> merci de réessayer dans un instant"
+    }
+  },
+  "SUGGESTION": {
+    "TITLE": "Proposez votre suggestion",
+    "CATEGORY": "​Catégories",
+    "SUGGESTIONTEXTAREA": "ma suggestion",
+    "CANCEL": "Annuler",
+    "SUBMIT": "Envoyer",
+    "IDEAS_CATEGORIES": {
+      "ONE": "Vie​ ​à​ ​l’école",
+      "TWO": "Vie​ ​en​ ​entreprise",
+      "THREE": "​Contenu​ ​pédagogique",
+      "FOUR": "Organisations​ ​des​ ​cours",
+      "FIVE": "​Organisations​ ​des​ ​évènements",
+      "SIX": "Aide​ ​à​ ​l’intégration"
+    },
+    "SWEET_ALERT": "Merci pour votre suggestion.<br>Nous la soumettrons au Comite Pedagogique lors de sa prochaine session.<br>1 prix sera decerne a la meilleure suggestion de I'annee dans chaque categorie.<br>Doncn'hesitez pas a nous proposer de nouvelles suggestions!",
+    "SUCCESS": "SUCCÈS",
+    "OK": "D'accord"
+  },
+  "STUDENT_INFORMATION": {
+    "TITLE": "Information Apprenant",
+    "FIRSTNAME": "Prénom",
+    "LASTNAME": "Nom de famille",
+    "EMAIL": "Email",
+    "DATEOFBIRTH": "Date de naissance",
+    "PLACEOFBIRTH": "Lieu de naissance",
+    "NATIONALITY": "Nationalité",
+    "RELATIONS": {
+      "FATHER": "Père",
+      "MOTHER": "Mère",
+      "GRANDFATHER": "Grand-Père",
+      "GRANDMOTHER": "Grand-Mère",
+      "UNCLE": "Oncle",
+      "AUNT": "Tante",
+      "OTHER": "Autre"
+    },
+    "GENDER": {
+      "TITLE": "Sexe",
+      "MALE": "Homme",
+      "FEMALE": "Femme"
+    },
+    "STUDENT_REF_ID": "Ref Apprenant",
+    "SUCCESSMESSAGE": "L'Apprenant {{ Civility }} {{ FName }} {{ LName }} a bien été enregistré.",
+    "FAILEDMESSAGE": "FR- The student is not registerd.",
+    "CONTINUEWITHREGISTRATION": "Continuer l'Enregistrement",
+    "COMPLETEREGISTRATION": "Votre dossier est bien enregistré."
+  },
+  "FORM_INSTRUCTION": "Veuillez completer ce formulaire",
+  "MY_INFORMATION": {
+    "TITLE": "Mes Informations",
+    "STUDIES": "Mes Etudes",
+    "PHOTOGRAPH": "Ma Photo",
+    "PHYSICALDISABILITY": {
+      "LABEL": "FR - Physical Disability",
+      "YES": "FR - Yes",
+      "NO": "FR - No"
+    }
+  },
+  "GUARDIAN_INFORMATION": {
+    "TITLE": "Mes Parents",
+    "RELATIONS": "Lien de Parenté ",
+    "ADD_PARENT": "Ajouter un Parent",
+    "PROFESSION": "FR - Profession",
+    "GENDER": {
+      "TITLE": "Sexe *",
+      "MALE": "Homme",
+      "FEMALE": "Femme"
+    }
+  },
+  "TASK": {
+    "ASSIGNED_BY": "De",
+    "ASSIGNED_TO": "Assigné à",
+    "TASKS": "les tâches",
+    "MYTASKS": "Mes Tâches",
+    "SEARCH": "recherche",
+    "ADDTASK": "Ajouter une tâche",
+    "ADDTESTTASK": "Ajouter une tâche à l'épreuve",
+    "RNCPTITLE": "Titre RNCP",
+    "ASSIGNTO": "Assignée à",
+    "RNCPTITLES": "Titres RNCP",
+    "CREATEDBY": "Créée par",
+    "CREATEDDATE": "Date Création",
+    "PRIORITY": "Priorité",
+    "DUEDATE": "Date d'échéance",
+    "DESCRIPTION": "Description",
+    "STATUS": "Statut",
+    "TODO": "FAIRE",
+    "INPROGRESS": "En cours",
+    "DONE": "Terminé",
+    "FORDOCUPLOADTASK": "Document à télédéposer",
+    "FILTER_BY_STATUS": {
+      "PLACEHOLDER": "Filtre sur le statut des tâches",
+      "ALL": "Toutes",
+      "DONE": "Fait",
+      "TODO": "A faire"
+    },
+    "TASKDETAILS": {
+      "DATE": "Date",
+      "STATUS": "Statut",
+      "ACTIONTAKEN": "Action menée",
+      "COMMENTS": "Commentaires",
+      "PENDING": "En cours",
+      "ACHIEVED": "Accompli"
+    },
+    "ADDEDITTASK": {
+      "RNCPTITLE": "Titre RNCP *",
+      "ASSIGNTO": "Assignée à *",
+      "CREATEDBY": "Créée par *",
+      "CREATEDDATE": "Date Création *",
+      "PRIORITY": "Priorité *",
+      "PRIORITYREQ": "Priorité is required",
+      "USERREQ": "Utilisateur is required",
+      "DUEDATE": "Date d'échéance *",
+      "DESCRIPTION": "Description *",
+      "STATUS": "Statut *",
+      "USER": "Utilisateur",
+      "CATEGORYOFUSERS": "Categorie d’Utilisateurs",
+      "USERMSG": "Veuillez sélectionner dans cette liste",
+      "INTERNAL_TASK": "Tâche interne",
+      "Add Expected Document": "Ajouter un document attendu"
+    },
+    "MESSAGE": {
+      "TASKEXIST": "Le titre RNCP est déjà dans cet intervalle de temps de session",
+      "TASKADDSUCCESS": "La tâche vient d'etre ajoutée avec succès.",
+      "TASKADDFAILED": "Impossible d'ajouter une tâche.",
+      "TASKUPDATETITLE": "Bravo",
+      "TASKUPDATESUCCESS": "La tâche mise à jour avec succès.",
+      "TASKSAVESUCCESS": "La tâche vient d'être mise à jour.",
+      "OK": "J’ai compris",
+      "TASKUPDATEFAILED": "Échec de la mise à jour de la tâche .",
+      "TASKDELETECONFIRM": "Êtes-vous sûr de vouloir supprimer la tâche.",
+      "TASKDELETESUCCESS": "La tâche vient d'etre supprimée avec succès.",
+      "TASKDELETEFAILED": "Échec de la suppression de la tâche.",
+      "URGENT_MESSAGE_SENT": "Le message a été envoyé. <br/> le destinataire verra votre message lors de la prochaine visite de la plateforme. <br/> Une notification spéciale a également été envoyée au destinataire.",
+      "URGENT_MESSAGE_BUTTON": "J’ai compris",
+      "SEND_URGENT_MESSAGE": "Envoyer un message urgent",
+      "URGENT_MESSAGE_REPLY": "Votre réponse vient d'être envoyé à RC",
+      "URGENT_MESSAGE_REPLY_BUTTON": "OK",
+      "NOTABLETODELETETITLE": "DEsole",
+      "NOTABLETODELETETEXT": "Vous n’avez pas la permission de supprimer cette tâche.<br/> Car vous n’en 'êtes pas l’initiateur.",
+      "URGENT_MAIL_NO_USERS": "Desole, il n'y a actuellement pas d'utilisateur pour cet {{ UserType }} ",
+      "NO_STUDENT_MARKS_ENTRY_TITLE": "Désolé",
+      "NO_STUDENT_MARKS_ENTRY_TEXT": "il n'y a pas encore d'étudiants inscrit à cette école.",
+      "CHANGE_S1_TITLE": "Désolé",
+      "CHANGE_S1_MESSAGE": "Vous ne pouvez pas changer le correcteur actuel, la correction est en cours par ce correcteur",
+      "CHANGE_S1_Btn": "D’accord"
+    }
+  },
+  "COMPANY": {
+    "MESSAGE": {
+      "TITLE": "Bravo",
+      "COMPANY_ADD_SUCCESS": "La société vient d'etre enregistréé avec succès.",
+      "COMPANY_ADD_FAILD": "Échec de l'enregistrement de la société.",
+      "COMPANY_ADD_SUCCESS_BUTTON": "Ok"
+    }
+  },
+  "CLASS": {
+    "MESSAGE": {
+      "CLASSADDSUCCESS": "la Classe vient d'etre enregistréé avec succès.",
+      "CLASSADDFAILED": "Échec de l'enregistrement de la classe",
+      "CLASSEDITSUCCESS": "FR - Class edited successfully.",
+      "CLASSEDITFAILED": "FR - Failed to edit class."
+    }
+  },
+  "SETTINGS": {
+    "TITLES": {
+      "GENERAL": "Général",
+      "ADMTCPAPAERHEADER": "ADMTC Papaer header",
+      "ADMTCPAPAER": "ADMTC Papaer footer",
+      "1001IDEASCATEGORIES": "1001 catégories d'idées",
+      "SCHOOLSBOARDRESULTS": "Résultats du conseil scolaire",
+      "INVOICE": "Facture d'achat",
+      "STUDENTSTATUSES": "Statut des apprenants",
+      "CONTRACTDEFAULTS": "Défauts de contrat",
+      "CNCPINFORMATION": "Information CNCP",
+      "USERTYPEMANAGMENT": "Gestion des Types D'utilisaturs",
+      "SCHOLERSEASON": "Année scolaire",
+      "CALENDARSTEPS": "Etapes Calendaires"
+    },
+    "GENERAL": {
+      "SCHOOLYEAR": "Année scolaire",
+      "IMAPSERVER": "Serveur Imap",
+      "IMAPPART": "Partie Imap",
+      "AUTOMATICNOTIFICATION": "Envoyer une notification automatique tous les jours"
+    },
+    "1001IDEASCATEGORIES": {
+      "CATEGORYNAME": "Catégorie"
+    },
+    "INVOICE": {
+      "VATTAXRATE": "Vat Taux d'imposition",
+      "INVOICEADDRESS": "Adresse de facturation",
+      "INVOICESEQUENCENUMBER": "Invoice sequence number",
+      "BANKACCOUNTDETAILSFORTRANSFAR": "Détails du compte bancaire pour le transfert",
+      "ACCOUNTHOLDER": "Titulaire de compte",
+      "DOMICILATION": "Domiciliation",
+      "IBAN": "IBAN",
+      "BICCODE": "Code BIC"
+    },
+    "STUDENTSTATUSES": {
+      "STATUSNAME": "Nom du statut",
+      "STATUSDESCRIPTION": "Description du statut"
+    },
+    "CONTRACTDETAILS": {
+      "STUDENTFESS": "Frais d'apprenant standard",
+      "CURRENCY": "Sélectionnez la devise",
+      "STANDARDSHAREOFCERTIFIER": "Part standardisée du certificateur"
+    },
+    "CNCPINFORMATION": {
+      "FUNCTION": "Fonction",
+      "FIRSTNAME": "Prénom",
+      "FAMILYNAME": "Nom de famille",
+      "PHONENUMBER": "Numéro de téléphone",
+      "MOBILENUMBER": "Numéro de portable",
+      "ADDRESSLINE1": "Adresse ligne1",
+      "ADDRESSLINE2": "Adresse Ligne2",
+      "ZIPCODE": "Code postal",
+      "CITY": "Ville",
+      "COUNTRY": "Sélectionner le pays",
+      "WEBSITEURL": "URL de site web",
+      "GENERALEMAIL": "Courrier électronique général"
+    },
+    "MESSAGE": {
+      "SUCCESSIDEACATEGORY": "Catégorie ajoutée avec succès.",
+      "SUCESSSCHOOLBOARD": "La classe scolaire s'ajoute avec succès.",
+      "STUDENTSTATUS": "L'état des apprenants s'ajoute avec succès."
+    },
+    "SCHOLERSEASON": {
+      "ADDSCHOLER": "Ajouter une Année Scolaire",
+      "EDITSCHOLAR": "Modifier une saison Scolaire",
+      "SEASON": "Année Scolaire",
+      "DESCRIPTION": "Description",
+      "FROM": "De",
+      "TO": "à",
+      "RNCPTITLES": "Titres RNCP",
+      "SCHOLARSEASONUPDATESUCCESS": "L’Année Scolaire <br/>{{Title}} <br/>vient d’être mise à jour.",
+      "SCHOLARSEASONADDSUCCESS": "L’Année Scolaire <br/>{{Title}} <br/>vient d’être mise à jour.",
+      "INVALIDDATETITLE": "Invalid Date",
+      "INVALIDDATETEXT": "TO date cannot be less than FROM date"
+    },
+    "CALENDARSTEPS": {
+      "ADDCALENDAR": "Ajouter une Etape Calendaire Type",
+      "EDITCALENDAR": "Modifier une Etape Calendaire",
+      "DELWARNINGTITLE": "Attention !",
+      "DELWARNINGMSG": "Vous êtes sur le point de supprimer cette Etape Calendaire : ",
+      "DELSUCCESSMSG": "L’Etape Calendaire :<br/> {{ Title }} <br/>vient d’être supprimée.",
+      "DELCONFIRMTITLE": "Etape Calendaire Supprimée !",
+      "YES": "Oui",
+      "NO": "Non",
+      "OK": "J’ai compris",
+      "WHAT": "Quoi",
+      "WHO": "Qui",
+      "BEFORE": "Avant",
+      "AFTER": "Après",
+      "NUMOFDAYS": "Nbre de Jours",
+      "ADDMSG": "Calender Step Ajouté avec succès",
+      "EDITMSG": "Étape du calendrier mise à jour avec succès",
+      "FAILUREMSG": "Echec de l'étape du calendrier pour l'enregistrement"
+    },
+    "USERTYPES": {
+      "USERTYPEMANAGMENT": "Gestion des Types Utilisateurs",
+      "USERTYPE": {
+        "title": "Type Utilisateur",
+        "validation1": "Type Utilisateur required"
+      },
+      "DESCRIPTION": {
+        "title": "Description",
+        "validation1": "Description is required"
+      },
+      "ENTITY": {
+        "title": "Entité",
+        "validation1": "Entité is required"
+      },
+      "ENTITYNAME": {
+        "ADMTC": "ADMTC",
+        "CERTIFIER": "Certificateur",
+        "ACADEMIC": "Pédagogique",
+        "COMPANY": "Entreprise",
+        "GROUPOFSCHOOLS": "Groupe d’Ecoles",
+        "GROUP-OF-SCHOOLS": "Groupe d’Ecoles"
+      },
+      "STUDENTMANAGMENT": {
+        "title": "Gestion des Apprenants",
+        "view": "Consulter",
+        "update": "Modifier",
+        "download": "Télécharger",
+        "v": "C",
+        "u": "M",
+        "d": "T",
+        "validation1": "Gestion des Apprenants is required"
+      },
+      "ADMISSION": {
+        "title": "ADMISSIONS",
+        "validation1": "Admission is required"
+      },
+      "ANNALESEPREUVES": {
+        "title": "ANNALES EPREUVES"
+      },
+      "BOITEAOUTILS": {
+        "title": "BOITE A OUTILS"
+      },
+      "Communication": {
+        "title": "Communication"
+      },
+      "Examens": {
+        "title": "Examens"
+      },
+      "ORGANISATION": {
+        "title": "ORGANISATION"
+      },
+      "PROGRAMME": {
+        "title": "PROGRAMME"
+      },
+      "EPREUVESCERTIFICATION": {
+        "title": "EPREUVES CERTIFICATION"
+      },
+      "ARCHIVES": {
+        "title": "ARCHIVES"
+      },
+      "PDFResultForGroupTest": "Résultats des groupes",
+      "ACTIONS": "Action",
+      "CANCEL": "Annuler",
+      "SAVE": "Enregistrer",
+      "ADDNEW": "Ajouter un Type Utilisateur",
+      "UserTypedeletedWarningTitle": "tes-vous sr?",
+      "UserTypedeletedWarningMessage": "Souhaitez vous supprimer l’utilisateur type :",
+      "UserTypedeletedSuccess": "Le type utilisateur vient d’être supprimé..",
+      "S1": {
+        "Title": "Félicitations !",
+        "Text": "Vous venez d’enregistrer l’utilisateur type : <br> {{UserTypeName}}",
+        "Ok": "Merci"
+      },
+      "S2": {
+        "Title": "Attention",
+        "Text": "Souhaitez vous supprimer l’utilisateur type : <br> {{UserTypeName}}",
+        "success": "Le type utilisateur : <br> {{UserTypeName}}  <br> vient d’être supprimé.",
+        "YES": "Oui",
+        "NO": "Non",
+        "DELETED": "Supprimé!"
+      },
+      "S3": {
+        "Title": "Sorry !",
+        "Text": "{{counter}} utilisateurs avec ce Type sont déjà enregistrés. <br> il est donc impossible de supprimer ce type utilisateur. <br> Souhaitez-vous consulter la liste des utilisateurs?"
+      },
+      "S4": {
+        "Title": "Félicitations !",
+        "Text": "Vous venez d’enregistrer l’utilisateur type : <br> {{UserTypeName}}"
+      }
+    }
+  },
+  "ADMTCSTAFFKEY": {
+    "DIRECTOR": "Direction Générale",
+    "SALES": "Commercial",
+    "VISITOR": "Visiteur",
+    "ADMIN": "Admin",
+    "CORRECTOR-OF-PROBLEMATIC": "Correcteur de Problematique",
+    "CORRECTOR-QUALITY": "Correcteur Contrôle Qualité",
+    "CORRECTOR-CERTIFIER": "Correcteur du Certificateur",
+    "ACADEMIC-DIRECTOR": "Référent Titre",
+    "ACADEMIC-ADMIN": "Membre du Service Pédagogique",
+    "GROUP-CHIEF-OF-ACADEMIC-DIRECTORS-AND-ADMIN": "Direction Pédagogique Groupe",
+    "TEACHER": "Enseignant",
+    "CORRECTOR": "Correcteur",
+    "ACAD-STAFF": "Preparation Rentrée",
+    "PROGRAM-REFERAL": "Référent Titre",
+    "ADMTC-STAFF": "Admin-ADMTC Staff",
+    "CONTRACT-SIGNATORY": "Signataire de Contrat",
+    "ACADEMIC-STAFF": "Membre de la Pedagogie",
+    "ACAD-LINKTO-ADMTC": "Référent Pédagogique lien entre Pédagogie et ADMTC",
+    "LINK-TO-ADMTC": "Référent Pédagogique lien entre Pédagogie et ADMTC",
+    "CROSS-CORRECTOR": "Correction Croisée",
+    "PRESIDENT-OF-JURY": "Président de Jury",
+    "PRESIDENT-JURY": "Président de Jury",
+    "MEMBER-JURY": "Membre de Jury",
+    "ACADEMIC-COMMITTEE-MEMBER": "Membre du comité Pédagogique",
+    "LEGAL-REPRESENTATIVE": "Représentant legal",
+    "MENTOR": "Tuteur d’Entreprise",
+    "HR": "RH d’Entreprise",
+    "STUDENT": "Apprenant",
+    "CHIEF-GROUP-ACADEMIC": "Chef De Groupe Pedagogique",
+    "ANIMATOR-BUSINESS-GAME": "Animateur Business Game",
+    "ALL USER": "Tous Utilisateurs"
+  },
+  "ENTITY": {
+    "ACADEMIC": "Pédagogique",
+    "COMPANY": "Entreprise",
+    "ADMTC": "ADMTC",
+    "GROUPOFSCHOOLS": "Groupe d’Ecoles",
+    "GROUP-OF-SCHOOLS": "Groupe d’Ecoles"
+  },
+  "EMPLOYABILITY": {
+    "SELECT-ANSWER-TYPE": "Selectionner le type de question",
+    "QUESTION": "Question",
+    "EMAIL-TEMPLATE": "Model d'email",
+    "VARIABLES": "Variables"
+  },
+  "FORMCONFIRMATION": {
+    "MESSAGE": {
+      "SUBMITANDGO": "FR-Submit and go",
+      "CANCELANDGO": "FR-Cancel and go",
+      "CANCEL": "FR-Cancel",
+      "FOMRCONFRIMMESSAGE": "FR-What you want about you have changed data ?",
+      "FORMVALIDATIONMESSAGE": "Please complete current test correction."
+    }
+  },
+  "PROBLEMATICFORM": {
+    "EmptyMessage": "La Note de Problématique  n'a pas encore été envoyée à l'Apprenant",
+    "TITLE": "Note de Problématique",
+    "STUDENT": "Apprenant :",
+    "CERTIFIER": "Certificateur :",
+    "Q1": "Ma mission principale au sein de l'entreprise / Objectif Final de ma mission :",
+    "Q2": "Mon analyse sur le déroulement de ma mission et sur les diagnostics internes et externes :",
+    "Q3": "Définir la problématique du PFE :",
+    "COMMENT": "Observations générales",
+    "SIGNBYSTUDENT": "Signature de l’Apprenant",
+    "SIGNBYACAD": "Signature de Pédagogie",
+    "SIGNBYCERTI": "Signature de Certificateur",
+    "REJECT": "Refusée",
+    "VALID": "Validée",
+    "SAVEBTN": "Sauvegarder",
+    "SENDBTN": "Envoyer à la Pédagogie",
+    "TASK_DESCP_INIT": "Note de Problématique",
+    "VALIDMSG": {
+      "TITLE": "La Note de Problématique est prête pour envoi au Certificateur.",
+      "TEXT": "La Note de Problématique vient d'être mise en file d’attente. <br/>Les Notes de Problématiques seront envoyées au certificateur lorsque vous aurez validé la Note de Problématique de chacun de vos apprenants.<br/>Une notification vous sera envoyée avec l’avis du certificateur sur chaque Note de Problématique",
+      "BTN": "J’ai compris"
+    },
+    "REJECTMSG": {
+      "TITLE": "Souhaitez-vous refuser cette Note de Problématique?",
+      "TEXT": "Si OUI, Une tâche sera affectée  à {{StufullName}} <br/> pour le suivi de cette Note de Problématique.<br/>Dans l’écran suivant, vous pourrez indiquer vos directives et la date limite de retour.",
+      "BTN1": "Oui",
+      "BTN2": "Non",
+      "CERTIFIER_TEXT": "Souhaitez-vous refuser la Note de Problématique de <br/> {{StufullName}} ?<br/> Si OUI, une notification sera envoyée à l’Apprenant <br/> ainsi qu'à la Pédagogie du Centre de Préparation <br/> pour consulter vos commentaires et la modifier. <br/> Vous recevrez une notification dès que  l’apprenant aura apporté ses modifications."
+    },
+    "CERTIFIER_REJECTMSG_SUCCESS": {
+      "TITLE": "Note de Problématique refusée.",
+      "TEXT": "Vous venez de refuser la Note de Problématique de <br/> {{StufullName}}. <br/> Une notification vient d'être envoyée à l’Apprenant <br/> ainsi qu'à la Pédagogie du Centre de Préparation <br/> pour consulter vos commentaires et la modifier. <br/> Vous recevrez une notification dès que  l’apprenant aura apporté ses modifications",
+      "BTN": "Merci"
+    },
+    "SUCCESS_STUDENT_SEND": {
+      "TITLE": "La Note de Problématique vient d'être envoyée à la Pédagogie",
+      "TEXT": "La Note de Problématique vient d'être envoyée à la Pédagogie. <br/> Vous recevrez une notification sur l’avis donné à votre Note de Problématique.",
+      "BTN": "J’ai compris"
+    },
+    "SUCCESS_STUDENT_SEND_CERTIFIER": {
+      "TITLE": "La Note de Problématique vient d'être envoyée pour validation.",
+      "TEXT": "La Note de Problématique vient d'être envoyée à la Pédagogie. <br/> Vous recevrez une notification sur l’avis donné à votre Note de Problématique"
+    },
+    "STUDENT_SAVE_SUCCESS": {
+      "TITLE": "La Note de Problématique est sauvegardée <br/> mais pas soumise à la validation.",
+      "TEXT": "Votre Note de Problématique est bien sauvegardée. <br/>Pour la soumettre à la validation, vous devrez cliquer sur le bouton “Envoyer à la Pédagogie”."
+    },
+    "PROB_SAVE_SUCCESS": {
+      "TITLE": "The Problematic is saved.",
+      "TEXT": "Your Changes for Problematic has been saved."
+    },
+    "CHECK_CERTIFIER_VALIDATE": {
+      "TITLE": "Souhaitez-vous valider cette Note de Problématique?",
+      "TEXT": "Souhaitez-vous valider la Note de Problématique de <br/>{{StufullName}}?<br/> Si OUI, une notification sera envoyée à l’Apprenant <br/> ainsi qu'à la Pédagogie du Centre de Préparation <br/> pour consulter vos éventuels commentaires.",
+      "BTN1": "Oui",
+      "BTN2": "Non"
+    },
+    "SUCCESS_CERTIFIER_VALIDATE": {
+      "TITLE": "Note de Problématique validée.",
+      "TEXT": "Vous venez de valider la Note de Problématique de <br/>{{StufullName}}<br/> Une notification vient d'être envoyée à l’Apprenant <br/> ainsi qu'à la Pédagogie du Centre de Préparation <br/> pour consulter vos éventuels commentaires.",
+      "BTN": "Merci"
+    }
+  },
+  "JOBDESCRIPTIONFORM": {
+    "REQUIRED_FIELD_MESSAGE": "Veuillez entrer toutes les informations",
+    "TITLE": "FICHE DE POSTE",
+    "EmptyMessage": "La fiche de Poste n'a pas encore été envoyée à l'Apprenant",
+    "JOBIDENTITY": "Identification du poste",
+    "STUDENT": "Apprenant",
+    "JOBNAME": "Intitule du poste",
+    "STUDENTIDENTITY": "Identité du candidat",
+    "ExpeditetheValidation": "Expedier la Validation",
+    "REMIND_STUDENT": "Relancer l’Apprenant",
+    "REMIND_MENTOR": "Relancer le Tuteur",
+    "DATESOFTHEMISSION": {
+      "TITLE": "Dates de la mission",
+      "FROM": "DU",
+      "TO": "AU"
+    },
+    "PRESENTATIONOFTHEDEPARTMENT": "Présentation du service",
+    "MAINMISSIONOFTHEDEPARTMENT": "Mission principale du service",
+    "ORGALIZATIONOFTHEDEPARTMENT": "Effectif du service",
+    "JOBMISSIONS": "Les missions du poste",
+    "MAINMISSION": "Mission principale",
+    "MISSIONSACTIVITIESANDAUTONOMY": {
+      "TITLE": "Missions, activités et champ d’autonomie et de responsabilité",
+      "MISSIONS": "Missions",
+      "ACTIVITIES": "Activité",
+      "AUTONOMYLEVEL": {
+        "TITLE": "Degré d’autonomie",
+        "OPT1": "Décide seul",
+        "OPT2": "Décide après info",
+        "OPT3": "Décide après aval",
+        "OPT4": "Réalise"
+      }
+    },
+    "REQUIREDCOMPETENCIESFORTHISJOB": {
+      "TITLE": "Les compétences requises pour le poste",
+      "JOBPROFILE": "Profil du poste",
+      "KNOWLEDGE": "Les « savoirs » : (quelles connaissances principales?)",
+      "KNOWHOW": "Les « savoir-faire » : (que doit-il être capable de faire ?)"
+    },
+    "OBJECTIVESANDEXPECTEDJOB&CONTRIBUTIONSFROMSTUDENTS": "Les objectifs du poste et les contributions attendues de l’apprenant",
+    "OBJECTIVESOFTHEDEPARTMENT": "Les objectifs du service",
+    "EXPECTEDFROMSTUDENT": {
+      "TITLE": "Les contributions et objectifs attendus de l’apprenant",
+      "CONTRIBUTION": "Contribution",
+      "OBJECTIVE": "Objectif"
+    },
+    "SIGNATUREOFTHESTUDENT": "Signature de l’apprenant",
+    "SIGNATUREOFTHECOMPANYMENTOR": "Signature de l’entreprise",
+    "SIGNATUREOFTHESTUDENTREQUITED": "Signature of the student requis.",
+    "SIGNATUREOFTHECOMPANYMENTORREQUITED": "Signature of the company mentor requis.",
+    "VALIDATEDBYACAD": "Validé par la pédagogie",
+    "S1": {
+      "TEXT": "Quand souhaitez-vous envoyer la demande de Fiche de Poste aux apprenants?",
+      "NOW": "Maintenant",
+      "LATER": "Plus tard",
+      "DONTSENDNOW": "Ne pas envoyer"
+    },
+    "S2": {
+      "TEXT": "Votre fiche de poste a bien été enregistrée. <br> Souhaitez vous l’envoyer maintenant à votre tuteur pour validation?",
+      "KEEP": "Garder la fiche de poste pour la modifier ultérieurement",
+      "SEND": "Envoyer la fiche de poste au tuteur pour validation."
+    },
+    "S3": {
+      "TEXT": "La fiche de poste a bien été enregistrée. <br> Souhaitez vous l’envoyer maintenant à la pédagogie de l’Ecole.",
+      "KEEP": "Garder la fiche de poste pour la modifier ultérieurement",
+      "SEND": "Envoyer la fiche de poste à l'École."
+    },
+    "S4": {
+      "TEXT": "La fiche de poste a bien été enregistrée <br> et déposée sur la plateforme. <br> L’apprenant sera informé par une notification.",
+      "SEND": "Envoyer votre confirmation à l’Apprenant"
+    },
+    "S5": {
+      "Title": "Etes Vous sure d'Expédier cette Validation",
+      "TEXT": "Souhaitez vous valider cette fiche de poste à la place du tuteur ?",
+      "YES": "OUI",
+      "NO": "NON",
+      "REMINDYES": "Oui",
+      "CANCEL": "Annuler",
+      "JOBDESC_S6": "Souhaitez vous effacer cette ligne?"
+    },
+    "S6": {
+      "Title": "Félicitations",
+      "TEXT": "Cette Fiche de Poste est désormais validée.<br>L’Apprenant vient d’en être informé.",
+      "OK": "J’ai compris"
+    },
+    "SAVE": "Enregistrer",
+    "CANCEL": "Annuler",
+    "PREVIEW": "FR- Preview",
+    "FAILEDMESSAGE": "Job Description has not been saved",
+    "M1": "c’est confirmé. La demande de Fiche de Poste sera bien envoyée le {{selectedDate}}. Le jour de l’envoi vous recevrez une confirmation avec la liste des apprenants concernés.",
+    "M2": "c’est confirmé.votre Fiche de Poste est enregistrée. Vous pourrez la modifier ultérieurement. <br> Veuillez noter que cette fiche de poste n’a donc pas encore été envoyée à votre tuteur pour validation.",
+    "M3": "c’est confirmé.votre Fiche de Poste vient d’être envoyée à votre tuteur pour validation.",
+    "M4": "C’est confirmé! La Fiche de Poste est enregistrée. Vous pourrez la modifier ultérieurement. <br> Veuillez noter que cette fiche de poste n’a donc pas encore été envoyée à l'École.",
+    "M5": "La fiche de poste vient d'être envoyée à l'école.",
+    "M6": "C’est confirmé!  La Fiche de Poste est bien enregistrée et déposée dans la plateforme.",
+    "N1_": "<br>{{ApprenantCivilité}} {{ApprenantPrenom}} {{ApprenantNom}}, <br><br>Vous êtes inscrit dans l'établissement {{schoolName}} pour préparer le Titre {{TitreDéveloppé}} .<br><br>Veuillez cliquer sur le lien ci-dessous pour accéder et compléter votre Fiche de Poste dans le cadre de votre mission au sein de  {{Entreprise}}, sous la supervision de votre tuteur {{TuteurCivilité}} {{TuteurPrenom}} {{TuteurNom}}. <br><br><a href='${URL}' >Cliquer Ici</a> <br><br>Cette Fiche de Poste doit être complétée par vous puis validée par votre tuteur au plus tard pour le {{date}}.<br><br>Pour toute question, n’hésitez pas à me contacter à {{senderEmail}}.<br><br>Cordialement,<br><br>{{senderCivility}} {{senderFirstName}} {{senderLastName}}<br>{{senderPostion}}",
+    "_N1": "<br>{{ApprenantCivilité}} {{ApprenantPrenom}} {{ApprenantNom}}, <br><br>Vous êtes inscrit dans l'établissement {{schoolName}} pour préparer le Titre {{TitreDéveloppé}} .<br><br>Veuillez cliquer sur le lien ci-dessous pour accéder et compléter votre Fiche de Poste dans le cadre de votre mission au sein de  {{Entreprise}}, sous la supervision de votre tuteur {{TuteurCivilité}} {{TuteurPrenom}} {{TuteurNom}}. <br><br><a href='${URL}' >Cliquer Ici</a> <br><br>Cette Fiche de Poste doit être complétée par vous pour le {{date}}.<br><br>Pour toute question, n’hésitez pas à me contacter à {{senderEmail}}.<br><br>Cordialement,<br><br>{{senderCivility}} {{senderFirstName}} {{senderLastName}}<br>{{senderPostion}}",
+    "N1": "<br>{{ApprenantCivilité}} {{ApprenantPrenom}} {{ApprenantNom}}, <br><br>Vous êtes inscrit dans l'établissement {{schoolName}} pour préparer le Titre {{TitreDéveloppé}} .<br><br>Veuillez cliquer sur le lien ci-dessous pour accéder et compléter votre Fiche de Poste dans le cadre de votre mission au sein de  {{Entreprise}}, sous la supervision de votre tuteur {{TuteurCivilité}} {{TuteurPrenom}} {{TuteurNom}}. <br><br><a href='${URL}' >Cliquer Ici</a> <br><br>Cette Fiche de Poste doit être complétée dans les meilleurs délais.<br><br>Pour toute question, n’hésitez pas à me contacter à {{senderEmail}}.<br><br>Cordialement,<br><br>{{senderCivility}} {{senderFirstName}} {{senderLastName}}<br>{{senderPostion}}",
+    "N1Subject": "Fiche de Poste à compléter",
+    "N2": "<br> ${schoolName} <br>  ${titleShortName} -  ${titleLongName} <br><br> Cher ${mentorCivility} ${mentorFirstName} ${mentorLastName}, <br> Veuillez ​​cliquer ​​sur ​​le ​​lien ​​ci-dessous​​ pour​​ accéder ​​et​​ compléter​​ votre ​​Fiche ​​de ​​Poste relative​​ à ​​la​​ mission​​ de​​ ${studentCivility}  ${studentFirstName} ${studentLastName}​​ au​​ seinde​​ ​​${companyName}. <br><br>  <a href='${URL}' >Cliquer Ici</a> <br><br> Cette​​ Fiche​​ de​​ Poste​​ doit​​ être ​​complétée ​​par​​ vous ​​puis​​ validée ​​par​​ vos ​​soins ​​au​​ plus ​​tard pour​​ le {{date}} <br> N’hésitez ​​pas ​​à ​​nous ​​contacter ​​pour ​​toute ​​question.<br><br> Cordialement,<br><br> Le service pédagogique",
+    "N2Subject": "Fiche​​ de ​​Poste ​​à ​​compléter ​​au ​​plus ​​tard {{date}}",
+    "N3": "<br> ${schoolName} <br>  ${titleShortName} -  ${titleLongName} <br><br> Cher ​${ACADStaffCivility}​ ​${ACADStaffFirstName} ​${ACADStaffLastName} <br><br> La Fiche​ de​ Poste​ de​​​ ${studentCivility}​ ${studentFirstName} ${studentLastName}​ vient d’être validée par​ son​ tuteur.<br>Veuillez cliquer ​sur ​le lien ci-dessous pour l’ouvrir et ​la valider. <br><br> <a href='${URL}' >Cliquer Ici</a> <br><br> À bientôt, <br> <br>​ L’équipe ADMTC",
+    "N3Subject": "Fiche de Poste à valider",
+    "N4": "<br> ${schoolName} <br>  ${titleShortName} -  ${titleLongName} <br><br> Cher ${studentCivility}​ ${studentFirstName} ${studentLastName}, <br> Votre​ Fiche​ de​ Poste​ a​ bien​ été​ validée. <br> Vous​ pouvez​ la​ consulter​ à​ tout​ moment​ en​ cliquant​ sur​ le​ lien​ ci-dessous​ ou​ en​ vous <br> rendant​ sur​ la​ plateforme​ pour​ la​ retrouver​ dans​ dans​ votre​ dossier. <br> <a href='${URL}' >Cliquer Ici</a> <br> <br>​ À​ bientôt, <br> La​ Plateforme​ ADMTC ",
+    "N4Subject": "Votre​ Fiche​ de​ Poste​ est​ bien​ validée",
+    "OK": "D'accord",
+    "KEEPJOBDESC": "Garder cette fiche de Poste pour plus tard",
+    "SENDTOMENTOR": "Envoyer au Tuteur pour validation",
+    "SENDTOSCHOOL": "Envoyer à l’Ecole",
+    "SENDCONFIRMATIONTOSTUDENT": "Envoyer la confirmation à l’Apprenant",
+    "SCHOOL": "Etablissement",
+    "TITIE": "Titre RNCP Préparé",
+    "CLASS": "Classe",
+    "COMPANY": "Entreprise",
+    "MENTOR": "Tuteur",
+    "ConfirmSentToStudent": {
+      "Title": "Bravo  !",
+      "Text": "La fiche de poste vient d'être envoyée à l'Apprenant."
+    },
+    "ConfirmSentToMentor": {
+      "Title": "Bravo  !",
+      "Text": "La Fiche de Poste vient d'être envoyée à votre Tuteur.",
+      "SENDTOSCHOOLCONFIRMTITLE": "Merci!"
+    },
+    "JOBDESC_S7": {
+      "Title": "Fiche de Poste active <br/> mais non envoyée",
+      "Text": "Cette Fiche de Poste est désormais Active et Disponible <br/>dans l’onglet “Fiche de Poste” du dossier de cet Apprenant.. <br/> Mais ni l’Apprenant, ni le Tuteur ne la recevront.",
+      "OK": "J’ai compris"
+    }
+  },
+  "MENTOREVALUATION": {
+    "TITLE": "Évaluation Tuteur d'Entreprise",
+    "TEXT": "L'Évaluation Tuteur d'Entreprise n'a pas encore été envoyée.",
+    "EMAILTEMPLATE": {
+      "TITLE": "Modèle de Mél",
+      "FILENAME": {
+        "title": "Nom du Modèle",
+        "validation1": "Nom du Modèle requis",
+        "validation2": "100 caractères minimum.",
+        "validation3": "uniquement alphanumérique."
+      },
+      "SUBJECT": {
+        "title": "Sujet",
+        "validation1": "Sujet requis",
+        "validation2": "100 caractères minimum.",
+        "validation3": "uniquement alphanumérique."
+      },
+      "VERIABLES": "Variables",
+      "REVERT": "Revert",
+      "SAVE": "Enregistrer",
+      "TEMPLATEMANAGEMENT": "Modèle Management",
+      "NAME": "Nom du Fichier",
+      "ACTIONS": "Actions",
+      "CANCEL": "Annuler",
+      "TemplateCreatedSuccess": "Vous venez d’enregistrer Le modèle ",
+      "TemplateupdatedSuccess": "Vous venez d’enregistrer Le modèle",
+      "TemplatedeletedSuccess": "Modèle has been deleted",
+      "TemplatedeletedWarningMessage": "Vous allez supprimer ce template",
+      "TemplatedeletedWarningTitle": "tes-vous sr?",
+      "OK": "J’ai compris",
+      "CONGRATULATION": "Félicitations !"
+    },
+    "QUESTIONNAIRE": {
+      "AvailableQuestionnaire": "Questionnaires Disponibles",
+      "TITLE": "Questionnaire",
+      "METITLE": "ME-Questionnaire",
+      "DUPLICATE_QUESTIONNAIRE": "Dupliquer un Questionnaire",
+      "EDIT_QUESTIONNAIRE": "Modifier un Questionnaire",
+      "COMPETENCE_BLOCK": "Bloc de Questions",
+      "ADD_SEGEMENT": "Ajouter une Section",
+      "COMPETENCE_NAME": "Nom du Bloc",
+      "SEGEMENT_NAME": "Section",
+      "MANAGEMENT": "Questionnaire Management",
+      "QUESTION_NAME": "Nom de la question",
+      "SAVE_QUESTIONAIRE": "Enrregistrer",
+      "EDIT_QUESTIONAIRE": "Modifier",
+      "ACTIONS": "Actions",
+      "ANSWER_TYPE": "Type de Reponse",
+      "REVERT": "Revert",
+      "SAVE": "Enregistrer",
+      "CANCEL": "Annuler",
+      "NAME": {
+        "title": "Name",
+        "validation1": "Name required",
+        "validation2": "Maximum 100 letter",
+        "validation3": "Must be alphanumeric"
+      },
+      "QUESTION": {
+        "title": "Question"
+      },
+      "SELECTANSWERTYPE": {
+        "title": "Sélectionner le type de réponse attendu"
+      },
+      "OPTION": {
+        "title": "Option"
+      },
+      "CreatedSuccess": "Questionnaire Created",
+      "updatedSuccess": "Questionnaire Updated",
+      "deletedSuccess": "Questionnaire has been deleted",
+      "deletedWarningMessage": "Vous allez supprimer ce Questionnaire",
+      "deletedWarningTitle": "tes-vous sr?",
+      "SUBMIT": "Valider",
+      "SubmittedSuccess": "Thank you",
+      "CONFIRMRESUBMIT": "Are you sure want to submit?",
+      "Numeric": "Nombre",
+      "Date": "Date",
+      "Text": "Texte",
+      "SingleOption": "Réponse Unique",
+      "MultipleOptions": "Réponse Multiples",
+      "AddQuestion": "Ajouter Question",
+      "CompetenceBlock": "Competence Block",
+      "QuestionnaireName": "Nom du Questionnaire",
+      "Messages": {
+        "deletedCompetenceWarningTitle": "Souhaitez vous effacer ce bloc de quesitons?",
+        "deletedCompetenceWarningMessage": "You are about to delete competence.",
+        "deletedCompetenceSuccess": "Bloc de questions effacé.",
+        "deletedSegmentWarningTitle": "Souhaitez vous effacer ce segment?",
+        "deletedSegmentWarningMessage": "You are about to delete segment.",
+        "deletedSegmentSuccess": "Segment effacé.",
+        "deletedQuestionWarningTitle": "Supprimer cette question?",
+        "deletedQuestionWarningMessage": "Supprimer cette question?",
+        "deletedQuestionSuccess": "Question effacée.",
+        "deletedQuestionSuccessOk": "J’ai compris",
+        "deletedOptionWarningTitle": "Souhaitez vous effacer cette option",
+        "deletedOptionWarningMessage": "You are about to delete option.",
+        "deletedOptionSuccess": "Option effacée.",
+        "updateQuestionnaireSuccessTitle": "Bravo!",
+        "updateQuestionnaireSuccessText": "Le questionnaire a bien été enregistré."
+      }
+    },
+    "NOTATIONGRID": {
+      "TITLE": "Grille D’Evalutation"
+    },
+    "SELECTDATEOFEVALUATION": {
+      "title": "Date de l'Évaluation",
+      "validation1": "Date de l'Évaluation required"
+    },
+    "SELECTQUESTIONNAIRE": {
+      "title": "Sélectionner Le Questionnaire",
+      "validation1": "Questionnaire required"
+    },
+    "SELECTMAILTEMPATE": {
+      "title": "Sélectionner le modèle de Mél",
+      "validation1": "modèle de Mél required"
+    },
+    "SELCECTEVELUATIONGRID": {
+      "title": "Sélectionner l'Évaluation",
+      "validation1": "l'Évaluation required"
+    },
+    "SELECTREMAIDERMAIL": {
+      "title": "Sélectionner le modèle de Mél de relance",
+      "validation1": "modèle de Mél de relance required"
+    },
+    "EVALUATIONGRID": {
+      "title": "Grille d’Evaluation"
+    },
+    "REMAINDEREMAILTEMPLATE": {
+      "title": "Modèle de Mél de relance"
+    },
+    "MentorEvaluationCreatedSuccess": "Mentor Evaluation Created",
+    "MentorEvaluationdeletedWarningMessage": "Vous allez supprimer ce template",
+    "MentorEvaluationdeletedWarningTitle": "tes-vous sr?",
+    "MENTOREVAL_SENT": {
+      "TITLE": "Désolé",
+      "TEXT": "l'évaluation du tuteur a déjà été envoyée à cet étudiant."
+    }
+  },
+  "STUDENT": {
+    "STUDENTDETAILS": "Student Details",
+    "DOC": "Doc",
+    "DOCUMENT": "Cartable",
+    "SUBJECTFORCERTIFICATION": "Epreuves de la Certification",
+    "expectedDocUploadSuccess": {
+      "Title": "Bravo !",
+      "Text": "Vous venez de déposer le doc. {{TestDocName}} pour {{StudentCivility}} {{StudentFirstName}} {{StudentLastName}}",
+      "Ok": "J’ai compris"
+    },
+    "FIRSTNAME": {
+      "title": "Prénom",
+      "validation1": "Prénom requis"
+    },
+    "LASTNAME": {
+      "title": "Nom",
+      "validation1": "Nom requis"
+    },
+    "SECONDNAME": {
+      "title": "Second Name",
+      "validation1": "Second Name requis"
+    },
+    "THIRDNAME": {
+      "title": "Third Name",
+      "validation1": "Third Name requis"
+    },
+    "FAMILYNAME": {
+      "title": "Family Name",
+      "validation1": "Family Name requis"
+    },
+    "SEX": {
+      "MALE": "Male",
+      "FEMALE": "Female",
+      "validation1": "requis"
+    },
+    "EMAIL": {
+      "title": "Mél",
+      "validation1": "Mél requis"
+    },
+    "DATEOFBIRTH": {
+      "title": "Date de Naissance",
+      "validation1": "Date de Naissance requis"
+    },
+    "PLACEOFBIRTH": {
+      "title": "Lieu de Naissance",
+      "validation1": "Lieu de Naissance requis"
+    },
+    "NATIONALITY": {
+      "title": "Nationalité",
+      "validation1": "Nationalité requis"
+    },
+    "ADDRESS1": {
+      "title": "Adresse1",
+      "validation1": "Adresse1 requis"
+    },
+    "ADDRESS2": {
+      "title": "Adresse2",
+      "validation1": "Adresse2 requis"
+    },
+    "REGION": {
+      "title": "Region",
+      "validation1": "Region Required"
+    },
+    "RetakeCenter": {
+      "title": "Retake Center",
+      "validation1": "Retake Center Required"
+    },
+    "ZIPCODE": {
+      "title": "Code Postal",
+      "validation1": "Code Postal requis",
+      "validation2": "5 chiffres max."
+    },
+    "CITY": {
+      "title": "Ville",
+      "validation1": "Ville requis"
+    },
+    "COUNTRY": {
+      "title": "Pays",
+      "validation1": "Pays requis"
+    },
+    "SCHOLERSEASON": {
+      "title": "Année scolaire",
+      "validation1": "Année scolaire requis"
+    },
+    "TELEPHONE": {
+      "title": "Téléphone",
+      "validation1": "Téléphone requis",
+      "validation2": "12 caractères max.",
+      "validation3": "5 chiffres min."
+    },
+    "STUDIESFINANCEDBY": {
+      "title": "Studies are fanced by",
+      "validation1": "Studies are fanced by requis"
+    },
+    "STATUS": {
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive",
+      "PENDING": "Pending",
+      "validation1": "Status requis"
+    },
+    "SCHOOLREF": "Ref école",
+    "FROM": "De",
+    "TO": "à",
+    "INSERTTEXT": "Tapez votre texte ici",
+    "GARDIANINFORMATION": "Gardian Information",
+    "RELATION": "Relation",
+    "CELLPHONE": "CellPhone",
+    "ADDANOTHERGARDIAN": "Add another Gardian",
+    "SUBMIT": "Submit",
+    "SAVE": "Enregistrer",
+    "CLASS": "Class",
+    "COMPANY": "Entreprise",
+    "SELECTMENTOR": "Select Mentor",
+    "TESTS": "Tests",
+    "TEST": "Test",
+    "SCORE": "Note Obtenue",
+    "STUDENTNAME": "Apprenant",
+    "TITLE": "Apprenant",
+    "ACTIONS": "Actions",
+    "ADDTITLE": "Add Title",
+    "ADDCOMPANY": "Ajouter Entreprise",
+    "ADD_SCHOOL": "Ajouter une école",
+    "ADDNEWCOMPANY": "Add New Company",
+    "ADDNEWCLASS": "Add New Class",
+    "ADDNEWMENTOR": "Ajouter un nouveau Tuteur",
+    "MARKS": "Notes",
+    "JOBDESCRIPTION": "Fiche de poste",
+    "MENTOR_EVAL": "Evaluation par le Tuteur d'Entreprise",
+    "DIPLOMA": "Diplome",
+    "SENDTOSTUDENTJOBDESCRIPTIONTOOL": "Envoyer la Fiche de Poste à L’Apprenant",
+    "SENDINTERNSHIPTHEMETOOL": "Envoyer la Fiche de Problématique à L’Apprenant",
+    "SENDMENTOREVALUATIONTOOL": "Envoyé la Fiche d'Évaluation au Tuteur",
+    "SENDTOSTUDENTJOBDESCRIPTION": "Fiche de Poste",
+    "SENDINTERNSHIPTHEME": "Problématique",
+    "GO_TO_PROBLEMATIC": "Accéder",
+    "PROBLEMATIC_TITLE": "Note de Problématique",
+    "SENDMENTOREVALUATION": "Evaluation",
+    "SENTTOSTUDENT": "Envoyé à l’Apprenant",
+    "SENTTOMENTOR": "Envoyé au Tuteur",
+    "SENT_TO_SCHOOL": "Envoyé à l'Ecole",
+    "VALIDATEBYMENTOR": "Validé par le Tuteur",
+    "FILLEDBYMENTOR": "Validé par le Tuteur",
+    "VALIDATEBYACADEMICDPT": "Validé par la Pédagogie",
+    "VALIDATEDBYACADSTAFF": "Validé par la Pédagogie",
+    "EXPEDITEDBYACADSTAFF": "Validé par la Pédagogie",
+    "MESSAGE": {
+      "SUCCESS": "Bravo !",
+      "OK": "J'ai compris",
+      "MAILSENDMSG": "Mail Envoyé",
+      "ERRORTIT": "Desolé",
+      "ERRORMSG": "Your message has not been sent",
+      "UPDATESUCCESS": "L’Apprenant  {{ Civility }} {{ FName }} {{ LName }} est bien enregistré.",
+      "FAILEDMESSAGE": "Ah... réessayez s’il vous plait !",
+      "CONFIRMDEACTIVE": "Votre fiche de poste a bien été enregistrée. <br> Souhaitez vous l’envoyer maintenant à votre tuteur pour validation ",
+      "DEACTIVATEDSUCCESS": {
+        "TITLE": "Apprenant démissionné:",
+        "TEXT": "l'Apprenant {{ FName }} {{ LName }} <br/> est désormais considéré comme démissionné."
+      },
+      "CONFIRMDEACTIVE": "Veuillez confirmer la démission de cet Apprenant :<br/> {{ Civility }} {{ FName }} {{ LName }} <br/> Cet Apprenant ne sera plus en mesure de prendre part aux evaluation a partir de maintenant.",
+      "CONFIRMDEACTIVETITLE": "Confirmer la démission",
+      "DEACTIVATEDSTUDENTACTION": {
+        "Resignation": "Demission",
+        "Cancel": "Annuler"
+      },
+      "DEACTIVATEDFAIL": {
+        "TITLE": "Désolé",
+        "TEXT": "Cette action n’a pas pu s’effectuer. <br/> peut être a cause du net. <br/> merci de réessayer dans un instant"
+      },
+      "REACTIVATE_STUDENT": {
+        "TITLE": "Confirmer la Réactivation",
+        "TEXT": "Veuillez confirmer la réactivation de cet Apprenant :<br/> {{ Civility }} {{ FName }} {{ LName }} <br/> Cet Apprenant sera de nouveau en mesure de participer aux évaluations à partir de maintenant.",
+        "REACTIVATE": "Réactivation"
+      },
+      "CONFIRMACTIVE": "Are you sure you want Active Student : ",
+      "ACTIVATEDSUCCESS": "Student Activated Successfully.",
+      "ACTIVATEDFAIL": "Student Activation Fail..Please try again!",
+      "ENTERDATEOFDEACTIVE": "Entrez la date de demission et la raison",
+      "ENTERDATEOFREACTIVE": "Entrez la date de réactivation et la raison",
+      "CLICKTODEACTIVATE": "Cliquez pour demissioner",
+      "ACTIVE_STATUS": "Actif",
+      "NONACTIVE_STATUS": "Non Actif",
+      "PENDING": "En attente",
+      "INCORRECT_EMAIL": "Adresse mél incorrecte",
+      "ALL": "Tous",
+      "SENDMAIL": "Envoyer un message",
+      "REASON": "Motif de la démission",
+      "REASON_REACTIVATION": "Raison",
+      "RSESIGNATIONDATE": "Date de démission",
+      "REACTIVATIONDATE": "Date de réactivation",
+      "RSESIGNATIONSUBMIT": "Confirmer la Demission",
+      "REMINDER": {
+        "SUCCESS": "C'est fait",
+        "SUCCESSMESSAGE": "Un rappel vient juste d'être envoyé",
+        "CONFIRMATION_TITLE": "Souhaitez vous envoyer un rappel a l’Apprenant ?",
+        "CONFIRMATION_TEXT": "Un rappel sera envoyé à l’Apprenant avec un lien <br/>pour accéder directement à sa Fiche de Poste."
+      },
+      "STUDENT_PENDING": {
+        "SORRY": "Desole !",
+        "TEXT": "Tant que cet Apprenant n’a pas entré son mot de passe <br/> vous ne pourrez pas effectuer cette tâche"
+      }
+    },
+    "COURSE": "Formation",
+    "IDENTITY": "Identité",
+    "PARENTS": "Parents",
+    "ADDNEWSTUDENT": "Ajouter un Apprenant",
+    "SELECTRNCPTITLE": {
+      "title": "Titre RNCP",
+      "validation1": "Titre RNCP requis"
+    },
+    "CIVILITY": {
+      "title": "Civilité",
+      "validation1": "Civilité requis"
+    },
+    "COMPMAYNAME": {
+      "title": "Nom de l’Entreprise",
+      "validation1": "Nom de l’Entreprise requis"
+    },
+    "COMPANYSTATUS": {
+      "active": "Actif",
+      "inactive": "Non Actif"
+    },
+    "ACTIVITY": {
+      "title": "Activité",
+      "validation1": "Activité requis"
+    },
+    "MENTOR": {
+      "title": "Tuteur",
+      "validation1": "Tuteur requis"
+    },
+    "ADDRESS": {
+      "title": "Adresse",
+      "validation1": "Adresse requis"
+    },
+    "RELATIONS": {
+      "title": "Lien de Parenté",
+      "validation1": "Lien de Parenté requis"
+    },
+    "CLASSES": {
+      "title": "Classe",
+      "validation1": "Classe requis"
+    },
+    "SPECIALIZATION": {
+      "title": "Spécialisation",
+      "validation1": "Specialization required"
+    },
+    "DELIMETER": {
+      "title": "Delimeter",
+      "validation1": "Delimeter requis"
+    },
+    "PARALLEL_INTAKE": "Admission parallèle",
+    "CONTINUE": "Continuer",
+    "SAMEADDRESS": "Méme adresse",
+    "OTHERADDRESS": "Other Address",
+    "ANOTHERPARENT": "Ajouter un parent",
+    "REMOVEPARENT": "enlever un parent",
+    "MR": "M",
+    "MRS": "Mme",
+    "ADDMENTOR": "Ajouter un nouveau Tuteur",
+    "ADDCOMPNAY": "Add New Company",
+    "MYPHOTO": {
+      "title": "Ma Photo",
+      "subtitle": "Télédéposez votre photo d'identité",
+      "validation1": "Ma Photo requis"
+    },
+    "LASTDEPLOMA": {
+      "title": "Mon niveau d'études ou mon dernier diplôme obtenu",
+      "subtitle": "Télédéposez le PDF ou une image de votre dernier diplôme obtenu ou votre relevé de notes",
+      "validation1": "Dernier Diplome obtenu Required",
+      "inputTitle": "Nom du diplôme"
+    },
+    "SENDMAIL": {
+      "title": "Envoyer un Mel",
+      "TO": {
+        "title": "à",
+        "validation1": "Email required",
+        "validation2": "Maximum 100 letter"
+      },
+      "SUBJECT": {
+        "title": "Sujet",
+        "validation1": "Subject required",
+        "validation2": "Maximum 100 letter",
+        "validation3": "Must be alphanumeric"
+      },
+      "CC": {
+        "title": "CC",
+        "validation1": "Cc required",
+        "validation2": "Maximum 100 letter",
+        "validation3": "Must be alphanumeric"
+      },
+      "BCC": {
+        "title": "Bcc",
+        "validation1": "Bcc required",
+        "validation2": "Maximum 100 letter",
+        "validation3": "Must be alphanumeric"
+      },
+      "CANCEL": "Annuler",
+      "SEND": "Envoyer",
+      "add_cc": "Add Cc",
+      "add_bcc": "Add Bcc"
+    },
+    "PROBLEMATIC": {
+      "QUESTION_1": "Ma mission principale au sein de l'entreprise / Objectif Final de ma mission :",
+      "QUESTION_2": "Mon analyse sur le déroulement de ma mission et sur les diagnostics internes et externes :",
+      "QUESTION_3": "Définir la problématique du PFE :",
+      "MAXIMUM_LINES": "(entre 5 et 20 lignes maximum)",
+      "CUSTOM_QUESTIONS": {
+        "MPI 2019": {
+          "QUESTION_1": "Contexte / Environnement :",
+          "QUESTION_2": "Problématique et solution(s) proposée(s) :",
+          "QUESTION_3": "Justification du caractère innovant de la(es) solution(s) proposée(s) :"
+        },
+        "MPI DIGITAL 1AN 2019": {
+          "QUESTION_1": "Contexte / Environnement :",
+          "QUESTION_2": "Problématique et solution(s) proposée(s) :",
+          "QUESTION_3": "Justification du caractère innovant de la(es) solution(s) proposée(s) :"
+        }
+      },
+      "SENDNOTIFICATION": {
+        "TITLE": "Envoyer la Note de Problématique  à l’Apprenant?",
+        "TEXT": "Souhaitez vous envoyer la Note de Problématique  à {{ FullName }} ?",
+        "TEXTALLSTUDENT": "Souhaitez vous envoyer (donner accès à ?) la Note de Problématique à tous les Apprenants qui ne l’ont pas encore reçue?",
+        "BUTTON1": "Oui",
+        "BUTTON2": "Non",
+        "Choosedocument": "Quel(s) document(s) souhaitez vous générer en PDF pour consultation ou impression ?",
+        "ChoosedocumentTitle": "Quel(s) Document(s)?",
+        "BUTTON": "PDF/PRINT",
+        "SELECTMISSING": "Vous devez sélectionner au moins un Apprenant.s",
+        "MULTIPPLETITLE": "Documents are generated in PDF first",
+        "SENT_TO_STUDENT": "Envoyée à l’Apprenant",
+        "SENT_TO_ACAD_DPT": "Envoyée à la Pédagogie",
+        "SENT_TO_ACADDPT": "Envoyée à la Pédagogie",
+        "RESUBMITTED_TO_ACADDPT": "Envoyée à la Pédagogie",
+        "REJECTED_BY_ACAD_DPT": "Refusée par la Pédagogie",
+        "REJECTED_BY_ACADDPT": "Refusée par la Pédagogie",
+        "Validated_BY_ACAD_DPT": "Validée par la Pédagogie",
+        "VALIDATED_BY_ACADDPT": "Validée par la Pédagogie",
+        "SENT_TO_CERTIFIER": "Envoyée au Certificateur",
+        "REJECTED_BY_CERTIFIER": "Refusée par la Certificateur",
+        "VALIDATED_BY_CERTIFIER": "Validée par le Certificateur",
+        "RESUBMITTED_TO_CERTIFIER": "Renvoyée au Certificateur",
+        "REVIEWED_BY_ACAD_DPT": "Revue par la Pédagogie",
+        "REVIEWED_BY_ACADDPT": "Revue par la Pédagogie",
+        "REVIEVED_BY_CERTIFIER": "Revue par le Certificateur",
+        "SUCCESS_TIT": "la Note de Problématique envoyée !",
+        "SUCCESS_TEXT": "la Note de Problématique vient d'être envoyée à {{ FullName }}.",
+        "SUCCESS_BTN": "J'ai compris",
+        "SEND_TO_MANY": {
+          "TITLE": "Envoyer la Note de Problématique ?",
+          "TEXT": "Souhaitez vous envoyer la Note de Problématique  <br/>aux apprenants qui ne l’ont pas encore reçue?"
+        },
+        "NOT_SENT_TO": {
+          "TITLE": "Voici la liste d’apprenants<br/> qui ne recevront pas <br/>la note de problematique:",
+          "TEXT": "La problématique <br/>n'a pas été envoyée aux apprenants <br/>suivants car il n'y a aucune entreprise déclarée dans leur dossier apprenant ou l'apprenant a déjà complété le formulaire de problématique.<br/>{{ studentlist }}"
+        }
+      }
+    },
+    "EMAILTOSTUDENTS": {
+      "BUTTON": "Email d’Enregistrement",
+      "TEXT": "Envoyer le mel d’enregistrement à tous les Apprenant"
+    },
+    "PRINT_S1": "Vous devez sélectionner au moins un Apprenant.",
+    "FILESTUDENT": "Dossier Apprenant",
+    "PDF/PRINT": "PDF/IMPRESSION",
+    "PROBLEMATICPDF": "Note de Problématique",
+    "MENTORPDF": "Evaluation Tuteur Entreprise",
+    "IMPORT": "Import Apprenants",
+    "CLOSE_CONTRACT": "Clôturer ce Contrat",
+    "PARALLEL_S1": {
+      "TITLE": "Vous êtes sur le point d’enregistrer cet apprenant en admission parallèle",
+      "TEXT": "Les notes pour toutes les évaluations de première année seront automatiquement notées pour cet apprenant.",
+      "I_CONFIRM": "Je confirme"
+    }
+  },
+  "CLASSNAME": "Classe",
+  "CLASSDESCRIPTION": "Description",
+  "ADDCLASS": "Ajouter une classe",
+  "MANAGECLASSES": "Gestion des classes",
+  "FOOTERTOTAL": "au Total",
+  "COUNTRY": {
+    "France": "France",
+    "Afghanistan": "Afghanistan",
+    "South Africa": "Afrique du Sud",
+    "Albanie": "Albanie",
+    "Algeria": "Algérie",
+    "Germany": "Allemagne",
+    "Angola": "Andorre",
+    "Anguilla": "Anguilla",
+    "Antarctique": "Antarctique",
+    "Antigua and Barbuda": "Antigua-et-Barbuda",
+    "Netherlands Antilles": "Antilles Néerlandaises",
+    "Saudi Arabia": "Arabie Saoudite",
+    "Argentina": "Argentine",
+    "Armenia": "Arménie",
+    "Aruba": "Aruba",
+    "Australia": "Australie",
+    "Austria": "Autriche",
+    "Azerbaijan": "Azerbaïdjan",
+    "bahamas": "Bahamas",
+    "Bahrain": "Bahreïn",
+    "Bangladesh": "Bangladesh",
+    "Barbados": "Barbade",
+    "Belarus": "Bélarus",
+    "Belgium": "Belgique",
+    "Belize": "Belize",
+    "Benin": "Bénin",
+    "Bermuda": "Bermudes",
+    "Bhutan": "Bhoutan",
+    "Bolivia": "Bolivie",
+    "Bosnia and Herzegovina": "Bosnie-Herzégovine",
+    "Botswana": "Botswana",
+    "Brazil": "Brésil",
+    "Brunei Darussalam": "Brunéi Darussalam",
+    "Bulgaria": "Bulgarie",
+    "Burkina Faso": "Burkina Faso",
+    "Burundi": "Burundi",
+    "Cambodia": "Cambodge",
+    "Cape Verde": "Cap-vert",
+    "Cameroon": "Cameroun",
+    "Canada": "Canada",
+    "Chile": "Chili",
+    "China": "Chine",
+    "Cyprus": "Chypre",
+    "Colombia": "Colombie",
+    "Comoros": "Comores",
+    "Costa Rica": "Costa Rica",
+    "Ivory Coast": "Côte d'Ivoire",
+    "Croatia": "Croatie",
+    "Cuba": "Cuba",
+    "Denmark": "Danemark",
+    "Djibouti": "Djibouti",
+    "Dominique": "Dominique",
+    "Egypt": "Égypte",
+    "El Salvador": "El Salvador",
+    "United Arab Emirates": "Émirats Arabes Unis",
+    "Ecuador": "Équateur",
+    "Eritrea": "Érythrée",
+    "Spain": "Espagne",
+    "Estonia": "Estonie",
+    "Federated States of Micronesia": "États Fédérés de Micronésie",
+    "United States": "États-Unis",
+    "Ethiopia": "Éthiopie",
+    "Russian Federation": "Fédération de Russie",
+    "Fiji": "Fidji",
+    "Finland": "Finlande",
+    "Gabon": "Gabon",
+    "Gambia": "Gambie",
+    "Georgia": "Géorgie",
+    "Ghana": "Ghana",
+    "Gibraltar": "Gibraltar",
+    "Greece": "Grèce",
+    "Granada": "Grenade",
+    "Greenland": "Groenland",
+    "Guadeloupe": "Guadeloupe",
+    "Guam": "Guam",
+    "Guatemala": "Guatemala",
+    "Guinea": "Guinée",
+    "Guinea-Bissau": "Guinée-Bissau",
+    "Equatorial Guinea": "Guinée Équatoriale",
+    "Guyana": "Guyana",
+    "French Guiana": "Guyane Française",
+    "Haiti": "Haïti",
+    "Honduras": "Honduras",
+    "Hong Kong": "Hong-Kong",
+    "Hungary": "Hongrie",
+    "Bouvet Island": "Île Bouvet",
+    "Christmas Island": "Île Christmas",
+    "Isle of Man": "Île de Man",
+    "Norfolk Island": "Île Norfolk",
+    "Islands (malvinas) Falkland": "Îles (malvinas) Falkland",
+    "land Islands": "Îles Åland",
+    "Cocos (Keeling) Islands": "Îles Cocos (Keeling)",
+    "Cook Islands": "Îles Cook",
+    "Faroe Islands": "Îles Féroé",
+    "Solomon Islands": "Îles Salomon",
+    "Turks and Caicos Islands": "Îles Turks et Caïques",
+    "British Virgin Islands": "Îles Vierges Britanniques",
+    "United States Virgin Islands": "Îles Vierges des États-Unis",
+    "India": "Inde",
+    "Indonesia": "Indonésie",
+    "Iraq": "Iraq",
+    "Ireland": "Irlande",
+    "Iceland": "Islande",
+    "Israel": "Israël",
+    "Italy": "Italie",
+    "Libyan Arab Jamahiriya": "Jamahiriya Arabe Libyenne",
+    "Jamaica": "Jamaïque",
+    "Japan": "Japon",
+    "Jordan": "Jordanie",
+    "Kazakhstan": "Kazakhstan",
+    "Kenya": "Kenya",
+    "Kyrgyzstan": "Kirghizistan",
+    "Kiribati": "Kiribati",
+    "Kuwait": "Koweït",
+    "Lesotho": "Lesotho",
+    "Latvia": "Lettonie",
+    "Lebanon": "Liban",
+    "Liberia": "Libéria",
+    "Liechtenstein": "Liechtenstein",
+    "Lithuania": "Lituanie",
+    "Luxembourg": "Luxembourg",
+    "Macau": "Macao",
+    "Madagascar": "Madagascar",
+    "Malaysia": "Malaisie",
+    "Malawi": "Malawi",
+    "Maldives": "Maldives",
+    "Mali": "Mali",
+    "Malta": "Malte",
+    "Morocco": "Maroc",
+    "Martinique": "Martinique",
+    "Mauritius": "Maurice",
+    "Mauritania": "Mauritanie",
+    "Mayotte": "Mayotte",
+    "Mexico": "Mexique",
+    "Monaco": "Monaco",
+    "Mongolia": "Mongolie",
+    "Montserrat": "Montserrat",
+    "Mozambique": "Mozambique",
+    "Myanmar": "Myanmar",
+    "Namibia": "Namibie",
+    "Nauru": "Nauru",
+    "Nepal": "Népal",
+    "Nicaragua": "Nicaragua",
+    "Niger": "Niger",
+    "Nigeria": "Nigéria",
+    "Niue": "Niué",
+    "Norway": "Norvège",
+    "New Caledonia": "Nouvelle-Calédonie",
+    "New Zealand": "Nouvelle-Zélande",
+    "Oman": "Oman",
+    "Uganda": "Ouganda",
+    "Uzbekistan": "Ouzbeke",
+    "Pakistan": "Pakistan",
+    "Palau": "Palaos",
+    "Panama": "Panama",
+    "Papua New Guinea": "Papouasie-Nouvelle-Guinée",
+    "Paraguay": "Paraguay",
+    "Netherlands": "Pays-Bas",
+    "Peru": "Pérou",
+    "Philippines": "Philippines",
+    "Pitcairn": "Pitcairn",
+    "Poland": "Pologne",
+    "French Polynesia": "Polynésie française",
+    "Puerto Rico": "Porto Rico",
+    "Portugal": "Portugal",
+    "Qatar": "Qatar",
+    "Syrian Arab Republic": "République arabe syrienne",
+    "Central African Republic": "République centrafricaine",
+    "Republic of Korea": "République de Corée",
+    "Republic of Moldova": "République de Moldova",
+    "Democratic Republic of Congo": "République Démocratique du Congo",
+    "Lao Peoples Democratic Republic": "République démocratique populaire lao",
+    "Dominican Republic": "République Dominicaine",
+    "Islamic Republic of Iran": "République islamique d'Iran",
+    "Democratic Peoples Republic of Korea": "République Populaire Démocratique de Corée",
+    "Czech Republic": "République Tchèque",
+    "United Republic of Tanzania": "République-Unie de Tanzanie",
+    "Meeting": "Réunion",
+    "Romania": "Roumanie",
+    "United Kingdom": "Royaume-Uni",
+    "Rwanda": "Rwanda",
+    "Western Sahara": "Sahara Occidental",
+    "Saint Kitts and Nevis": "Saint-Kitts-et-Nevis",
+    "San Marino": "Saint-Marin",
+    "Saint Pierre and Miquelon": "Saint Pierre and Miquelon",
+    "Holy See (state of Vatican City)": "Saint-Siège (État de la Cité du Vatican)",
+    "Saint Vincent and the Grenadines": "Saint-Vincent-et-les-Grenadines",
+    "Saint Helena": "Sainte-Hélène",
+    "Saint Lucia": "Sainte-Lucie",
+    "Samoa": "Samoa",
+    "American Samoa": "Samoa américaines",
+    "Sao Tome and Principe": "Sao Tomé et Principe",
+    "Senegal": "Sénégal",
+    "Serbia and Montenegro": "Serbie et Monténégro",
+    "Seychelles": "les Seychelles ",
+    "Sierra Leone": "Sierra Leone",
+    "Singapore": "Singapour",
+    "Slovakia": "Slovaquie",
+    "Slovenia": "Slovénie",
+    "Somalia": "Somalie",
+    "Sudan": "Soudan",
+    "Sri Lanka": "Sri Lanka",
+    "Sweden": "Suède",
+    "Switzerland": "Suisse",
+    "Suriname": "Suriname",
+    "Swaziland": "Swaziland",
+    "Tajikistan": "Tadjikistan",
+    "Taiwan": "Taïwan",
+    "Chad": "Tchad",
+    "Palestinian Territory Occupied": "Territoire palestinien Occupé",
+    "Thailand": "Thaïlande",
+    "Timor-Leste": "Timor-Leste",
+    "Togo": "Aller",
+    "Tokelau": "Tokelau",
+    "Tonga": "Tonga",
+    "Trinidad and Tobago": "Trinité-et-Tobago",
+    "Tunisia": "Tunisie",
+    "Turkmenistan": "Turkménistan",
+    "Turkey": "Turquie",
+    "Tuvalu": "Tuvalu",
+    "Ukraine": "Ukraine",
+    "Uruguay": "Uruguay",
+    "Vanuatu": "Vanuatu",
+    "Venezuela": "Venezuela",
+    "Viet Nam": "Viet Nam",
+    "Wallis and Futuna": "Wallis et Futuna",
+    "Yemen": "Yémen",
+    "Zambia": "Zambie",
+    "Zimbabwe": "Zimbabwe"
+  },
+  "Search": {
+    "search": "Chercher",
+    "SalesStaff": "Vendeur",
+    "School": "Ecole",
+    "Title": "Titre",
+    "Deal": "Deal",
+    "SCHOOL_SEARCH": "Chercher Ecole Name",
+    "SCHOOL_ORIGIN": "Ecole Origine",
+    "SCHOOL_CORRECTOR": "Ecole Correctrice"
+  },
+  "PARAMETERRNCP": {
+    "CLASSES": {
+      "MESSAGE": {
+        "ATTENTION": "Attention",
+        "DELETECONFIRMMESSAGE": "Souhaitez vous supprimer la classe : <br>{{CLASSNAME}} ? ",
+        "DELETESUCCESS": "La classe  : <br>{{CLASSNAME}} <br>ient d’être supprimée.",
+        "DELETEFAILED": "Failed to delete class.",
+        "UPDATESUCCESS": "class update successfully.",
+        "UPDATEFAILED": "Failed to update class.",
+        "SAVESUCCESS": "class save successfully.",
+        "SAVEFAILED": "Failed to save class.",
+        "STUDENTTITLE": "Désolé !",
+        "STUDENTEXIEST": "La classe {{CLASSNAME}}  contient déjà {{STUDENTTOTLE}} apprenants. <br> il est donc impossible de supprimer cette classe. <br> Souhaitez-vous consulter la liste des Apprenants pour ce titre?"
+      }
+    }
+  },
+  "NATIONALITY": {
+    "France": "Française",
+    "Afghanistan": "Afghan",
+    "Albanie": "Albanaise",
+    "Algeria": "Algérienne",
+    "American Samoa": "Samoa américaines",
+    "Angola": "Angolaise",
+    "Anguilla": "Anguilla",
+    "Antarctique": "Antartique",
+    "Antigua and Barbuda": "Antiguaise et barbudienne",
+    "Argentina": "Argentine",
+    "Armenia": "Armenienne",
+    "Aruba": "Aruba",
+    "Australia": "Australienne",
+    "Austria": "Autrichienne",
+    "Azerbaijan": "Azerbaïdjanaise",
+    "Bahamas": "Bahamienne",
+    "Bahrain": "Bahreinienne",
+    "Bangladesh": "Bangladaise",
+    "Barbados": "Barbadienne",
+    "Belarus": "Bielorusse",
+    "Belgium": "Belge",
+    "Belize": "Belizienne",
+    "Benin": "Beninoise",
+    "Bermuda": "Bermudes",
+    "Bhutan": "Bhoutanaise",
+    "Bolivia": "Bolivienne",
+    "Bosnia and Herzegovina": "Bosnienne",
+    "Botswana": "Botswanaise",
+    "Bouvet Island": "Île Bouvet",
+    "Brazil": "Brésilienne",
+    "British Virgin Islands": "Îles Vierges Britanniques",
+    "Brunei Darussalam": "Bruneienne",
+    "Bulgaria": "Bulgare",
+    "Burkina Faso": "Burkinabe",
+    "Burundi": "Burundaise",
+    "Cambodia": "Cambodgienne",
+    "Canada": "Canadienne",
+    "Cape Verde": "Cap-verdienne",
+    "Cameroon": "Camerounaise",
+    "Central African Republic": "Centrafricaine",
+    "Chad": "Tchadienne",
+    "Chile": "Chilienne",
+    "China": "Chinoise",
+    "Christmas Island": "Île Christmas",
+    "Cocos (Keeling) Islands": "Îles Cocos (Keeling)",
+    "Comoros": "Comorienne",
+    "Colombia": "Colombienne",
+    "Cook Islands": "Îles Cook",
+    "Costa Rica": "Costaricienne",
+    "Croatia": "Croate",
+    "Cuba": "Cubaine",
+    "Cyprus": "Chypriote",
+    "Czech Republic": "Tcheque",
+    "Democratic Peoples Republic of Korea": "République Populaire Démocratique de Corée",
+    "Democratic Republic of Congo": "Congolaise",
+    "Denmark": "Danoise",
+    "Djibouti": "Djiboutienne",
+    "Dominican Republic": "Dominicaine",
+    "Dominique": "Dominique",
+    "Ecuador": "Équateur",
+    "Egypt": "Égyptienne",
+    "El Salvador": "El Salvador",
+    "Equatorial Guinea": "Equato-guineenne",
+    "Eritrea": "Érythrée",
+    "Estonia": "Estonie",
+    "Ethiopia": "Ethiopienne",
+    "Faroe Islands": "Îles Féroé",
+    "Federated States of Micronesia": "États Fédérés de Micronésie",
+    "Fiji": "Fidjienne",
+    "Finland": "Finlandaise",
+    "French Guiana": "Guyane Française",
+    "French Polynesia": "Polynésie française",
+    "Gabon": "Gabonaise",
+    "Gambia": "Gambienne",
+    "Georgia": "Georgienne",
+    "Germany": "Allemande",
+    "Ghana": "Ghaneenne",
+    "Gibraltar": "Gibratlar",
+    "Granada": "Grenadienne",
+    "Greece": "Grecque",
+    "Greenland": "Groenland",
+    "Guadeloupe": "Guadeloupe",
+    "Guam": "Guam",
+    "Guatemala": "Guatémaltèque",
+    "Guinea": "Guineenne",
+    "Guinea-Bissau": "Guinée-Bissau",
+    "Guyana": "Guyanienne",
+    "Haiti": "Haïtienne",
+    "Holy See (state of Vatican City)": "Saint-Siège (État de la Cité du Vatican)",
+    "Honduras": "Hondurienne",
+    "Hong Kong": "Hong-Kong",
+    "Hungary": "Hongroise",
+    "Iceland": "Islandaise",
+    "India": "Indienne",
+    "Indonesia": "Indonesienne",
+    "Iraq": "Irakienne",
+    "Ireland": "Irlandaise",
+    "Islamic Republic of Iran": "République islamique d'Iran",
+    "Islands (malvinas) Falkland": "Îles (malvinas) Falkland",
+    "Isle of Man": "Île de Man",
+    "Israel": "Israélienne",
+    "Italy": "Italienne",
+    "Ivory Coast": "Ivoirienne",
+    "Jamaica": "Jamaïcaine",
+    "Japan": "Japonaise",
+    "Jordan": "Jordanienne",
+    "Kazakhstan": "Kazakhstanaise",
+    "Kenya": "Kenyane",
+    "Kiribati": "Kiribatienne",
+    "Kuwait": "Koweitienne",
+    "Kyrgyzstan": "Kirghize",
+    "land Islands": "Îles Åland",
+    "Lao Peoples Democratic Republic": "République démocratique populaire lao",
+    "Latvia": "Lettone",
+    "Lebanon": "Libanaise",
+    "Lesotho": "Lesothane",
+    "Liberia": "Liberienne",
+    "Libyan Arab Jamahiriya": "Libyenne",
+    "Liechtenstein": "Liechtensteinoise",
+    "Lithuania": "Lituanie",
+    "Luxembourg": "Luxembourgeoise",
+    "Macau": "Macao",
+    "Madagascar": "Madagascar",
+    "Malawi": "Malawienne",
+    "Malaysia": "Malaisienne",
+    "Maldives": "Moldave",
+    "Maliian": "Malienne",
+    "Malta": "Maltaise",
+    "Martinique": "Martinique",
+    "Mauritania": "Mauritanienne",
+    "Mauritius": "Maurice",
+    "Mayotte": "Mayotte",
+    "Meeting": "Réunion",
+    "Mexico": "Mexicaine",
+    "Monaco": "Monaco",
+    "Mongolia": "Mongole",
+    "Montserrat": "Montenegrine",
+    "Morocco": "Monegasque",
+    "Mozambique": "Mozambicaine",
+    "Myanmar": "Birmane",
+    "Namibia": "Namibienne",
+    "Nauru": "Nauruane",
+    "Nepal": "Nepalaise",
+    "Netherlands Antilles": "Antilles Néerlandaises",
+    "Netherlands": "Neerlandaise",
+    "New Caledonia": "Néo-calédonienne",
+    "New Zealand": "Néo-zélandaise",
+    "Nicaragua": "Nicaraguayenne",
+    "Niger": "Niger",
+    "Nigeria": "Nigerienne",
+    "Niue": "Niué",
+    "Norfolk Island": "Nord-Irlandais",
+    "Norway": "Norvégienne",
+    "Oman": "Omanaise",
+    "Pakistan": "Pakistanaise",
+    "Palau": "Palau",
+    "Palestinian Territory Occupied": "Palestinienne",
+    "Panama": "Panaméenne",
+    "Papua New Guinea": "Papouane-neoguineenne",
+    "Peru": "Péruvienne",
+    "Paraguay": "Paraguayenne",
+    "Philippines": "Philippine",
+    "Pitcairn": "Pitcairn",
+    "Poland": "Polonaise",
+    "Portugal": "Portugaise",
+    "Puerto Rico": "Portoricaine",
+    "Qatar": "Qatarienne",
+    "Republic of Korea": "République de Corée",
+    "Republic of Moldova": "République de Moldavie",
+    "Russian Federation": "Russe",
+    "Rwanda": "Rwandaise",
+    "Saint Kitts and Nevis": "Saint-Christophe-et-Niévès",
+    "Saint Lucia": "Saint-lucienne",
+    "Saint Vincent and the Grenadines": "Saint-vincentaise-et-grenadine",
+    "Saint Helena": "Sainte-Hélène",
+    "Samoa": "Samoane",
+    "San Marino": "Saint-marinaise",
+    "Sao Tome and Principe": "Santomeenne",
+    "Saudi Arabia": "Saoudienne",
+    "Senegal": "Senegalaise",
+    "Serbia and Montenegro": "Serbe",
+    "Seychelles": "Seychelloise ",
+    "Sierra Leone": "Sierra-leonaise",
+    "Singapore": "Singapourienne",
+    "Slovakia": "Slovaque",
+    "Slovenia": "Slovene",
+    "Solomon Islands": "Îles Salomon",
+    "Somalia": "Somalienne",
+    "South Africa": "Sud-africaine",
+    "Spain": "Espagne",
+    "Sri Lanka": "Sri-lankaise",
+    "Sudan": "Soudanaise",
+    "Suriname": "Surinamaise",
+    "Swaziland": "Swazie",
+    "Switzerland": "Suisse",
+    "Sweden": "Suédoise",
+    "Syrian Arab Republic": "Syrienne",
+    "Taiwan": "Taiwanaise",
+    "Tajikistan": "Tadjike",
+    "Thailand": "Thaïlandaise",
+    "Timor-Leste": "Timor-Leste",
+    "Togo": "Togolaise",
+    "Tokelau": "Tokelau",
+    "Tonga": "Tonguienne",
+    "Trinidad and Tobago": "Trinidadienne",
+    "Tunisia": "Tunisienne",
+    "Turkey": "Turque",
+    "Turkmenistan": "Turkmene",
+    "Turks and Caicos Islands": "Îles Turks et Caïques",
+    "Tuvalu": "Tuvaluane",
+    "Uganda": "Ougandaise",
+    "Ukraine": "Ukrainienne",
+    "United Arab Emirates": "Emirienne",
+    "United Kingdom": "Royaume-Uni",
+    "United Republic of Tanzania": "Tanzanienne",
+    "United States": "États-Unis",
+    "United States Virgin Islands": "Îles Vierges des États-Unis",
+    "Uruguay": "Uruguayenne",
+    "Uzbekistan": "Ouzbeke",
+    "Vanuatu": "Vanuatuane",
+    "Venezuela": "Vénézuélienne",
+    "Viet Nam": "Vietnamienne",
+    "Wallis and Futuna": "Wallis et Futuna",
+    "Western Sahara": "Sahara o",
+    "Yemen": "Yemenite",
+    "Zambia": "Zambienne",
+    "Zimbabwe": "Zimbabweenne",
+
+    "American": "Américaine",
+    "English": "Anglaise",
+    "Andorran": "Andorrane",
+    "Bissau-Guinéenne": "Bissau-Guinéenne",
+    "British": "Britannique",
+    "Burmese": "Burmese",
+    "Scotland": "Écossais",
+    "Welsh": "Gallois",
+    "Hellenic": "Hellenique",
+    "Herzegovinian": "Herzegoviniese",
+    "Hollandaise": "Hollandaise",
+    "Iran": "Iraniese",
+    "Kittitian-and-nevicienne": "Kittitienne-et-nevicienne",
+    "Kossovienne": "Kossovienne",
+    "Laotian": "Laotienne",
+    "Macedonian": "Macedonienne",
+    "Malagasy": "Malgache",
+    "Marshallaise": "Marshallaise",
+    "Micronesian": "Micronesienne",
+    "Mosotho": "Mosotho",
+    "North Korea": "Nord-coréenne",
+    "Romania": "Roumaine",
+    "South Korea": "Sud-coréenne",
+
+    "Barbudans": "Barbudaine",
+    "Belarusian": "Belarusian",
+    "Korean": "Coréenne",
+    "Ecuadorian": "Équatorienne",
+    "Eritrean": "Erythreenne",
+    "Spanish": "Espagnole",
+    "East Timorese": "Est-timoraise",
+    "Maldivan": "Maldivienne",
+    "Moroccan": "Marocaine",
+    "Mauritian": "Mauricienne",
+    "Salvadoran": "Salvadorienne"
+  },
+  "MailBox": {
+    "INBOX": "Courrier Entrant",
+    "SENT": "Envoyé",
+    "IMPORTANT": "Important",
+    "DRAFT": "Brouillon",
+    "TRASH": "Corbeille",
+    "DATE": "Date",
+    "download": "Recevoir  les Mails",
+    "MAIL_TO_GROUP": "Mél à un groupe",
+    "compose": "Nouveau Message",
+    "reply": "Répondre",
+    "reply_all": "Répondre à tous",
+    "forward": "Transférer",
+    "delete": "Supprimer",
+    "date": "Date",
+    "from": "De",
+    "to": "à",
+    "subject": "Sujet",
+    "URGENT_MESSAGE": "Message urgent",
+    "URGENT_MESSAGE_DIALOG_TITLE": "Message urgent - Vous devrez répondre à ce message afin d’accéder à ADMTC.PRO",
+    "NO_RECEPIENT_FOUND": "Aucun destinataire trouvé",
+    "RECEPIENT_REQUIRED": "Veuillez entrer un Destinataire",
+    "MESSAGE": "Message",
+    "SEND": "Envoyer",
+    "ATTACH_FILE": "Joindre un fichier",
+    "SOME_UNKNOWN_ERROR": "Une erreur est survenue",
+    "search": "Chercher",
+    "school": "Ecole",
+    "title": "Titre",
+    "sales": "Vendeur",
+    "deal": "Deal",
+    "Reply_Here": "Répondre ici",
+    "composeMail": {
+      "title": "Envoyer un Mel",
+      "send": "Envoyer",
+      "attach_file": "Joindre un fichier",
+      "to": "à",
+      "cc": "CC",
+      "bcc": "CCI",
+      "add_cc": "Ajouter cc",
+      "add_bcc": "Ajouter c",
+      "subject": "Sujet",
+      "message": "Message",
+      "MESSAGES": {
+        "TITLE": "Bravo!",
+        "TEXT": "Votre message vient d'être envoyé.",
+        "CONFIRMBTN": "OK"
+      },
+      "DRAFT": {
+        "TITLE": "Annulation?",
+        "TEXT": " Vous êtes sur le point d’annuler ce message.<br/>Souhaitez-vous l’enregistrer comme brouillon ?",
+        "CONFIRMBTN": "Oui",
+        "CANCELBTN": "Annuler",
+        "DECBTN": "Non"
+      }
+    },
+    "forwardMail": {
+      "send": "Envoyer",
+      "attach_file": "Joindre un fichier",
+      "to": "à",
+      "message": "Message"
+    },
+    "emailDetails": {
+      "reply": "Répondre",
+      "reply_all": "Répondre à tous",
+      "forward": "Transférer",
+      "delete": "Supprimer",
+      "previous": "Précédent",
+      "next": "Prochaine"
+    },
+    "replyAll": {
+      "send": "Envoyer",
+      "attach_file": "Joindre un fichier",
+      "to": "à",
+      "message": "Message"
+    },
+    "replyMail": {
+      "send": "Envoyer",
+      "attach_file": "Joindre un fichier",
+      "to": "à",
+      "message": "Message"
+    },
+    "URGENT_REPLY": {
+      "TITLE": "Bravo!",
+      "TEXT": "Votre réponse vient d'être envoyé à <br/> {{fullName}}.",
+      "CONFIRMBTN": "J’ai compris"
+    },
+    "MESSAGES": {
+      "ATTENTION": "Attention",
+      "ASKMSG": "Vous êtes sur le point de supprimer ce message",
+      "YES": "Oui",
+      "NO": "NON",
+      "DELETED": "Supprimé",
+      "DELMSG": "ce message vient d'être supprimé.",
+      "OK": "J’ai compris",
+      "DRAFTMSG": "Enregistré dans l’onglet Brouillon.",
+      "THANK": "Merci"
+    }
+  },
+  "SET_PASSWORD": {
+    "TITLE": "Bienvenue sur la plateforme Pédagogique Collaborative Admtc.pro",
+    "MESSAGE": "Enregistré.",
+    "BUTTON": "Entrer"
+  },
+  "RESETPASSWORD": "Votre nouveau mot de passe",
+  "ForgotPasswordMessage": "Un email vient de vous être envoyé<br/>pour créer votre nouveau mot de passe",
+  "EmailNotFound": "Désolé. Email inconnu dans la plateforme.",
+  "PasswordRecover": "Renouvelez votre mot de passe",
+  "ForgotPassword": "Mot de Passe oublié.",
+  "HELP": "Besoin d’assistance ou d’aide ?",
+  "FORGOT_PASSWORD": {
+    "TITLE": "Désolé",
+    "MESSAGE": "Cet mel ne correspond à aucun utilisateur dans la Plateforme.",
+    "BUTTON": "J’ai compris"
+  },
+  "RESET_PASSWORD": {
+    "TITLE": "Bravo!",
+    "MESSAGE": "Votre mot de passe vient d'être renouvelé.",
+    "BUTTON": "Je me connecte"
+  },
+  "PASSWORD_RESETED": {
+    "TITLE": "Votre nouveau mot de passe",
+    "MESSAGE": "Un email vient de vous être envoyé<br/>pour créer votre nouveau mot de passe",
+    "BUTTON": "J’ai compris"
+  },
+  "PASSWORD_RESETED_24H": {
+    "TITLE": "Désolé",
+    "MESSAGE": "Une demande de renouvellement de mot de passe a déjà été effectuée pour cette adresse email dans les dernières 24h.<br/>Vous devez utiliser le lien envoyé dans l’émail précédent ou demander un nouveau mot de passe 24h après la précédente demande.<br/>Si vous rencontrez une difficulté, vous pouvez demander de l’aide à aide@admtc.pro",
+    "BUTTON": "J’ai compris"
+  },
+  "MyFile": "Mon dossier",
+  "MyPhotoDiploma": "Ma Photo / Mon Niveau",
+  "dashboardMessage": {
+    "FROM": "De",
+    "TO": "à",
+    "draft_message": "Message brouillon"
+  },
+  "BACKEND": {
+    "STUDENT": {
+      "THANKYOU": "Merci",
+      "UNDERSTOOD": "J’ai compris",
+      "SORRY": "Désolé",
+      "SENDREGISTERMAIL": {
+        "SUCCESS": "Le mel permettant l’enregistrement<br/>a bien été envoyé aux apprenants <br/>n’ayant pas encore fait la démarche <br/>d’entrer leur mot de passe.",
+        "ERROR": "Cette action n’a pas pu s’effectuer. <br/> peut être a cause du net. <br/> merci de réessayer dans un instant"
+      }
+    },
+    "JOBDESCRIPTION": {
+      "MENTOR": {
+        "VALIDATEDBYACADSTAFF": "Cette fiche de poste a déjà été validée par le service pédagogique de l’école."
+      },
+      "REMINDSTUDENT": {
+        "SUCCESSMESSAGE": "Un rappel vient juste d'être envoyé",
+        "ERRORMESSAGE": "Une erreur est survenue"
+      },
+      "REMINDMENTOR": {
+        "SUCCESSMESSAGE": "Un rappel vient juste d'être envoyé",
+        "ERRORMESSAGE": "Une erreur est survenue"
+      }
+    },
+    "ERRORS": {
+      "USER_EMAIL_PRESENT": "un autre utilisateur est déjà enregistré avec cet email"
+    },
+    "TEST": {
+      "ASSIGN_CORRECTOR": {
+        "ADDED_SUCCESS": "Corrector Assigned for Test"
+      }
+    },
+    "MENTOR_EVALUATION": {
+      "NO_TEST_CREATED": "Aucune Evaluation Tuteur trouvée {{rncpTitle}}"
+    }
+  },
+  "EMAIL_S6": {
+    "TITLE": "Mel envoyé à la nouvelle adresse.",
+    "TEXT": "L’utilisateur va recevoir un mel à cette nouvelle adresse pour entrer un nouveau mot de passe."
+  },
+  "MAIN_MENU": {
+    "STUDENT": "Apprenants",
+    "RNCP": "Titre RNCP",
+    "SCHOOLS": "Ecoles",
+    "TASKS": "Mes Tâches",
+    "MAILBOX": "Boite aux Lettres",
+    "USER": "Utilisateurs",
+    "IDEAS": "1001 Idées",
+    "TESTS": "Epreuves",
+    "PREVIOUS_COURSES": "Cours précédents",
+    "TOOLS": {
+      "HISTORY": "Historique",
+      "HEADER": "Outils",
+      "TITLES_RNCP": "Titres RNCP",
+      "PLATFORM": "Plateforme",
+      "QUESTIONNAIRRE_TOOLS": "Outil formulaire",
+      "EXPORT_GROUPS": "Exporter Les Groupes",
+      "EMPLOYABILITY_SURVEY": "Enquête d’Employabilité",
+      "BILLING": "Facturation",
+      "CROSS_CORRECTION": "Correction Croisée",
+      "TRANSFER": "Transfert",
+      "STATUS_UPDATE": "Pointage",
+      "CERTIDEGREE": "CertiDegree",
+      "QUALITYCONTROL": "Contrôle Qualité",
+      "ALERT_FUNCTIONALITY": "Alerte fonctionnalité",
+      "INTERNAL_NOTE": "Note Interne"
+    }
+  },
+  "NEW_SCHOOL": {
+    "TITLE": "Une École de plus...",
+    "TEXT": "l'École {{schoolShortName}} vient d'être enregistrée",
+    "UPDATEMSG": "L'école {{shortName}} a été mise à jour",
+    "ADD_SCHOOL": "Ajouter une École",
+    "EDIT_SCHOOL": "Modifier cette École",
+    "RNCP_CR": "Titre RNCP / Certificateur",
+    "RNCP_PC": "Titre RNCP / Centre de Préparation",
+    "ADD_RNCP": "Ajouter un Titre RNCP",
+    "SCHOOL_SHORT_NAME": "Sigle",
+    "SCHOOL_LONG_NAME": "Nom de l'École",
+    "NEW_RNCP": "Nouveau Titre RNCP",
+    "CODE_RNCP": "Code RNCP",
+    "SHORT_RNCP_NAME": "Titre RNCP abrégé",
+    "LONG_RNCP_NAME": "Titre RNCP développé",
+    "RNCP_LEVEL": "Niveau RNCP",
+    "CANCEL_ADD_SCHOOL": "Annuler",
+    "ADD_RNCP_TITLE": "Ajouter un Titre RNCP",
+    "EDIT_RNCP_TITLE": "Modifier le Titre RNCP",
+    "SUCCESS": "Bravo !",
+    "RNCP_ADDED": "le titre RNCP a été créé avec succès.",
+    "RNCP_EDITED": "Le Titre RNCP a bien été mis à jour.",
+    "SCHOOL_NOT_EXITS": "sorties scolaires",
+    "ERROR": "Quelque chose s'est mal passé",
+    "CODEERROR": "5 chiffres max",
+    "Text_Official_Journal": "Texte officiel Journal",
+    "Date_Official_Journal": "Date officielle Journal",
+    "Add_Specializations": "Ajouter une spécialisation",
+    "Specialization": "Spécialisation",
+    "Select_Specialization": "Sélectionnez les spécialisation",
+    "Select_Specializations": "Sélectionnez les spécialisations",
+    "Block_Of_Specializations": "Bloc de spécialisation",
+    "MESSAGE": {
+      "schoolExistsTitle": "Désolé",
+      "schoolExistsText": "{{schoolShortName}} est deja dans la plateforme.",
+      "schoolExistsbutton": "J’ai compris",
+      "FAILED": "Non Admis",
+      "FAILED_MSG": "Échec de la mise à jour de l'école"
+    },
+    "ADMTC_DIR_IN_CHARGE": "ADMTC DIR en charge de ce titre"
+  },
+  "TOOLS_HISTORY": {
+    "TitleName": "Historique des Notifications",
+    "Date": "Date",
+    "Notif_Ref": "Notif. Ref",
+    "Notif_Subject": "Sujet de la Notif.",
+    "Title": "Titre",
+    "School": "Ecole",
+    "De": "De",
+    "A": "A",
+    "Subject": "Epreuve",
+    "Test": "Evaluation",
+    "Action": "Action",
+    "TODAY": "Aujourd'hui"
+  },
+
+  "TOOLS_INTERNAL_NOTES": {
+    "TitleName": "Internal Notes",
+    "FName": "First Name",
+    "LName": "Last Name",
+    "User_type": "Type Utilisateur",
+    "Date": "Date",
+    "Who": "Qui",
+    "Title": "Titre",
+    "School": "Ecole",
+    "User": "Utilisateur",
+    "Note": "Note",
+    "Action": "Action"
+  },
+
+  "TOOLS_DOCTEST": {
+    "TitleName": "Document-Test Table",
+    "Date": "Date",
+    "Title": "Titre",
+    "School": "Ecole",
+    "Subject": "Epreuve",
+    "Test": "Evaluation",
+    "Action": "Action",
+    "Class": "Classe",
+    "Student": "Apprenants",
+    "Expertise": "Bloc de Competence",
+    "TypeOfDoc": "Type de Doc",
+    "DocName": "Nom du Doc",
+    "Action_Buttons": {
+      "View": "Voir",
+      "Send": "Transmettre"
+    }
+  },
+
+  "TRANSFER_RESPONSIBILITY": {
+    "DIALOG_TITLE": "Transfert de Responsabilité",
+    "TRANSFER": "Transférer",
+    "TRANS_S1": {
+      "YES_TRANSFER": "Oui transférer!",
+      "Title": "Transfert de Responsabilité",
+      "Text": "Vous êtes sur le point de transférer la responsabilité <br/>{{userType}}<br/>De {{leftUser}}<br/>A {{rightUser}}<br/>Toutes les tâches en attentes vont être transférées immédiatement<br/>Une notification sera envoyée à chacun des utilisateurs concernés + vous en CC pour les informer."
+    },
+    "TRANS_S1B": {
+      "Text": "{{rightUser}} <br/> est maintenant référent titre pour : {{schoolShortName}} - {{rncpShortName}}",
+      "OK": "Merci"
+    },
+    "TRANS_S2": {
+      "Title": "Désolé",
+      "Text": "Désolé le titre de {{rncpShortName}} à déjà été assigné au: {{userType}} {{existedUser}}.",
+      "OK": "Merci"
+    },
+    "TRANS_S3": {
+      "Title": "Désolé",
+      "Text": "Vous essayez de transférer la responsabilité de Référrent Titre<br/>vers un utilisateur ayant déjà au moins 1 Titre RNCP<br/>avec d'autre fonction que Réferrent Titrer<br/>La conséquence serait pour cet utilisateur<br/>de devenir Réferrent Titre pour tous les Titres RNCP auxquels il est assigné<br/>tout ceci sert à éviter<br/>qu'1 titre RNCP aie plus d'1 Réferrent Titre au sein d'une même ecole."
+    }
+  },
+  "DOCTESTTABLE": {
+    "Select_At_Least_One": {
+      "Title": "Vous devez sélectionner au moins un Document ou Evaluation.",
+      "Button": "J’ai compris"
+    },
+    "Doc_Expected": "Doc. Attendu",
+    "Internal_Task": "Tâche interne",
+    "Correction_Grid": "Grille Evaluation"
+  },
+  "ChromeBrowserAlert": {
+    "Message": "Désolé…<br/>ADMTC.PRO est<br/>optimisé pour Google<br/>Chrome Ordinateur<br/>seulement.<br/>",
+    "Btn": "J’ai compris"
+  },
+  "STUDENT_IMPORT": {
+    "SUCCESSFULL_IMPORT": {
+      "TITLE": "Import réussi !",
+      "TEXT": "Tous les apprenants ont bien été importés.<br/> Vous devez désormais les inviter à se connecter à la plateforme pour choisir leur mot de passe <br/>en cliquant sur le bouton jaune « Email d’enregistrement » au-dessus de la listes des apprenants.<br/>Rappel : tant que tous les apprenants ne sont pas enregistrés,<br/> Vous ne pourrez pas accéder aux fonctionnalités majeures de la plateforme.",
+      "BUTTON": "Merci"
+    },
+    "UNSUCCESSFULL_IMPORT": {
+      "TITLE": "Attention : Erreur sur l’Import",
+      "TEXT": "Certains apprenants n’ont pas pu être importés dans la plateforme. <br/>Importés: {{ noOfSuccessfullStudentImport }} <br/>Non importés : {{ noOfUnsuccessfullStudentImport }} <br/> Nous venons de vous envoyer un email avec le rapport d’importation des données<br/> et le lien pour télécharger le fichier à corriger pour un nouvel import.<br/>Apprenants importés : Vous devez désormais les inviter à se connecter à la plateforme pour choisir leur mot de passe <br/>en cliquant sur le bouton jaune « Email d’enregistrement » au-dessus de la listes des apprenants.<br/> <b>Rappel : tant que tous les apprenants ne sont pas enregistrés,<br/> vous ne pourrez pas accéder aux fonctionnalités majeures de la plateforme.</b>",
+      "BUTTON": "J’ai compris"
+    },
+    "DELIMITER_UNSUCCESSFULL_IMPORT": {
+      "TITLE": "Le fichier à importer <br/> n’a pas le format CSV <br/> que vous avez sélectionné."
+    },
+    "UPLOAD_RESTRICT_TO_CSV": {
+      "TITLE": "Désolé !",
+      "TEXT": "Votre document doit être au format CSV.",
+      "BUTTON": "J’ai compris"
+    },
+    "DELIMETER": {
+      "TITLE": "Séparateur",
+      "COMMA": "Virgule [ , ] ",
+      "SEMICOLON": "Point-virgule [ ; ]",
+      "TAB": "Tabulation [  ]"
+    },
+    "DOWNLOAD_TEMPLATE": "Télécharger le modèle"
+  },
+  "CrossCorrection": {
+    "Cross_Correction": "Correction Croisée",
+    "Select_RNCP_Title": {
+      "title": "Sélectionner un Titre RNCP",
+      "validation1": "Ce champs est requis"
+    },
+    "Select_a_Class": {
+      "title": "Selectionner une Classe",
+      "validation1": "Ce champs est requis"
+    },
+    "Select_the_Test": {
+      "title": "Selection l’Evaluation",
+      "validation1": "Ce champs est requis"
+    },
+    "CROSSCORRECTION_NOT_ACCESSIBLE": {
+      "title": "Désolé",
+      "text": "Les notes seront disponibles<br/>après la décision finale du jury",
+      "button": "J'ai compris"
+    },
+    "Cancel": "Annuler",
+    "Enter": "Entrer",
+    "List_of_ALL_Students_preparing": "Liste des Apprenants du Titre",
+    "List_of_All_Schools": "Liste des Ecoles du Titre",
+    "Students": "Apprenants",
+    "School_Origin": "Ecole Origine",
+    "School_Correcting": "Ecole Correctrice",
+    "Cross_Corrector": "Correcteur Croise",
+    "Numb_of_Students": "Numb of Students",
+    "Num_of_Student_assigned_to": "Num of Student assigned to",
+    "Difference": "Difference",
+    "Schools": "Ecoles",
+    "Correction": "Correction",
+    "Diff": "Diff.",
+    "Student": "Apprenant",
+    "Save": "Enregistrer",
+    "Save&Leave": "Enregistrer & Quitter",
+    "Send_Notifications": "Envoyer les Notifications",
+    "Create_User": "Créer Utilisateur",
+    "CROSS_S1": {
+      "Title": "Envoyer les Notifications?",
+      "Text": "Vous êtes sur le point d’envoyer les notifications avec les instructions aux Référents titre ainsi qu’aux Correcteurs Croisés.",
+      "OK": "Confirmer",
+      "Cancle": "Annuler "
+    },
+    "CROSS_S2": {
+      "Title": "C’est enregistré !",
+      "Button": "Merci"
+    },
+    "CROSS_S3": {
+      "Title": "C’est enregistré !",
+      "Button": "Merci"
+    },
+    "CROSS_S4": {
+      "Title": "Bravo",
+      "Text": "votre notification a été envoyée avec succès",
+      "Button": "Merci"
+    },
+    "REMAINING_TO_ASSIGN": "restent à affecter"
+  },
+  "DOWNLOAD_All_DOC": {
+    "TITLE": "Vous souhaitez télécharger TOUS les documents?",
+    "TEXT": "Vous êtes sur le point de télécharger <br/>Tous les documents déposés par les apprenants<br/>Le tout est inclus dans un fichier zip."
+  },
+  "SEND_COPY_CROSS": {
+    "SENT_TO": "Envoyer les copies à",
+    "PAPER_COPIES_TO": "Veuillez envoyer les copies papier à :",
+    "LIST_OF_STUDENT": "La liste des étudiants dont les copies doivent être envoyées à l'école:",
+    "SENT_TO_CERTIFIER": "Envoyer les copies papier à ",
+    "SENT_TO_CERTIFIER_DESCP": "Veuillez envoer les copies papier au certificateur",
+    "CERTIFIER": "Certificateur"
+  },
+  "Results": "Résultats",
+  "MobileViewMessage": "Retrouvez cette page en details sur Mac / PC.",
+  "STUDENT_EXPORT_COLUMNS": {
+    "SCHOOL": "Ecole",
+    "SCHOLAR_SEASON": "saison scolaire",
+    "RNCPTITLE": "Titre RNCP",
+    "CLASS": "Classe",
+    "STUDENT_CIVILITY": "civilité étudiant",
+    "STUDENT_FIRST_NAME": "prénom étudiant",
+    "STUDENT_LAST_NAME": "nom étudiant",
+    "EMAIL": "email étudiant",
+    "GROUP_TEST": "Groupe épreuve",
+    "GROUP_NAME": "Nom du groupe",
+    "Diploma": "Diplome",
+    "Uploaded": "Déposé",
+    "Link-Dip": "Lien Dip.",
+    "DateOfDiplomaUpload": "Date of Upload Diploma",
+    "JOBDESCRIPTION": "Fiche de Poste",
+    "PROBLEMATIC": "Problématique",
+    "MENTOR": "Eval. Tuteur Ent."
+  },
+  "CROSSCORRECTION_EXPORT_COLUMNS": {
+    "RNCPTITLE": "Titre",
+    "SCHOOL_ORIGIN": "Ecole ORIGINE",
+    "SCHOOL_ORIGIN_ADDRESS": "Adresse Ecole ORIGINE",
+    "ACTIVE_STUDENTS": "Apprenants ORIGINE",
+    "SCHOOL_CORRECTING": "Ecole CORRECTRICE",
+    "SCHOOL_CORRECTIN_ADDRESS": "Adresse Ecole CORRECTRICE",
+    "STUDENTS_TO_BE_CORRECTED": "Apprenant à  CORRECTION"
+  },
+  "DOCTEST": {
+    "RESET": "Réinitialiser"
+  },
+  "MENTOR_EVAL_NOTIFICATIONS": {
+    "MENTEVAL_N1": {
+      "SUBJECT": "Evaluation Tuteur à compléter au plus tard {{dueDate}}",
+      "BODY": "<br>{{TuteurCivilité}} {{TuteurPrenom}} {{TuteurNom}},<br><br>Vous êtes le tuteur de  {{ApprenantCivilité}} {{ApprenantPrenom}} {{ApprenantNom}} inscrit(e) dans l'établissement {{schoolName}} pour préparer le Titre {{TitreDéveloppé}}.<br><br> Dans ce cadre, vous disposez d’un accès à la Plateforme Pédagogique Collaborative Admtc.pro pour compléter son évaluation professionnelle.<br>Celle-ci est impérative pour la validation de sa formation.<br><br>Veuillez cliquer sur le lien ci-dessous pour la compléter :<br>${URL}<br><br>Vous devrez définir un mot de passe lorsque vous cliquez sur le lien ci-dessus ou vous connecter si vous avez déjà défini un mot de passe.<br><br>Vous trouverez ci-dessous un lien pour découvrir les quelques étapes à mener.<br><a href={{mentorGuideLink}}>cliquez ici</a><br><br>N’hésitez pas à nous contacter pour toute question.<br><br>Cordialement,<br>{{senderCivility}} {{senderFirstName}} {{senderLastName}}<br>{{senderPostion}}<br>"
+    },
+    "CONFIRM_SEND": {
+      "TITLE": "Souhaitez-vous envoyer la demande d'évaluation au tuteur?",
+      "BTN1": "Oui",
+      "BTN2": "Non",
+      "REMIND_TEXT": "Cette demande d'evaluation tuteur a déjà été envoyée le {{dateOfSending}}",
+      "REMIND": "Souhaitez-vous l'envoyer de nouveau au tuteur ?"
+    }
+  },
+  "DELETEDOC_S1": {
+    "TITLE": "Supprimer ce Document?",
+    "TEXT": "Vous êtes sur le point de supprimer le doc: <br/> {{DOCNAME}} <br/> La tâche relative au dépôt de ce document <br/> va être de nouveau “À Faire”"
+  },
+  "USER_S5": {
+    "TITLE": "Envoyer un message au Référent Titre",
+    "TEXT": "Un mél va être envoyé au<br/>Référent Titre pour l’informer que<br/>{{userCivility}} {{userFirstName}} {{userLastName}}<br/>a une adresse mél erronée dans ADMTC.PRO",
+    "SEND": "Envoyer"
+  },
+  "STUD_S9": {
+    "TITLE": "Confirmer le changement d’Entreprise",
+    "TEXT": "En désactivant l’Entreprise <br/> {{companyName}}<br/> La Fiche de Poste et la Note de Problématique (si elle s’applique)<br/> seront remises à zéro<br/><br/> Veuillez confirmer le changement d’Entreprise pour l’Apprenant <br/> {{studentCivility}} {{studentFirstName}} {{studentLastName}}",
+    "CONFIRM": "Je confirme",
+    "CONFIRM_IN": "Je confirme dans {{ timer }} sec"
+  },
+  "ASSIGN_CORR": {
+    "TITLE": "Confirmez cette affection de Correcteur",
+    "I_CONFIRM_IN": "Je confirme dans {{ timer }} sec",
+    "I_CONFIRM": "Je confirme",
+    "TEXT_OTHER_ONE": "Vous êtes sur le point d’affection la correction de<br/>{{testName}}<br/>à {{correctorsName}} <br/><br/> une notification de cette affection<br/>lui sera envoyé immédiatement.<br/><br/>Vous recevrez aussi une notification de confirmation<br/>depuis laquelle vous pourrez modifier cette affection.",
+    "TEXT_MANY": "Vous êtes sur le point d’affection la correction de<br/>{{testName}} à<br/> {{correctorsName}} une notification de cette affection<br/>leur sera envoyée immédiatement.<br/>avec la liste des apprenants leur étant affectés<br/>Vous recevrez aussi une notification de confirmation<br/>depuis laquelle vous pourrez modifier cette affection.",
+    "TEXT_SELF_ONE": "Vous êtes sur le point d’affection la correction de<br/>{{testName}}<br/>à vous même.<br/><br/>une notification de cette affection<br/>vous sera envoyée immédiatement<br/>depuis laquelle vous pourrez modifier cette affection."
+  },
+  "Export_S1": {
+    "TITLE": "Veuillez sélectionner le type de fichier pour exporter votre document.",
+    "OK": "Confirmer",
+    "COMMA": "CSV - Virgule",
+    "SEMICOLON": "CSV -  Point-virgule",
+    "TAB": "TSV - Tab",
+    "INVALID": "Veuillez sélectionner dans cette liste"
+  },
+  "Export_S1_COLUMNS": {
+    "SCHOOL": "Ecole",
+    "RNCP_TITLE": "Titre RNCP",
+    "CLASS": "Classe",
+    "SCOLAR_SEASON": "Saison scolaire",
+    "CIVILITY": "Civilité étudiant",
+    "FIRST_NAME": "Prénom étudiant",
+    "LAST_NAME": "Nom étudiant",
+    "EMAIL": "Email étudiant",
+    "TEST_NAME": "TESTNAME",
+    "Date of Birth": "Date de Naissance",
+    "Place of Birth": "Lieu de Naissance",
+    "Expected Doc Name": "Doc. Attendu",
+    "File Name": "Nom du Fichier",
+    "Link to download": "Téléchargement",
+    "Upload Date": "Date Dépot",
+    "Upload Time": "Heure Dépot",
+    "SCORE": "Note",
+    "Group": "Groupe",
+    "Student Decision": "Décision de l'apprenant pour le rattrapage final",
+    "Student Retake": "Rattrapage final sélectionné par l'apprenant",
+    "FINAL_SCORE_AFTER_RETAKE": "Note finale après rattrapage",
+    "CERTIFICATION_STATUS_AFTER_RETAKE": "Statut de réussite après rattrapage",
+    "JURY_DECISION_AFTER_RETAKE": "Décision du jury après rattrapage",
+    "JURY_DECISION_BEFORE_RETAKE": "Décision du jury avant rattrapage",
+    "STUDENT_DESCISION": {
+      "FAILED": "Refuse",
+      "RETAKING": "Accepte"
+    }
+  },
+  "FinalTranscript": {
+    "title": "Relevé de Notes",
+    "School": "Ecole",
+    "RNCPTitle": "Titre RNCP",
+    "Class": "Classe",
+    "ScolarSeason": "saison scolaire",
+    "Civility": "civilité étudiant",
+    "FirstName": "prénom étudiant",
+    "LastName": "nom étudiant",
+    "Email": "email étudiant",
+    "FinalScore": "Note Finale",
+    "CertificationStatus": "Statut de réussite",
+    "DecisionJury": "Décision du Jury",
+    "SuggestedRetake": "Rattrapage suggéré",
+    "SCHOLAR_BOARD_SUBMISSION": "Soumission au Jury de Scolarité",
+    "EXPORT_AFTER_DECISION_JURY": "Tableau des Résultats après décision Jury / Apprenant",
+    "PDF_RETAKE_TEST_RESULT": "PDF Resultats Avant Rattrapage",
+    "EXPORT_RETAKE_ONLY": "Tableau des apprenants autorisés au rattrapage",
+    "SUBMISSION_AFTER_RETAKE": "Soumission au jury de scolarité après rattrapage",
+    "SUCCESS_STATISTICS": "Tableau du Résultat Final et Statistiques",
+    "SCHOOL_RANKINGS": "Classement Écoles",
+    "Student Final Result": "Résultats du Relevé de Notes des Apprenants",
+    "STUDENT_RANKING": "Classement Apprenant",
+    "SCHOOLS": "Centres de Preparation",
+    "RANKING": "Classement",
+    "NATIONAL": "National",
+    "INPUT_FINAL_DECISION": "Entrée de la décision du Jury",
+    "GENERATE_FINAL_TRANSCRIPT": "Générer le Relevé de Notes Final",
+    "Final_Score": "Note Finale",
+    "Certification_Status": "Statut de réussite",
+    "Decision_Jury": "Décision du Jury",
+    "Suggested_Retake": "Rattrapage suggéré",
+    "CERTIFICATION_STATE": {
+      "PASS1": "Admis",
+      "PASS": "Admis",
+      "PASS2": "Admis avec la bienveillance du Jury",
+      "PASS3": "Admis avec la bienveillance du Jury",
+      "FAILED": "Non Admis",
+      "ELIMINATED": "Eliminé",
+      "ELIMINATEDS": "Eliminés"
+    }
+  },
+  "CLASH_EMAIL_S1": {
+    "TEXT": "Le mél saisi est déjà utilisé par un autre utilisateur.",
+    "UNDERSTOOD": "Compris"
+  },
+  "PRIVACY_POLICY": {
+    "READ_PRIVACY": "En vous inscrivant, vous acceptez la Politique de conﬁdentialité de ADMTC.PRO accessible via le lien suivant : ",
+    "POLICAY_LINK": "Protection de vos données personnelles",
+    "COOKIES_CONSENT_TEXT": "ADMTC.PRO utilise des cookies pour vous assurer la meilleure expérience sur notre site. Ces cookies sont utilisés uniquement pour améliorer les services ADMTC.PRO. ADMTC.PRO respecte la vie privée de ses utilisateurs et visiteurs, lors du traitement des fichiers cookies et respecte les règles de confidentialité de l’Union européenne.",
+    "LEARN_MORE": "En savoir plus",
+    "GOT_IT": "OK",
+    "MENU_TITLE": "Déclaration de confidentialité"
+  },
+  "USER_S7_SUPERUSER": {
+    "TEXT": "Vous êtes maintenant connété en tant que <br/> {{UserCivility}} {{UserFirstName}} {{UserLastName}}.<br/>lorsque vous avez terminé vous devrez vous déconnecter de ce compte."
+  },
+  "EMPLOYABILITY_SURVEY": {
+    "CSVFileName": "résultat de l'enquête d'employabilité",
+    "EXPORTCSVBUTTON": "Export EE CSV",
+    "ExportESCSVDialogHeader": "Export CSV Enquête d'Employabilité",
+    "ACADIR_VAL_SW": {
+      "title": "Veuillez confirmer la validation l’enquête d’employabilité de",
+      "BTN1": "Valider",
+      "BTN2": "Annuler"
+    },
+    "CERTIFICATION": {
+      "PASS": "Admis",
+      "FAILED": "Non Admis",
+      "ELIMINATED": "Éliminé",
+      "RETAKING": "Rattrapage"
+    },
+    "SENT_SURVEY_SUBMIT": {
+      "TITLE": "Vous avez déjà envoyé l'enquête sur l'employabilité !",
+      "TEXT": "Vous avez déjà envoyé l'enquête sur l'employabilité à tous les Apprenants de ",
+      "TEXT1": "le",
+      "TEXT2": "Voulez-vous leur envoyer un rappel?",
+      "CANCEL": "Annuler"
+    },
+    "EMPLOYABILITY_TITLE": "Enquête d'Employabilité",
+    "rncp": "Titre RNCP",
+    "scholar": "Année Scolaire",
+    "class": "select a class",
+    "Success": "succès",
+    "SWEET_ALERT": {
+      "TITLE": "Êtes-vous sûr de vouloir envoyer l'enquête sur l'employabilité?",
+      "TEXT": " Vous êtes sur le point d'envoyer l'enquête sur l'employabilité à tous les étudiants de",
+      "CONFIRM": "Je confirme",
+      "CANCEL": "Annuler"
+    },
+    "SWEET_ALERT_A": {
+      "TITLE": "Enquête envoyée à tous les étudiants de",
+      "CONFIRM": "Merci"
+    },
+    "SW_2": {
+      "TITLE": "Vous avez déjà envoyé l'enquête sur l'employabilité !",
+      "TEXT1": "Vous avez déjà envoyé l'enquête sur l'employabilité à tous les étudiants de",
+      "TEXT2": "Voulez-vous leur envoyer un rappel ?",
+      "REMINDER": "Rappel envoyé à tous les étudiants de"
+    },
+    "TABLE": {
+      "ABBRIV": "EE",
+      "SENTTOSTUDENT": "Envoyé à Apprenant",
+      "COMPLETEDBYSTUDENT": "Complété par l'apprenant",
+      "VERIFIRDBYACADIR": "validé par la pédagogie",
+      "VALIDATEDBYACADDIR": "validé par la pédagogie",
+      "REJECTEDBYACADDIR": "Rejetée par la pédagogie"
+    },
+    "FORM": {
+      "REQUIRED_FIELD": "est requis",
+      "TITLE": "SUIVI D’INSERTION TITRE ",
+      "DIRECTIONS": "La reconnaissance par l’Etat de la certification (Titre RNCP) que vous avez préparé est soumise à renouvellement régulier.<br/>Ce renouvellement repose sur la qualité et la précision des informations fournies à la Commission Nationale des Certifications Professionnelles (CNCP) sur votre parcours professionnel, à l’issue du cycle de formation.<br/>Elles permettent de confirmer l’adéquation de l’intitulé de la certification avec la réalité professionnelle et la moyenne des salaires de la promotion justifie le niveau de la certification (actuellement au niveau I).<br/>Seules les informations suivies d’un astérisque* sont transmises à la CNCP et ce, sans mention de votre nom.Compte tenu de la mobilité des jeunes diplômés, nous vous remercions de nous communiquer les coordonnées de vos parents afin de ne pas perdre contact et être en mesure de vous contacter dans un an puis dans 3 ans pour valider votre évolution de carrière. Les autres informations nous sont utiles pour adapter la formation aux évolutions du métier dans les entreprises.<br/>Merci de répondre avec sincérité à ce questionnaire.<br/>",
+      "LNAME": "nom",
+      "POSTAL_ADDRESS": "Adresse postale",
+      "ZIPCODE": "Code postal",
+      "MOBILE": "Téléphone portable",
+      "PHONE": "Téléphone Fixe",
+      "PERSONAL_MAIL": "Mail personnel",
+      "PROFFESIONAL_MAIL": "Mail professionnel",
+      "YOU_BLOCK": {
+        "TITLE": "Vous",
+        "ESTABLISHMENT": "Etablissement dans lequel vous avez suivi les cours"
+      },
+      "CONTACT_BLOCK": {
+        "TITLE": "Vos Coordonnées",
+        "PROFESSIONAL_EMAIL": "Mail professionnel",
+        "PERSONAL_EMAIL": "Mail personnel",
+        "PROFESSION": "Profession"
+      },
+      "PARENT_BLOCK": {
+        "TITLE": "Les Coordonnées de l'un de vos Parents",
+        "DIRECTIONS": "Compte tenu de la mobilité des jeunes diplômés, nous vous remercions de nous communiquer les coordonnées de vos parents afin de ne pas perdre contact et être en mesure de vous contacter dans un an puis dans 3 ans pour valider votre évolution de carrière.",
+        "LAST_NAME_N_FIRST_NAME": "Nom et prénom",
+        "PROFESSION": "Profession",
+        "COMPLETE_MAILING_ADD": "Adresse postale complète (avec code postal et ville)"
+      },
+      "EXP_BLOCK": {
+        "TITLE": "Votre Parcours<br/>Votre parcours AVANT la formation au Titre {title}",
+        "LAST_DIPLOMA": "Dernier diplôme préparé avant l’entrée dans le cycle de préparation au titre de {title}",
+        "Q_graduate": "Avez-vous obtenu ce diplôme ?",
+        "Q_professional_experience": "Aviez-vous une expérience professionnelle significative en Marketing ? ",
+        "Q_professional_experience_yes_months": "Si oui, précisez la durée en mois de cette expérience",
+        "Q_professional_experience_yes_position": "Si oui, quel poste occupiez-vous ?",
+        "Q_professional_experience_yes_status": "Si oui, quel était votre statut ?",
+        "Q_professional_experience_yes_activity": "Si oui, dans quel secteur d'activité exerciez-vous ?"
+      },
+      "SITUATION_BLOCK": {
+        "TITLE": "Votre situation actuelle<br/>Votre situation APRES la fin de la formation",
+        "Q_JOB_SITUATION": "Quelle est votre situation professionnelle actuelle ?"
+      },
+      "CONTRACT_BLOCK": {
+        "TITLE": "Contrat",
+        "START_DATE": "Date de début de contrat",
+        "END_DATE": "Date de fin de contrat (pour les CDD ou Interim)",
+        "STATUS": "Statut",
+        "GROSS_SALARY": "Montant de Salaire brut annuel (confidentiel et impératif pour la Commission Nationale des Certifications Professionnelles) ",
+        "COMISSION": "Primes et commissions et intéressement",
+        "COMISSION_ANNUAL": "annuels",
+        "COMPANY_NAME": "Nom de votre Entreprise",
+        "BUSINESS_SECTOR": "Secteur d’activités de votre entreprise",
+        "COMPANY_WEBSITE": "Site internet de votre entreprise",
+        "CURRENCY_POSTFIX": "en euros",
+        "JOB_STATUS": {
+          "EXECUTIVES": "Cadre",
+          "NON_EXECUTIVES": "Non cadre"
+        }
+      },
+      "PROFESSIONAL_ACTIVITY_BLOCK": {
+        "TITLE_HELD": "Intitulé du poste occupé (Tel qu'il est indiqué sur votre bulletin de salaire ou votre carte de visite)"
+      },
+      "FORM_OPTIONS": {
+        "JOB_STATUS": {
+          "TRAINEE": "Stagiaire",
+          "ROTATING": "Alternant",
+          "EMP_CONTRACT": "Salarié en CDD ou CDI",
+          "AUTO_ENTREPRENEUR": "Auto-entrepreneur"
+        },
+        "JOB_SITUATIONS": {
+          "INITIAL_TRAINING": "Poursuite d’études en FORMATION INITIALE",
+          "LEARNING": "Poursuite d’études en APPRENTISSAGE",
+          "PRO_CONTRACT": "Poursuite d’études en CONTRAT De PRO",
+          "JOB_SEARCH": "Recherche d’emploi",
+          "INTERIM": "Intérim",
+          "CSD": "CDD",
+          "CDI": "CDI",
+          "AUTO_ENTREPRENEUR": "Auto-entrepreneur",
+          "BUSINESS_CREATION": "Création d’entreprise",
+          "CIVIC_SERVICE": "Service Civique",
+          "OTHER": "Other"
+        },
+        "BOOLEAN": {
+          "YES": "Oui",
+          "NO": "Non"
+        }
+      },
+      "FAILURE_TITLE": {
+        "PART1": "Votre enquête d'employabilité a été rejetée par la scolarité de votre école",
+        "SECOND_TIME": "deuxième",
+        "THIRD_TIME": "Troisième",
+        "PART2": " avec la raison ci-dessous :",
+        "AT": "le"
+      }
+    },
+    "VERIFIED_BY_ACADIR": "",
+    "REJECTED_BY_ACADIR": "Rejetée par la pédagogie",
+    "VALIDATE": "Valider",
+    "REJECT": "Rejeter",
+    "REJECTION_REASON_TITLE": "Saisir la raison du rejet",
+    "REJECTION_REASON": "Raison du rejet",
+    "REJECTION_DATE": "Date du rejet",
+    "REJECT_SWAL": {
+      "S1": {
+        "TITLE": "Refuser l’enquête d’employabilité ?",
+        "TEXT": "You want to reject the employability survey by student. Please input the reason of rejection below  :"
+      },
+      "S1B": {
+        "TEXT": "Refus envoyé à l’apprenant",
+        "OK": "J’ai compris"
+      },
+      "S2": {
+        "TEXT": "Veuillez noter que c'est la dernière fois que vous pouvez rejeter cette enquête d'employabilité. </br>Vous pouvez contacter ADMTC pour toute question ou assistance   "
+      },
+      "S3": {
+        "TITLE": "Enquête d’employabilité validée",
+        "BUTTON": "J’ai compris"
+      }
+    },
+    "SUBMIT": "Envoyer"
+  },
+  "QUESTIONNAIRE_FIELDS": {
+    "STUDENT_CIVILITY": "Civilité",
+    "STUDENT_FIRST_NAME": "Nom",
+    "STUDENT_LAST_NAME": "Prénom",
+    "STUDENT_ADDR_1": "Adresse 1",
+    "STUDENT_ADDR_2": "Adresse 2",
+    "STUDENT_POSTAL_CODE": "Code Postal",
+    "STUDENT_CITY": "Ville",
+    "STUDENT_COUNTRY": "Pays",
+    "STUDENT_MOBILE": "Téléphone Mobile",
+    "STUDENT_FIX_PHONE": "Téléphone fix",
+    "STUDENT_PERSONAL_EMAIL": "mél personnel",
+    "STUDENT_PROFESSIONAL_EMAIL": "mél professionnel",
+    "STUDENT_DIPLOMA": "Diplôme",
+    "PARENT_RELATION": "Lien de parenté",
+    "PARENT_CIVILITY": "Civilité du parent",
+    "PARENT_FIRST_NAME": "Nom du parent",
+    "PARENT_LAST_NAME": "Prénom du parent",
+    "PARENT_ADDR_1": "Adresse 1 du parent",
+    "PARENT_ADDR_2": "Adresse 2 du parent",
+    "PARENT_POSTAL_CODE": "Code Postal",
+    "PARENT_CITY": "Ville",
+    "PARENT_COUNTRY": "Pays",
+    "PARENT_MOBILE": "Téléphone du parent",
+    "PARENT_JOB": "Emploi",
+    "PARENT_PERSONAL_EMAIL": "mél personnel du parent",
+    "PARENT_PROFESSIONAL_EMAIL": "mél professionnel du parent"
+  },
+  "QUESTION_ANSWER_TYPE": {
+    "NUMERIC": "Numerique",
+    "DATE": "Date",
+    "FREE_TEXT": "Texte libre",
+    "SINGLE_OPTION": "Choix unique",
+    "MULTIPLE_OPTION": "Choix multiple",
+    "EMAIL": "Mél",
+    "AUTO_POPULATED_FIELD": "Auto populated field",
+    "PARENT_AND_CHILD": "Parent et enfant"
+  },
+  "DMOE": {
+    "TITLE": "Si vous exercez une activité professionnelle",
+    "DIRECTIONS_TITLE": "Missions principales",
+    "WARNING": "Si vous n’effectuez pas cette mission, veuillez cocher la case “non”.",
+    "DIRECTIONS": "Parmi les activités et fonctions ci-dessous, quelles sont celles que vous avez l’occasion de mettre en œuvre dans votre emploi actuel (plusieurs choix possibles) ?",
+    "Q1": "Etudier des marchés et/ou des secteurs d’activités ?",
+    "Q2": "Analyser des produits ?",
+    "Q3": "Définir des axes de développement en fonction de l’activité de l’entreprise ?",
+    "Q4": "Réaliser un diagnostic de la situation de l’entreprise ?",
+    "Q5": "Réaliser des stratégies de développement pour satisfaire aux enjeux de l’entreprise ?",
+    "Q6": "Evaluer les besoins de ressources pour mettre en œuvre le/les plans d’action ?",
+    "Q7": "Analyser des résultats afin d’élaborer un modèle économique adapté au contexte ?",
+    "Q8": "Interpréter des tableaux de bords afin d’orienter le pilotage de l’activité ?",
+    "Q9": "Affecter des ressources pour optimiser la rentabilité de l’entreprise ?",
+    "Q10": "Structurer une politique commerciale et/ou marketing pour promouvoir l’entreprise ?",
+    "Q11": "Décider des modalités de communication pour déployer l’action ?",
+    "Q12": "Construire des partenariats commerciaux pour consolider le développement des activités ?",
+    "Q13": "Définir une organisation pour fédérer et faciliter les relations interservices ?",
+    "Q14": "Définir des modes de management pour mobiliser les équipes ?",
+    "Q15": "Mettre en place des outils pour favoriser le travail collaboratif et la communication en interne ?",
+    "Q16": "Développer une politique de GRH pour valoriser et faire évoluer les collaborateurs ?",
+    "Q17": "Manager une équipe et/ou des prestataires ?"
+  },
+  "RMO": {
+    "TITLE": "Si vous exercez une activité professionnelle",
+    "DIRECTIONS_TITLE": "Missions principales",
+    "WARNING": "Si vous n’effectuez pas cette mission, veuillez cocher la case “non”.",
+    "DIRECTIONS": "Parmi les activités et fonctions ci-dessous, quelles sont celles que vous avez l’occasion de mettre en œuvre dans votre emploi actuel (plusieurs choix possibles) ?",
+    "Q1": "D’étudier des marchés et/ou des secteurs d’activités ?",
+    "Q2": "D’analyser des produits ?",
+    "Q3": "D’identifier et d'analyser des concurrents de marchés ?",
+    "Q4": "D’étudier des stratégies de positionnements d’offres de produits et/ou services ?",
+    "Q5": "De recenser une clientèle cible (Etude de caractéristiques de clientèles et Définition de profil de clients types) ?",
+    "Q6": "De concevoir des actions de marketing opérationnel ?",
+    "Q7": "De réaliser un budget prévisionnel pour une action ?",
+    "Q8": "De présenter votre (vos) proposition(s) d’actions à vos supérieurs ?",
+    "Q9": "De programmer et planifier le déroulement d’une action ?",
+    "Q10": "De manager une équipe et/ou des prestataires ?",
+    "Q11": "De suivre le déroulement d’opérations ?",
+    "Q12": "D’analyser les retombées et les impacts de vos actions de marketing",
+    "Q13": "De valoriser les résultats de vos actions marketing opérationnel ?",
+    "Q14": "De réaliser le bilan d’actions marketing ?"
+  },
+  "Survey_S3": {
+    "TITLE": "Merci!",
+    "TEXT": "L’enquête d’employabilité a été envoyée à la pédagogie de votre école",
+    "BUTTON": "J’ai compris"
+  },
+  "Survey_S4": {
+    "TITLE": "L’enquête d’employabilité est sauvegardée. </br>Mais pas envoyée",
+    "TEXT": "Votre enquête d’employabilité a été sauvegardée </br>Pour l’envoyer à la pédagogie de votre école, veuillez cliquer sur le bouton “envoyer”",
+    "BUTTON": "J’ai compris"
+  },
+  "THUMBSUP": {
+    "SW1": {
+      "TITLE": "Confirmer le changement de statut de l’apprenant ",
+      "TEXT": "Vous venez de cliquer sur le pouce pour indiquer que l’apprenant est en conformité avec les règles et le calendrier de l'école </br>L'icône va devenir VERT… </br> L’apprenant sera en mesure de recevoir le relevé de notes."
+    },
+    "SW2": {
+      "TITLE": "Confirmer le changement de statut de l’apprenant ",
+      "TEXT": "Vous venez de cliquer sur le pouce pour indiquer que l’apprenant n'est pas en conformité avec les règles et le calendrier de l'école </br> L'icône va devenir ROUGE … </br> L’apprenant ne sera pas en mesure de recevoir le relevé de notes"
+    },
+    "OK": "En règle",
+    "NOT_OK": "Pas en règle"
+  },
+  "FINAL_TRANSCRIPT": {
+    "TITLE": "Relevé de Notes",
+    "PASS2-3": "Admis avec la bienveillance du Jury",
+    "TAB_TITLE": "Résultats",
+    "FT": "Le relevé de Note",
+    "SCHOOL_BOARD": "Décision Du Jury",
+    "STUDENT_DECIDED": "Décision Apprenant",
+    "FINAL_RESULT": "Résultat Définitif",
+    "RETAKE": "RATTRAPAGE",
+    "FAIL": "NON ADMIS",
+    "PASS": "ADMIS",
+    "ELIMINATED": "ÉLIMINÉ",
+    "REFUSE_RETAKE": "Refuse Rattrapage",
+    "FINAL_RESULT_FAIL": "NON ADMIS",
+    "EMPTYMESSAGE": "Le relevé de Notes n’a pas encore été généré",
+    "NOT_YET": "Pas Encore",
+    "RESULT_OF_FINAL_TRANSCRIPT": "Résultats du Relevé de Notes",
+    "DECISION_OF_SCHOOL_BOARD": "Décision du Jury",
+    "DECISION_OF_STUDENT": "Décision Apprenant",
+    "STATUS": "Statut",
+    "UNDERSTOOD": "J'ai compris",
+    "CERTIFICATION_STATUS": {
+      "ELIMINATED": "Éliminé",
+      "PASS": "Admis",
+      "FAILED": "Non Admis",
+      "RETAKING": "Rattrapage",
+      "PASS1": "Admis",
+      "PASS2": "Admis avec la bienveillance du Jury",
+      "PASS3": "Admis avec la bienveillance du Jury"
+    },
+    "RETAKE_DECISION": {
+      "ACCEPT": "Accepte",
+      "REFUSE": "Refuse"
+    },
+    "DAY": {
+      "MON": "lundi",
+      "TUE": "mardi",
+      "WED": "mercredi",
+      "THU": "jeudi",
+      "FRI": "vendredi",
+      "SAT": "samedi",
+      "SUN": "dimanche"
+    },
+    "FINAL_S1": {
+      "TITLE": "Confirmer la décision du jury",
+      "TEXT": "Le résultat du relevé de notes de {{ nameOfStudent }} est : {{ certificationStatus }} </br>Souhaitez vous modifier ce résultat pour: {{ juryDecision }}",
+      "YES": "Je confirme",
+      "NO": "Annuler",
+      "OK_IN": "Je confirme {{ timer }} sec"
+    },
+    "FINAL_S2": {
+      "TITLE": "impossible de valider le statut de l'apprenant",
+      "TEXT": "le dossier administratif de l'apprenant est incomplet. Nous allons envoyer un rappel à cet apprenant."
+    },
+    "FINAL_S4": {
+      "TITLE": "Sélection des évaluations pour le Rattrapage",
+      "TEXT": "Veuillez sélectionner l'Évaluation pour le rattrapage"
+    },
+    "FINAL_S5": {
+      "TITLE": "Êtes-vous décidé pour votre rattrapage ?",
+      "TEXT_AC": "Vous avez choisi votre rattrapage comme suit<br/>l'évaluation suivante:<br/> {{testList}}",
+      "TEXT_RE": "Vous refusez le rattrapage<br/>La décision du jury est donc : “Non Admis”"
+    },
+    "ACAD_TASK_DESP": "Saisie de la décision de l'apprenant pour l'épreuve de rattrapage final à effectuer avant le ",
+    "ACAD_TASK_STUD": "Voici la liste des apprenants qui doivent saisir leur décision:",
+    "RESULTS_BEFORE_FINAL_RETAKE": "Resultats avant rattrapage",
+    "FINAL_PDFQ": {
+      "TITLE": "Télécharger les Résultats en PDF<br/> avant Rattrapage",
+      "TEXT": "Vous êtes sur le point de <br/> télécharger les PDF des résultats avant rattrapage pour :<br/>{{ testNames }}"
+    }
+  },
+  "FINAL_TRANSCRIPT_RESULT_PDF": {
+    "STU_FNAME": "Prénom",
+    "STU_LNAME": "Nom",
+    "DOB": "Né(e) le",
+    "SECTION": "Certification Professionnelle",
+    "TEST": "EPREUVES",
+    "FINAL_MARKS": "NOTES ANNUELLES",
+    "AVERAGE": "Moyenne",
+    "FINAL_SCORE": "Moyenne Générale",
+    "CREDITS": "CREDITS ECTS",
+    "RESULT": "Résultat",
+    "FOOTER": {
+      "PROFESSIONAL_CERTIFICATION": "Certification Professionnelle - Niveau ",
+      "DESCRIPTION": "Arrêté du 31 janvier 2018 publié au Journal Officiel du 08 février 2018 portant enregistrement au répertoire national des certifications professionnelles. Enregistrement pour deux ans, au niveau I, sous l'intitulé \"Dirigeant manager opérationnel d'entreprise\" avec effet au 29 novembre 2017, jusqu'au 08 février 2020",
+      "ADDRESS": "101 rue de la Fontaine bellot - 92160 ANTONY"
+    }
+  },
+  "MENTOR_EVAL_PDF": {
+    "NAME": "Nom",
+    "SCHOOL": "Etablissement",
+    "SWEET_ALERT": {
+      "TITLE": "Les PDF des évaluations du tuteurs ont été générés!",
+      "TEXT": "Vous pouvez retrouver cette évaluation </br> dans le kit pédagogique </br> dossier 06 - épreuve de la certification </br> ou dans la fiche de l’apprenant onglet :  </br> sujet de la certification",
+      "BTN": "J’ai compris"
+    },
+    "GEN_PDF": "Générer PDF"
+  },
+  "BLANK": "",
+  "SEND_QUESTIONNAIRE": {
+    "TITLE": "SEND GENERAL QUESTIONNAIRE",
+    "ENTITY": "sélectionner l'entité",
+    "RECIPIENT": "Destinataire",
+    "VALIDATOR": "Validateur",
+    "USERTYPE": "Sélectionner le type d'utilisateur",
+    "VALIDAION": "Type de validation",
+    "SELECTSCHOOL": "Select School"
+  },
+  "QUESTIONNAIRE": {
+    "SW9": {
+      "TEXT": "Veuillez entrer un nom pour le Questionnaire",
+      "ERROR": "Questionnaire déjà existant: Nom déjà utilisé pour un autre questionnaire",
+      "NODATA": "Vous devez entrer un nom pour le formulaire"
+    },
+    "TABLE": {
+      "TEMPLATE_NAME": "Nom du modèle",
+      "SEND_DATE": "Date d’envoi",
+      "Scholar_Season": "Saison scolaire",
+      "Questionnaire_Type": "Type de questionnaire",
+      "STATUS": "Statut %",
+      "Send_Reminder": "Envoyer un rappel",
+      "Status_Details": "Détails du statut",
+      "Export_to_CSV": "Exporter au format CSV",
+      "Print_to_PDF": "Imprimer au format PDF",
+      "Duplicate": "Dupliquer"
+    },
+    "BOARD": {
+      "Select_Questionnaire_Type": "sélectionnez le type de questionnaire",
+      "Select_creator": "sélectionnez un créateur",
+      "Send_Questionnaire": "Envoyer le formulaire",
+      "Bt_RESET": "Réinitialiser",
+      "STATUS": "Statut %"
+    },
+    "SUCCESS_SW": {
+      "TITLE": "Formulaire dupliqué !",
+      "OK": "Merci"
+    }
+  },
+  "CERTIFICATE_ISSUANCE": {
+    "OFFICIAL_CERTI": "Création des Certificats Officiels",
+    "DETAILS_REVISION_DONE": "Correction Effectuée",
+    "DETAILS_NEED_REVISION": "Détails  devant être vérifié",
+    "CERTIFICATE_ISSUED": "Certificat délivré",
+    "DETAILS_CONFIRMED": "Détails vérifiés",
+    "SENT_TO_STUDENT": "Envoyé à l’apprenant",
+    "SELECT_STATUS": "Sélectionnez le statut",
+    "FINAL_STATUS": "Final Certificate status",
+    "SEND_CERTIFICATE": "Envoyer certificat",
+    "DOWNLOAD_CERTIFICATE": "Télécharger le certificat",
+    "TAB_TITLE": "Détails de la certification",
+    "SENT_TO_STUDENT_SUB": {
+      "TITLE": "Envoyé à",
+      "SUBTITLE": "l’apprenant"
+    },
+    "DETAILS_NEED_REVISION_SUB": {
+      "TITLE": "Détails  devant",
+      "SUBTITLE": "être vérifié"
+    },
+    "MODIFICATION_REQUESTED": {
+      "TITLE": "Demande de",
+      "SUBTITLE": "correction"
+    },
+    "MODIFICATION_DONE": {
+      "TITLE": "Correction",
+      "SUBTITLE": "effectuée"
+    },
+    "Modification Requested": "Demande de correction",
+    "Modification Done": "Correction effectuée",
+    "STUDENT_DETAILS": {
+      "STUDENT_NAME": "Nom de l’apprenant",
+      "ADDRESS": "Adresse",
+      "DATE_BIRTH": "Date et lieu de naissance",
+      "NATIONALITY": "Nationalité",
+      "PHONE_NUMBER": "Numéro de téléphone",
+      "EMAIL_ADDRESS": "Adresse mél",
+      "SCHOOL_NAME": "Nom de l’école",
+      "SCHOOL_COURT_NAME": "Sigle de l’école",
+      "SCHOOL_ADDRESS": "Adresse de l’école",
+      "SCHOOL_WEBSITE_URL": "Site web de l’école : Url",
+      "SIGNATORY_1": "Signataire 1",
+      "SIGNATORY_2": "Signataire 2",
+      "SIGNATORY_3": "Signataire 3",
+      "TITLE": "Titre",
+      "DATE_ISSUANCE": "Date d’émission",
+      "DEGREE_REF": "Niveau réf",
+      "SCHOOL_REF": "Ecole réf",
+      "REF_TEXT_JOURNAL": "Réf du texte du journal officiel",
+      "REF_DATE_JOURNAL": "Réf de la date du journal officiel",
+      "CERTIDEGREE_BLOCKCHAIN_REF": "Réf Blockchain CertiDegree",
+      "CONFIRM": "Confirmer",
+      "NEED_REVISION": "Demande de correction",
+      "GET_CERTIFICATE": "Obtenir le certificat",
+      "LINK_CERTIFICATE": "Link to Certidegree",
+      "HASH_CODE": "HASH code"
+    },
+    "REQUEST_REVISION": "Demande de correction",
+    "REQUEST_REVISION_TEXT": "Veuillez saisir les informations que vous souhaitez modifier.",
+    "REQUEST_REVISION_TEXT_SUB": "Assurez-vous de décrire clairement les modifications souhaitées.",
+    "CERTIFICATE_REVISION_FOR": "Révision des détails du certificat pour",
+    "STUDENT_PASSED": "Apprenants admis",
+    "CERT_S2": {
+      "TITLE": "Vous allez confirmer tous les détails pour la certification!",
+      "TEXT": "Veuillez vous assurer que vos détails de certification ne comportent aucune erreur. <br>Vous ne pourrez pas modifier les données après avoir appuyé sur Confirmer.",
+      "OK_IN": "Confirmer dans {{ timer }} sec",
+      "OK": "Confirmer"
+    },
+    "CERT_S4": {
+      "TEXT": "Vous venez d'envoyer une notification à chacun des apprenants séléctionés<br/>pour leur demander de confirmer les informations essentielles<br/>avant délivrance du diplome.<br/>Chaque apprenant doit confirmer<br/>ou demander une correction.<br/>Le Référent Titre<br/>recevra éventuellement une notification pour opérer les changements si nécéssaire<br/>"
+    },
+    "CERT_S1": {
+      "TEXT": "Un ou plusieurs apprenants que vous avez sélectionnés ont déjà reçu une notification d'émission de certificat auparavant. Nous enverrons un rappel à l'apprenant qui n'a pas encore terminé le processus de délivrance de la certification."
+    },
+    "CERT_S3": {
+      "TEXT": "Votre demande de modification<br/>est prise en compte.<br/>Une fois les informations corrigées<br/>vous recevrez une nouvelle demande de confirmation.<br/>"
+    },
+    "CERT_S5": {
+      "TITLE": "Certains Certificats ne sont  pas envoyés !",
+      "TEXT": "Un ou plusieurs apprenants sélectionnés n’a pas encore téléchargé son diplôme ou complété son Enquête employabilité ou complété son dossier administratif. Par conséquent, la délivrance des certificats restera bloquée pour ces apprenants. Mais ils recevront toujours une tâche pour confirmer leurs détails personnels. </br>Pour les apprenants ayant finalisé leur dossier,  la tâche de confirmation détails personnels leur est envoyée.</br>Un rappel a été envoyé aux apprenants ayant déjà reçu la tâche de confirmation de ses détails personnels."
+    },
+    "CERT_S7": {
+      "TITLE": "Le lien de téléchargement a été envoyé sur votre boite aux lettres.",
+      "TEXT": "Une notification avec le lien de téléchargement pour chaque apprenant a été envoyée. De là, vous pouvez cliquer sur le lien pour télécharger par apprenant ou par groupe.",
+      "Button": "Je confirme"
+    },
+    "CERT_S8": {
+      "TITLE": "Votre Identité est-elle Correcte ?",
+      "TEXT": "Veuillez confirmer votre identité<br/>ou demander une modification si besoin.<br/><br/>Tant que les détails de votre identité<br/> n’auront pas été confirmés par vous,<br/>la délivrance de votre certification professionnelle restera bloquée.",
+      "BTN": "J’ai compris"
+    }
+  },
+  "CHANGEMENT_RNCP_TITLE": {
+    "CHANGEMENT_S1": {
+      "TITLE": "Vous êtes sur le point d’enregistrer </br>{{ studentName }}</br>pour le Titre {{ newRNCP }}",
+      "TEXT": "{{ studentName }} est déjà enregistré dans la plateforme </br>pour le Titre {{ oldTitle }} </br> au sein de l’école {{schoolName}}.</br> Souhaitez vous ajouter le Titre {{ newRNCP }} à  {{ studentName }}?",
+      "YES_IN": "Confirmer dans {{ timer }} sec",
+      "YES": "Confirmer",
+      "CHANGE_MAIL_ADDRESS": "Changer l’adresse mail"
+    },
+    "CHANGEMENT_S2": {
+      "TITLE": "{{ studentName }} est maintenant enregistré pour le Titre {{ newRNCP }}",
+      "TEXT": "Son dossier pour le Titre {{oldTitle}}<br>est accessible par le menu Cours Précédents",
+      "BTN": "Compris"
+    },
+    "CHANGE_SCHOOL_S4": {
+      "TITLE": "Demander à ADMTC le transfert de l’apprenant ?",
+      "TEXT": "Cet apprenant a déjà commencé la préparation du titre {{oldTitle}} <br/>au sein de {{schoolName}} <br/>Souhaitez vous le transfert de son dossier vers votre établissement ?"
+    },
+    "CHANGEMENT_S3": {
+      "TEXT": "L’apprenant {{ studentName}} </br> est déjà enregistré dans l’école {{schoolName}} </br> pour le titre de {{oldTitle}}</br> et n’a pas reçu son Relevé de notes"
+    },
+    "CHANGESCHOOL_S5": {
+      "TEXT": "L’apprenant {{ studentName}}</br> a déjà obtenu son relevé de notes </br> pour le titre {{oldTitle}}</br> au sein de l’école {{schoolName}}."
+    }
+  },
+  "CHNAGE_SCHOOL": {
+    "TRANSFER_STUDENT": "Transférer l'Apprenant",
+    "SCHOOL_ORIGIN": "École d'Origine",
+    "Select Student": "Sélectionner l'Apprenant",
+    "RNCP Title": "Titre RNCP",
+    "School Destination": "École de Destination"
+  },
+  "TUTORIAL_MENU": {
+    "SEND": "Envoyer",
+    "Add new tutorial": "Ajouter un nouveau tutoriel",
+    "Modify a tutorial": "Modifier un tutoriel",
+    "Title of tutorial": "Titre du tutoriel",
+    "Type of user": "Utilisateur",
+    "Description": "Description",
+    "Action": "Action",
+    "PLACEHOLDER": {
+      "Title of the tutorial": "Titre du tutoriel*",
+      "Description": "Description*",
+      "Category of user": "Catégorie d’utilisateur*",
+      "Link of the tutorial": "Lien du tutoriel*",
+      "Message": "Message",
+      "SUBJECT": "Sujet *"
+    },
+    "MESSAGE_TEMPLATE": "<p>{{RecipientCivility}} {{RecipientFirstname}} {{RecipientLastname}}</p><p>Veuillez trouver ci dessous le tutoriel :{{TutorialTitle}}</p><p>{{TutorialDescription}}</p><p>Cliquez ici pour y accéder : </p><p>{{URL_Link}}</p><br><p>Regards</p><p>{{UserSenderFirstName}} {{UserSenderLastName}}</p><p>{{UserSenderPosition}}</p>",
+    "TUTO_S1": {
+      "TEXT": "Le tutoriel a été sauvegardé"
+    },
+    "TUTO_S2": {
+      "TEXT": "Le tutoriel {{tutorialName}} a été mis à jour"
+    },
+    "TUTO_S3": {
+      "TITLE": "Envoyer le tutoriel {{tutorialName}}",
+      "TEXT": "Vous êtes sur le point d’envoyer le tutoriel </br> {{tutorialName}} à  {{ userType }} de {{ titleLongName }}"
+    },
+    "TUTO_S4": {
+      "TEXT": "Le tutoriel vient d’être envoyé !"
+    },
+    "TUTO_S5": {
+      "TEXT": "Vous êtes sur le point de supprimer le tutoriel {{tutorialName}}",
+      "CONFIRM": "Je confirme"
+    },
+    "TUTO_S6": {
+      "TITLE": "Supprimé",
+      "TEXT": "Le tutoriel  vient d’être supprimé !"
+    }
+  },
+  "PUBLISHABLE_FOR_STUDENTS": {
+    "TITLE": "Publiable pour les apprenants",
+    "PUBLISHED_TO_STUDENT": "Publié aux Apprenants",
+    "PUBLISHDOC_S1": {
+      "TITLE": "Publier ce Document pour les Apprenants?",
+      "TEXT": "Vous êtes sur le point de publier </br> {{ docname }} </br> Ce document sera disponible pour les apprenants",
+      "YES_IN": "Oui dans {{ timer }} sec",
+      "YES": "Oui",
+      "NO": "Non"
+    },
+    "PUBLISHDOC_S2": {
+      "TEXT": "Le document est maintenant publié aux apprenants",
+      "BTN": "D’accord"
+    },
+    "PUBLISHDOC_S3": {
+      "TITLE": "Le document est maintenant indisponible pour les apprenants"
+    }
+  },
+  "TUTORIALS_List": {
+    "HOW TO CHANGE THE MENTOR OF A COMPANY": "<b>Comment</b> changer le Tuteur d'une Entreprise d'Accueil ?",
+    "HOW TO CHANGE THE COMPANY": "<b>Comment</b> remplacer l’entreprise d’accueil ?",
+    "HOW TO SEND THE EVALUATION OF THE COMPANY MENTOR": "<b>Comment</b> Envoyer et suivre l'évaluation du tuteur Entreprise ?",
+    "HOW TO SEND THE PDF EVALUATION TO THE MENTOR": "<b>Comment</b> Envoyer l’évaluation au format PDF au tuteur Entreprise ?",
+    "WHERE TO FIND THE EVALUATION GRID FOR A TEST": "<b>Où</b> trouver la grille d’évaluation d’une épreuve ?",
+    "HOW TO CHANGE THE EMAIL ADDRESS OF A USER: CORRECTOR, MENTOR, ETC.": "<b>Comment</b> changer l’adresse mél d’un utilisateur : correcteur, tuteur etc ?",
+    "HOW TO ASSIGN ONE OR MORE CORRECTORS?": "<b>Comment</b> affecter un ou plusieurs correcteurs ?",
+    "HOW TO CHECK THE CURRENT DEGREE OF THE LEARNER": "<b>Comment</b> vérifier le dépôt du diplôme de l’apprenant ?",
+    "HOW TO CHANGE A CORRECTOR": "<b>Comment</b> changer un correcteur ?",
+    "HOW TO LOG IN FOR THE FIRST TIME": "<b>Comment</b>  se connecter la première fois ?",
+    "HOW TO OPEN THE LINK IN AN E-MAIL": "<b>Comment</b> ouvrir le lien dans un mél ?",
+    "HOW TO LOG IN FOR THE FIRST TIME AS A MENTOR": "<b>Comment</b> se connecter la première fois en tant que tuteur?",
+    "HOW TO UPLOAD A DOCUMENT?": "<b>Comment</b> télé déposer un document ?",
+    "HOW TO ENTER BONUS/PENALITIES": "<b>Comment</b> saisir les bonus / penalités ?",
+    "HOW ADD A STUDENT WITH A SPECIALIZATION": "<b>Comment</b> ajouter un apprenant avec une spécialisation ? ",
+    "HOW ADD A STUDENT IN PARALLEL INTAKE": "<b>Comment</b> ajouter un apprenant en admission parallèle ?",
+    "HOW VALIDATE/REJECT A DOCUMENT EXPECTED BY A STUDENT": "<b>Comment</b> valider ou rejeter un document attendu par un apprenant ?",
+    "HOW TO DEACTIVATE A STUDENT": "<b>Comment</b> déclarer un apprenant démissionnaire ?"
+  },
+  "QUALITY_CONTROL": {
+    "TITLE": "Contrôle Qualité",
+    "NO_OF_STUDENTS_PC": "Nombre d’apprenants par Centre de Préparation",
+    "DIFFERENT_ALLOWED": "Différence autorisée sur la Correction de l’épreuve",
+    "ASSIGN_QC_CORRECTOR": "Affecter un Controleur Qualité",
+    "QUALITY_S1": {
+      "TITLE": "Confirmez cette affection de Contrôleur de qualité",
+      "TEXT": "Vous êtes sur le point d’affecter le contrôle de qualité de<br/>{{testName}}<br/>à {{ qName }}<br/><br/> une notification de cette affection<br/>lui sera envoyé immédiatement.<br/><br/>Vous recevrez aussi une notification de confirmation<br/>depuis laquelle vous pourrez modifier cette affection.",
+      "SUCCESS": "Je confirme",
+      "SUCCESSIN": "Je confirm dans {{ timer }}"
+    },
+    "QUALITY_S2": {
+      "TITLE": "Confirmez cette affectation de Contrôleur de qualité",
+      "TEXT": "Vous êtes sur le point  d’affecter le contrôle de qualité de <br/>{{testName}} à<br/> {{qList}}<br/> une notification de cette affection<br/>leur sera envoyée immédiatement.<br/>avec la liste des apprenants leur étant affectés<br/>Vous recevrez aussi une notification de confirmation<br/>depuis laquelle vous pourrez modifier cette affection."
+    },
+    "QUALITY_S4": {
+      "TEXT": "La correction pour le contrôle de qualité de cette évaluation est bien enregistrée, pour la soumettre à la pédagogie, veuillez cliquer sur 'publie'",
+      "OK": "J’ai compris"
+    },
+    "QUALITY_S5": {
+      "TITLE": "Êtes vous sûr de vouloir publier les résultats du contrôle de qualité ?",
+      "TEXT": "En publiant ces résultats, <br/>la correction pour le contrôle de qualité sera validée et sauvegardée sur la plateforme.",
+      "OK": "Je confirme",
+      "CANCEL": "Annuler"
+    },
+    "QUALITY_S6": {
+      "TITLE": "Bravo!",
+      "TEXT": "La correction pour le contrôle de qualité de cette évaluation est bien validée et sauvegardée sur la plateforme.",
+      "OK": "J’ai compris"
+    },
+    "QUALITY_S7": {
+      "TITLE": "Désolé !",
+      "TEXT": "La correction du Contrôle qualité ou la correction de l’épreuve {{testName}} n’est pas terminée.<br/>Nous vous enverrons une notification lorsque le résultat sera prêt.",
+      "OK": "Okay"
+    },
+
+    "Test_correction_mark": "Note Correction ",
+    "Quality_Control_mark": "Note Contrôle Qualité",
+    "Different": "Différence"
+  },
+  "ALERT_FUNCTIONALITY": {
+    "YES": "Oui",
+    "NO": "Non",
+    "ALERT": "Alerte fonctionnalité",
+    "DISPLAY_DATE": "Date de publication",
+    "ALERT_TITLE": "Titre de l’alerte",
+    "RECEPIENT": "Destinataire",
+    "PUBLISHED": "Publié",
+    "NOT_PUBLISHED": " pas publié",
+    "ANSWER": "Réponse",
+    "ACTION": "Action",
+    "MODIFY": "Modifier",
+    "ADD_ALERT": "Ajouter une nouvelle alerte",
+    "ADD_ALERT_FOR_NEW_FUNC": "Ajouter une alerte pour une nouvelle fonctionnalité",
+    "TITLE_OF_ALERT": "Titre de l’alerte ",
+    "CATEGORY": "Catégorie d’utilisateurs",
+    "ANSWERS_EXPECTED": "Souhaitez vous une réponse des utilisateurs ?",
+    "TEXT_BTN1": "Texte pour le bouton 1 à afficher aux utilisateurs",
+    "TEXT_BTN2": "Texte pour le bouton 2 à afficher aux utilisateurs",
+    "NEW_FUNC": "Nouvelle fonctionnalité - Vous devez répondre à ce message afin d’accéder à ADMTC.PRO",
+    "REPLY": "Répondre",
+    "MESSAGE": "Message",
+    "ERROR":{
+      "NAME": "Nom de l'alerte requis ",
+    "MSG_REQUIRED" : "Message requis"
+     },
+     "BUTTON": {
+      "CANCEL": "Annuler",
+      "SAVEPUBLISH": "Sauvegarder & quitter",
+      "PUBLISH": "Publier"
+      },
+   "NOT_PUBLISH": {
+    "TITLE" : "L’alerte de fonctionnalité à bien été sauvegardée  </br> Mais pas publiée",
+    "TEXT" : "L’alerte de fonctionnalité à bien été sauvegardée  </br> Pour la publier veuillez appuyer sur le bouton “publier” ",
+    "BUTTON" : "J’ai compris",
+    "TYPE": "Information"
+   },
+   "PUBLISH": {
+    "TITLE" : "Êtes-vous sûr de vouloir publier l’alerte sur la nouvelle fonctionnalité ?",
+    "TEXT" : "Vous êtes sur le point de publier l’alerte pour la nouvelle fonctionnalité </br> {{alertTitle}}",
+    "BUTTON" : "Je confirme",
+    "CANCEL": "Annuler",
+    "TYPE": "Question"
+   },
+   "POPUP":{
+     "TITLE":"Nouvelle Fonctionnalité au sein de la plateforme. Veuillez répondre à cela avant d'utiliser la plateforme",
+     "ANSWER": "Pour obtenir le détail des réponses des utilisateurs, veuillez télécharger le fichier CSV",
+     "NOT_ANSWER":"Ci-dessous le nombre de réponse jusqu’à aujourd’hui :",
+     "text": "Vous pouvez sélectionner le format CSV ci-dessous, puis cliquer sur le bouton télécharger pour obtenir le détail des résultats.",
+     "DOWNLOAD": "Télécharger",
+     "TOTAL_CLICK":"Total de clics sur {{button}}"
+   },
+   "ALERT_S3":{
+     "TEXT": "L’alerte a été publiée aux utilisateurs de type {{usertype}} ",
+     "BUTTON": "Merci",
+     "TITLE": "Succès"
+   },
+   "ALERT_S4":{
+    "TEXT": "L’alerte est déjà publiée </br> Vous ne pouvez pas modifier / supprimer celle-ci",
+    "BUTTON": "Merci",
+    "TITLE": "Désolée"
+   },
+   "ALERT_S9":{
+    "TEXT": "Alerte déjà existante: ce Nom est déjà utilisé pour une autre Alerte de fonctionnalité",
+    "TITLE": "Attention !",
+    "BUTTON": "OK"
+   },
+   "ALERT_S5":{
+    "TEXT": "Vous êtes sur le point de supprimer l’alerte de nouvelle fonctionnalité  </br> {{alertTitle}} ",
+    "BUTTON": "Je confirme",
+    "TITLE": "Êtes vous sûr de vouloir supprimer cette Alerte ?",
+    "CANCEL": "Annuler"
+   },
+   "ALERT_S6": {
+    "TEXT": "L’alerte {{ name}} a été supprimée",
+    "BUTTON": "Ok",
+    "TITLE": "supprimée"
+
+   },
+   "CSV_HEADER":{
+    "Civ": "Civilité" ,
+    "FirstName" : "Prénom",
+    "LastName": "Nom",
+    "School": "École",
+    "UserType": "Type d'utilisateur",
+    "Date_and_Time": "Date et Heure ",
+    "Answer": "Réponse"
+   }
+
+  },
+  "TOOLTIP_FOR_ICON": {
+    "STATUS TOWARDS ADMINISTRATION": "Statut vis à vis de l'administration",
+    "CONNECT AS THIS USER": "Se connecter en tant que cette personne",
+    "INFORM ERROR IN EMAIL": "Informer le Ref. Titre d’une erreur sur adresse mèl",
+    "RESIGNATION OF STUDENT": "Démission de cet apprenant",
+    "DELETE STUDENT": "Supprimer cet utilisateur",
+    "VIEW OR EDIT STUDENT": "Voir/Modifier  la fiche de cet apprenant",
+    "VIEW OR EDIT USER": "Voir/Modifier la fiche de cet utilisateur",
+    "SEND EMAIL TO STUDENT": "Send an email to this student",
+    "SEND EMAIL TO USER": "Send an email to this user"
+  },
+
+  "INTERNALNOTEFORM": {
+    "SCHOOL": "Ecole",
+    "TITLE": "Titre RNCP",
+    "CLASS": "Classe",
+    "USER_TYPE": "Type Utilisateur",
+    "USER": "Utilisateur",
+    "NOTE": "Note",
+    "ATTACHED_DOCUMENTS": "documents attachés",
+    "ADDITIONAL_NOTE": {
+      "TITLE": "notes additionnelles",
+      "USER": "Utilisateur",
+      "DESC": "Note"
+    }
+  },
+
+  "Export_Users": {
+    "Date_Creation": "Date of Creation",
+    "Usertypes": "Types Utilisateurs",
+    "Userlist": "liste d'utilisateurs",
+    "FirstName": "Prénom",
+    "LastName": "Nom",
+    "Civility": "Civilité",
+    "Email": "Mail",
+    "SchoolZipCode": "Code postal de l'école",
+    "SchoolCity": "Ville de l'école"
+  },
+  "NEED_HELP": {
+    "Title": "Besoin d’assistance ou d’aide ?",
+    "Name": "Nom",
+    "FirstName": "Prénom",
+    "Email": "Adresse mél",
+    "School": "Ecole",
+    "UserType": "Types Utilisateurs",
+    "Message": "Message",
+    "Submit": "Envoyer",
+    "Cancel": "Annuler",
+    "Help_S1": {
+      "TITLE": "Votre message a bien été envoyé à Aide à l'utilisateur de la plateforme ADMTC.PRO",
+      "OK": "Merci"
+    }
+  }
+}

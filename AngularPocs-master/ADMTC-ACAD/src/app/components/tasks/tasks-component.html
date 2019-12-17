@@ -1,0 +1,213 @@
+<md-card>
+  <md-card-content>
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxFlex="100" fxFlex.lt-md="100">
+        <a href="javascript:void(0);" class="text-xl mr-2" style="margin-left: 0.1%;"> {{'TASK.MYTASKS' | translate}} </a>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutWrap="wrap" class="addTaskButton" >
+
+      <div fxFlex="78" fxFlex.lt-md="100">
+        <div fxFlex="40" fxFlex.lt-md="28">
+          <div class="select-input-container" fxFlex="82">
+            <md-select [(ngModel)]="filterByStatus" color="accent" [placeholder]="'TASK.FILTER_BY_STATUS.PLACEHOLDER' | translate"
+            style="width: 100%" (change)="filterByTaskStatus($event)">
+              <md-option [value]="'ALL'">
+                {{ 'TASK.FILTER_BY_STATUS.ALL' | translate}}
+              </md-option>
+              <md-option [value]="'Done'">
+                {{ 'TASK.FILTER_BY_STATUS.DONE' | translate}}
+              </md-option>
+              <md-option [value]="'Todo'">
+                {{ 'TASK.FILTER_BY_STATUS.TODO' | translate}}
+              </md-option>
+            </md-select>
+          </div>
+        </div>
+        <div fxFlex="59" fxFlex.lt-md="28">
+            <div class="px-1">
+                <md-input-container dividerColor="accent" fxFlex="60" fxFlex.lt-md="55">
+                  <input mdInput [(ngModel)]="searchText" maxlength="30" placeholder="{{ 'USERS.SEARCH' | translate }}" type="text">
+                </md-input-container>
+                <div dividerColor="accent" fxFlex="35" fxFlex.lt-md="100">
+                                  <button md-raised-button class="btnSearch" style="width:90%;" flex type="button" color="primary" (click)="filterByTaskStatus()">
+                                  <md-icon>search</md-icon>
+                                  {{'USERS.SEARCH' | translate}}
+                              </button>
+                           </div>
+                <div dividerColor="accent" fxFlex="28" fxFlex.lt-md="100">
+                  <button [disabled]="!isSearching" fxFlex style="margin-left: 5px;width: 100%;height: 38px;" md-raised-button type="button"
+                    class="btnSearch" color="primary" (click)="resetSearch()">
+                    <md-icon>restore</md-icon>
+                    {{'DOCTEST.RESET' | translate}}
+                  </button>
+                </div>
+              </div>
+         </div>
+
+      </div>
+      <div fxFlex="21" fxFlex.lt-md="100" style="overflow: hidden;">
+        <button style="float: right;width: 230px;" md-raised-button color="accent" (click)="AddTaskDialogOpen({},null)" *ngIf="showAddEditTaskButton">
+          <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="#000000" d="M19,19H5V5H15V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V11H19M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"
+            />
+          </svg>
+          {{'TASK.ADDTASK' | translate}}
+        </button>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutWrap="wrap" class="taskListNgSelect" *ngIf="checkIsDirectorSalesAdmin">
+      <div fxFlex="78" fxFlex.lt-md="78">
+        <div fxFlex="40">
+            <ng-select style="margin-top: 3px;" [(ngModel)]="userTypeBind" fxFlex="83" (selected)="ChangeUserTitle($event)" [multiple]="false"
+            [items]="userTypes" [placeholder]="'PARAMETERS-RNCP.TEST.SELECT_USERTYPE' | translate"></ng-select>
+
+        </div>
+
+
+        <div fxFlex="59" fxFlex.lt-md="28">
+            <div class="px-1">
+                <div fxFlex="49.5" fxFlex.lt-md="49.5"></div>
+                <div dividerColor="accent" fxFlex="29" fxFlex.lt-md="29">
+                    <button *ngIf="checkIsDirectorSalesAdmin" md-raised-button class="btnSearch" style="width:90%;" flex type="button" color="primary" (click)="filterInternaltasks()">
+                      {{'USERS.Internal Task' | translate}}
+                    </button>
+                </div>
+                <!-- <div fxFlex="28" fxFlex.lt-md="100"></div> -->
+              </div>
+         </div>
+      </div>
+      <div fxFlex="22" fxFlex.lt-md="22" fxLayoutAlign="end end">
+          <button style="float: right;width: 230px;" md-raised-button color="accent" (click)="AddTestTaskDialogOpen()" *ngIf="checkIsDirectorSalesAdmin">
+              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="#000000" d="M19,19H5V5H15V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V11H19M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"/>
+              </svg>
+              {{'TASK.ADDTESTTASK' | translate}}
+            </button>
+      </div>
+    </div>
+  </md-card-content>
+</md-card>
+<div class="hideScroller">
+  <!-- [count]="page.totalElements"-->
+  <!--[offset]="page.pageNumber"
+        [limit]="page.size"
+                (page)="changePage($event)"
+                (sort)="sortPage($event)"
+        [externalPaging]="true"
+                   [externalSorting]="true"
+        -->
+  <!--[columnMode]="'force'"
+     [headerHeight]="50"
+     [footerHeight]="50"
+     [rowHeight]="'auto'"
+     [reorderable]="reorderable"
+          [cssClasses]="ngxDtCssClasses"
+    -->
+  <ngx-datatable class="material rncp-table" [rows]="tasksList" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
+    [rowHeight]="50" [scrollbarV]="false" [reorderable]="reorderable" [count]="page.totalElements"
+    [offset]="page.pageNumber" [limit]="page.size" (page)="changePage($event)" [messages]="{emptyMessage: 'NoDataToDisplay' | translate }"
+    [sorts]="[{prop: 'dueDate', dir: 'asc'},{prop: 'taskStatus', dir: 'asc'},{prop: 'createdBy.firstName', dir: 'asc'},{prop: 'userSelection', dir: 'asc'},{prop: 'priority', dir: 'asc'},{prop: 'createdDate', dir: 'asc'},{prop: 'rncp.shortName', dir: 'asc'},{prop: 'test.subjectId.subjectName', dir: 'asc'}]"
+    [externalSorting]="true" (sort)="sortPage($event)" [selectionType]="'single'" [externalPaging]="true"
+    (activate)="onActivate($event)" [cssClasses]="ngxDtCssClasses" [selected]="selected">
+    <!--(activate)="onSelect($event)" for grid hover event-->
+    <ngx-datatable-column [flexGrow]="4" name="dueDate" prop="dueDate" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span style="margin-left: -15px !important" (click)="sort()"> {{'TASK.DUEDATE' | translate}} </span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <span style="margin-left: -8px !important" [style.color]="checkSeletcedTask(row)">   {{row?.dueDate | date: 'dd/MM/yyyy'}} </span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="4" name="taskStatus" prop="taskStatus" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span style="margin-left: -16px !important" (click)="sort()"> {{'TASK.STATUS' | translate}}</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <span [style.color]="checkSeletcedTask(row)"> {{'TASK.FILTER_BY_STATUS.' + row?.taskStatus.toUpperCase() | translate }}</span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="createdBy" prop="createdBy.firstName" [flexGrow]="8" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span (click)="sort()"> {{'TASK.ASSIGNED_BY' | translate}}</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <span [style.color]="checkSeletcedTask(row)"> {{row?.createdBy?.firstName + ' ' + row?.createdBy?.lastName }}</span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="assignedTo" prop="userSelection" [flexGrow]="8" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span (click)="sort()"> {{'TASK.ASSIGNED_TO' | translate}}</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <span [style.color]="checkSeletcedTask(row)"> {{row.userSelection?.selectionType !== 'user' ? row.userSelection?.testGroupId ? row.userSelection?.testGroupId.name
+        : '' : row?.userSelection?.userId?.firstName + ' ' + row?.userSelection?.userId?.lastName }}{{row?.type === 'admtcCorrection' ? ' - ' + row?.school?.shortName : ''}}</span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="2" name="priority" prop="priority" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span (click)="sort()" mdTooltip="{{'TASK.PRIORITY' | translate}}" mdTooltipPosition="above"> P </span>
+      </ng-template>
+
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <span [style.color]="checkSeletcedTask(row)">{{row?.priority}}</span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="4" name="createdDate" prop="createdDate" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span style="margin-left: -15px !important" (click)="sort()" > {{'TASK.CREATEDDATE' | translate}}</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <span style="margin-left: -8px !important" [style.color]="checkSeletcedTask(row)"> {{row?.createdDate | date: 'dd/MM/yyyy'}}</span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="4" prop="rncp.shortName" name="rncp" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span style="margin-left: -18px  !important" (click)="sort()"> {{'TASK.RNCPTITLES' | translate}}</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <span [style.color]="checkSeletcedTask(row)">{{ row?.rncp?.shortName }}</span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column [flexGrow]="16" prop="test.subjectId.subjectName" name="test.subjectId.subjectName" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span (click)="sort()" >{{'DASHBOARD.SUBJECT/TEST' | translate}}</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <span [style.color]="checkSeletcedTask(row)">{{ row?.test?.subjectId?.subjectName }}{{row?.test?.subjectId?.subjectName && row?.test?.name ? ' / ' : ''}}{{row?.test?.name}}</span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column [flexGrow]="16" prop="description" name="description" [sortable]="false" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span (click)="sort()" >{{'TASK.DESCRIPTION' | translate}}</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <span [style.color]="checkSeletcedTask(row)">
+          {{ ( row['type'] === 'documentsExpected' || row['type'] === 'reuploadExpectedDocument' ) ?
+            ('TASK.FORDOCUPLOADTASK' | translate) : ''}}{{' '}}{{ getTranslateWhat(row?.description, row) | limitTo:100 }}</span>
+      </ng-template>
+    </ngx-datatable-column>
+    <!-- <div *ngIf="showAddEditTaskButton"> -->
+      <ngx-datatable-column *ngIf="showAddEditTaskButton" [flexGrow]="4" name="Actions" [sortable]="false" [cellClass]="'text-center'" [resizeable]="false">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <span>
+          {{'USERLISTTABLE.ACTIONS.TITLE' | translate}}
+          </span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <button  md-icon-button md-button-sm md-raised-button class="grid-button"
+                      *ngIf="row?.isEditable &&
+                      (row?.type?.toLowerCase() === 'addtask' || ((row?.description?.toLowerCase() === 'assign corrector' || row?.type === 'retakeAssignCorrector')&& row?.taskStatus?.toLowerCase() === 'done') )"
+                      (click)="editdialog(row,row['_id'])">
+                  <md-icon>edit</md-icon>
+                </button>
+                <button md-icon-button md-button-sm md-raised-button class="grid-button" *ngIf="row?.isEditable && row?.type?.toLowerCase() === 'addtask'" (click)="deleteTask(row['_id'],row['createdBy'])">
+                  <md-icon>close</md-icon>
+                </button>
+        </ng-template>
+      </ngx-datatable-column>
+    <!-- </div> -->
+  </ngx-datatable>
+</div>

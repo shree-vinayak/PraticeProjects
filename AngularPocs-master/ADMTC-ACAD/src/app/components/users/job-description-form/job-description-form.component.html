@@ -1,0 +1,453 @@
+<h6 *ngIf="isMobileView" class="MobileViewMessage" style="text-align: center;">
+  {{'MobileViewMessage' | translate}}
+</h6>
+
+<form *ngIf="!isMobileView" class="student-form" [formGroup]="jobDescriptionForm" (ngSubmit)="saveJobDescriptionForm(jobDescriptionForm.value)">
+  <div class="row wrap" style="max-width:70vw" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+    <div #pagesElement fxFlex="70" [ngClass]="{'student-form-jobdescription' : isReadOnly }">
+      <div class="job-description">{{ 'JOBDESCRIPTIONFORM.TITLE' | translate }}
+        <div>
+          <div class="pdfdivclass">
+            <button style="float: right !important;transform: translate(5px, 0px);" md-button md-raised-button color="accent" type="button"
+              (click)="downloadPDF()">
+              <i class="fa fa-file-pdf-o" style="font-size: 16px; padding-left: 10px;" aria-hidden="true"></i>
+              PDF
+            </button>
+          </div>
+        </div>
+      </div>
+      <md-card class="primary-background dark-header">
+        <div class="jobDescriptionCardStatus">
+          <div class="job-button">
+            <button class="jobButton" [disabled]="sentToMentor">
+              <span style="float: left;">
+                <p class="para">{{ 'STUDENT.SENTTOSTUDENT' | translate }}</p>
+              </span>
+              <img *ngIf="sentToStudent" class="pdfImageCard" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAeCAYAAABAFGxuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAANPSURBVFhH7ZhLKLRRGMfPjPstY0HJAgsbCwtlpWw0C4lkIVFIlERY2SBZ2Uw2VmSvbChlwcKGnaJs3CK5h9zv/L/zP9+ZaY53ZgzjMxbfr97G+54z7/l5znmecxobJOIXYtefv47/YoF4eHgQ9/f3+u4vYRe7vb0VLpdL9PX1iYuLC/1UwsUfLk5OTiCFkJiYiLi4OHR0dODy8lK1hU3s4OAA7e3tSEhIYFVQF+W6urqUXFimcnd3V/T394uxsTE1lW7e3t6EjKJ4enr6+alkpOrq6hAdHe2JFK/IyEjU1NRgc3MTUvDnppKDra2tobq6GlFRUYZUTEyMer61taV7/9Aao9Tq6ipKSkpUZLyleN/c3IydnR3Vz80/F+NgS0tLcDqdiIiIMKSSkpJUAjA732MRu7q6wtnZmb4LDUqtrKyguLjYIsVs7Onpwfn5ue5tYogdHx+jt7cXVVVVahGGwsvLCxYXF1FUVGSRSklJUVKyoOreVjxizJaWlhb1n/BF5eXl2Nvb062fg1Kzs7PIy8uD3W43pJKTkzE4OIjr62vd2zdKjOFsa2tDfHy85wXMHKa1r/kPxPPzM6anp5GbmwubzWZIZWRkQG4/uLm50b39o8QY0u7ubkOMF+UaGhpwdHSkOn8EpaamppCTk2ORSk9Px+joaFBSxDOVp6enaq+KjY01Xsh7pjPbAyFPB5iYmEB2drZFKjMzE7LKqz7BYln8XGfv5VgA+dxfBnHAkZERZGVl+ZQaHx/H4+Oj7h0chhjhtFGCMt4DULa1tVWVE2/kXofh4WGkpqYaUvybi39yclJN8WexiJHDw0M0NTVZIsfdv7Oz05Pmd3d3GBoaQlpamtHPLTUzM/MlKeJTjDByjY2Nln2NCUK5/f19DAwMwOFwGO2Uys/PV+WCZeOr+BUj8niiiq0vuYKCAlWTvJ+7IzU3NxeSFAkoRlhka2trLZvv+4tFubCwEAsLCyFLkQ/FCCNXWVnpV45S3A+Xl5fx+vqqvxUaQYkRnpUqKios+x5ly8rKsL6+bhxbQiVoMcKDXmlpqSdy/OSe+t1S5FNiHHxjY0NFjmep+vp6bG9vf7sU+dJvF1JOzM/PC3kiFXJjFjIbdcv38Ut/VBHiD+3R9D9TI7ixAAAAAElFTkSuQmCC">
+              <img *ngIf="!sentToStudent" class="pdfImageCancelCard" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAkACQDASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAAAAgFBwECCQb/xAAxEAABAwIFAgMHBAMAAAAAAAABAgMEBREABgcSITFBCBMyFBUiM1FTsSMmQoFDccL/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8ArLO+bNQ8kayS6tW5bjVabWdqQVGM9H3HahCb8snsOoPJsoE4bzSXUek6j5dROp5DE5oATISlXWwv/pJtwruOtjcA1a03pGo+XjCqKEtTmQVQ5qU3Wws/lJ4unoeD1AISP926LahmxVCqkQlJKSVMy2Sf63tqAB55BA6KHAdFFqCElSiEpAuSTYAfXCf+I3XNdadk5XybJUmlD4Jk9pRBknu2gj/H2J/lyOnqitZfEHMznl6PRsusSaVEkMAVNSlALdUfU0ggn9P6ngqBsQBcGU8OOhvvwxs05yigUgELhwHRzKt0cWPt36A+q3I223B67QhGrp07hmCujinbz7H76DqnvJ2p27dp+X1235+nFsGGTShKUhKQAkCwAHAGDAC1BCSpaglIFySbADCVeKTVGkZzqLFDoMeLJiUx4qNVAup1diChpX2+eT0UUgjgAmV8SGuC605Jyrk+TtpSSWps1s8ySDYtoP2/qR6v9erHhx0N9+GLmrOMYikcOQoKxb2o9nFj7fcD+XB9PCgoZhmflyrUqdUaUoWLU5lifHUGpLYUCCUm29tVrXHBF+cdAtI9RqPqLlxEymFDExgBEuAVDfHV247oPZQ4PI6ggY1X01o+omWzT56BHmspJhTG0/FHXbjjug2AKe46WIBCSE5s0X1DsLwqrEN+QVMymif63Nqt25BB6EcB0WwYrXIGseVM15aYqUiqQqVKJ8t+JLkJbU24ACbXtuTzwr8EEYMBWbekGUj4i3IZhuGminCsew7h5PnF0p27bfL77b9eOnGGTbAShISAkAcAdBgwYDfFaa95No+a9P6q9VWCZVMjOyoshuwcbUlJNrkH4TYAj8EA4MGAh9GtLcnxtN6G/IokOoSZ0ZuY8/OZQ8vetCSQCRwkdAPySTgwYMB//9k=">
+            </button>
+          </div>
+          <!-- Changed To Sent To School for Feb 2018 version -->
+          <div class="job-button">
+            <button class="jobButton">
+              <span style="float: left;">
+                <p class="para" >&nbsp; {{ 'STUDENT.SENT_TO_SCHOOL' | translate }} &nbsp;</p>
+              </span>
+              <img *ngIf="sentToMentor" class="pdfImageCard" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAeCAYAAABAFGxuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAANPSURBVFhH7ZhLKLRRGMfPjPstY0HJAgsbCwtlpWw0C4lkIVFIlERY2SBZ2Uw2VmSvbChlwcKGnaJs3CK5h9zv/L/zP9+ZaY53ZgzjMxbfr97G+54z7/l5znmecxobJOIXYtefv47/YoF4eHgQ9/f3+u4vYRe7vb0VLpdL9PX1iYuLC/1UwsUfLk5OTiCFkJiYiLi4OHR0dODy8lK1hU3s4OAA7e3tSEhIYFVQF+W6urqUXFimcnd3V/T394uxsTE1lW7e3t6EjKJ4enr6+alkpOrq6hAdHe2JFK/IyEjU1NRgc3MTUvDnppKDra2tobq6GlFRUYZUTEyMer61taV7/9Aao9Tq6ipKSkpUZLyleN/c3IydnR3Vz80/F+NgS0tLcDqdiIiIMKSSkpJUAjA732MRu7q6wtnZmb4LDUqtrKyguLjYIsVs7Onpwfn5ue5tYogdHx+jt7cXVVVVahGGwsvLCxYXF1FUVGSRSklJUVKyoOreVjxizJaWlhb1n/BF5eXl2Nvb062fg1Kzs7PIy8uD3W43pJKTkzE4OIjr62vd2zdKjOFsa2tDfHy85wXMHKa1r/kPxPPzM6anp5GbmwubzWZIZWRkQG4/uLm50b39o8QY0u7ubkOMF+UaGhpwdHSkOn8EpaamppCTk2ORSk9Px+joaFBSxDOVp6enaq+KjY01Xsh7pjPbAyFPB5iYmEB2drZFKjMzE7LKqz7BYln8XGfv5VgA+dxfBnHAkZERZGVl+ZQaHx/H4+Oj7h0chhjhtFGCMt4DULa1tVWVE2/kXofh4WGkpqYaUvybi39yclJN8WexiJHDw0M0NTVZIsfdv7Oz05Pmd3d3GBoaQlpamtHPLTUzM/MlKeJTjDByjY2Nln2NCUK5/f19DAwMwOFwGO2Uys/PV+WCZeOr+BUj8niiiq0vuYKCAlWTvJ+7IzU3NxeSFAkoRlhka2trLZvv+4tFubCwEAsLCyFLkQ/FCCNXWVnpV45S3A+Xl5fx+vqqvxUaQYkRnpUqKios+x5ly8rKsL6+bhxbQiVoMcKDXmlpqSdy/OSe+t1S5FNiHHxjY0NFjmep+vp6bG9vf7sU+dJvF1JOzM/PC3kiFXJjFjIbdcv38Ut/VBHiD+3R9D9TI7ixAAAAAElFTkSuQmCC">
+              <img *ngIf="!sentToMentor" class="pdfImageCancelCard" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAkACQDASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAAAAgFBwECCQb/xAAxEAABAwIFAgMHBAMAAAAAAAABAgMEBREABgcSITFBCBMyFBUiM1FTsSMmQoFDccL/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8ArLO+bNQ8kayS6tW5bjVabWdqQVGM9H3HahCb8snsOoPJsoE4bzSXUek6j5dROp5DE5oATISlXWwv/pJtwruOtjcA1a03pGo+XjCqKEtTmQVQ5qU3Wws/lJ4unoeD1AISP926LahmxVCqkQlJKSVMy2Sf63tqAB55BA6KHAdFFqCElSiEpAuSTYAfXCf+I3XNdadk5XybJUmlD4Jk9pRBknu2gj/H2J/lyOnqitZfEHMznl6PRsusSaVEkMAVNSlALdUfU0ggn9P6ngqBsQBcGU8OOhvvwxs05yigUgELhwHRzKt0cWPt36A+q3I223B67QhGrp07hmCujinbz7H76DqnvJ2p27dp+X1235+nFsGGTShKUhKQAkCwAHAGDAC1BCSpaglIFySbADCVeKTVGkZzqLFDoMeLJiUx4qNVAup1diChpX2+eT0UUgjgAmV8SGuC605Jyrk+TtpSSWps1s8ySDYtoP2/qR6v9erHhx0N9+GLmrOMYikcOQoKxb2o9nFj7fcD+XB9PCgoZhmflyrUqdUaUoWLU5lifHUGpLYUCCUm29tVrXHBF+cdAtI9RqPqLlxEymFDExgBEuAVDfHV247oPZQ4PI6ggY1X01o+omWzT56BHmspJhTG0/FHXbjjug2AKe46WIBCSE5s0X1DsLwqrEN+QVMymif63Nqt25BB6EcB0WwYrXIGseVM15aYqUiqQqVKJ8t+JLkJbU24ACbXtuTzwr8EEYMBWbekGUj4i3IZhuGminCsew7h5PnF0p27bfL77b9eOnGGTbAShISAkAcAdBgwYDfFaa95No+a9P6q9VWCZVMjOyoshuwcbUlJNrkH4TYAj8EA4MGAh9GtLcnxtN6G/IokOoSZ0ZuY8/OZQ8vetCSQCRwkdAPySTgwYMB//9k=">
+            </button>
+          </div>
+          <!-- <div class="job-button">
+            <button class="jobButton">
+              <span style="float: left;">
+                <p class="para">{{ 'STUDENT.VALIDATEBYMENTOR' | translate }}</p>
+              </span>
+              <img *ngIf="validateByMentor" class="pdfImageCard" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAeCAYAAABAFGxuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAANPSURBVFhH7ZhLKLRRGMfPjPstY0HJAgsbCwtlpWw0C4lkIVFIlERY2SBZ2Uw2VmSvbChlwcKGnaJs3CK5h9zv/L/zP9+ZaY53ZgzjMxbfr97G+54z7/l5znmecxobJOIXYtefv47/YoF4eHgQ9/f3+u4vYRe7vb0VLpdL9PX1iYuLC/1UwsUfLk5OTiCFkJiYiLi4OHR0dODy8lK1hU3s4OAA7e3tSEhIYFVQF+W6urqUXFimcnd3V/T394uxsTE1lW7e3t6EjKJ4enr6+alkpOrq6hAdHe2JFK/IyEjU1NRgc3MTUvDnppKDra2tobq6GlFRUYZUTEyMer61taV7/9Aao9Tq6ipKSkpUZLyleN/c3IydnR3Vz80/F+NgS0tLcDqdiIiIMKSSkpJUAjA732MRu7q6wtnZmb4LDUqtrKyguLjYIsVs7Onpwfn5ue5tYogdHx+jt7cXVVVVahGGwsvLCxYXF1FUVGSRSklJUVKyoOreVjxizJaWlhb1n/BF5eXl2Nvb062fg1Kzs7PIy8uD3W43pJKTkzE4OIjr62vd2zdKjOFsa2tDfHy85wXMHKa1r/kPxPPzM6anp5GbmwubzWZIZWRkQG4/uLm50b39o8QY0u7ubkOMF+UaGhpwdHSkOn8EpaamppCTk2ORSk9Px+joaFBSxDOVp6enaq+KjY01Xsh7pjPbAyFPB5iYmEB2drZFKjMzE7LKqz7BYln8XGfv5VgA+dxfBnHAkZERZGVl+ZQaHx/H4+Oj7h0chhjhtFGCMt4DULa1tVWVE2/kXofh4WGkpqYaUvybi39yclJN8WexiJHDw0M0NTVZIsfdv7Oz05Pmd3d3GBoaQlpamtHPLTUzM/MlKeJTjDByjY2Nln2NCUK5/f19DAwMwOFwGO2Uys/PV+WCZeOr+BUj8niiiq0vuYKCAlWTvJ+7IzU3NxeSFAkoRlhka2trLZvv+4tFubCwEAsLCyFLkQ/FCCNXWVnpV45S3A+Xl5fx+vqqvxUaQYkRnpUqKios+x5ly8rKsL6+bhxbQiVoMcKDXmlpqSdy/OSe+t1S5FNiHHxjY0NFjmep+vp6bG9vf7sU+dJvF1JOzM/PC3kiFXJjFjIbdcv38Ut/VBHiD+3R9D9TI7ixAAAAAElFTkSuQmCC">
+              <img *ngIf="!validateByMentor" class="pdfImageCancelCard" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAkACQDASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAAAAgFBwECCQb/xAAxEAABAwIFAgMHBAMAAAAAAAABAgMEBREABgcSITFBCBMyFBUiM1FTsSMmQoFDccL/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8ArLO+bNQ8kayS6tW5bjVabWdqQVGM9H3HahCb8snsOoPJsoE4bzSXUek6j5dROp5DE5oATISlXWwv/pJtwruOtjcA1a03pGo+XjCqKEtTmQVQ5qU3Wws/lJ4unoeD1AISP926LahmxVCqkQlJKSVMy2Sf63tqAB55BA6KHAdFFqCElSiEpAuSTYAfXCf+I3XNdadk5XybJUmlD4Jk9pRBknu2gj/H2J/lyOnqitZfEHMznl6PRsusSaVEkMAVNSlALdUfU0ggn9P6ngqBsQBcGU8OOhvvwxs05yigUgELhwHRzKt0cWPt36A+q3I223B67QhGrp07hmCujinbz7H76DqnvJ2p27dp+X1235+nFsGGTShKUhKQAkCwAHAGDAC1BCSpaglIFySbADCVeKTVGkZzqLFDoMeLJiUx4qNVAup1diChpX2+eT0UUgjgAmV8SGuC605Jyrk+TtpSSWps1s8ySDYtoP2/qR6v9erHhx0N9+GLmrOMYikcOQoKxb2o9nFj7fcD+XB9PCgoZhmflyrUqdUaUoWLU5lifHUGpLYUCCUm29tVrXHBF+cdAtI9RqPqLlxEymFDExgBEuAVDfHV247oPZQ4PI6ggY1X01o+omWzT56BHmspJhTG0/FHXbjjug2AKe46WIBCSE5s0X1DsLwqrEN+QVMymif63Nqt25BB6EcB0WwYrXIGseVM15aYqUiqQqVKJ8t+JLkJbU24ACbXtuTzwr8EEYMBWbekGUj4i3IZhuGminCsew7h5PnF0p27bfL77b9eOnGGTbAShISAkAcAdBgwYDfFaa95No+a9P6q9VWCZVMjOyoshuwcbUlJNrkH4TYAj8EA4MGAh9GtLcnxtN6G/IokOoSZ0ZuY8/OZQ8vetCSQCRwkdAPySTgwYMB//9k=">
+            </button>
+          </div> -->
+
+          <div class="job-button">
+            <button class="jobButton">
+              <span style="float: left;">
+                <p class="para">{{ 'STUDENT.VALIDATEBYACADEMICDPT' | translate }}</p>
+              </span>
+              <img *ngIf="validateByAcademic" class="pdfImageCard" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAeCAYAAABAFGxuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAANPSURBVFhH7ZhLKLRRGMfPjPstY0HJAgsbCwtlpWw0C4lkIVFIlERY2SBZ2Uw2VmSvbChlwcKGnaJs3CK5h9zv/L/zP9+ZaY53ZgzjMxbfr97G+54z7/l5znmecxobJOIXYtefv47/YoF4eHgQ9/f3+u4vYRe7vb0VLpdL9PX1iYuLC/1UwsUfLk5OTiCFkJiYiLi4OHR0dODy8lK1hU3s4OAA7e3tSEhIYFVQF+W6urqUXFimcnd3V/T394uxsTE1lW7e3t6EjKJ4enr6+alkpOrq6hAdHe2JFK/IyEjU1NRgc3MTUvDnppKDra2tobq6GlFRUYZUTEyMer61taV7/9Aao9Tq6ipKSkpUZLyleN/c3IydnR3Vz80/F+NgS0tLcDqdiIiIMKSSkpJUAjA732MRu7q6wtnZmb4LDUqtrKyguLjYIsVs7Onpwfn5ue5tYogdHx+jt7cXVVVVahGGwsvLCxYXF1FUVGSRSklJUVKyoOreVjxizJaWlhb1n/BF5eXl2Nvb062fg1Kzs7PIy8uD3W43pJKTkzE4OIjr62vd2zdKjOFsa2tDfHy85wXMHKa1r/kPxPPzM6anp5GbmwubzWZIZWRkQG4/uLm50b39o8QY0u7ubkOMF+UaGhpwdHSkOn8EpaamppCTk2ORSk9Px+joaFBSxDOVp6enaq+KjY01Xsh7pjPbAyFPB5iYmEB2drZFKjMzE7LKqz7BYln8XGfv5VgA+dxfBnHAkZERZGVl+ZQaHx/H4+Oj7h0chhjhtFGCMt4DULa1tVWVE2/kXofh4WGkpqYaUvybi39yclJN8WexiJHDw0M0NTVZIsfdv7Oz05Pmd3d3GBoaQlpamtHPLTUzM/MlKeJTjDByjY2Nln2NCUK5/f19DAwMwOFwGO2Uys/PV+WCZeOr+BUj8niiiq0vuYKCAlWTvJ+7IzU3NxeSFAkoRlhka2trLZvv+4tFubCwEAsLCyFLkQ/FCCNXWVnpV45S3A+Xl5fx+vqqvxUaQYkRnpUqKios+x5ly8rKsL6+bhxbQiVoMcKDXmlpqSdy/OSe+t1S5FNiHHxjY0NFjmep+vp6bG9vf7sU+dJvF1JOzM/PC3kiFXJjFjIbdcv38Ut/VBHiD+3R9D9TI7ixAAAAAElFTkSuQmCC">
+              <img *ngIf="!validateByAcademic" class="pdfImageCancelCard" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAkACQDASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAAAAgFBwECCQb/xAAxEAABAwIFAgMHBAMAAAAAAAABAgMEBREABgcSITFBCBMyFBUiM1FTsSMmQoFDccL/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8ArLO+bNQ8kayS6tW5bjVabWdqQVGM9H3HahCb8snsOoPJsoE4bzSXUek6j5dROp5DE5oATISlXWwv/pJtwruOtjcA1a03pGo+XjCqKEtTmQVQ5qU3Wws/lJ4unoeD1AISP926LahmxVCqkQlJKSVMy2Sf63tqAB55BA6KHAdFFqCElSiEpAuSTYAfXCf+I3XNdadk5XybJUmlD4Jk9pRBknu2gj/H2J/lyOnqitZfEHMznl6PRsusSaVEkMAVNSlALdUfU0ggn9P6ngqBsQBcGU8OOhvvwxs05yigUgELhwHRzKt0cWPt36A+q3I223B67QhGrp07hmCujinbz7H76DqnvJ2p27dp+X1235+nFsGGTShKUhKQAkCwAHAGDAC1BCSpaglIFySbADCVeKTVGkZzqLFDoMeLJiUx4qNVAup1diChpX2+eT0UUgjgAmV8SGuC605Jyrk+TtpSSWps1s8ySDYtoP2/qR6v9erHhx0N9+GLmrOMYikcOQoKxb2o9nFj7fcD+XB9PCgoZhmflyrUqdUaUoWLU5lifHUGpLYUCCUm29tVrXHBF+cdAtI9RqPqLlxEymFDExgBEuAVDfHV247oPZQ4PI6ggY1X01o+omWzT56BHmspJhTG0/FHXbjjug2AKe46WIBCSE5s0X1DsLwqrEN+QVMymif63Nqt25BB6EcB0WwYrXIGseVM15aYqUiqQqVKJ8t+JLkJbU24ACbXtuTzwr8EEYMBWbekGUj4i3IZhuGminCsew7h5PnF0p27bfL77b9eOnGGTbAShISAkAcAdBgwYDfFaa95No+a9P6q9VWCZVMjOyoshuwcbUlJNrkH4TYAj8EA4MGAh9GtLcnxtN6G/IokOoSZ0ZuY8/OZQ8vetCSQCRwkdAPySTgwYMB//9k=">
+            </button>
+          </div>
+        </div>
+
+
+        <md-card-content style="text-align: left;">
+          <md-card class="primary-background dark-header border-yellow" id="cardOneTitle">
+            <md-card-content>
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                <div fxFlex="50">
+                  <div class="form-title">{{ 'JOBDESCRIPTIONFORM.STUDENT' | translate }} :
+                    <span class="title-labe-jobdesc">
+                      {{ jobDescription && jobDescription.studentId && jobDescription.studentId['firstName'] ? utilityService.computeCivility(jobDescription.studentId['sex'],translate.currentLang.toUpperCase())
+                      +" "+ jobDescription.studentId['firstName'] + " "+ jobDescription.studentId['lastName'] :'' }}
+                    </span>
+                  </div>
+                </div>
+                <div fxFlex="47">
+                  <div class="form-title" style="margin-left: 0.6%;">{{ 'JOBDESCRIPTIONFORM.COMPANY' | translate }} :
+                    <span class="title-labe-jobdesc">
+                      {{ jobDescription && jobDescription.company && jobDescription.company['companyName'] ? jobDescription.company['companyName']
+                      : '' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                <div fxFlex="50">
+                  <div class="form-title">{{ 'JOBDESCRIPTIONFORM.SCHOOL' | translate }} :
+                    <span class="title-labe-jobdesc">
+                      <!-- {{ jobDescription && jobDescription.studentId && jobDescription.studentId['school']['longName'] ? jobDescription.studentId['school']['longName'] : '' }} -->
+                      {{ jobDescription && jobDescription.studentId && jobDescription.studentId['school']['shortName'] ? jobDescription.studentId['school']['shortName']
+                      : '' }}
+                    </span>
+                  </div>
+                </div>
+                <div fxFlex="50">
+                  <div class="form-title" id="paddingLeftAlignment">{{ 'JOBDESCRIPTIONFORM.MENTOR' | translate }} :
+                    <span class="title-labe-jobdesc">
+                      {{ jobDescription && jobDescription.mentor && jobDescription.mentor['firstName'] ? utilityService.computeCivility(jobDescription.mentor['sex'],translate.currentLang.toUpperCase())
+                      + ' ' + jobDescription.mentor['firstName'] + ' ' + jobDescription.mentor['lastName']: '' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                <div fxFlex="50">
+                  <div class="form-title">{{ 'JOBDESCRIPTIONFORM.TITIE' | translate }} :
+                    <span class="title-labe-jobdesc">
+                      {{ jobDescription && jobDescription.studentId && jobDescription.studentId['rncpTitle']['longName'] ? jobDescription.studentId['rncpTitle']['longName']
+                      : '' }}
+                    </span>
+                  </div>
+                </div>
+                <div fxFlex="50">
+                  <div class="form-title" id="paddingLeftAlignment">{{ 'JOBDESCRIPTIONFORM.CLASS' | translate }} :
+                    <span class="title-labe-jobdesc">
+                      {{ jobDescription && jobDescription.studentId && jobDescription.studentId['currentClass']['description'] ? jobDescription.studentId['currentClass']['description']
+                      : '' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+
+          <md-card class="primary-background dark-header border-yellow">
+            <md-card-content>
+
+              <!-- Job Identity -->
+              <div fxLayout fxLayout.xs="column" class="textAreaMat" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                <div fxFlex="20">
+                  <div class="form-title">{{ 'JOBDESCRIPTIONFORM.JOBIDENTITY' | translate}}</div>
+                </div>
+                <div fxFlex="80">
+
+                  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                    <div fxFlex="100">
+                      <md-input-container class="full-width">
+                        <textarea rows="2" formControlName="jobName" #jobName mdInput [placeholder]="'JOBDESCRIPTIONFORM.JOBNAME'| translate">
+                          </textarea>
+                        <span class="pdfDomDisplay"> {{ jobName.value }} </span>
+                      </md-input-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- STUDENTIDENTITY -->
+              <!-- <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                        <div fxFlex="20">
+                            <div class="form-title">{{ 'JOBDESCRIPTIONFORM.STUDENTIDENTITY' | translate }}</div>
+                        </div>
+                        <div fxFlex="80" formGroupName="studentIdentity">
+                            <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                                <div fxFlex="50">
+                                    <md-input-container class="full-width">
+                                        <input formControlName="firstName" #firstName mdInput [placeholder]="'USERS.ADDEDITUSER.FIRSTNAME'| translate">
+                                    </md-input-container>
+                                </div>
+                                <div fxFlex="50">
+                                    <md-input-container class="full-width">
+                                        <input formControlName="lastName" #lastName mdInput [placeholder]="'USERS.ADDEDITUSER.LASTNAME'| translate">
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+              <!-- DATESOFTHEMISSION -->
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                <div fxFlex="20">
+                  <div class="form-title">{{ 'JOBDESCRIPTIONFORM.DATESOFTHEMISSION.TITLE' | translate }}</div>
+                </div>
+                <div fxFlex="80" formGroupName="datesOfTheMission">
+                  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                    <div fxFlex="50">
+                      <md-input-container dividerColor="accent" class="full-width">
+                        <input #fromDate mdInput type="text" [mdDatepicker]="from" formControlName="from" [placeholder]="'JOBDESCRIPTIONFORM.DATESOFTHEMISSION.FROM' | translate  ">
+                        <button [disabled]="isReadOnly" mdSuffix [mdDatepickerToggle]="from" class="white-datepicker-button" style="background-color: grey !important;" [ngStyle]="{'visibility': isReadOnly ? 'hidden' : 'visible'}"></button>
+                        <span class="pdfDomDisplay"> {{ fromDate.value }} </span>
+                      </md-input-container>
+                      <md-datepicker #from [touchUi]="false"></md-datepicker>
+                    </div>
+                    <div fxFlex="50">
+                      <md-input-container dividerColor="accent" class="full-width">
+                        <input #todate mdInput type="text" [min]="minDate()" [mdDatepicker]="to" formControlName="to" [placeholder]="'JOBDESCRIPTIONFORM.DATESOFTHEMISSION.TO' | translate  ">
+                        <button [disabled]="isReadOnly" mdSuffix [mdDatepickerToggle]="to" class="white-datepicker-button" style="background-color: grey !important;" [ngStyle]="{'visibility': isReadOnly ? 'hidden' : 'visible'}"></button>
+                        <span class="pdfDomDisplay"> {{ todate.value }} </span>
+                      </md-input-container>
+                      <md-datepicker #to [touchUi]="false"></md-datepicker>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- PRESENTATIONOFTHEDEPARTMENT-->
+              <div class="textAreaMat" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                <div fxFlex="20">
+                  <div class="form-title">{{ 'JOBDESCRIPTIONFORM.PRESENTATIONOFTHEDEPARTMENT' | translate }}</div>
+                </div>
+                <div fxFlex="80">
+                  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                    <div fxFlex="50">
+                      <md-input-container class="full-width">
+                        <textarea rows="2"formControlName="mainMissionOfTheDepartment" #mainMissionOfTheDepartment mdInput [placeholder]="'JOBDESCRIPTIONFORM.MAINMISSIONOFTHEDEPARTMENT'| translate  ">
+                        </textarea>
+                          <span class="pdfDomDisplay"> {{ mainMissionOfTheDepartment.value }} </span>
+                      </md-input-container>
+                    </div>
+                    <div fxFlex="50">
+                      <md-input-container class="full-width">
+                        <textarea rows="2" formControlName="organizationOfTheDepartment" #organizationOfTheDepartment mdInput [placeholder]="'JOBDESCRIPTIONFORM.ORGALIZATIONOFTHEDEPARTMENT'| translate  ">
+                        </textarea>
+                          <span class="pdfDomDisplay"> {{ organizationOfTheDepartment.value }} </span>
+                      </md-input-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- JOB MISSIONS -->
+              <div class="textAreaMat"  fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                <div fxFlex="20">
+                  <div class="form-title">{{ 'JOBDESCRIPTIONFORM.JOBMISSIONS' | translate }}</div>
+                </div>
+                <div fxFlex="80">
+                  <md-input-container class="full-width">
+                    <textarea rows="2" formControlName="mainMission" #mainMission mdInput [placeholder]="'JOBDESCRIPTIONFORM.MAINMISSION'| translate  ">
+                      </textarea>
+                      <span class="pdfDomDisplay"> {{ mainMission.value }} </span>
+                  </md-input-container>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+          <md-card class="primary-background dark-header border-yellow">
+            <md-card-content>
+              <!-- MISSIONSACTIVITIESANDAUTONOMY -->
+              <div>
+                <div class="form-title">{{ 'JOBDESCRIPTIONFORM.MISSIONSACTIVITIESANDAUTONOMY.TITLE' | translate }}
+
+                </div>
+                <div formArrayName="missionsActivitiesAutonomy">
+                  <div *ngFor="let item of jobDescriptionForm['controls'].missionsActivitiesAutonomy['controls'];let i=index" [formGroupName]="i">
+                    <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                      <div fxFlex="33">
+                        <md-input-container class="full-width">
+                          <input formControlName="missions" #missions mdInput [placeholder]="'JOBDESCRIPTIONFORM.MISSIONSACTIVITIESANDAUTONOMY.MISSIONS'| translate  ">
+                          <span class="pdfDomDisplay"> {{ missions.value }} </span>
+                        </md-input-container>
+                      </div>
+                      <div fxFlex="33">
+                        <md-input-container class="full-width">
+                          <input formControlName="activities" #activities mdInput [placeholder]="'JOBDESCRIPTIONFORM.MISSIONSACTIVITIESANDAUTONOMY.ACTIVITIES'| translate ">
+                          <span class="pdfDomDisplay"> {{ activities.value }} </span>
+                        </md-input-container>
+                      </div>
+                      <div fxFlex="33">
+                        <md-select formControlName="autonomyLevel" #autonomyLevel [placeholder]="'JOBDESCRIPTIONFORM.MISSIONSACTIVITIESANDAUTONOMY.AUTONOMYLEVEL.TITLE'| translate  "
+                          class="full-width">
+                          <md-option *ngFor="let autonomyLevelOpt of autonomyLevels" [value]="autonomyLevelOpt.value">
+                            {{autonomyLevelOpt.viewValue | translate }}
+                          </md-option>
+                          <span class="pdfDomDisplay"> {{ autonomyLevel.value }} </span>
+                        </md-select>
+                      </div>
+                      <div fxFlex="1">
+                        <md-icon (click)="addMissionsActivitiesAutonomy(missionsActivitiesAutonomyNumber)" class="pull-right cursor-pointer p0 plusIconPadding"
+                          *ngIf="!isReadOnly && i === 0">add</md-icon>
+                        <md-icon style="padding-top: 16px !important" (click)="removeMissionsActivitiesAutonomy(i,item)" class="pull-right cursor-pointer p0"
+                          *ngIf="!isReadOnly && i !== 0">remove</md-icon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+          <md-card class="primary-background dark-header border-yellow">
+            <md-card-content>
+              <!-- REQUIRED COMPETENCIES FOR THIS JOB -->
+              <div>
+                <div class="form-title">{{ 'JOBDESCRIPTIONFORM.REQUIREDCOMPETENCIESFORTHISJOB.TITLE' | translate }}</div>
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                  <div fxFlex="20">
+                    <div class="form-sub-title">{{ 'JOBDESCRIPTIONFORM.REQUIREDCOMPETENCIESFORTHISJOB.JOBPROFILE' | translate }}</div>
+                  </div>
+                  <div fxFlex="80">
+                    <div class="knowledge" formArrayName="knowledge">
+                      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                        <div fxFlex="100">
+                        </div>
+                      </div>
+                      <div class="textAreaMat" *ngFor="let item of jobDescriptionForm['controls'].knowledge['controls'];let i=index">
+                        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                          <div fxFlex="90">
+                            <md-input-container class="full-width">
+                                <textarea rows="1" mdInput [formControlName]="i" #REQUIREDCOMPETENCIESFORTHISJOB [placeholder]="'JOBDESCRIPTIONFORM.REQUIREDCOMPETENCIESFORTHISJOB.KNOWLEDGE'| translate  ">
+                                  </textarea>
+                                <span class="pdfDomDisplay"> {{ REQUIREDCOMPETENCIESFORTHISJOB.value }} </span>
+                            </md-input-container>
+                          </div>
+                          <div fxFlex="10">
+                            <md-icon (click)="addKnowledge(knowledgeNumber)" class="pull-right cursor-pointer p0 plusIconPadding" *ngIf="!isReadOnly && i === 0">add</md-icon>
+                            <md-icon style="padding-top: 16px !important" (click)="removeKnowledge(i, item)" class="pull-right cursor-pointer p0" *ngIf="!isReadOnly && i !== 0">remove</md-icon>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="knowledge" formArrayName="knowHow">
+                      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                        <div fxFlex="100">
+                        </div>
+                      </div>
+                      <div class="textAreaMat" *ngFor="let item of jobDescriptionForm['controls'].knowHow['controls'];let i=index">
+                        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                          <div fxFlex="90">
+                            <md-input-container class="full-width">
+                                <textarea rows="1" mdInput [formControlName]="i" #REQUIREDCOMPETENCIESFORTHISJOBKNOWHOW [placeholder]="'JOBDESCRIPTIONFORM.REQUIREDCOMPETENCIESFORTHISJOB.KNOWHOW'| translate  ">
+                                  </textarea>
+                                  <span class="pdfDomDisplay"> {{ REQUIREDCOMPETENCIESFORTHISJOBKNOWHOW.value }} </span>
+                            </md-input-container>
+                          </div>
+                          <div fxFlex="10">
+                            <md-icon (click)="addKnowledgeHow(knowledgeHowNumber)" class="pull-right cursor-pointer p0 plusIconPadding" *ngIf="!isReadOnly && i === 0">add</md-icon>
+                            <md-icon style="padding-top: 16px !important" (click)="removeKnowledgeHow(i,item )" class="pull-right cursor-pointer p0"
+                              *ngIf="!isReadOnly && i !== 0">remove</md-icon>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+          <md-card class="primary-background dark-header border-yellow">
+            <md-card-content>
+              <!-- OBJECTIVES OF THE JOB AND EXPECTED CONTRIBUTIONS OF THE STUDENTS-->
+              <div class="company-student-cont-obj">
+                <div class="form-title">{{'JOBDESCRIPTIONFORM.OBJECTIVESANDEXPECTEDJOB&CONTRIBUTIONSFROMSTUDENTS' | translate }}</div>
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                  <div fxFlex="50" formArrayName="objectivesOfTheDepartment" [ngClass]="{'objectiveMissionClass' : !checkStatus(jobDescription,'sent_to_student') }">
+                    <!-- Expected from department objectives -->
+                    <div *ngIf="!checkStatus(jobDescription,'sent_to_student')">
+                      <div class="form-sub-title">{{ 'JOBDESCRIPTIONFORM.OBJECTIVESOFTHEDEPARTMENT' | translate }}</div>
+                      <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                        <div fxFlex="100">
+                          <md-icon style="margin-top: -16px;transform: translateY(-13px);" (click)="addCompanyObjective(compnayObjectiveNumber)" class="pull-right cursor-pointer p0"
+                            *ngIf="!isReadOnly">add</md-icon>
+                        </div>
+                      </div>
+                      <div *ngFor="let item of jobDescriptionForm['controls'].objectivesOfTheDepartment['controls'];let i=index">
+
+                        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                          <div fxFlex="90">
+                            <md-input-container class="full-width">
+                              <input mdInput [formControlName]="i" #EXPECTEDFROMSTUDENT [placeholder]="'JOBDESCRIPTIONFORM.EXPECTEDFROMSTUDENT.OBJECTIVE'| translate  ">
+                              <span class="pdfDomDisplay"> {{ EXPECTEDFROMSTUDENT.value }} </span>
+                            </md-input-container>
+                          </div>
+                          <div fxFlex="10">
+                            <md-icon style="padding-top: 16px !important" (click)="removeCompanyObjective(i, item)" class="pull-right cursor-pointer p0"
+                              *ngIf="!isReadOnly && i >= 0">remove</md-icon>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    &nbsp;
+                  </div>
+                  <div fxFlex="50" class="objectiveMissionClass" id="objectiveMissionClassboxMargin">
+                    <!-- Expected from student contribution and objectives -->
+                    <div class="form-sub-title">{{ 'JOBDESCRIPTIONFORM.EXPECTEDFROMSTUDENT.TITLE' | translate }}</div>
+                    <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                      <div fxFlex="100">
+                        <md-icon (click)="addExpectedFromStudent(expectedFromStudentNumber)" class="pull-right cursor-pointer p0" *ngIf="!isReadOnly"
+                          style="margin-top: -16px;transform: translateY(-13px);">add</md-icon>
+                      </div>
+                    </div>
+                    <div formArrayName="expectedFromTheStudent">
+                      <div *ngFor="let item of jobDescriptionForm['controls'].expectedFromTheStudent['controls'];let i=index" [formGroupName]="i">
+                        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                          <div fxFlex="48">
+                            <md-input-container class="full-width">
+                              <input formControlName="contribution" #contribution mdInput [placeholder]="'JOBDESCRIPTIONFORM.EXPECTEDFROMSTUDENT.CONTRIBUTION'| translate ">
+                              <span class="pdfDomDisplay"> {{ contribution.value }} </span>
+                            </md-input-container>
+                          </div>
+                          <div fxFlex="48">
+                            <md-input-container class="full-width">
+                              <input formControlName="objectives" #objectives mdInput [placeholder]="'JOBDESCRIPTIONFORM.EXPECTEDFROMSTUDENT.OBJECTIVE'| translate ">
+                              <span class="pdfDomDisplay"> {{ objectives.value }} </span>
+                            </md-input-container>
+                          </div>
+                          <div fxFlex="2">
+                            <md-icon style="padding-top: 16px !important" (click)="removeExpectedFromStudent(i,item)" class="pull-right cursor-pointer p0"
+                              *ngIf="!isReadOnly && i !== 0">remove</md-icon>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+
+          <!-- Signature -->
+          <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0" class="mt-18" style="">
+            <div fxFlex="50">
+              <md-checkbox *ngIf="jobDescription?.sendNotification !== false" signature name="Signature" color="accent" formControlName="signatureOfTheStudent" #signatureOfTheStudent>
+                &nbsp;&nbsp;
+                <img *ngIf="jobDescriptionForm.get('signatureOfTheStudent').value" class="pdfImage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAeCAYAAABAFGxuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAANPSURBVFhH7ZhLKLRRGMfPjPstY0HJAgsbCwtlpWw0C4lkIVFIlERY2SBZ2Uw2VmSvbChlwcKGnaJs3CK5h9zv/L/zP9+ZaY53ZgzjMxbfr97G+54z7/l5znmecxobJOIXYtefv47/YoF4eHgQ9/f3+u4vYRe7vb0VLpdL9PX1iYuLC/1UwsUfLk5OTiCFkJiYiLi4OHR0dODy8lK1hU3s4OAA7e3tSEhIYFVQF+W6urqUXFimcnd3V/T394uxsTE1lW7e3t6EjKJ4enr6+alkpOrq6hAdHe2JFK/IyEjU1NRgc3MTUvDnppKDra2tobq6GlFRUYZUTEyMer61taV7/9Aao9Tq6ipKSkpUZLyleN/c3IydnR3Vz80/F+NgS0tLcDqdiIiIMKSSkpJUAjA732MRu7q6wtnZmb4LDUqtrKyguLjYIsVs7Onpwfn5ue5tYogdHx+jt7cXVVVVahGGwsvLCxYXF1FUVGSRSklJUVKyoOreVjxizJaWlhb1n/BF5eXl2Nvb062fg1Kzs7PIy8uD3W43pJKTkzE4OIjr62vd2zdKjOFsa2tDfHy85wXMHKa1r/kPxPPzM6anp5GbmwubzWZIZWRkQG4/uLm50b39o8QY0u7ubkOMF+UaGhpwdHSkOn8EpaamppCTk2ORSk9Px+joaFBSxDOVp6enaq+KjY01Xsh7pjPbAyFPB5iYmEB2drZFKjMzE7LKqz7BYln8XGfv5VgA+dxfBnHAkZERZGVl+ZQaHx/H4+Oj7h0chhjhtFGCMt4DULa1tVWVE2/kXofh4WGkpqYaUvybi39yclJN8WexiJHDw0M0NTVZIsfdv7Oz05Pmd3d3GBoaQlpamtHPLTUzM/MlKeJTjDByjY2Nln2NCUK5/f19DAwMwOFwGO2Uys/PV+WCZeOr+BUj8niiiq0vuYKCAlWTvJ+7IzU3NxeSFAkoRlhka2trLZvv+4tFubCwEAsLCyFLkQ/FCCNXWVnpV45S3A+Xl5fx+vqqvxUaQYkRnpUqKios+x5ly8rKsL6+bhxbQiVoMcKDXmlpqSdy/OSe+t1S5FNiHHxjY0NFjmep+vp6bG9vf7sU+dJvF1JOzM/PC3kiFXJjFjIbdcv38Ut/VBHiD+3R9D9TI7ixAAAAAElFTkSuQmCC">
+                <img *ngIf="!jobDescriptionForm.get('signatureOfTheStudent').value" class="pdfImageCancel" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAkACQDASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAAAAgFBwECCQb/xAAxEAABAwIFAgMHBAMAAAAAAAABAgMEBREABgcSITFBCBMyFBUiM1FTsSMmQoFDccL/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8ArLO+bNQ8kayS6tW5bjVabWdqQVGM9H3HahCb8snsOoPJsoE4bzSXUek6j5dROp5DE5oATISlXWwv/pJtwruOtjcA1a03pGo+XjCqKEtTmQVQ5qU3Wws/lJ4unoeD1AISP926LahmxVCqkQlJKSVMy2Sf63tqAB55BA6KHAdFFqCElSiEpAuSTYAfXCf+I3XNdadk5XybJUmlD4Jk9pRBknu2gj/H2J/lyOnqitZfEHMznl6PRsusSaVEkMAVNSlALdUfU0ggn9P6ngqBsQBcGU8OOhvvwxs05yigUgELhwHRzKt0cWPt36A+q3I223B67QhGrp07hmCujinbz7H76DqnvJ2p27dp+X1235+nFsGGTShKUhKQAkCwAHAGDAC1BCSpaglIFySbADCVeKTVGkZzqLFDoMeLJiUx4qNVAup1diChpX2+eT0UUgjgAmV8SGuC605Jyrk+TtpSSWps1s8ySDYtoP2/qR6v9erHhx0N9+GLmrOMYikcOQoKxb2o9nFj7fcD+XB9PCgoZhmflyrUqdUaUoWLU5lifHUGpLYUCCUm29tVrXHBF+cdAtI9RqPqLlxEymFDExgBEuAVDfHV247oPZQ4PI6ggY1X01o+omWzT56BHmspJhTG0/FHXbjjug2AKe46WIBCSE5s0X1DsLwqrEN+QVMymif63Nqt25BB6EcB0WwYrXIGseVM15aYqUiqQqVKJ8t+JLkJbU24ACbXtuTzwr8EEYMBWbekGUj4i3IZhuGminCsew7h5PnF0p27bfL77b9eOnGGTbAShISAkAcAdBgwYDfFaa95No+a9P6q9VWCZVMjOyoshuwcbUlJNrkH4TYAj8EA4MGAh9GtLcnxtN6G/IokOoSZ0ZuY8/OZQ8vetCSQCRwkdAPySTgwYMB//9k="> {{'JOBDESCRIPTIONFORM.SIGNATUREOFTHESTUDENT' | translate }}
+              </md-checkbox>
+              <br>
+              <small *ngIf="jobDescriptionForm.controls['signatureOfTheStudent'].hasError('required')" class="mat-text-warn"> {{'JOBDESCRIPTIONFORM.SIGNATUREOFTHESTUDENTREQUITED' | translate }}</small>
+            </div>
+            <div fxFlex="50">
+              <!-- Removed mentor signature for pdf and form for Feb 2018 Version -->
+              <!-- <md-checkbox *ngIf="!checkStatus(jobDescription,'sent_to_student')" signature name="Signature" color="accent" formControlName="signatureOfTheCompanyMentor"
+                #signatureOfTheCompanyMentor>
+                &nbsp;&nbsp;
+                <img *ngIf="jobDescriptionForm.get('signatureOfTheCompanyMentor').value" class="pdfImage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAeCAYAAABAFGxuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAANPSURBVFhH7ZhLKLRRGMfPjPstY0HJAgsbCwtlpWw0C4lkIVFIlERY2SBZ2Uw2VmSvbChlwcKGnaJs3CK5h9zv/L/zP9+ZaY53ZgzjMxbfr97G+54z7/l5znmecxobJOIXYtefv47/YoF4eHgQ9/f3+u4vYRe7vb0VLpdL9PX1iYuLC/1UwsUfLk5OTiCFkJiYiLi4OHR0dODy8lK1hU3s4OAA7e3tSEhIYFVQF+W6urqUXFimcnd3V/T394uxsTE1lW7e3t6EjKJ4enr6+alkpOrq6hAdHe2JFK/IyEjU1NRgc3MTUvDnppKDra2tobq6GlFRUYZUTEyMer61taV7/9Aao9Tq6ipKSkpUZLyleN/c3IydnR3Vz80/F+NgS0tLcDqdiIiIMKSSkpJUAjA732MRu7q6wtnZmb4LDUqtrKyguLjYIsVs7Onpwfn5ue5tYogdHx+jt7cXVVVVahGGwsvLCxYXF1FUVGSRSklJUVKyoOreVjxizJaWlhb1n/BF5eXl2Nvb062fg1Kzs7PIy8uD3W43pJKTkzE4OIjr62vd2zdKjOFsa2tDfHy85wXMHKa1r/kPxPPzM6anp5GbmwubzWZIZWRkQG4/uLm50b39o8QY0u7ubkOMF+UaGhpwdHSkOn8EpaamppCTk2ORSk9Px+joaFBSxDOVp6enaq+KjY01Xsh7pjPbAyFPB5iYmEB2drZFKjMzE7LKqz7BYln8XGfv5VgA+dxfBnHAkZERZGVl+ZQaHx/H4+Oj7h0chhjhtFGCMt4DULa1tVWVE2/kXofh4WGkpqYaUvybi39yclJN8WexiJHDw0M0NTVZIsfdv7Oz05Pmd3d3GBoaQlpamtHPLTUzM/MlKeJTjDByjY2Nln2NCUK5/f19DAwMwOFwGO2Uys/PV+WCZeOr+BUj8niiiq0vuYKCAlWTvJ+7IzU3NxeSFAkoRlhka2trLZvv+4tFubCwEAsLCyFLkQ/FCCNXWVnpV45S3A+Xl5fx+vqqvxUaQYkRnpUqKios+x5ly8rKsL6+bhxbQiVoMcKDXmlpqSdy/OSe+t1S5FNiHHxjY0NFjmep+vp6bG9vf7sU+dJvF1JOzM/PC3kiFXJjFjIbdcv38Ut/VBHiD+3R9D9TI7ixAAAAAElFTkSuQmCC">
+                <img *ngIf="!jobDescriptionForm.get('signatureOfTheCompanyMentor').value" class="pdfImageCancel" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAkACQDASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAAAAgFBwECCQb/xAAxEAABAwIFAgMHBAMAAAAAAAABAgMEBREABgcSITFBCBMyFBUiM1FTsSMmQoFDccL/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8ArLO+bNQ8kayS6tW5bjVabWdqQVGM9H3HahCb8snsOoPJsoE4bzSXUek6j5dROp5DE5oATISlXWwv/pJtwruOtjcA1a03pGo+XjCqKEtTmQVQ5qU3Wws/lJ4unoeD1AISP926LahmxVCqkQlJKSVMy2Sf63tqAB55BA6KHAdFFqCElSiEpAuSTYAfXCf+I3XNdadk5XybJUmlD4Jk9pRBknu2gj/H2J/lyOnqitZfEHMznl6PRsusSaVEkMAVNSlALdUfU0ggn9P6ngqBsQBcGU8OOhvvwxs05yigUgELhwHRzKt0cWPt36A+q3I223B67QhGrp07hmCujinbz7H76DqnvJ2p27dp+X1235+nFsGGTShKUhKQAkCwAHAGDAC1BCSpaglIFySbADCVeKTVGkZzqLFDoMeLJiUx4qNVAup1diChpX2+eT0UUgjgAmV8SGuC605Jyrk+TtpSSWps1s8ySDYtoP2/qR6v9erHhx0N9+GLmrOMYikcOQoKxb2o9nFj7fcD+XB9PCgoZhmflyrUqdUaUoWLU5lifHUGpLYUCCUm29tVrXHBF+cdAtI9RqPqLlxEymFDExgBEuAVDfHV247oPZQ4PI6ggY1X01o+omWzT56BHmspJhTG0/FHXbjjug2AKe46WIBCSE5s0X1DsLwqrEN+QVMymif63Nqt25BB6EcB0WwYrXIGseVM15aYqUiqQqVKJ8t+JLkJbU24ACbXtuTzwr8EEYMBWbekGUj4i3IZhuGminCsew7h5PnF0p27bfL77b9eOnGGTbAShISAkAcAdBgwYDfFaa95No+a9P6q9VWCZVMjOyoshuwcbUlJNrkH4TYAj8EA4MGAh9GtLcnxtN6G/IokOoSZ0ZuY8/OZQ8vetCSQCRwkdAPySTgwYMB//9k="> {{'JOBDESCRIPTIONFORM.SIGNATUREOFTHECOMPANYMENTOR' | translate }}
+              </md-checkbox>
+              <br>
+              <small *ngIf="jobDescriptionForm.controls['signatureOfTheCompanyMentor'].hasError('required')" class="mat-text-warn"> {{'JOBDESCRIPTIONFORM.SIGNATUREOFTHECOMPANYMENTORREQUITED' | translate }}</small> -->
+            </div>
+          </div>
+        </md-card-content>
+      </md-card>
+    </div>
+
+  </div>
+  <div class="row wrap" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+    <div fxFlex="70">
+      <div class="text-right" style="margin-right: 5px;">
+        <button [disabled]="isReadOnly" *ngIf="showSaveJobDescButton && !utilityService.checkUserIsAdminOfCertifier()" md-button
+          md-raised-button color="primary" (click)="keepJobDescription(jobDescriptionForm.value)" type="button">{{'JOBDESCRIPTIONFORM.KEEPJOBDESC'| translate}}</button>
+        <!-- <button  md-button md-raised-button color="accent" type="submit">{{'JOBDESCRIPTIONFORM.SENDTOMENTOR'| translate}}</button> -->
+        <button [disabled]="isReadOnly" *ngIf="showSendToMentorButton && !utilityService.checkUserIsAdminOfCertifier()" md-button
+          md-raised-button color="accent" type="submit">{{'JOBDESCRIPTIONFORM.SENDTOSCHOOL'| translate}}</button>
+        <button [disabled]="isReadOnly" *ngIf="showSendToSchoolButton && !utilityService.checkUserIsAdminOfCertifier()" md-button
+          md-raised-button color="accent" type="submit">{{'JOBDESCRIPTIONFORM.SENDTOSCHOOL'| translate}}</button>
+        <button [disabled]="isReadOnly" *ngIf="showReminderForStudent && !utilityService.checkUserIsAdminOfCertifier() && jobDescription?.sendNotification !== false" md-button
+          md-raised-button color="accent" type="button" (click)="sendRemainderToStudent()">{{'JOBDESCRIPTIONFORM.REMIND_STUDENT'| translate}}</button>
+        <!-- Removed Remind Mentor Button for Feb 2018 Version  -->
+          <!-- <button [disabled]="isReadOnly" *ngIf="showReminderForMentor && !utilityService.checkUserIsAdminOfCertifier()" md-button
+          md-raised-button color="accent" type="button" (click)="sendRemainderToMentor()">{{'JOBDESCRIPTIONFORM.REMIND_MENTOR'| translate}}</button> -->
+        <button [disabled]="isReadOnly" *ngIf="showExpediteValidationButton && !utilityService.checkUserIsAdminOfCertifier()" md-button
+          md-raised-button color="accent" type="button" (click)="ExpeditetheValidation(jobDescriptionForm.value)">{{'JOBDESCRIPTIONFORM.ExpeditetheValidation'| translate}}</button>
+        <button [disabled]="isReadOnly" *ngIf="showSendToStudentButton && !utilityService.checkUserIsAdminOfCertifier()" md-button
+          md-raised-button color="accent" type="submit">{{'JOBDESCRIPTIONFORM.SENDCONFIRMATIONTOSTUDENT'| translate}}</button>
+      </div>
+    </div>
+  </div>
+</form>

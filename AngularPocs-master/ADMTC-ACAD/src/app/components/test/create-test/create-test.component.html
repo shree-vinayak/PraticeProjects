@@ -1,0 +1,68 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <md-card fxFlex="100">
+    <md-card-content>
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <button class="tab-button" md-raised-button [fxFlex.gt-sm]="test.controlledTest ? 33.33 : 20 " [fxFlex.gt-xs]="33.33"
+                fxFlex="100" [routerLink]="['first']" [ngClass]="(progress > 20) ? 'completed-tab' : ''"
+                color="{{(progress >= 20) ? 'primary' : ''}}" routerLinkActive="active-tab">
+          <div class="tab-span">1</div>
+          <span>{{'TEST.TESTIDENTITY' | translate}}</span>
+        </button>
+        <button class="tab-button" md-raised-button fxFlex.gt-sm="20" fxFlex.gt-xs="50" fxFlex="100" *ngIf="!test.controlledTest"
+                [ngClass]="(progress > 40) ? 'completed-tab' : ''"
+                color="{{(progress >= 40) ? 'primary' : ''}}" routerLinkActive="active-tab" [routerLink]="['second']">
+          <div class="tab-span">2</div>
+          {{'TEST.NOTATIONGRID' | translate}}
+        </button>
+        <button class="tab-button" md-raised-button fxFlex.gt-sm="20" fxFlex.gt-xs="50" fxFlex="100" *ngIf="!test.controlledTest"
+                [ngClass]="(progress > 60) ? 'completed-tab' : ''"
+                color="{{(progress >= 60) ? 'primary' : ''}}" routerLinkActive="active-tab" [routerLink]="['third']">
+          <div class="tab-span">3</div>
+          {{'TEST.RELATEDDOCUMENTS' | translate}}
+        </button>
+        <button class="tab-button" md-raised-button [fxFlex.gt-sm]="test.controlledTest ? 33.33 : 20" fxFlex.gt-xs="33.33" fxFlex="100"
+                [ngClass]="(progress === 100) ? 'completed-tab' : ''"
+                color="{{(progress > 60) ? 'primary' : ''}}" routerLinkActive="active-tab" [routerLink]="['fourth']">
+          <div class="tab-span">{{!test.controlledTest ? '4' : '2'}}</div>
+          {{'TASKS' | translate}}
+        </button>
+        <button class="tab-button" md-raised-button [fxFlex.gt-sm]="test.controlledTest ? 33.33 : 20" fxFlex.gt-xs="33.33" fxFlex="100"
+        [ngClass]="(progress === 100) ? 'completed-tab' : ''"
+        color="{{(progress > (test.controlledTest ? 66.66 : 80)) ? 'primary' : ''}}" routerLinkActive="active-tab" [routerLink]="['fifth']">
+          <div class="tab-span">{{!test.controlledTest ? '5' : '3'}}</div>
+          {{'TEST.PREVIEWTASK' | translate}}
+        </button>
+      </div>
+      <md-progress-bar mode="determinate" [value]="progress" color="accent" class="mb-1"></md-progress-bar>
+      <div style="min-height: 500px; overflow: auto">
+
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div fxFlex="50" fxFlex.lt-md="100" [ngStyle]="{display : expanded ? 'none' : ''}">
+            <router-outlet (activate)="eventChange($event)"></router-outlet>
+          </div>
+          <div [fxFlex]="expanded ? 100 : 50" fxFlex.lt-md="100" style="overflow: hidden">
+            <div style="text-align: right; padding-bottom:4px;" >
+              <button md-raised-button color="green" (click)="cancelTest()">
+                <md-icon>cancel</md-icon>
+                {{'TEST.CANCEL' | translate}}
+              </button>&nbsp;&nbsp;
+              <button md-raised-button color="accent" (click)="saveTest(false)"  style="display:none;">
+                <md-icon>save</md-icon>
+                {{'TEST.SAVE' | translate}}
+              </button>&nbsp;&nbsp;
+              <button md-raised-button color="accent" (click)="saveTest(true)" name="single-click">
+                <md-icon>save</md-icon>
+                {{'TEST.SAVE&LEAVE' | translate}}
+              </button>
+              <button md-raised-button color="accent" *ngIf="isFiftStep" [disabled]="!isRNCPPublished" (click)="checkPublishTestConditions(true, true)" name="single-click">
+                  <md-icon>save</md-icon>
+                  {{'TEST.PUBLISH' | translate}}
+                </button>
+            </div>
+            <app-test-document (expandView)="expand($event)" [expanded]="false"></app-test-document>
+          </div>
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>
+</div>

@@ -1,0 +1,416 @@
+@import "scss/material.variables";
+@import "scss/material.themes";
+@import "scss/mixins/bi-app/bi-app-ltr";
+// Core Variables and Mixins
+@import "scss/app.variables";
+@import "scss/mixins";
+// Core Styles
+@import "scss/core";
+@import "scss/material";
+@import "scss/utilities/utilities";
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+.urgentMsg-backdrop + .cdk-overlay-pane {
+  .mat-dialog-container {
+    overflow: visible;
+  }
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.background-primary {
+  background-color: #607d8b !important;
+}
+
+.select-input-container {
+  margin-bottom: 0;
+}
+
+.invalid-select {
+  .mat-select-placeholder,
+  .mat-select-arrow {
+    color: #ff5722 !important;
+  }
+  .mat-select-underline {
+    height: 2px;
+    background-color: #ff5722 !important;
+  }
+}
+
+/*.select-input-container .mat-select-trigger {
+  margin-bottom: 0;
+}*/
+
+body .mat-select-trigger {
+  height: 25px;
+}
+
+.middle {
+  vertical-align: middle;
+}
+
+.mat-option {
+  line-height: 2.5rem;
+  height: 2.5rem;
+}
+
+.app-dark {
+  .mat-input-underline {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  .mat-input-placeholder {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .mat-hint {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .mat-select-arrow {
+    color: rgba(255, 255, 255, 0.4)
+  }
+  .mat-select-trigger {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .mat-select-underline {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.app-dark .mat-input-invalid:not(.mat-focused) .mat-input-underline {
+  .mat-accent,
+  .mat-warn,
+  .mat-primary {
+    background-color: #ff5722;
+  }
+}
+
+.app-dark .mat-progress-bar.mat-accent .mat-progress-bar-buffer {
+  background-color: #8e845b;
+}
+
+.right-labels {
+  .mat-tab-labels {
+    justify-content: flex-end;
+  }
+}
+
+.auto-tab-width {
+  .mat-tab-label {
+    min-width: auto !important;
+  }
+}
+
+.ngx-datatable.material.rncp-table.correction-table {
+  datatable-header.datatable-header {
+    height: auto !important;
+  }
+  .datatable-header-cell {
+    padding: 3px;
+  }
+  .datatable-body-row .datatable-body-cell {
+    padding: 3px;
+  }
+  .mat-input-wrapper {
+    margin:0;
+  }
+}
+
+.ngx-datatable.material.rncp-table {
+  datatable-header.datatable-header {
+    background: #212121 !important;
+  }
+
+  datatable-header.datatable-header .datatable-row-left {
+    background: #212121 !important;
+  }
+
+  datatable-header.datatable-header .datatable-row-right {
+    background: #212121 !important;
+  }
+
+  .datatable-header-cell {
+    border-right: 1px solid #545454 !important;
+    text-align: center;
+  }
+  .datatable-body-row .datatable-body-cell {
+    border-right: 1px solid #545454 !important;
+    padding: 0.3rem .8rem;
+  }
+  .datatable-body-row.datatable-row-even {
+    background-color: #607d8b !important;
+  }
+  .datatable-body-row.datatable-row-odd {
+    .grid-button {
+      background-color: #607d8b !important;
+    }
+  }
+  .datatable-body-row.datatable-row-even .datatable-body-cell {
+    background-color: #607d8b !important;
+  }
+
+  .datatable-body-row.datatable-row-odd .datatable-body-cell {
+    background-color: #424242 !important;
+  }
+}
+.ngx-datatable.material.mailList {
+  .datatable-body-row.datatable-row-even {
+    background-color: #607d8b;
+  }
+  .datatable-body-row.datatable-row-odd {
+    .grid-button {
+      background-color: #607d8b;
+    }
+  }
+}
+.ngx-datatable.material.user-type {
+
+  .datatable-body-row .datatable-body-cell {
+    border-bottom: 1px solid gray;
+
+  }
+
+}
+
+.ngx-datatable.material.students-correction-table.single-selection {
+  datatable-header.datatable-header {
+    height: auto !important;
+  }
+  .datatable-header-cell {
+    padding: 3px;
+  }
+  .datatable-body-row.active {
+    background: #ffd740 !important;
+    color: black !important;
+  }
+  .datatable-body-row.active:hover {
+    background-color: #ffd740 !important;
+    color: black !important;
+  }
+}
+
+.ngx-datatable.material.suggestion-table {
+  .datatable-header-cell,
+  .datatable-body-cell-label {
+    text-align: center;
+  }
+  .datatable-body-row .datatable-body-cell {
+    border-right: 1px solid #545454;
+    padding: 0.3rem .8rem;
+  }
+  .datatable-body-row.datatable-row-even {
+    background-color: #607d8b;
+  }
+  .datatable-body-row.datatable-row-odd {
+    .grid-button {
+      background-color: #607d8b;
+    }
+  }
+}
+
+.dark-text {
+  color: black;
+}
+
+.categories-tab-group.dark {
+  .mat-ink-bar {
+    background-color: #424242;
+  }
+  .mat-tab-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+  .mat-tab-label {
+    //color: white;
+    opacity: 1;
+  }
+  .mat-tab-label.mat-tab-label-active {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.mat-tab-labels {
+  .mat-tab-label {
+    //color: white;
+    opacity: 1 !important;
+  }
+  .mat-tab-label.mat-tab-label-active {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+  }
+}
+
+.white-datepicker-button {
+  background: url("../images/icon_date_range_white_24px.svg") no-repeat !important;
+  height: 1rem !important;
+  width: 1rem !important;
+  background-size: cover !important;
+}
+
+.ql-container .ql-editor {
+  height: 400px;
+  overflow: scroll;
+}
+
+.card-margin {
+  margin: 0.3333em;
+}
+
+.white-background-tabs {
+  .mat-tab-label-active {
+    background-color: rgba(207, 216, 220, 0.3);
+    opacity: 1 !important;
+  }
+}
+
+image-upload {
+  width: 75% !important;
+  display: block !important;
+  float: left !important;
+}
+
+.file-upload > .upload.button {
+  float: right !important;
+  background: transparent !important;
+  height: 20px !important;
+  width: 20px !important;
+  background: url(https://image.flaticon.com/icons/png/128/25/25635.png) no-repeat !important;
+  background-size: 20px !important;
+  background-position: center !important;
+}
+
+.drag-box-message {
+  padding-top: 10px !important;
+}
+
+.file-upload {
+  padding: 12px 16px !important;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mr-24 {
+  margin-right: 24px;
+}
+
+.mat-input-container .mat-datepicker-toggle {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+md-radio-group {
+  float: right !important;
+  md-radio-button:first-child {
+    margin-right: 12px !important;
+  }
+  .mat-radio-container {
+    top: 4px !important;
+  }
+}
+
+.swal2-content {
+  font-size: 15px !important;
+}
+
+.swal2-content br {
+  line-height: 28px !important;
+}
+md-input-container.no-bottom-margin .mat-input-wrapper {
+  margin-bottom: 0 !important;
+}
+
+/*Tooltips - start*/
+.ng-tooltip {
+  max-width: 400px;
+  background-color: gray;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 8px;
+  position: absolute;
+  z-index: 1000;
+  display: block;
+  opacity: 0;
+  -webkit-transition: opacity 300ms;
+  -moz-transition: opacity 300ms;
+  -o-transition: opacity 300ms;
+  transition: opacity 300ms;
+}
+
+.ng-tooltip-show {
+  opacity: 1;
+}
+
+.ng-tooltip::after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+}
+
+.ng-tooltip-top::after {
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-color: gray transparent transparent transparent;
+}
+
+.ng-tooltip-bottom::after {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-color: transparent transparent gray transparent;
+}
+
+.ng-tooltip-left::after {
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-color: transparent transparent transparent gray;
+}
+
+.ng-tooltip-right::after {
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-color: transparent gray transparent transparent;
+}
+/*Tooltips - end*/
+
+.ngx-datatable.material .datatable-footer .datatable-pager li a{
+  color:#545454 !important;
+}
+ .ngx-datatable.material .datatable-footer .datatable-pager li a:hover{
+
+  color:#545454 !important;
+  background:#ffd740 !important;
+}
+.ngx-datatable.material .datatable-footer .datatable-pager li.active a:hover {
+  color: #545454 !important;
+}
+
+.DialogTitle{
+  font-size: 20px !important;
+  font-weight: 500 !important;
+}
+
+.customClassDialog .swal2-styled{
+  color:black !important;
+}

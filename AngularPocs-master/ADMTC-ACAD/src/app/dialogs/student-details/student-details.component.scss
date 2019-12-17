@@ -1,0 +1,30 @@
+:host /deep/ {
+    .ql-container {
+        height: auto;
+    }
+    .mat-tab-labels .mat-tab-label.mat-tab-label-active {
+        background-color: #607D8B !important;
+        color: white;
+    }
+    .student-details .tab-data {
+        padding: 1.5rem 1.5rem !important;
+        background-color: #fafafa !important;
+        color: rgba(0, 0, 0, 0.87) !important;
+    }
+    md-radio-group {
+        float: left !important;
+    }
+    .mat-select {
+        display: block !important;
+    }
+    .mat-input-wrapper {
+        margin: 1em 0 !important;
+    }
+    input[type=file] {
+        color: transparent;
+        margin-top: 20px;
+    }
+    .label-text{
+      padding-top:15px;
+    }
+}

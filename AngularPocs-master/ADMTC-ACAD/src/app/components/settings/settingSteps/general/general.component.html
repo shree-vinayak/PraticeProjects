@@ -1,0 +1,65 @@
+<form id="form" [formGroup]="form">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="100">
+                    <div class="address-container">
+                        <div class="px-1" style="margin-top:10px">
+                            <span>{{'SETTINGS.TITLES.GENERAL' | translate}}</span>
+                        </div>
+                        <div class="panel-body">
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1 select-input-container">
+                                        <md-input-container color="accent" style="width: 100%">
+                                            <input mdInput type="text" formControlName="schoolyear" [placeholder]="'SETTINGS.GENERAL.SCHOOLYEAR' | translate" />
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1 select-input-container">
+                                        <md-input-container color="accent" style="width: 100%">
+                                            <input mdInput type="text" formControlName="imapserver" [placeholder]="'SETTINGS.GENERAL.IMAPSERVER' | translate" />
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1 select-input-container">
+                                        <md-input-container color="accent" style="width: 100%">
+                                            <input mdInput type="text" formControlName="imappart" [placeholder]="'SETTINGS.GENERAL.IMAPPART' | translate" />
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1 select-input-container">
+                                        <p style="display:inline-block;margin-top: 9px;font-size:13px">{{ 'SETTINGS.GENERAL.AUTOMATICNOTIFICATION' | translate}}</p>
+                                        <md-input-container color="accent" style="width: 100%">
+                                            <input mdInput type="number" formControlName="automaticnotification" />
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col_s12" fxLayoutWrap="wrap">
+                <div>
+                    <div class="px-1 pull-right">
+                        <button md-raised-button color="primary">
+
+                            {{'USERS.ADDEDITUSER.SUBMIT' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

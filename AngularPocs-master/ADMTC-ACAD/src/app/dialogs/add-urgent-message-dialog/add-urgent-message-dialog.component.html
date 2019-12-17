@@ -1,0 +1,98 @@
+﻿<form id="frmAddTask" [formGroup]="form" (ngSubmit)="sendMailUrgent()" style="max-height:570px;">
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container" style="margin-bottom: 20px;">
+        <md-icon>
+          <i class="fa fa-bolt" aria-hidden="true"></i>
+        </md-icon>
+        <label class="Title">
+          {{'TASK.MESSAGE.SEND_URGENT_MESSAGE' | translate}}
+        </label>
+        <a class="close_icon">
+          <i class="material-icons" (click)="cancel()">close</i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container" style="margin-bottom: 20px;">
+        <ng-select [class]="submitted && selectedRNCP === '' ? 'invalidDropDown' : ''" formControlName="rncp" fxFlex="100" (data)="ChangeRNCPTitle($event)"
+          [multiple]="false" [items]="RNCPTitles" placeholder="{{ 'TASK.ADDEDITTASK.RNCPTITLE' | translate }}*"></ng-select>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container">
+        <md-input-container color="accent" style="width: 100%; margin-bottom: 20px;">
+          <input type="text" required mdInput id="icon_prefix2" formControlName="subject" [placeholder]="'MailBox.subject' | translate"
+            class="materialize-textbox" />
+        </md-input-container>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="userSelection">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container">
+        <span>{{'TASK.ADDEDITTASK.USER' | translate}}</span>
+        <md-slide-toggle labelPosition="after" [(ngModel)]="userCatStatus" [checked]="userCatStatus" (change)="toggleFinalScore($event)" formControlName="selectionType">
+        </md-slide-toggle>
+        <span>{{'TASK.ADDEDITTASK.CATEGORYOFUSERS' | translate}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="!userCatStatus" formGroupName="userSelection">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container userSelectContainer" style="margin-bottom: 10px;">
+        <ng-select [class]="submitted && selectedUser?.id === null ? 'invalidDropDown' : ''" formControlName="userId" fxFlex="100" (data)="ChangeAssignTo()"
+          [multiple]="false" size="3" [(ngModel)]="selectedUser" [items]="userList" placeholder="{{ 'TASK.ADDEDITTASK.USER' | translate }}*">
+        </ng-select>
+        <!-- <md-select color="accent" formControlName="userId" [placeholder]="'TASK.ADDEDITTASK.USER' | translate" fxFlex="100" [(ngModel)]="selectedUser"
+          (change)="ChangeAssignTo()">
+          <md-option *ngFor="let user of AssignTo" [value]="user._id" fxFlex="100">
+            {{ user.firstName }} {{ user.lastName }}
+          </md-option>
+        </md-select> -->
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="userCatStatus" formGroupName="userSelection">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container">
+        <md-select color="accent" formControlName="userTypeId" [placeholder]="'TASK.ADDEDITTASK.CATEGORYOFUSERS' | translate" fxFlex="100">
+          <md-option *ngFor="let usertype of userTypeList" [value]="usertype._id" fxFlex="100">
+            {{ usertype.name }}
+          </md-option>
+        </md-select>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container">
+        <md-input-container color="accent" style="width: 100%">
+          <textarea mdInput id="icon_prefix2" maxLength="1000" formControlName="description" [placeholder]="'MailBox.MESSAGE' | translate"
+            class="materialize-textarea"></textarea>
+        </md-input-container>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container">
+        <div class="pull-right">
+          <button md-raised-button color="warn" type="button" (click)="cancel()">{{'CANCEL' | translate}}</button>
+          <button md-raised-button color="primary" type="submit">{{'USERS.ADDEDITUSER.SUBMIT' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

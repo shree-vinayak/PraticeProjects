@@ -1,0 +1,105 @@
+<div fxLayout="row wrap" fxLayoutAlign="start center" *ngIf="user">
+  <div fxFlex style="padding: 0.3333%" class="text-center">
+    <!-- <span class="text-xl mr-2">{{'RNCPTITLE' | translate}} : </span> -->
+    <span class="text-xl mr-2">{{rncpTitle?.shortName}}</span>
+    <span class="text-xl mr-2">{{rncpTitle?.longName}}</span>
+    <span class="text-xl mr-2">{{'LEVEL' | translate}} {{rncpTitle?.rncpLevel}}</span>
+    <button md-raised-button color="accent" type="button" style="float: right !important" (click)="scrollToCalender()">
+      <md-icon>event</md-icon> {{'DASHBOARD.CALENDAR' | translate}}</button>
+  </div>
+</div>
+<div fxLayout="row wrap" *ngIf="user">
+  <div fxFlex="65">
+    <div fxLayout="column wrap">
+        <md-card fxFlex class="primary-background dark-header">
+      <pending-tasks *ngIf="showPendingTasks" [rncpTitle]="rncpTitle"
+      (updateUpComingEventList)="updateUpComingEventList($event)"></pending-tasks>
+        </md-card>
+      <br *ngIf="utilityService.checkUserIsAcademicAdminDirector() || utilityService.checkUserIsDirectorSalesAdmin()">
+      <md-card fxFlex class="primary-background dark-header">
+        <md-card-title #goToCalendar style="padding-bottom: 11.5px;">
+          <!-- <div class="text-xl" style="padding-top: .75rem;">{{'DASHBOARD.UPCOMINGEVENTS' | translate}}</div> -->
+          <div class="text-xl" style="padding-top: .75rem;" id='calendar'>{{'DASHBOARD.CALENDAR' | translate}}</div>
+          <span fxFlex></span>
+          <button md-mini-fab color="accent" class="mr-1" (click)="addEvent()" [ngStyle]="{ 'visibility': user.entity.type === 'admtc' ? 'visible' : 'hidden' }">
+            <md-icon>add</md-icon>
+          </button>
+        </md-card-title>
+        <hr>
+        <md-card-content class="pa-0 dark-text">
+          <list-of-events [listofEvents]="listofEvents" [rncpTitle]="rncpTitle"></list-of-events>
+        </md-card-content>
+      </md-card>
+    </div>
+  </div>
+  <div fxFlex="35">
+    <md-card class="primary-background dark-header">
+      <md-card-title style="padding-right: 0px;">
+        <div fxLayout="row wrap" fxLayoutAlign="start center">
+          <div fxFlex class="text-xl">
+            {{'ACADEMIC KIT' | translate}}
+            <span *ngIf="modifyCategoriesView">
+              &nbsp;-&nbsp;
+              <i class="fa fa-file"></i>
+              {{'DASHBOARD.MODIFYCATEGORIES' | translate}}
+            </span>
+          </div>
+          <div *ngIf="rncpTitle && academicKit?.isCreated; else createKitButton">
+            <div *ngIf="modifyCategoriesView; then backButton else modifyButton"></div>
+            <ng-template #modifyButton>
+              <button md-raised-button color="accent" (click)="manageCategories()" [ngStyle]="{'visibility':user.entity.type === 'admtc' ? 'visible' : 'hidden' }">
+                <md-icon>edit</md-icon>
+                {{'DASHBOARD.MODIFYCATEGORIES' | translate}}
+              </button>
+            </ng-template>
+            <ng-template #backButton>
+              <button md-raised-button color="primary" (click)="goToCategoryList()">
+                <md-icon>reply</md-icon>
+                {{'DASHBOARD.GOBACK' | translate}}
+              </button>
+            </ng-template>
+          </div>
+          <ng-template #createKitButton>
+            <button md-raised-button color="accent" (click)="createAcademicKit()">
+              <md-icon>create_new_folder</md-icon>
+              {{'DASHBOARD.CREATEACADEMICKIT' | translate}}
+            </button>
+          </ng-template>
+        </div>
+      </md-card-title>
+      <hr>
+      <ng-template #noKit>
+        <md-card-content style="padding-left: 0; padding-right: 0;padding-top: 0;padding-bottom: 1.2px;">
+          <div class="text-center text-lg mt-2">
+            {{'DASHBOARD.NOKIT' | translate}}
+          </div>
+        </md-card-content>
+      </ng-template>
+
+      <div *ngIf="rncpTitle && academicKit?.isCreated; else noKit">
+        <app-modify-categories (updateKit)="updateCurrentKit()" [selectedCategoryIdToModify]="selectedCategoryIdToModify" *ngIf="modifyCategoriesView; else categoryList" [positionStack]="positionStack">
+        </app-modify-categories>
+        <ng-template #categoryList>
+          <md-card-content style="padding-left: 0; padding-right: 0;padding-top: 0; padding-bottom: 1.2px;">
+            <div class="category-list" *ngIf="rncpTitle && academicKit && academicKit.categories && academicKit.categories.length > 0; else addCategory">
+              <app-category (updateKit)="updateCurrentKit()" *ngFor="let category of academicKit?.categories | orderBy: 'title'; index as i"
+                [category]="category" [showEdit]="true" [index]="i" (selectedCategoryId)="selectedCategory($event)" (manageCategory)="manageCategory($event)" [parentFolderName]="category.title"></app-category>
+            </div>
+            <ng-template #addCategory>
+              <div class="text-center">
+                <p class="text-lg">
+                  {{'DASHBOARD.NOCATEOGRIES'| translate}}
+                </p>
+                <button class="mt-2" md-raised-button (click)="addNewCategory()">
+                  <md-icon>add</md-icon>
+                  {{'DASHBOARD.ADDCATEGORY' | translate}}
+                </button>
+              </div>
+            </ng-template>
+          </md-card-content>
+        </ng-template>
+      </div>
+
+    </md-card>
+  </div>
+</div>

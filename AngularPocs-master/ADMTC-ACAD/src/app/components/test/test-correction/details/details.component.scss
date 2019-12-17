@@ -1,0 +1,14 @@
+.scroll-y{
+	height: 200px;
+	overflow-y: auto;
+}
+:host /deep/ .primary-background {
+  background-color: #607d8b;
+}
+md-card.dark-header {
+  .mat-card-title{
+    margin-bottom: 0;
+    padding-bottom: 16px;
+    background-color: #212121;
+  }
+}

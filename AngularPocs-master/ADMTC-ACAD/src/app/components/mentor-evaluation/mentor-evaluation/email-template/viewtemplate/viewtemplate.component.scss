@@ -1,0 +1,15 @@
+:host /deep/ {
+    .ql-container {
+        height: auto;
+    }
+    .viewTemplate .mat-tab-label {
+        display: none;
+    }
+}
+.ql-container {
+  height: auto;
+}
+
+.viewTemplate .mat-tab-label {
+    display: none;
+}

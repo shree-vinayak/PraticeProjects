@@ -1,0 +1,139 @@
+<md-card>
+  <md-card-content>
+    <div fxLayout="row" fxLayoutWrap="wrap" class="top-bar schoolListComponent">
+      <h3 fxFlex="100" style="display: inline">
+        <md-icon style="font-size:44px; width:45px; height: 45px;">exposure</md-icon>
+        <span style="font-size: 100%; vertical-align: super;">{{'MAIN_MENU.TOOLS.QUALITYCONTROL' | translate}} for {{rncpClassTestName}}
+          <!-- {{params | async | json}} -->
+        </span>
+      </h3>
+    </div>
+    <div fxLayout="row" fxLayoutWrap="wrap" class="top-bar schoolListComponent taskListNgSelect">
+      <div fxFlex="20">
+        <ng-select [(ngModel)]="filterObject.school"  fxFlex="100" (selected)="changeSchool($event)"
+          [multiple]="false" [items]="schoolList" [placeholder]="'Search.SCHOOL_ORIGIN' | translate">
+        </ng-select>
+      </div>
+      <div fxFlex="2.5"></div>
+      <div fxFlex="20">
+        <md-input-container fxFlex="100" dividerColor="accent">
+          <input mdInput [(ngModel)]="filterObject.filterText" maxlength="30" [placeholder]="'USERS.SEARCH' | translate" type="text">
+        </md-input-container>
+      </div>
+      <div fxFlex="2.5"></div>
+      <div fxFlex="5">
+        <div dividerColor="accent">
+          <button md-raised-button fxFlex type="button" class="btnSearch" color="primary"
+            (click)="filteredListOfQC()">
+            <md-icon>search</md-icon>Search
+          </button>
+        </div>
+      </div>
+      <div fxFlex="2.5"></div>
+      <div fxFlex="5">
+        <div dividerColor="accent">
+          <button md-raised-button fxFlex type="button" class="btnSearch" color="primary"
+            (click)="resetSearch()">
+            <md-icon>restore</md-icon>Reset
+          </button>
+        </div>
+      </div>
+      <div fxFlex="10">
+      </div>
+      <div fxFlex="15">
+        <div class="px-1 select-input-container">
+          <md-select [(ngModel)]="delimiterSelected" color="accent" style="width: 100%" placeholder="{{ 'STUDENT_IMPORT.DELIMETER.TITLE' | translate}}">
+            <md-option *ngFor="let delimeter of delimeterList" [value]="delimeter.value" (click)="selectDelimiter(delimeter)">
+              {{ 'STUDENT_IMPORT.DELIMETER.' + delimeter.key | translate}}
+            </md-option>
+          </md-select>
+        </div>
+      </div>
+      <div fxFlex="10">
+        <div dividerColor="accent">
+          <button md-raised-button fxFlex type="button" class="btnSearch" color="primary" (click)="exportCSV()">
+            <i class="fa fa-file-excel-o" style="font-size: 16px" aria-hidden="true" style="padding-right: 5px;"></i>Export
+            CSV</button>
+        </div>
+      </div>
+    </div>
+  </md-card-content>
+</md-card>
+
+<div fxLayout="row wrap" fxLayoutWrap="wrap" style="padding:1em;">
+  <md-card style="width:100%">
+    <md-card-content>
+
+      <!-- [sorts]="[{prop: 'schoolOriginId.shortName', dir: 'asc'},{prop: 'studentId.lastName', dir: 'asc'}]" -->
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100">
+            <ngx-datatable class="material rncp-table" [rows]="fillteredQualityControlList" [columnMode]="'flex'"
+            [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
+            [cssClasses]="ngxDtCssClasses" [messages]="{emptyMessage: 'NoDataToDisplay' | translate }"
+            [sorts]="[{prop: 'testMarks', dir: 'asc'},{prop: 'difference', dir: 'asc'},{prop: 'QCMarks', dir: 'asc'}, {prop: 'school', dir: 'asc'},  {prop: 'studentLastName', dir: 'asc'}]"
+            [externalSorting]="true" [selectionType]="'single'" [limit]="page?.size" [scrollbarV]="true"
+            [offset]="page?.pageNumber" [externalPaging]="false" [count]="page?.totalElements" (sort)="sortPage($event)">
+
+            <!-- First Name -->
+            <ngx-datatable-column name="firstName" [flexGrow]="1.5" prop="firstName" [sortable]="true" [resizeable]="false">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span> {{'STUDENT_INFORMATION.FIRSTNAME' | translate}}</span>
+              </ng-template>
+              <ng-template let-value="value" let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                {{ row?.studentFirstName }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <!-- Last Name -->
+            <ngx-datatable-column name="studentLastName" [flexGrow]="1.5" prop="studentLastName" [sortable]="true" [resizeable]="false">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                  <span> {{'STUDENT_INFORMATION.LASTNAME' | translate}}</span>
+                </ng-template>
+                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                    {{ row?.studentLastName}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="school" [flexGrow]="1.5" prop="school" [sortable]="true" [resizeable]="false">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                  <span> {{'SCHOOLTITLE' | translate}}</span>
+                </ng-template>
+                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                  <span>{{ row?.school  }}</span>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="testMarks" [flexGrow]="0.9" prop="testMarks" [sortable]="true" [resizeable]="false">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span style="margin-left: -10px;"> {{'QUALITY_CONTROL.Test_correction_mark' | translate}}</span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                  <span>{{ row?.testMarks }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+
+
+            <ngx-datatable-column name="QCMarks" [flexGrow]="0.9" prop="QCMarks" [sortable]="true" [resizeable]="false">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                  <span style="margin-left: -10px;"> {{'QUALITY_CONTROL.Quality_Control_mark' | translate }}</span>
+                </ng-template>
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                    <span>{{ row?.QCMarks }}</span>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="difference" [flexGrow]="0.9" prop="difference" [sortable]="true" [resizeable]="false">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                  <span style="margin-left: -10px;"> {{'QUALITY_CONTROL.Different' | translate}}</span>
+                </ng-template>
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                    <span>{{ row?.difference }}</span>
+                </ng-template>
+            </ngx-datatable-column>
+
+            </ngx-datatable>
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>
+</div>

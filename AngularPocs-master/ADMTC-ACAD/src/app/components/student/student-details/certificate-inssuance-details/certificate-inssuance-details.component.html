@@ -1,0 +1,214 @@
+<div style="text-align:center;margin-top: 10px;">
+  <app-student-status-card *ngIf="certificationCardsStatus?.sendState?.isVisible" [title]="certificationCardsStatus?.sendState.title"
+    [state]="certificationCardsStatus?.sendState?.status" [subtitle]="certificationCardsStatus?.sendState.subtitle">
+  </app-student-status-card>
+  <app-student-status-card *ngIf="certificationCardsStatus?.studentDecisionState?.isVisible" [title]="certificationCardsStatus?.studentDecisionState.title"
+    [state]="certificationCardsStatus?.studentDecisionState?.status" [subtitle]="certificationCardsStatus?.studentDecisionState.subtitle"
+    [bgColor]="certificationCardsStatus?.studentDecisionState?.bgColor">
+  </app-student-status-card>
+  <app-student-status-card *ngIf="certificationCardsStatus?.certificateState?.isVisible" [title]="certificationCardsStatus?.certificateState.title"
+    [state]="certificationCardsStatus?.certificateState?.status" [subtitle]="certificationCardsStatus?.certificateState.subtitle">
+  </app-student-status-card>
+</div>
+
+<div [ngStyle]="{'pointer-events': isPreviousCourse ? 'none' : 'all'}" *ngIf="student?.certificateIssuanceStatus" fxLayout="row" fxLayoutAlign="center" style="margin-top: 10px;">
+  <md-card fxFlex="70" fxFlexAlign="center">
+    <!-- Student Details Card -->
+    <md-card-content>
+      <md-card fxFlex fxFlexAlign="start">
+        <md-card-content class="primary-background dark-header border-yellow">
+          <div fxLayout="column" fxLayoutWrap="wrap" fxLayoutGap="-15px" style="margin-bottom: -15px;">
+            <div fxFlex="100" fxLayout="row" style="margin-top: 15px !important;">
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.STUDENT_NAME' | translate }} : </label>
+                <span> &nbsp;&nbsp;{{ getCivility(student?.sex) }} {{ student?.firstName }} {{ student?.lastName }}</span>
+              </div>
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.EMAIL_ADDRESS' | translate }} : </label>
+                <span> &nbsp;&nbsp;{{ student?.email ? student?.email : '' }}</span>
+              </div>
+            </div>
+            <div fxFlex="100" fxLayout="row">
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.DATE_BIRTH' | translate }} : </label>
+                <span> &nbsp;&nbsp;{{ student?.placeOfBirth? student?.placeOfBirth : '' }}{{ student?.dateOfBirth ?
+                  ' - ' + getTranslateddate(student?.dateOfBirth) : '' }}</span>
+              </div>
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.NATIONALITY' | translate }} : </label>
+                <span> &nbsp;&nbsp;{{ student?.nationality ? getCountryName(student?.nationality, 'NATIONALITY') : '' }}</span>
+              </div>
+            </div>
+            <div fxFlex="100" fxLayout="row">
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.PHONE_NUMBER' | translate }} : </label>
+                <span> &nbsp;&nbsp;{{ student?.telePhone ? student?.telePhone : '' }}</span>
+              </div>
+              <div fxFlex="50" fxFlexAlign="start">
+                  <label style="float: left"> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.ADDRESS' | translate }} : </label>
+                  <div class="long-text-block">
+                    <p *ngIf="student?.address?.line1">{{ student?.address?.line1 }}</p>
+                    <p *ngIf="student?.address?.line2">{{ student?.address?.line2 }}</p>
+                    <p *ngIf="student?.address?.postalCode || student?.address?.city">
+                      {{student?.address?.postalCode}}{{ student?.address?.postalCode && student?.address?.city ? ' - ' : '' }}{{student?.address?.city}}
+                    </p>
+                    <p *ngIf="student?.address?.country">{{ getCountryName(student.address.country, 'COUNTRY') }}</p>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </md-card-content>
+      </md-card>
+    </md-card-content>
+
+    <!-- School Details Card -->
+    <md-card-content *ngIf="student?.certificateIssuanceStatus === 'certificate_issued'">
+      <md-card fxFlex fxFlexAlign="start">
+        <md-card-content class="primary-background dark-header border-yellow">
+          <div fxLayout="column" fxLayoutWrap="wrap" fxLayoutGap="-15px" style="margin-bottom: -35px;">
+            <div fxFlex="100" fxLayout="row" style="margin-top: 15px !important;">
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.SCHOOL_NAME' | translate }} : </label>
+                <span> &nbsp;&nbsp;{{ student?.school?.shortName ? student?.school?.shortName : '' }}</span>
+              </div>
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.SCHOOL_COURT_NAME' | translate }} : </label>
+                <span> &nbsp;&nbsp;{{ student?.school?.longName ? student?.school?.longName : '' }}</span>
+              </div>
+            </div>
+            <div fxFlex="100" fxLayout="row">
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.SCHOOL_WEBSITE_URL' | translate }} : </label>
+                <span> &nbsp;&nbsp;{{ student?.rncpTitle?.certifier?.socialAddresses?.webUrl ? student?.rncpTitle?.certifier?.socialAddresses?.webUrl:
+                  '' }}</span>
+              </div>
+              <div fxFlex="50" fxFlexAlign="start">
+                <label style="float: left"> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.SCHOOL_ADDRESS' | translate }} : </label>
+                <div class="long-text-block">
+                  <p *ngIf="student?.address?.line1">{{ student?.school?.schoolAddress?.address1 }}</p>
+                  <p *ngIf="student?.address?.line2">{{ student?.school?.schoolAddress?.address1 }}</p>
+                  <p *ngIf="student?.school?.schoolAddress?.postalCode || student?.school?.schoolAddress?.city">
+                    {{student?.school?.schoolAddress?.postalCode}}{{ student?.school?.schoolAddress?.city && student?.school?.schoolAddress?.postalCode
+                    ? ' - ' : '' }}{{student?.school?.schoolAddress?.city}}
+                  </p>
+                  <p *ngIf="student?.school?.country">{{ getCountryName(student.school.country, 'COUNTRY') }}</p>
+                </div>
+              </div>
+            </div>
+            <!-- <div fxFlex="100" fxLayout="row">
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.SIGNATORY_1' | translate }} : </label>
+                <span> &nbsp;&nbsp;{{ student?.rncpTitle?.shortName }}</span>
+              </div>
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.SIGNATORY_2' | translate }} : </label>
+                <span> &nbsp;&nbsp;{{ student?.currentClass?.name }}</span>
+              </div>
+            </div>
+            <div fxFlex="100" fxLayout="row">
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.SIGNATORY_3' | translate }} : </label>
+                <span> &nbsp;&nbsp;{{ student?.rncpTitle?.shortName }}</span>
+              </div>
+              <div fxFlex="50" fxFlexAlign="start">
+              </div>
+            </div> -->
+          </div>
+        </md-card-content>
+      </md-card>
+    </md-card-content>
+
+    <!-- RNCP & Certificate Details Card -->
+    <md-card-content *ngIf="student?.certificateIssuanceStatus === 'certificate_issued'">
+      <md-card fxFlex fxFlexAlign="start">
+        <md-card-content class="primary-background dark-header border-yellow">
+          <div fxLayout="column" fxLayoutWrap="wrap" fxLayoutGap="-15px" style="margin-bottom: -35px;">
+            <div fxFlex="100" fxLayout="row" style="margin-top: 15px !important;">
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.TITLE' | translate }} : </label>
+                <span> &nbsp;&nbsp;{{ student?.rncpTitle?.longName ? student?.rncpTitle?.longName : '' }}</span>
+              </div>
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.DATE_ISSUANCE' | translate }} : </label>
+                <!-- Field for Certificate Issuance Date not implemented by BE -->
+                <span> &nbsp;&nbsp;{{ getCetificateIssuanceDate() }}</span>
+              </div>
+            </div>
+            <div fxFlex="100" fxLayout="row">
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.DEGREE_REF' | translate }} : </label>
+                <span> &nbsp;&nbsp;{{ student?.rncpTitle?.rncpCode ? student?.rncpTitle?.rncpCode : '' }}</span>
+              </div>
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.SCHOOL_REF' | translate }} : </label>
+                <span> &nbsp;&nbsp;{{ student?.school?.schoolRef ? student?.school?.schoolRef : '' }}</span>
+              </div>
+            </div>
+            <div fxFlex="100" fxLayout="row">
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.REF_DATE_JOURNAL' | translate }} : </label>
+                <span> &nbsp;&nbsp;{{ student?.rncpTitle?.journalDate ? student?.rncpTitle?.journalDate : '' }}</span>
+              </div>
+              <div fxFlex="50" fxFlexAlign="start">
+                <label style="float: left;margin-bottom: 0px !important;"> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.REF_TEXT_JOURNAL'
+                  | translate }} : </label>
+                {{ student?.rncpTitle?.journalText ? student?.rncpTitle?.journalText : '' }}
+              </div>
+            </div>
+            <div fxFlex="100" fxLayout="row">
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.CERTIDEGREE_BLOCKCHAIN_REF' | translate }} : </label>
+                <!-- Field for Certificate Hash Code Date not implemented by BE -->
+                <span> &nbsp;&nbsp;</span>
+              </div>
+              <div fxFlex="50" fxFlexAlign="start">
+              </div>
+            </div>
+          </div>
+        </md-card-content>
+      </md-card>
+    </md-card-content>
+
+    <md-card-content *ngIf="student?.certificateIssuanceStatus === 'certificate_issued'">
+      <md-card fxFlex fxFlexAlign="start">
+        <md-card-content class="primary-background dark-header border-yellow">
+          <div fxLayout="column" fxLayoutWrap="wrap" fxLayoutGap="-15px" style="margin-bottom: -35px;">
+            <div fxFlex="100" fxLayout="row" style="margin-top: 15px !important;">
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.LINK_CERTIFICATE' | translate }} : </label>
+                <span> &nbsp;&nbsp;
+                    <a [href]="student?.certificatePdfLink ? student?.certificatePdfLink : ''" target="_blank">
+                      {{ 'CLICK_HERE' | translate }}
+                    </a>
+                  </span>
+              </div>
+              <div fxFlex="50" fxFlexAlign="start">
+                <label> {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.HASH_CODE' | translate }} : </label>
+                <!-- Field for Certificate Issuance Date not implemented by BE -->
+                <span> &nbsp;&nbsp;</span>
+              </div>
+            </div>
+          </div>
+        </md-card-content>
+      </md-card>
+    </md-card-content>
+  </md-card>
+</div>
+
+<div *ngIf="!isPreviousCourse && student?.certificateIssuanceStatus" fxLayout="row" fxLayoutAlign="center">
+  <div fxFlex="70" fxLayoutAlign="end end" fxFlexAlign="center">
+    <span *ngIf="student?.certificateIssuanceStatus === 'certificate_issued'; else actions">
+      <!-- <button md-raised-button color="accent" type="button" (click)="getCertificationPdf()" style="margin-left: 5px;">
+        {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.GET_CERTIFICATE' | translate }}
+      </button> -->
+    </span>
+    <ng-template #actions>
+      <button  *ngIf="student?.certificateIssuanceStatus !== 'details_need_revision'" md-raised-button color="red" type="button" (click)="requestRevision()">
+        {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.NEED_REVISION' | translate }}
+      </button>
+      <button *ngIf="student?.certificateIssuanceStatus !== 'details_need_revision'" md-raised-button color="accent" type="button" (click)="confirmCertificateDetails()" style="margin-left: 5px;">
+        {{ 'CERTIFICATE_ISSUANCE.STUDENT_DETAILS.CONFIRM' | translate }}
+      </button>
+    </ng-template>
+  </div>
+</div>

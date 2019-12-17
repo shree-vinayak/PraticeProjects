@@ -1,0 +1,72 @@
+<div fxLayout="row wrap">
+  <div fxFlex="50">
+    <div fxLayout="row wrap" fxLayoutAlign="end" class="card-margin">
+      <button md-raised-button color="primary" (click)="addNewClass()">
+        <md-icon>add</md-icon>
+        {{'ADDCLASS' | translate}}
+      </button>
+    </div>
+    <ngx-datatable
+      class="material rncp-table"
+      [rows]="classes"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [columnMode]="'force'"
+      [reorderable]="reorderable"
+      [externalPaging]="true"
+      [count]="page.totalElements"
+      [offset]="page.pageNumber"
+      [limit]="page.size"
+      (page)="changePage($event)"
+      [externalSorting]="true"
+      (sort)="sortPage($event)"
+      [cssClasses]="ngxDtCssClasses"
+      [selectionType]="'single'"
+      (select)='onSelectClass($event)'>
+      <ngx-datatable-column>
+        <ng-template ngx-datatable-header-template>
+          {{'CLASSNAME' | translate}}
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row['name']}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column>
+        <ng-template ngx-datatable-header-template>
+          {{'CLASSDESCRIPTION' | translate}}
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row['description']}}
+        </ng-template>
+      </ngx-datatable-column>
+      <!--<ngx-datatable-column [flexGrow]="10" [sortable]="false" [cellClass]="'text-center'">-->
+        <!--<ng-template ngx-datatable-header-template>-->
+          <!--{{'ACTION' | translate}}-->
+        <!--</ng-template>-->
+        <!--<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>-->
+          <!--<button md-icon-button md-button-sm md-raised-button class="grid-button" (click)="editClass(row)">-->
+            <!--<md-icon>edit</md-icon>-->
+          <!--</button>-->
+        <!--</ng-template>-->
+      <!--</ngx-datatable-column>-->
+      <ngx-datatable-footer>
+        <ng-template
+          ngx-datatable-footer-template
+          let-rowCount="rowCount"
+          let-pageSize="pageSize"
+          let-selectedCount="selectedCount"
+          let-curPage="curPage"
+          let-offset="offset">
+          <div style="padding: 5px 10px">
+            <div>
+              <strong>{{selectedCount}}</strong> / {{rowCount}}  {{'FOOTERTOTAL' | translate}}
+            </div>
+
+          </div>
+        </ng-template>
+      </ngx-datatable-footer>
+
+    </ngx-datatable>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+body {
+    background: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: #000;
+    margin: 0;
+  }
+  ul li {
+    line-height: 1.571;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .container {
+    max-width: 1040px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    list-style: none;
+  }
+  a {
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+  }
+  a:hover, a:focus {
+    transition: 300ms all;
+    text-decoration: none;
+  }
+  *,
+  button,
+  a,
+  img {
+    outline: none;
+  }
+  button:focus{
+    outline: none;
+  }
+
+  h2, p {
+      margin: 0;
+  }
+
+  .container {
+    max-width: 1040px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin: auto;
+}

@@ -1,0 +1,73 @@
+<div fxLayout="column wrap" fxLayoutAlign="start" style="width: 100%; height: 100%;">
+  <div style="margin-left:-24px; margin-right: -24px; margin-top: -24px;">
+    <div class="pa-1">
+      <div fxLayout="row wrap" fxLayoutAlign="start center">
+        <div fxFlex style="padding-left: 6px;">
+          <svg style="width:24px;height:24px" viewBox="0 0 24 24" class="middle">
+            <path fill="#000000" d="M3,8H5V16H3V8M7,8H9V16H7V8M11,8H13V16H11V8M15,19.25V4.75L22.25,12L15,19.25Z" />
+          </svg>
+          <span class="text-xl">{{'TRANSFER_RESPONSIBILITY.DIALOG_TITLE' | translate}}</span>
+
+        </div>
+        <button md-icon-button (click)="closeDialog()" style="padding-left: 10px;">
+          <md-icon>close</md-icon>
+        </button>
+      </div>
+    </div>
+    <hr>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap" fxFlex="100">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+
+      <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:20px; ">
+        <div fxFlex="100" fxFlex.lt-md="100">
+          <ng-select (selected)="selectSchool($event)" (typed)="schoolRemoved($event)" (removed)="schoolRemoved($event)"
+            [(ngModel)]="selectedSchool" [items]="schoolLists | orderBy: 'schoolLists.text'" [placeholder]="'TOOLS_DOCTEST.School' | translate"></ng-select>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px; ">
+        <div fxFlex="100" fxFlex.lt-md="100">
+          <ng-select (selected)="selectRNCP($event)" [disabled]="userList.length < 1" [(ngModel)]="selectedRNCP"
+            [items]="titleLists | orderBy: 'titleLists.text'" [placeholder]="'TOOLS_DOCTEST.Title' | translate"></ng-select>
+
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px; ">
+        <div fxFlex="100" fxFlex.lt-md="100">
+          <ng-select [disabled]="selectedSchool.length < 1 || selectedSchool.length < 1" (selected)="selectUserType($event)"
+            [(ngModel)]="selectedUserType" [items]="userTypesLists | orderBy: 'userTypesLists.text'" [placeholder]="'Customer.AddSchool.userType.title' | translate"
+            [placeholder]="'TOOLS_DOCTEST.Title' | translate"></ng-select>
+
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px; ">
+        <div fxFlex="40" fxFlex.lt-md="40">
+          <ng-select [disabled]="userList.length < 0 || selectedRNCP.length < 1 || selectedUserType.length < 1"
+            (selected)="leftUserSelected($event)" [(ngModel)]="selectedLeftUser" [items]="leftUserList | orderBy: 'leftUserList.text'"></ng-select>
+
+        </div>
+        <div fxFlex="20" fxFlex.lt-md="20">
+          <svg style="width:24px;height:24px; transform: translateX(3vw); vertical-align: -webkit-baseline-middle;"
+            viewBox="0 0 24 24">
+            <path fill="#000000" d="M3,8H5V16H3V8M7,8H9V16H7V8M11,8H13V16H11V8M15,19.25V4.75L22.25,12L15,19.25Z" />
+          </svg>
+          <!-- <md-icon style="transform: translateX(3vw); vertical-align: -webkit-baseline-middle;">arrow_forward</md-icon> -->
+        </div>
+
+        <div fxFlex="40" fxFlex.lt-md="40">
+          <ng-select [disabled]="selectedSchool.length < 1 || selectedSchool.length < 1 || selectedUserType.length < 1 || selectedLeftUser.length < 1"
+            (selected)="rightUserSelected($event)" [(ngModel)]="selectedRightUser" [items]="rigthUserList | orderBy: 'rigthUserList.text'"></ng-select>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="5px" fxFlexAlign="end" style="width: 100%" style="margin-top:10px; ">
+        <button md-raised-button color="red" (click)="closeDialog()">{{"CrossCorrection.Cancel" | translate}}</button>
+        <button md-raised-button color="primary" (click)="transferResponsibility()" [disabled]="selectedRightUser.length < 1">{{"TRANSFER_RESPONSIBILITY.TRANSFER"
+          | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

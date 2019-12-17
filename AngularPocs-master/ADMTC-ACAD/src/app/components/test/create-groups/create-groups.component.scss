@@ -1,0 +1,185 @@
+.scroll-y {
+  height: 200px;
+  overflow-y: auto;
+}
+
+.full-height-95{
+  height: 95% !important;
+}
+
+:host /deep/ .primary-background {
+  background-color: #607d8b;
+}
+:host /deep/ .TitleText p {
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 15px;
+}
+
+:host /deep/ span {
+  h5 {
+    margin: 10px;
+  }
+
+  p {
+    margin: 0px;
+  }
+}
+
+main {
+  overflow-y: auto;
+}
+
+:host /deep/ .studentScore {
+  text-align: center !important;
+}
+:host /deep/ .studentDoc {
+  text-align: center !important;
+}
+md-card.dark-header {
+  .mat-card-title {
+    margin-bottom: 0;
+    padding-bottom: 16px;
+    background-color: #212121;
+  }
+}
+
+.mat-card-title {
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+  font-size: 13px !important;
+}
+
+.container_two {
+  padding: 15px 15px 5px 15px;
+}
+
+.flex_3 {
+  flex: 3 !important;
+  width: 33% !important;
+
+}
+
+.flex_3 .px-1 {
+  padding-left: 0 !important
+}
+
+.mat-input-wrapper {
+
+  margin-bottom: 5px !important;
+}
+
+.datatable-header .datatable-header-cell {
+  padding: 3px !important;
+}
+.TitleOfCardDiv{
+  width: 100%;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.yellow-border {
+  border: 2px solid #ffd740;
+  margin-bottom:5px !important;
+}
+:host /deep/ .yellow-border datatable-footer{
+  display: none !important;
+}
+
+.total_number div {
+  display: inline-block;
+  margin-top: 0 !important;
+  vertical-align: top !important;
+  padding-top: 0 !important
+}
+
+.total_number {
+  text-align: right;
+  margin: 0 !important;
+}
+
+.mat-card-content {
+  padding-top: 7px !important;
+  padding-bottom: 7px !important
+}
+
+.ql-align-center {
+  margin: 8px 0 0 0 !important;
+  font-size: 13px;
+}
+
+.table_container .mat-input-wrapper {
+  margin: 5px 0 !important;
+}
+
+#form_container {
+  display: block !important
+}
+
+.title_pd0 {
+  padding-bottom: 14px !important;
+  padding-top: 14px !important;
+}
+
+
+
+
+
+
+
+:host /deep/ .rncp-title-tile {
+  background-color: #607d8b;
+  border-radius: 22px;
+}
+
+:host /deep/ .rncp-title-tile:hover {
+    background-color: #d28104;
+}
+
+// :host /deep/ .mat-button-toggle-checked .mat-button-toggle-label-content{
+//    background-color:#607d8b !important;
+// }
+
+:host /deep/ .rncp-title-tile h5{
+  font-size: 28px;
+}
+
+:host /deep/ .rncp-title-tile p{
+ height: 37px;
+ overflow: hidden;
+}
+
+
+
+:host /deep/ .rncp-title-tile .mat-card {
+	text-align: center;
+	display: block;
+  height: 225px !important;
+  margin: 7px !important;
+  padding: 10px;
+  flex:0 !important;
+  color: white;
+  overflow: hidden;
+  word-wrap: break-word;
+  h5 {
+    margin-top: 10px;
+  text-transform: uppercase;
+  }
+  hr{
+    border-color: white;
+  }
+}
+
+.rncp-title-tile:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 10px #a0a0a0;
+}
+
+:host /deep/ .cardTitleInput .mat-input-wrapper {
+  margin: 0px !important;
+}
+
+
+.cardTitleInput .mat-input-wrapper {
+  margin: 0px !important;
+}

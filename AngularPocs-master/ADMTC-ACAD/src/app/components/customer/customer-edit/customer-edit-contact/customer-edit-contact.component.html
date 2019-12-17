@@ -1,0 +1,90 @@
+   <div>
+     <md-input-container dividerColor="accent">
+   
+            <input mdInput type="text" placeholder="{{ 'Customer.EditContact.Search' | translate }}" [(ngModel)]="ContactListSearchItem" name="ContactListSearchItem" (keyup)="searchContactList($event)">
+        
+
+  </md-input-container>
+      <button md-raised-button 
+        (click)="onNewContact()" 
+        color="primary"
+        class="btn-add-contact"
+        style="margin-left:6%;">
+        <i class="fa fa-plus" aria-hidden="true"></i> 
+        {{ 'Customer.EditContact.AddUser' | translate }}
+      </button>
+
+
+<ngx-datatable class="material"
+                 [rows]="contacts"    
+                [columnMode]="'flex'"
+                [rowHeight]="'auto'"
+                [headerHeight]="50"
+                [sorts]="[{prop: 'shortName', dir: 'asc'}]"
+                [selectionType]="'checkbox'">
+
+<!-- 
+  <ngx-datatable-column [width]="400" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true">
+  </ngx-datatable-column> -->
+  
+  <!-- <ngx-datatable-column name="Name"  [sortable]="false"> -->
+    <ngx-datatable-column [width]="130" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true" [flexGrow]="8">
+  </ngx-datatable-column>
+    
+  <!-- </ngx-datatable-column> -->
+
+
+
+  <ngx-datatable-column name="Name" [flexGrow]="8" [sortable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      {{ 'Customer.EditContact.NAME' | translate}}
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.firstName }}  {{ row.lastName }}<!--pending addresses in all customers-->
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="userTypes" [flexGrow]="8" [sortable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      {{ 'Customer.EditContact.USERTYPE' | translate}}
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <span *ngFor="let type of row.userTypes">{{ type.name }}</span> <!--pending addresses in all customers-->
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="action" [flexGrow]="8" [sortable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      {{ 'Customer.EditContact.ACTIONS' | translate}}
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+     
+    <button md-icon-button md-button-sm md-raised-button class="grid-button" (click)="sendMessage(row)">
+      <md-icon>mail</md-icon>          
+    </button>
+
+    <button md-icon-button md-button-sm md-raised-button class="grid-button" (click)="onEditContact(row)">
+      <md-icon>edit</md-icon>          
+    </button>
+
+    <button md-icon-button md-button-sm md-raised-button class="grid-button" (click)="onDeleteContact(row)">
+      <md-icon>delete</md-icon>          
+    </button>
+
+    </ng-template>
+  </ngx-datatable-column>
+  
+</ngx-datatable>
+ 
+</div>
+
+
+
+
+
+
+
+
+
+
+

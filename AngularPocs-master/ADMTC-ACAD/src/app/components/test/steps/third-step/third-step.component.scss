@@ -1,0 +1,31 @@
+.no-overflow {
+  max-width: 100%
+}
+
+.mat-raised-button.mat-primarybtn,
+.mat-fab.mat-primarybtn,
+.mat-mini-fab.mat-primarybtn {
+  background-color: #3f51b5;
+}
+
+.no-bottom-margin [fxFlex] {
+  margin-bottom: auto;
+}
+
+
+.owl-datetime-input {
+border-top: none !important;
+border-left: none !important;
+border-right: none !important;
+border-bottom: 1px solid #8e8e8e !important;
+background: #424242 !important;
+}
+
+.inputStyleClass {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: 1px solid #8e8e8e !important;
+  background: #424242 !important;
+}
+

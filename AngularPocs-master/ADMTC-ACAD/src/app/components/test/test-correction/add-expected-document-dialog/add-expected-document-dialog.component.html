@@ -1,0 +1,37 @@
+<h4>Documents Expected for {{student && student.civility? student.civility : ''}} {{student && student.firstName? student.firstName : ''}} {{student && student.lastName? student.lastName : ''}}</h4>
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+
+        <ngx-datatable class="material" [rows]="expectedDocuments" [footerHeight]="30" [headerHeight]="50" [rowHeight]="'auto'" [columnMode]="'flex'" [externalSorting]="true" [cssClasses]="ngxDtCssClasses"
+            >
+            <ngx-datatable-column [flexGrow]="7">
+                <ng-template ngx-datatable-header-template>
+                    {{'STUDENT.DOC' | translate }}
+                  </ng-template>
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{row['documentName']}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column cellClass="studentDoc" [flexGrow]="7" >
+                <ng-template ngx-datatable-header-template>
+                    {{'STUDENT.STUDENTNAME' | translate }}
+                  </ng-template>
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    <input #userphoto style="display:none" type="file" ng2FileSelect [uploader]="uploader" disableMultipart="true" class="student-details-photo" />
+                    <i class="fa fa-file-o fa-lg" style="color:red;cursor: pointer;" *ngIf="!row.isUploaded" (click)="updateExpectedDocument(row)"></i>
+                    <i class="fa fa-file-o fa-lg" style="color:green;cursor: pointer;" *ngIf="row.isUploaded" (click)="updateExpectedDocument(row)"></i>
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+
+    </div>
+</div>
+
+<div style="text-align: right">
+    <button md-raised-button md-button-sm color="warn" type="button" (click)="cancel()">
+      {{'CANCEL' | translate}}
+    </button>
+    <button md-raised-button md-button-sm color="primary" type="button" (click)="submit()">
+      {{'SUBMIT' | translate}}
+    </button>
+</div>

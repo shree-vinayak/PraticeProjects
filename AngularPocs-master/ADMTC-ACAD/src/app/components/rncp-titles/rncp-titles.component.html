@@ -1,0 +1,52 @@
+<div fxLayout="row wrap">
+	<div fxFlex="10" fxFlex.gt-sm="15" fxFlex.gt-xs="50" style="width: fit-content;">
+		<md-input-container dividerColor="accent" style="margin-left: 15px; width: 100%;">
+			<input [(ngModel)]="textSearch" mdInput type="text" placeholder="{{ 'Search.search' | translate }}" (keyup)="searchRNCP($event)">
+		</md-input-container>
+	</div>
+	<div fxFlex="90" fxFlex.gt-sm="85" fxFlex.gt-xs="50">
+		<button md-raised-button (click)="select('All')" style="margin-left: 20px;" color="primary">{{'ALLTITLES' | translate}}
+		</button>
+	</div>
+</div>
+
+<div fxLayout="row wrap" style="margin-left: 10px;">
+	<md-button-toggle-group style="background-color: #212121;border: 1px solid #607d8b;" #group="mdButtonToggleGroup">
+		<md-button-toggle *ngFor="let data of certifier; index as i" (click)="select(data && data.certifier && data.certifier.shortName ? data.certifier.shortName : '')"
+		 value="{{data && data.certifier && data.certifier.shortName ? data.certifier.shortName : ''}}" style="color: white;">{{data && data.certifier && data.certifier.shortName ? data.certifier.shortName : ""}}
+		</md-button-toggle>
+	</md-button-toggle-group>
+</div>
+
+<div fxLayout="row wrap">
+	<div *ngFor="let data of rncpTitles | orderBy: 'shortName'; index as i">
+		<div fxLayout="column wrap" style="padding: 3px;">
+			<md-card fxFlex class="primary-background dark-header text-center rncp-title-tile">
+				<md-card-content style="height: 235px; width: 237px" (click)="goToRncpTitle(data._id)">
+					<h5>
+						<b mdTooltip="{{ data.shortName }}" mdTooltipPosition="above">{{data.shortName | limitTo:'20'}}</b>
+					</h5>
+					<hr/>
+					<p>
+						{{data.longName ? data.longName : ""}}
+						<br/>
+					</p>
+					<span [class]="'setposition'"> {{'LEVEL' | translate}} {{data.rncpLevel}} </span>
+
+					<h6 style="margin-top: 10px;">
+						<b>{{data.certifier && data.certifier.shortName ? data.certifier.shortName : ""}} &nbsp;</b>
+					</h6>
+					<span *ngIf="user.entity.type == 'admtc'">
+
+						<span title="{{'PARAMETERS-RNCP.Activation.Published' | translate}}" placement="right" *ngIf="data.isPublished" style="color: green;">
+							<i class="fa fa-circle" aria-hidden="true"></i>
+						</span>
+						<span title="{{'PARAMETERS-RNCP.Activation.Unpublished' | translate}}" placement="right" *ngIf="!data.isPublished" style="color: #F44336;">
+							<i class="fa fa-circle" aria-hidden="true"></i>
+						</span>
+					</span>
+				</md-card-content>
+			</md-card>
+		</div>
+	</div>
+</div>

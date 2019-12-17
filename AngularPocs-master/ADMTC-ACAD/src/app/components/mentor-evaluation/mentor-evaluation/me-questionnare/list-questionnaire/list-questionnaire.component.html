@@ -1,0 +1,121 @@
+<!-- <div fxLayout="column" fxLayoutAlign="start" style="width: 100%; height: 100%;">
+    <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px;">
+        <div class="pa-1">
+            <div fxLayout="row wrap" fxLayoutAlign="start center">
+                <div fxFlex>
+                    <span class="text-xl">{{'MENTOREVALUATION.QUESTIONNAIRE.AvailableQuestionnaire' | translate}}</span>
+                </div>
+                <button md-icon-button (click)="cancel()">
+          <md-icon>close</md-icon>
+        </button>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <div class="questionnaireInput">
+        <md-tab-group fxFlex headerPosition="center" class="mb-1 create-subject" md-stretch-tabs style="min-height: 300px">
+        <md-tab [label]="'' | translate">
+        <div fxFlex.gt-sm="100%" fxFlex="100" style="margin-top: 15px;">
+            <form [formGroup]="form">
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="100" fxFlex.lt-md="100">
+                        <div class="px-1">
+                            <md-input-container dividerColor="accent" style="width: 100%">
+                                <input #searchInput mdInput class="search-input mt-1" formControlName="competenceName" (keyup)="onSearch(searchInput.value)" placeholder="Competence Name" type="text" required/>
+                            </md-input-container>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </md-tab>
+        </md-tab-group>
+    </div>
+    <br/>
+
+
+
+    <div>
+        <div *ngIf="searching; else results">
+            <div fxLayout="column wrap" fxLayoutAlign="start center">
+                <md-spinner></md-spinner>
+                <div>Searching...</div>
+            </div>
+        </div>
+        <ng-template #results>
+            <div fxLayout="row wrap">
+                <div fxFlex *ngIf="!isDuplicate">
+                    <md-nav-list>
+                        <a md-list-item (click)="onSelectquestionnaire(result)" style="border-bottom: 1px solid rgba(0, 0, 0, 0.4)" *ngFor="let result of searchResults">
+                            {{result.questionnaireName}}
+                        </a>
+                    </md-nav-list>
+                </div>
+
+                <div fxFlex *ngIf="isDuplicate">
+                    <md-nav-list>
+                        <a md-list-item (click)="duplicatequestionnaire(result)" style="border-bottom: 1px solid rgba(0, 0, 0, 0.4)" *ngFor="let result of searchResults">
+                            {{result.questionnaireName}}
+                        </a>
+                    </md-nav-list>
+                </div>
+
+            </div>
+        </ng-template>
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutAlign="flex-end" fxLayoutGap="1rem" fxFlexAlign="end" style="width: 100%">
+        <button md-raised-button class="mat-green" (click)="cancel()">{{"CANCEL" | translate}}</button>
+        <button md-raised-button color="accent" (click)="continue()">{{"USERS.ADDEDITUSER.SUBMIT" | translate}}</button>
+    </div>
+</div> -->
+
+<div fxLayout="column" fxLayoutAlign="start" style="width: 100%; height: 100%;">
+  <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px;">
+    <div class="pa-1">
+      <div fxLayout="row wrap" fxLayoutAlign="start center">
+        <div fxFlex>
+          <md-icon class="middle">receipt</md-icon>
+          <span class="text-xl">{{'MENTOREVALUATION.QUESTIONNAIRE.AvailableQuestionnaire' | translate}}</span>
+        </div>
+        <button md-icon-button (click)="cancel()">
+          <md-icon>close</md-icon>
+        </button>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <form [formGroup]="form">
+    <input #searchInput type="text" formControlName="competenceName" (keyup)="onSearch(searchInput.value)" class="search-input mt-1"
+      placeholder="{{'MENTOREVALUATION.QUESTIONNAIRE.QuestionnaireName' | translate}}" type="text" required />
+  </form>
+
+
+  <div class="mt-1" fxFlex style="min-height: 300px; overflow: auto;">
+    <div *ngIf="searching; else results">
+      <div fxLayout="column wrap" fxLayoutAlign="start center">
+        <md-spinner></md-spinner>
+        <div>Searching...</div>
+      </div>
+    </div>
+    <ng-template #results>
+      <div fxLayout="row wrap">
+        <div fxFlex *ngIf="!isDuplicate">
+          <md-nav-list>
+            <a md-list-item (click)="onSelectquestionnaire(result)" style="border-bottom: 1px solid rgba(0, 0, 0, 0.4)" *ngFor="let result of searchResults">
+              {{result.questionnaireName}}
+            </a>
+          </md-nav-list>
+        </div>
+
+        <div fxFlex *ngIf="isDuplicate">
+          <md-nav-list>
+            <a md-list-item (click)="duplicatequestionnaire(result)" style="border-bottom: 1px solid rgba(0, 0, 0, 0.4)" *ngFor="let result of searchResults">
+              {{result.questionnaireName}}
+            </a>
+          </md-nav-list>
+        </div>
+      </div>
+    </ng-template>
+  </div>

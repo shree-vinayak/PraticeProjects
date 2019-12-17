@@ -1,0 +1,33 @@
+<form [formGroup]="revisionForm" (ngSubmit)="sendRevisionRequest()" class="suggestion-form">
+  <a class="close_icon">
+    <i style="float: right;margin-top: 4px;" class="material-icons" (click)="closeDialog()">close</i>
+  </a>
+  <h3 md-dialog-title>
+    <span style="vertical-align: -webkit-baseline-middle;">
+      <svg style="width:25px;height:25px" viewBox="0 0 24 24">
+        <path fill="#000000" d="M19,19H5V5H15V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V11H19M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"
+        />
+      </svg>
+    </span>
+    <span class="suggestion-title">{{'CERTIFICATE_ISSUANCE.REQUEST_REVISION' | translate}}</span>
+  </h3>
+  <md-dialog-content>
+    <div style="margin-bottom: 10px;">
+      <div class="description-detail">{{'CERTIFICATE_ISSUANCE.REQUEST_REVISION_TEXT' | translate}}</div>
+      <div class="description-detail"> {{'CERTIFICATE_ISSUANCE.REQUEST_REVISION_TEXT_SUB' | translate }}</div>
+    </div>
+    <div>
+      <md-input-container class="full-width">
+        <textarea rows="3" maxLength="700" mdInput mdTextareaAutosize formControlName="description"
+        placeholder="{{ 'PARAMETERS-RNCP.CLASSES.DESC' | translate }}"></textarea>
+      </md-input-container>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions class="pull-right">
+    <button md-button md-raised-button color="warn" type="button" class="mr-12" (click)="closeDialog()">
+      {{'SUGGESTION.CANCEL' | translate}}</button>
+    <button md-button md-raised-button color="primary" type="submit">
+      {{'SUBMIT' | translate}}
+    </button>
+  </md-dialog-actions>
+</form> 

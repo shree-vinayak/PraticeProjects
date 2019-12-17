@@ -1,0 +1,104 @@
+<form [formGroup]="form" style="max-height:550px;" ngStyle.gt-xs="margin-top: 10%">
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <!-- <div fxFlex.gt-xs="25" *ngIf="true" fxHide>
+      <div fxLayout="row">
+        <a id="linkedin-button" class="btn btn-block btn-social btn-linkedin" (click)="loginLinkedIn()">
+          <i class="fa fa-linkedin" aria-hidden="true" style="margin-right:4px;"></i>
+          {{'SOCIAL_LOGIN.SIGN_IN_WITH_LINKEDIN' | translate}}
+        </a>
+      </div>
+      <div fxLayout="row">
+          <a id="linkedin-button" class="btn btn-block btn-social btn-linkedin" (click)="loginViadeo()">
+              <i class="fa fa-linkedin" aria-hidden="true" style="margin-right:4px;"></i>
+              {{'SOCIAL_LOGIN.SIGN_IN_WITH_VIADEO' | translate}}
+          </a>
+      </div>
+    </div>
+    <div fxFlex="5" *ngIf="true" fxHide></div>
+    <div fxFlex="5" class="divider-parent" *ngIf="true" fxHide ngStyle.gt-xs="height:350px">
+      <div class="vertical-divider">{{'OR' | translate}}</div>
+    </div> -->
+
+    <div fxFlex="25" fxFlex.xs="400px" ngStyle.xs="margin-top:50%">
+      <md-card style="background: #212121;">
+        <md-card-content>
+          <div fxlayout="row">
+            <div fxFlex style="text-align: center">
+              <div style="text-align: center;font-size: 20px;">{{'USERS.SETPASSWORD.WELCOME' | translate}}</div>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" fxFlex.lt-md="100">
+              <div class="px-1">
+                <div class="branding" style="margin-left: 113px;">
+                  <h4 style="align-content:center">Admtc.Pro</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" fxFlex.lt-md="100">
+              <div class="px-1">
+                <md-input-container color="accent" style="width: 100%">
+                  <input mdInput formControlName="username" maxlength="50" [placeholder]="'LOGIN.EMAIL' | translate"
+                    #username type="text" (change)="changeValue()" />
+                </md-input-container>
+              </div>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" fxFlex.lt-md="100">
+              <div class="px-1">
+                <md-input-container color="accent" style="width: 100%">
+                  <input mdInput formControlName="password" maxlength="30" #password type="password" [placeholder]="'LOGIN.PASSWORD' | translate"
+                    (change)="changeValue()" />
+                </md-input-container>
+              </div>
+            </div>
+          </div>
+           
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" fxFlex.lt-md="100">
+              <div class="px-1" style="text-align:left;">
+                <a (click)="forgotpassword()">
+                  <!--routerLink="admtc-acad"-->
+                  <span>{{'ForgotPassword' | translate}}</span>
+                </a>
+              </div>
+            </div>
+            <div fxFlex="100" fxFlex.lt-md="100">
+              <div class="px-1" style="text-align:right;">
+                <button md-raised-button (click)="login()" [disabled]="form.invalid" style="background: #81B441;color:#fff;">
+                  {{'LOGIN.LOGIN' | translate}}
+                </button>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:20px;">
+            <div *ngIf="form.controls['username'].touched && form.controls['username'].invalid" style="color:#ff5722;">{{
+              'LOGIN.USERNAME REQUIRED'| translate }}</div>
+            <div *ngIf="form.controls['password'].touched && form.controls['password'].invalid" style="color:#ff5722;">
+              {{ 'LOGIN.PASSWORD REQUIRED'| translate }}</div>
+            <div *ngIf="form.valid && isValid === false" style="color:#ff5722;">{{'LOGIN.USERNAME OR PASSWORD INVALID'
+              |
+              translate}}</div>
+            <!-- <div *ngIf="isCompany" style="color:#ff5722;">{{'LOGIN.COMPANYUSERMESSAGE' | translate}}</div> -->
+
+          </div>
+        </md-card-content>
+      </md-card>
+      <!-- Code for social login -->
+      <div fxLayout="row" fxLayoutAlign="center center" style="margin: 5% 0 5% 0;" *ngIf="allowLinkedInLogin">
+        <span>{{'OR' | translate}}</span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="allowLinkedInLogin">
+        <div fxFlex="97.5" class="button" (click)="loginLinkedIn()">
+          {{'SOCIAL_LOGIN.SIGN_IN_WITH_LINKEDIN' | translate}}
+          <div></div>
+          <i class="fa fa-linkedin"></i>
+        </div>
+      </div>
+      <!-- Code for social login ends here-->
+    </div>
+  </div>
+</form>

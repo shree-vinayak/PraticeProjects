@@ -1,0 +1,64 @@
+.tags {
+    background-color: #ffd740;
+    color: black;
+    padding: 3px 5px 3px 5px;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+
+.plus-font {
+    font-size: 22px;
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+.btnSearchHeight {
+    height: 35px;
+}
+
+:host /deep/ {
+    .tutorialComponent ng-select select-dropdown>div .options {
+        background-color: rgba(0, 0, 0, 0.5)
+    }
+    .tutorialComponent .ui-select-placeholder {
+        color: #dddddd;
+        float: left;
+        font-weight: 700;
+        font-size: 14px;
+        margin-left: -12px;
+    }
+    .tutorialComponent .form-control:focus {
+        box-shadow: #424242;
+        border-left-color: #424242 !important;
+        border-right-color: #424242 !important;
+        border-top: none !important;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(0, 0, 0, .6);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(0, 0, 0, .6);
+    }
+    .tutorialComponent .btn {
+        background-color: #424242 !important;
+        border-left-color: #424242 !important;
+        border-right-color: #424242 !important;
+        border-top: none !important;
+    }
+    .tutorialComponent .ui-select-match-text {
+        color: white;
+        margin-left: -12px;
+    }
+    .tutorialComponent input {
+        color: white !important;
+        background-color: #424242 !important;
+        border-left-color: #424242 !important;
+        border-right-color: #424242 !important;
+        border-top: none !important;
+    }
+    .tutorialComponent {
+        input {
+            background-color: #424242 !important;
+        }
+    }
+
+    .tutorialComponent .no-scroll .datatable-body {
+        overflow-x: hidden;
+    }
+}

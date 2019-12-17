@@ -1,0 +1,168 @@
+<div fxLayout="row" fxLayoutWrap="wrap" style="margin: 10px;">
+  <div fxFlex.gt-sm="70%" fxFlex="100">
+    <form [formGroup]="questionnaireForm">
+      <md-card>
+        <md-card-content>
+          <md-card>
+            <md-card-content>
+              <div fxLayout="row" fxLayoutWrap="wrap" fxFlex="100">
+                <div fxFlex="100" fxFlex.lt-md="100">
+                  <div class="px-1 select-input-container">
+                    <md-input-container style="width: 100%">
+                      <input mdInput placeholder="{{'MENTOREVALUATION.QUESTIONNAIRE.NAME.title' | translate}}" [formControl]="questionnaireForm.controls['name']"
+                        type="search" pattern="[a-zA-Z ÆÐƎƏƐƔĲŊŒẞÞǷȜæðǝəɛɣĳŋœĸſßþƿȝĄƁÇĐƊĘĦĮƘŁØƠŞȘŢȚŦŲƯY̨Ƴąɓçđɗęħįƙłøơşșţțŧųưy̨ƴÁÀÂÄǍĂĀÃÅǺĄÆǼǢƁĆĊĈČÇĎḌĐƊÐÉÈĖÊËĚĔĒĘẸƎƏƐĠĜǦĞĢƔáàâäǎăāãåǻąæǽǣɓćċĉčçďḍđɗðéèėêëěĕēęẹǝəɛġĝǧğģɣĤḤĦIÍÌİÎÏǏĬĪĨĮỊĲĴĶƘĹĻŁĽĿʼNŃN̈ŇÑŅŊÓÒÔÖǑŎŌÕŐỌØǾƠŒĥḥħıíìiîïǐĭīĩįịĳĵķƙĸĺļłľŀŉńn̈ňñņŋóòôöǒŏōõőọøǿơœŔŘŖŚŜŠŞȘṢẞŤŢṬŦÞÚÙÛÜǓŬŪŨŰŮŲỤƯẂẀŴẄǷÝỲŶŸȲỸƳŹŻŽẒŕřŗſśŝšşșṣßťţṭŧþúùûüǔŭūũűůųụưẃẁŵẅƿýỳŷÿȳỹƴźżžẓ ]*">
+                    </md-input-container>
+                    <small *ngIf="questionnaireForm.controls['name'].hasError('required') && (questionnaireForm.controls['name'].touched || formSubmit)"
+                      class="mat-text-warn"> {{'MENTOREVALUATION.QUESTIONNAIRE.NAME.validation1' | translate}}</small>
+                    <small *ngIf="questionnaireForm.controls['name'].hasError('maxlength') && (questionnaireForm.controls['name'].touched || formSubmit)"
+                      class="mat-text-warn">{{ 'MENTOREVALUATION.QUESTIONNAIRE.NAME.validation2' | translate}}</small>
+                    <small *ngIf="questionnaireForm.controls['name'].hasError('pattern') && (questionnaireForm.controls['name'].touched || formSubmit)"
+                      class="mat-text-warn">{{ 'MENTOREVALUATION.QUESTIONNAIRE.NAME.validation3' | translate}}</small>
+                  </div>
+                </div>
+
+              </div>
+            </md-card-content>
+          </md-card>
+
+          <md-card>
+            <md-card-content>
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="50" fxFlex.lt-md="50">
+                  <div class="px-1 select-input-container">
+                    <md-input-container color="accent" style="width: 100%">
+                      <input [formControl]="questionnaireForm.controls['question']" mdInput type="text" [placeholder]="'MENTOREVALUATION.QUESTIONNAIRE.QUESTION.title' | translate"
+                      />
+                    </md-input-container>
+                  </div>
+                </div>
+                <div fxFlex="40" fxFlex.lt-md="40">
+                  <div class="px-1 select-input-container">
+                    <md-select (change)="answerTypeChange($event)" [formControl]="questionnaireForm.controls['answertype']" color="accent" style="width: 100%"
+                      [placeholder]="'MENTOREVALUATION.QUESTIONNAIRE.SELECTANSWERTYPE.title' | translate">
+                      <md-option value="Numeric">{{"MENTOREVALUATION.QUESTIONNAIRE.Numeric" | translate}} </md-option>
+                      <md-option value="Date"> {{"MENTOREVALUATION.QUESTIONNAIRE.Date" | translate}} </md-option>
+                      <md-option value="Text"> {{"MENTOREVALUATION.QUESTIONNAIRE.Text" | translate}} </md-option>
+                      <md-option value="SingleOption">{{"MENTOREVALUATION.QUESTIONNAIRE.SingleOption" | translate}} </md-option>
+                      <md-option value="MultipleOptions">{{"MENTOREVALUATION.QUESTIONNAIRE.MultipleOptions" | translate}} </md-option>
+                    </md-select>
+                    <div fxLayout="row" *ngIf="showAnswerOptions">
+                      <md-input-container color="accent" fxFlex="85">
+                        <input [formControl]="questionnaireForm.controls['option']" mdInput type="text" [placeholder]="'MENTOREVALUATION.QUESTIONNAIRE.OPTION.title' | translate"
+                        />
+                      </md-input-container>
+                      <button type="button" color="primary" (click)="addMoreOptions()" md-icon-button md-button-sm md-raised-button class="grid-button">
+                        <md-icon>add</md-icon>
+                      </button>
+                    </div>
+                    <div fxLayout="row" *ngFor="let option of optionsList;let i=index;">
+                      <span style="text-align: right;">{{i + 1}}) {{option}} </span>
+                    </div>
+                  </div>
+                </div>
+                <div fxFlex="10" fxFlex.lt-md="10" class="add_icon">
+                  <div class="px-1 select-input-container">
+                    <div class="px-1 select-input-container" *ngIf='!EditQuestionStatus'>
+                      <button type="button" color="accent" (click)="addMoreQuestion()" md-icon-button md-button-sm md-raised-button class="grid-button">
+                        <md-icon>add</md-icon>
+                      </button>
+                    </div>
+                    <div class="px-1 select-input-container" *ngIf='EditQuestionStatus'>
+                      <button type="button" color="accent" (click)="saveQuestion()" md-icon-button md-button-sm md-raised-button class="grid-button">
+                        <md-icon>save</md-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+          <md-card>
+            <md-card-content>
+              <div fxLayout="row" fxLayoutWrap="wrap" *ngFor="let data of questionList;let i=index;" style="width:100%;">
+                <md-card style="width:100%">
+                  <md-card-content style="width:100%">
+                    <div fxFlex="70" fxFlex.lt-md="70">
+                      <div class="px-1 select-input-container">
+                        {{data.question}}
+
+                        <div *ngIf="data.answerType == 'SingleOption'">
+                          <md-radio-group style="float: left !important;">
+                            <md-radio-button *ngFor="let option of data.options;let i=index;" value="{{option}}" class="rdmark">{{option}}</md-radio-button>
+
+                          </md-radio-group>
+                        </div>
+                        <div *ngIf="data.answerType == 'MultipleOptions'">
+                          <md-checkbox fxFlex="100" *ngFor="let option of data.options;let i=index;" labelPosition="after">{{option}}</md-checkbox>
+                        </div>
+                      </div>
+                    </div>
+                    <div fxFlex="20" fxFlex.lt-md="20">
+                      <div class="px-1 select-input-container">
+                        {{'MENTOREVALUATION.QUESTIONNAIRE.' + data.answerType | translate}}
+
+                      </div>
+                    </div>
+                    <div fxFlex="15" fxFlex.lt-md="15" class="add_icon">
+
+                      <button md-icon-button (click)="EditQuestion(i)">
+                        <md-icon>edit</md-icon>
+                      </button>
+                      <button md-icon-button (click)="removeQuestion(i)">
+                        <md-icon>delete</md-icon>
+                      </button>
+
+
+
+                    </div>
+                  </md-card-content>
+                </md-card>
+              </div>
+            </md-card-content>
+          </md-card>
+
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="60" fxFlex.lt-md="60">&nbsp;</div>
+            <div fxFlex="40" fxFlex.lt-md="60" style="text-align: right;">
+              <button md-raised-button md-button-sm color="red" class="mr-1" type="button" (click)="revert()">{{ 'MENTOREVALUATION.QUESTIONNAIRE.CANCEL' | translate }}</button>
+              <button md-raised-button md-button-sm color="green" class="mr-1" type="submit" (click)="sendTemplate()">{{ 'MENTOREVALUATION.QUESTIONNAIRE.SAVE' | translate }}</button>
+            </div>
+          </div>
+        </md-card-content>
+      </md-card>
+    </form>
+
+  </div>
+  <div fxFlex.gt-sm="30%" fxFlex="100">
+    <md-card>
+      <md-card-content>
+        <h5>{{'MENTOREVALUATION.QUESTIONNAIRE.MANAGEMENT' | translate}}</h5>
+        <ngx-datatable [rows]="questionnaireList" [sorts]="[{prop: 'name', dir: 'asc'}]" #table class='material Message-class' [columnMode]="'flex'"
+          [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="10">
+          <ngx-datatable-column name="Date" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+              <span (click)="sort()">{{ 'MENTOREVALUATION.QUESTIONNAIRE.NAME.title' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <span style="cursor: pointer;" (click)="onSelectMessage(row)" *ngIf="row.name">{{row.name }}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="subject" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+              <span (click)="sort()">{{ 'MENTOREVALUATION.QUESTIONNAIRE.ACTIONS' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <button md-icon-button class="ml-xs overflow-visible" (click)="viewQuestionnaire(row)">
+                <md-icon>edit</md-icon>
+              </button>
+              <button md-icon-button class="ml-xs overflow-visible" (click)="deleteQuestionnaire(row)">
+                <md-icon>delete</md-icon>
+              </button>
+
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

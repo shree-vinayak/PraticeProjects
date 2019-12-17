@@ -1,0 +1,51 @@
+:host /deep/ .primary-background {
+  background-color: #607d8b;
+  border-radius: 22px;
+}
+
+:host /deep/ .primary-background:hover {
+    background-color: #d28104;
+}
+
+:host /deep/ .mat-button-toggle-checked .mat-button-toggle-label-content{
+background-color:#607d8b !important;
+
+}
+
+:host /deep/ h5{
+font-size: 28px;
+
+}
+
+:host /deep/ p{
+ height: 37px;
+overflow: hidden;
+
+}
+
+
+
+:host /deep/ .mat-card {
+	text-align: center;
+	display: block;
+    // height: 225px !important;
+    margin: 7px !important;
+    padding: 10px;
+    flex:0 !important;
+    color: white;
+    overflow: hidden;
+    word-wrap: break-word;
+    h5 {
+    	margin-top: 10px;
+		text-transform: uppercase;
+    }
+    hr{
+    	border-color: white;
+    }
+}
+
+.rncp-title-tile:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 10px #a0a0a0;
+}
+

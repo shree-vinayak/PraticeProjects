@@ -1,0 +1,340 @@
+<md-card>
+  <md-card-content>
+
+    <!-- <div fxLayout="row" fxLayoutWrap="wrap" class="addTaskButton taskListNgSelect">
+      <div fxFlex="100" fxFlex.lt-md="100">
+        <div fxFlex="25" fxFlex.lt-md="25">
+          <div class="select-input-container" fxFlex="90">
+            <ng-select style="margin-top: 3px;" fxFlex="100"></ng-select>
+          </div>
+        </div>
+        <div fxFlex="25" fxFlex.lt-md="25">
+          <div class="select-input-container" fxFlex="90">
+            <ng-template [ngIf]="showRNCPList === true">
+              <ng-select style="margin-top: 3px;" fxFlex="100"></ng-select>
+            </ng-template>
+          </div>
+        </div>
+        <div fxFlex="25" fxFlex.lt-md="25">
+          <div class="select-input-container" fxFlex="90">
+            <ng-template>
+              <ng-select style="margin-top: 3px;" fxFlex="100"></ng-select>
+            </ng-template>
+          </div>
+        </div>
+
+        <div fxFlex="25" fxFlex.lt-md="25">
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <div dividerColor="accent" fxFlex="47">
+              <button fxFlex style="margin-left: 5px;width: 100%;height: 38px;" md-raised-button type="button" class="btnSearch"
+                color="primary">
+              </button>
+            </div>
+            <div dividerColor="accent" fxFlex="2"></div>
+            <div dividerColor="accent" fxFlex="50">
+              <button fxFlex style="margin-left: 5px;width: 100%;height: 38px;" md-raised-button type="button" class="btnSearch"
+                color="primary">
+                <md-icon>search</md-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutWrap="wrap" class="addTaskButton taskListNgSelect">
+      <div fxFlex="100" fxFlex.lt-md="100">
+        <div fxFlex="25" fxFlex.lt-md="25">
+          <div class="select-input-container" fxFlex="90">
+            <ng-select style="margin-top: 3px;" fxFlex="100"></ng-select>
+          </div>
+        </div>
+        <div fxFlex="25" fxFlex.lt-md="25">
+          <div class="select-input-container" fxFlex="90">
+            <ng-select style="margin-top: 3px;" fxFlex="100"></ng-select>
+          </div>
+        </div>
+        <div fxFlex="25" fxFlex.lt-md="25">
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <div dividerColor="accent" fxFlex="50">
+              <button fxFlex style="margin-left: 5px;width: 100%;height: 38px;" md-raised-button type="button" class="btnSearch"
+                color="primary" (click)="resetSearch()">
+                <md-icon>restore</md-icon>
+                {{ 'DOCTEST.RESET' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutWrap="wrap" class="addTaskButton taskListNgSelect">
+      <div fxFlex="100" fxFlex.lt-md="100">
+        <div fxFlex="25" fxFlex.lt-md="25">
+          <div class="select-input-container" fxFlex="90">
+            <ng-select style="margin-top: 3px;" fxFlex="100"></ng-select>
+          </div>
+        </div>
+        <div fxFlex="25" fxFlex.lt-md="25">
+          <md-input-container dividerColor="accent" fxFlex="90">
+            <input mdInput >
+          </md-input-container>
+        </div>
+        <div fxFlex="25" fxFlex.lt-md="25">
+        </div>
+        <div fxFlex="25" fxFlex.lt-md="25">
+          &nbsp;
+        </div>
+      </div>
+    </div> -->
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxFlex="100" fxFlex.rt-md="100" style="margin-left: 0.4%; float: right">
+        <button style="float: right;width: 200px;" md-raised-button color="accent" (click)="goToaddInternalNote()">
+          <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="#000000" d="M19,19H5V5H15V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V11H19M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z" />
+          </svg>
+          {{'TOOLS_INTERNAL_NOTES.TitleName' | translate}}
+        </button>
+      </div>
+    </div>
+  </md-card-content>
+</md-card>
+
+<div>
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxLayout="row" fxLayoutWrap="wrap" fxFlex="100">
+      <div fxFlex.gt-sm="50%" fxFlex="100">
+        <ngx-datatable class="material material rncp-table" [rows]="allNotesList" [headerHeight]="50" [footerHeight]="50"
+          [rowHeight]="'60'" [columnMode]="'force'" [reorderable]="true" [externalPaging]="true" [count]="page.totalElements"
+          [offset]="page.pageNumber" [offset]="page.pageNumber" [limit]="page.size" (page)="changePage($event)"
+          [externalSorting]="true" (sort)="onSort($event, allNotesList)" [messages]="{emptyMessage: 'NoDataToDisplay' | translate }"
+          [sorts]="[{prop: 'createdAt', dir: 'asc'},
+                    {prop: 'creator', dir: 'asc'},
+                    {prop: 'rncpTitle.shortName', dir: 'asc'},
+                    {prop: 'school.shortName', dir: 'asc'},
+                    {prop: 'user', dir: 'asc'},
+                    {prop: 'noteTitle', dir: 'asc'}]"
+          [cssClasses]="ngxDtCssClasses">
+
+          <ngx-datatable-column headerClass="text-center" [width]="80"  [canAutoResize]="false" prop="createdAt"
+            [resizeable]="false">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span (click)="sort()">{{ 'TOOLS_INTERNAL_NOTES.Date' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template >
+              <span title="{{row?.createdAt | date:'dd-MM-y'}}">
+                {{row?.createdAt | date:'dd-MM-y'}}
+              </span>
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column headerClass="text-center" [canAutoResize]="false" [width]="100" prop="creator"
+            [resizeable]="false">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span (click)="sort()">{{ 'TOOLS_INTERNAL_NOTES.Who' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              {{row?.creator?.firstName}} {{row?.creator?.lastName}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column headerClass="text-center" [canAutoResize]="false" [width]="100" prop="rncpTitle.shortName"
+            [resizeable]="false">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span (click)="sort()">{{ 'TOOLS_INTERNAL_NOTES.Title' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <span>{{ row?.rncpTitle?.shortName }}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column headerClass="text-center" [width]="130" prop="school.shortName" [resizeable]="false">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span (click)="sort()">{{ 'TOOLS_INTERNAL_NOTES.School' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <div class="mailSubject" title="{{row?.School}}">
+                {{row?.school?.shortName}}
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column headerClass="text-center" [width]="130" prop="user" [resizeable]="false">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span (click)="sort()">{{ 'TOOLS_INTERNAL_NOTES.User' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <div class="mailSubject" title="{{row?.user}}">
+                <!-- {{ row?.student?.civility }} -->
+                {{utilityService.computeCivility(row?.user?.civility, translate.currentLang)}}
+                {{row?.user?.firstName}}
+                {{row?.user?.lastName}}
+
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column headerClass="text-center" [width]="130" prop="noteTitle" [resizeable]="false">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span (click)="sort()">{{ 'TOOLS_INTERNAL_NOTES.Note' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <div class="mailSubject" title="{{row?.noteTitle}}" (click)="onSelect(row?._id)">
+                {{row?.noteTitle}}
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column headerClass="text-center" [width]="150" [canAutoResize]="false" prop="Actions"
+            [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template>
+              <span mdTooltip="{{'TOOLS_INTERNAL_NOTES.Action' | translate}}" mdTooltipPosition="above">
+                {{'TOOLS_INTERNAL_NOTES.Action' | translate}}
+              </span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+              <div class="text-center">
+
+                <button md-icon-button md-button-sm md-raised-button class="grid-button" *ngIf="row" (click)="goToAddAdditionlNote(row)">
+                  <span mdTooltip="{{'INTERNAL_NOTE.ACTIONS.Add_additional_note' | translate}}" mdTooltipPosition="above">
+                    <svg style="width:24px;height:24px;vertical-align: middle; " viewBox="0 0 24 24">
+                      <path fill="white" style="fill: white;" d="M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22H9M11,6V9H8V11H11V14H13V11H16V9H13V6H11Z" />
+                    </svg>
+                  </span>
+                </button>
+                <button mdTooltip="{{'INTERNAL_NOTE.ACTIONS.Edit' | translate}}" mdTooltipPosition="above" (click)="goToUpdateInternalNote(row)"
+                  md-icon-button md-button-sm md-raised-button class="grid-button" *ngIf=" row?.creator?._id === loginService.getLoggedInUser()?._id">
+                  <md-icon>edit</md-icon>
+                </button>
+                <button mdTooltip="{{'INTERNAL_NOTE.ACTIONS.Forward' | translate}}" mdTooltipPosition="above"
+                  md-icon-button md-button-sm md-raised-button class="grid-button" *ngIf="row" (click)="forwardInternalNote(row)">
+                  <md-icon>send</md-icon>
+                </button>
+                <button md-icon-button md-button-sm md-raised-button class="grid-button" mdTooltip="{{'INTERNAL_NOTE.ACTIONS.Delete' | translate}}"
+                  mdTooltipPosition="above" *ngIf=" row?.creator?._id === loginService.getLoggedInUser()?._id" (click)="deleteInternalNote(row)">
+                  <md-icon>close</md-icon>
+                </button>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+
+      <!-- Right view -->
+
+      <div fxFlex.gt-sm="50%" fxFlex="100" *ngIf="selectedNoteDetails">
+        <md-card class="primary-background dark-header">
+          <md-card-content class="note-infirmation" style="text-align: left;">
+            <md-card class="primary-background dark-header border-yellow" id="cardOneTitle">
+              <md-card-content>
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                  <div fxFlex="50">
+                    <div class="form-title">{{ 'INTERNALNOTEFORM.SCHOOL' | translate }} :
+                      <span class="title-labe-jobdesc">
+                        {{selectedNoteDetails?.school?.shortName}}
+                      </span>
+                    </div>
+                  </div>
+                  <div fxFlex="50">
+                    <div class="form-title" style="margin-left: 0.6%;">{{ 'INTERNALNOTEFORM.TITLE' | translate }} :
+                      <span class="title-labe-jobdesc">
+                        {{selectedNoteDetails?.rncpTitle?.shortName}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                  <div fxFlex="50">
+                    <div class="form-title">{{ 'INTERNALNOTEFORM.CLASS' | translate }} :
+                      <span class="title-labe-jobdesc">
+                        <!-- {{ jobDescription && jobDescription.studentId && jobDescription.studentId['school']['longName'] ? jobDescription.studentId['school']['longName'] : '' }} -->
+                        {{selectedNoteDetails?.classId?.name}}
+                      </span>
+                    </div>
+                  </div>
+                  <div fxFlex="50">
+                    <div class="form-title" id="paddingLeftAlignment">{{ 'INTERNALNOTEFORM.USER_TYPE' | translate }} :
+                      <span class="title-labe-jobdesc">
+                        {{selectedNoteDetails?.userType?.name}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                  <div fxFlex="100">
+                    <div class="form-title">{{ 'INTERNALNOTEFORM.USER' | translate }} :
+                      <span class="title-labe-jobdesc">
+                        <!-- {{utilityService.computeCivility(selectedNoteDetails?.user?.civility,
+                        translate.currentLang)}}
+                        {{selectedNoteDetails?.user?.firstName}}
+                        {{selectedNoteDetails?.user?.lastName}} -->
+
+                        {{utilityService.computeCivility(selectedNoteDetails?.user?.civility, translate.currentLang)}}
+                        {{selectedNoteDetails?.user?.firstName}}
+                        {{selectedNoteDetails?.user?.lastName}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </md-card-content>
+            </md-card>
+            <md-card class="primary-background dark-header border-yellow" id="cardTwoTitle">
+              <md-card-content>
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                  <div fxFlex="100">
+                    <div>{{ 'INTERNALNOTEFORM.NOTE' | translate }} :
+                      <div class="title-labe-jobdesc">
+                        {{selectedNoteDetails?.noteBody}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </md-card-content>
+            </md-card>
+            <div style="margin: 0.33333333rem; padding-bottom: 2.5rem">
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                <div fxFlex="100">
+                  <div style="padding-bottom: 6px;">{{ 'INTERNALNOTEFORM.ATTACHED_DOCUMENTS' | translate }}</div>
+                  <div class="title-labe-jobdesc">
+                    <div *ngFor="let file of selectedNoteDetails.documents;let i=index">
+                      <md-icon style="vertical-align: middle;">file_download</md-icon>
+                      {{ file?.name }}
+                    </div>
+                  </div>
+                  <div class="title-labe-jobdesc">
+                    <div *ngFor="let addedFiles of selectedNoteDetails.additionalNote; let i=index">
+                      <div *ngFor="let doc of addedFiles.addedDocuments;let i=index">
+                        <md-icon style="vertical-align: middle;">file_download</md-icon>
+                        {{ doc?.name }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="margin: 0.33333333rem">
+              {{ 'INTERNALNOTEFORM.ADDITIONAL_NOTE.TITLE' | translate }}
+            </div>
+            <md-card class="primary-background dark-header border-yellow" id="cardFourTitle" *ngFor="let addNote of selectedNoteDetails.additionalNote;let i=index">
+              <md-card-content>
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                  <div fxFlex="100">
+                    <div>{{ 'INTERNALNOTEFORM.ADDITIONAL_NOTE.USER' | translate }} :
+                      <span class="title-labe-jobdesc">
+                        {{ addNote?.user?.civility }} {{addNote?.user?.firstName}}
+                        {{addNote?.user?.lastName}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                  <div fxFlex="100">
+                    <div>{{ 'INTERNALNOTEFORM.ADDITIONAL_NOTE.DESC' | translate }} :
+                      <div class="title-labe-jobdesc">
+                        <!-- {{ jobDescription && jobDescription.studentId && jobDescription.studentId['school']['longName'] ? jobDescription.studentId['school']['longName'] : '' }} -->
+                        {{addNote?.addedNote}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </md-card-content>
+            </md-card>
+          </md-card-content>
+        </md-card>
+      </div>
+    </div>
+  </div>
+</div>

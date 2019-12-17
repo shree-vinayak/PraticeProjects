@@ -1,0 +1,93 @@
+<div fxLayout="column wrap" fxLayoutAlign="start" style="width: 100%; height: 100%;">
+  <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px;">
+    <div class="pa-1">
+      <div fxLayout="row wrap" fxLayoutAlign="start center">
+        <div fxFlex style="padding-left: 7px;">
+          <md-icon class="middle">receipt</md-icon>
+          <span class="text-xl" *ngIf="eventModel && eventModel['_id'] ">{{ 'DASHBOARD.UPCOMINGEVENT.UpdateEVENT' | translate }}</span>
+          <span class="text-xl" *ngIf="!eventModel || !eventModel['_id'] ">{{ 'DASHBOARD.UPCOMINGEVENT.ADDEVENT' | translate }}</span>
+
+        </div>
+        <button md-icon-button (click)="closeDialog()" style="padding-left:10px;">
+          <md-icon>close</md-icon>
+        </button>
+      </div>
+    </div>
+    <hr>
+  </div>
+</div>
+<br>
+<form [formGroup]="addEventForm" (ngSubmit)="addEvent()">
+  <!-- <md-card-content> -->
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <ng-select formControlName="userTypes" (data)="changeTypes($event)" [multiple]="true" [items]="userTypes" style="width: 100%"
+          placeholder="{{ 'USERS.ADDEDITUSER.SELECTUSERTYPE' | translate }}*"></ng-select>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <md-slide-toggle labelPosition="after" [checked]="!showSchools" (change)="toggleIsAllSchools($event)">
+          {{'DASHBOARD.UPCOMINGEVENT.FORALLSCHOOLS' | translate}}</md-slide-toggle>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="showSchools">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <ng-select formControlName="schools" (data)="changeSchool($event)" [multiple]="true" [items]="schoolList"
+          placeholder="{{ 'DASHBOARD.UPCOMINGEVENT.SELECT_SCHOOLS' | translate }}*" style="width: 100%"></ng-select>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div fxLayout="row" fxLayoutWrap="wrap" style="justify-content: space-between;">
+        <div fxLayout="column" fxLayoutWrap="wrap">
+          <md-input-container style="width: 100%">
+            <input mdInput formControlName="fromDate" [mdDatepicker]="fromDate" [placeholder]="'SETTINGS.SCHOLERSEASON.FROM'| translate"
+              type="text" date>
+            <button mdSuffix class="datepicker-button" [mdDatepickerToggle]="fromDate"></button>
+          </md-input-container>
+          <md-datepicker #fromDate [touchUi]="true"></md-datepicker>
+        </div>
+        <div fxLayout="column" fxLayoutWrap="wrap">
+          <md-input-container style="width: 100%">
+            <input mdInput formControlName="toDate" [min]="disablePastDates()" [mdDatepicker]="toDate" [placeholder]="'SETTINGS.SCHOLERSEASON.TO'|translate"
+              type="text" date [disabled]="checkFromValid">
+            <button mdSuffix class="datepicker-button" [mdDatepickerToggle]="toDate" [disabled]="checkFromValid"></button>
+          </md-input-container>
+          <md-datepicker #toDate [touchUi]="true"></md-datepicker>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div class="select-input-container" style="width:100%;">
+          <md-input-container style="width:100%;">
+            <textarea mdInput id="icon_prefix2" formControlName="name" [placeholder]="'TASK.ADDEDITTASK.DESCRIPTION' | translate" class="materialize-textarea"
+            ></textarea>
+          </md-input-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="end" style="margin-top: 20px; margin-left: 17px; width:100% !important;">
+    <div fxFlex="100" fxFlex.lt-md="100" fxLayoutAlign="end">
+      <button md-raised-button md-button-sm color="red" class="mr-1" type="button" (click)="closeDialog()">{{ 'SETTINGS.USERTYPES.CANCEL' | translate }}</button>
+      <button md-raised-button md-button-sm color="green" class="mr-1" type="submit">{{ 'SETTINGS.USERTYPES.SAVE' | translate }}</button>
+    </div>
+  </div>
+</form>

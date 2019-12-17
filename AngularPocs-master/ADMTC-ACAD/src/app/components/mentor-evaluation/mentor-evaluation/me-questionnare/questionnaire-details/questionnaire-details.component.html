@@ -1,0 +1,440 @@
+<md-card class="questionnaire-details">
+  <md-card-title>
+    <div fxLayout="row wrap">
+      <div fxFlex="100" fxFlex.lt-sm="100">
+        <!-- <h4 class="mt-0"> -->
+        <div fxFlex="50">
+          <md-icon style="vertical-align: middle; margin-right: 10px">border_color</md-icon>
+          <md-input-container style="width:80%;">
+            <input mdInput type="text" #questionnaireName placeholder="{{'MENTOREVALUATION.QUESTIONNAIRE.QuestionnaireName' | translate}}"
+              (blur)="setQuestionnaireName(questionnaireName.value)" />
+          </md-input-container>
+        </div>
+        <div fxFlex="5"></div>
+        <div fxFlex="40">
+          <md-select placeholder="Questionnaire Type" style="width:80%;" [(ngModel)]="questionnaireType" (change)="changeQuestionnaireType($event)">
+            <md-option value="mentor-evaluation">Mentor Evaluation</md-option>
+            <md-option value="employability-survey">Employability Survey</md-option>
+            <md-option value="other">Other</md-option>
+          </md-select>
+        </div>
+      </div>
+      <div fxFlex="100" fxFlex.lt-sm="100">
+        <small style="width: 100%" *ngIf="formSubmit && questionnaire.questionnaireName == ''" class="mat-text-warn">{{'DASHBOARD.ERRORS.REQUIREDFIELD' | translate}}</small>
+      </div>
+    </div>
+  </md-card-title>
+  <hr/>
+  <md-card-content>
+    <md-tab-group class="auto-tab-width white-background-tabs">
+      <md-tab>
+        <ng-template md-tab-label>
+          <md-icon>vertical_align_top</md-icon>
+          {{'TEST.HEADING' | translate}}
+        </ng-template>
+        <div class="pt-2">
+
+          <md-card style="background-color: #607d8b">
+            <md-card-header>
+              <md-card-title>{{'TEST.TITLE' | translate}}</md-card-title>
+            </md-card-header>
+            <hr>
+            <md-card-content>
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex>
+                  <div class="px-1">
+                    <label class="mr-1">{{'TEXT' | translate}}</label>
+                    <button md-raised-button md-icon-button type="button" (click)="openTextDialog('questionnaire-title-text')">
+                      <md-icon>{{questionnaire.questionnaireGrid.header.title === '' ? 'add' : 'edit'}}</md-icon>
+                      <!--AJOUTER-->
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+
+          <md-card style="background-color: #607d8b">
+            <md-card-header>
+              <md-card-title>{{'TEST.HEADER' | translate}}</md-card-title>
+            </md-card-header>
+            <hr>
+            <md-card-content>
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex>
+                  <div class="px-1">
+                    <label class="mr-1">{{'TEXT' | translate}}</label>
+                    <button md-raised-button md-icon-button type="button" (click)="openTextDialog('top-header')">
+                      <md-icon>{{questionnaire.questionnaireGrid.header.text === '' ? 'add' : 'edit'}}</md-icon>
+                      <!--AJOUTER-->
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+          <md-card style="background-color: #607d8b">
+            <md-card-header>
+              <!-- <md-card-title>{{'TEST.HEADER' | translate}}</md-card-title> -->
+              <md-card-title>{{'TEST.DIRECTION' | translate}}</md-card-title>
+            </md-card-header>
+            <hr>
+            <md-card-content>
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex>
+                  <div class="px-1">
+                    <label class="mr-1">{{'TEXT' | translate}}</label>
+                    <button md-raised-button md-icon-button type="button" (click)="openTextDialog('direction-text')">
+                      <md-icon>{{questionnaire.questionnaireGrid.header.direction === '' ? 'add' : 'edit'}}</md-icon>
+                      <!--AJOUTER-->
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+          <md-card>
+            <md-card-header>
+              <md-card-title>
+                <md-checkbox labelPosition="after"> {{'TEST.COMMENTSCOLUMN' | translate}} </md-checkbox>
+              </md-card-title>
+              <md-input-container>
+                <input mdInput type="text" #commentHeader placeholder="{{'TEST.COMMENTSHEADER' | translate}}" (blur)="setCommentsHeader(commentHeader.value)"
+                />
+              </md-input-container>
+            </md-card-header>
+            <hr>
+            <md-card-content>
+            </md-card-content>
+          </md-card>
+          <md-card style="background-color: #607d8b">
+            <md-card-header>
+              <md-card-title>{{'TEST.HEADERFIELDS' | translate}}</md-card-title>
+              <button md-raised-button type="button" [md-menu-trigger-for]="headerFieldsMenu" class="mr-1" style="right: 0; position: absolute; margin-top: 0.25em">
+                <md-icon>add</md-icon>
+                {{'ADD' | translate}}
+                <md-icon>arrow_drop_down</md-icon>
+              </button>
+              <md-menu xPosition="before" yPosition="below" #headerFieldsMenu="mdMenu">
+                <div *ngFor="let field of questionnaireConsts.requiredFieldsTypes; let i = index;">
+                  <button md-menu-item *ngIf="!field.removed" type="button" (click)="addHeaderField(field, i, true)">
+                    {{ 'TEST.HEADERFIELDSLIST.' + field.view | translate }}
+                  </button>
+                </div>
+                <button md-menu-item type="button" (click)="addHeaderField({value: 'other', type: 'text', view: ''}, -1, false)">
+                  {{ 'TEST.HEADERFIELDSLIST.Other' | translate }}
+                </button>
+              </md-menu>
+            </md-card-header>
+            <hr>
+            <md-card-content *ngIf="headerFields.length > 0">
+              <div>
+                <div fxLayout="row wrap" fxLayoutAlign="start center" *ngFor="let field of headerFields; let i = index">
+                  <div>
+                    <button md-icon-button md-button-sm type="button" (click)="removeHeaderField(i)">
+                      <md-icon>delete</md-icon>
+                    </button>
+                    <button md-icon-button md-button-sm *ngIf="field.editing" type="button" (click)="saveHeaderField(i)">
+                      <md-icon>check_circle</md-icon>
+                    </button>
+                    <button md-icon-button md-button-sm *ngIf="!field.editing" type="button" (click)="editHeaderField(i)">
+                      <md-icon>edit</md-icon>
+                    </button>
+                  </div>
+                  <div [fxFlex]="field.dataType === 'longtext' ? '60' : '40'" *ngIf="field.editing" class="pr-1">
+                    <md-input-container style="width: 100%" color="accent">
+                      <input mdInput [placeholder]="'FIELDTEXT' | translate" type="text" [(ngModel)]="field.value" />
+                    </md-input-container>
+                  </div>
+                  <div fxFlex *ngIf="!field.required && field.editing">
+                    <md-select color="accent" [placeholder]="'FIELDTYPE' | translate" [(ngModel)]="field.dataType">
+                      <md-option *ngFor="let fType of questionnaireConsts.fieldTypes" [value]="fType.value">
+                        {{ 'TEST.FIELDTYPES.' + fType.view | translate }}
+                      </md-option>
+                    </md-select>
+                  </div>
+                  <div fxFlex>
+                    <md-select color="accent" *ngIf="field.dataType != 'longtext' && field.editing" [placeholder]="'ALIGNMENT' | translate" [(ngModel)]="field.align">
+                      <md-option [value]="'left'">{{ 'LEFT' | translate }}</md-option>
+                      <md-option [value]="'right'">{{ 'RIGHT' | translate }}</md-option>
+                    </md-select>
+                    <span *ngIf="!field.editing">{{field.value}} - {{field.align.toUpperCase() | translate}}</span>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+        </div>
+      </md-tab>
+      <md-tab>
+        <ng-template md-tab-label>
+          <md-icon>help</md-icon>
+          {{'Questionnaire' | translate}}
+        </ng-template>
+        <div class="pt-2">
+          <md-card style="background-color: #607d8b">
+            <md-card-header>
+              <div fxFlex="30">
+                <md-card-title>{{'Questionnaire Block' | translate}}</md-card-title>
+              </div>
+              <div fxFlex="60">
+
+              </div>
+              <div fxFlex="10" fxLayoutAlign="center" style="align-self: center !important;">
+                <button md-raised-button md-icon-button md-button-sm (click)="addNewCompetenceDialog()">
+                  <md-icon>add</md-icon>
+                </button>
+              </div>
+
+            </md-card-header>
+            <hr>
+            <md-card-content>
+              <div fxLayout="row wrap">
+                <div fxLayout="row wrap">
+                  <div fxFlex="30"></div>
+                  <div fxFlex="20" fxLayoutAlign="end">
+                  </div>
+
+                  <div fxFlex="50" fxLayoutAlign="end">
+                  </div>
+                </div>
+                <div fxFlex="100">
+                  <form [formGroup]="form">
+                    <md-card class="border-yellow" *ngFor="let competence of form['controls'];let competenceIndex=index" [formGroupName]="competenceIndex">
+                      <md-card-content>
+                        <div fxLayout="row wrap">
+                          <div fxFlex="90">
+
+                            <md-input-container color="accent" style="width:100%">
+                              <input mdInput #segmentValue formControlName="competenceName" (blur)="updateDocumentObject()" [placeholder]=" blockOfCompetencePlaceholder[competenceIndex] | translate "
+                                type="text" required/>
+                            </md-input-container>
+                            <small *ngIf="formSubmit && form.value[competenceIndex]['competenceName'] == ''" class="mat-text-warn">{{'DASHBOARD.ERRORS.REQUIREDFIELD' | translate}}</small>
+
+
+                          </div>
+                          <div fxFlex="10">
+                            <div fxFlex="100" style="text-align: right;">
+                              <button color="accent" md-icon-button md-raised-button type="button" (click)="removeCompetence(competenceIndex)">
+                                <md-icon>close</md-icon>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <div fxLayout="row wrap">
+                            <button md-raised-button color="primary" class="add-section-btn" type="button" (click)="addNewSegment(competenceIndex)">
+                              <md-icon>add</md-icon>{{'MENTOREVALUATION.QUESTIONNAIRE.ADD_SEGEMENT' | translate}}</button>
+                          </div>
+                          <div fxLayout="row wrap">
+                            <div fxFlex formGroupName="segment">
+                              <md-card class="background-primary" *ngFor="let segment of competence.get('segment')['controls'];let segmentIndex=index"
+                                [formGroupName]="segmentIndex">
+                                <md-card-content>
+
+                                  <div fxLayout="row wrap">
+                                    <div fxFlex="80">
+                                      <md-input-container color="accent" style="width:100%">
+                                        <input mdInput #segmentName formControlName="segmentName" (blur)="updateDocumentObject()" [placeholder]="'MENTOREVALUATION.QUESTIONNAIRE.SEGEMENT_NAME' | translate"
+                                          type="text" required/>
+                                      </md-input-container>
+                                      <small *ngIf="formSubmit && form.value[competenceIndex]['segment'][segmentIndex]['segmentName'] == ''" class="mat-text-warn">{{'DASHBOARD.ERRORS.REQUIREDFIELD' | translate}}</small>
+                                    </div>
+
+                                    <div fxFlex="20">
+                                      <div fxFlex="100" style="text-align: right;">
+                                        <button md-icon-button md-raised-button type="button" (click)="removeSegment(competenceIndex,segmentIndex)">
+                                          <md-icon>close</md-icon>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <button md-raised-button type="button" class="add-section-btn" (click)="AddQuestion(competenceIndex,segmentIndex)">
+                                    <md-icon>add</md-icon>{{'MENTOREVALUATION.QUESTIONNAIRE.AddQuestion' | translate}}</button>
+
+                                  <div formGroupName="question">
+                                    <md-card *ngFor="let question of segment.get('question')['controls'];let questionIndex = index;" [formGroupName]="questionIndex">
+                                      <md-card-content>
+
+                                        <div fxLayout="row wrap" fxLayoutGap="">
+                                          <div fxFlex="15" style="align-self: center">
+                                            <md-slide-toggle #isFieldToggle formControlName="isField" (change)="changeIsField($event, competenceIndex, segmentIndex, questionIndex)">
+                                              {{ 'Field' | translate}}
+                                            </md-slide-toggle>
+                                          </div>
+                                          <ng-template [ngIf]="!isFieldToggle.checked">
+                                            <div fxFlex="35" >
+                                              <md-input-container color="accent" style="width: 100%">
+                                                <input #questionName mdInput style="width: 100%" (blur)="updateDocumentObject()" formControlName="questionName" [placeholder]="'MENTOREVALUATION.QUESTIONNAIRE.QUESTION_NAME' | translate"
+                                                  type="text" required />
+                                              </md-input-container>
+                                              <small *ngIf="formSubmit && form.value[competenceIndex]['segment'][segmentIndex]['question'][questionIndex]['questionName'] == ''"
+                                                class="mat-text-warn">{{'DASHBOARD.ERRORS.REQUIREDFIELD' | translate}}</small>
+                                            </div>
+                                            <div fxFlex="25">
+                                              <div class="px-1 select-input-container" >
+                                                <md-select #questionType fxFlex="100" (change)="updateDocumentObject()" formControlName="questionType" [placeholder]="'MENTOREVALUATION.QUESTIONNAIRE.ANSWER_TYPE' | translate ">
+                                                  <md-option *ngFor="let questionAnswerType of questionnaireConsts.questionAnswerTypes" [value]="questionAnswerType.key">
+                                                    {{"QUESTION_ANSWER_TYPE." + questionAnswerType.name.toUpperCase() | translate}}
+                                                  </md-option>
+                                                </md-select>
+                                              </div>
+                                              <small *ngIf="formSubmit && form.value[competenceIndex]['segment'][segmentIndex]['question'][questionIndex]['questionType'] == ''"
+                                                class="mat-text-warn">{{'DASHBOARD.ERRORS.REQUIREDFIELD' | translate}}</small>
+                                            </div>
+                                          </ng-template>
+
+                                          <ng-template [ngIf]="isFieldToggle.checked">
+                                            <div fxFlex="60">
+                                              <div class="px-1 select-input-container" >
+                                                <md-select fxFlex="100" (change)="onQuestionnaireFieldsChange($event, competenceIndex, segmentIndex, questionIndex)" formControlName="questionnaireFieldKey"
+                                                  [placeholder]="'MENTOREVALUATION.QUESTIONNAIRE.ANSWER_TYPE' | translate ">
+                                                  <md-option [value]="field" *ngFor="let field of questionnaireConsts.questionnaireFields">{{"QUESTIONNAIRE_FIELDS." + field | translate}} </md-option>
+                                                </md-select>
+                                              </div>
+                                            </div>
+                                          </ng-template>
+
+                                          <div fxFlex="15" style="align-self: center">
+                                            <md-checkbox formControlName="isAnswerRequired" value="form.value[competenceIndex]['segment'][segmentIndex]['question'][questionIndex]['isAnswerRequired']"
+                                              (change)="changeIsAnswerRequired($event, competenceIndex, segmentIndex, questionIndex)">Required?</md-checkbox>
+                                          </div>
+                                          <div fxFlex="10">
+                                            <div fxFlex="100" style="text-align: right;">
+                                              <button color="primary" md-icon-button md-raised-button type="button"
+                                              (click)="removeQuestion(competenceIndex,segmentIndex,questionIndex)">
+                                                <md-icon>close</md-icon>
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div fxLayout="row wrap" *ngIf="checkIsMutiOption(competenceIndex,segmentIndex,questionIndex)">
+                                          <div fxFlex="80">
+                                            <md-input-container color="accent" style="width: 100%">
+                                              <input #option formControlName="answer" mdInput type="text" [placeholder]="'MENTOREVALUATION.QUESTIONNAIRE.OPTION.title' | translate"
+                                              />
+                                            </md-input-container>
+                                          </div>
+                                          <div fxFlex="20">
+                                            <button type="button" color="primary" (click)="addMoreOptions(competenceIndex,segmentIndex,questionIndex)" md-icon-button
+                                              md-button-sm md-raised-button class="grid-button">
+                                              <md-icon>add</md-icon>
+                                            </button>
+                                          </div>
+                                        </div>
+                                        <div fxLayout="row wrap" *ngIf="checkIsMutiOption(competenceIndex,segmentIndex,questionIndex)">
+                                          <div fxFlex="100" fxLayout="row wrap" *ngFor="let option of form.value[competenceIndex]['segment'][segmentIndex]['question'][questionIndex].options;let
+                                            optionIndex=index;">
+                                            <div fxFlex="70">
+                                              <span style="text-align: right;">{{optionIndex + 1}}) {{option.optionText}} </span>
+                                            </div>
+                                            <div fxFlex="30">
+                                              <button type="button" md-icon-button (click)="removeOption(competenceIndex,segmentIndex,questionIndex,optionIndex)">
+                                                <md-icon style="margin-top: -30px;">delete</md-icon>
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </md-card-content>
+                                    </md-card>
+                                  </div>
+                                </md-card-content>
+                              </md-card>
+                            </div>
+                          </div>
+
+                        </div>
+                      </md-card-content>
+                    </md-card>
+                  </form>
+                </div>
+
+              </div>
+            </md-card-content>
+          </md-card>
+        </div>
+      </md-tab>
+      <md-tab>
+        <ng-template md-tab-label>
+          <md-icon>vertical_align_bottom</md-icon>
+          {{'TEST.FOOTER' | translate}}
+        </ng-template>
+        <div class="pt-2">
+          <md-card style="background-color: #607d8b">
+            <md-card-header>
+              <md-card-title>{{'TEST.MAINFOOTER' | translate}}</md-card-title>
+              <div class="mr-1 mt-1" style="right: 0; position: absolute; margin-top: 0.25em">
+                <md-checkbox name="cb" color="accent" align="end" [checked]="questionnaire.questionnaireGrid.footer.textBelow" (change)="footerTextPositionChanged($event)">
+                  {{'TEST.FOOTERBELOW' | translate}}
+                </md-checkbox>
+              </div>
+            </md-card-header>
+            <hr>
+            <md-card-content>
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex>
+                  <div class="px-1">
+                    <label class="mr-1">{{'TEXT' | translate}}</label>
+                    <button md-raised-button md-icon-button type="button" (click)="openTextDialog('footer-text')">
+                      <md-icon>{{questionnaire.questionnaireGrid.footer.text === '' ? 'add' : 'edit'}}</md-icon>
+                      <!--AJOUTER-->
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+          <md-card style="background-color: #607d8b">
+            <md-card-header>
+              <md-card-title>{{'TEST.FOOTERFIELDS' | translate}}</md-card-title>
+              <button md-raised-button type="button" class="mr-1" (click)="addFooterField({value: 'other', type: 'text', view: 'Champ'})"
+                style="right: 0; position: absolute; margin-top: 0.25em">
+                <md-icon>add</md-icon>
+                {{'ADD' | translate}}
+              </button>
+            </md-card-header>
+            <hr>
+            <md-card-content *ngIf="footerFields.length > 0">
+              <div>
+                <div fxLayout="row wrap" fxLayoutAlign="start center" *ngFor="let field of footerFields; let i = index">
+                  <div>
+                    <button md-icon-button md-button-sm type="button" (click)="removeFooterField(i)">
+                      <md-icon>delete</md-icon>
+                    </button>
+                    <button md-icon-button md-button-sm *ngIf="field.editing" type="button" (click)="saveFooterField(i)">
+                      <md-icon>check_circle</md-icon>
+                    </button>
+                    <button md-icon-button md-button-sm *ngIf="!field.editing" type="button" (click)="editFooterField(i)">
+                      <md-icon>edit</md-icon>
+                    </button>
+                  </div>
+                  <div [fxFlex]="field.dataType === 'longtext' ? '60' : '40'" *ngIf="field.editing" class="pr-1">
+                    <md-input-container style="width: 100%" color="accent">
+                      <input mdInput [placeholder]="'FIELDTEXT' | translate" type="text" [(ngModel)]="field.value" />
+                    </md-input-container>
+                  </div>
+                  <div fxFlex *ngIf="field.editing">
+                    <md-select color="accent" [placeholder]="'FIELDTYPE' | translate" [(ngModel)]="field.dataType">
+                      <md-option *ngFor="let fType of questionnaireConsts.fieldTypes" [value]="fType.value">
+                        {{ 'TEST.FIELDTYPES.' + fType.view | translate }}
+                      </md-option>
+                    </md-select>
+                  </div>
+                  <div fxFlex>
+                    <md-select color="accent" *ngIf="field.dataType != 'longtext' && field.editing" [placeholder]="'ALIGNMENT' | translate" [(ngModel)]="field.align">
+                      <md-option [value]="'left'">{{ 'LEFT' | translate }}</md-option>
+                      <md-option [value]="'right'">{{ 'RIGHT' | translate }}</md-option>
+                    </md-select>
+                    <span *ngIf="!field.editing">{{field.value}} - {{field.align.toUpperCase() | translate}}</span>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+        </div>
+      </md-tab>
+    </md-tab-group>
+  </md-card-content>
+</md-card>

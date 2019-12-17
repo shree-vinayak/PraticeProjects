@@ -1,0 +1,219 @@
+.ng2-dropdown-menu__options-container {
+    z-index: 9999 !important;
+}
+:host /deep/ .multi-list-length .ui-select-multiple .ui-select-choices{
+    max-height: 256px !important;
+    overflow-y: scroll !important;
+}
+
+:host /deep/ .border-red .ui-select-container {
+	border: 3px solid #f44336
+}
+
+:host /deep/ .group-of-school-list .ui-select-choices-row.active > a {
+    background: rgba(0, 0, 0, 0.04) !important;
+    color: black !important
+}
+
+:host /deep/ .group-of-school-list .ui-select-choices-row > a{
+    line-height: 2.5rem;
+    height: 2.5rem;
+}
+
+.btnSearch {
+    margin-left: 5px;
+    height: 37px;
+    min-width: auto !important;
+}
+.col_s6 {
+    width: 50% !important;
+    float: left;
+}
+
+.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #3f51b5!important;
+}
+
+.mat-radio-inner-circle {
+    background-color: #3f51b5!important;
+}
+
+.col_s6>div,
+.col_s12>div {
+    width: 100%;
+}
+
+.col_s6 .mat-select {
+    width: 100%;
+}
+
+.col_s12 {
+    width: 100% !important;
+    float: left;
+}
+.col_s12 .mat-select {
+    width: 100%;
+}
+
+.resume-label {
+    font-size: 12px;
+    color: #151313;
+    padding-left: 16px;
+    display: inline-block;
+}
+
+.resume-px {
+    display: inline-block !important;
+}
+
+.resume-px div {
+    display: inline-block !important;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+body .mat-select-trigger {
+    margin: 1em 0 !important;
+}
+
+.btn-delete {
+    font-size: 13px;
+    margin-bottom: 8px;
+    padding: 0;
+    line-height: 35px;
+    min-width: 45px;
+}
+
+.btn-download {
+    font-size: 13px;
+    margin-bottom: 8px;
+    padding: 0;
+    line-height: 35px;
+    min-width: 45px;
+}
+.add-company{
+    float: right;
+}
+
+
+/*Loadiing Css - start*/
+/* Absolute Center Spinner */
+.overlay-loading {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0;
+  right: 0;
+}
+
+/* Transparent Overlay */
+.overlay-loading:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.80);
+}
+
+/* :not(:required) hides these rules from IE9 and below */
+.overlay-loading:not(:required) {
+  /* hide "loading..." text */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.overlay-loading:not(:required):after {
+  content: '';
+  display: block;
+  font-size: 10px;
+  width: 1em;
+  height: 1em;
+  margin-top: -0.5em;
+  -webkit-animation: spinner 1500ms infinite linear;
+  -moz-animation: spinner 1500ms infinite linear;
+  -ms-animation: spinner 1500ms infinite linear;
+  -o-animation: spinner 1500ms infinite linear;
+  animation: spinner 1500ms infinite linear;
+  border-radius: 0.5em;
+  -webkit-box-shadow: rgba(255, 230, 0, 0.986) 1.5em 0 0 0, rgba(255, 230, 0, 0.986) 1.1em 1.1em 0 0, rgba(255, 230, 0, 0.986) 0 1.5em 0 0, rgba(255, 230, 0, 0.986) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(255, 230, 0, 0.986) 0 -1.5em 0 0, rgba(255, 230, 0, 0.986) 1.1em -1.1em 0 0;
+  box-shadow: rgba(255, 230, 0, 0.986) 1.5em 0 0 0, rgba(255, 230, 0, 0.986) 1.1em 1.1em 0 0, rgba(255, 230, 0, 0.986) 0 1.5em 0 0, rgba(255, 230, 0, 0.986) -1.1em 1.1em 0 0, rgba(255, 230, 0, 0.986) -1.5em 0 0 0, rgba(255, 230, 0, 0.986) -1.1em -1.1em 0 0, rgba(255, 230, 0, 0.986) 0 -1.5em 0 0, rgba(255, 230, 0, 0.986) 1.1em -1.1em 0 0;
+}
+
+/* Animation */
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+/*Loadiing Css - end*/

@@ -1,0 +1,74 @@
+
+<ngx-datatable class="material"
+                [rows]="rncpTitles"    
+                [columnMode]="'flex'"
+                [rowHeight]="'auto'"
+                [headerHeight]="50"
+                [sorts]="[{prop: 'Certifier', dir: 'asc'}]">
+
+    <ngx-datatable-column name="Certifier" [flexGrow]="8" [sortable]="false">
+    <ng-template let-column="column" 
+      ngx-datatable-header-template>
+      {{ 'Customer.EDITTITLE.CERTIFIER' | translate}}
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.certifier?.shortName }}<!--pending addresses in all customers-->
+    </ng-template>
+  </ngx-datatable-column>
+
+    <ngx-datatable-column name="Preparation Center" [flexGrow]="8" [sortable]="false">
+    <ng-template let-column="column" 
+      ngx-datatable-header-template>
+      {{ 'Customer.EDITTITLE.PREPARATIONCENTER' | translate}}
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.preparationCenters}}<!--pending addresses in all customers-->
+    </ng-template>
+  </ngx-datatable-column>
+
+
+
+    <ngx-datatable-column name="School Long Name" [flexGrow]="14" [sortable]="false">
+    <ng-template let-column="column" 
+      ngx-datatable-header-template>
+      {{ 'Customer.EDITTITLE.LONGNAME' | translate}}
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.longName}}
+    </ng-template>
+  </ngx-datatable-column>
+
+
+
+  <ngx-datatable-column name="Short Name" [flexGrow]="7">
+    <ng-template let-column="column" 
+      ngx-datatable-header-template>
+      {{ 'Customer.EDITTITLE.SHORTNAME' | translate}}
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.shortName}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="RNCP Level" [flexGrow]="8" [sortable]="false">
+    <ng-template let-column="column" 
+      ngx-datatable-header-template>
+      {{ 'Customer.EDITTITLE.LEVELRNCP' | translate}}
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.rncpLevel }}
+    </ng-template>
+  </ngx-datatable-column>
+
+
+    <ngx-datatable-column name="Expiration Date" [flexGrow]="8" [sortable]="false">
+    <ng-template let-column="column" 
+      ngx-datatable-header-template>
+      {{ 'Customer.EDITTITLE.EXPIRATIONDATE' | translate}}
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.expiredDate | date:'dd/MM/y' }}
+    </ng-template>
+  </ngx-datatable-column>
+
+</ngx-datatable>

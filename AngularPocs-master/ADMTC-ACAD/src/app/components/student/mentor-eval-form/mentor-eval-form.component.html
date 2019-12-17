@@ -1,0 +1,182 @@
+<div [ngStyle]="{'pointer-events': isPreviousCourse ? 'none' : 'all'}" *ngIf="!questionnaireSubmit && displayQuestionairre">
+    <div class="job-description">{{ 'MENTOREVALUATION.TITLE' | translate }}</div>
+    <form class="mentorEvalForm">
+        <div class="row wrap" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0" style="margin-right: 0px !important">
+            <div fxFlex="70">
+                <md-card class="primary-background dark-header">
+                    <md-card-content style="text-align: left;">
+
+                        <md-card class="primary-background dark-header border-yellow">
+                            <md-card-content>
+                                <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                                    <div fxFlex="50">
+                                        <div class="form-title" style="margin: 0px;">{{ 'JOBDESCRIPTIONFORM.STUDENT' | translate | titlecase}} :
+                                            <span style="font-weight: normal;">
+                        {{ studentName }}
+                      </span>
+                                        </div>
+
+                                    </div>
+                                    <div fxFlex="50">
+                                        <div class="form-title" style="margin: 0px;">{{ 'JOBDESCRIPTIONFORM.COMPANY' | translate | titlecase }} :
+                                            <span style="font-weight: normal;">
+                        {{ companies[0]?.company?.companyName }}
+                      </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                                    <div fxFlex="50">
+                                        <div class="form-title" style="margin: 0px;">{{ 'JOBDESCRIPTIONFORM.SCHOOL' | translate | titlecase}} :
+                                            <span style="font-weight: normal;">
+                        {{ school}}
+                      </span>
+                                        </div>
+                                    </div>
+                                    <div fxFlex="50">
+                                        <div class="form-title" style="margin: 0px;">{{ 'JOBDESCRIPTIONFORM.MENTOR' | translate | titlecase}} :
+                                            <span style="font-weight: normal;">
+                        {{ mentor }}
+                      </span>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                                    <div fxFlex="50">
+                                        <div class="form-title" style="margin: 0px;">{{ 'JOBDESCRIPTIONFORM.TITIE' | translate | titlecase }} :
+                                            <span style="font-weight: normal;">
+                        {{ rncpTitle }}
+                      </span>
+                                        </div>
+                                    </div>
+                                    <div fxFlex="50">
+                                        <div class="form-title" style="margin: 0px;">{{ 'JOBDESCRIPTIONFORM.CLASS' | translate | titlecase }} :
+                                            <span style="font-weight: normal;">
+                        {{ assignedClass }}
+                      </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                                    <div fxFlex="50">
+                                        <div class="form-title" style="margin: 0px;">{{ 'Questionnaire Name' | translate | titlecase}} :
+                                            <span style="font-weight: normal;">{{ qtName }}</span>
+                                        </div>
+                                    </div>
+                                    <div fxFlex="50"></div>
+                                </div>
+
+                            </md-card-content>
+                        </md-card>
+
+                        <div *ngIf="myData.length > 0">
+                            <!-- <md-card class="primary-background dark-header border-yellow">
+                <md-card-content> -->
+                            <!-- <div *ngFor="let md of myData; let i=index"> -->
+                            <!-- <div fxFlex="auto" class="form-title">Questionnaire Name :  -->
+                            <form>
+                                <div>
+                                    <div *ngFor="let c of myData | orderBy: 'sortOrder'; let i=index">
+                                        <md-card class="primary-background dark-header border-yellow">
+                                            <md-card-content>
+                                                <div style="justify-content: space-between;">
+                                                    <div>
+                                                        <div *ngFor="let s of c.segment | orderBy: 'sortOrder'; let j=index">
+                                                            <!-- </div> -->
+
+                                                            <div fxFlex="100">
+                                                                <div *ngFor="let q of s.question | orderBy: 'sortOrder'; let k=index">
+                                                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                                                        <div fxFlex="50">
+                                                                            <div style="margin: 10px;">{{ q.questionName }}</div>
+                                                                        </div>
+                                                                        <div fxFlex="50" [ngSwitch]="q.answerType.toLowerCase()" >
+
+                                                                            <md-input-container *ngSwitchCase="'numeric'" fxFlex="100" dividerColor="accent">
+                                                                                <input mdInput type="number" [disabled]="isReadOnly" name="answer" value="{{myData[i]['segment'][j]['question'][k]?.answer}}" (blur)="changeValue($event,i,j,k)" placeholder="answer">
+                                                                            </md-input-container>
+                                                                            <md-input-container *ngSwitchCase="'text'" fxFlex="100" dividerColor="accent">
+                                                                                <input mdInput type="text" [disabled]="isReadOnly" name="answer" value="{{myData[i]['segment'][j]['question'][k]?.answer}}" (blur)="changeValue($event,i,j,k)" placeholder="answer">
+                                                                            </md-input-container>
+                                                                            <div *ngSwitchCase="'date'">
+                                                                                <md-input-container fxFlex="100" dividerColor="accent" style="margin-top: -0.5em;">
+                                                                                    <input mdInput type="text" [disabled]="isReadOnly" name="answer" value="{{myData[i]['segment'][j]['question'][k]?.answer}}" (blur)="changeValue($event,i,j,k)" [mdDatepicker]="answer" placeholder="Date">
+                                                                                    <button mdSuffix *ngIf="!isReadOnly" [mdDatepickerToggle]="answer" class="white-datepicker-button" style="background-color: grey !important;"></button>
+                                                                                </md-input-container>
+                                                                                <md-datepicker #answer [touchUi]="true" (selectedChanged)="changeValueDatePicker($event,i,j,k)"></md-datepicker>
+                                                                            </div>
+                                                                            <div *ngSwitchCase="'singleoption'" >
+                                                                                <md-radio-group [style.display]="grid" fxLayout="row" [disabled]="isReadOnly" name="{{k}}" value="{{myData[i]['segment'][j]['question'][k]?.answer}}" (change)="onradioChange($event,i,j,k,ioption,option,q['options'])" style="float: left;">
+                                                                                    <md-radio-button *ngFor="let option of q['options'];let idx= index" [value]="option" style="margin-right: 5px">
+                                                                                        {{option | translate}}
+                                                                                    </md-radio-button>
+                                                                                </md-radio-group>
+                                                                            </div>
+                                                                            <div *ngSwitchCase="'multipleoptions'" [style.display]="grid">
+                                                                                <md-checkbox fxFlex="100" name="{{k}}" (change)="onChkChange($event,i,j,k,ioption,option,q['options'])" *ngFor="let option of  q['options'];let ioption=index;" labelPosition="after" value="{{option}}" [checked]="validateCheckBoxIsChecked(i,j,k,option)"
+                                                                                    [disabled]="isReadOnly">
+                                                                                    {{option}}&nbsp;&nbsp;&nbsp;
+                                                                                </md-checkbox>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+
+                                            </md-card-content>
+                                        </md-card>
+                                    </div>
+                                </div>
+                                <!-- {{MainForm.value | json }} -->
+                            </form>
+                            <!-- </div>
+                </md-card-content>
+              </md-card> -->
+                        </div>
+
+                        <!-- Signature -->
+                        <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0" class="mt-18" style="margin-left: 1%">
+                            <div fxFlex="50">
+                                <md-checkbox  name="signatureOfTheMentorChekbox" color="accent"  [(ngModel)]="signatureOfTheMentorChekbox" [disabled]="isReadOnly">
+                                    &nbsp;&nbsp;{{'JOBDESCRIPTIONFORM.SIGNATUREOFTHECOMPANYMENTOR' | translate | titlecase}}
+                                </md-checkbox>
+                                <br>
+
+                            </div>
+                            <div fxFlex="50">
+                                <md-checkbox  name="validateByACADChekbox" color="accent" [(ngModel)]="validateByACADChekbox" *ngIf="mainDataObj.mentorEvaluationStatus === 'filledByMentor' && checkUserIsAcademicDirector()">
+                                    &nbsp;&nbsp;{{'JOBDESCRIPTIONFORM.VALIDATEDBYACAD' | translate | titlecase}}
+                                </md-checkbox>
+                                <br>
+                            </div>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+
+        </div>
+        <div class="row wrap" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0" style="margin-right: 0px !important">
+            <div *ngIf="!isPreviousCourse" fxFlex="70">
+                <div class="text-right" style="margin-right: 5px;">
+                    <button md-button md-raised-button color="accent" [disabled]="isReadOnly" (click)="saveData()" *ngIf="(this.mainDataObj.mentorEvaluationStatus === 'sentToMentor' || this.mainDataObj.mentorEvaluationStatus === 'filledByMentor') && !utility.checkUserIsAdminOfCertifier() && !checkUserIsAcademicDirector()">{{'STUDENT.SAVE' | translate}}</button>
+                    <button md-button md-raised-button color="accent" [disabled]="!checkIsvalidate()" *ngIf="this.mainDataObj.mentorEvaluationStatus === 'sentToMentor' && !utility.checkUserIsAdminOfCertifier()" (click)="submitWithUpdatedStatus()">{{'USERS.ADDEDITUSER.SUBMIT'| translate}}</button>
+                    <button md-button md-raised-button color="accent" [disabled]="!checkIsvalidate()" *ngIf="this.mainDataObj.mentorEvaluationStatus === 'filledByMentor'  && checkUserIsAcademicDirector() && !utility.checkUserIsAdminOfCertifier() " (click)="submitWithUpdatedStatus()">{{'USERS.ADDEDITUSER.SUBMIT'| translate}}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div *ngIf="questionnaireSubmit && !utility.checkUserIsStudent()">
+  <evaluation-grid (emitStatustoDetails)="updateStudentDetails($event)" [mentorEvalID]="mentorEvalID"></evaluation-grid>
+</div>

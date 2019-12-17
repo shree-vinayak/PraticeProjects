@@ -1,0 +1,253 @@
+<div fxLayout="column wrap" fxLayoutAlign="start" style="width:100%;height:100%" *ngIf="!newAlert">
+    <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px; background-color: #ffd740 !important;">
+        <div class="pa-1">
+            <div fxLayout="row wrap" fxLayoutAlign="start center">
+                <div fxFlex>
+                    <i class="fa fa-bolt fa-2x" style="vertical-align: bottom;"></i>
+                    <span class="text-xl" style="margin-left:5px; font-weight: 500; font-weight: 600;">{{'MailBox.URGENT_MESSAGE_DIALOG_TITLE'
+                        | translate}}</span>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <md-tab-group fxFlex headerPosition="center" class="mb-1 viewTemplate" md-stretch-tabs style="min-height: 300px"
+        *ngIf="UrgentMessage != null">
+        <md-tab [label]="'STUDENT.SENDMAIL.title' | translate">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="100" fxFlex.lt-md="100">
+                    <div>
+                        <p class="contextSpace" style="float:left;">
+                            <b style="font-size:20px"> {{ UrgentMessage?.subject }} </b>
+                        </p>
+                        <p class="contextSpace" style="float:right;">
+                            {{ getTranslatedDate(UrgentMessage?.createdAt) }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <hr style="border:1px solid !important;margin-top: -20px !important;">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="100" fxFlex.lt-md="100">
+                    <p class="contextSpace">
+                        <b>{{ 'dashboardMessage.FROM' | translate }} : &nbsp;</b>
+                        <span *ngIf="UrgentMessage?.senderProperty?.sender?.email">
+                            {{getCivility(UrgentMessage?.senderProperty?.sender?.sex)}}
+                            {{UrgentMessage?.senderProperty?.sender?.firstName}}
+                            {{UrgentMessage?.senderProperty?.sender?.lastName}}
+                        </span>
+                        <span *ngIf="!UrgentMessage?.senderProperty?.sender?.email">
+                            {{UrgentMessage?.senderProperty?.sender}}
+                        </span>
+                    </p>
+                    <p class="contextSpace">
+                        <b>{{ 'dashboardMessage.TO' | translate }} : &nbsp;</b>
+                        <span *ngFor="let recipientList of UrgentMessage?.recipientProperty;  let recIndex = index;">
+                            <span *ngFor="let rec of recipientList?.recipient">
+                                <span *ngIf="rec?.email" title="{{rec?.email}}">
+                                    {{getCivility(rec?.sex)}} {{rec?.firstName}} {{rec?.lastName}}
+                                </span>
+                                <span *ngIf="!rec?.email" title="{{rec}}">
+                                    {{ rec }}
+                                </span>
+                                <span *ngIf="recIndex < UrgentMessage?.recipientProperty?.length - 1"> ,&nbsp;&nbsp;</span>
+                            </span>
+                        </span>
+                    </p>
+                    <p class="contextSpace" style="white-space: pre-line !important;" [innerHTML]="UrgentMessage?.message | safeHtml">
+                    </p>
+                </div>
+            </div>
+        </md-tab>
+    </md-tab-group>
+
+    <form [formGroup]="mailForm" fxLayout="column" fxLayoutAlign="left" fxLayoutGap="1rem" style="width:100%;">
+        <div>
+            <hr />
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" fxFlex.lt-md="100">
+                <md-input-container color="accent" fxFlex>
+                    <textarea rows="3" mdInput id="icon_prefix2" [formControl]="mailForm.controls['message']" class="materialize-textarea"
+                        [placeholder]="'MailBox.Reply_Here' | translate"></textarea>
+                </md-input-container>
+                <label class="file-upload" fxFlex="5" [title]=" 'MailBox.composeMail.attach_file' | translate ">
+                    <i class="fa fa-paperclip" style="font-size: 1.5rem"></i>
+                    <input #myInput type="file" name="file" multiple (change)="handleInputChange($event)">
+                </label>
+                <button class="ReplyBtn" style="float: right;" fxFlex="15" md-raised-button color="accent" (click)="ReplyUrgentMessage()"
+                    [disabled]="!mailForm.valid">
+                    <md-icon> reply </md-icon> {{ 'MailBox.reply' | translate }}
+                </button>
+            </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap" class="file-section">
+            <div *ngFor="let file of attachmnetsPaths" class="fileInfo">
+                <button md-icon-button type="button">
+                    <md-icon>insert_drive_file</md-icon>
+                </button>
+                <label>{{file.name}}</label>
+                <button md-icon-button type="button" (click)="removeAttachment(file)">
+                    <md-icon> close </md-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<div fxLayout="column wrap" fxLayoutAlign="start" style="width:100%;height:100%" *ngIf="newAlert">
+  <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px; background-color: #ffd740 !important;">
+      <div class="pa-1">
+          <div fxLayout="row wrap" fxLayoutAlign="start center">
+              <div fxFlex>
+                <svg style="width:24px;height:24px; vertical-align: middle;" viewBox="0 0 24 24">
+                  <path fill="#000000" d="M6,6.9L3.87,4.78L5.28,3.37L7.4,5.5L6,6.9M13,1V4H11V1H13M20.13,4.78L18,6.9L16.6,5.5L18.72,3.37L20.13,4.78M4.5,10.5V12.5H1.5V10.5H4.5M19.5,10.5H22.5V12.5H19.5V10.5M6,20H18A2,2 0 0,1 20,22H4A2,2 0 0,1 6,20M12,5A6,6 0 0,1 18,11V19H6V11A6,6 0 0,1 12,5Z" />
+              </svg>
+              <span class="text-xl" style="margin-left:5px; font-weight: 500; font-weight: 600;">{{'ALERT_FUNCTIONALITY.POPUP.TITLE' | translate}}</span>
+              </div>
+          </div>
+      </div>
+      <hr>
+  </div>
+
+  <md-tab-group fxFlex headerPosition="center" class="mb-1 viewTemplate" md-stretch-tabs style="min-height: 300px">
+      <md-tab [label]="'STUDENT.SENDMAIL.title' | translate">
+          <div fxLayout="row" fxLayoutWrap="wrap">
+              <div fxFlex="100" fxFlex.lt-md="100">
+                  <div>
+                      <p class="contextSpace" style="float:left;">
+                          <b> {{alertData.name}} </b>
+                      </p>
+                      <p class="contextSpace" style="float:right; margin-right: 15px;">
+                        {{getTranslatedDate(alertData.createdAt | date:'EEEE, MMMM dd, yyyy')}}
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <br />
+          <hr style="border:1px solid !important;margin-top: -20px !important;">
+          <div fxLayout="row" fxLayoutWrap="wrap">
+              <div fxFlex="100" fxFlex.lt-md="100">
+                  <p class="contextSpace" style="white-space: pre-line !important;" [innerHTML]="alertData.message">
+                  </p>
+              </div>
+          </div>
+      </md-tab>
+  </md-tab-group>
+
+  <form [formGroup]="alertReplyForm" fxLayout="column" fxLayoutAlign="left" fxLayoutGap="1rem" style="width:100%;">
+      <div>
+          <hr />
+      </div>
+
+      <div fxLayout="row" fxLayoutWrap="wrap">
+          <div fxFlex="100" fxFlex.lt-md="100" *ngIf="alertData.requiredResponse===true">
+            <md-input-container color="accent" fxFlex>
+              <textarea rows="3" mdInput id="icon_prefix2" [formControl]="alertReplyForm.controls['message']"
+                  class="materialize-textarea" [placeholder]="'MailBox.Reply_Here' | translate"></textarea>
+          </md-input-container>
+
+          <button class="ReplyBtn" style="float: right;" fxFlex="15" md-raised-button color="accent" (click)="ReplyAlertMessage('')"
+              [disabled]="!alertReplyForm.valid">
+              <md-icon> reply </md-icon> {{ 'MailBox.reply' | translate }}
+          </button>
+          </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutWrap="wrap" fxFlexAlign="end end" *ngIf="alertData.requiredResponse===false" style="position: absolute; bottom: 12px; right: 35px;">
+        <div style="display: -webkit-inline-box;">
+
+          <button class="ReplyBtn" style="float: right;width:220px; margin-right: 10px"  md-raised-button color="accent" (click)="ReplyAlertMessage('button1')">
+              {{alertData.button1}}
+          </button>
+          <button class="ReplyBtn" style="float: right;width:220px" md-raised-button color="accent" (click)="ReplyAlertMessage('button2')">
+              {{alertData.button2}}
+          </button>
+      </div>
+      </div>
+  </form>
+</div>
+
+
+<!-- <div *ngIf="newAlert">
+    <div fxLayout="column wrap" fxLayoutAlign="start" style="width:100%;height:100%">
+        <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px; background-color: #ffd740 !important;">
+            <div class="pa-1">
+                <div fxLayout="row wrap" fxLayoutAlign="start center">
+                    <div fxFlex>
+                        <svg style="width:24px;height:24px; vertical-align: middle;" viewBox="0 0 24 24">
+                            <path fill="#000000" d="M6,6.9L3.87,4.78L5.28,3.37L7.4,5.5L6,6.9M13,1V4H11V1H13M20.13,4.78L18,6.9L16.6,5.5L18.72,3.37L20.13,4.78M4.5,10.5V12.5H1.5V10.5H4.5M19.5,10.5H22.5V12.5H19.5V10.5M6,20H18A2,2 0 0,1 20,22H4A2,2 0 0,1 6,20M12,5A6,6 0 0,1 18,11V19H6V11A6,6 0 0,1 12,5Z" />
+                        </svg>
+                        <span class="text-xl" style="margin-left:5px; font-weight: 500; font-weight: 600;">{{'ALERT_FUNCTIONALITY.POPUP.TITLE' | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+
+        <div fxLayout="row" fxLayoutWrap="wrap" style="padding-top:16px">
+            <div fxFlex="50" fxFlexAlign=" end start" style="font-weight: bold">
+                <p>{{alertData.name}}</p>
+            </div>
+            <div fxFlex="50" fxFlexAlign="end end" style="text-align: right">
+                <p>{{alertData.createdAt | date:'EEEE, MMMM dd, yyyy'}}</p>
+            </div>
+        </div>
+
+        <div>
+            <hr />
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap" style="padding-top:16px">
+            <div fxFlex="100" [innerHTML]="alertData.message">
+
+            </div>
+
+        </div>
+
+        <div>
+            <hr />
+        </div>
+
+        <div>
+            <hr />
+        </div>
+
+
+        <form [formGroup]="alertReplyForm" fxLayout="column" fxLayoutAlign="left" fxLayoutGap="1rem" style="width:100%;margin-top: 35%">
+
+            <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="alertData.requiredResponse===true">
+                <div fxFlex="100" fxFlex.lt-md="100">
+                    <md-input-container color="accent" fxFlex>
+                        <textarea rows="3" mdInput id="icon_prefix2" [formControl]="alertReplyForm.controls['message']"
+                            class="materialize-textarea" [placeholder]="'MailBox.Reply_Here' | translate"></textarea>
+                    </md-input-container>
+
+                    <button class="ReplyBtn" style="float: right;" fxFlex="15" md-raised-button color="accent" (click)="ReplyAlertMessage('')"
+                        [disabled]="!alertReplyForm.valid">
+                        <md-icon> reply </md-icon> {{ 'MailBox.reply' | translate }}
+                    </button>
+                </div>
+            </div>
+
+
+
+
+        </form>
+    </div>
+    <div fxLayout="row" fxLayoutWrap="wrap" fxFlexAlign="end end" *ngIf="alertData.requiredResponse===false" style="position: absolute; bottom: 35px;right: 35px;">
+        <div style="display: -webkit-inline-box;">
+
+            <button class="ReplyBtn" style="float: right;width:220px; margin-right: 10px"  md-raised-button color="accent" (click)="ReplyAlertMessage('button1')">
+                {{alertData.button1}}
+            </button>
+            <button class="ReplyBtn" style="float: right;width:220px" md-raised-button color="accent" (click)="ReplyAlertMessage('button2')">
+                {{alertData.button2}}
+            </button>
+        </div>
+    </div>
+</div> -->

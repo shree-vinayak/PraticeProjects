@@ -1,0 +1,269 @@
+<div>
+  <form [formGroup]="contactform"  (ngSubmit)="save(contactform)">
+        <md-card-title>
+          <p *ngIf="!editingMode; else editMode">
+            {{ 'Customer.AddContact.AddContact' | translate}}
+          </p>
+          <ng-template #editMode>
+            <p>
+              {{ 'Customer.AddContact.EditContact' | translate}}
+            </p>
+          </ng-template>
+        </md-card-title>
+
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" 
+            fxFlex=45 
+            class="ctMrg">
+            
+            <div style="width: 100%">
+              <md-radio-group [formControl]="contactform.controls['title']">
+                <md-radio-button value="mr" class="rdmark">{{ 'Customer.AddContact.Mr' | translate}}</md-radio-button>
+                <md-radio-button value="mrs" class="rdmark">{{ 'Customer.AddContact.Mrs' | translate}}</md-radio-button>
+                <md-radio-button value="ms" class="rdmark">{{ 'Customer.AddContact.Ms' | translate}}</md-radio-button>
+              </md-radio-group>
+            </div>
+            
+            <small 
+              *ngIf="contactform.controls['title'].hasError('required') && 
+              contactform.controls['title'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.TitleRequired' | translate }}
+            </small>
+          
+          </div>
+          
+          <div class="mb-1" 
+            fxFlex=45
+            class="ctMrg">
+            <md-input-container style="width: 100%">
+              <input mdInput 
+              placeholder="{{ 'position' | translate}}" 
+              [formControl]="contactform.controls['position']" 
+              type="text" 
+              pattern="[a-zA-Z ]*"  maxlength = "60">
+            </md-input-container>
+
+            <small 
+              *ngIf="contactform.controls['position'].hasError('required') && 
+              contactform.controls['position'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.PositionRequired' | translate }}
+            </small>
+           
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" 
+            fxFlex=45
+            class="ctMrg">
+            <md-input-container style="width: 100%">
+              <input mdInput 
+              placeholder="{{ 'firstName' | translate}}" 
+              [formControl]="contactform.controls['firstName']" 
+              type="text"
+              pattern="[a-zA-Z ]*"  maxlength = "40">
+            </md-input-container>
+
+            <small 
+              *ngIf="contactform.controls['firstName'].hasError('required') && 
+              contactform.controls['firstName'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.FirstNameRequired' | translate }}
+            </small>
+
+          </div>
+          <div class="mb-1" 
+            fxFlex=45
+            class="ctMrg">
+            <md-input-container style="width: 100%">
+              <input mdInput 
+              placeholder="{{ 'lastName' | translate}}" 
+              [formControl]="contactform.controls['lastName']" 
+              type="text" 
+              pattern="[a-zA-Z ]*"  maxlength = "40">
+            </md-input-container>
+
+            <small 
+              *ngIf="contactform.controls['lastName'].hasError('required') && 
+              contactform.controls['lastName'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.LastNameRequired' | translate }}
+            </small>
+
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" 
+            fxFlex=45
+            class="ctMrg">
+            <md-input-container style="width: 100%">
+              <input mdInput 
+              placeholder="{{ 'phoneNumber' | translate}}" 
+              [formControl]="contactform.controls['phone']" 
+              pattern="[0-9 ]*">
+            </md-input-container>
+
+            <small *ngIf="contactform.controls['phone'].hasError('required') && 
+              contactform.controls['phone'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.PhoneRequired' | translate }}
+            </small>
+
+            <small *ngIf="contactform.controls['phone'].hasError('maxlength') && 
+              contactform.controls['phone'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.PhoneLength' | translate }}
+            </small>
+
+            <small *ngIf="contactform.controls['phone'].errors?.phone && 
+              contactform.controls['phone'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.ValidNumber' | translate }}
+            </small>
+
+            <small *ngIf="contactform.controls['phone'].hasError('pattern') && 
+              contactform.controls['phone'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.MustBeNumber' | translate }}
+            </small>
+          
+          </div>
+          <div class="mb-1" 
+            fxFlex=45
+            class="ctMrg">
+            <md-input-container style="width: 100%">
+              <input mdInput 
+              placeholder="{{ 'mobileNumber' | translate}}" 
+              [formControl]="contactform.controls['mobile']" 
+              pattern="[0-9 ]*">
+            </md-input-container>
+
+            <small *ngIf="contactform.controls['mobile'].hasError('required') && 
+              contactform.controls['mobile'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.MobilePhoneRequired' | translate }}
+            </small>
+
+            <small *ngIf="contactform.controls['mobile'].hasError('maxlength') && 
+              contactform.controls['mobile'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.MobilePhoneLength' | translate }} 
+            </small>
+
+            <small *ngIf="contactform.controls['mobile'].errors?.phone && 
+              contactform.controls['mobile'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.ValidNumber' | translate }}
+            </small>
+
+            <small *ngIf="contactform.controls['mobile'].hasError('pattern') && 
+              contactform.controls['mobile'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.MustBeNumber' | translate }}
+            </small>
+
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" 
+            fxFlex=45
+            class="ctMrg">
+            <md-input-container style="width: 100%">
+              <input mdInput 
+              placeholder="{{ 'directLine' | translate}}" 
+              [formControl]="contactform.controls['directLinePortable']" 
+              pattern="[0-9 ]*">
+            </md-input-container>
+
+            <small *ngIf="contactform.controls['directLinePortable'].hasError('required') && 
+              contactform.controls['directLinePortable'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.DirectPhoneRequired' | translate }}
+            </small>
+
+            <small *ngIf="contactform.controls['directLinePortable'].hasError('maxlength') && 
+              contactform.controls['directLinePortable'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.DirectPhoneLength' | translate }}
+            </small>
+
+            <small *ngIf="contactform.controls['directLinePortable'].errors?.phone && 
+              contactform.controls['directLinePortable'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.ValidNumber' | translate }}
+            </small>
+
+            <small *ngIf="contactform.controls['directLinePortable'].hasError('pattern') && 
+              contactform.controls['directLinePortable'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.MustBeNumber' | translate }}
+            </small>
+
+          </div>
+          <div class="mb-1" 
+            fxFlex=45
+            class="ctMrg">
+            <md-input-container style="width: 100%">
+              <input mdInput 
+              placeholder="{{ 'emailAddress' | translate}}" 
+              [formControl]="contactform.controls['email']">
+            </md-input-container>
+
+            <small *ngIf="contactform.controls['email'].hasError('required') && 
+              contactform.controls['email'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.EmailRequired' | translate }}
+            </small>
+
+            <small *ngIf="contactform.controls['email'].errors?.email && 
+              contactform.controls['email'].touched" 
+              class="mat-text-warn"> 
+              {{ 'Customer.AddContact.ValidEmail' | translate }}
+            </small>
+
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <md-select multiple 
+            fxFlex=95 
+            placeholder="{{ 'RoleAdmtc' | translate}}"
+            formControlName="roleAdmtc"
+            class="ctMrg">
+            <md-option *ngFor="let role of roles" [value]="role">
+              {{ role | translate }}
+            </md-option>
+          </md-select>
+
+          <small *ngIf="contactform.controls['roleAdmtc'].hasError('required') && 
+            contactform.controls['roleAdmtc'].touched" 
+            class="mat-text-warn"> 
+            {{ 'Customer.AddContact.RoleRequired' | translate }}
+          </small>
+        
+        </div>
+
+        <div class="pb-1" style=" text-align:right;">
+          <button md-raised-button 
+            md-button-sm 
+            class="mr-1" 
+            (click)="cancel()" 
+            type="button">
+            {{ 'cancel' | translate }}
+          </button>
+          <button md-raised-button 
+            md-button-sm 
+            color="green" 
+            class="mr-1" 
+            type="submit"
+            [disabled]="!contactform.valid">
+            {{ 'submit' | translate }}
+          </button>
+        </div>
+
+  </form>
+  <small *ngIf="errorMessage" class="mat-text-warn"> {{errorMessage}}</small>
+</div>

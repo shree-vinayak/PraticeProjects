@@ -1,0 +1,32 @@
+<div fxLayout="row wrap" *ngIf="popStudent">
+    <div fxFlex="100">
+            <!-- min-width:140% width: 365px;-->
+        <div fxLayout="column wrap" style="padding: 3px;">
+            <md-card [ngStyle]="{ 'background-color': isActive ? '#727272' : '#424242' }"
+                fxFlex class="primary-background dark-header text-center rncp-title-tile md-card-height" >
+                <img md-card-avatar [src]="student.isphotoInS3 ? ( s3FilePath + encodeURL(student?.photoS3Path)): student.photo ? serverimgPath + student.photo : student.sex === 'Male' ? imgUrl : imgUrlFemale " class="card-image">
+                <md-card-subtitle>
+                    <h5 class="studentName">
+                        <span *ngIf="student.sex === 'Male'">{{ 'STUDENT.MR' | translate}}.</span>
+                        <span *ngIf="student.sex === 'Female'">{{ 'STUDENT.MRS' | translate}}</span>
+                        <span [mdTooltip]="student.firstName + ' ' + student.lastName" [mdTooltipPosition]="'after'">
+                            {{ student?.firstName + ' ' + student.lastName | limitTo: (student?.sex === 'Male') ? 20 : 18 }}
+                        </span>
+
+                        <i *ngIf="student.status === 'active' && !student?.incorrectEmail" style="font-size:25px;cursor: pointer;color:greenyellow; float:right" mdTooltip="{{'STUDENT.MESSAGE.ACTIVE_STATUS' | translate}}" mdTooltipPosition="after"  class="fa fa-check-circle" aria-hidden="true"></i>
+                        <i *ngIf="student.status === 'pending' && !student?.incorrectEmail" style="font-size:25px;cursor: pointer;color:grey; float:right" mdTooltip="{{'STUDENT.MESSAGE.PENDING' | translate}}" mdTooltipPosition="after"  class="fa fa-check-circle" aria-hidden="true"></i>
+                        <i *ngIf="student.status === 'deactivated' && !student?.incorrectEmail" style="font-size:25px;cursor: pointer;color:red; float:right" mdTooltip="{{'STUDENT.MESSAGE.NONACTIVE_STATUS' | translate}}" mdTooltipPosition="after"  class="fa fa-check-circle" aria-hidden="true"></i>
+                        <i *ngIf="student?.incorrectEmail" style="font-size:25px;cursor: pointer;color:red; float:right" class="fa fa-check-circle" aria-hidden="true"></i>
+                    </h5>
+                    <h6 class="studentName" >
+                        <div class="rncp-class-text">
+                            {{ student?.rncpTitle?.shortName }} : {{ student?.currentClass?.name }}
+                        </div>
+
+                        <i style="font-size:25px;cursor: pointer;color:black; float:right; padding-bottom:1%" title="{{'STUDENT.MESSAGE.SENDMAIL' | translate}}" (click)="sendMail(student)" color="black" class="fa fa-envelope" aria-hidden="true" *ngIf="!utility.checkUserIsAdminOrDirectorOfCertifier()"></i>
+                    </h6>
+                </md-card-subtitle>
+            </md-card>
+        </div>
+    </div>
+</div>

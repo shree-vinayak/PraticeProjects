@@ -1,0 +1,353 @@
+﻿<form [formGroup]="form" (ngSubmit)="goToNextStep()">
+  <div fxLayout="row wrap" fxLayoutAlign="end" class="card-margin">
+    <button md-raised-button color="accent">
+      {{'CONTINUE' | translate}}
+      <md-icon>keyboard_arrow_right</md-icon>
+    </button>
+  </div>
+  <md-card>
+    <md-card-content>
+      <div fxLayout="row wrap" fxLayoutAlign="start">
+        <button md-raised-button type="button" color="primary" (click)="duplicateTest()">
+          <md-icon>content_copy</md-icon>
+          {{'TEST.DUPLICATETEST' | translate}}
+        </button>
+      </div>
+      <div fxLayout="row" fxLayoutWrap="wrap" class="mt-1">
+        <div fxFlex="33" fxFlex.lt-md="100">
+          <div class="px-1 select-input-container">
+              <md-select [ngClass]="{'invalid-select': (form.controls['class'].invalid && submitted)}" color="accent" [placeholder]="'TEST.CLASS' | translate"
+                [formControl]="form.controls['class']" style="width: 100%" (change)="classChange($event)">
+                <md-option *ngFor="let class of classes" [value]="class._id">
+                  {{ class.name.toUpperCase() }}
+                </md-option>
+              </md-select>
+              <md-hint></md-hint>
+          </div>
+        </div>
+        <div fxFlex="33" fxFlex.lt-md="100">
+          <div class="px-1 select-input-container">
+            <md-select [formControl]="form.controls['subjectId']" (change)="changeTest($event)" [placeholder]="'TEST.SELECTSUBJECT' | translate"
+              style="width: 100%" [ngClass]="{'invalid-select': (form.controls['subjectId'].invalid && submitted)}">
+              <ng-template [ngIf]="test.class">
+                <md-option *ngFor="let subject of subjects" [value]="subject._id">{{ subject.subjectName }}</md-option>
+              </ng-template>
+            </md-select>
+            <md-hint></md-hint>
+          </div>
+        </div>
+        <div fxFlex="33" fxFlex.lt-md="100">
+          <div class="px-1 select-input-container">
+            <md-select [formControl]="form.controls['subjectTestId']" (change)="fillTestData($event)" [placeholder]="'TEST.SELECTTEST' | translate"
+              style="width: 100%" [ngClass]="{'invalid-select': (form.controls['subjectTestId'].invalid && submitted)}">
+              <ng-template [ngIf]="test.class && test.subjectId">
+                <md-option *ngFor="let test of testList" [value]="test._id">{{ test.evaluation }}</md-option>
+              </ng-template>
+            </md-select>
+            <md-hint></md-hint>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutWrap="wrap" style="place-content: center;">
+        <div fxFlex="30" fxFlex.lt-md="100" style="place-content: center;">
+          <div class="pa-1">
+            <!-- <div class="px-1"> -->
+            <!-- <md-input-container dividerColor="accent" style="width: 100%"> -->
+            <!-- <input mdInput readonly [placeholder]="'TEST.MINSCORE' | translate" [formControl]="form.controls['maxScore']" [value]="test.maxScore"
+                                type="number"> -->
+            <label style="color: #c1cdd1;">{{'TEST.WEIGHTDESCRIPTION1' | translate }} {{ test.weight !== null || undefined ? (test.weight +'%') : '' }}
+              {{'TEST.WEIGHTDESCRIPTION2' | translate}}</label>
+          </div>
+        </div>
+        <div fxFlex="22" fxFlex.lt-md="100" style="text-align: center;">
+          <div class="pa-1 select-input-container">
+            <!-- <div class="px-1 select-input-container"> -->
+            <!-- <md-input-container dividerColor="accent" style="width: 100%"> -->
+            <!-- <input mdInput readonly [placeholder]="'TEST.TYPE' | translate" [formControl]="form.controls['type']" [value]="test.type"
+                type="text"> -->
+            <label style="color: #c1cdd1; width:100%;">{{'TEST.TYPE' | translate}}</label>
+            <div>{{test?.type !== '' ? ('PARAMETERS-RNCP.TEST.TYPE.' + test.type | translate) : ''}}</div>
+            <!-- </md-input-container> -->
+          </div>
+        </div>
+        <div fxFlex="20" fxFlex.lt-md="100" *ngIf="test.type === 'Jury' || test.type === 'Memoire-ORAL'">
+          <div class="pa-1">
+            <md-input-container style="width:100%">
+              <input mdInput type="number" mdInput placeholder="Min" #juryMin [value]="test.juryMin" (blur)="setJuryMin(juryMin.value)"
+              />
+            </md-input-container>
+          </div>
+
+        </div>
+        <div fxFlex="5" fxFlex.lt-md="100" *ngIf="test.type === 'Jury' || test.type === 'Memoire-ORAL'"></div>
+
+        <div fxFlex="20" fxFlex.lt-md="100" *ngIf="test.type === 'Jury' || test.type === 'Memoire-ORAL'">
+          <div class="pa-1">
+            <md-input-container style="width:100%">
+              <input mdInput type="number" mdInput placeholder="Max" #juryMax [value]="test.juryMax" (blur)="setJuryMax(juryMax.value)"
+              />
+            </md-input-container>
+          </div>
+
+        </div>
+        <div fxFlex="23" fxFlex.lt-md="100">
+          <div class="pa-1" *ngIf="test.type === 'mentor-evaluation'">
+            <md-checkbox fxFlex="100" #questionnaireCheckbox labelPosition="before" [checked]="test.addedQuestionnaire === true" (change)="showQuestionnaire($event)">{{"Add Questionnaire?" | translate}}</md-checkbox>
+          </div>
+        </div>
+        <div fxFlex="25" fxFlex.lt-md="100">
+          <div class="pa-1">
+            <div class="px-1 select-input-container" *ngIf="test.addedQuestionnaire === true && test.type === 'mentor-evaluation'">
+              <md-select color="accent" [placeholder]="'Questionnaire List' | translate" style="width: 100%" (change)="setQuestionnaireId($event)"
+                [(ngModel)]="test.questionnaire" [ngModelOptions]="{standalone: true}">
+                <md-option *ngFor="let qName of questionnaire" [value]="qName._id">
+                  {{ qName?.questionnaireName }}
+                </md-option>
+              </md-select>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutWrap="wrap">
+      </div>
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="40" fxFlex.lt-md="100">
+          <div class="px-1 select-input-container">
+            <md-select color="accent" [ngClass]="{'invalid-select': (form.controls['correctionType'].invalid && submitted)}" [placeholder]="'TEST.CORRECTIONTYPE' | translate"
+              [formControl]="form.controls['correctionType']" style="width: 100%" [disabled]="test.type === 'Memoire-ORAL'">
+              <md-option *ngFor="let cType of getCorrectionTypes()" [value]="cType.value">
+                {{ 'TEST.CORRECTIONTYPES.' + cType.value.toUpperCase() | translate }}
+              </md-option>
+            </md-select>
+            <md-hint></md-hint>
+            <!--<md-hint class="text-md">Choisir le type de correction</md-hint>-->
+          </div>
+        </div>
+        <div fxFlex="30" fxFlex.lt-md="50" *ngIf="test?.correctionType !== 'pc' && test?.correctionType !== 'cp' && !test?.groupTest && !test?.controlledTest && test.type !== 'mentor-evaluation'">
+          <div class="pa-1">
+            <md-checkbox fxFlex="70" (change)="whenAllowReTakeChange($event)" [formControl]="form.controls['allowReTakeExam']" labelPosition="after">{{ 'TEST.REATAKE_ALLOWED' | translate}}</md-checkbox>
+          </div>
+        </div>
+        
+        <div fxFlex="30" *ngIf="showQualityControl()">
+          <div fxLayout="column" fxLayoutWrap="wrap">
+            <div class="pa-1">
+              <md-checkbox  (change)="allowQualityControl($event)" [formControl]="form.controls['qualityControl']" labelPosition="after">{{ 'QUALITY_CONTROL.TITLE' |
+                translate}}</md-checkbox>
+            </div>
+            <div class="pa-1" *ngIf="form.controls['qualityControl'].value">
+              <label> {{'QUALITY_CONTROL.NO_OF_STUDENTS_PC'  | translate }} </label>
+              <md-input-container style="width:100%">
+                <input mdInput type="number"  [formControl]="form.controls['studentPerSchoolForQC']" min="1"/>
+              </md-input-container>
+            </div>
+            <div class="pa-1" *ngIf="form.controls['qualityControl'].value">
+              <label> {{'QUALITY_CONTROL.DIFFERENT_ALLOWED' | translate }} </label>
+              <md-input-container style="width:100%">
+                <input mdInput type="number"  [formControl]="form.controls['qualityControlDifference']" min="1"/>
+              </md-input-container>
+            </div>
+          </div>
+        </div>
+        <!-- <div fxFlex="50" fxFlex.lt-md="100">
+          <div class="px-1 select-input-container">
+            <md-select [ngClass]="{'invalid-select': (form.controls['organiser'].invalid && submitted)}" color="accent" [placeholder]="'TEST.ORGANISER' | translate"
+              [formControl]="form.controls['organiser']" style="width: 100%;" required>
+              <md-option *ngFor="let organiser of organisers" [value]="organiser.value">
+                {{ organiser.view }}
+              </md-option>
+            </md-select> -->
+        <!--<md-hint class="text-md">Choisir l'organisateur</md-hint>-->
+        <!-- </div>
+        </div> -->
+      </div>
+      <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="test?.correctionType !== 'pc' && test?.correctionType !== 'cp' && !test?.allowReTakeExam">
+        <div fxFlex="20" fxFlex.lt-md="100">
+          <div class="pa-1">
+            <md-slide-toggle name="controlledToggle" (change)="onControlledToggle($event)" [checked]="freeControlTest" [formControl]="form.controls['controlledTest']">
+              {{'TEST.FREETESTCONTROL' | translate }}
+            </md-slide-toggle>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <!--div fxFlex="50" fxFlex.lt-md="100">
+                    <div class="px-1">
+                        <md-input-container dividerColor="accent" style="width: 100%">
+                            <input mdInput type="text" [mdDatepicker]="testDatePicker" [formControl]="form.controls['date']" [placeholder]="'TEST.TESTDATE' | translate">
+                            <button mdSuffix [mdDatepickerToggle]="testDatePicker" class="white-datepicker-button"></button>
+                        </md-input-container>
+                        <md-datepicker #testDatePicker [touchUi]="true"></md-datepicker>
+                    </div>
+                </div-->
+        <div fxFlex="30" fxFlex.lt-md="100">
+          <div class="px-1">
+            <md-input-container dividerColor="accent" style="width: 100%">
+              <input mdInput type="text" [mdDatepicker]="testDatePicker" [formControl]="form.controls['date']" [placeholder]="'TEST.TESTDATE' | translate">
+              <button mdSuffix [mdDatepickerToggle]="testDatePicker" class="white-datepicker-button"></button>
+            </md-input-container>
+            <md-datepicker #testDatePicker [touchUi]="true"></md-datepicker>
+            <md-hint></md-hint>
+            <!-- <md-input-container dividerColor="accent" style="width: 100%">
+                            <input mdInput [formControl]="form.controls['date']" [placeholder]="'TEST.TESTDATE' | translate" ngui-datetime-picker (valueChanged)="myNgModelDateChange($event)"
+                                [close-on-select]="false" date-format="DD-MM-YYYY hh:mm" />
+                        </md-input-container> -->
+          </div>
+        </div>
+
+        <div fxFlex fxFlex.lt-md="100">
+          <div class="pa-1">
+            <md-radio-group name="testDateType" fxLayout="row" [formControl]="form.controls['dateType']" (change)="checkDiff($event)">
+              <md-radio-button *ngFor="let dateType of visibleDataType" [value]="dateType.value" style="margin-right: 5px">
+                {{'TEST.DATETYPES.' + dateType.view | translate}}
+              </md-radio-button>
+            </md-radio-group>
+            <md-hint></md-hint>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="test?.correctionType !== 'pc' && test?.correctionType !== 'cp' && !test?.groupTest && !test?.controlledTest">
+        <div fxFlex="30" fxFlex.lt-md="30">
+          <div class="px-1">
+            <md-input-container dividerColor="accent" style="width: 100%" [ngStyle]="{'visibility': test?.allowReTakeExam ? 'visible' : 'hidden'}">
+              <input mdInput type="text" [mdDatepicker]="retakeTestDatePicker" [formControl]="form.controls['dateReTakeExam']" [placeholder]="'TEST.RETAKE_DATE' | translate">
+              <button mdSuffix [mdDatepickerToggle]="retakeTestDatePicker" class="white-datepicker-button"></button>
+            </md-input-container>
+            <md-datepicker #retakeTestDatePicker [touchUi]="true"></md-datepicker>
+            <md-hint></md-hint>
+          </div>
+        </div>
+        <!-- <div fxFlex="70" fxFlex.lt-md="70" style="padding-left: 3.7%">
+          <div class="pa-1">
+            <md-checkbox fxFlex="70" (change)="whenAllowReTakeChange($event)" [formControl]="form.controls['allowReTakeExam']" labelPosition="after">{{ 'TEST.REATAKE_ALLOWED' | translate}}</md-checkbox>
+          </div>
+        </div> -->
+      </div>
+
+      <div fxLayout="row wrap" *ngIf="(test?.correctionType !== 'pc' && !test?.allowReTakeExam && test?.type !== 'mentor-evaluation') && !form.controls['qualityControl']?.value">
+        <div fxFlex="50" fxFlex.lt-md="100">
+          <div class="mb-1 px-1">
+            <md-slide-toggle name="groupToggle" [formControl]="form.controls['groupTest']" [checked]="form.value.groupTest">
+              {{'TEST.GROUPTEST' | translate }}
+            </md-slide-toggle>
+          </div>
+        </div>
+
+      </div>
+      <div fxLayout="row wrap" *ngIf="form.controls['groupTest'].value && form.controls['correctionGrid']!==undefined">
+
+        <div fxFlex="25" fxFlex.lt-md="100">
+          <div class="mb-1 px-1">
+            <md-input-container dividerColor="accent" style="width: 100%">
+              <input mdInput placeholder="Min" [formControl]="form.controls['correctionGrid'].controls['groupDetails'].controls['minNoOfStudents']"
+                type="number">
+            </md-input-container>
+          </div>
+        </div>
+        <div fxFlex="25" fxFlex.lt-md="100">
+          <md-input-container dividerColor="accent" style="width: 100%">
+            <input mdInput placeholder="Max" [formControl]="form.controls['correctionGrid'].controls['groupDetails'].controls['noOfStudents']"
+              type="number">
+          </md-input-container>
+        </div>
+      </div>
+      <!-- <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="50" fxFlex.lt-md="100">
+
+          <div class="px-1 select-input-container">
+            <md-select [ngClass]="{'invalid-select': (form.controls['class'].invalid && submitted)}" color="accent" [placeholder]="'TEST.CLASS' | translate"
+              [formControl]="form.controls['class']" style="width: 100%">
+              <md-option *ngFor="let class of classes" [value]="class._id">
+                {{ class.name.toUpperCase() }}
+              </md-option>
+            </md-select>
+            <md-hint></md-hint>
+          </div>
+        </div>
+      </div> -->
+      <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="isDiffDate" formArrayName="schools">
+        <div fxFlex="80" fxFlex.lt-md="100" *ngFor="let school of form.value.schools; let i=index;" [formGroupName]="i">
+          <div fxFlex="40" fxFlex.lt-md="100">
+            <span> {{ preparationCenter[i]?.shortName }}</span>
+            <input type="hidden" [value]="school._id" formControlName="schoolDetails">
+          </div>
+          <div fxFlex="40" fxFlex.lt-md="100">
+            <md-input-container dividerColor="accent" style="width: 100%">
+              <input mdInput [(ngModel)]="form.value.schools[i].testDate" (ngModelChange)="updateMyDate($event)" type="text" [mdDatepicker]="testDate"
+                [placeholder]="'TEST.TESTDATE' | translate" formControlName="testDate">
+
+              <button mdSuffix [mdDatepickerToggle]="testDate" class="white-datepicker-button"></button>
+            </md-input-container>
+            <md-datepicker #testDate [touchUi]="true"></md-datepicker>
+            <!-- <md-icon (click)="addSchool()">add</md-icon> -->
+          </div>
+          <!-- <div [formGroupName]="rowIndex"> -->
+          <!-- <ngx-datatable [rows]="preparationCenter" [sorts]="[{prop: 'shortName', dir: 'asc'}]" #table class='material user-type' [columnMode]="'flex'"
+            [headerHeight]="50" [footerHeight]="50" [rowHeight]="'50'" [limit]="10" >
+
+            <ngx-datatable-column name="School" [flexGrow]="10" prop="shortName" [sortable]="true">
+              <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn" ngx-datatable-header-template> {{ 'SCHOOLS' | translate }} </ng-template>
+              <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                <div [formGroupName]="rowIndex">
+                <span> {{ row.shortName }}</span>
+                <input type="hidden" value="{{ row._id }}" formControlName="schoolDetails" #schoolDetails>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Date" [flexGrow]="5" prop="shortName" [sortable]="true">
+              <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn" ngx-datatable-header-template> Date </ng-template>
+              <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                <div [formGroupName]="rowIndex">
+                <md-input-container dividerColor="accent" style="width: 100%">
+                  <input mdInput type="text" [mdDatepicker]="testDate" [placeholder]="'TEST.TESTDATE' | translate" formControlName="testDate" #schoolDetails>
+                  <button mdSuffix [mdDatepickerToggle]="testDate" class="white-datepicker-button"></button>
+                </md-input-container>
+              <md-datepicker #testDate [touchUi]="true" (input)="checkDiff('Different')"></md-datepicker>
+
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable> -->
+          <!-- </div> -->
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>
+</form>
+<!-- <form [formGroup]="formCombined" *ngIf="showCombined">
+  <md-card>
+    <md-card-content>
+      <div *ngFor="let field of combinedFields;let i=index;">
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div fxFlex="50" fxFlex.lt-md="100">
+            <div class="px-1 select-input-container">
+              <md-select color="accent" [placeholder]="'TEST.SELECTATEST' | translate" style="width: 100%" [formControl]="formCombined.controls['test_'+i]"
+                [(ngModel)]="field['test']">
+                <md-option *ngFor="let test of RncpTests" [value]="test._id">
+                  {{ test.name | translate }}
+                </md-option>
+              </md-select>
+            </div>
+          </div>
+          <div fxFlex="50" fxFlex.lt-md="100">
+            <div class="px-1">
+              <md-input-container dividerColor="accent" style="width: 100%">
+                <input max="10" mdInput placeholder="Coefficient" type="number" [formControl]="formCombined.controls['coefficient_'+i]" [(ngModel)]="field['coefficient']">
+              </md-input-container>
+            </div>
+          </div>
+        </div>
+      </div> -->
+<!-- <div style="text-align: right;"> Add Test
+        <button color="accent" (click)="addMoreTestCombine()" md-icon-button md-button-sm md-raised-button class="grid-button">
+          <md-icon>add</md-icon>
+        </button>
+      </div> -->
+
+<!-- </md-card-content>
+  </md-card>
+
+</form> -->

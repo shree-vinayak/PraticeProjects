@@ -1,0 +1,32 @@
+:host /deep/ {
+    .ql-container {
+        height: auto;
+    }
+    .viewTemplate .mat-tab-label {
+        display: none;
+    }
+    .cancleBtnCorrection{
+      margin-right:5px !important;
+    }
+    button.mr-1.mat-primary.mat-raised-button{
+      background-color: #3f51b5;
+      color:white;
+    }
+}
+button.mr-1.mat-primary.mat-raised-button{
+  background-color: #3f51b5;
+  color:white;
+}
+.ql-container {
+  height: auto;
+}
+
+.viewTemplate .mat-tab-label {
+    display: none;
+}
+
+.text-crossCorrection{
+  font-size: 20px !important;
+    font-weight: 500 !important;
+    margin-left:10px !important;
+}

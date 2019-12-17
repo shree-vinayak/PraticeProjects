@@ -1,0 +1,291 @@
+<div class="app" #root="$implicit" dir="ltr" [ngClass]="{'app-dark': dark, 'boxed': boxed, 'collapsed-sidebar': collapseSidebar, 'compact-sidebar': compactSidebar}">
+
+  <md-toolbar *ngIf="isBrowserCompatible" class="main-header" color="primary">
+
+
+    <a md-button routerLinkActive="active" (click)="goHome()" class="logo branding" style="margin:0 0px 0 16px !important">
+    </a>
+
+    <!-- MAIN MENU  -->
+    <div *ngIf="isUserAuthenticated" class="main-menu">
+      <a md-button routerLink="rncp-titles" routerLinkActive="active" *ngIf="showRncpTitleMenu" class="MoHdn">
+        <md-icon>import_contacts</md-icon>
+        <span class="UserInfoSpan">{{'MAIN_MENU.RNCP' | translate}}</span>
+      </a>
+      <a md-button routerLink="school-group" routerLinkActive="active" *ngIf="showSchoolGroupRncpMenu" class="MoHdn">
+        <md-icon>account_balance</md-icon>
+        <span class="UserInfoSpan">{{'MAIN_MENU.SCHOOLS' | translate}}</span>
+      </a>
+      <a md-button routerLink="school" routerLinkActive="active" *ngIf="showSchoolMenu" class="MoHdn">
+        <md-icon>account_balance</md-icon>
+        <span class="UserInfoSpan">{{'MAIN_MENU.SCHOOLS' | translate}}</span>
+      </a>
+      <a md-button routerLink="myfile" routerLinkActive="active" *ngIf="showStudentFileMenu" >
+        <md-icon>local_library</md-icon>
+        <span class="UserInfoSpan">{{'MyFile' | translate}}</span>
+      </a>
+      <a md-button routerLink="photoDiploma" routerLinkActive="active" *ngIf="showStudentDiplomaMenu">
+        <md-icon>contact_mail</md-icon>
+        <span class="UserInfoSpan">{{'MyPhotoDiploma' | translate}}</span>
+      </a>
+      <a md-button routerLink="students" routerLinkActive="active" *ngIf="showStudentMenu" class="MoHdn">
+        <md-icon>school</md-icon>
+        <span class="UserInfoSpan">{{'MAIN_MENU.STUDENT' | translate}}</span>
+      </a>
+
+      <a md-button routerLink="school/{{this.schoolId}}/edit/0" *ngIf="showSchoolStudentsMenu" routerLinkActive="active" class="MoHdn">
+        <md-icon>school</md-icon>
+        <span class="UserInfoSpan">{{'MAIN_MENU.STUDENT' | translate}}</span>
+      </a>
+
+      <a md-button routerLink="allStudentsTable" *ngIf="showAllStudentsMenu" routerLinkActive="active" class="MoHdn">
+        <md-icon>school</md-icon>
+        <span class="UserInfoSpan">{{'MAIN_MENU.STUDENT' | translate}}</span>
+      </a>
+
+      <a md-button *ngIf="showSchoolGroupStudentMenu" routerLinkActive="active" (click)="redirectToSchool()">
+        <md-icon>school</md-icon>
+        <span>{{'MAIN_MENU.STUDENT' | translate}}</span>
+      </a>
+      <a md-button routerLink="admtc-acad/tasks" routerLinkActive="active" *ngIf="showTaskMenu" class="MoHdn">
+        <md-icon>title</md-icon>
+        <span class="UserInfoSpan">{{'MAIN_MENU.TASKS' | translate}}</span>
+      </a>
+
+      <a md-button routerLink="mailbox" routerLinkActive="active" *ngIf="showMailBoxMenu" class="MoHdn">
+        <md-icon>email</md-icon>
+        <span class="UserInfoSpan">{{'MAIN_MENU.MAILBOX' | translate}}</span>
+      </a>
+
+      <!-- ADMTC USERS Management Link-->
+      <a md-button routerLink="admtc-users" routerLinkActive="active" *ngIf="showUsersMgmtAdmtcMenu" class="MoHdn">
+        <md-icon>person</md-icon>
+        <span class="UserInfoSpan">{{'MAIN_MENU.USER' | translate}}</span>
+      </a>
+
+      <!-- Academic USERS Management Link-->
+      <a md-button routerLink="academic-users" routerLinkActive="active" *ngIf="showUsersMgmtAcademicMenu" class="MoHdn">
+        <md-icon>person</md-icon>
+        <span class="UserInfoSpan">{{'MAIN_MENU.USER' | translate}}</span>
+      </a>
+
+      <a md-button routerLink="ideas" routerLinkActive="active" *ngIf="showIdeasMenu && !isAdmtcUserEntity" class="MoHdn">
+        <md-icon>markunread_mailbox</md-icon>
+        <span class="UserInfoSpan">{{'MAIN_MENU.IDEAS' | translate}}</span>
+      </a>
+
+      <a md-button routerLinkActive="active" [mdMenuTriggerFor]="priviousCourse" *ngIf="showPreviousCourseTab && listOfStudentPreviousCourses.length" class="MoHdn">
+        <md-icon>beenhere</md-icon>
+        <span class="UserInfoSpan">{{'MAIN_MENU.PREVIOUS_COURSES' | translate}}</span>
+      </a>
+      <md-menu #priviousCourse="mdMenu" [overlapTrigger]="false" yPosition="above">
+        <button *ngFor="let course of listOfStudentPreviousCourses" md-menu-item routerLinkActive="active"
+        [routerLink]="['/student/previousCourse', course?.rncpId?._id, course?.schoolId?._id]" >
+          <span>{{course?.rncpId?.shortName + ' - ' + course?.schoolId?.shortName}}</span>
+        </button>
+      </md-menu>
+
+      <!-- END Common Menus  -->
+
+      <!-- TOOLS Menu -->
+      <a md-button routerLinkActive="active" [mdMenuTriggerFor]="toolsMenu" *ngIf="showToolsMenu" class="MoHdn">
+        <md-icon>perm_data_setting</md-icon>
+        <span class="UserInfoSpan">{{'MAIN_MENU.TOOLS.HEADER' | translate}}</span>
+      </a>
+
+      <md-menu #toolsMenu="mdMenu" [overlapTrigger]="false" yPosition="above">
+        <button md-menu-item routerLink="tools/settings">
+          <!--<md-icon>perm_data_setting</md-icon>-->
+          <span>{{'MAIN_MENU.TOOLS.PLATFORM' | translate}}</span>
+        </button>
+        <button md-menu-item routerLink="tools/parameter-rncp">
+          <!--<md-icon></md-icon>-->
+          <span>{{'MAIN_MENU.TOOLS.TITLES_RNCP' | translate}}</span>
+        </button>
+        <button md-menu-item (click)="gotoCrossCorrection()" *ngIf="isAdmtcUserEntity">
+          <span>{{'CrossCorrection.Cross_Correction' | translate}}</span>
+        </button>
+        <button md-menu-item routerLink="tools/questionnaire-tools" *ngIf="questionnairreTools">
+          <span>{{'MAIN_MENU.TOOLS.QUESTIONNAIRRE_TOOLS' | translate}}</span>
+        </button>
+        <button md-menu-item *ngIf="isAdmtcUserEntity" (click)="openExportGroupsDialog()">
+            <span>{{'MAIN_MENU.TOOLS.EXPORT_GROUPS' | translate}}</span>
+          </button>
+        <button md-menu-item (click)="gotoEmployabilitySurvey()">
+          <span>{{'MAIN_MENU.TOOLS.EMPLOYABILITY_SURVEY' | translate}}</span>
+        </button>
+        <button md-menu-item routerLink="tools/history">
+          <span>{{'MAIN_MENU.TOOLS.HISTORY' | translate}}</span>
+        </button>
+        <button md-menu-item (click)="openTransferResponsibilityDialog()">
+          <span>{{'MAIN_MENU.TOOLS.TRANSFER' | translate}}</span>
+        </button>
+        <button md-menu-item (click)="openStatusUpdateDialog()" *ngIf="isAdmtcUserEntity">
+          <span>{{'MAIN_MENU.TOOLS.STATUS_UPDATE' | translate}}</span>
+        </button>
+        <button md-menu-item>
+          <!--<md-icon>perm_data_setting</md-icon>-->
+          <span>{{'MAIN_MENU.TOOLS.BILLING' | translate}}</span>
+        </button>
+        <button md-menu-item routerLink="tools/alertFunction" *ngIf="showAlertUserFunctionality">
+          <!--<md-icon></md-icon>-->
+          <span>{{'MAIN_MENU.TOOLS.ALERT_FUNCTIONALITY' | translate}}</span>
+        </button>
+        <button md-menu-item (click)="openUrgentMailDialog()" *ngIf="isAdmtcUserEntity">
+          <span>{{'USERLISTTABLE.URGENT_MESSAGE' | translate}}</span>
+        </button>
+        <button md-menu-item routerLink="internal-note" *ngIf="isAdmtcUserEntity ">
+          <span>{{'MAIN_MENU.TOOLS.INTERNAL_NOTE' | translate}}</span>
+        </button>
+    
+        <button md-menu-item (click)="openGrouptMailDialog()" *ngIf="isAdmtcUserEntity && display_GROUP_EMAIL">
+          <span>{{'MailBox.MAIL_TO_GROUP' | translate}}</span>
+        </button>
+        <button md-menu-item routerLink="ideas" *ngIf="showIdeasMenu && isAdmtcUserEntity">
+          <span>{{'MAIN_MENU.IDEAS' | translate}}</span>
+        </button>
+        <button md-menu-item (click)="gotoFinalTranscript()" *ngIf="isAdmtcUserEntity && displayFINAL_TRANSCRIPTIcon">
+          <span>{{'FinalTranscript.title' | translate}}</span>
+        </button>
+        <button  md-menu-item routerLink="tutorial/list" *ngIf="showTutorialListADMTC && display_tutorialMenu">
+          <span>{{'TUTORIALS' | translate}}</span>
+        </button>
+        <button md-menu-item (click)="openFinalCertificateDialog()" *ngIf="isAdmtcUserEntity && displayCERTIDEGREEIcon">
+          <span>{{'MAIN_MENU.TOOLS.CERTIDEGREE' | translate}}</span>
+        </button>
+        <button md-menu-item (click)="openTransferStudentFromSchool()" *ngIf="isAdmtcUserEntity && transferStudentSchool">
+          <span>{{'CHNAGE_SCHOOL.TRANSFER_STUDENT' | translate}}</span>
+        </button>
+        <button md-menu-item (click)="openQualityControlDialog()" *ngIf="isAdmtcUserEntity">
+            <span>{{'MAIN_MENU.TOOLS.QUALITYCONTROL' | translate}}</span>
+        </button>
+      </md-menu>
+
+      <!-- Docs & Test Table Menu -->
+      <a md-button routerLink="doctesttable" routerLinkActive="active" #rLinkActive="routerLinkActive" *ngIf="showCertificationTestsMenu">
+        <svg style="width:28px;height:46px" viewBox="0 0 24 24" routerLinkActive="abc">
+          <path [ngStyle]="{'fill': rLinkActive.isActive === true ? '#ffd740' : 'white'}" fill="white" d="M15.2,10.7L16.6,16L12,12.2L7.4,16L8.8,10.8L4.6,7.3L10,7L12,2L14,7L19.4,7.3L15.2,10.7M14,19.1H13V16L12,15L11,16V19.1H10A2,2 0 0,0 8,21.1V22.1H16V21.1A2,2 0 0,0 14,19.1Z"
+          />
+        </svg>
+        <span>{{'MAIN_MENU.TESTS' | translate}}</span>
+      </a>
+
+
+      <a routerLinkActive="active"  md-button class="MoHdn"  [mdMenuTriggerFor]="helpMenu" >
+        <i class="fa fa-question fa-lg" style="padding-right:5px;padding-left:10px;"></i> {{'HELP' | translate}}
+      </a>
+      <md-menu #helpMenu="mdMenu" [overlapTrigger]="false" yPosition="above">
+        <button style="color:black" md-menu-item (click)="openComposeMailDialog()">
+          <i class="fa fa-bolt fa-lg" style="padding-right:10px;padding-left:10px;"></i>{{'CONTACTUS' | translate}}
+        </button>
+
+
+          <button style="color:black" md-menu-item  (click)="onTutorials()" *ngIf="showTutorialListACAD && display_tutorialMenu">
+            <svg style="width: 20px; transform: translateY(4px); height: 18px; margin-right: 10px;" viewBox="0 0 24 24">
+              <path fill="#000000" d="M22,18V22H18V19H15V16H12L9.74,13.74C9.19,13.91 8.61,14 8,14A6,6 0 0,1 2,8A6,6 0 0,1 8,2A6,6 0 0,1 14,8C14,8.61 13.91,9.19 13.74,9.74L22,18M7,5A2,2 0 0,0 5,7A2,2 0 0,0 7,9A2,2 0 0,0 9,7A2,2 0 0,0 7,5Z"
+              />
+            </svg>
+            <span>{{'TUTORIALS' | translate}}</span>
+        </button>
+
+        <button style="color:black" md-menu-item class="md2-menu-item" [mdMenuTriggerFor]="tutMenu" *ngIf="!showTutorialListACAD && !showTutorialListADMTC">
+          <svg style="width: 20px; transform: translateY(4px); height: 18px; margin-right: 10px;" viewBox="0 0 24 24">
+            <path fill="#000000" d="M22,18V22H18V19H15V16H12L9.74,13.74C9.19,13.91 8.61,14 8,14A6,6 0 0,1 2,8A6,6 0 0,1 8,2A6,6 0 0,1 14,8C14,8.61 13.91,9.19 13.74,9.74L22,18M7,5A2,2 0 0,0 5,7A2,2 0 0,0 7,9A2,2 0 0,0 9,7A2,2 0 0,0 7,5Z"
+            />
+          </svg>
+          <span>{{'TUTORIALS' | translate}}</span>
+        </button>
+
+
+      <md-menu backdropClass="panel-menu-class" panelClass="panel-menu-class" hasBackdrop="true" #tutMenu="mdMenu" yPosition="above">
+          <div *ngFor="let nameList of tutoriaslArray" style="width: 99%">
+              <span *ngIf="nameList.linkList && nameList.linkList.length > 0">
+                <div class="menu-entity" (click)="openTutorialLink( nameList.linkList[0] && nameList.linkList[0].link ? nameList.linkList[0].link : '')">
+                  {{ getTranslateUserType(nameList.name) }}
+                </div>
+                <div *ngFor="let item of nameList.linkList" md-button class="MoHdn md2-menu-item md2-button" (click)="openTutorialLink(item.link)">
+                  <span [innerHTML]="getTutorialTitle(item.title)"></span>
+                </div>
+              </span>
+          </div>
+      </md-menu>
+
+      </md-menu>
+
+      <a md-button routerLinkActive="active" (click)="openQualityControlDialog()" *ngIf="showQualityControlMenu && !isAdmtcUserEntity" class="MoHdn">
+        <md-icon>exposure</md-icon>
+        <span class="UserInfoSpan">{{'MAIN_MENU.TOOLS.QUALITYCONTROL' | translate}}</span>
+      </a>
+
+    </div>
+    <!-- END MAIN MENU -->
+
+    <!-- Logged User Details -->
+    <div style="vertical-align: middle; position: absolute; right: 1rem">
+      <button md-button style="font-weight: bold; font-size: 16px;" *ngIf="RNCPTitleName !== ''">
+        {{ RNCPTitleName }}
+      </button>
+      <button md-button style="font-weight: bold; font-size: 16px;" *ngIf="schoolShortName !== '' && user.entity.type === 'group-of-schools'">
+        {{ schoolShortName }}
+      </button>
+      <button md-raised-button color="accent" md-button (click)="updateUnreadCount()" [mdMenuTriggerFor]="profileMenu" class="profileMenu">
+        <md-icon *ngIf="isAdmtcUserEntity && user" style="margin-top: -3px !important;">person</md-icon>
+        <md-icon *ngIf="!isAdmtcUserEntity && user" style="margin-top: -3px !important;">person</md-icon>
+        <span *ngIf="isAdmtcUserEntity && user" class="UserInfoSpan">
+          <!-- <i class="fa fa-user" style="margin-right: 5px !important;"></i> -->
+          {{ user?.firstName }} {{ user?.lastName }}
+        </span>
+        <span *ngIf="!isAdmtcUserEntity && user" class="UserInfoSpan">
+          <!-- <i class="fa fa-user" style="margin-right: 5px !important;"></i>  -->
+          {{ user?.firstName }} {{ user?.lastName }} {{ entityName ? " - "+entityName:"" }}
+        </span>
+      </button>
+      <md-menu #profileMenu="mdMenu"  [overlapTrigger]="false" yPosition="above">
+        <button md-menu-item routerLink="mailbox" routerLinkActive="active">
+          <i class="fa fa-envelope fa-lg" style="padding-right:10px;padding-left:6px;"></i>
+          {{'MYMESSAGES' | translate}}
+          <span class="unreadCounter" *ngIf="(inboxCounter + importantCounter) > 0"> {{ inboxCounter + importantCounter }} </span>
+        </button>
+        <button md-menu-item (click)="setLanguage('en')">
+          <img [src]="logoEN" width="30" height="22" /> {{'ENGLISH' | translate}}</button>
+        <button md-menu-item (click)="setLanguage('fr')">
+          <img [src]="logoFR" width="30" height="22" /> {{'FRENCH' | translate}}</button>
+
+        <!-- social login button -->
+        <button md-menu-item (click)="subscribeToLogin()" *ngIf="checkIfStudentorMentor() && allowLinkedInLogin" [ngClass]="user?.socialLogins?.linkedIn ? 'avoid-clicks' : ''">
+            <i class="fa fa-linkedin-square" style="margin-left: 5px;margin-right: 7px;font-size:24px; vertical-align: middle;"></i> <span style="text-align:center">{{'Connect LinkeIn' | translate}}{{user?.socialLogins?.linkedIn ? ('(Connected)') : ''}}</span></button>
+        <!-- social login button -->
+          <button md-menu-item (click)="gotoPrivacyPolicy()">
+            <svg class="privacy-svg" viewBox="0 0 24 24">
+              <path fill="#000000" d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M17.13,17C15.92,18.85 14.11,20.24 12,20.92C9.89,20.24 8.08,18.85 6.87,17C6.53,16.5 6.24,16 6,15.47C6,13.82 8.71,12.47 12,12.47C15.29,12.47 18,13.79 18,15.47C17.76,16 17.47,16.5 17.13,17Z"
+              />
+            </svg>
+            {{'PRIVACY_POLICY.MENU_TITLE' | translate}}
+          </button>
+        <button md-menu-item (click)="logout()" *ngIf="isUserAuthenticated && !isRegistrationPage">
+          <i class="fa fa-sign-out fa-lg" style="padding-right:10px;padding-left:10px;"></i>{{'LOGOUT' | translate}}</button>
+      </md-menu>
+    </div>
+    <!-- END Logged User Details -->
+
+    <!-- Non Logged User -->
+    <div style="vertical-align: middle; position: absolute; right: 1rem">
+      <button md-raised-button color="accent" md-button [mdMenuTriggerFor]="languageMenu" *ngIf="!isUserAuthenticated">
+        <i class="fa fa-language fa-lg"></i>
+        {{selectedLanguage}}
+      </button>
+      <md-menu #languageMenu="mdMenu">
+        <button md-menu-item (click)="setLanguage('en')">
+          <img [src]="logoEN" width="30" height="22" /> {{'ENGLISH' | translate}}</button>
+        <button md-menu-item (click)="setLanguage('fr')">
+          <img [src]="logoFR" width="30" height="22" />{{'FRENCH' | translate}}</button>
+      </md-menu>
+    </div>
+    <!-- END Non Logged User -->
+  </md-toolbar>
+
+
+  <md-sidenav-container class="app-inner">
+    <router-outlet (activate)="eventChange($event)"></router-outlet>
+  </md-sidenav-container>
+</div>

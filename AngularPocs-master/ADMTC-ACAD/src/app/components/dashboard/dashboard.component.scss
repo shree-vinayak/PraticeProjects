@@ -1,0 +1,75 @@
+:host /deep/ .primary-background {
+  background-color: #607d8b;
+}
+md-card.dark-header {
+  .mat-card-title{
+    margin-bottom: 0;
+    padding-bottom: 16px;
+    background-color: #212121;
+  }
+}
+
+:host /deep/ .page-count span {
+  display: none !important;
+}
+
+:host /deep/ {
+  .dashboardStaffComponent ng-select select-dropdown>div .options {
+      background-color: rgba(0, 0, 0, 0.5)
+  }
+  .dashboardStaffComponent .ui-select-placeholder {
+      color: #dddddd;
+      float: left;
+      font-weight: 700;
+      font-size: 14px;
+      margin-left: -12px;
+  }
+  .dashboardStaffComponent .form-control:focus {
+      box-shadow: #212121;
+      border-left-color: #212121 !important;
+      border-right-color: #212121 !important;
+      border-top: none !important;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(0, 0, 0, .6);
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(0, 0, 0, .6);
+  }
+  .dashboardStaffComponent .btn {
+      background-color: #212121 !important;
+      border-left-color: #212121 !important;
+      border-right-color: #212121 !important;
+      border-top: none !important;
+  }
+  .dashboardStaffComponent .ui-select-match-text {
+      color: white;
+      margin-left: -12px;
+  }
+  .dashboardStaffComponent input {
+      color: white !important;
+      background-color: #212121 !important;
+      border-left-color: #212121 !important;
+      border-right-color: #212121 !important;
+      border-top: none !important;
+  }
+  .dashboardStaffComponent {
+      input {
+          background-color: #212121 !important;
+      }
+  }
+}
+
+.dashboardStaffComponent ng-select select-dropdown>div .options {
+  background-color: rgba(0, 0, 0, 0.5)
+}
+
+.dashboardStaffComponent .btn {
+  background-color: gray;
+}
+
+.dashboardStaffComponent input {
+  background-color: gray;
+}
+
+.dashboardStaffComponent {
+  input {
+      background-color: gray;
+  }
+}

@@ -1,0 +1,282 @@
+<h6 *ngIf="isMobileView" class="MobileViewMessage">
+    {{'MobileViewMessage' | translate}}
+</h6>
+<div *ngIf="!isMobileView">
+    <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="isAutorized">
+        <md-input-container fxFlex="20">
+            <input #SearchTool type="text" mdInput [formControl]="myControl" placeholder="{{ 'Search.search' | translate }}" (keyup)='filterMailListsOnSalesStaff($event)'>
+        </md-input-container>
+        <button [disabled]="!hideResetButton" style="margin-left: 5px;height: 38px;" md-raised-button type="button" color="primary"
+            (click)="resetSearch()">
+            <md-icon>restore</md-icon> Reset
+        </button>
+    </div>
+    <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="isAutorized">
+
+        <div fxFlex.gt-sm="60" fxFlex.gt-xs="60" fxFlex="60" class="mail-type-list-wrapper">
+            <md-list>
+                <md-list-item fxFlex *ngFor="let _mailCat of mailCategories" [ngClass]="_mailCat.key == selectedMailCategory ? 'active mail-type-' + _mailCat.key : 'mail-type-' + _mailCat.key "
+                    (click)="changeSelectedMailCategory(_mailCat.key)">
+                    <i class="fa" [ngClass]="_mailCat.icon"></i> {{ 'MailBox.' + _mailCat.name | translate }}
+                    <span *ngIf="_mailCat.key === 'inbox' && inboxCount" class="unreadNotify">
+                        <b> {{ inboxCount }} </b>
+                    </span>
+                    <span *ngIf="_mailCat.key === 'important' && importantCount" class="unreadNotify">
+                        <b> {{ importantCount }} </b>
+                    </span>
+                </md-list-item>
+            </md-list>
+        </div>
+        <div fxFlex.gt-sm="40" fxFlex.gt-xs="40" fxFlex="40" class="mail-type-list-wrapper">
+            <div class="mail-controls">
+
+                <button md-button [title]=" 'MailBox.download' | translate " (click)="changeSelectedMailCategory(selectedMailCategory)">
+                    <i class="fa fa-download"></i>
+                </button>
+                <button md-button [title]=" 'MailBox.compose' | translate " (click)="openComposeMailDialog()">
+                    <i class="fa fa-pencil"></i>
+                </button>
+                <button md-button *ngIf="isAdmin" [title]="'USERLISTTABLE.URGENT_MESSAGE' | translate" (click)="openUrgentMailDialog()">
+                    <i class="fa fa-bolt"></i>
+                </button>
+
+                <button md-button *ngIf="isAdmin && display_GROUP_EMAIL" [title]=" 'MailBox.MAIL_TO_GROUP' | translate " (click)="openComposeMailDialog(true)">
+                        <svg style="width: 17px;height: 17px; margin: -3px;" viewBox="0 0 24 24">
+                            <path fill="#000000" d="M16,13C15.71,13 15.38,13 15.03,13.05C16.19,13.89 17,15 17,16.5V19H23V16.5C23,14.17 18.33,13 16,13M8,13C5.67,13 1,14.17 1,16.5V19H15V16.5C15,14.17 10.33,13 8,13M8,11A3,3 0 0,0 11,8A3,3 0 0,0 8,5A3,3 0 0,0 5,8A3,3 0 0,0 8,11M16,11A3,3 0 0,0 19,8A3,3 0 0,0 16,5A3,3 0 0,0 13,8A3,3 0 0,0 16,11Z" />
+                        </svg>
+                </button>
+                <!-- <button md-button [title]=" 'MailBox.reply' | translate" *ngIf="isbtnShown"><i class="fa fa-reply"></i></button>
+                <button md-button [title]=" 'MailBox.reply_all' | translate" *ngIf="isbtnShown"><i class="fa fa-reply-all"></i></button>
+                <button md-button [title]=" 'MailBox.forward' | translate" *ngIf="isbtnShown"><i class="fa fa-mail-forward"></i></button> -->
+                <button md-button [title]=" 'MailBox.delete' | translate" *ngIf="IsDeleteBtn" (click)="onDeleteMail()">
+                    <i class="fa fa-trash"></i>
+                </button>
+                <button md-button [title]=" 'Important' | translate" *ngIf="IsImportantBtn" (click)="MailMoveTo('important')">
+                    <i class="fa fa-hand-paper-o"></i>
+                </button>
+                <button md-button [title]=" 'MoveToInbox' | translate" *ngIf="IsMovetoInboxBtn" (click)="MailMoveTo('inbox')">
+                    <i class="fa fa-inbox"></i>
+                </button>
+            </div>
+        </div>
+
+
+        <div fxLayout="row" fxLayoutWrap="wrap" fxFlex="100">
+            <div fxFlex.gt-sm="50%" fxFlex="100">
+                <ngx-datatable class="material ngx-dt-maillist mailList" [rows]="mailsList" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'60'"
+                    [columnMode]="'force'" [reorderable]="reorderable" [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+                    [limit]="page.size" (page)="changePage($event)" [externalSorting]="true" (sort)="sortPage($event)" [messages]="{emptyMessage: 'NoDataToDisplay' | translate }"
+                    [sorts]="[{prop: 'createdAt', dir: 'desc'},{prop: 'senderProperty', dir: 'desc'},{prop: 'recipientProperty', dir: 'desc'},{prop: 'subject', dir: 'desc'}]"
+                    [selected]="selectedMails" [selectionType]="'checkbox'" (select)='onMailSelected($event)' (activate)="mailRowActivated($event)"
+                    [cssClasses]="ngxDtCssClasses" [rowClass]="rowClass">
+                    <ngx-datatable-column [width]="20" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+                        <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                            <label class="datatable-checkbox">
+                                <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+                            </label>
+                        </ng-template>
+                        <ng-template ngx-datatable-cell-template let-row="row" let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                            <label [className]="row?.IsCheckReadFlag === false  ? 'datatable-checkbox unread' : 'datatable-checkbox'">
+                                <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
+                            </label>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column [width]="20" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" [headerCheckboxable]="true">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <span *ngIf="row.isUrgentMail">
+                                <i class="fa fa-bolt fa-2x"></i>
+                            </span>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column headerClass="text-center" [width]="100" [canAutoResize]="false" prop="createdAt" [resizeable]="false">
+                        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                            <span (click)="sort()">{{ 'MailBox.date' | translate }}</span>
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <span (click)="onSelectMessage(row)" title="{{row?.createdAt | date:'dd-MM-y'}}">
+                                {{row?.createdAt | date:'dd-MM-y'}}
+                            </span>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column headerClass="text-center"  [canAutoResize]="false" [width]="150" prop="senderProperty" [resizeable]="false">
+                        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                            <span (click)="sort()">{{ 'MailBox.from' | translate }}</span>
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <span (click)="onSelectMessage(row)" *ngIf="row?.senderProperty?.sender?.email" title="{{row?.senderProperty?.sender?.email}}">
+                                {{getCivility(row?.senderProperty?.sender?.sex)}} {{row?.senderProperty?.sender?.firstName}} {{row?.senderProperty?.sender?.lastName}}
+                            </span>
+                            <span (click)="onSelectMessage(row)" *ngIf="!row?.senderProperty?.sender?.email" title="{{row?.senderProperty?.sender}}">
+                                {{row?.senderProperty?.sender}}
+                            </span>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column headerClass="text-center"  [canAutoResize]="false" [width]="150" prop="recipientProperty" [resizeable]="false">
+                        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                            <span (click)="sort()">{{ 'MailBox.to' | translate }}</span>
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <span (click)="onSelectMessage(row)" *ngFor="let recipientList of row?.recipientProperty; let recIndex = index;">
+                                <span *ngFor="let rec of recipientList?.recipient;">
+                                    <span *ngIf="rec?.email" title="{{rec?.email}}">
+                                        {{getCivility(rec?.sex)}} {{rec?.firstName}} {{rec?.lastName}}
+                                    </span>
+                                    <span *ngIf="!rec?.email" title="{{rec}}">
+                                        {{ rec }}
+                                    </span>
+                                    <span *ngIf="recIndex < row?.recipientProperty?.length - 1">,&nbsp;&nbsp;</span>
+                                </span>
+                            </span>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column headerClass="text-center" [width]="300" prop="subject" [resizeable]="false">
+                        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                            <span (click)="sort()">{{ 'MailBox.subject' | translate }}</span>
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <div class="mailSubject" (click)="onSelectMessage(row)" title="{{row?.subject}}">
+                                {{row?.subject}}
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+
+            </div>
+            <div fxFlex.gt-sm="50%" fxFlex="100">
+                <div class="view-message-section" *ngIf="viewMessageData && viewMessageData._id">
+                    <div class="compose-mail-actions">
+                        <button md-button [title]=" 'MailBox.emailDetails.reply' | translate " (click)="OpenMailPopupRequest(viewMessageData,'reply-mail')">
+                            <i class="fa fa-reply"></i>
+                        </button>
+                        <button md-button [title]=" 'MailBox.emailDetails.reply_all' | translate " (click)="OpenMailPopupRequest(viewMessageData,'reply-all')">
+                            <i class="fa fa-reply-all"></i>
+                        </button>
+                        <button md-button [title]=" 'MailBox.emailDetails.forward' | translate " (click)="OpenMailPopupRequest(viewMessageData,'foward-mail')">
+                            <i class="fa fa-mail-forward"></i>
+                        </button>
+                        <button md-button [title]=" 'MailBox.emailDetails.delete' | translate " (click)="openDialog(viewMessageData)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                      
+                        <span *ngIf="viewMessageData.isUrgentMail == true">
+                            <i class="fa fa-bolt"></i> {{'MailBox.URGENT_MESSAGE' | translate}}
+                        </span>
+                        <div style="float: right">
+                            <button *ngIf="!checkIsPreviousBtnShow()" style="color:gray" md-button [title]=" 'MailBox.emailDetails.previous' | translate ">
+                                <i class="fa fa-caret-left"></i>
+                            </button>
+                            <button *ngIf="checkIsPreviousBtnShow()" md-button [title]=" 'MailBox.emailDetails.previous' | translate " (click)="onPreviousMessage(viewMessageData)">
+                                <i class="fa fa-caret-left"></i>
+                            </button>
+                            <button *ngIf="checkIsNextBtnShow()" md-button [title]=" 'MailBox.emailDetails.next' | translate " (click)="onNextMessage(viewMessageData)">
+                                <i class="fa fa-caret-right"></i>
+                            </button>
+                            <button *ngIf="!checkIsNextBtnShow()" style="color:gray" md-button [title]=" 'MailBox.emailDetails.next' | translate ">
+                                <i class="fa fa-caret-right"></i>
+                            </button>
+                            <!-- <button md-button (click)="closeViewMailBox(viewMessageData)"><i class="fa fa-times" aria-hidden="true"></i></button> -->
+                            <!-- <p class="ViewMailCloseBtn" (click)="closeViewMailBox()"></p> -->
+                        </div>
+                    </div>
+
+
+                    <div class="compose-mail">
+                        <div style="width: 100%">
+                            <div class="emailsubject e-mailSubject"  *ngIf="viewMessageData?.subject">
+                                <b>{{viewMessageData?.subject}}</b>
+                            </div>
+                            <span style="float: right; margin-right: 18px;">{{ getTranslatedDate(viewMessageData?.createdAt) }}</span>
+                        </div>
+                        <hr>
+                        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px;font-size:12px;">
+                            <label>{{ 'dashboardMessage.FROM' | translate }} : &nbsp;</label>
+                            <span *ngIf="viewMessageData?.senderProperty?.sender?.email">
+                                {{getCivility(viewMessageData?.senderProperty?.sender?.sex)}} {{viewMessageData?.senderProperty?.sender?.firstName}} {{viewMessageData?.senderProperty?.sender?.lastName}}
+                            </span>
+                            <span *ngIf="!viewMessageData?.senderProperty?.sender?.email">
+                                {{viewMessageData?.senderProperty?.sender}}
+                            </span>
+                        </div>
+                        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:5px;margin-bottom:10px;font-size:12px;" *ngIf="recpList?.length > 0">
+                            <div fxFlex>
+                                <label>{{ 'dashboardMessage.TO' | translate }} : &nbsp;</label>
+                                <span *ngFor="let recipientList of recpList; let recIndex = index">
+                                    <span *ngIf="recipientList?.rank" title="{{recipientList?.rank}}">
+                                        <span *ngFor="let rec of recipientList?.recipient;">
+                                           <span *ngIf="rec?.email" title="{{rec?.email}}" >
+                                              {{getCivility(rec?.sex)}} {{rec?.firstName}} {{rec?.lastName}}
+                                             </span>
+                                             <span *ngIf="!rec?.email" title="{{rec}}">
+                                                {{ rec }}
+                                             </span>
+                                            <span *ngIf="recIndex < recpList?.length - 1">,&nbsp;&nbsp;</span>
+                                        </span>
+                                  </span>
+                              </span>
+                            </div>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:5px;font-size:12px;"
+                        *ngIf="isAdmin && selectedMailCategory === 'sent' && viewMessageData.isGroupParent && viewMessageData?.groupDetails?.rncp?.length">
+                            <div fxFlex>
+                                <label>{{ 'RNCPTITLES' | translate }} : &nbsp;</label>
+                                <span *ngFor="let rncpItem of viewMessageData?.groupDetails?.rncp; let rncpIndex = index">
+                                    {{ rncpItem.shortName }}{{ rncpIndex === 0 ? '' : ',' }}
+                              </span>
+                            </div>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-bottom:15px;font-size:12px;" 
+                        *ngIf="isAdmin && selectedMailCategory === 'sent' && viewMessageData.isGroupParent && viewMessageData?.groupDetails?.userType?.length" >
+                            <div fxFlex>
+                                <label>{{ 'DASHBOARD.USERTYPE' | translate }} : &nbsp;</label>
+                                <span *ngFor="let userTypeItem of viewMessageData?.groupDetails?.userType; let userTypeIndex = index">
+                                    {{ getTranslateUserType(userTypeItem?.name) }}{{ userTypeIndex === 0 ? '' : ',' }}
+                              </span>
+                            </div>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:5px;margin-bottom:15px;font-size:12px;"  *ngIf="ccList?.length > 0">
+                            <div fxFlex>
+                                <label>{{ 'MailBox.composeMail.cc' | translate }} : &nbsp;</label>
+                                <span *ngFor="let recipientList of ccList; let recIndex = index; ">
+                                    <span *ngIf="recipientList?.rank" title="{{recipientList?.rank}}">
+                                       <span *ngFor="let rec of recipientList?.recipient;">
+                                           <span *ngIf="rec?.email" title="{{rec?.email}}">
+                                                 {{getCivility(rec?.sex)}} {{rec?.firstName}} {{rec?.lastName}}
+                                            </span>
+                                            <span *ngIf="!rec?.email" title="{{rec}}">
+                                                  {{ rec }}
+                                           </span>
+                                           <span *ngIf="recIndex < ccList?.length - 1">,&nbsp;&nbsp;</span>
+                                            </span>
+                                      </span>
+                                 </span>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:5px">
+                            <div fxFlex>
+                                <p innerHTML={{viewMessageData.message}}> </p>
+                                <br/>
+                                <br/>
+                                <div class="fileInfo" *ngFor="let attach of viewMessageData.attachments">
+                                    <button md-icon-button type="button">
+                                        <md-icon>insert_drive_file</md-icon>
+                                    </button>
+                                    <label>{{getFileName(attach)}}</label>
+                                    <button md-icon-button type="button" (click)="downloadFile(attach)">
+                                        <md-icon> file_download </md-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:5px">
+
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

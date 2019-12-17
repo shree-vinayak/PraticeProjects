@@ -1,0 +1,120 @@
+<div fxLayout="column wrap" fxLayoutAlign="start" class="main-container">
+  <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px;">
+    <div class="pa-1">
+      <div fxLayout="row wrap" fxLayoutAlign="start center">
+        <h4 fxFlex>
+          <span class="text-crossCorrection">
+            <span>
+              <svg class="place-svg-icon" viewBox="0 0 24 24">
+                <path fill="#000000" d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z"
+                />
+              </svg>
+            </span>
+            {{'MAIN_MENU.TOOLS.STATUS_UPDATE' | translate}}
+          </span>
+        </h4>
+        <button md-icon-button (click)="closeDialog()">
+          <md-icon>close</md-icon>
+        </button>
+      </div>
+    </div>
+    <hr>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap" fxFlex="100">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      <form [formGroup]="statusUpdateForm">
+
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:20px; ">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <md-input-container fxFlex="100">
+              <input type="text" placeholder="{{'CrossCorrection.Select_RNCP_Title.title' | translate}}" mdInput formControlName="rncpTitle"
+                [mdAutocomplete]="autoTitle">
+              <md-autocomplete #autoTitle="mdAutocomplete">
+                <md-option *ngFor="let list of filteredOptionsRNCPTitle |  async" [value]="list.shortName" (click)="OnSelectRNCPTitle(list)">
+                  {{ list.shortName }}
+                </md-option>
+              </md-autocomplete>
+            </md-input-container>
+          </div>
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <small *ngIf="statusUpdateForm.controls['rncpTitle'].hasError('required') && (statusUpdateForm.controls['rncpTitle'].touched || formSubmit)"
+              class="mat-text-warn">
+              {{'CrossCorrection.Select_RNCP_Title.validation1' | translate}}</small>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:20px; ">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <md-input-container fxFlex="100">
+              <input type="text" placeholder="{{'STUDENT.SCHOLERSEASON.title' | translate}}" mdInput formControlName="scholarSeason" [mdAutocomplete]="autoScholarSeason">
+              <md-autocomplete #autoScholarSeason="mdAutocomplete">
+                <md-option *ngFor="let singleScholarseason of filteredOptionsScholarSeason |  async" [value]="singleScholarseason.scholarseason"
+                  (click)="OnSelectScholarSeason(singleScholarseason)">
+                  {{ singleScholarseason.scholarseason }}
+                </md-option>
+              </md-autocomplete>
+            </md-input-container>
+          </div>
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <small *ngIf="statusUpdateForm.controls['scholarSeason'].hasError('required') &&
+                  (statusUpdateForm.controls['scholarSeason'].touched || formSubmit)" class="mat-text-warn">
+              {{'STUDENT.SCHOLERSEASON.validation1' | translate}}</small>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px; ">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <md-input-container fxFlex="100">
+              <input type="text" placeholder="{{'CrossCorrection.Select_a_Class.title' | translate}}" mdInput formControlName="class" [mdAutocomplete]="autoClass">
+              <md-autocomplete #autoClass="mdAutocomplete">
+                <md-option *ngFor="let list of filteredOptionsClass |  async" [value]="list.name" (click)="OnSelectClass(list)">
+                  {{ list.name }}
+                </md-option>
+              </md-autocomplete>
+            </md-input-container>
+          </div>
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <small *ngIf="statusUpdateForm.controls['class'].hasError('required') && (statusUpdateForm.controls['class'].touched || formSubmit)"
+              class="mat-text-warn">
+              {{'CrossCorrection.Select_a_Class.validation1' | translate}}</small>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px; ">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <md-input-container fxFlex="100">
+              <input type="text" placeholder="{{'CrossCorrection.Select_the_Test.title' | translate}}" mdInput formControlName="test" [mdAutocomplete]="autoTest">
+              <md-autocomplete #autoTest="mdAutocomplete">
+                <md-option *ngFor="let list of filteredOptionsTest |  async" [value]="list.name" (click)="OnSelectTest(list)">
+                  {{ list.name }}
+                </md-option>
+              </md-autocomplete>
+            </md-input-container>
+          </div>
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <small *ngIf="statusUpdateForm.controls['test'].hasError('required') && (statusUpdateForm.controls['test'].touched || formSubmit)"
+              class="mat-text-warn">
+              {{'CrossCorrection.Select_the_Test.validation1' | translate}}</small>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:5px; ">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <md-checkbox fxFlex="100" labelPosition="after" [checked]="false" (change)="notificationEvent($event)">Notification</md-checkbox>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:5px; ">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <md-checkbox fxFlex="100" labelPosition="after" [checked]="false" (change)="csvEvent($event)">CSV</md-checkbox>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutAlign="end end" fxLayoutGap="5px" fxFlexAlign="end" style="width: 100%">
+    <button md-raised-button color="red" (click)="closeDialog()">{{"CrossCorrection.Cancel" | translate}}</button>
+    <button md-raised-button color="primary" [disabled]="statusUpdateForm.invalid || submitButtonDisabled"
+      (click)="getStatusOfTest()">{{"CrossCorrection.Enter" | translate}}</button>
+  </div>
+</div>

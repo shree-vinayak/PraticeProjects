@@ -1,0 +1,116 @@
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="70" fxFlex.lt-md="60" >
+            <span class="titleImport">{{ 'STUDENT.IMPORT' | translate }}</span>
+            <button md-raised-button color="accent" type="submit" style="float: right;margin-right: 0.5%;" (click)="csvTypeSelection()">{{ 'STUDENT_IMPORT.DOWNLOAD_TEMPLATE' | translate }}</button>            
+    </div>
+</div>
+<div fxLayout="row" class="student-import" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+        <form [formGroup]="formCourse" (ngSubmit)="importStudent(formCourse.value)">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="70" fxFlex.lt-md="70">
+                    <md-card>
+                        <md-card-content style="padding-bottom: 10%;">
+                            <!-- Select Scholar  season Title -->
+                            <div fxLayoutWrap="wrap">
+                                <div fxFlex="15" fxFlex.lt-md="10" class="label-text maxwidth23">
+                                    <label>{{'STUDENT.SCHOLERSEASON.title' | translate}}</label>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-md="40">
+                                    <div class="px-1 select-input-container">
+                                        <md-select color="accent" formControlName="scholarSeason" #scholarSeason style="width: 100%" (change)="selectScholarSeason(formCourse.controls['scholarSeason'].value)">
+                                            <md-option *ngFor="let name of scholarSeasonData; let i = index" [value]="name._id">
+                                                {{ name.scholarseason }}
+                                            </md-option>
+                                        </md-select>
+                                        <small *ngIf="formCourse.controls['rncpTitle'].hasError('required') && (formCourse.controls['rncpTitle'].touched || formCourseSubmit)" class="mat-text-warn"> {{'STUDENT.SCHOLERSEASON.validation1' | translate}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Select RNCP Title -->
+                            <div fxLayoutWrap="wrap">
+                                <div fxFlex="15" fxFlex.lt-md="10" class="label-text maxwidth23">
+                                    <label>{{'STUDENT.SELECTRNCPTITLE.title' | translate}}</label>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-md="40">
+                                    <div class="px-1 select-input-container">
+                                        <md-select color="accent" formControlName="rncpTitle" #rncpTitle style="width: 100%" (change)="changeRNCPTitles($event.value)">
+                                            <md-option *ngFor="let rncptitle of RNCPTitles" [value]="rncptitle._id">
+                                                {{ rncptitle.shortName }}
+                                            </md-option>
+                                        </md-select>
+                                        <small *ngIf="formCourse.controls['rncpTitle'].hasError('required') && (formCourse.controls['rncpTitle'].touched || formCourseSubmit)" class="mat-text-warn"> {{'STUDENT.SELECTRNCPTITLE.validation1' | translate}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Select Class -->
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="15" fxFlex.lt-md="10" class="label-text maxwidth23">
+                                    <label>{{'STUDENT.CLASSES.title' | translate}}</label>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-md="40">
+                                    <div class="px-1 select-input-container">
+                                        <md-select color="accent" formControlName="currentClass" #currentClass style="width: 100%">
+                                            <md-option *ngFor="let class of classesOfRNCP" [value]="class._id">
+                                                {{ class.name }}
+                                            </md-option>
+                                        </md-select>
+                                        <small *ngIf="formCourse.controls['currentClass'].hasError('required') && (formCourse.controls['currentClass'].touched || formCourseSubmit)" class="mat-text-warn"> {{'STUDENT.CLASSES.validation1' | translate}}</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="15" fxFlex.lt-md="10" class="label-text maxwidth23">
+                                    <label>{{ 'STUDENT_IMPORT.DELIMETER.TITLE' | translate}}</label>
+                                </div>
+                                <div fxFlex="50" fxFlex.lt-md="40">
+                                    <div class="px-1 select-input-container">
+                                        <md-select color="accent" formControlName="fileDelimeter" #currentClass style="width: 100%">
+                                            <md-option *ngFor="let delimeter of delimeterList" [value]="delimeter.value"  (click)="changeSampleDownloadName(delimeter.key)">
+                                                {{ 'STUDENT_IMPORT.DELIMETER.' + delimeter.key  | translate}}
+                                            </md-option>
+                                        </md-select>
+                                        <small *ngIf="formCourse.controls['fileDelimeter'].hasError('required') && (formCourse.controls['fileDelimeter'].touched || formCourseSubmit)" class="mat-text-warn"> {{'STUDENT.DELIMETER.validation1' | translate}}</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                    <div fxFlex="16.7" fxFlex.lt-md="16.7" class="label-text maxwidth23">
+                                        <!-- <label>{{'STUDENT.CLASSES.title' | translate}}</label> -->
+                                        <label>Data File</label>
+                                    </div>
+                                    <div fxFlex="37" fxFlex.lt-md="37" style="align-self: center; padding-top: 10.5px;">
+                                        <!-- <label>{{'STUDENT.CLASSES.title' | translate}}</label> -->
+                                        <span style="padding-top: 16px; overflow-wrap: break-word;">{{fileNameToShow}}</span>
+                                    </div>
+                                    
+                                    <div fxFlex="10" fxFlex.lt-md="10" style="align-self: center;">
+                                        <div class="photo-upload" style="text-align: right">
+                                            <input #importFile style="display: none;" type="file" ng2FileSelect [uploader]="fileUploader" 
+                                                accept=".csv" disableMultipart="true" />
+                                            <button style="margin: 2% 3% 0 0;" [disabled]="formCourse.invalid" (click)="openUploadWindow()" fxFlexAlign="end" md-raised-button color="primary" type="button">
+                                                <md-icon>add</md-icon>
+                                                {{'DOCUMENT.FILE' | translate}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+                <div fxFlex="70" fxFlex.lt-md="70">
+                    <div class="pull-right" style="padding-right: 0.5%;">
+                        <button md-raised-button color="warn" type="button" (click)="cancel()">{{'CANCEL' | translate}}</button>
+                        <button md-raised-button color="accent" type="button" (click)="resetForm()">Reset</button>
+                        <button md-raised-button [disabled]="!isFileUploaded || formCourse.invalid " [color]="!isFileUploaded || formCourse.invalid ? 'grey' : 'green'" type="submit">{{'SUBMIT' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

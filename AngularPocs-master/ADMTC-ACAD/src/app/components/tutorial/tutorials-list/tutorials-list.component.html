@@ -1,0 +1,122 @@
+<div fxLayout="row wrap" fxLayoutAlign="center start" >
+  <!-- <div fxFlex="3"></div> -->
+  <div fxFlex="94">
+    <md-card>
+      <md-card-content>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+
+          <div fxFlex="25" fxFlex.lt-md="25" class="tutorialComponent">
+            <md-input-container fxFlex="80" dividerColor="accent">
+              <input mdInput [(ngModel)]="searchTutorialText" maxlength="30" [placeholder]="'USERS.SEARCH' | translate" type="text" (keyup)="debounceTitleSearch()">
+            </md-input-container>
+          </div>
+          <div fxFlex="25" fxFlex.lt-md="25" class="tutorialComponent">
+            <!-- <div class="px-1 select-input-container" style="padding-left: 0px !important"> -->
+            <ng-select fxFlex="80" (selected)="selectedUserType($event)" [multiple]="false" [(ngModel)]="searchTutorialType"
+              [items]="userTypes" [placeholder]="'USERS.SELECTUSERTYPE' | translate"></ng-select>
+            <!-- </div> -->
+          </div>
+          <div fxFlex="20"></div>
+          <div fxFlex="11">
+              <button [disabled]="!isSearching" md-raised-button fxFlex type="button" class="btnSearchHeight"
+              color="primary" (click)="resetSearch()">
+                  <md-icon>restore</md-icon>
+                  Reset
+              </button>
+          </div>
+          <div fxFlex="1"></div>
+          <div fxFlex="18" dividerColor="accent">
+            <button *ngIf="isAdmtcadmtcDirSales"  md-raised-button fxFlex type="button" color="accent" class="btnSearchHeight" (click)="addTutorial(null)">
+              <span class="plus-font">+</span>
+              <span>{{'TUTORIAL_MENU.Add new tutorial' | translate}} </span>
+            </button>
+          </div>
+        </div>
+      </md-card-content>
+    </md-card>
+    <!-- (select)="onSelect($event)" -->
+    <ngx-datatable class="material rncp-table certiStudNgxDiv" [rows]="tutorialList" [columnMode]="'flex'"
+      [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [reorderable]="true" [count]="page.totalElements"
+      [offset]="page.pageNumber" [limit]="page.size" (page)="changePage($event)" [messages]="{emptyMessage: 'NoDataToDisplay' | translate }"
+      [sorts]="[{prop: 'title', dir: 'asc'}, {prop: 'description', dir: 'asc'}]" [externalSorting]="true"
+      [externalPaging]="false" (sort)="sortPage($event)" [cssClasses]="ngxDtCssClasses" #table [scrollbarV]="true">
+
+
+      <ngx-datatable-column [flexGrow]="1" [sortable]="false" [resizeable]="false">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <span (click)="sort()" position="right">No.</span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+          <div style="text-align: center"> {{ rowIndex }}</div>
+        </ng-template>
+      </ngx-datatable-column>
+      <!-- prop="title" name="title" -->
+      <ngx-datatable-column [flexGrow]="5"  [sortable]="false" [resizeable]="false">
+        <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+          <span (click)="sort()"> {{'TUTORIAL_MENU.Title of tutorial' | translate}}</span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <span class="tooltips" position="right">
+            <span [innerHTML]="getTutotialTitleTranslated(row?.title)"></span>
+          </span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!-- emp survey -->
+      <ngx-datatable-column [flexGrow]="6" [resizeable]="false" prop="userType" name="userType" [sortable]="true">
+        <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+          <span (click)="sort()">
+            {{'TUTORIAL_MENU.Type of user' | translate }}</span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <span *ngFor="let type of getUserTypesToDisp(row?.userType)" class="tags">{{ getTranslateUserType(type?.name)}}</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <!--  -->
+      <!-- prop="description" name="description"  -->
+      <ngx-datatable-column [flexGrow]="9" [resizeable]="false" [sortable]="false">
+        <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+          <span (click)="sort()">
+            {{'TUTORIAL_MENU.Description' | translate }}</span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <span [innerHTML]="row?.description"></span>
+        </ng-template>
+      </ngx-datatable-column>
+
+
+      <ngx-datatable-column name="Actions" [flexGrow]="3" [sortable]="false" [resizeable]="false" [cellClass]="'text-center'">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          {{'USERLISTTABLE.ACTIONS.TITLE' | translate}}
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+
+          <!-- mdTooltip="{{'TOOLS_DOCTEST.Action_Buttons.View' | translate}}" mdTooltipPosition="above" -->
+          <button md-icon-button md-button-sm md-raised-button class="grid-button" (click)="openTutorialLink(row?.link)">
+            <span>
+              <i class="fa fa-eye" style="vertical-align: sub;font-size: 22px;color:white;"></i>
+            </span>
+          </button>
+
+          <!-- (click)="addTutorial(row)" -->
+          <button *ngIf="isAdmtcadmtcDirSales" md-icon-button md-button-sm md-raised-button class="grid-button custom-margin" (click)="addTutorial(row)">
+            <md-icon>edit</md-icon>
+          </button>
+
+          <button *ngIf="isAdmtcadmtcDirSales" md-icon-button md-button-sm md-raised-button class="grid-button custom-margin" (click)="deleteTutorial(row)">
+            <md-icon>close</md-icon>
+          </button>
+
+          <!-- (click)="forwardTask(row)" -->
+          <!-- mdTooltip="{{'MailBox.replyAll.send' | translate}}" mdTooltipPosition="above" -->
+          <button md-icon-button md-button-sm md-raised-button class="grid-button" (click)="sendTutorial(row)">
+            <md-icon>send</md-icon>
+          </button>
+          
+        </ng-template>
+      </ngx-datatable-column>
+
+    </ngx-datatable>
+  </div>
+  <!-- <div fxFlex="3"></div> -->
+</div>

@@ -1,0 +1,56 @@
+<div fxLayout="column wrap" fxLayoutAlign="start" style="width: 100%; height: 80%;">
+  <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px;">
+    <div class="pa-1">
+      <div fxLayout="row wrap" fxLayoutAlign="start center">
+        <div fxFlex>
+          <md-icon class="middle">receipt</md-icon>
+          <span class="text-xl">{{'TESTCORRECTIONS.HEADERINFO' | translate}}</span>
+        </div>
+        <button md-icon-button (click)="closeDialog()">
+          <md-icon>close</md-icon>
+        </button>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="submit(form.value)">
+    <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="1rem" fxFlexAlign="end" style="width: 100%; min-height: 300px;" *ngIf="test" >
+      <div fxLayout="row" fxLayoutWrap="wrap" class="mt-1">
+       <!--  <div fxFlex="100" fxFlex.lt-md="100" *ngFor="let field of test.correctionGrid.header.fields; let i = index ">
+          <div class="px-1">
+            <md-input-container dividerColor="accent" style="width: 100%">
+              <input mdInput [placeholder]="field.value" type="{{field.dataType}}" [formControl]="form.controls['header'+i]" [(ngModel)]="testCorrect.header.fields[i].value">
+            </md-input-container>
+          </div>
+        </div> -->
+        <div fxFlex="50" fxFlex.lt-md="100" *ngFor="let field of test.correctionGrid.header.fields; let i = index ">
+          <div class="px-1">
+            <div *ngIf="field.type != 'other'">
+              <div *ngIf="field.type == 'dateRange' || field.type == 'dateFixed'">
+                {{field.value}} : {{today | date: 'dd/MM/yyyy'}}
+              </div>
+              <div *ngIf="field.type == 'titleName'">
+                {{field.value}} : {{rncpTitle}}
+              </div>
+              <div *ngIf="field.type == 'currentSchoolYear'">
+                {{field.value}} : {{currentSchoolYear}}
+              </div>
+              <div *ngIf="field.type == 'eventName' || field.type == 'status'">
+                <md-input-container dividerColor="accent" style="width: 100%">
+                  <input mdInput [placeholder]="field.value" type="{{field.dataType}}" [formControl]="form.controls['header'+i]" [(ngModel)]="testCorrect.correctionGrid.header.fields[i].value">
+                </md-input-container>
+              </div>
+            </div>
+            <md-input-container dividerColor="accent" style="width: 100%" *ngIf="field.type == 'other'">
+              <input mdInput [placeholder]="field.value" type="{{field.dataType}}" [formControl]="form.controls['header'+i]" [(ngModel)]="testCorrect.correctionGrid.header.fields[i].value">
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style=" text-align: right;">
+      <button md-raised-button color="warn" type="button" (click)="closeDialog()">{{'TESTCORRECTIONS.SUBMIT.CANCEL' | translate}}</button>
+      <button md-raised-button color="primary" type="submit">{{'TESTCORRECTIONS.SUBMIT.SUBMIT' | translate}}</button>
+    </div>
+  </form>
+</div>

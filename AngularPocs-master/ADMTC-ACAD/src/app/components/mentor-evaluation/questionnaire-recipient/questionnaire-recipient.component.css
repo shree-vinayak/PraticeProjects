@@ -1,0 +1,11 @@
+.type {
+    background: #fdd83f;
+    color: #000;
+    margin: 0px 2px 0px 2px;
+    border-radius: 3px;
+    padding: 3px;
+}
+
+.status-icon i {
+    font-size: 25px;
+}

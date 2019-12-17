@@ -1,0 +1,17 @@
+
+  <div class="card-button">
+    <button class="cardButton" [style.background-color]="getBGColor(bgColor)">
+      <span class="text-container">
+        <p class="para" [style.color]="getTextColor(bgColor)">{{ title | translate}}</p>
+        <p class="para" [style.color]="getTextColor(bgColor)"> {{ subtitle | translate}} </p>
+      </span>
+      <span [ngSwitch]="state">
+        <i class="fa fa-check icons" *ngSwitchCase="btnStatus.Okay" style="color:green" aria-hidden="true"></i>
+        <i class="fa fa-times icons" *ngSwitchCase="btnStatus.NotOkay" style="color:red" aria-hidden="true"></i>
+        <i class="fa fa-circle icons" *ngSwitchCase="btnStatus.Fail" style="color:red" aria-hidden="true"></i>
+        <i class="fa fa-circle icons" *ngSwitchCase="btnStatus.Pass" style="color:green" aria-hidden="true"></i>
+        <i class="fa fa-circle icons" *ngSwitchCase="btnStatus.Processing" style="color:orange" aria-hidden="true"></i>
+        <span *ngSwitchDefault></span>
+      </span>
+    </button>
+  </div>

@@ -1,0 +1,177 @@
+<md-card *ngIf="AddNewStatus">
+    <form [formGroup]="addScholerForm" (ngSubmit)="addScholerSeason()">
+        <md-card-content>
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="50" fxFlex.lt-md="50">
+                    <div fxLayout="row" fxLayoutWrap="wrap">
+                        <md-input-container style="width: 100%">
+                            <input mdInput placeholder="{{ 'SETTINGS.SCHOLERSEASON.SEASON' | translate }}" formControlName="scholerseason" type="text">
+                        </md-input-container>
+                        <small *ngIf="addScholerForm.controls['scholerseason'].hasError('required') && (addScholerForm.controls['scholerseason'].touched || formSubmit)"
+                            class="mat-text-warn">
+                            {{ 'SETTINGS.SCHOLERSEASON.SEASON' | translate }} required </small>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutWrap="wrap">
+                        <md-input-container style="width: 100%">
+                            <input mdInput placeholder="{{ 'SETTINGS.SCHOLERSEASON.DESCRIPTION' | translate }}" formControlName="description" type="text">
+                        </md-input-container>
+                        <small *ngIf="addScholerForm.controls['description'].hasError('required') && (addScholerForm.controls['description'].touched || formSubmit)"
+                            class="mat-text-warn">
+                            {{'SETTINGS.SCHOLERSEASON.DESCRIPTION' | translate}} required</small>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutWrap="wrap">
+                        <!-- <md-input-container style="width: 100%">
+                            <input mdInput formControlName="fromdate" placeholder="{{'SETTINGS.SCHOLERSEASON.FROM' | translate }}" ngui-datetime-picker
+                                [date-only]="true" (valueChanged)="fromDateChange($event)" [close-on-select]="false" date-format="DD-MM-YYYY"
+                            />
+                        </md-input-container> -->
+                        <md-input-container style="width: 100%">
+                            <input mdInput formControlName="fromdate" (change)="getTitleList('to',$event)" [mdDatepicker]="fromdate" [placeholder]="'SETTINGS.SCHOLERSEASON.FROM'|translate"
+                                date>
+                            <button mdSuffix class="white-datepicker-button" [mdDatepickerToggle]="fromdate"></button>
+                        </md-input-container>
+                        <md-datepicker #fromdate (selectedChanged)="getTitleList('from',$event)" [touchUi]="false"></md-datepicker>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutWrap="wrap">
+                        <!-- <md-input-container dividerColor="accent" style="width: 100%">
+                            <input mdInput formControlName="todate" placeholder="{{'SETTINGS.SCHOLERSEASON.TO' | translate }}" ngui-datetime-picker [date-only]="true"
+                                (valueChanged)="toDateChange($event)" [close-on-select]="false" date-format="DD-MM-YYYY" />
+                        </md-input-container> -->
+                        <md-input-container style="width: 100%">
+                            <input mdInput formControlName="todate" (change)="getTitleList('to',$event)" [mdDatepicker]="todate" [placeholder]="'SETTINGS.SCHOLERSEASON.TO'|translate">
+                            <button mdSuffix class="white-datepicker-button" [mdDatepickerToggle]="todate"></button>
+                        </md-input-container>
+                        <md-datepicker #todate (selectedChanged)="getTitleList('to',$event)" [touchUi]="false"></md-datepicker>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="addScholerForm.value.fromdate && addScholerForm.value.todate">
+                        <div fxFlex="100" fxFlex.lt-md="100">
+                            <div class="px-1 select-input-container" class="cch">
+
+                                <md-checkbox *ngFor="let rncp of rncpTitles" (change)="toCheck(rncp,$event)" class="mdcheck">
+                                    {{ rncp.shortName }}
+                                </md-checkbox>
+                                <!--
+                            <md-select multiple formControlName="rncptitles"  fxFlex="100"  placeholder="{{ 'SETTINGS.SCHOLERSEASON.RNCPTITLES' | translate }}">
+                                 <md-option *ngFor="let user of rncpTitles" [value]="user">
+                                    {{ user.shortName }}
+                                </md-option>
+                            </md-select>
+
+		-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutWrap="wrap" style="float: right;margin-top: 20px;">
+                        <button md-raised-button md-button-sm color="red" class="mr-1" type="button" (click)="cancel()">{{ 'SETTINGS.USERTYPES.CANCEL' | translate }}</button>
+                        <button md-raised-button md-button-sm color="green" class="mr-1" type="submit">{{ 'SETTINGS.USERTYPES.SAVE' | translate }}</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </md-card-content>
+    </form>
+</md-card>
+
+<div *ngIf="!AddNewStatus">
+
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="50" fxFlex.lt-md="50">
+            <h5> {{ 'SETTINGS.TITLES.SCHOLERSEASON' | translate }} </h5>
+
+        </div>
+        <div fxFlex="50" fxFlex.lt-md="50">
+            <button style="float:right;margin-top: 25px;" md-raised-button md-button-sm color="accent" class="mr-1" type="submit" (click)="addNewUserType()">+ {{ 'SETTINGS.SCHOLERSEASON.ADDSCHOLER' | translate }}</button>
+        </div>
+    </div>
+
+    <!--
+
+	<div fxLayout="row" fxLayoutWrap="wrap">
+	    <div fxFlex="100" fxFlex.lt-md="50">
+		    <div *ngFor="let season of seasons">
+                    {{ season.scholarseason}} , {{ season.description }}, {{ season.to }} , {{ season.from }} , {{ season.rncptitles[0] }} , {{ season.rncptitles[1] }} , {{ season?.rncptitles[2] }}
+			</div>
+		</div>
+	</div>
+
+	-->
+
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100">
+
+
+
+            <ngx-datatable [rows]="seasons" [sorts]="[{prop: 'scholarseason', dir: 'asc'},{prop: 'description', dir: 'asc'},{prop: 'from', dir: 'asc'},{prop: 'to', dir: 'asc'}]"
+                #table class='material user-type' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+                [limit]="10">
+
+                <ngx-datatable-column name="Scholer Season" [flexGrow]="5" prop="scholarseason" [resizeable]="false" [sortable]="true">
+                    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn" ngx-datatable-header-template> {{ 'SETTINGS.SCHOLERSEASON.SEASON' | translate }} </ng-template>
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <a class="scName"> {{ row.scholarseason}} </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+
+                <ngx-datatable-column name="Description" [flexGrow]="10" prop="shortName" [resizeable]="false" [sortable]="true">
+                    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn" ngx-datatable-header-template> {{ 'SETTINGS.SCHOLERSEASON.DESCRIPTION' | translate }} </ng-template>
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <a class="scName"> {{ row.description }} </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="fROM" [flexGrow]="5" prop="shortName" [resizeable]="false" [sortable]="true">
+                    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn" ngx-datatable-header-template> {{ 'SETTINGS.SCHOLERSEASON.FROM' | translate }} </ng-template>
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <a class="scName"> {{ row.from | date }} </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="tO" [flexGrow]="5" prop="shortName" [resizeable]="false" [sortable]="true">
+                    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn" ngx-datatable-header-template> {{ 'SETTINGS.SCHOLERSEASON.TO' | translate }} </ng-template>
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <a class="scName"> {{ row.to | date }} </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="RNCP Titles" [flexGrow]="20" prop="shortName" [resizeable]="false" [sortable]="true">
+                    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn" ngx-datatable-header-template> {{ 'SETTINGS.SCHOLERSEASON.RNCPTITLES' | translate }} </ng-template>
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <div class="TitleText">
+                            <span *ngFor="let rncp of row.rncptitles;let i=index"  >
+                                {{ rncp.shortName }}
+                                <span *ngIf="row.rncptitles.length-1 > i">, </span>
+                            </span>
+                        </div>
+
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column [resizeable]="false" [sortable]="true" [resizeable]="false" [flexGrow]="4">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button md-icon-button class="ml-xs overflow-visible pull-right" (click)="scholerEdit(row)">
+                            <md-icon>edit</md-icon>
+                        </button>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<style>
+    app-usertypes {
+        width: 100% !important;
+    }
+</style>

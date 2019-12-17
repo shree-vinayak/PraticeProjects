@@ -1,0 +1,386 @@
+<md-card *ngIf="AddNewStatus">
+  <form [formGroup]="form">
+    <md-card-content>
+      <h5>{{'SETTINGS.USERTYPES.ADDNEW' | translate}}</h5>
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="50" fxFlex.lt-md="50">
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div class="px-1" style="width: 100%">
+              <md-input-container style="width: 100%">
+                <input mdInput type="text" [formControl]="form.controls['name']"  [readonly]="disableElement" [placeholder]="'SETTINGS.USERTYPES.USERTYPE.title' | translate"
+                   />
+              </md-input-container>
+              <small *ngIf="form.controls['name'].hasError('required') && (form.controls['name'].touched || formSubmit)" class="mat-text-warn">{{'SETTINGS.USERTYPES.USERTYPE.validation1' | translate}}</small>
+            </div>
+
+          </div>
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div class="px-1 select-input-container" style="width: 100%">
+              <md-select placeholder="{{ 'SETTINGS.USERTYPES.ENTITY.title' | translate }}" formControlName="entity" style="width: 100%"
+                [disabled]="disableElement" >
+                <md-option *ngFor="let data of entity" [value]="data.key">
+                  {{getTranslateENTITY(data.value)}}
+                </md-option>
+              </md-select>
+              <small *ngIf="form.controls['entity'].hasError('required') && (form.controls['entity'].touched || formSubmit)" class="mat-text-warn">
+                {{'SETTINGS.USERTYPES.ENTITY.validation1' | translate}}</small>
+            </div>
+          </div>
+          <div formGroupName="FolderPermission">
+
+
+            <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="admissions">
+              <div class="px-1" fxFlex="40">
+                <md-slide-toggle labelPosition="befour" class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+                  formControlName="status">
+                  {{ 'SETTINGS.USERTYPES.ADMISSION.title' | translate}}
+                </md-slide-toggle>
+              </div>
+              <div class="px-1" fxFlex="60" *ngIf="form.value.FolderPermission.admissions.status" formGroupName="permissions">
+                <md-checkbox labelPosition="befour" formControlName="view">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.view" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="update">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.update" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="download">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.download" | translate}}</md-checkbox>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="annalesEpreuves">
+              <div class="px-1" fxFlex="40">
+                <md-slide-toggle labelPosition="befour" class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+                  formControlName="status">
+                  {{ 'SETTINGS.USERTYPES.ANNALESEPREUVES.title' | translate}}
+                </md-slide-toggle>
+              </div>
+              <div class="px-1" fxFlex="60" *ngIf="form.value.FolderPermission.annalesEpreuves.status" formGroupName="permissions">
+                <md-checkbox labelPosition="befour" formControlName="view">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.view" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="update">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.update" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="download">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.download" | translate}}</md-checkbox>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="boiteaOutils">
+              <div class="px-1" fxFlex="40">
+                <md-slide-toggle labelPosition="befour" class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+                  formControlName="status">
+                  {{ 'SETTINGS.USERTYPES.BOITEAOUTILS.title' | translate}}
+                </md-slide-toggle>
+              </div>
+              <div class="px-1" fxFlex="60" *ngIf="form.value.FolderPermission.boiteaOutils.status" formGroupName="permissions">
+                <md-checkbox labelPosition="befour" formControlName="view">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.view" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="update">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.update" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="download">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.download" | translate}}</md-checkbox>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="communication">
+              <div class="px-1" fxFlex="40">
+                <md-slide-toggle labelPosition="befour" class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+                  formControlName="status">
+                  {{ 'SETTINGS.USERTYPES.Communication.title' | translate}}
+                </md-slide-toggle>
+              </div>
+              <div class="px-1" fxFlex="60" *ngIf="form.value.FolderPermission.communication.status" formGroupName="permissions">
+                <md-checkbox labelPosition="befour" formControlName="view">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.view" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="update">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.update" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="download">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.download" | translate}}</md-checkbox>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="examens">
+              <div class="px-1" fxFlex="40">
+                <md-slide-toggle labelPosition="befour" class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+                  formControlName="status">
+                  {{ 'SETTINGS.USERTYPES.Examens.title' | translate}}
+                </md-slide-toggle>
+              </div>
+              <div class="px-1" fxFlex="60" *ngIf="form.value.FolderPermission.examens.status" formGroupName="permissions">
+                <md-checkbox labelPosition="befour" formControlName="view">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.view" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="update">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.update" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="download">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.download" | translate}}</md-checkbox>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="organisation">
+              <div class="px-1" fxFlex="40">
+                <md-slide-toggle labelPosition="befour" class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+                  formControlName="status">
+                  {{ 'SETTINGS.USERTYPES.ORGANISATION.title' | translate}}
+                </md-slide-toggle>
+              </div>
+              <div class="px-1" fxFlex="60" *ngIf="form.value.FolderPermission.organisation.status" formGroupName="permissions">
+                <md-checkbox labelPosition="befour" formControlName="view">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.view" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="update">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.update" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="download">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.download" | translate}}</md-checkbox>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="programme">
+              <div class="px-1" fxFlex="40">
+                <md-slide-toggle labelPosition="befour" class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+                  formControlName="status">
+                  {{ 'SETTINGS.USERTYPES.PROGRAMME.title' | translate}}
+                </md-slide-toggle>
+              </div>
+              <div class="px-1" fxFlex="60" *ngIf="form.value.FolderPermission.programme.status" formGroupName="permissions">
+                <md-checkbox labelPosition="befour" formControlName="view">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.view" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="update">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.update" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="download">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.download" | translate}}</md-checkbox>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="epreuvesCertification">
+              <div class="px-1" fxFlex="40">
+                <md-slide-toggle labelPosition="befour" class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+                  formControlName="status">
+                  {{ 'SETTINGS.USERTYPES.EPREUVESCERTIFICATION.title' | translate}}
+                </md-slide-toggle>
+              </div>
+              <div class="px-1" fxFlex="60" *ngIf="form.value.FolderPermission.epreuvesCertification.status" formGroupName="permissions">
+                <md-checkbox labelPosition="befour" formControlName="view">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.view" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="update">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.update" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="download">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.download" | translate}}</md-checkbox>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="archives">
+              <div class="px-1" fxFlex="40">
+                <md-slide-toggle labelPosition="befour" class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+                  formControlName="status">
+                  {{ 'SETTINGS.USERTYPES.ARCHIVES.title' | translate}}
+                </md-slide-toggle>
+              </div>
+              <div class="px-1" fxFlex="60" *ngIf="form.value.FolderPermission.archives.status" formGroupName="permissions">
+                <md-checkbox labelPosition="befour" formControlName="view">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.view" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="update">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.update" | translate}}</md-checkbox>&nbsp;
+                <md-checkbox labelPosition="befour" formControlName="download">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.download" | translate}}</md-checkbox>
+              </div>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div style="width: 100%;border-bottom: 1px solid gray;margin-top: 10px;margin-bottom: 10px;"></div>
+
+          </div>
+
+          <div fxLayout="row" fxLayoutWrap="wrap">
+
+            <div class="px-1" fxFlex="40">
+              <md-slide-toggle labelPosition="befour" class="example-margin" [color]="color" [checked]="checked" [disabled]="disabled"
+                formControlName="studentManagement">
+                {{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.title' | translate}}
+              </md-slide-toggle>
+            </div>
+            <!-- <div class="px-1" fxFlex="60" *ngIf="studentaccesschecked">
+                            <md-checkbox labelPosition="befour" formControlName="studentManagement">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.view" | translate}}</md-checkbox>&nbsp;
+                            <md-checkbox labelPosition="befour" formControlName="studentManagement">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.update" | translate}}</md-checkbox>&nbsp;
+                            <md-checkbox labelPosition="befour" formControlName="studentManagement">{{"SETTINGS.USERTYPES.STUDENTMANAGMENT.download" | translate}}</md-checkbox>
+                        </div> -->
+
+          </div>
+
+          <!-- <div fxLayout="row" fxLayoutWrap="wrap" style="float: right;margin-top: 20px;">
+                        <button md-raised-button md-button-sm color="red" class="mr-1" type="button" (click)="cancel()">{{ 'SETTINGS.USERTYPES.CANCEL' | translate }}</button>
+                        <button md-raised-button md-button-sm color="green" class="mr-1" type="submit" (click)="sendTemplate()">{{ 'SETTINGS.USERTYPES.SAVE' | translate }}</button>
+                    </div> -->
+        </div>
+        <div fxFlex="5" fxFlex.lt-md="5">&nbsp;</div>
+
+        <div fxFlex="45" fxFlex.lt-md="45">
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <md-input-container color="accent" style="width: 100%">
+              <textarea rows="20" mdInput id="icon_prefix2" [placeholder]="'SETTINGS.USERTYPES.DESCRIPTION.title' | translate" class="materialize-textarea"
+                [formControl]="form.controls['description']"></textarea>
+            </md-input-container>
+            <small *ngIf="form.controls['description'].hasError('required') && (form.controls['description'].touched || formSubmit)"
+              class="mat-text-warn"> {{'SETTINGS.USERTYPES.DESCRIPTION.validation1' | translate}}</small>
+          </div>
+          <div fxLayout="row" fxLayoutWrap="wrap" style="float: right;margin-top: 20px;">
+            <button md-raised-button md-button-sm color="red" class="mr-1" type="button" (click)="cancel()">{{ 'SETTINGS.USERTYPES.CANCEL' | translate }}</button>
+            <button md-raised-button md-button-sm color="green" style="margin-right: 0px !important" class="mr-1" type="submit" (click)="saveUserType()">{{ 'SETTINGS.USERTYPES.SAVE' | translate }}</button>
+          </div>
+        </div>
+      </div>
+
+    </md-card-content>
+  </form>
+</md-card>
+
+
+
+<div *ngIf="!AddNewStatus">
+
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="50" fxFlex.lt-md="50">
+      <h5>{{'SETTINGS.USERTYPES.USERTYPEMANAGMENT' | translate}}</h5>
+    </div>
+    <div fxFlex="50" fxFlex.lt-md="50">
+      <button style="float:right;margin-top: 25px;" md-raised-button md-button-sm color="accent" class="mr-1" type="submit" (click)="addNewUserType()">+ {{ 'SETTINGS.USERTYPES.ADDNEW' | translate }}</button>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <ngx-datatable [rows]="usertypelist" [sorts]="[{prop: 'name', dir: 'asc'}]" #table class='material user-type' [columnMode]="'flex'"
+        [headerHeight]="50" [footerHeight]="50" [rowHeight]="'40'" [limit]="page.size" [cssClasses]="ngxDtCssClasses">
+        <ngx-datatable-column cellClass="clsTypeTitle" name="Date" [resizeable]="false" [sortable]="true" [flexGrow]="4">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span [mdTooltip]="'SETTINGS.USERTYPES.USERTYPE.title' | translate" (click)="sort()">{{ 'SETTINGS.USERTYPES.USERTYPE.title' | translate }}</span>
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span style="cursor: pointer;" (click)="onSelectMessage(row)" *ngIf="row.name">{{ getTranslateADMTCSTAFFKEY(row['name']) }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column cellClass="clsTypeTitle" name="entity" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span [mdTooltip]="'SETTINGS.USERTYPES.ENTITY.title' | translate" (click)="sort()">{{ 'SETTINGS.USERTYPES.ENTITY.title' | translate }}</span>
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span *ngIf="row.entity">{{getTranslateENTITY(row['entity']) }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column cellClass="clsTypeTitle" name="isSystemType" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span [mdTooltip]="'System Type' | translate" (click)="sort()">{{ 'System Type' | translate }}</span>
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span *ngIf="row.isSystemType">&#10004;</span>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="STUDENTMANAGMENT" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span [mdTooltip]="'SETTINGS.USERTYPES.STUDENTMANAGMENT.title' | translate" (click)="sort()">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.title' | translate }}</span>
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span *ngIf="row.studentManagement">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.v' | translate }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ADMISSION" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span [mdTooltip]="'SETTINGS.USERTYPES.ADMISSION.title' | translate" (click)="sort()">{{ 'SETTINGS.USERTYPES.ADMISSION.title' | translate }}</span>
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span *ngIf="checkPermissionForPrint(row,'admissions','permissions','update')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.u' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'admissions','permissions','view')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.v' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'admissions','permissions','download')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.d' | translate }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ANNALESEPREUVES" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span [mdTooltip]="'SETTINGS.USERTYPES.ANNALESEPREUVES.title' | translate" (click)="sort()">{{ 'SETTINGS.USERTYPES.ANNALESEPREUVES.title' | translate }}</span>
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span *ngIf="checkPermissionForPrint(row,'annalesEpreuves','permissions','update')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.u' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'annalesEpreuves','permissions','view')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.v' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'annalesEpreuves','permissions','download')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.d' | translate }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="BOITEAOUTILS" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span [mdTooltip]="'SETTINGS.USERTYPES.BOITEAOUTILS.title' | translate" (click)="sort()">{{ 'SETTINGS.USERTYPES.BOITEAOUTILS.title' | translate }}</span>
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span *ngIf="checkPermissionForPrint(row,'boiteaOutils','permissions','update')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.u' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'boiteaOutils','permissions','view')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.v' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'boiteaOutils','permissions','download')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.d' | translate }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Communication" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span [mdTooltip]="'SETTINGS.USERTYPES.Communication.title' | translate" (click)="sort()">{{ 'SETTINGS.USERTYPES.Communication.title' | translate }}</span>
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span *ngIf="checkPermissionForPrint(row,'communication','permissions','update')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.u' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'communication','permissions','view')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.v' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'communication','permissions','download')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.d' | translate }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Examens" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span [mdTooltip]="'SETTINGS.USERTYPES.Examens.title' | translate" (click)="sort()">{{ 'SETTINGS.USERTYPES.Examens.title' | translate }}</span>
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span *ngIf="checkPermissionForPrint(row,'examens','permissions','update')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.u' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'examens','permissions','view')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.v' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'examens','permissions','download')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.d' | translate }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ORGANISATION" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span [mdTooltip]="'SETTINGS.USERTYPES.ORGANISATION.title' | translate" (click)="sort()">{{ 'SETTINGS.USERTYPES.ORGANISATION.title' | translate }}</span>
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span *ngIf="checkPermissionForPrint(row,'organisation','permissions','update')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.u' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'organisation','permissions','view')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.v' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'organisation','permissions','download')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.d' | translate }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="PROGRAMME" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span [mdTooltip]="'SETTINGS.USERTYPES.PROGRAMME.title' | translate" (click)="sort()">{{ 'SETTINGS.USERTYPES.PROGRAMME.title' | translate }}</span>
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span *ngIf="checkPermissionForPrint(row,'programme','permissions','update')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.u' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'programme','permissions','view')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.v' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'programme','permissions','download')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.d' | translate }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="EPREUVESCERTIFICATION" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span [mdTooltip]="'SETTINGS.USERTYPES.EPREUVESCERTIFICATION.title' | translate" (click)="sort()">{{ 'SETTINGS.USERTYPES.EPREUVESCERTIFICATION.title' | translate }}</span>
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span *ngIf="checkPermissionForPrint(row,'epreuvesCertification','permissions','update')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.u' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'epreuvesCertification','permissions','view')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.v' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'epreuvesCertification','permissions','download')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.d' | translate }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ARCHIVES" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span [mdTooltip]="'SETTINGS.USERTYPES.ARCHIVES.title' | translate" (click)="sort()">{{ 'SETTINGS.USERTYPES.ARCHIVES.title' | translate }}</span>
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span *ngIf="checkPermissionForPrint(row,'archives','permissions','update')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.u' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'archives','permissions','view')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.v' | translate }}</span>
+            <span *ngIf="checkPermissionForPrint(row,'archives','permissions','download')">{{ 'SETTINGS.USERTYPES.STUDENTMANAGMENT.d' | translate }}</span>
+
+
+
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ARCHIVES" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            &nbsp;
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <a (click)="EditUserType(row)">
+              <md-icon>edit</md-icon>
+            </a>
+            <a *ngIf="row['isSystemType']">
+              &nbsp;
+            </a>
+            <a *ngIf="!row['isSystemType']" (click)="deleteUserType(row)">
+              <md-icon>delete</md-icon>
+            </a>
+
+
+
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+
+      <!-- <ngx-datatable class="material user-type" [rows]="usertypelist" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [reorderable]="reorderable" [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+                [limit]="page.size" (page)="changePage($event)" [externalSorting]="true" (sort)="sortPage($event)" [cssClasses]="ngxDtCssClasses">
+                <ngx-datatable-column name="type">
+                    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                        <span (click)="sort()">  {{'TASK.DUEDATE' | translate}} </span>
+                    </ng-template>
+                    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        {{row['type'] }}
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable> -->
+    </div>
+  </div>
+
+
+
+
+</div>
+
+<style>
+  app-usertypes {
+    width: 100% !important;
+  }
+
+</style>

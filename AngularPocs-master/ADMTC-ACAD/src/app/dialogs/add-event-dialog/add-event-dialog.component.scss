@@ -1,0 +1,77 @@
+.ng2-dropdown-menu__options-container {
+  z-index: 9999 !important;
+}
+
+:host /deep/ .ui-select-choices {
+  overflow: inherit !important;
+  max-height: none !important;
+}
+
+.ui-select-choices {
+  overflow: inherit !important;
+  max-height: none !important;
+}
+
+.btnSearch {
+  margin-left: 5px;
+  height: 37px;
+  min-width: auto !important;
+}
+
+.col_s6 {
+  width: 50% !important;
+  float: left;
+}
+
+
+
+.col_s6>div,
+.col_s12>div {
+  width: 100%;
+}
+
+.col_s6 .mat-select {
+  width: 100%;
+}
+
+.col_s12 {
+  width: 100% !important;
+  float: left;
+}
+
+.resume-label {
+  font-size: 12px;
+  color: #151313;
+  padding-left: 16px;
+  display: inline-block;
+}
+
+.resume-px {
+  display: inline-block !important;
+}
+
+.resume-px div {
+  display: inline-block !important;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+body .mat-select-trigger {
+  margin: 1em 0 !important;
+}
+
+.btn-delete {
+  font-size: 13px;
+  margin-bottom: 8px;
+  padding: 0;
+  line-height: 35px;
+  min-width: 45px;
+}
+
+.btn-download {
+  font-size: 13px;
+  margin-bottom: 8px;
+  padding: 0;
+  line-height: 35px;
+  min-width: 45px;
+}

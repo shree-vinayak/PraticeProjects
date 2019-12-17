@@ -1,0 +1,20 @@
+.head-text p {
+    font-size: 24px;
+}
+
+.answer {
+    font-size: 19px;
+}
+
+
+:host /deep/ {
+    .ql-container .ql-editor {
+    height: 150px !important;
+    overflow: scroll;
+
+}
+
+.ql-container.ql-snow {
+    height: 150px;
+}
+}

@@ -1,0 +1,115 @@
+<div class="header">
+  <h2> Todos Application</h2>
+</div>
+<div class="main">
+  <div class="main-inr">
+    <div class="container">
+      <form class="todo-form" [formGroup]="todoForm">
+        <div class="form-field">
+          <label>
+            Title
+          </label>
+          <input type="text" placeholder="Enter Title" formControlName="title" class="inp">
+        </div>
+        <div class="form-field">
+          <label>
+            Description
+          </label>
+          <textarea class="textarea" formControlName="description">
+
+            </textarea>
+        </div>
+        <div class="form-field">
+          <label>
+            Select Date and Time
+          </label>
+          <input [owlDateTime]="dt1"  formControlName="timeOfTheEvent" [min]="min" [max]="max" [owlDateTimeTrigger]="dt1" placeholder="Date Time">
+          <owl-date-time #dt1></owl-date-time>
+          <!--<select class="select" formControlName="hours">
+            <option>Select Hours</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+            <option>13</option>
+            <option>14</option>
+            <option>15</option>
+            <option>16</option>
+            <option>17</option>
+            <option>18</option>
+            <option>19</option>
+            <option>20</option>
+            <option>21</option>
+            <option>22</option>
+            <option>23</option>
+            <option>24</option>
+          </select> -->
+        </div>
+        <div class="form-field">
+          <ul>
+            <li>
+              <input type="submit" *ngIf="!editMode" (click)="addTodo()" [disabled]="todoForm.invalid"
+                value="Save Todo">
+            </li>
+            <li>
+              <input type="submit" *ngIf="editMode" (click)="updateTodo()" [disabled]="todoForm.invalid"
+                value="Update Todo">
+            </li>
+            <li>
+              <input type="reset" (click)="reset()" value="Reset">
+            </li>
+          </ul>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="todo-btm">
+    <div class="todo-header">
+      <h2>
+        All Todo
+      </h2>
+    </div>
+    <div class="container">
+      <button (click)="multipleDelete()" [disabled]="!isSelected">Delete Selected</button>
+      <div class="todo-btm-inr">
+        <div class="content-block">
+          <div class="view-post" *ngFor="let todo of todos">
+            <div class="btn-chheck">
+              <span>
+                <input type="checkbox" (change)="checkout(todo.todoId, $event)">
+              </span>
+              <span class="shortcut">
+                <span class="edit anchor-tag">
+                  <a (click)="editTodo(todo.todoId)">Edit</a>
+                </span>
+                <span class="delete anchor-tag">
+                  <a (click)="deleteTodo(todo.todoId)">Delete</a>
+                </span>
+              </span>
+            </div>
+            <div class="title">
+              <label>Title: </label>
+              <span>{{todo.title}}</span>
+            </div>
+            <div class="body">
+              <label>Description: </label>
+              <span>{{todo.description}}</span>
+            </div>
+            <div class="body">
+              <label>Date & Time: </label>
+              <span>{{todo.timeOfTheEvent}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

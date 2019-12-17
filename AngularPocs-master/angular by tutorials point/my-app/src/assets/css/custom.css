@@ -1,0 +1,47 @@
+.logo {
+    /* margin-left: 113px; */
+    width: 30%;
+    float: left;
+}
+.logo img{
+    width:200px;
+}
+
+.menu li {
+    
+    display: inline-block;
+    padding: 0 5px;
+}
+
+.menu {
+    float: right;
+    
+    /* margin-right: 20px; */
+}
+
+body{
+        margin: 0;
+}
+
+/* .container {
+    margin: 0px 116px;
+} */
+
+.marginTop {
+    margin-top: 105px;
+}
+
+ .navbar-dark .navbar-nav .nav-link.active {
+    color: #f27f08;
+}
+
+@media (max-width:767px) {
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(52, 58, 64);
+}
+
+div#collapsibleNavbar {
+    background: white;
+}
+}
+

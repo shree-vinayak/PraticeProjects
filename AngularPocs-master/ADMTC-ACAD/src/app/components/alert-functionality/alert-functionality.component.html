@@ -1,0 +1,196 @@
+<div fxLayout="column" fxLayoutWrap="wrap" fxLayoutGap="5px">
+  <md-card>
+    <md-card-content>
+      <div fxLayout="row" fxLayoutWrap="wrap" class="top-bar" style="padding-bottom: 2%">
+        <svg style="width: 100px;
+                height: 82px;" viewBox="0 0 50 50">
+          <path fill="#ffffff" d="M6,6.9L3.87,4.78L5.28,3.37L7.4,5.5L6,6.9M13,1V4H11V1H13M20.13,4.78L18,6.9L16.6,5.5L18.72,3.37L20.13,4.78M4.5,10.5V12.5H1.5V10.5H4.5M19.5,10.5H22.5V12.5H19.5V10.5M6,20H18A2,2 0 0,1 20,22H4A2,2 0 0,1 6,20M12,5A6,6 0 0,1 18,11V19H6V11A6,6 0 0,1 12,5Z" />
+        </svg>
+        <span style="padding-left: 30px;font-size: 35px;margin-left: -60px;">{{
+          'ALERT_FUNCTIONALITY.ALERT' | translate
+          }}</span>
+      </div>
+      <div fxLayout="row" fxLayoutWrap="wrap" class="top-bar taskListNgSelect">
+        <div fxFlex="20">
+          <div class="px-1 select-input-container">
+            <!-- <md-select color="accent" [(ngModel)]="alertsTitle" fxFlex="80" fxFlex.lt-md="80" [placeholder]="'ALERT_FUNCTIONALITY.ALERT_TITLE' | translate"
+                            style="width: 100%">
+                            <md-option *ngFor="let alerts of searchableAlertsList" [value]="alerts._id"> {{alerts.name}}
+                            </md-option>
+                        </md-select> -->
+
+            <!-- <md-input-container fxFlex="65">
+              <input type="text" placeholder="{{
+                  'ALERT_FUNCTIONALITY.ALERT_TITLE' | translate
+                }}"
+                mdInput [mdAutocomplete]="auto" />
+              <md-autocomplete #auto="mdAutocomplete">
+                <md-option *ngFor="let alert of searchableAlertsList | async" [value]="alert.name" (data)="searchAleartList($event)"
+                  (click)="alertsTitle = alert._id">
+                  {{ alert.name }}
+                </md-option>
+              </md-autocomplete>
+            </md-input-container> -->
+            <ng-select [(ngModel)]="selectedSearchedAlert" [items]="searchableAlertsList | orderBy: 'schoolLists.text'" [placeholder]="'ALERT_FUNCTIONALITY.ALERT_TITLE' | translate"></ng-select>
+          </div>
+        </div>
+        <div fxFlex="20">
+          <div class="px-1 select-input-container">
+            <md-select color="accent" [(ngModel)]="alertStatus" fxFlex="60" fxFlex.lt-md="60" [placeholder]="'ALERT_FUNCTIONALITY.PUBLISHED' | translate"
+              style="width: 100%">
+              <md-option value="ALL">
+                {{ 'TASK.FILTER_BY_STATUS.ALL' | translate }}
+              </md-option>
+              <md-option value="true">
+                {{ 'ALERT_FUNCTIONALITY.PUBLISHED' | translate }}
+              </md-option>
+              <md-option value="false">
+                {{ 'ALERT_FUNCTIONALITY.NOT_PUBLISHED' | translate }}
+              </md-option>
+            </md-select>
+          </div>
+        </div>
+        <div fxFlex="60" fxLayoutAlign="end flex-start">
+          <button color="primary" style="margin-left: 5.30px;" (click)="getFiltered()" md-raised-button>
+            <md-icon>search</md-icon>{{ 'USERS.SEARCH' | translate }}
+          </button>
+          <button color="primary" style="margin-left: 5.30px;" (click)="clearFields()"
+            md-raised-button>
+            <md-icon>restore</md-icon>{{ 'DOCTEST.RESET' | translate }}
+          </button>
+          <button color="primary" style="margin-left: 5.30px;background-color: #ffd740; color:black" md-raised-button
+            (click)="openAlertDialog('add', '')">
+            <md-icon>add</md-icon>{{ 'ALERT_FUNCTIONALITY.ADD_ALERT' | translate }}
+          </button>
+        </div>
+        <div fxFlex="05">
+          <div fxFlex="40" dividerColor="accent"></div>
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>
+  <div fxFlex="100">
+    <div fxFlex="100" class="schoolList">
+      <ngx-datatable class="material rncp-table schoolListMainDivision" [rows]="listOfAlerts" [columnMode]="'flex'"
+        [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [messages]="{ emptyMessage: 'NoDataToDisplay' | translate }"
+        [externalSorting]="true" [count]="page.totalElements" [offset]="page.pageNumber" [offset]="page.pageNumber"
+        [limit]="page.size" (page)="changePage($event)" (sort)="onSort($event, listOfAlerts)" [messages]="{ emptyMessage: 'NoDataToDisplay' | translate }"
+        [sorts]="[
+          { prop: 'createdAt', dir: 'asc' },
+          { prop: 'name', dir: 'asc' },
+          { prop: 'recipient', dir: 'asc' },
+          { prop: 'published', dir: 'asc' },
+          { prop: 'requiredResponse', dir: 'asc' }
+        ]"
+        [cssClasses]="ngxDtCssClasses" #table [selectionType]="'checkbox'">
+        <ngx-datatable-column name="createdAt" [flexGrow]="2" prop="createdAt" [sortable]="true" [resizeable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span (click)="sort()">{{
+              'ALERT_FUNCTIONALITY.DISPLAY_DATE' | translate
+              }}</span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <span title="{{ row?.createdAt | date: 'dd-MM-yyyy' }}">
+              {{ row?.createdAt | date: 'dd/MM/yyyy' }}
+            </span>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="name" [flexGrow]="4" prop="name" [sortable]="true" [resizeable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span (click)="sort()">{{
+              'ALERT_FUNCTIONALITY.ALERT_TITLE' | translate
+              }}</span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <span title="{{ row?.name }}">
+              {{ row?.name }}
+            </span>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="recipient" [flexGrow]="5" prop="recipient" [sortable]="true" [resizeable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span (click)="sort()">{{
+              'ALERT_FUNCTIONALITY.RECEPIENT' | translate
+              }}</span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <span *ngFor="let rec of row.recipient" class="tags" title="{{ rec.name }}">{{
+              utilityService.getTranslateADMTCSTAFFKEY(rec.name) }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="published" [flexGrow]="1" prop="published" [sortable]="true" [resizeable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span (click)="sort()">{{
+              'ALERT_FUNCTIONALITY.PUBLISHED' | translate
+              }}</span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <div style="text-align:center;" [ngSwitch]="row?.published">
+              <i *ngSwitchCase="true" style="color:greenyellow;" class="fa fa-circle statusIcon" aria-hidden="true"></i>
+              <i *ngSwitchCase="false" style="color:#ff4040;" class="fa fa-circle statusIcon" aria-hidden="true"></i>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="requiredResponse" [flexGrow]="1" prop="requiredResponse" [sortable]="true"
+          [resizeable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span (click)="sort()">{{
+              'ALERT_FUNCTIONALITY.ANSWER' | translate
+              }}</span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <span>
+              {{
+              (row?.requiredResponse === true
+              ? 'ALERT_FUNCTIONALITY.YES'
+              : 'ALERT_FUNCTIONALITY.NO') | translate
+              }}
+            </span>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Actions" [flexGrow]="1.5" prop="Actions" [sortable]="false" [resizeable]="false">
+          [resizeable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            <span mdTooltip="{{ 'TOOLS_INTERNAL_NOTES.Action' | translate }}" mdTooltipPosition="above">
+              {{ 'USERLISTTABLE.ACTIONS.TITLE' | translate }}
+            </span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <div class="text-center">
+              <span mdTooltip="{{ 'USERLISTTABLE.ACTIONS.DELETE' | translate }}" mdTooltipPosition="above">
+                <button md-icon-button md-button-sm md-raised-button class="grid-button" [disabled]="row?.creator._id !== loggeduserId"
+                  (click)="deleteAlert(row)">
+                  <md-icon>close</md-icon>
+                </button>
+              </span>
+              <span mdTooltip="{{ 'USERLISTTABLE.ACTIONS.EDIT' | translate }}" mdTooltipPosition="above">
+                <button md-icon-button md-button-sm md-raised-button class="grid-button" [disabled]="row?.creator._id !== loggeduserId"
+                  (click)="openAlertDialog('edit', row)">
+                  <md-icon>edit</md-icon>
+                </button>
+              </span>
+              <span mdTooltip="{{
+                  'USERLISTTABLE.ACTIONS.USER_RESPONSES' | translate
+                }}"
+                mdTooltipPosition="above">
+                <button md-icon-button md-button-sm md-raised-button class="grid-button" (click)="openResponseDialog(row)">
+                  <md-icon>forum</md-icon>
+                </button>
+              </span>
+              <span mdTooltip="{{ 'USERLISTTABLE.ACTIONS.DUPLICATE' | translate }}" mdTooltipPosition="above">
+                <button md-icon-button md-button-sm md-raised-button class="grid-button" (click)="openAlertDialog('duplicate', row)">
+                  <md-icon>content_copy</md-icon>
+                </button>
+              </span>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

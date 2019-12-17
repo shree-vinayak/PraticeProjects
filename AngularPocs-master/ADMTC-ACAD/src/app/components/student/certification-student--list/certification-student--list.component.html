@@ -1,0 +1,262 @@
+<div fxLayout="row" fxLayoutWrap="wrap" class="certiStudentTableComponent">
+  <div fxFlex="65" fxFlex.lt-md="65">
+    <md-card>
+      <md-card-content>
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-bottom: 10px;">
+
+          <div fxFlex="64" fxFlex.lt-md="64" class="title-max">
+            {{ rncpClassScholarTitle + ' - ' }}{{ 'CERTIFICATE_ISSUANCE.STUDENT_PASSED' | translate }}
+          </div>
+
+          <div fxFlex="36" fxFlex.lt-md="36">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+              <div fxFlex="49.5" dividerColor="accent">
+                <button md-raised-button fxFlex type="button" class="btnSearch" color="primary" (click)="getStudentForFilter()">
+                  <md-icon>search</md-icon>
+                  {{'USERS.SEARCH' | translate}}
+                </button>
+              </div>
+              <div fxFlex="1"></div>
+              <div fxFlex="49.5" dividerColor="accent">
+                <button [disabled]="!isSearching" style="margin-left: 5px;" md-raised-button fxFlex type="button" class="btnSearch" color="primary"
+                  (click)="resetSearch()">
+                  <md-icon>restore</md-icon>
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div fxFlex="32" fxFlex.lt-md="32">
+            <ng-select color="accent" [(ngModel)]="schoolSelectModel" fxFlex="80" fxFlex.lt-md="80" [multiple]="false" [items]="allSchools"
+            [placeholder]="'USERS.ADDEDITUSER.SELECTSCHOOL' | translate" style="margin-top: 5px;"></ng-select>
+          </div>
+
+          <div fxFlex="32" fxFlex.lt-md="32">
+            <md-select [(ngModel)]="selectedStatus" color="accent" fxFlex="80" fxFlex.lt-md="80" [placeholder]="'CERTIFICATE_ISSUANCE.SELECT_STATUS' | translate"
+              style="width: 100%">
+              <md-option *ngFor="let status of statusList" [value]="status.value">
+                {{status.status | translate}}
+              </md-option>
+            </md-select>
+          </div>
+          <div fxFlex="36" fxFlex.lt-md="36">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+              <div fxFlex="49.5" dividerColor="red">
+                <button md-raised-button fxFlex type="button" class="btnSearch-dark" color="red" (click)="gotoRNCPCards()">
+                  <md-icon>reply</md-icon>
+                  {{'CANCEL' | translate}}
+                </button>
+              </div>
+              <div fxFlex="1"></div>
+              <div fxFlex="49.5" dividerColor="accent">
+                <button style="margin-left: 5px;" [disabled]="!selectedStudents.length" md-raised-button fxFlex type="button"
+                class="btnSearch-dark" color="accent" (click)="sendSelectedStudentsForCertification()">
+                  <md-icon class="small-marg">send</md-icon>
+                  {{'CERTIFICATE_ISSUANCE.SEND_CERTIFICATE' | translate}}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div fxFlex="64" fxFlex.lt-md="64">
+          </div>
+          <div fxFlex="36" fxFlex.lt-md="36">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+              <div fxFlex="49.5" dividerColor="red">
+              </div>
+              <div fxFlex="1"></div>
+              <div fxFlex="49.5" dividerColor="accent">
+                <button style="margin-left: 5px;" [disabled]="!selectedStudents.length" md-raised-button fxFlex type="button"
+                class="btnSearch-dark text-wrap" color="accent" (click)="sendCERT_N7ToDownloadCertificate()">
+                  <md-icon class="small-marg sendCertificate">file_download</md-icon>
+                  <span class="sendCertificate">{{'CERTIFICATE_ISSUANCE.DOWNLOAD_CERTIFICATE' | translate}} </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </md-card-content>
+    </md-card>
+    <div *ngIf="allStudentsForCertification.length">
+      <ngx-datatable class="material rncp-table certiStudNgxDiv" [rows]="studentsForCertification" [columnMode]="'flex'" [headerHeight]="50"
+        [footerHeight]="50" [rowHeight]="50" [reorderable]="true" [count]="page.totalElements" [offset]="page.pageNumber" [limit]="page.size"
+        (page)="changePage($event)" [messages]="{emptyMessage: 'NoDataToDisplay' | translate }"
+        [sorts]="[{prop: 'lastName', dir: 'asc'},{prop: 'firstName', dir: 'asc'},{prop: 'certificateIssuanceStatus', dir: 'asc'},
+        {prop: 'school.shortName', dir: 'asc'}, {prop: 'employabilitySurveyId.surveyStatus' , dir: 'asc'}, {prop: 'allowFinalTranscriptGen' , dir: 'asc'},
+        {prop: 'finalTranscriptId.juryDecisionForFinalTranscript' , dir: 'asc'}, {prop: 'isDiplomaInS3' , dir: 'asc'}]"
+        [externalSorting]="true" [externalPaging]="false" (sort)="sortPage($event)" [cssClasses]="ngxDtCssClasses" #table [scrollbarV]="true"
+        [selectionType]="'checkbox'" (select)="onSelect($event)" [selected]="selectedStudents">
+
+        <ngx-datatable-column [flexGrow]="1" [width]="45" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false"
+          [headerCheckboxable]="true" [checkboxable]="true">
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [flexGrow]="1.9" prop="lastName" name="lastName" [sortable]="true" [resizeable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span (click)="sort()" position="right" mdTooltip="{{'STUDENT.LASTNAME.title' | translate}}"> {{'STUDENT.LASTNAME.title'
+              | translate}}</span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <span position="right" mdTooltip="{{ row?.lastName }}"> {{ row?.lastName }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [flexGrow]="1.9" prop="firstName" name="firstName" [sortable]="true" [resizeable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span (click)="sort()"> {{'STUDENT.FIRSTNAME.title' | translate}}</span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <span class="tooltips" position="right" mdTooltip="{{ row?.firstName }}">{{ row?.firstName }}
+
+            </span>
+          </ng-template>
+        </ngx-datatable-column>
+
+
+
+
+        <!-- thumbsup -->
+        <!--  -->
+        <ngx-datatable-column [flexGrow]="1" [resizeable]="false" prop="allowFinalTranscriptGen" name="allowFinalTranscriptGen">
+          <ng-template let-column="column" ngx-datatable-header-template  let-sort="sortFn">
+            <span placement="top">
+              <svg style="width:18px;height:24px" viewBox="0 0 24 24">
+                <path fill="#c7c7c7" d="M5,9V21H1V9H5M9,21A2,2 0 0,1 7,19V9C7,8.45 7.22,7.95 7.59,7.59L14.17,1L15.23,2.06C15.5,2.33 15.67,2.7 15.67,3.11L15.64,3.43L14.69,8H21C22.11,8 23,8.9 23,10V12C23,12.26 22.95,12.5 22.86,12.73L19.84,19.78C19.54,20.5 18.83,21 18,21H9M9,19H18.03L21,12V10H12.21L13.34,4.68L9,9.03V19Z"
+                />
+              </svg>
+            </span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <div style="text-align:center;">
+              <i mdTooltip="{{'THUMBSUP.NOT_OK' | translate}}" mdTooltipPosition="right" *ngIf="!row?.allowFinalTranscriptGen" style="color:#ff4040;"
+                class="fa fa-circle statusIcon" aria-hidden="true"></i>
+              <i mdTooltip="{{'THUMBSUP.OK' | translate}}" mdTooltipPosition="right" *ngIf="row?.allowFinalTranscriptGen" style="color:#adff2f;"
+                class="fa fa-circle statusIcon" aria-hidden="true"></i>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <!-- emp survey -->
+        <!--  -->
+        <ngx-datatable-column [flexGrow]="1" [resizeable]="false" prop="employabilitySurveyId.surveyStatus" name="employabilitySurveyId.surveyStatus" [sortable]="true">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span (click)="sort()" style="margin-left: -12px" tooltip="{{'EMPLOYABILITY_SURVEY.TABLE.ABBRIV' | translate }}" placement="top">{{'EMPLOYABILITY_SURVEY.TABLE.ABBRIV'
+              | translate }}</span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <div style="text-align:center;" *ngIf="row?.employabilitySurveyId?.surveyStatus" [ngSwitch]="row?.employabilitySurveyId?.surveyStatus"
+              mdTooltip="{{ 'EMPLOYABILITY_SURVEY.TABLE.' + row?.employabilitySurveyId?.surveyStatus.toUpperCase() | translate}}"
+              mdTooltipPosition="right">
+              <i *ngSwitchCase="'sentToStudent'" style="color:#ff46f9" class="fa fa-circle statusIcon" aria-hidden="true"></i>
+              <i *ngSwitchCase="'completedByStudent'" style="color:orange;" class="fa fa-circle statusIcon" aria-hidden="true"></i>
+              <i *ngSwitchCase="'validatedByAcadDir'" style="color:greenyellow;" class="fa fa-circle statusIcon" aria-hidden="true"></i>
+              <i *ngSwitchCase="'rejectedByAcadDir'" style="color:#ff4040;" class="fa fa-circle statusIcon" aria-hidden="true"></i>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <!-- Diploma upload -->
+        <!--  -->
+        <ngx-datatable-column [flexGrow]="1" [sortable]="true" [resizeable]="false" prop="isDiplomaInS3" name="isDiplomaInS3">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span style="margin-left: -12px" tooltip="{{'STUDENT.DIPLOMA' | translate }}" placement="top">{{'STUDENT.DIPLOMA'
+              | translate }}</span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <div style="text-align:center;">
+              <i *ngIf="(row?.isDiplomaInS3 || row?.diploma)" style="color:greenyellow;" class="fa fa-circle statusIcon" aria-hidden="true"></i>
+              <i *ngIf="!(row?.isDiplomaInS3 || row?.diploma)" style="color:#ff4040;" class="fa fa-circle statusIcon" aria-hidden="true"></i>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <!-- final transcript -->
+        <!--  -->
+        <ngx-datatable-column [flexGrow]="1.5" [resizeable]="false" prop="finalTranscriptId.juryDecisionForFinalTranscript"
+        name="finalTranscriptId.juryDecisionForFinalTranscript" [sortable]="true"  >
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span placement="top" [tooltip]="'USERS.CERTIFIER' | translate">
+              <img src="assets/images/gavel.svg" alt="">
+            </span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <!-- <span>Outer</span> -->
+            <div style="text-align:center;" *ngIf="row?.finalTranscriptId?.juryDecisionForFinalTranscript"
+            [ngSwitch]="row?.finalTranscriptId?.juryDecisionForFinalTranscript">
+              <i *ngSwitchCase="'failed'" style="color:red;" class="fa fa-circle statusIcon" aria-hidden="true" mdTooltip="{{ 'FINAL_TRANSCRIPT.FINAL_RESULT_FAIL' | translate }}"
+                mdTooltipPosition="right"></i>
+              <i *ngSwitchCase="'eliminated'" style="color:red;" class="fa fa-circle statusIcon" aria-hidden="true" mdTooltip="{{ 'FINAL_TRANSCRIPT.ELIMINATED' | translate }}"
+                mdTooltipPosition="right"></i>
+              <div *ngSwitchCase="'retaking'">
+                <ng-template [ngIf]="!row?.finalTranscriptId?.afterFinalRetakeDecision">
+                  <i *ngIf="row?.finalTranscriptId?.studentDecision === 'retaking' || row?.finalTranscriptId?.studentDecision === ''" style="color:orange;"
+                    class="fa fa-circle statusIcon" aria-hidden="true" mdTooltip="{{ 'FINAL_TRANSCRIPT.RETAKE' | translate }}"
+                    mdTooltipPosition="right"></i>
+                  <i *ngIf="row?.finalTranscriptId?.studentDecision === 'failed'" style="color:red;" class="fa fa-circle statusIcon" aria-hidden="true"
+                    mdTooltip="{{ 'FINAL_TRANSCRIPT.FINAL_RESULT_FAIL' | translate }}" mdTooltipPosition="right"></i>
+                </ng-template>
+
+                <ng-template [ngIf]="row?.finalTranscriptId?.afterFinalRetakeDecision">
+                  <span *ngIf="!row?.finalTranscriptId?.hasJuryFinallyDecided; else decisonDone">
+                    <i *ngIf="row?.finalTranscriptId?.studentDecision === 'retaking' || row?.finalTranscriptId?.studentDecision === ''" style="color:orange;" class="fa fa-circle statusIcon" aria-hidden="true" mdTooltip="{{ 'FINAL_TRANSCRIPT.RETAKE' | translate }}"
+                    mdTooltipPosition="right"></i>
+                    <i *ngIf="row?.finalTranscriptId?.studentDecision === 'failed'" style="color:red;" class="fa fa-circle statusIcon" aria-hidden="true" mdTooltip="{{ 'FINAL_TRANSCRIPT.FINAL_RESULT_FAIL' | translate }}"
+                    mdTooltipPosition="right"></i>
+                  </span>
+                   <!-- / -->
+
+                <ng-template #decisonDone >
+                    <i *ngIf="getFinalResultAfterReTake(row?.finalTranscriptId?.afterFinalRetakeDecision) === 'FAILED'" style="color:red;" class="fa fa-circle statusIcon" aria-hidden="true" mdTooltip="{{ 'FINAL_TRANSCRIPT.FINAL_RESULT_FAIL' | translate }}"
+                      mdTooltipPosition="right"></i>
+                    <i *ngIf="getFinalResultAfterReTake(row?.finalTranscriptId?.afterFinalRetakeDecision) === 'PASS'" style="color:greenyellow;" class="fa fa-circle statusIcon" aria-hidden="true" mdTooltip="{{ 'FINAL_TRANSCRIPT.CERTIFICATION_STATUS.PASS' | translate }}"
+                      mdTooltipPosition="right"></i>
+                  <!-- / -->
+                </ng-template>
+                </ng-template>
+              </div>
+              <i *ngSwitchCase="'pass'" style="color:greenyellow;" class="fa fa-circle statusIcon" aria-hidden="true" mdTooltip="{{ 'FINAL_TRANSCRIPT.CERTIFICATION_STATUS.PASS' | translate }}"
+                mdTooltipPosition="right"></i>
+              <i *ngSwitchDefaul aria-hidden="true"></i>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+
+        <!-- certidegree -->
+        <ngx-datatable-column [flexGrow]="1" prop="certificateIssuanceStatus" name="certificateIssuanceStatus" [sortable]="true"
+          [resizeable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span style="margin-left: -12px" tooltip="Certidegree" placement="top">CD</span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <div style="text-align:center;" *ngIf="row?.certificateIssuanceStatus" [ngSwitch]="row?.certificateIssuanceStatus"
+              mdTooltip="{{ 'CERTIFICATE_ISSUANCE.' + row?.certificateIssuanceStatus?.toUpperCase() | translate}}" mdTooltipPosition="right">
+              <i *ngSwitchCase="'sent_to_student'" style="color:purple;" class="fa fa-circle statusIcon" aria-hidden="true"></i>
+              <i *ngSwitchCase="'details_revision_done'" style="color:blue;" class="fa fa-circle statusIcon" aria-hidden="true"></i>
+              <i *ngSwitchCase="'details_need_revision'" style="color:red;" class="fa fa-circle statusIcon" aria-hidden="true"></i>
+              <i *ngSwitchCase="'certificate_issued'" style="color:greenyellow;" class="fa fa-circle statusIcon" aria-hidden="true"></i>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+
+
+
+        <ngx-datatable-column [flexGrow]="3" prop="school.shortName" name="school.shortName" [sortable]="true" [resizeable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span (click)="sort()" tooltip="{{'USERLISTTABLE.SCHOOL' | translate}}" placement="top"> {{'USERLISTTABLE.SCHOOL'
+              | translate}} </span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <span mdTooltip="{{row?.school?.shortName}}" placement="right"> {{ row?.school?.shortName }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

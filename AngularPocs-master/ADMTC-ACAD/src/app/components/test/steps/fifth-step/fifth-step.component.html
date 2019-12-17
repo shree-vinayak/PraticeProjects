@@ -1,0 +1,58 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-between center" class="card-margin">
+  <button md-raised-button color="primary" type="button" (click)="goToPreviousStep()">
+    <md-icon>chevron_left</md-icon>
+    {{'PREVIOUS' | translate}}
+  </button>
+  <button md-raised-button color="accent" type="button" (click)="submitTest()">
+    {{'REGISTERTEST' | translate}}
+    <md-icon>done</md-icon>
+  </button>
+</div>
+
+<div *ngIf="pendingTasks?.length">
+  <ngx-datatable class="material rncp-table" [rows]="pendingTasks" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+  [cssClasses]="ngxDtCssClasses" [messages]="{emptyMessage: 'NoDataToDisplayPendingTasks' | translate }"
+  [sorts]="[{prop: 'assignedTo.name', dir: 'asc'},{prop: 'dueDate', dir: 'asc'},{prop: 'description', dir: 'asc'}, {prop: 'school.shortName', dir: 'asc'}]"
+  [externalSorting]="true" [selectionType]="'single'" [limit]="page.size" (sort)="onSort($event, rows)"
+  [offset]="page.pageNumber" (page)="changePage($event)" [externalPaging]="false" [count]="page.totalElements">
+
+  <ngx-datatable-column name="school.shortName" [flexGrow]="1.5" prop="school.shortName" [sortable]="true" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      <span> {{'SCHOOLTITLE' | translate}}</span>
+    </ng-template>
+    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex">
+      <span>{{ test.dateType === 'Different' ? row?.school?.shortName : 'DASHBOARD.UPCOMINGEVENT.ALL_SCHOOLS' | translate}}</span>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="dueDate" [flexGrow]="0.9" prop="dueDate" [sortable]="true" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      <span style="margin-left: -10px;"> {{'DASHBOARD.DUEDATE' | translate}}</span>
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+      {{row['dueDate'] | date: 'dd/MM/yyyy'}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="assignedTo.name" [flexGrow]="1.5" prop="assignedTo.name" [sortable]="true" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      <span> {{'DASHBOARD.ASSIGNEDTO' | translate}}</span>
+    </ng-template>
+    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex">
+      <span>{{row?.assignedTo?.entity ? (getTranslateENTITY(row?.assignedTo?.entity) + ' - ') : '' }} {{getAssignedTo(row.assignedTo.name)}} {{row?.type === 'admtcCorrection' ? ' - ' + row?.school?.shortName : ''}}</span>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="description" [flexGrow]="3" prop="description" [sortable]="true" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      <span> {{'DASHBOARD.TASK' | translate}} </span>
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+      <div style="text-overflow: ellipsis !important;overflow: hidden;white-space: nowrap;">
+        {{getTranslateWhat(row?.description, row)}}
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+  </ngx-datatable>
+</div>
+

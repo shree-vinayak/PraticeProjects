@@ -1,0 +1,69 @@
+<div fxLayout="row wrap">
+  <div fxFlex="50">
+    <form>
+      <div fxLayout="row wrap" [formGroup]="RNCPform">
+        <div fxFlex="50">
+          <div fxLayout="column wrap" class="card-margin">
+            <!-- <md-select placeholder="{{'PARAMETERS-RNCP.CLASSES.RNCP-SELECT' | translate}}" [(ngModel)]="selectedRNCP" (change)="getClassList()">
+            <md-option *ngFor="let rncp of rncpTitles" [value]="rncp._id">{{ rncp.shortName }}</md-option>
+          </md-select> -->
+            <md-input-container fxFlex="70">
+              <input type="text" placeholder="{{'PARAMETERS-RNCP.TEST.RNCP-SELECT' | translate}}" mdInput #myControl formControlName="text"
+                [mdAutocomplete]="auto">
+              <md-autocomplete #auto="mdAutocomplete">
+                <md-option *ngFor="let list of filteredOptions |  async" [value]="list.shortName" (click)="OnSelectRNCPTitle(list)">
+                  {{ list.shortName }}
+                </md-option>
+              </md-autocomplete>
+            </md-input-container>
+          </div>
+        </div>
+        <div fxFlex="20"> </div>
+        <div fxFlex="30">
+          <div fxLayout="column wrap" fxLayoutAlign="end" class="card-margin">
+            <button md-raised-button color="accent" (click)="addNewClass()">
+              <md-icon>add</md-icon>
+              {{'ADDCLASS' | translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <ngx-datatable class="material rncp-table" [rows]="classes" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+      [columnMode]="'force'" [reorderable]="reorderable" [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+      [limit]="page.size" (page)="changePage($event)" [externalSorting]="true" (sort)="sortPage($event)" [cssClasses]="ngxDtCssClasses"
+      [selectionType]="'single'" (select)='onSelectClass($event)'>
+      <ngx-datatable-column>
+        <ng-template ngx-datatable-header-template>
+          {{'CLASS NAME' | translate}}
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row['name']}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column>
+        <ng-template ngx-datatable-header-template>
+          {{'CLASS DESCRIPTION' | translate}}
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row['description']}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="10" [sortable]="false" [cellClass]="'text-center'">
+        <ng-template ngx-datatable-header-template>
+          {{'ACTION' | translate}}
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <button md-icon-button md-button-sm md-raised-button class="grid-button" (click)="editClass(row)">
+            <md-icon>edit</md-icon>
+          </button>
+          <button md-icon-button md-button-sm md-raised-button class="grid-button" (click)="deleteClass(row)">
+            <md-icon>delete</md-icon>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+
+    </ngx-datatable>
+  </div>
+</div>

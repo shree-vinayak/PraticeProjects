@@ -1,0 +1,70 @@
+<div>
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="50" fxFlex.lt-md="50">
+            <h5> {{ 'SETTINGS.TITLES.CALENDARSTEPS' | translate }} </h5>
+        </div>
+        <div fxFlex="50" fxFlex.lt-md="50">
+            <button style="float:right;margin-top: 25px;" md-raised-button md-button-sm color="accent" class="mr-1" type="submit" (click)="addNewCalender()">+ {{ 'SETTINGS.CALENDARSTEPS.ADDCALENDAR' | translate }}</button>
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100">
+
+            <ngx-datatable [rows]="calenderList" [sorts]="[{prop: 'what', dir: 'asc'},{prop: 'who', dir: 'asc'},{prop: 'before', dir: 'asc'},{prop: 'after', dir: 'asc'},{prop: 'numberOfDays', dir: 'asc'}]" #table class='material user-type' [columnMode]="'force'"
+                [headerHeight]="50" [footerHeight]="50" [rowHeight]="40" [limit]="page.size">
+
+                <ngx-datatable-column name="what" [flexGrow]="15" [maxWidth]="500" prop="title" [resizeable]="false" [sortable]="true">
+                    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn" ngx-datatable-header-template> {{ 'SETTINGS.CALENDARSTEPS.WHAT' | translate }} </ng-template>
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <a class="scName"> {{ row?.title}} </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="userTypeId" [flexGrow]="15" [maxWidth]="300" prop="who" [resizeable]="false" [sortable]="true">
+                    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn" ngx-datatable-header-template> {{ 'SETTINGS.CALENDARSTEPS.WHO' | translate }} </ng-template>
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <a class="scName"> {{ row.userTypeId?.name }} </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="before" [flexGrow]="5" [maxWidth]="120" prop="before" [resizeable]="false" [sortable]="true">
+                    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn" ngx-datatable-header-template> {{ 'SETTINGS.CALENDARSTEPS.BEFORE' | translate }} </ng-template>
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <md-icon *ngIf="row.beforeDays">done</md-icon>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="after" [flexGrow]="5" [maxWidth]="120" prop="after" [resizeable]="false" [sortable]="true">
+                    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn" ngx-datatable-header-template> {{ 'SETTINGS.CALENDARSTEPS.AFTER' | translate }} </ng-template>
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <md-icon *ngIf="!row.beforeDays">done</md-icon>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="numberOfDays" [flexGrow]="10" [maxWidth]="150" prop="numberOfDays" [resizeable]="false" [sortable]="true">
+                    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn" ngx-datatable-header-template> {{ 'SETTINGS.CALENDARSTEPS.NUMOFDAYS' | translate }} </ng-template>
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <a class="scName"> {{ row?.numberOfDays }} </a>
+                    </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column [flexGrow]="10" [maxWidth]="250" [sortable]="true" [resizeable]="false">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        <button md-icon-button class="ml-xs overflow-visible pull-right" (click)="calenderDel(row)">
+                            <md-icon>delete</md-icon>
+                        </button>
+                        <button md-icon-button class="ml-xs overflow-visible pull-right" (click)="calenderEdit(row)">
+                            <md-icon>edit</md-icon>
+                        </button>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+
+        </div>
+    </div>
+
+
+
+
+</div>

@@ -1,0 +1,40 @@
+.category-path {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.modify-category-header {
+  box-shadow: 0px 1px 6px black;
+}
+.path-link{
+  //position: relative;
+  transition: font-size 0.3s;
+}
+.path-link:hover {
+  font-size: 1.2em;
+  color: #ffd740;
+}
+.path-link:last-child {
+  color: #ffd740;
+}
+
+//  .ma-1 {
+//   margin: 1rem 0rem 0rem 0rem !important;
+//   //width: 33vw !important;
+// }
+
+// :host /deep/ {
+//   .mat-tab-header {
+//     //width: 36vw !important;
+//     width: 100%;
+
+//   }
+// }
+
+// .mat-tab-header {
+//   //width: 36vw !important;
+//   width: 100%;
+
+// }
+
+
+
+

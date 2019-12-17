@@ -1,0 +1,102 @@
+<md-card>
+    <md-card-content>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" fxFlex.lt-md="100">
+                <a style="margin-left: 0.5%" href="javascript:void(0);" class="text-xl mr-2"> {{'USERS.USERS' | translate}} </a>
+            </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap" class="admtcStaffComponent">
+            <div fxFlex="33" fxFlex.lt-md="33">
+                <ng-select [(ngModel)]="userTypeBind" style="margin-top: 4px;" fxFlex="68" (data)="ChangeUserTitle($event)" [multiple]="false" [items]="userTypes" [placeholder]="'USERS.SELECTUSERTYPE' | translate"></ng-select>
+            </div>
+            <div fxFlex="50" fxFlex.lt-md="100">
+                <div class="px-1">
+                    <md-input-container dividerColor="accent" fxFlex="40" fxFlex.lt-md="55">
+                        <input mdInput [(ngModel)]="searchText" maxlength="30" [placeholder]="'USERS.SEARCH' | translate" type="text" (keypress)="KeyPressSearchUserList($event)">
+                    </md-input-container>
+                    <div dividerColor="accent" fxFlex="35" fxFlex.lt-md="100">
+                        <button md-raised-button class="btnSearch" style="width: 90%;" flex type="button" color="primary" (click)="searchUserList(true)">
+                        <md-icon>search</md-icon>
+                        {{'USERS.SEARCH' | translate}}
+                    </button>
+                    </div>
+                    <div dividerColor="accent" fxFlex="25" fxFlex.lt-md="100">
+                        <button [disabled]="!isSearching" fxFlex style="margin-left: 5px;width: 100%;" md-raised-button type="button" class="btnSearch" color="primary" (click)="resetSearch()">
+                        <md-icon>restore</md-icon>
+                        Reset
+                    </button>
+                    </div>
+                </div>
+            </div>
+            <div fxFlex="17" fxFlex.lt-md="100">
+                <button style="float: right;" md-raised-button color="accent" (click)="UsermenuDialog(null)">
+                   <md-icon style="margin-bottom:5px;margin-right: 2px;">person_add</md-icon>{{'USERS.ADDUSER' | translate}}
+                </button>
+            </div>
+        </div>
+
+
+    </md-card-content>
+</md-card>
+<div *ngIf="userList !== undefined">
+
+    <ngx-datatable class="material rncp-table" [rows]="userList" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
+        [rowHeight]="37" [reorderable]="reorderable"  [count]="page.totalElements" [offset]="page.pageNumber"
+        [sorts]="[{prop: 'lastName', dir: 'asc'},{prop: 'types[0].name', dir: 'asc'},{prop: 'entity.type', dir: 'asc'}]"
+        [limit]="page.size" [externalSorting]="true" [scrollbarV]="true" (sort)="sortPage($event)" [cssClasses]="ngxDtCssClasses">
+        <ngx-datatable-column name="lastName" prop="lastName" [flexGrow]="20" [sortable]="true" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                <span (click)="sort()"> {{'USERLISTTABLE.NAME' | translate}}</span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{ (row?.sex == 'M' ? 'USERLISTTABLE.CIVILITY.MR' : 'USERLISTTABLE.CIVILITY.MRS') | translate }} {{row.firstName}} {{row.lastName}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="types[0].name" prop="types[0].name" [flexGrow]="48" [sortable]="true" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+              <span (click)="sort()" > {{'USERLISTTABLE.USERTYPE' | translate}}</span>
+           </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span *ngFor="let type of row.types" class="tags">{{ getTranslateUserType(type.name) }}</span>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="entity.type" prop="entity.type" [flexGrow]="10" [sortable]="true" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                    <span (click)="sort()" > {{'USERLISTTABLE.ENTITY' | translate}} </span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                       {{row?.entity?.type ? getTranslateENTITY(row?.entity?.type) : ''}} 
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [flexGrow]="3" name="isRegistered" prop="isRegistered" [sortable]="false" [resizeable]="false"  [cellClass]="'icon-align'">
+            <ng-template let-column="column" ngx-datatable-header-template>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <div style="text-align: center;">
+                    <i *ngIf="row?.incorrectEmail" style="color: red;" class="fa fa-check-circle registration-icon" aria-hidden="true"></i>
+                    <i *ngIf="!row?.incorrectEmail" [ngStyle]="{ 'color': row?.isRegistered ? 'greenyellow' : 'black' }" [mdTooltip]=" row?.isRegistered ? ('STUDENT.MESSAGE.ACTIVE_STATUS' | translate) : ('STUDENT.MESSAGE.PENDING' | translate)"
+                        mdTooltipPosition="after" class="fa fa-check-circle registration-icon" aria-hidden="true"></i>
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Actions" [flexGrow]="9" [sortable]="false" [cellClass]="'text-center'" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template>
+                {{'USERLISTTABLE.ACTIONS.TITLE' | translate}}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <button *ngIf="row._id !== loggedInUserId && (isAcadDir || isUserCertifierAdmin)" [disabled]="row._id === loggedInUserId" md-icon-button md-button-sm md-raised-button class="grid-button" (click)="deleteRegisteredUser(row['_id'],row['firstName'])">
+                    <md-icon>close</md-icon>
+                </button>
+                <button *ngIf="!isAcadDir || row._id !== loggedInUserId" md-icon-button md-button-sm md-raised-button class="grid-button" (click)="openPopUpForEditDialog(row['_id'])">
+                    <md-icon>edit</md-icon>
+                </button>
+                <button *ngIf="!isAcadDir || row._id !== loggedInUserId" md-icon-button md-button-sm md-raised-button class="grid-button" (click)="sendMail(row)">
+                    <md-icon>mail</md-icon>
+                </button>
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+</div>

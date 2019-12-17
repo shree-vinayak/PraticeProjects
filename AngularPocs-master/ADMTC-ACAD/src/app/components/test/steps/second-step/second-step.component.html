@@ -1,0 +1,647 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-between center" class="card-margin">
+  <button md-raised-button color="primary" type="button" (click)="goToPreviousStep()">
+    <md-icon>chevron_left</md-icon>
+    {{'PREVIOUS' | translate}}
+  </button>
+  <button md-raised-button color="accent" (click)="goToNextStep()">
+    {{'CONTINUE' | translate}}
+    <md-icon>keyboard_arrow_right</md-icon>
+  </button>
+</div>
+<md-card>
+  <md-card-title>
+    <div fxLayout="row wrap">
+      <div fxFlex fxFlex.lt-sm="100">
+        <h4 class="mt-0">
+          <md-icon style="vertical-align: middle; margin-right: 10px">border_color</md-icon>
+          <span>{{'TEST.NOTATIONGRID' | translate}}</span>
+        </h4>
+      </div>
+      <div>
+        <md-slide-toggle labelPosition="before" [checked]="test.correctionGrid.orientation === 'landscape'" (change)="toggleOrientation($event)"
+          name="orientationToggle">{{'TEST.LANDSCAPE' | translate}}
+        </md-slide-toggle>
+      </div>
+    </div>
+  </md-card-title>
+  <hr/>
+  <md-card-content>
+    <md-tab-group class="auto-tab-width white-background-tabs">
+      <md-tab>
+        <ng-template md-tab-label>
+          <md-icon>vertical_align_top</md-icon>
+          {{'TEST.HEADING' | translate}}
+        </ng-template>
+        <div class="pt-2">
+          <md-card style="background-color: #607d8b">
+            <md-card-header>
+              <md-card-title>{{'TEST.HEADER' | translate}}</md-card-title>
+            </md-card-header>
+            <hr>
+            <md-card-content>
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex>
+                  <div class="px-1">
+                    <label class="mr-1">{{'TEXT' | translate}}</label>
+                    <button md-raised-button md-icon-button type="button" (click)="openTextDialog('top-header')">
+                      <md-icon>{{test.correctionGrid.header.text === '' ? 'add' : 'edit'}}</md-icon>
+                      <!--AJOUTER-->
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+          <md-card style="background-color: #607d8b">
+            <md-card-header>
+              <md-card-title>{{'TEST.HEADERFIELDS' | translate}}</md-card-title>
+              <button md-raised-button type="button" [md-menu-trigger-for]="headerFieldsMenu" class="mr-1" style="right: 0; position: absolute; margin-top: 0.25em">
+                <md-icon>add</md-icon>
+                {{'ADD' | translate}}
+                <md-icon>arrow_drop_down</md-icon>
+              </button>
+              <md-menu xPosition="before" yPosition="below" #headerFieldsMenu="mdMenu">
+                <div *ngFor="let field of requiredFieldsTypes; let i = index;">
+                  <button md-menu-item *ngIf="!field.removed" type="button" (click)="addHeaderField(field, i, true)">
+                    {{ field.view }}
+                  </button>
+                </div>
+                <button md-menu-item type="button" (click)="addHeaderField({value: 'other', type: 'text', view: 'Champ'}, -1, false)">
+                  Other
+                </button>
+              </md-menu>
+            </md-card-header>
+            <hr>
+            <md-card-content *ngIf="headerFields.length > 0">
+              <div>
+                <div fxLayout="row wrap" fxLayoutAlign="start center" *ngFor="let field of headerFields; let i = index">
+                  <div>
+                    <button md-icon-button md-button-sm type="button" (click)="removeHeaderField(i)">
+                      <md-icon>delete</md-icon>
+                    </button>
+                    <button md-icon-button md-button-sm *ngIf="field.editing" type="button" (click)="saveHeaderField(i)">
+                      <md-icon>check_circle</md-icon>
+                    </button>
+                    <button md-icon-button md-button-sm *ngIf="!field.editing" type="button" (click)="editHeaderField(i)">
+                      <md-icon>edit</md-icon>
+                    </button>
+                  </div>
+                  <div [fxFlex]="field.dataType === 'longtext' ? '60' : '40'" *ngIf="field.editing" class="pr-1">
+                    <md-input-container style="width: 100%" color="accent">
+                      <input mdInput [placeholder]="'FIELDTEXT' | translate" type="text" [(ngModel)]="field.value" />
+                    </md-input-container>
+                  </div>
+                  <div fxFlex *ngIf="!field.required && field.editing">
+                    <md-select color="accent" [placeholder]="'FIELDTYPE' | translate" [(ngModel)]="field.dataType">
+                      <md-option *ngFor="let fType of fieldTypes" [value]="fType.value">
+                        {{ 'TEST.FIELDTYPES.' + fType.view | translate }}
+                      </md-option>
+                    </md-select>
+                  </div>
+                  <div fxFlex>
+                    <md-select color="accent" *ngIf="field.dataType != 'longtext' && field.editing" [placeholder]="'ALIGNMENT' | translate" [(ngModel)]="field.align">
+                      <md-option [value]="'left'">{{ 'LEFT' | translate }}</md-option>
+                      <md-option [value]="'right'">{{ 'RIGHT' | translate }}</md-option>
+                    </md-select>
+                    <span *ngIf="!field.editing">{{field.value}} - {{field.align.toUpperCase() | translate}}</span>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+          <md-card *ngIf="test.groupTest" class="background-primary">
+            <md-card-header>
+              <md-card-title>{{'TEST.GROUPDETAILS' | translate}}</md-card-title>
+            </md-card-header>
+            <hr/>
+            <md-card-content>
+              <div fxLayout="row wrap" class="px-1">
+                <div fxFlex>
+                  <md-input-container color="accent" class="width: 100%">
+                    <input mdInput type="text" #groupHeaderText [placeholder]="'TEST.TITLETEXT' | translate" [value]="test.correctionGrid.groupDetails.headerText"
+                      (change)="changeGroupHeaderText($event)">
+                  </md-input-container>
+                </div>
+                <div fxFlex>
+                  <md-input-container color="accent">
+                    <input mdInput type="number" #groupNoOfStudents [value]="test.correctionGrid.groupDetails.noOfStudents" [placeholder]="'TEST.NOOFSTUDENTS' | translate"
+                      (change)="changeGroupNoOfStudents($event)">
+                  </md-input-container>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+        </div>
+      </md-tab>
+      <md-tab>
+        <ng-template md-tab-label>
+          <md-icon>format_line_spacing</md-icon>
+          {{'TEST.NOTATION' | translate}}
+        </ng-template>
+        <div class="pt-2">
+          <div fxLayout="row wrap" fxLayoutAlign="end">
+            <button style="margin: 0.33rem" md-raised-button color="primary" (click)="showOptions = !showOptions">
+              {{showOptions ? ('TEST.HIDEOPTIONS'|translate) : ('TEST.SHOWOPTIONS'|translate)}}
+              <md-icon>{{showOptions ? 'arrow_drop_up' : 'arrow_drop_down'}}</md-icon>
+            </button>
+            <button md-raised-button color="primary" class="add-section-btn" type="button" (click)="addNewSection()">
+              <md-icon>add</md-icon>
+              {{'TEST.ADDSECTION' | translate}}
+            </button>
+          </div>
+          <div fxLayout="row wrap">
+            <div fxFlex>
+              <md-card class="background-primary">
+                <md-card-content *ngIf="showOptions">
+                  <div fxLayout="row wrap" class="py-1">
+                    <div fxFlex>
+                      <div class="px-1">
+                        <div fxLayout="row wrap" fxLayoutAlign="start center">
+                          <span>{{'VIEW' | translate}} 1</span>
+                          <md-slide-toggle name="viewCb" style="padding-top: 0.5rem" class="mx-1" color="accent" [checked]="test.correctionGrid.correction.showAsList"
+                            (change)="changeView($event)">
+                          </md-slide-toggle>
+                          <span>{{'VIEW' | translate}} 2</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div fxFlex>
+                      <div class="px-1">
+                        <md-checkbox name="viewNotationMarksCb" class="mt-1" *ngIf="test.correctionGrid.correction.showAsList" color="accent" [checked]="test.correctionGrid.correction.showNotationsMarks"
+                          (change)="changeNotationMarksView($event)" align="start">
+                          {{'TEST.SHOWNOTATIONMARKS' | translate}}
+                        </md-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                  <hr/>
+                  <ng-template [ngIf]="!test.correctionGrid.correction.showAsList">
+                    <div fxLayout="row wrap" class="py-1">
+                      <div fxFlex fxFlex.lt-sm="100">
+                        <div class="px-1">
+                          <md-checkbox name="cbdirections" color="accent" [checked]="test.correctionGrid.correction.showDirectionsColumn" (change)="toggleDirectionsArea($event)"
+                            align="start">
+                            {{'TEST.DIRECTIONSCOLUMN' | translate}}
+                          </md-checkbox>
+                        </div>
+                      </div>
+                      <div fxFlex fxFlex.lt-sm="100">
+                        <div class="px-1" *ngIf="test.correctionGrid.correction.showDirectionsColumn">
+                          <md-input-container color="accent">
+                            <input mdInput type="text" [value]="test.correctionGrid.correction.directionsColumnHeader" #directionsHeaderInput (change)="updateDirectionsArea(directionsHeaderInput.value)"
+                              [placeholder]="'TEST.DIRECTIONSHEADER' | translate" />
+                          </md-input-container>
+                        </div>
+                      </div>
+                    </div>
+                    <hr/>
+                    <div fxLayout="row wrap" class="py-1">
+                      <div fxFlex fxFlex.lt-sm="100">
+                        <div class="px-1">
+                          <md-checkbox name="cbnumbernotes" color="accent" [checked]="test.correctionGrid.correction.showNumberMarksColumn" (change)="toggleNumberMarksColumn($event)"
+                            align="start">
+                            {{'TEST.NUMBERMARKSCOLUMN' | translate}}
+                          </md-checkbox>
+                        </div>
+                      </div>
+                      <div fxFlex fxFlex.lt-sm="100">
+                        <div class="px-1" *ngIf="test.correctionGrid.correction.showNumberMarksColumn">
+                          <md-input-container color="accent">
+                            <input mdInput type="text" [value]="test.correctionGrid.correction.numberMarksColumnHeader" #numberMarksHeaderInput (change)="updateNumberMarksColumnHeader(numberMarksHeaderInput.value)"
+                              [placeholder]="'TEST.COLUMNHEADER' | translate" />
+                          </md-input-container>
+                        </div>
+                      </div>
+                    </div>
+                    <hr/>
+                    <div fxLayout="row wrap" class="py-1">
+                      <div fxFlex fxFlex.lt-sm="100">
+                        <div class="px-1">
+                          <md-checkbox name="cbletternotes" color="accent" [checked]="test.correctionGrid.correction.showLetterMarksColumn" (change)="toggleLetterMarksColumn($event)"
+                            align="start">
+                            {{'TEST.LETTERMARKSCOLUMN' | translate}}
+                          </md-checkbox>
+                        </div>
+                      </div>
+                      <div fxFlex fxFlex.lt-sm="100">
+                        <div class="px-1" *ngIf="test.correctionGrid.correction.showLetterMarksColumn">
+                          <md-input-container color="accent">
+                            <input mdInput type="text" [value]="test.correctionGrid.correction.letterMarksColumnHeader" #letterMarksHeaderInput (change)="updateLetterMarksColumnHeader(letterMarksHeaderInput.value)"
+                              [placeholder]="'TEST.COLUMNHEADER' | translate" />
+                          </md-input-container>
+                        </div>
+                      </div>
+                    </div>
+                    <hr/>
+                  </ng-template>
+                  <div fxLayout="row wrap" class="py-1">
+                    <div fxFlex fxFlex.lt-sm="100">
+                      <div class="px-1">
+                        <md-checkbox name="cbx" color="accent" [checked]="test.correctionGrid.correction.commentArea" (change)="toggleCommentArea($event)"
+                          align="start">
+                          {{test.correctionGrid.correction.showAsList ? ('TEST.COMMENTS' | translate) : ('TEST.COMMENTSCOLUMN' | translate)}}
+                        </md-checkbox>
+                      </div>
+                    </div>
+                    <div fxFlex fxFlex.lt-sm="100">
+                      <div class="px-1" *ngIf="test.correctionGrid.correction.commentArea">
+                        <md-input-container color="accent">
+                          <input mdInput type="text" [value]="test.correctionGrid.correction.commentsHeader" #commentsHeaderInput (change)="updateCommentArea(commentsHeaderInput.value)"
+                            [placeholder]="'TEST.COMMENTSHEADER' | translate" />
+                        </md-input-container>
+                      </div>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div fxLayout="row wrap" class="py-1">
+                    <div fxFlex>
+                      <div class="px-1">
+                        <md-checkbox name="showOverallCommentsCb" color="accent" class="mr-1 mt-1" [checked]="test.correctionGrid.correction.showFinalComments"
+                          (change)="changeFinalComments($event)" align="start">
+                          {{'TEST.FINALCOMMENTS' | translate}}
+                        </md-checkbox>
+                      </div>
+                    </div>
+                    <div fxFlex>
+                      <div class="px-1" *ngIf="test.correctionGrid.correction.showFinalComments">
+                        <md-input-container color="accent">
+                          <input mdInput type="text" [value]="test.correctionGrid.correction.finalCommentsHeader" #finalCommentsHeaderInput (change)="updateFinalCommentArea(finalCommentsHeaderInput.value)"
+                            [placeholder]="'TEST.FINALCOMMENTSHEADER' | translate" />
+                        </md-input-container>
+                      </div>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div fxLayout="row wrap" class="py-1">
+                    <div fxFlex>
+                      <div fxLayout="row wrap">
+                        <div fxFlex fxFlex.lt-sm="100">
+                          <div class="px-1">
+                            <md-checkbox name="cb" color="accent" [checked]="test.correctionGrid.correction.displayFinalTotal" (change)="changeTotalZoneDisplay($event)"
+                              align="start">
+                              {{'TEST.SHOWTOTAL' | translate}}
+                            </md-checkbox>
+                          </div>
+                        </div>
+                        <div fxFlex fxFlex.lt-sm="100" *ngIf="test.correctionGrid.correction.displayFinalTotal">
+                          <div class="px-1">
+                            <md-checkbox name="cba" color="accent" [checked]="test.correctionGrid.correction.totalZone.displayAdditionalTotal" (change)="changeAdditionalTotalZoneDisplay($event)"
+                              align="start">
+                              {{'TEST.SHOWEXTRATOTAL' | translate}}
+                            </md-checkbox>
+                          </div>
+                        </div>
+                      </div>
+                      <div fxLayout="row wrap">
+                        <div fxFlex fxFlex.lt-sm="100">
+                          <div class="px-1 pt-1" *ngIf="test.correctionGrid.correction.displayFinalTotal && test.correctionGrid.correction.totalZone.displayAdditionalTotal">
+                            <md-input-container color="accent" class="mr-1">
+                              <input mdInput [(ngModel)]="totalZoneScore" type="number" pattern="[1-9][0-9]*" (change)="updateTotalZone()" [placeholder]="'ADDITIONALMAXTOTAL' | translate"
+                              />
+                            </md-input-container>
+                          </div>
+                        </div>
+                        <div fxFlex fxFlex.lt-sm="100">
+                          <div class="px-1 pt-1" *ngIf="test.correctionGrid.correction.displayFinalTotal && test.correctionGrid.correction.totalZone.displayAdditionalTotal">
+                            <md-select [placeholder]="'DECIMALPOINTS' | translate" color="accent" [(ngModel)]="decimalPlaces" (change)="updateTotalZone()">
+                              <md-option *ngFor="let i of decimalPlacesValues" [value]="i">{{ i }}
+                              </md-option>
+                            </md-select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div fxLayout="row wrap" class="py-1">
+                    <div fxFlex fxFlex.lt-sm="100">
+                      <div class="px-1">
+                        <md-checkbox name="cbpen" color="accent" [checked]="test.correctionGrid.correction.showPenalties" (change)="changePenaltyDisplay($event)"
+                          align="start">
+                          {{'TEST.PENALTIES' | translate}}
+                        </md-checkbox>
+                      </div>
+                    </div>
+                    <div fxFlex fxFlex.lt-sm="100">
+                      <div class="px-1" *ngIf="test.correctionGrid.correction.showPenalties">
+                        <md-input-container color="accent">
+                          <input mdInput type="text" [value]="test.correctionGrid.correction.penaltiesHeader" #penaltiesHeaderInput (change)="updatePenaltiesHeader(penaltiesHeaderInput.value)"
+                            [placeholder]="'TEST.PENALTIESHEADER' | translate" />
+                        </md-input-container>
+                      </div>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div fxLayout="row wrap" class="py-1">
+                    <div fxFlex fxFlex.lt-sm="100">
+                      <div class="px-1">
+                        <md-checkbox name="cbbon" color="accent" [checked]="test.correctionGrid.correction.showBonuses" (change)="changeBonusDisplay($event)"
+                          align="start">
+                          {{'TEST.BONUSES' | translate}}
+                        </md-checkbox>
+                      </div>
+                    </div>
+                    <div fxFlex fxFlex.lt-sm="100">
+                      <div class="px-1" *ngIf="test.correctionGrid.correction.showBonuses">
+                        <md-input-container color="accent">
+                          <input mdInput type="text" [value]="test.correctionGrid.correction.bonusesHeader" #bonusesHeaderInput (change)="updateBonusesHeader(bonusesHeaderInput.value)"
+                            [placeholder]="'TEST.BONUSESHEADER' | translate" />
+                        </md-input-container>
+                      </div>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div fxLayout="row wrap" class="py-1">
+                    <div fxFlex fxFlex.lt-sm="100">
+                      <div class="px-1">
+                        <md-checkbox name="cbbon" color="accent" [checked]="test.correctionGrid.correction.showElimination" (change)="changeEliminationDisplay($event)"
+                          align="start">
+                          {{'TEST.ELIMINATION' | translate}}
+                        </md-checkbox>
+                      </div>
+                    </div>
+                  </div>
+
+                </md-card-content>
+              </md-card>
+            </div>
+          </div>
+          <ng-template ngFor let-section let-sectionIndex="index" [ngForOf]="test.correctionGrid.correction.sections">
+            <md-card class="section" [id]="'section-' + sectionIndex">
+              <md-card-content>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div  fxFlex="55">
+                    <div class="card-margin">
+                      <label class="mr-1">{{section.title === '' ? ('TEST.SECTIONTITLE' | translate) : getTextFromHtml(section.title)}}
+                      </label>
+
+                    </div>
+                  </div>
+                   <div  fxFlex="15">
+                      <button md-icon-button md-raised-button type="button" color="accent" (click)="editSectionTitle(sectionIndex)">
+                          <md-icon>{{section.title === '' ? 'add' : 'edit'}}</md-icon>
+                          <!--AJOUTER-->
+                        </button>
+                        <md-icon class="middle" style="color: red" *ngIf="section.title === '' || !correctionGridSections[sectionIndex]">priority_high</md-icon>
+                   </div>
+                  <div  fxFlex="20">
+                    <div class="px-1">
+                      <md-input-container color="accent">
+                        <input mdInput [placeholder]="'TEST.MAXIMUMNOTATION' | translate" [value]="section.maximumRating" (change)="editSectionTotal(sectionIndex, $event)"
+                          type="number" required pattern="[0-9][0-9]*" />
+                      </md-input-container>
+                    </div>
+                  </div>
+                  <div  fxFlex="10">
+                    <button md-icon-button md-raised-button type="button" (click)="removeSection(sectionIndex)">
+                      <md-icon>close</md-icon>
+                    </button>
+                  </div>
+                </div>
+                <div fxLayout="row wrap">
+                  <button md-raised-button type="button" class="add-section-btn" (click)="addSubSection(sectionIndex)">
+                    <md-icon>add</md-icon>
+                    {{'TEST.ADDNOTATION' | translate}}
+                  </button>
+                </div>
+                <md-card *ngFor="let subsection of section.subSections; let subSectionIndex = index">
+                  <md-card-content>
+                    <div fxLayout="row" fxLayoutWrap="wrap">
+                      <div  fxFlex="55">
+                        <label class="mr-1">{{subsection.title === '' ? ('TEST.NOTATIONTITLE' | translate) : getTextFromHtml(subsection.title)}}
+                        </label>
+                      </div>
+                      <div  fxFlex="15">
+                        <button md-raised-button md-icon-button type="button" color="accent" (click)="editSubSectionTitle(sectionIndex, subSectionIndex)">
+                          <md-icon style="vertical-align: middle">
+                            {{subsection.title === '' ? 'add' : 'edit'}}
+                          </md-icon>
+                          <!--AJOUTER-->
+                        </button>
+                        <md-icon class="middle" style="color: red" *ngIf="subsection.title === ''">priority_high</md-icon>
+                      </div>
+                      <div  fxFlex="20">
+                        <div class="px-1">
+                          <md-input-container color="accent">
+                            <input mdInput required [placeholder]="'TEST.MAXIMUMNOTATION' | translate" [value]="subsection.maximumRating" (change)="editNotationTotal(sectionIndex, subSectionIndex, $event)"
+                              type="number" />
+                          </md-input-container>
+                        </div>
+                      </div>
+                      <div  fxFlex="10">
+                        <button *ngIf="section.subSections.length > 1" md-icon-button md-raised-button color="primary" (click)="removeSubSection(sectionIndex, subSectionIndex)">
+                          <md-icon>close</md-icon>
+                        </button>
+                      </div>
+                    </div>
+                    <div fxLayout="row wrap" *ngIf="test.correctionGrid.correction.showDirectionsColumn && !test.correctionGrid.correction.showAsList">
+                      <div fxFlex>
+                        <label class="mr-1">{{'Directive' | translate}}</label>
+                        <button md-raised-button md-icon-button md-button-sm type="button" color="primary" (click)="editSubSectionDirection(sectionIndex, subSectionIndex)">
+                          <md-icon>{{subsection.direction === '' ? 'add' : 'edit'}}
+                          </md-icon>
+                          <!--AJOUTER-->
+                        </button>
+                      </div>
+                    </div>
+                  </md-card-content>
+                </md-card>
+                <div fxLayout="row wrap" fxLayoutAlign="end" class="card-margin" *ngIf="!section.pageBreak && sectionIndex < test.correctionGrid.correction.sections.length - 1">
+                  <button md-raised-button md-button-sm (click)="addPageBreak(sectionIndex)">
+                    <i class="fa fa-plus fa-xs"></i>
+                    {{'TEST.PAGEBREAK' | translate}}
+                  </button>
+                </div>
+              </md-card-content>
+            </md-card>
+            <div fxLayout="row wrap" fxLayoutAlign="start center" class="background-primary px-1" *ngIf="section.pageBreak && sectionIndex < test.correctionGrid.correction.sections.length-1">
+              <div fxFlex class="text-center text-weight-bold">
+                {{'TEST.PAGEBREAK' | translate}}
+              </div>
+              <i class="fa fa-close fa-xs" (click)="removePageBreak(sectionIndex)"></i>
+            </div>
+          </ng-template>
+        </div>
+      </md-tab>
+      <md-tab *ngIf="test.correctionGrid.correction.showPenalties || test.correctionGrid.correction.showBonuses">
+        <ng-template md-tab-label>
+          <md-icon>check</md-icon>
+          {{'TEST.PENALTIES' | translate}}/{{'TEST.BONUSES' | translate}}
+        </ng-template>
+        <div class="pt-2">
+          <md-card class="background-primary" *ngIf="test.correctionGrid.correction.showPenalties">
+            <md-card-header>
+              <md-card-title>{{'TEST.PENALTIES' | translate}}</md-card-title>
+              <button md-raised-button type="button" class="mr-1" style="right: 0; position: absolute; margin-top: 0.25em" (click)="addPenalty()">
+                <md-icon>add</md-icon>
+                {{'ADD' | translate}}
+              </button>
+            </md-card-header>
+            <hr>
+            <md-card-content>
+              <div>
+                <div fxLayout="row wrap" fxLayoutAlign="start center" *ngFor="let field of penaltyFields; let i = index">
+                  <div>
+                    <button md-icon-button md-button-sm type="button" (click)="removePenaltyField(i)">
+                      <md-icon>delete</md-icon>
+                    </button>
+                    <button md-icon-button md-button-sm *ngIf="field.editing" type="button" (click)="savePenaltyField(i)">
+                      <md-icon>check_circle</md-icon>
+                    </button>
+                    <button md-icon-button md-button-sm *ngIf="!field.editing" type="button" (click)="editPenaltyField(i)">
+                      <md-icon>edit</md-icon>
+                    </button>
+                  </div>
+                  <div fxFlex *ngIf="field.editing" class="pr-1">
+                    <md-input-container style="width: 100%" color="accent">
+                      <input mdInput [placeholder]="'TEST.PENALTYTEXT' | translate" type="text" [(ngModel)]="field.title" />
+                    </md-input-container>
+                  </div>
+                  <div fxFlex="20" *ngIf="field.editing">
+                    <md-input-container style="width: 100%" color="accent">
+                      <input mdInput [placeholder]="'TEST.PENALTY' | translate" type="number" pattern="[1-9][0-9]*" [(ngModel)]="field.count" />
+                    </md-input-container>
+                  </div>
+                  <div fxFlex fxLayout="row wrap" fxLayoutAlign="start center" *ngIf="!field.editing" class="ml-1">
+                    <span class="mr-1">- {{field.count}}</span>
+                    <span fxFlex class="mr-1 text-justify">{{field.title}}</span>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+          <md-card class="background-primary" *ngIf="test.correctionGrid.correction.showBonuses">
+            <md-card-header>
+              <md-card-title>{{'TEST.BONUSES' | translate}}</md-card-title>
+              <button md-raised-button type="button" class="mr-1" style="right: 0; position: absolute; margin-top: 0.25em" (click)="addBonus()">
+                <md-icon>add</md-icon>
+                {{'ADD' | translate}}
+              </button>
+            </md-card-header>
+            <hr>
+            <md-card-content>
+              <div>
+                <div fxLayout="row wrap" fxLayoutAlign="start center" *ngFor="let field of bonusFields; let i = index">
+                  <div>
+                    <button md-icon-button md-button-sm type="button" (click)="removeBonusField(i)">
+                      <md-icon>delete</md-icon>
+                    </button>
+                    <button md-icon-button md-button-sm *ngIf="field.editing" type="button" (click)="saveBonusField(i)">
+                      <md-icon>check_circle</md-icon>
+                    </button>
+                    <button md-icon-button md-button-sm *ngIf="!field.editing" type="button" (click)="editBonusField(i)">
+                      <md-icon>edit</md-icon>
+                    </button>
+                  </div>
+                  <div fxFlex *ngIf="field.editing" class="pr-1">
+                    <md-input-container style="width: 100%" color="accent">
+                      <input mdInput [placeholder]="'TEST.BONUSTEXT' | translate" type="text" [(ngModel)]="field.title" />
+                    </md-input-container>
+                  </div>
+                  <div fxFlex="20" *ngIf="field.editing">
+                    <md-input-container style="width: 100%" color="accent">
+                      <input mdInput [placeholder]="'TEST.BONUS' | translate" type="number" pattern="[1-9][0-9]*" [(ngModel)]="field.count" />
+                    </md-input-container>
+                  </div>
+                  <div fxFlex fxLayout="row wrap" fxLayoutAlign="start center" *ngIf="!field.editing" class="ml-1">
+                    <span class="mr-1">+ {{field.count}}</span>
+                    <span fxFlex class="mr-1 text-justify">{{field.title}}</span>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+        </div>
+      </md-tab>
+      <md-tab>
+        <ng-template md-tab-label>
+          <md-icon>vertical_align_bottom</md-icon>
+          {{'TEST.FOOTER' | translate}}
+        </ng-template>
+        <div class="pt-2">
+          <md-card style="background-color: #607d8b">
+            <md-card-header>
+              <md-card-title>{{'TEST.MAINFOOTER' | translate}}</md-card-title>
+              <div class="mr-1 mt-1" style="right: 0; position: absolute; margin-top: 0.25em">
+                <md-checkbox name="cb" color="accent" align="end" [checked]="test.correctionGrid.footer.textBelow" (change)="footerTextPositionChanged($event)">
+                  {{'TEST.FOOTERBELOW' | translate}}
+                </md-checkbox>
+              </div>
+            </md-card-header>
+            <hr>
+            <md-card-content>
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex>
+                  <div class="px-1">
+                    <label class="mr-1">{{'TEXT' | translate}}</label>
+                    <button md-raised-button md-icon-button type="button" (click)="openTextDialog('footer-text')">
+                      <md-icon>{{test.correctionGrid.footer.text === '' ? 'add' : 'edit'}}</md-icon>
+                      <!--AJOUTER-->
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+          <md-card style="background-color: #607d8b">
+            <md-card-header>
+              <md-card-title>{{'TEST.FOOTERFIELDS' | translate}}</md-card-title>
+              <button md-raised-button type="button" class="mr-1" (click)="addFooterField({value: 'other', type: 'text', view: 'Champ'})"
+                style="right: 0; position: absolute; margin-top: 0.25em">
+                <md-icon>add</md-icon>
+                {{'ADD' | translate}}
+              </button>
+            </md-card-header>
+            <hr>
+            <md-card-content *ngIf="footerFields.length > 0">
+              <div>
+                <div fxLayout="row wrap" fxLayoutAlign="start center" *ngFor="let field of footerFields; let i = index">
+                  <div>
+                    <button md-icon-button md-button-sm type="button" (click)="removeFooterField(i)">
+                      <md-icon>delete</md-icon>
+                    </button>
+                    <button md-icon-button md-button-sm *ngIf="field.editing" type="button" (click)="saveFooterField(i)">
+                      <md-icon>check_circle</md-icon>
+                    </button>
+                    <button md-icon-button md-button-sm *ngIf="!field.editing" type="button" (click)="editFooterField(i)">
+                      <md-icon>edit</md-icon>
+                    </button>
+                  </div>
+                  <div [fxFlex]="field.dataType === 'longtext' ? '60' : '40'" *ngIf="field.editing" class="pr-1">
+                    <md-input-container style="width: 100%" color="accent">
+                      <input mdInput [placeholder]="'FIELDTEXT' | translate" type="text" [(ngModel)]="field.value" />
+                    </md-input-container>
+                  </div>
+                  <div fxFlex *ngIf="field.editing">
+                    <md-select color="accent" [placeholder]="'FIELDTYPE' | translate" [(ngModel)]="field.dataType">
+                      <md-option *ngFor="let fType of fieldTypes" [value]="fType.value">
+                        {{ 'TEST.FIELDTYPES.' + fType.view | translate }}
+                      </md-option>
+                    </md-select>
+                  </div>
+                  <div fxFlex>
+                    <md-select color="accent" *ngIf="field.dataType != 'longtext' && field.editing" [placeholder]="'ALIGNMENT' | translate" [(ngModel)]="field.align">
+                      <md-option [value]="'left'">{{ 'LEFT' | translate }}</md-option>
+                      <md-option [value]="'right'">{{ 'RIGHT' | translate }}</md-option>
+                    </md-select>
+                    <span *ngIf="!field.editing">{{field.value}} - {{field.align.toUpperCase() | translate}}</span>
+                  </div>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
+        </div>
+      </md-tab>
+    </md-tab-group>
+  </md-card-content>
+</md-card>
+<div fxLayout="row wrap" fxLayoutAlign="space-between center" class="card-margin">
+  <button md-raised-button color="primary" type="button" (click)="goToPreviousStep()">
+    <md-icon>chevron_left</md-icon>
+    {{'PREVIOUS' | translate}}
+  </button>
+  <button md-raised-button color="accent" type="button" (click)="goToNextStep()">
+    {{'CONTINUE' | translate}}
+    <md-icon>keyboard_arrow_right</md-icon>
+  </button>
+</div>

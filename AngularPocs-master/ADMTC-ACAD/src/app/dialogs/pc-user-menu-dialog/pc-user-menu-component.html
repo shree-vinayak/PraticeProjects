@@ -1,0 +1,144 @@
+<div *ngIf="userModel == undefined && modify">
+    <!-- <md-spinner></md-spinner> -->
+    <md-progress-bar mode="indeterminate"></md-progress-bar>
+</div>
+<form [formGroup]="form" (ngSubmit)="addRegisterdUser()" *ngIf="modify === false || modify === true && userModel">
+    <!--*ngIf="modify === false || modify === true && userModel"-->
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100">
+            <div class="px-1 select-input-container">
+                <md-select style="width: 100%" (change)="changeUserEntities()" [placeholder]="'USERS.ADDEDITUSER.ENTITIES' | translate" formControlName="entityValue">
+                    <md-option *ngFor="let entities of userEntities" [value]="entities.value">
+                        {{ entities.view }}
+                    </md-option>
+                </md-select>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100">
+            <div class="px-1 select-input-container">
+                <ng-select formControlName="types" (data)="changeUserTypes($event)" [multiple]="true" [items]="userTypes" [disabled]="disabled || (userid === loggedInUserId && modify )" placeholder="{{ 'USERS.ADDEDITUSER.SELECTUSERTYPE' | translate }}*"></ng-select>
+            </div>
+            <small style="margin-left: 20px" *ngIf="form.get('types').invalid && formSubmitted" class="mat-text-warn">
+                {{'Customer.AddSchool.userType.validation1' | translate}}
+            </small>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100">
+            <div class="px-1 select-input-container" style="width: fit-content;width: -moz-fit-content;margin-top: 10px;">
+                <label>
+                    <div style="margin-top: 4.5px;">{{'USERS.ADDEDITUSER.CIVILITY.TITLE'| translate}}</div>
+                </label>
+                <md-radio-group style='padding-left: 20px' name="civility" fxLayout="row" formControlName="sex" #sex>
+                    <md-radio-button *ngFor="let sex of sexType;let idx= index" [value]="sex.value" style="margin-right: 5px">
+                        {{'USERS.ADDEDITUSER.CIVILITY.' + sex.view | translate}}
+                    </md-radio-button>
+                </md-radio-group>
+            </div>
+        </div>
+    </div>
+    <div class="col_s6" fxLayoutWrap="wrap">
+        <div>
+            <div class="px-1">
+                <md-input-container  style="width: 100%">
+                    <input mdInput formControlName="firstName" maxlength="30" #firstname [placeholder]="'USERS.ADDEDITUSER.FIRSTNAME' | translate"
+                    type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*" (blur)="changeControlValue(form.get('firstName'), true)"/>
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+    <div class="col_s6" fxLayoutWrap="wrap">
+        <div>
+            <div class="px-1">
+                <md-input-container  style="width: 100%">
+                    <input mdInput formControlName="lastName" maxlength="30" #lastname [placeholder]="'USERS.ADDEDITUSER.LASTNAME' | translate"
+                    type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*" (blur)="changeControlValue(form.get('lastName'), false)">
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div class="px-1">
+                <md-input-container style="width: 100%">
+                    <input mdInput formControlName="position" maxlength="100" #mobilePhone [placeholder]="'USERS.ADDEDITUSER.POSITION' | translate" type="text">
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <div class="px-1">
+                <md-input-container style="width: 100%">
+                    <input mdInput formControlName="email" maxlength="200" #email [placeholder]="'USERS.ADDEDITUSER.EMAIL' | translate" type="email">
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div class="px-1">
+                <md-input-container style="width: 100%">
+                    <input mdInput formControlName="officePhone" maxlength="10" [placeholder]="'USERS.ADDEDITUSER.OFFICEPHONE' | translate" type="text" pattern="^(0|\+[0-9]{1,5})?(( ?){1})?([0-9]*$)$">
+
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <div class="px-1">
+                <md-input-container style="width: 100%">
+                    <input mdInput formControlName="directLine" maxlength="10" #mobilePhone [placeholder]="'USERS.ADDEDITUSER.DIRECTLINE' | translate" type="text" pattern="^(0|\+[0-9]{1,5})?(( ?){1})?([0-9]*$)$">
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="form?.controls?.entityValue?.value === 'company'" class="col_s6" fxLayoutWrap="wrap">
+        <div>
+            <div class="px-1">
+                <md-select [placeholder]="'USERS.ADDEDITUSER.COMPANY' | translate" formControlName="company">
+                    <md-option *ngFor="let company of companylist" [value]="company._id">
+                        {{ company.companyName }}
+                    </md-option>
+                </md-select>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="form?.controls?.entityValue?.value === 'company'" class="col_s6 add_company_btn" fxLayoutWrap="wrap">
+        <div>
+            <div class="px-1">
+                <button md-raised-button color="primary" (click)="addNewCompany()" type="button">
+                    {{'USERS.ADDEDITUSER.ADDCOMPANY' | translate}} +
+                </button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div class="px-1">
+                <md-input-container style="width: 100%">
+                    <input mdInput formControlName="portablePhone" maxlength="10" #mobilePhone [placeholder]="'USERS.ADDEDITUSER.PORTABLEPHONE' | translate" type="text" pattern="^(0|\+[0-9]{1,5})?(( ?){1})?([0-9]*$)$">
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+    <div style="float: right">
+        <div fxLayoutWrap="wrap">
+            <div>
+                <div>
+                    <button style="margin-right: 10px;" md-raised-button color="warn" type="button" (click)="cancel()">{{'CANCEL' | translate}}</button>
+                    <button md-raised-button color="primary" type="submit">
+                    {{'USERS.ADDEDITUSER.SUBMIT' | translate}}
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

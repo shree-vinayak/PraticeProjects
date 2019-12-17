@@ -1,0 +1,101 @@
+md-toolbar.main-header.mat-primary.mat-toolbar {
+  background: #212121;
+}
+
+.unreadCounter{
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  padding: 8px 10px;
+  max-width: 30px;
+  max-height: 30px;
+}
+
+.mat-tab-label-active {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+
+.main-menu a.mat-button.active {
+  color: #ffd740;
+}
+
+.main-menu a:hover{
+  color: lightgrey;
+}
+:host /deep/ {
+  .customClassDialog .swal2-styled{
+    color:black !important;
+  }
+}
+.customClassDialog .swal2-styled{
+  color:black !important;
+}
+
+
+@media screen and (max-width: 600px) {
+  .UserInfoSpan {
+    display: none;
+  }
+
+  // .main-header a {
+  //   margin-right: -25px;
+  //   padding: 0px;
+  //   margin-left: -25px;
+  // }
+
+  .profileMenu{
+    min-width: 0px;
+    line-height: 0px;
+    padding: 10px;
+  }
+
+  .MoHdn{
+    display: none;
+  }
+
+}
+
+.privacy-svg {
+  width: 24px;
+  height: 24px;
+  margin-left: 3px;
+  transform: translateY(6px);
+  margin-right: 3px;
+}
+
+.md2-menu-custom-left {
+  font-size: 15px;
+  display: flex;
+}
+
+.md2-main{
+  width: 180px;
+}
+
+.md2-button {
+  width: 100% !important;
+  text-align: left !important;
+  cursor: pointer;
+  padding: 6px 5px 6px 15px;
+}
+
+.menu-entity {
+  color: black;
+  margin-left: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 96%;
+}
+
+.md2-button:hover {
+  background-color: rgba(158,158,158,0.2);
+}
+
+.panel-menu-class {
+  transform: translateY(-20px);border-top: 1px solid gray;
+}
+
+.avoid-clicks {
+  pointer-events: none;
+}

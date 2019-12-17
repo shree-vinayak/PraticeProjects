@@ -1,0 +1,225 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+
+    <div fxFlex="65" fxFlex.lt-md="65">
+      <div fxFlex="33" fxFlex.lt-md="33">
+        <!-- select creator -->
+        <div class="px-1 select-input-container">
+          <md-select color="accent" fxFlex="90" fxFlex.lt-md="90" placeholder  ="{{'QUESTIONNAIRE.BOARD.Select_creator' | translate}}"
+            style="width: 100%" [(ngModel)]="filterCreator">
+            <md-option (click)="selectCreator(creator)" *ngFor="let creator of creatorList" [value]="creator.lastName + creator.firstName">
+             {{creator.lastName}} {{creator.firstName}}
+            </md-option>
+          </md-select>
+        </div>
+        <!-- select rncp -->
+        <div class="px-1 select-input-container">
+          <md-select color="accent" fxFlex="90" fxFlex.lt-md="90"  placeholder  ="{{'PARAMETERS-RNCP.CLASSES.RNCP-SELECT' | translate}}" style="width: 100%" [(ngModel)]="filterRncpTitle">
+            <md-option *ngFor="let title of rncpList" [value]="title?.shortName" (click)="onSelectRncp(title)">
+               {{ title?.shortName }}
+            </md-option>
+          </md-select>
+        </div>
+        <!-- select questionnaireType -->
+        <div class="px-1 select-input-container">
+          <md-select color="accent" fxFlex="90" fxFlex.lt-md="90" placeholder  ="{{'QUESTIONNAIRE.BOARD.Select_Questionnaire_Type' | translate}}" style="width: 100%" [(ngModel)]="filterQuestionnaireType">
+            <md-option *ngFor="let ques of questionnaireList" [value]="ques?.questionnaireTemplate?.questionnaireName">
+              {{ ques?.questionnaireTemplate?.questionnaireName }}
+            </md-option>
+          </md-select>
+        </div>
+
+      </div>
+
+      <div fxFlex="33" fxFlex.lt-md="33">
+        
+      <!-- select class -->
+        <div class="px-1 select-input-container top-height">
+          <md-select color="accent" fxFlex="90" fxFlex.lt-md="90" placeholder  ="{{'CrossCorrection.Select_a_Class.title' | translate}}" style="width: 100%" [(ngModel)]="filterClass" [disabled]="!filterRncpTitle">
+            <md-option *ngFor="let class of classList" [value]="class?.name" >
+              {{class?.name}}
+            </md-option>
+          </md-select>
+        </div>
+      </div>
+
+
+      <div fxFlex="33" fxFlex.lt-md="33">
+        <!-- select scholar season -->
+        <div class="px-1 select-input-container top-height">
+          <md-select color="accent" fxFlex="90" fxFlex.lt-md="90" placeholder  ="{{'EMPLOYABILITY_SURVEY.scholar' | translate}}" style="width: 100%" [(ngModel)]="filterScholarSeason" [disabled]="!filterRncpTitle">
+            <md-option *ngFor="let season of scholarSeasonsList" [value]="season?.scholarseason" >
+              {{season?.scholarseason}}
+            </md-option>
+          </md-select>
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <div fxFlex="35" fxFlex.lt-md="35">
+      <div fxFlex="30" fxFlex.lt-md="30">
+        <button style="margin-left: 5px;" fxFlex class="btnHeight top-height" md-raised-button type="button" color="primary" (click)="searchQuestionnaire()" >
+          <md-icon>search</md-icon>
+          {{'USERS.SEARCH' | translate}}
+        </button>
+      </div>
+      <div fxFlex="25" fxFlex.lt-md="25">
+        <button style="margin-left: 5px;" fxFlex class="btnHeight top-height" md-raised-button type="button" color="primary" (click)="resetSearch()">
+          <md-icon>restore</md-icon>
+          {{'QUESTIONNAIRE.BOARD.Bt_RESET' | translate}}
+        </button>
+      </div>
+      <div fxFlex="55" fxFlex.lt-md="55">
+        <button style=" margin-left:5px; float: left;height: 3em;" md-raised-button color="accent" class="top-height" (click)="sendQuestionnaire()">
+          <md-icon>send</md-icon>
+          {{'QUESTIONNAIRE.BOARD.Send_Questionnaire' | translate}}
+        </button>
+      </div>
+       
+    </div>
+</div>
+
+<ngx-datatable class="material rncp-table stuListNgxDiv" [rows]="questions" [columnMode]="'flex'" [headerHeight]="50"
+  [footerHeight]="50" [rowHeight]="60" [scrollbarV]="true"
+  [messages]="{emptyMessage: 'NoDataToDisplay' | translate }" [sorts]="[{prop: 'sendDate', dir: 'asc'},
+ {prop: 'Title', dir: 'asc'},{prop: 'scholarSeason', dir: 'asc'},{prop: 'class', dir: 'asc'},
+ {prop: 'recipient', dir: 'asc'},{prop: 'questionnaireType', dir: 'asc'}]"
+  [externalSorting]="true"  [cssClasses]="ngxDtCssClasses" #table [selectionType]="'checkbox'" >
+
+  <ngx-datatable-column [flexGrow]="1" [width]="45" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false"
+    [headerCheckboxable]="true" [checkboxable]="true">
+  </ngx-datatable-column>
+
+  <!-- template name -->
+  <ngx-datatable-column [flexGrow]="4.7" name="templateName" [resizeable]="false" mdTooltip="{{'QUESTIONNAIRE.TABLE.TEMPLATE_NAME' | translate}}"
+  mdTooltipPosition="right">
+    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn" >
+      <span> {{'QUESTIONNAIRE.TABLE.TEMPLATE_NAME' | translate}}</span>
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{ row?.questionnaireTemplate?.questionnaireName }}
+    </ng-template>
+  </ngx-datatable-column> 
+
+   <!-- send date --> 
+  <ngx-datatable-column [flexGrow]="3.5" prop="sendDate" name="sendDate" [sortable]="true" [resizeable]="false" mdTooltip="{{'QUESTIONNAIRE.TABLE.TEMPLATE_NAME' | translate}}">
+    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+      <span (click)="sort()"> {{'QUESTIONNAIRE.TABLE.SEND_DATE' | translate}}</span>
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{row?.createdAt | date:'dd/MM/yyyy' }}
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- title -->
+  <ngx-datatable-column [flexGrow]="2.5" prop="Title" name="Title" [sortable]="true" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+      <span (click)="sort()"> {{'USERS.ADDEDITUSER.TITLE' | translate}}</span>
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+     {{ row?.rncpId?.shortName }}
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- school -->
+  <ngx-datatable-column [flexGrow]="2.5"  name="school" [sortable]="true" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+      <span (click)="sort()"> {{'Export_S1_COLUMNS.SCHOOL' | translate}}</span>
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{ row?.schoolId?.shortName }}
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- scholar season -->
+  <ngx-datatable-column [flexGrow]="4" prop="scholarSeason" name="scholarSeason" [sortable]="true" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+      <span (click)="sort()"> {{'QUESTIONNAIRE.TABLE.Scholar_Season' | translate}}</span>
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+     {{ row?.scholarSeasonId?.scholarseason }}
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- class -->
+  <ngx-datatable-column [flexGrow]="4" prop="class" name="class" [sortable]="true" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+      <span (click)="sort()"> {{'PARAMETERS-RNCP.CLASSES.CLASS' | translate}}</span>
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+     {{ row?.classId?.name }}
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- recipient -->
+  <ngx-datatable-column [flexGrow]="3" prop="recipient" name="recipient" [sortable]="true" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+      <span (click)="sort()"> {{'SEND_QUESTIONNAIRE.RECIPIENT' | translate}}</span>
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      <div *ngIf="row?.recipientSelection?.recipientType === 'user'">
+         {{ row?.recipientSelection?.userId?.lastName }}  {{ row?.recipientSelection?.userId?.firstName }}
+      </div>
+      <div *ngIf="row?.recipientSelection?.recipientType === 'userType'">
+        {{ row?.recipientSelection?.userTypeId?.name }}
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- questionnaireType -->
+  <ngx-datatable-column [flexGrow]="2" prop="templateName" name="templateName" [sortable]="true" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+      <span (click)="sort()"> {{'QUESTIONNAIRE.TABLE.Questionnaire_Type' | translate}}</span>
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+       {{ row?.questionnaireTemplate?.questionnaireType }}
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- status -->
+  <ngx-datatable-column [flexGrow]="2.5" prop="questionnaireType" name="questionnaireType" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+      <span> {{'QUESTIONNAIRE.TABLE.STATUS' | translate}}</span>
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      {{row?.statusPercentage}}
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- action -->
+  <ngx-datatable-column [flexGrow]="5" name="Actions" [sortable]="false" [cellClass]="'text-center'" [resizeable]="false">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      <span mdTooltip="Action" mdTooltipPosition="above">
+        {{'QUESTIONNAIRE_TOOLS.ACTION' | translate}}
+      </span>
+    </ng-template>
+    <!-- duplicate -->
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      <span mdTooltip="{{'QUESTIONNAIRE.TABLE.Duplicate' | translate}}" mdTooltipPosition="above">
+        <button md-icon-button md-button-sm md-raised-button class="grid-button">
+          <md-icon>content_copy</md-icon>
+        </button>
+      </span>
+      <!-- send-reminder -->
+      <span mdTooltip="{{'QUESTIONNAIRE.TABLE.Send_Reminder' | translate}}" mdTooltipPosition="above">
+        <button md-icon-button md-button-sm md-raised-button class="grid-button custom-margin">
+          <md-icon>send</md-icon>
+        </button>
+      </span>
+      <!-- status details -->
+      <span mdTooltip="{{'QUESTIONNAIRE.TABLE.Status_Details' | translate}}"  mdTooltipPosition="above">
+        <button md-icon-button md-button-sm md-raised-button class="grid-button custom-margin">
+          <md-icon>edit</md-icon>
+        </button>
+      </span>
+      <!-- export to csv -->
+      <span mdTooltip="{{'QUESTIONNAIRE.TABLE.Export_to_CSV' | translate}}" mdTooltipPosition="above">
+        <button md-icon-button md-button-sm md-raised-button class="grid-button custom-margin">
+          <i class="fa fa-file-excel-o" style="font-size: 18px;"></i>
+        </button>
+      </span>
+     <!-- pdf -->
+      <span mdTooltip="{{'QUESTIONNAIRE.TABLE.Print_to_PDF' | translate}}" mdTooltipPosition="above">
+        <button md-icon-button md-button-sm md-raised-button class="grid-button">
+          <i class="fa fa-file-pdf-o fa-lg"></i>
+          <!-- <md-icon>file-pdf</md-icon> -->
+        </button>
+      </span>
+  
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable> 

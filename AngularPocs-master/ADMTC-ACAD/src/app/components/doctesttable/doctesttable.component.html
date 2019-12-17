@@ -1,0 +1,267 @@
+<md-card>
+  <md-card-content>
+    <div fxLayout="row" fxLayoutWrap="wrap" class="addTaskButton taskListNgSelect">
+      <div fxFlex="100" fxFlex.lt-md="100">
+        <div fxFlex="16" fxFlex.lt-md="16">
+          <div class="select-input-container" fxFlex="90">
+            <ng-select style="margin-top: 3px;" [allowClear]="true" [(ngModel)]="selectedSchool" fxFlex="100"
+              (data)="changeSchoolFilterTyped($event)" [multiple]="false" [items]="schoolLists" [placeholder]="'TOOLS_DOCTEST.School' | translate"></ng-select>
+          </div>
+        </div>
+        <div fxFlex="16" fxFlex.lt-md="16">
+          <div class="select-input-container" fxFlex="90">
+            <!-- <ng-template> -->
+            <ng-select style="margin-top: 3px;" [allowClear]="true" [disabled]="selectedSchool.length <= 0" [(ngModel)]="selectedRNCP" fxFlex="100" (data)="changeTitleFilter($event)" [multiple]="false"
+              [items]="titleLists" [placeholder]="'TOOLS_DOCTEST.Title' | translate"></ng-select>
+            <!-- </ng-template> -->
+          </div>
+        </div>
+        <div fxFlex="16" fxFlex.lt-md="16">
+          <div class="select-input-container" fxFlex="90">
+            <ng-select [disabled]="selectedRNCP.length <= 0" [allowClear]="true" style="margin-top: 3px;" [(ngModel)]="selectedClass" fxFlex="100" (data)="changeClassFilter($event)"
+              [multiple]="false" [items]="classLists" [placeholder]="'TOOLS_DOCTEST.Class' | translate"></ng-select>
+          </div>
+        </div>
+        <div fxFlex="16" fxFlex.lt-md="16">
+          <div class="select-input-container" fxFlex="90">
+            <ng-select [disabled]="selectedClass.length <= 0" [allowClear]="true" style="margin-top: 3px;" [(ngModel)]="selectedStudent" fxFlex="100" (data)="changeStudentFilter($event)"
+              [multiple]="false" [items]="studentLists" [placeholder]="'TOOLS_DOCTEST.Student' | translate"></ng-select>
+          </div>
+        </div>
+
+        <div fxFlex="16" fxFlex.lt-md="16">
+          <md-input-container dividerColor="accent" fxFlex="90" fxFlex.lt-md="90">
+            <input mdInput [(ngModel)]="searchDocument" maxlength="30" placeholder="{{ 'TASK.SEARCH' | translate }}" type="text">
+          </md-input-container>
+        </div>
+
+        <div fxFlex="20" fxFlex.lt-md="20">
+          <div dividerColor="accent" fxFlex="50">
+            <button fxFlex style="margin-left: 5px;width: 100%;height: 38px;" md-raised-button type="button" class="btnSearch" color="primary"
+              (click)="searchBasedOnFilter(true)">
+              <md-icon>search</md-icon>
+              {{'USERS.SEARCH' | translate}}
+            </button>
+          </div>
+          <div dividerColor="accent" fxFlex="50">
+            <button fxFlex style="margin-left: 5px;width: 100%;height: 38px;" md-raised-button type="button" class="btnSearch" color="primary"
+              (click)="resetSearch()">
+              <md-icon>restore</md-icon>
+              {{'DOCTEST.RESET' | translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutWrap="wrap" class="addTaskButton taskListNgSelect">
+      <div fxFlex="100" fxFlex.lt-md="100">
+        <div fxFlex="16" fxFlex.lt-md="16">
+          <div class="select-input-container" fxFlex="90">
+            <ng-select [disabled]="selectedRNCP.length <= 0" [allowClear]="true" style="margin-top: 3px;" [(ngModel)]="selectedExpertise" fxFlex="100" (data)="changeExpertiseFilter($event)"
+              [multiple]="false" [items]="expertiseLists" [placeholder]="'TOOLS_DOCTEST.Expertise' | translate"></ng-select>
+          </div>
+        </div>
+        <div fxFlex="16" fxFlex.lt-md="16">
+          <div class="select-input-container" fxFlex="90">
+            <ng-select [disabled]="selectedExpertise.length <= 0" [allowClear]="true" style="margin-top: 3px;" [(ngModel)]="selectedSubject" fxFlex="100" (data)="changeSubjectFilter($event)"
+              [multiple]="false" [items]="subjectLists" [placeholder]="'TOOLS_DOCTEST.Subject' | translate"></ng-select>
+          </div>
+        </div>
+        <div fxFlex="16" fxFlex.lt-md="16">
+          <div class="select-input-container" fxFlex="90">
+            <ng-select [disabled]="selectedRNCP.length <=0" [allowClear]="true" style="margin-top: 3px;" [(ngModel)]="selectedTest" fxFlex="100" (data)="changeTestFilter($event)"
+              [multiple]="false" [items]="testLists" [placeholder]="'TOOLS_DOCTEST.Test' | translate"></ng-select>
+          </div>
+        </div>
+        <div fxFlex="16" fxFlex.lt-md="16">
+          <div class="select-input-container" fxFlex="90">
+            <ng-select style="margin-top: 3px;" [(ngModel)]="selectedDocType" [allowClear]="true" fxFlex="100" (data)="changeTypeOfDocFilter($event)"
+              [multiple]="false" [items]="typeOfDocLists" [placeholder]="'TOOLS_DOCTEST.TypeOfDoc' | translate"></ng-select>
+          </div>
+        </div>
+        <div fxFlex="16" fxFlex.lt-md="16"></div>
+        <div fxFlex="20" fxFlex.lt-md="20" style="padding-left: 7px;">
+          <button md-raised-button color="accent" md-button style="width:100%;" (click)="forwardMailToMultiple()">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+              <div fxFlex="3" fxFlex.lt-md="3"></div>
+              <div fxFlex="15" fxFlex.lt-md="15">
+                <md-icon style="margin-top: -3px !important; vertical-align: middle;">send</md-icon>
+              </div>
+              <div fxFlex="75" fxFlex.lt-md="75">
+                <span>
+                  {{'MailBox.forward' | translate }}
+                </span>
+              </div>
+            </div>
+
+
+          </button>
+        </div>
+      </div>
+    </div>
+  </md-card-content>
+</md-card>
+<div class="hideScroller">
+
+  <ngx-datatable class="material material rncp-table" [rows]="docTestRecords" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
+    [rowHeight]="50" [scrollbarH]="false" [scrollbarV]="false" [reorderable]="reorderable" [count]="page.totalElements" [offset]="page.pageNumber"
+    [limit]="page.size" (page)="changePage($event)" [messages]="{emptyMessage: 'NoDataToDisplay' | translate }" (sort)="sortPage($event)"
+    [externalSorting]="true" [externalPaging]="true"
+    [sorts]="[{prop: 'createdAt', dir: 'asc'},
+              {prop: 'Type', dir: 'asc'},
+              {prop: 'uploadedForStudent.rncpTitle.shortName', dir: 'asc'},
+              {prop: 'uploadedForStudent.school.shortName', dir: 'asc'},
+              {prop: 'parentTest.name', dir: 'asc'},
+              {prop: 'uploadedForStudent.currentClass.name', dir: 'asc'},
+              {prop: 'uploadedForStudent.lastName', dir: 'asc'},
+              {prop: 'parentTest.subjectId.expertise.blockOfExperise', dir: 'asc'},
+              {prop: 'parentTest.subjectId.subjectName', dir: 'asc'},
+              {prop: 'name', dir: 'asc'},
+              {prop: 'documentType', dir: 'asc'}]" 
+    [selectionType]="'checkbox'" (activate)="onActivate($event)" (select)="onSelect($event)"
+    [selected]="selected" [cssClasses]="ngxDtCssClasses">
+    <ngx-datatable-column [flexGrow]="0.8" [sortable]="false" [draggable]="false" [resizeable]="false">
+      <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+        <md-checkbox style="margin-left:-3px !important" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)"></md-checkbox>
+      </ng-template>
+      <ng-template ngx-datatable-cell-template let-row="row" let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+        <md-checkbox style="margin-left:15% !important; padding-top: 5px !important;" [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></md-checkbox>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="1.5" name="createdAt" prop="createdAt" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span mdTooltip="{{'TOOLS_DOCTEST.Date' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important">
+          {{'TOOLS_DOCTEST.Date' | translate}} </span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row?.createdAt | date: 'dd/MM/yyyy'}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="2" name="uploadedForStudent.rncpTitle.shortName" prop="uploadedForStudent.rncpTitle.shortName"
+      [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span mdTooltip="{{'TOOLS_DOCTEST.Title' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important" (click)="sortColumn()">
+          {{'TOOLS_DOCTEST.Title' | translate}} </span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row?.uploadedForStudent?.rncpTitle?.shortName}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="2" name="uploadedForStudent.school.shortName" prop="uploadedForStudent.school.shortName"
+      [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span mdTooltip="{{'TOOLS_DOCTEST.School' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important"
+          (click)="sortColumn()"> {{'TOOLS_DOCTEST.School' | translate}} </span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row?.uploadedForStudent?.school?.shortName}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="2" name="uploadedForStudent.currentClass.name" prop="uploadedForStudent.currentClass.name"
+      [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span mdTooltip="{{'TOOLS_DOCTEST.Class' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important" (click)="sortColumn()">
+          {{'TOOLS_DOCTEST.Class' | translate}} </span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row?.uploadedForStudent?.currentClass?.name}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="2" name="uploadedForStudent.lastName" prop="uploadedForStudent.lastName" [sortable]="true"
+      [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span mdTooltip="{{'TOOLS_DOCTEST.Student' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important"
+          (click)="sortColumn()">
+          {{'TOOLS_DOCTEST.Student' | translate}} </span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <span *ngIf="row?.uploadedForStudent">
+            {{ utility.computeCivility(row?.uploadedForStudent?.sex, translate.currentLang.toUpperCase()) + ' ' + row?.uploadedForStudent?.firstName + ' ' + row?.uploadedForStudent?.lastName}}
+        </span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="2" name="parentTest.subjectId.expertise.blockOfExperise" prop="parentTest.subjectId.expertise.blockOfExperise"
+      [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span mdTooltip="{{'TOOLS_DOCTEST.Expertise' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important"
+          (click)="sortColumn()"> {{'TOOLS_DOCTEST.Expertise' | translate}} </span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row?.parentTest?.subjectId?.expertise?.blockOfExperise}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="2" name="parentTest.subjectId.subjectName" prop="parentTest.subjectId.subjectName" [sortable]="true"
+      [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span mdTooltip="{{'TOOLS_DOCTEST.Subject' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important"
+          (click)="sortColumn()"> {{'TOOLS_DOCTEST.Subject' | translate}} </span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row?.parentTest?.subjectId?.subjectName}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="3" name="parentTest.name" prop="parentTest.name" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span mdTooltip="{{'TOOLS_DOCTEST.Test' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important" (click)="sortColumn()">
+          {{'TOOLS_DOCTEST.Test' | translate}} </span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row?.parentTest?.name}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="2.4" name="documentType" prop="documentType" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span mdTooltip="{{'TOOLS_DOCTEST.TypeOfDoc' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important"
+          (click)="sortColumn()">
+          {{'TOOLS_DOCTEST.TypeOfDoc' | translate}} </span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <div *ngIf="row?.documentType === 'documentExpected' || row?.documentType === 'missingCopy'">
+          <span *ngIf="row?.documentType === 'documentExpected' || row?.documentType === 'missingCopy'">
+            <svg style="width:24px;height:24px; vertical-align:middle" viewBox="0 0 24 24">
+              <path fill="#ffffff" d="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M11,4H6V20H11L18,20V11H11V4Z"
+              />
+            </svg>
+          </span>{{ ' ' }}{{row?.documentType === 'documentExpected' ? ('DOCTESTTABLE.Doc_Expected' | translate) : 'Doc. Justif Absence'}}
+        </div>
+        <div *ngIf="row?.documentType === 'StudentTestCorrection'">
+          <md-icon style="vertical-align: middle;">edit</md-icon> {{'DOCTESTTABLE.Correction_Grid' | translate}}
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="3.5" name="name" prop="name" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span mdTooltip="{{'TOOLS_DOCTEST.DocName' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important"
+          (click)="sortColumn()">
+          {{'TOOLS_DOCTEST.DocName' | translate}} </span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row?.name}}
+      </ng-template>
+    </ngx-datatable-column>
+
+
+    <ngx-datatable-column [flexGrow]="1.4" name="Actions" [sortable]="false" [cellClass]="'text-center'" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        <span mdTooltip="Action" mdTooltipPosition="above">
+          Action
+        </span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <span mdTooltip="{{'TOOLS_DOCTEST.Action_Buttons.View' | translate}}" mdTooltipPosition="above">
+          <button md-icon-button md-button-sm md-raised-button class="grid-button" *ngIf="row" (click)="downloadDocumentorCorrectionGrid(row)">
+            <i class="fa fa-eye" style="vertical-align: sub;font-size: 22px;color:white;"></i>
+          </button>
+        </span>
+        <span mdTooltip="{{'TOOLS_DOCTEST.Action_Buttons.Send' | translate}}" mdTooltipPosition="above">
+          <button md-icon-button md-button-sm md-raised-button class="grid-button" *ngIf="row" (click)="forwardMailSingle(row)">
+            <md-icon>send</md-icon>
+          </button>
+        </span>
+
+      </ng-template>
+    </ngx-datatable-column>
+
+
+  </ngx-datatable>
+</div>

@@ -1,0 +1,22 @@
+.suggestion-title {
+    display: inline-block;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.mr-12 {
+    margin-right: 12px;
+}
+
+.inputBox {
+    margin: 10px 0px;
+}
+
+:host /deep/ {
+    .mat-calendar-body-cell {
+    padding: 7.14286% 0 !important;
+}
+
+}

@@ -1,0 +1,10 @@
+.questionnaire-details .mat-input-wrapper {
+    margin-top: 1.14em;
+}
+
+:host /deep/ {
+    .questionnaire-details .mat-input-wrapper {
+        margin-top: 1.14em;
+    }
+    
+}

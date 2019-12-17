@@ -1,0 +1,95 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex="60" fxFlex.lt-md="60">
+
+    <ngx-datatable class="material rncp-table stuListNgxDiv" [rows]="tabledata" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
+      [rowHeight]="60" [scrollbarV]="true" [messages]="{emptyMessage: 'NoDataToDisplay' | translate }" [cssClasses]="ngxDtCssClasses"
+      #table [selectionType]="'checkbox'">
+
+      <ngx-datatable-column [flexGrow]="1" [width]="45" [canAutoResize]="false" [draggable]="false" [resizeable]="false" [headerCheckboxable]="true"
+        [checkboxable]="true">
+      </ngx-datatable-column>
+
+      <!-- user type -->
+      <ngx-datatable-column [flexGrow]="4.7" name="templateName" [resizeable]="false" mdTooltip="{{'QUESTIONNAIRE.TABLE.TEMPLATE_NAME' | translate}}"
+        mdTooltipPosition="right">
+        <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+          <span> User type</span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <span *ngFor="let type of row?.userReceiver?.types" class="type"> {{type.name}} </span>
+
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!-- recipient name -->
+      <ngx-datatable-column [flexGrow]="3.5" prop="sendDate" name="sendDate" [resizeable]="false" mdTooltip="{{'QUESTIONNAIRE.TABLE.TEMPLATE_NAME' | translate}}">
+        <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+          <span (click)="sort()"> Recipient name </span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+
+          <span *ngIf="(row?.userReceiver?.sex) ==='M'">
+            {{'USERS.ADDEDITUSER.CIVILITY.MR' | translate}}
+          </span>
+          <span *ngIf="(row?.userReceiver?.sex )=== 'F' ">
+            {{'USERS.ADDEDITUSER.CIVILITY.MRS' | translate}}
+          </span>
+
+          {{row?.userReceiver?.firstName}} {{row?.userReceiver?.lastName}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!-- status -->
+      <ngx-datatable-column [flexGrow]="1.5" prop="Title" name="Title" [resizeable]="false">
+        <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+          <span (click)="sort()"> Status </span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <div class="status-icon" style="text-align:center;" mdTooltip="" mdTooltipPosition="right">
+            <i mdTooltip="{{'THUMBSUP.NOT_OK' | translate}}" mdTooltipPosition="right" *ngIf="(row?.questionnaireStatus === 'sentToUser')"
+              style="color:#ff4040;" class="fa fa-circle statusIcon" aria-hidden="true"></i>
+            <i mdTooltip="{{'THUMBSUP.OK' | translate}}" mdTooltipPosition="right" *ngIf="(row?.questionnaireStatus === 'completed')"
+              style="color:#adff2f;" class="fa fa-circle statusIcon" aria-hidden="true"></i>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+
+
+      <!-- date completed -->
+      <ngx-datatable-column [flexGrow]="3.5" prop="sendDate" name="sendDate" [resizeable]="false" mdTooltip="{{'QUESTIONNAIRE.TABLE.TEMPLATE_NAME' | translate}}">
+        <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+          <span>Date completed </span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row?.submittedDate | date:'dd/MM/yyy' }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [flexGrow]="3" name="Actions" [cellClass]="'text-center'" [resizeable]="false">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <span mdTooltip="Action" mdTooltipPosition="above">
+            Action
+          </span>
+        </ng-template>
+        <!-- duplicate -->
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <span mdTooltip="{{'Duplicate' | translate}}" mdTooltipPosition="above">
+            <button md-icon-button md-button-sm md-raised-button class="grid-button">
+              <md-icon>send</md-icon>
+            </button>
+          </span>
+          <!-- send-reminder -->
+          <span mdTooltipPosition="above">
+            <button md-icon-button md-button-sm md-raised-button class="grid-button custom-margin">
+              <md-icon>send</md-icon>
+            </button>
+          </span>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+  <div fxFlex="40" fxFlex.lt-md="40">
+
+  </div>
+
+</div>

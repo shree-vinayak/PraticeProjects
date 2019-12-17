@@ -1,0 +1,55 @@
+<div style="text-align:center;margin-top: 10px;">
+    <div class="job-button">
+        <button class="jobButton" [disabled]="sentToMentor">
+         <span style="float: left;">
+           <p class="para">{{ 'STUDENT.SENTTOSTUDENT' | translate }}</p>
+          </span>
+          <i *ngIf="sentToStudent" class="fa fa-check icons" style="color:green"  aria-hidden="true"></i>
+          <i *ngIf="!sentToStudent" class="fa fa-times icons" style="color:red"  aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="job-button">
+        <button class="jobButton">
+           <span style="float: left;">
+             <p class="para">{{ 'STUDENT.SENT_TO_SCHOOL' | translate }}</p>
+            </span>
+            <i *ngIf="sentToMentor" class="fa fa-check icons" style="color:green" aria-hidden="true"></i>
+            <i *ngIf="!sentToMentor" class="fa fa-times icons" style="color:red" aria-hidden="true"></i>
+          </button>
+    </div>
+    <!-- <div class="job-button">
+        <button class="jobButton">
+             <span style="float: left;">
+               <p class="para">{{ 'STUDENT.VALIDATEBYMENTOR' | translate }}</p>
+              </span>
+              <i *ngIf="validateByMentor" class="fa fa-check icons" style="color:green"  aria-hidden="true"></i>
+              <i *ngIf="!validateByMentor" class="fa fa-times icons" style="color:red"  aria-hidden="true"></i>
+            </button>
+    </div> -->
+
+    <div class="job-button">
+        <button class="jobButton">
+     <span style="float: left;">
+       <p class="para">{{ 'STUDENT.VALIDATEBYACADEMICDPT' | translate }}</p>
+      </span>
+      <i *ngIf="validateByAcademic" class="fa fa-check icons" style="color:green"  aria-hidden="true"></i>
+      <i *ngIf="!validateByAcademic" class="fa fa-times icons" style="color:red"  aria-hidden="true"></i>
+    </button>
+    </div>
+</div>
+
+<div *ngIf="jobDescription && jobDescription.jobDescriptionId" style="overflow: hidden;text-align: center;">
+    <app-job-description-form [jobDescriptionDetail]="jobDescription" (jobDescriptionStatusChangeEvent)="checkStatus($event)"></app-job-description-form>
+</div>
+
+<div *ngIf="jobDescriptionByEmail && jobDescriptionByEmail.jobDescriptionId" style="overflow: hidden;text-align: center;">
+    <app-job-description-form [jobDescriptionDetail]="jobDescriptionByEmail" (jobDescriptionStatusChangeEvent)="checkStatus($event)"></app-job-description-form>
+</div>
+
+
+<div *ngIf="(!jobDescription || !jobDescription.jobDescriptionId) && checkJobdescEmptyMessage">
+    <br>
+    <div style=" font-size: 20px;font-weight: 600; text-align:center;">{{ 'JOBDESCRIPTIONFORM.TITLE' | translate }}</div><br>
+    <div style=" font-size: 18px;text-align:center;">{{ 'JOBDESCRIPTIONFORM.EmptyMessage' | translate }}</div>
+
+</div>

@@ -1,0 +1,137 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100">
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100">
+                <form id="frmIdeaaCategory" [formGroup]="form">
+
+                    <div class="px-1" style="margin-top:10px">
+                        <span>1001 ideas categories</span>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="90" fxFlex.lt-md="90">
+                                    <div class="px-1 select-input-container">
+                                        <md-input-container color="accent" style="width: 100%">
+                                            <input mdInput type="text" formControlName="categoryName" [placeholder]="'SETTINGS.1001IDEASCATEGORIES.CATEGORYNAME' | translate" />
+                                        </md-input-container>
+                                    </div>
+                                </div>
+                                <div fxFlex="10" fxFlex.lt-md="10">
+                                    <div class="px-1 select-input-container">
+                                        <!--<button md-raised-button color="primary" type="submit">{{'USERS.ADDEDITUSER.SUBMIT' | translate}}</button>-->
+                                        <a (click)="addIdeasCategory()" class="btn-floating btn-large waves-effect waves-light red add-btn add_btn_manual"><i class="material-icons manual_icon_design">add</i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1 select-input-container">
+                                        <div *ngFor="let idea of ideasCategoryList" class="box">
+                                            <div fxFlex="100" fxFlex.lt-md="100">
+                                                <div class="px-1 select-input-container">
+                                                    {{idea.categoryName}}
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="px-1 select-input-container">
+                                                    <a (click)="deleteIdeaCategory(idea._id)" class="btn-floating btn-large waves-effect waves-light red add-btn right delete_btn_manual"><i class="material-icons delete_manual_icon_design">delete</i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="col_s12" fxLayoutWrap="wrap" style="margin-top:5px;">
+            <div>
+                <div class="px-1 pull-right">
+                    <button md-raised-button color="primary">
+
+                        {{'USERS.ADDEDITUSER.SUBMIT' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .address-container .panel-default {
+        position: relative;
+    }
+
+        .address-container .panel-default:nth-child(2) {
+            margin-top: 20px;
+        }
+
+    .address-container .panel-heading {
+        display: inline-block;
+        position: absolute;
+        background-color: #ddd;
+        top: -9px;
+        left: 11px;
+        padding: 2px 14px;
+        font-size: 12px;
+    }
+
+    .address-container .panel-body {
+        border: 1px solid #ddd !important;
+        padding-top: 15px;
+    }
+
+    .cdk-focused, .cdk-mouse-focused {
+        background-color: rgba(0,0,0,.12);
+    }
+
+    .add-btn {
+        width: 25px;
+        height: 25px;
+        background-color: #ffd740;
+        display: inline-block;
+        border-radius: 50%;
+        top: 4px;
+        vertical-align: middle;
+        margin-left: 3px;
+        box-shadow: 1px 2px 4px #9e9d9d;
+    }
+
+    .box {
+        padding: 5px;
+        border: 1px solid;
+        margin-top: 5px;
+    }
+    .delete_btn_manual {
+        width: 25px;
+        height: 25px;
+        background-color: #607d8b;
+        display: inline-block;
+        border-radius: 0;
+        vertical-align: middle;
+        margin-left: 3px;
+        box-shadow: none;
+    }
+    .add_btn_manual{
+        width: 35px;
+        height: 35px;
+        background-color: #607d8b;
+        display: inline-block;
+        border-radius: 0;
+        vertical-align: middle;
+        margin-left: 3px;
+        box-shadow: none;
+    }
+    .delete_manual_icon_design {
+        font-size: 25px;
+    }
+    .manual_icon_design {
+        font-size: 35px;
+    }
+</style>

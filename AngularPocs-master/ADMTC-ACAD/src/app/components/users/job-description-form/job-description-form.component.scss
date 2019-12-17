@@ -1,0 +1,226 @@
+.full-width {
+  width: 100% !important;
+}
+
+:host /deep/ {
+
+button.swal2-cancel.btn-danger.same-width.swal2-styled {
+    width: 98% !important;
+    background-color: green !important;
+
+}
+}
+
+:host /deep/ {
+
+.same-width {
+  width: 98% !important;
+  background-color: green !important;
+}
+}
+
+.jobDescriptionCardStatus{
+  text-align:center;
+  margin-top: 5px;
+  display: none;
+}
+
+.pdfImage{
+  height: 0px;
+  width: 0px;
+  display: none;
+}
+
+.job-button{
+  margin: 0px 10px;
+  width: 170px;
+  display: initial;
+  display: none;
+}
+
+.icons{
+  font-size: 36px;
+  float: right;
+  margin-right: 10px;
+  display: none;
+}
+.para{
+  max-width: 90px;
+  margin: 2px 10px 0px 0px;
+  color: black;
+  font-weight: 700;
+  display: none;
+}
+.jobButton{
+  width: 180px;
+  padding: 7px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border-color: #000000;
+  cursor: default;
+  display: none;
+}
+
+
+.pdfImageCancel{
+  height: 0px;
+  width: 0px;
+  display: none;
+}
+
+#cardOneTitle{
+
+}
+
+.pdfImageCard{
+  height: 0px;
+  width: 0px;
+  display: none;
+}
+
+.pdfImageCancelCard{
+  height: 0px;
+  width: 0px;
+  display: none;
+}
+
+.pdfDomDisplay {
+  display :none;
+  font-size: 15px;
+  font-weight:600;
+}
+.student-form-jobdescription .mat-input-element:disabled {
+  color: white !important;
+}
+
+.student-form-jobdescription .form-title {
+  color: gray !important;
+}
+.student-form-jobdescription .title-labe-jobdesc{
+  color: white !important;
+}
+.title-labe-jobdesc{
+  font-weight: normal;
+}
+.student-form{
+  .row {
+    margin-right: 0px !important;
+  }
+}
+
+.form-title {
+  padding-bottom: 6px;
+  /*border-bottom: 1px solid rgba(0, 0, 0, 0.2);*/
+  margin:0px;
+  font-size: 15px;
+  font-weight:600;
+}
+.mat-input-wrapper{
+  margin: 5px 0 !important;
+}
+
+.form-sub-title {
+  margin: 12px 0 6px;
+  font-size: 13px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+
+.mt-18 {
+  margin-top: 18px;
+  margin-left: 1%
+}
+
+.p0{
+  padding: 0!important;
+}
+.pdfIcon{
+  margin-bottom: 1px;
+  font-size: 13px;
+  padding-left: 20px;
+}
+
+.pdfdivclass {
+  float: right;
+  width: 67px;
+  overflow: hidden;
+  border-radius: 3px;
+  margin-right: 0.4%;
+  transform: translateY(-30px)
+}
+
+.job-description{
+  font-size: 20px;
+  font-weight: 600;
+  text-align:center;
+  //margin: 12px 0;
+}
+.border-yellow{
+  border: 2px solid #ffd740;
+}
+.border-yellow md-card-content{
+  padding-bottom: 0px !important;
+  padding-top: 5px !important;
+}
+
+
+.form-group {
+  margin-bottom: 1rem;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.col-form-label {
+  padding-top: calc(.5rem - 1px * 2);
+  padding-bottom: calc(.5rem - 1px * 2);
+  margin-bottom: 0;
+}
+
+.form-control-plaintext {
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  margin-bottom: 0;
+  line-height: 1.25;
+  border: solid transparent;
+  border-width: 1px 0;
+}
+
+@media (min-width: 576px) {
+  .col-sm-2 {
+    -ms-flex: 0 0 40%;
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+
+  .col-sm-10 {
+    -ms-flex: 0 0 60%;
+    flex: 0 0 60%;
+    max-width: 60%;
+  }
+}
+
+.mat-icon {
+  padding: 16px;
+}
+
+.mat-checkbox-inner-container{
+  margin-right: 8px!important;
+}
+.objectiveMissionClass{
+  border: 2px solid #ffd740;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+.plusIconPadding{
+  padding-top: 12px !important;
+}
+
+
+

@@ -1,0 +1,38 @@
+[
+    {
+        "name":"Student1",
+        "id": 1,
+        "score":"",
+        "action":"add"
+    },
+    {
+        "name":"Student2",
+        "id": 2,
+        "score":"",
+        "action":"add"
+    },
+    {
+        "name":"Student3",
+        "id": 3,
+        "score":"",
+        "action":"add"
+    },
+    {
+        "name":"Student4",
+        "id": 4,
+        "score":"21/100",
+        "action":"edit"
+    },
+    {
+        "name":"Student5",
+        "id": 5,
+        "score":"68/100",
+        "action":"add"
+    },
+    {
+        "name":"Student6",
+        "id": 6,
+        "score":"68/100",
+        "action":"add"
+    }
+]

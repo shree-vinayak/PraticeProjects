@@ -1,0 +1,146 @@
+<form id="form" [formGroup]="form">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100">
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="100">
+                    <div class="address-container">
+                        <div class="px-1" style="margin-top:10px">
+                            <span>{{'SETTINGS.TITLES.CNCPINFORMATION' | translate}}</span>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div fxLayout="row" fxLayoutWrap="wrap">
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+                                        <div class="px-1 select-input-container">
+                                            <md-input-container color="accent" style="width: 100%">
+                                                <input mdInput type="text" formControlName="FunctionName" [placeholder]="'SETTINGS.CNCPINFORMATION.FUNCTION' | translate" />
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+                                        <div class="px-1 select-input-container">
+                                            <md-input-container color="accent" style="width: 100%">
+                                                <input mdInput type="text" formControlName="AddressLine1" [placeholder]="'SETTINGS.CNCPINFORMATION.ADDRESSLINE1' | translate" />
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div fxLayout="row" fxLayoutWrap="wrap">
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+                                        <div class="px-1 select-input-container">
+                                            <md-input-container color="accent" style="width: 100%">
+                                                <input mdInput type="text" formControlName="FirstName" [placeholder]="'SETTINGS.CNCPINFORMATION.FIRSTNAME' | translate" />
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+                                        <div class="px-1 select-input-container">
+                                            <md-input-container color="accent" style="width: 100%">
+                                                <input mdInput type="text" formControlName="AddressLine2" [placeholder]="'SETTINGS.CNCPINFORMATION.ADDRESSLINE2' | translate" />
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div fxLayout="row" fxLayoutWrap="wrap">
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+                                        <div class="px-1 select-input-container">
+                                            <md-input-container color="accent" style="width: 100%">
+                                                <input mdInput type="text" formControlName="FamilyName" [placeholder]="'SETTINGS.CNCPINFORMATION.FAMILYNAME' | translate" />
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+                                        <div class="px-1 select-input-container">
+                                            <div fxFlex="50" fxFlex.lt-md="50">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" formControlName="ZipCode" [placeholder]="'SETTINGS.CNCPINFORMATION.ZIPCODE' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                            <div fxFlex="50" fxFlex.lt-md="50">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" formControlName="City" [placeholder]="'SETTINGS.CNCPINFORMATION.CITY' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div fxLayout="row" fxLayoutWrap="wrap">
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+                                        <div class="px-1 select-input-container">
+                                            <md-input-container color="accent" style="width: 100%">
+                                                <input mdInput type="text" formControlName="PhoneNumber" [placeholder]="'SETTINGS.CNCPINFORMATION.PHONENUMBER' | translate" />
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+                                        <div class="px-1 select-input-container">
+                                            <md-select color="accent" style="width: 100%" formControlName="CountryName"  [placeholder]="'USERS.COUNTRY' | translate">
+                                                <md-option *ngFor="let country of countryList" [value]="country.id">
+                                                    {{ country.countryName }}
+                                                </md-option>
+                                            </md-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" fxLayoutWrap="wrap">
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+                                        <div class="px-1 select-input-container">
+                                            <md-input-container color="accent" style="width: 100%" >
+                                                <input mdInput type="text" formControlName="MobileNumber" [placeholder]="'SETTINGS.CNCPINFORMATION.MOBILENUMBER' | translate" />
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+                                        <div class="px-1 select-input-container">
+                                            <md-input-container color="accent" style="width: 100%">
+                                                <input mdInput type="text" formControlName="WebSiteURL" [placeholder]="'SETTINGS.CNCPINFORMATION.WEBSITEURL' | translate" />
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div fxLayout="row" fxLayoutWrap="wrap">
+
+                                    <div fxFlex="50" fxFlex.lt-md="50">
+                                        <div class="px-1 select-input-container">
+                                            <md-input-container color="accent" style="width: 100%">
+                                                <input mdInput type="text" formControlName="GeneralMail" [placeholder]="'SETTINGS.CNCPINFORMATION.GENERALEMAIL' | translate" />
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--<div fxLayout="row" fxLayoutWrap="wrap">
+                                    <div fxFlex="100" fxFlex.lt-md="100">
+                                        <div class="px-1 select-input-container">
+                                            <md-input-container color="accent" style="width: 50%">
+                                                <input mdInput type="text" [placeholder]="'SETTINGS.CONTRACTDETAILS.STANDARDSHAREOFCERTIFIER' | translate" />
+                                            </md-input-container>%
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col_s12" fxLayoutWrap="wrap">
+                <div>
+                    <div class="px-1 pull-right">
+                        <button md-raised-button color="primary">
+
+                            {{'USERS.ADDEDITUSER.SUBMIT' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

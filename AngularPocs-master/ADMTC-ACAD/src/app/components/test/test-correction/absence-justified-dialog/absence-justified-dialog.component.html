@@ -1,0 +1,25 @@
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+        <md-input-container style="width: 100%">
+            <textarea maxlength="500" mdInput [(ngModel)]="reson" [placeholder]=" 'TESTCORRECTIONS.MESSAGE.MISSINGCOPY-VALIDATE-REASON' | translate" rows="3" ></textarea>
+          </md-input-container>
+    </div>
+    <div fxFlex="100" fxFlex.lt-md="100">
+        {{'TESTCORRECTIONS.MESSAGE.MISSINGCOPY-VALIDATE-FILE' | translate }}
+        <input #userphoto type="file" ng2FileSelect [uploader]="uploader"  disableMultipart="true" class="student-details-photo" />
+    </div>
+    <div fxFlex="100" fxFlex.lt-md="100">
+        <div style="text-align: right">
+            <button md-raised-button md-button-sm color="warn" type="button" (click)="cancel()">
+              {{'CANCEL' | translate}}
+            </button>
+            <button name="single-click" md-raised-button md-button-sm color="primary" type="button" (click)="submit()">
+              {{'SUBMIT' | translate}}
+            </button>
+        </div>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,98 @@
+<!-- <md-card fxFlex class="primary-background dark-header"> -->
+  <md-card-title class="filter-card">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxFlex="60" fxFlex.lt-md="100" style="padding-top: 10px">
+        <span class="text-xl">{{'DASHBOARD.PENDINGTASKS' | translate}} {{rncpTitle?.shortName}}</span>
+      </div>
+      <div fxFlex="40" fxFlex.lt-md="100">
+
+          <!-- -->
+        <md-input-container dividerColor="accent" fxFlex="100" fxFlex.lt-md="100" style="height: 45px;font-size:14px">
+          <input mdInput type="text" placeholder="{{ 'TASK.SEARCH' | translate }}" [(ngModel)]="searchPendingTask" (keyup)="filterPendingTask($event.target.value)"  >
+        </md-input-container>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutWrap="wrap" class="dashboardStaffComponent">
+      <div fxFlex="60" fxFlex.lt-md="100">
+        <ng-select *ngIf="utilityService.checkUserIsDirectorSalesAdmin()" [(ngModel)]="filterSchool" (selected)="fiterBySchool($event)"
+          [multiple]="false" [items]="schoolListforSelect" fxFlex="50" placeholder="{{ 'USERS.ADDEDITUSER.SELECTSCHOOL' | translate }}"></ng-select>
+      </div>
+      <div fxFlex="30" fxFlex.lt-md="100">
+        <ng-select [(ngModel)]="filterUsertype" (selected)="fiterByUserType($event)" [multiple]="false" [items]="userTypes"
+          fxFlex="100" placeholder="{{ 'USERS.ADDEDITUSER.SELECTUSERTYPE' | translate }}"></ng-select>
+      </div>
+      <div fxFlex="10" fxFlex.lt-md="100">
+        <button style="margin-left: 0px; float: right" md-raised-button fxFlex="100" type="button" class="btnSearch"
+          color="primary" (click)="resetSearch()">
+          <md-icon>restore</md-icon>
+          Reset
+        </button>
+      </div>
+    </div>
+  </md-card-title>
+  <hr>
+  <md-card-content class="pa-0 dark-text">
+    <a *ngIf="pendingTasks !== undefined">
+      <ngx-datatable class="material rncp-table" [rows]="pendingTasks" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+        [cssClasses]="ngxDtCssClasses" [messages]="{emptyMessage: 'NoDataToDisplayPendingTasks' | translate }" (sort)="sortPage($event)"
+        [sorts]="[{prop: 'userSelection', dir: 'asc'},{prop: 'dueDate', dir: 'asc'},{prop: 'description', dir: 'asc'},{prop: 'test.subjectId.subjectName', dir: 'asc'},{prop: 'priority', dir: 'asc'}]"
+        [externalSorting]="true" [selected]="selected" [selectionType]="'single'" (activate)="onSelect($event)" [limit]="page.size"
+        [offset]="page.pageNumber" (page)="changePage($event)" [externalPaging]="true" [count]="page.totalElements">
+
+        <ngx-datatable-column name="dueDate" [flexGrow]="0.9" prop="dueDate" [sortable]="true" [resizeable]="false">
+          <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+            <span style="margin-left: -10px;"> {{'DASHBOARD.DUEDATE' | translate}}</span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+            {{row['dueDate'] | date: 'dd/MM/yyyy'}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="userSelection" [flexGrow]="2.3" prop="userSelection" [sortable]="true" [resizeable]="false">
+          <ng-template ngx-datatable-header-template let-sort="sortFn">
+            <span> {{'DASHBOARD.ASSIGNEDTO' | translate}}</span>
+          </ng-template>
+          <ng-template let-value="value" let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex">
+            <span>{{getAssignedTo(row.userSelection)}} {{row?.type === 'admtcCorrection' ? ' - ' + row?.school?.shortName : ''}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="description" [flexGrow]="3" prop="description" [sortable]="true" [resizeable]="false">
+          <ng-template ngx-datatable-header-template>
+            <span> {{'DASHBOARD.TASK' | translate}} </span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+            <div style="text-overflow: ellipsis !important;overflow: hidden;white-space: nowrap;">
+              {{getTranslateWhat(row['description'], row)}}
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="test.subjectId.subjectName" [flexGrow]="2.7" prop="test.subjectId.subjectName" [sortable]="true" [resizeable]="false">
+          <ng-template ngx-datatable-header-template>
+            <span> {{'DASHBOARD.SUBJECT/TEST' | translate}}</span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+            <!-- <a (click)="goToTestCorrection(row['_id'])">{{row['test']['name']}}</a> -->
+            <span [mdTooltip]="row?.test?.subjectId.subjectName + ' /' + row?.test?.name" [mdTooltipPosition]="'above'">
+              <div style="text-overflow: ellipsis !important;overflow: hidden;white-space: nowrap">
+                {{row?.test?.subjectId ? (row?.test?.subjectId?.subjectName + (row?.test?.subjectId ? ' / ' : '') + row?.test?.name) : ''
+                }}
+              </div>
+
+            </span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="priority" [flexGrow]="0.5" prop="priority" [sortable]="true" style="text-align:center !important;"
+          [resizeable]="false">
+          <ng-template ngx-datatable-header-template>
+            <span style="margin-left: -15px;">{{'DASHBOARD.PRIORITY' | translate}}</span>
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex" id="priority">
+            <span class="priority-center" style="text-align:center !important;padding-left: 11px !important;">
+              {{row['priority']}}
+            </span>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </a>
+
+  </md-card-content>
+<!-- </md-card> -->

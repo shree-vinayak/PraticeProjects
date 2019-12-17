@@ -1,0 +1,226 @@
+﻿<form id="frmAddTask" [formGroup]="form" (ngSubmit)="addTask()" style="max-height:570px;">
+  <a class="close_icon">
+    <i class="material-icons" (click)="cancel()">close</i>
+  </a>
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100" style="padding-left: 2%;">
+      <span style="float: left"><svg style="width:30x;height:30px" viewBox="0 0 24 24">
+          <path fill="#000000" d="M19,19H5V5H15V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V11H19M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z" />
+        </svg> </span>
+      <h5 style="float: left; transform: translateY(-5px);"> {{title | translate}}
+      </h5>
+    </div>
+  </div>
+
+  <!-- Internal Task Toggle -->
+  <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="utilityService.checkUserIsDirectorSalesAdmin() && dispInternalTask">
+    <div fxFlex="100" fxFlex.lt-md="100" style="margin-bottom: 20px;">
+      <div class="px-1 select-input-container">
+        <md-slide-toggle labelPosition="after" [checked]="isInternalTask" (change)="toggleInternalTask($event)"></md-slide-toggle>
+        <span>{{'TASK.ADDEDITTASK.INTERNAL_TASK' | translate}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="!isInternalTask">
+    <div fxFlex="100" fxFlex.lt-md="100" style="margin-bottom: 20px;">
+      <div class="px-1 select-input-container">
+        <ng-select formControlName="rncp" fxFlex="100" (data)="ChangeRNCPTitle($event)" [multiple]="false" [items]="RNCPTitles"
+          [disabled]="isProblematicTask || isDocUploadTask" placeholder="{{ 'TASK.ADDEDITTASK.RNCPTITLE' | translate }}*"></ng-select>
+
+        <!-- <md-select color="accent" formControlName="rncp" [(ngModel)]="selectedRNCP" (change)="ChangeRNCPTitle()" [placeholder]="'TASK.ADDEDITTASK.RNCPTITLE' | translate"
+                    fxFlex="100" ch>
+                    <md-option *ngFor="let rncptitle of RNCPTitles" [value]="rncptitle._id" fxFlex="100">
+                        {{ rncptitle.shortName }}
+                    </md-option>
+                </md-select> -->
+      </div>
+      <small style="margin-left: 15px;" *ngIf="form.get('rncp').invalid && submitForm" class="mat-text-warn">
+        {{'STUDENT.SELECTRNCPTITLE.validation1' | translate}}</small>
+    </div>
+  </div>
+  <!-- <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100">
+            <div class="px-1 select-input-container">
+                <md-select color="accent" formControlName="assignTo" #assignTo [placeholder]="'TASK.ADDEDITTASK.ASSIGNTO' | translate" fxFlex="100">
+                    <md-option *ngFor="let user of AssignTo" [value]="user._id">
+                        {{ user.firstname }}
+                    </md-option>
+                </md-select>
+            </div>
+        </div>
+    </div> -->
+  <div fxLayout="row" fxLayoutWrap="wrap" formGroupName="userSelection" *ngIf="!isInternalTask">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container">
+        <span>{{'TASK.ADDEDITTASK.USER' | translate}}</span>
+        <md-slide-toggle labelPosition="after" [checked]="userCatStatus" (change)="toggleFinalScore($event)"
+          formControlName="selectionType"></md-slide-toggle>
+        <span>{{'TASK.ADDEDITTASK.CATEGORYOFUSERS' | translate}}</span>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="!userCatStatus">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container">
+        <!-- <md-select color="accent" formControlName="userId" [placeholder]="'TASK.ADDEDITTASK.USER' | translate" fxFlex="100" [(ngModel)]="selectedUser"
+                    (change)="ChangeAssignTo()">
+                    <md-option *ngFor="let user of AssignTo" [value]="user._id" fxFlex="100">
+                        {{ user.firstName }} {{ user.lastName }}
+                    </md-option>
+                </md-select> -->
+        <!-- [(ngModel)]="userLastNameSearchString" fxFlex="100"-->
+        <md-input-container fxFlex="100">
+          <input type="text" formControlName="userName" [placeholder]="'TASK.ADDEDITTASK.USER' | translate" mdInput
+            [mdAutocomplete]="auto" (keyup)="searchUserList($event)">
+          <md-autocomplete #auto="mdAutocomplete">
+            <!-- (click)="changeSchool(list)" -->
+            <md-option *ngFor="let user of AssignTo; let i = index" (click)="selectedUserName(user)" [value]="user.firstName + ' ' + user.lastName">
+              {{ user.firstName }} {{ user.lastName }}
+            </md-option>
+          </md-autocomplete>
+        </md-input-container>
+      </div>
+      <small style="margin-left: 15px;" *ngIf="(form.get('userName').value === '') && submitForm" class="mat-text-warn">
+        {{'TASK.ADDEDITTASK.USERREQ' | translate}}
+      </small>
+      <div class="px-1 select-input-container" *ngIf="isUserSelected">
+        <small style="color: red;">{{ 'TASK.ADDEDITTASK.USERMSG' | translate }}</small>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="userCatStatus" formGroupName="userSelection">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container">
+        <md-select color="accent" formControlName="userTypeId" [placeholder]="'TASK.ADDEDITTASK.CATEGORYOFUSERS' | translate"
+          fxFlex="100">
+          <md-option *ngFor="let usertype of userTypeList" [value]="usertype._id" fxFlex="100">
+            {{ usertype.name }}
+          </md-option>
+        </md-select>
+      </div>
+      <small style="margin-left: 20px" *ngIf="(form.get('userSelection.userTypeId').value === '' ) && submitForm" class="mat-text-warn">
+        {{'Customer.AddSchool.userType.validation1' | translate}}
+      </small>
+    </div>
+  </div>
+
+  <!-- <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="modify"> -->
+  <!-- <div fxFlex="50" fxFlex.lt-md="100" class="px-1" style="display:flex;">
+            <p class="resume-label">Created By :</p>
+            <div class="px-1 select-input-container" style="margin-top:1em;">
+                {{task.createdBy}}
+                <md-input-container color="accent" style="width: 100%">
+                    <input mdInput formControlName="createdBy" type="text" [placeholder]="'TASK.CREATEDBY' | translate" />
+                </md-input-container>
+            </div>
+        </div> -->
+  <!-- <div fxFlex="50" fxFlex.lt-md="50" class="px-1" style="display:flex;"> -->
+  <!-- <p class="resume-label">CreatedDate:</p>
+            <div class="px-1 select-input-container" style="margin-top:1em;">
+                {{task.createdDate | date: 'dd/MM/yyyy'}}
+                <md-input-container color="accent" style="width: 100%">
+                    <input mdInput type="text" class="abc" formControlName="createdDate" [placeholder]="'TASK.CREATEDDATE' | translate" />
+                </md-input-container>
+
+            </div> -->
+  <!-- </div> -->
+  <!-- </div> -->
+
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="50" fxFlex.lt-md="50">
+      <div class="px-1" style="margin-top: 6px;">
+        <!-- <md-input-container color="accent" style="width: 100%;margin-top:8px;">
+                    <input mdInput type="text" formControlName="priority" [placeholder]="'TASK.ADDEDITTASK.PRIORITY' | translate" />
+                </md-input-container> -->
+        <label>{{'TASK.PRIORITY' | translate}}:</label>
+        <md-radio-group name="taskPriority" formControlName="priority" style="float: none !important;margin-left: 10px;"
+          required>
+          <md-radio-button [value]="1" style="margin-right: 5px">
+            {{ 1 }}
+          </md-radio-button>
+          <md-radio-button [value]="2" style="margin-right: 5px">
+            {{ 2 }}
+          </md-radio-button>
+          <md-radio-button [value]="3" style="margin-right: 5px">
+            {{ 3 }}
+          </md-radio-button>
+        </md-radio-group>
+      </div>
+      <small style="margin-left: 15px" *ngIf="form.get('priority').invalid && submitForm" class="mat-text-warn">
+        {{'TASK.ADDEDITTASK.PRIORITYREQ' | translate}}</small>
+    </div>
+    <div fxFlex="50" fxFlex.lt-md="50">
+      <div class="px-1 select-input-container">
+        <md-input-container color="accent" style="width: 100%">
+          <input mdInput type="text" [mdDatepicker]="dueDate" [min]="minDate" [formControl]="form.controls['dueDate']"
+            [placeholder]="'TASK.ADDEDITTASK.DUEDATE' | translate" (keydown.space)="$event.preventDefault()">
+          <button mdSuffix [mdDatepickerToggle]="dueDate" class="white-datepicker-button" style="background-color: grey !important;"></button>
+          <!--<input mdInput type="text" formControlName="dueDate" [placeholder]="'TASK.DUEDATE' | translate" />-->
+        </md-input-container>
+        <md-datepicker #dueDate [touchUi]="true"></md-datepicker>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container">
+        <md-input-container color="accent" style="width: 100%">
+          <textarea mdInput id="icon_prefix2" formControlName="description" [placeholder]="'TASK.ADDEDITTASK.DESCRIPTION' | translate"
+            class="materialize-textarea"></textarea>
+        </md-input-container>
+      </div>
+    </div>
+  </div>
+  <!-- <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100">
+            <div class="px-1 select-input-container">
+                <md-select color="accent" formControlName="status" #status [placeholder]="'TASK.ADDEDITTASK.STATUS' | translate" style="width: 100%">
+                    <md-option *ngFor="let status of statusList" [value]="status.value">
+                        {{ status.view  }}
+                    </md-option>
+                </md-select>
+            </div>
+        </div>
+    </div> -->
+
+  <!-- CODE FOR INTERNAL TASK -->
+  <div fxLayout="row" style="justify-content: space-between" *ngIf="utilityService.checkUserIsDirectorSalesAdmin() && dispInternalTask" >
+    <div fxFlex="55" fxFlex.lt-md="55">
+      <div class="px-1 select-input-container">
+        <md-input-container class="full-width" fxFlex="100">
+          <input mdInput type="text" [placeholder]="'DOCUMENT.NAME' | translate" [(ngModel)]="currentInternalDocString"
+            [ngModelOptions]="{standalone: true}">
+        </md-input-container>
+      </div>
+    </div>
+    <div fxFlex >
+      <!-- <div class="px-1 select-input-container" style="padding-right: 0 !important;padding-left: 23px !important;"> -->
+        <button style="float: right; margin-right: 12px;" color="primary" md-raised-button color="primary" type="button" (click)='addDocumentExpected()'
+          fxFlexAlign="end">
+          {{ 'TASK.ADDEDITTASK.Add Expected Document' | translate}}
+        </button>
+      <!-- </div> -->
+    </div>
+  </div>
+
+  <div fxLayout="row" *ngFor="let doc of internalExpectedDoc; let i = index">
+    <div fxFlex="70" fxFlex.lt-md="70" *ngIf="utilityService.checkUserIsDirectorSalesAdmin()">
+      <div class="px-1 select-input-container">
+        <md-input-container class="full-width" fxFlex="70">
+        <input mdInput type="text" [(ngModel)]="doc.name" [ngModelOptions]="{standalone: true}" [required]="isInternalTask && internalExpectedDoc.length < 1">
+        </md-input-container>
+        <a color="primary" type="button" (click)='removeDocumentExpected(i)' fxFlexAlign="center">
+          <md-icon>remove_circle</md-icon>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pull-right">
+    <!-- <button md-raised-button color="warn" type="button" *ngIf="modify" (click)="deleteTask()">{{'DELETE' | translate}}</button> -->
+    <button md-raised-button color="warn" type="button" (click)="cancel()">{{'CANCEL' | translate}}</button>
+    <button md-raised-button color="primary" type="submit" style="margin-right: 11px;margin-top: 5px;">{{'USERS.ADDEDITUSER.SUBMIT' | translate}}</button>
+  </div>
+</form>

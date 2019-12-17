@@ -1,0 +1,40 @@
+<div style="margin-left:-24px; margin-right: -24px; margin-top: -24px;">
+    <div class="pa-1">
+        <div fxLayout="row wrap" fxLayoutAlign="start center">
+            <div fxFlex>
+                <md-icon class="middle">receipt</md-icon>
+                <span class="text-xl">{{ 'STUDENT.PROBLEMATIC_TITLE' | translate }}</span>
+
+            </div>
+            <button md-icon-button (click)="cancel()" style="padding-left: 10px;">
+                <md-icon>close</md-icon>
+            </button>
+        </div>
+    </div>
+    <hr>
+</div>
+<br>
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="30">
+        <label> {{'DASHBOARD.DUEDATE' | translate}} </label>
+    </div>
+    <div fxFlex="68">
+        : &nbsp; &nbsp; {{ problematicTask.dueDate | date: 'dd/MM/yyyy' }}
+    </div>
+</div>
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="30">
+        <label> {{'DASHBOARD.DESCRIPTION' | translate}} </label>
+    </div>:
+    <div fxFlex="68"  style="padding-left: 18px; word-break: break-word">
+        {{ translateTaskDescription( problematicTask.description ) }}
+    </div>
+</div>
+<div style="text-align: right; padding-top: 10px;" >
+    <button md-raised-button md-button-sm color="warn" type="button" (click)="cancel()">
+        {{'CANCEL' | translate}}
+    </button>
+    <button fxFlexAlign="end" md-raised-button md-button-sm color="primary" type="button" (click)="goToProblematic()">
+        {{'STUDENT.GO_TO_PROBLEMATIC' | translate}} 
+    </button>
+</div>

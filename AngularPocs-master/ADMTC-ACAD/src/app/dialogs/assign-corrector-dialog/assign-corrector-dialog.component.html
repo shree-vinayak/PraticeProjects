@@ -1,0 +1,133 @@
+<div fxLayout="column" fxLayoutAlign="start" style="width: 100%; height: 100%;">
+  <div style="margin-left:-24px; margin-right: -24px; margin-top: -24px;">
+    <div class="pa-1">
+      <div fxLayout="row wrap" fxLayoutAlign="start center">
+        <div fxFlex>
+          <md-icon class="middle">receipt</md-icon>
+          <span *ngIf="isQC" class="text-xl">{{ 'QUALITY_CONTROL.ASSIGN_QC_CORRECTOR' | translate }}</span>
+          <span *ngIf="!isQC" class="text-xl">{{ 'TEST.AUTOTASK.ASSIGN CORRECTOR' | translate }}</span>
+
+        </div>
+        <button md-icon-button (click)="cancel(false)" style="padding-left: 10px;">
+          <md-icon>close</md-icon>
+        </button>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <br>
+  <div fxLayout="row wrap">
+    <div fxFlex="30">
+      <label> {{'DASHBOARD.ASSIGN_CORRECTOR.RNCP_TITLE' | translate }} </label>
+    </div>
+    <div fxFlex="70">
+      : &nbsp;&nbsp; {{ rncp?.shortName + ' ' + rncp?.longName }}
+    </div>
+  </div>
+  <div fxLayout="row wrap">
+    <div fxFlex="30">
+      <label> {{'USERS.ADDEDITUSER.CLASS' | translate}} </label>
+    </div>
+    <div fxFlex="70">
+      : &nbsp;&nbsp; {{ task?.test?.class?.name }}
+    </div>
+  </div>
+  <div fxLayout="row wrap">
+    <div fxFlex="30">
+      <label> {{'PARAMETERS-RNCP.TEST.SUBJECTNAME' | translate}} </label>
+    </div>
+    <div fxFlex="70">
+      : &nbsp;&nbsp; {{ task?.test?.subjectId?.subjectName }}
+    </div>
+  </div>
+  <div fxLayout="row wrap">
+    <div fxFlex="30">
+      <label> {{'PARAMETERS-RNCP.TEST.TESTNAME' | translate}} </label>
+    </div>
+    <div fxFlex="70">
+      : &nbsp;&nbsp; {{ task?.test?.name }}
+    </div>
+  </div>
+  <div fxLayout="row wrap">
+    <div fxFlex="30">
+      <label> {{'Date' | translate}} </label>
+    </div>
+    <div fxFlex="70">
+      : &nbsp;&nbsp; {{ date }}
+    </div>
+  </div>
+  <div fxLayout="row wrap">
+    <div fxFlex="30">
+      <label> {{'DASHBOARD.REGISTEREDSTUDENT' | translate}} </label>
+    </div>
+    <div fxFlex="70">
+      : &nbsp;&nbsp; {{ task?.test?.registeredStudents }}
+    </div>
+  </div>
+  <br>
+  <ng-select [(ngModel)]="assignedCorrectors" (data)="changeUser($event)" (selected)="selectedFromList($event)"
+             (removed)="removedFromList($event)"  [multiple]="true" [items]="userList | orderBy: 'userList.text'"
+             placeholder="{{ 'DASHBOARD.ASSIGN_CORRECTOR.CORRECTORLIST_PLACEHOLDER' | translate }}*"></ng-select>
+  <div style="margin: 10px 0 10px 0;"></div>
+  <div fxLayout="row wrap">
+    <div fxFlex="100">
+      <label> {{message}} </label>
+    </div>
+    <!-- <div fxLayout="row wrap" *ngIf="users.length > 1">
+      <div *ngFor="let user of users; let i = index">
+        <div fxFlex="100">
+          <div fxFlex="50">
+            <label> {{user.text}} </label>
+          </div>
+          <div fxFlex="50">
+            : &nbsp;&nbsp; {{ i === 0 ? ((task?.test?.registeredStudents / users.length) + (task?.test?.registeredStudents % users.length))
+            : task?.test?.registeredStudents / users.length | number }}
+          </div>
+          <br>
+        </div>
+      </div>
+    </div> -->
+    <div fxLayout="row wrap" *ngIf="users.length > 1 && !displayAssignedCorrectors">
+      <div fxFlex="100" *ngFor="let use of users; let i = index">
+        <div *ngIf="use?.numberOfStudents ">
+          <div fxFlex="30">
+            <label> {{use?.text}} </label>
+          </div>
+          <div fxFlex="70">: &nbsp;&nbsp; {{use?.numberOfStudents }} {{ 'STUDENTS' | translate }}
+          </div>
+          <br>
+        </div>
+      </div>
+      <label> {{message2}} </label>
+    </div>
+    <div fxLayout="row wrap" *ngIf="assignedUsers.length > 1 && displayAssignedCorrectors">
+      <div fxFlex="100" *ngFor="let use of assignedUsers; let i = index">
+        <div *ngIf="use?.numberOfStudents ">
+          <div fxFlex="30">
+            <label> {{use?.text}} </label>
+          </div>
+          <div fxFlex="70">: &nbsp;&nbsp; {{use?.numberOfStudents }} {{ 'STUDENTS' | translate }}
+          </div>
+          <br>
+        </div>
+      </div>
+      <label> {{message2}} </label>
+    </div>
+  </div>
+  <div style="margin: 10px 0 10px 0;"></div>
+  <div fxLayout="row" fxLayoutAlign="end" style="margin-left: 17px !important; width:100% !important;">
+    <div fxFlex="100" fxFlex.lt-md="100" fxLayoutAlign="end">
+      <button md-raised-button md-button-sm class="mr-1" color="warn" type="button" (click)="cancel(false)" [disabled]="">
+        {{ 'TESTCORRECTIONS.SUBMIT.CANCEL' | translate }}
+      </button>
+      <!-- Will be disabled if Task is of type CertifierAssignCorrector using isCertifierAssignCorTask flag -->
+      <button *ngIf="!isQC" name="single-click" md-raised-button md-button-sm class="mr-1" (click)="submit()" [disabled]="disableSubmit"
+              [color]="disableSubmit ? 'grey' : 'green'">
+        {{ 'TESTCORRECTIONS.SUBMIT.SUBMIT' | translate }}
+      </button>
+      <button *ngIf="isQC" name="single-click" md-raised-button md-button-sm class="mr-1" (click)="assignQualityCOntrollers()" [disabled]="disableSubmit"
+              [color]="disableSubmit ? 'grey' : 'green'">
+        {{ 'TESTCORRECTIONS.SUBMIT.SUBMIT' | translate }}
+      </button>
+    </div>
+  </div>

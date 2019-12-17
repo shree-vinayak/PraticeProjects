@@ -1,0 +1,21 @@
+:host /deep/ .questionnaire-parent {
+    .mat-tab-label {
+        padding-left: 0px;
+        padding-right: 0px;
+        ;
+        border-bottom: 5px solid #000;
+    }
+    .mat-tab-labels {
+        width: 38em;
+        padding: 1px;
+        background: #212121;
+        border: 1.2px solid #607D8B;
+    }
+    .mat-tab-labels .mat-tab-label.mat-tab-label-active {
+        background-color: #607D8B !important;
+        color: white;
+    }
+    .app-dark .mat-ink-bar {
+        height: 1px !important;
+    }
+}

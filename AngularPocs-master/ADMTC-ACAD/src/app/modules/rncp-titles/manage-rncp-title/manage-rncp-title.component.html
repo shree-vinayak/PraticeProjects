@@ -1,0 +1,31 @@
+<div fxLayout="row wrap" fxLayoutAlign="start center">
+  <div fxFlex style="padding: 0.3333%" class="text-center">
+    <!-- <span class="text-xl mr-2">{{'RNCPTITLE' | translate}} : </span> -->
+    <span class="text-xl mr-2">{{rncpTitle?.shortName}}</span>
+    <span class="text-xl mr-2">{{rncpTitle?.longName}}</span>
+    <span class="text-xl mr-2">{{'LEVEL' | translate}} {{rncpTitle?.rncpLevel}}</span>
+  </div>
+  <div fxFlexAlign="end" class="card-margin">
+    <button md-raised-button color="primary" (click)="goBack()">
+      <md-icon>reply</md-icon>
+      Dashboard
+    </button>
+  </div>
+</div>
+
+<div fxLayout="row wrap">
+  <div fxFlex="100">
+    <md-card class="manage-card">
+      <md-card-content>
+        <md-tab-group>
+          <md-tab>
+            <ng-template md-tab-label>
+              {{'MANAGECLASSES' | translate}}
+            </ng-template>
+            <app-manage-classes></app-manage-classes>
+          </md-tab>
+        </md-tab-group>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

@@ -1,0 +1,161 @@
+<div fxLayout="column wrap" fxLayoutAlign="start" style="width: 100%; height: 100%;">
+  <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px;">
+    <div class="pa-1">
+      <div fxLayout="row wrap" fxLayoutAlign="start center">
+        <h3 fxFlex>
+          <span style="float: left">
+            <svg style="width:30x;height:30px;vertical-align: middle;" viewBox="0 0 24 24">
+              <path fill="#000000" d="M19,19H5V5H15V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V11H19M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z" />
+            </svg>
+          </span>
+          <h5 style="float: left; transform: translateY(-5px);">
+            {{'INTERNAL_NOTE.ADD_INTERNAL_NOTE.Title' | translate}}
+          </h5>
+        </h3>
+        <button md-icon-button (click)="closeDialog()">
+          <md-icon>close</md-icon>
+        </button>
+      </div>
+    </div>
+    <hr>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap" fxFlex="100">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+      <form [formGroup]="form" (ngSubmit)="saveInternalNote(form.value)">
+
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top: 5px;">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <md-input-container style="width: 100%">
+              <input mdInput [placeholder]="'INTERNAL_NOTE.ADD_INTERNAL_NOTE.NoteTitle' | translate" formControlName="noteTitle"
+                required>
+            </md-input-container>
+          </div>
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <small *ngIf="form.controls['noteTitle'].hasError('required') && (form.controls['noteTitle'].touched)"
+              class="mat-text-warn"> {{'INTERNAL_NOTE.ADD_INTERNAL_NOTE.validation1' | translate}}</small>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <ng-select style="margin-top: 3px;" fxFlex="100" (data)="changeSchoolFilterTyped($event)" [multiple]="false"
+              [(ngModel)]="selectedSchool" [ngModelOptions]="{standalone: true}" [items]="schoolLists" [placeholder]="'INTERNAL_NOTE.ADD_INTERNAL_NOTE.SelectSchool' | translate"></ng-select>
+          </div>
+          <!-- <div fxFlex="100" fxFlex.lt-md="100">
+            <small *ngIf="form.controls['school'].hasError('required') && (form.controls['school'].touched || formSubmit)"
+              class="mat-text-warn"> {{'INTERNAL_NOTE.ADD_INTERNAL_NOTE.validation1' | translate}}</small>
+          </div> -->
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top: 5px;">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <ng-select style="margin-top: 3px;" [disabled]="selectedSchool?.length <= 0" fxFlex="100" [(ngModel)]="selectedRNCP"
+              [ngModelOptions]="{standalone: true}" (data)="changeTitleFilter($event)" [multiple]="false" [items]="titleLists"
+              [placeholder]="'INTERNAL_NOTE.ADD_INTERNAL_NOTE.SelectTitle' | translate"></ng-select>
+          </div>
+          <!-- <div fxFlex="100" fxFlex.lt-md="100">
+            <small *ngIf="form.controls['rncpTitle'].hasError('required') && (form.controls['rncpTitle'].touched || formSubmit)"
+              class="mat-text-warn"> {{'INTERNAL_NOTE.ADD_INTERNAL_NOTE.validation1' | translate}}</small>
+          </div> -->
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top: 5px;">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <ng-select style="margin-top: 3px;" [disabled]="selectedRNCP?.length <= 0" fxFlex="100" [(ngModel)]="selectedClass"
+              [ngModelOptions]="{standalone: true}" (data)="changeClassFilter($event)" [multiple]="false" [items]="classLists"
+              [placeholder]="'INTERNAL_NOTE.ADD_INTERNAL_NOTE.SelectClass' | translate"></ng-select>
+          </div>
+          <!-- <div fxFlex="100" fxFlex.lt-md="100">
+            <small *ngIf="form.controls['classId'].hasError('required') && (form.controls['classId'].touched || formSubmit)"
+              class="mat-text-warn"> {{'INTERNAL_NOTE.ADD_INTERNAL_NOTE.validation1' | translate}}</small>
+          </div> -->
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top: 5px;">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <ng-select style="margin-top: 3px;" [disabled]="selectedClass?.length <= 0" fxFlex="100" [(ngModel)]="selectedTest"
+              [ngModelOptions]="{standalone: true}" (data)="changeTestFilter($event)" [multiple]="false" [items]="testLists"
+              [placeholder]="'INTERNAL_NOTE.ADD_INTERNAL_NOTE.SelectTest' | translate"></ng-select>
+          </div>
+          <!-- <div fxFlex="100" fxFlex.lt-md="100">
+            <small *ngIf="form.controls['test'].hasError('required') && (form.controls['test'].touched || formSubmit)"
+              class="mat-text-warn"> {{'INTERNAL_NOTE.ADD_INTERNAL_NOTE.validation1' | translate}}</small>
+          </div> -->
+        </div>
+        <!-- USER CODE -->
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top: 5px;">
+          <div fxFlex="100" fxFlex.lt-md="100">
+
+            <ng-select style="margin-top: 3px;" [(ngModel)]="selectedUserType" [ngModelOptions]="{standalone: true}"
+              fxFlex="100" (data)="ChangeUserTypeFilter($event)" [multiple]="false" [items]="userTypeLists"
+              [placeholder]="'INTERNAL_NOTE.ADD_INTERNAL_NOTE.UserType' | translate"></ng-select>
+          </div>
+          <!-- <div fxFlex="100" fxFlex.lt-md="100">
+            <small *ngIf="form.controls['userType'].hasError('required') && (form.controls['userType'].touched || formSubmit)"
+              class="mat-text-warn"> {{'INTERNAL_NOTE.ADD_INTERNAL_NOTE.validation1' | translate}}</small>
+          </div> -->
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top: 5px;">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <ng-select style="margin-top: 3px;" [disabled]="usersList?.length <= 0" [(ngModel)]="selectedUser"
+              [ngModelOptions]="{standalone: true}" fxFlex="100" (data)="ChangeUserFilter($event)" [multiple]="false"
+              [items]="usersList" [placeholder]="'INTERNAL_NOTE.ADD_INTERNAL_NOTE.User' | translate"></ng-select>
+          </div>
+          <!-- <div fxFlex="100" fxFlex.lt-md="100">
+            <small *ngIf="form.controls['user'].hasError('required') && (form.controls['user'].touched || formSubmit)"
+              class="mat-text-warn"> {{'INTERNAL_NOTE.ADD_INTERNAL_NOTE.validation1' | translate}}</small>
+          </div> -->
+        </div>
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top: 5px;">
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <md-input-container color="accent" style="width: 100%">
+              <textarea style="height: 80px" mdInput rows="5" id="icon_prefix2" formControlName="noteBody"
+                [placeholder]="'INTERNAL_NOTE.ADD_INTERNAL_NOTE.LongText' | translate" class="materialize-textarea"
+                required></textarea>
+            </md-input-container>
+          </div>
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <small *ngIf="form.controls['noteBody'].hasError('required') && (form.controls['noteBody'].touched)"
+              class="mat-text-warn"> {{'INTERNAL_NOTE.ADD_INTERNAL_NOTE.validation1' | translate}}</small>
+          </div>
+        </div>
+        <!-- CODE FOR ADD DOCUMENT -->
+        <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top: 5px;">
+          <div fxFlex="55" fxFlex.lt-md="55">
+            <md-input-container class="full-width" fxFlex="100">
+              <input mdInput type="text" [placeholder]="'INTERNAL_NOTE.ADD_ADDITIONAL_NOTE.NameOfDocument' | translate"
+                [(ngModel)]="currentInternalDocString" [ngModelOptions]="{standalone: true}">
+            </md-input-container>
+          </div>
+          <div fxFlex>
+            <div style="text-align: right">
+              <input #uploadFileControl style="display: none" type="file"  ng2FileSelect
+                [uploader]="uploader" disableMultipart="true" />
+              <button fxFlexAlign="end" md-raised-button color="primary" type="button" (click)="openUploadWindow()">
+                {{ 'INTERNAL_NOTE.ADD_ADDITIONAL_NOTE.AddDocument' | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row" *ngFor="let doc of internalExpectedDoc; let i = index">
+          <div fxFlex="70" fxFlex.lt-md="70">
+            <md-input-container class="full-width" fxFlex="70">
+              <input mdInput type="text" [(ngModel)]="doc.name" [ngModelOptions]="{standalone: true}" [required]="internalExpectedDoc?.length < 1">
+            </md-input-container>
+            <a color="primary" type="button" (click)='removeDocument(i)' fxFlexAlign="center">
+              <md-icon>remove_circle</md-icon>
+            </a>
+          </div>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutAlign="end end" fxLayoutGap="5px" fxFlexAlign="end" style="width: 100%">
+          <button md-raised-button color="red" (click)="closeDialog()">{{"INTERNAL_NOTE.CANCEL" | translate}}</button>
+          <button md-raised-button color="primary" type="submit" [disabled]="selectedSchool?.length <= 0 && selectedRNCP?.length <= 0">{{"INTERNAL_NOTE.ENTER"
+            | translate}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

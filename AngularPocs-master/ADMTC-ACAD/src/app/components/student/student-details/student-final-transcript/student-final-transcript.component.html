@@ -1,0 +1,219 @@
+<div style="text-align:center;margin-top: 10px;">
+  <app-student-status-card *ngIf="transcript?.finalTranscript?.isVisible" [title]="transcript?.finalTranscript.title" [state]="transcript?.finalTranscript?.status"
+    [subtitle]="transcript?.finalTranscript.subtitle">
+  </app-student-status-card>
+  <app-student-status-card *ngIf="transcript?.schoolBoard?.isVisible" [title]="transcript?.schoolBoard.title" [state]="transcript?.schoolBoard?.status"
+    [subtitle]="transcript?.schoolBoard.subtitle">
+  </app-student-status-card>
+  <app-student-status-card *ngIf="transcript?.studentDecision?.isVisible" [title]="transcript?.studentDecision.title" [state]="transcript?.studentDecision?.status"
+    [subtitle]="transcript?.studentDecision.subtitle">
+  </app-student-status-card>
+  <app-student-status-card *ngIf="transcript?.finalResult?.isVisible" [title]="transcript?.finalResult.title" [state]="transcript?.finalResult?.status"
+    [subtitle]="transcript?.finalResult.subtitle">
+  </app-student-status-card>
+</div>
+
+<div [ngStyle]="{'pointer-events': isPreviousCourse ? 'none' : 'all'}" *ngIf="transcriptDetail else NoFinalTranscript" fxLayout="row" fxLayoutAlign="center" style="margin-top: 10px;">
+  <md-card fxFlex="70" fxFlexAlign="center">
+    <!-- School Result Display Card -->
+    <md-card-content>
+      <md-card fxFlex fxFlexAlign="start">
+        <md-card-content class="primary-background dark-header border-yellow">
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="3">
+            </div>
+            <div fxFlex="7">
+              Date:
+            </div>
+            <div fxFlex="23">
+              {{ allDates?.schoolDate }}
+            </div>
+            <div fxFlex="30">
+              {{ 'FINAL_TRANSCRIPT.RESULT_OF_FINAL_TRANSCRIPT' | translate }}:
+            </div>
+            <div fxFlex="10" class="status" [style.color]="transcriptDetail?.certificationStatus === 'pass' ? 'greenyellow' : 'red'">
+              {{ 'FINAL_TRANSCRIPT.CERTIFICATION_STATUS.' + transcriptDetail?.certificationStatus.toUpperCase() | translate }}
+            </div>
+            <div fxFlex="17">
+            </div>
+          </div>
+        </md-card-content>
+      </md-card>
+    </md-card-content>
+    <!-- Jury Decision Card -->
+    <md-card-content *ngIf="transcriptDetail?.inputFinalDecisionStatus === true">
+      <md-card fxFlex fxFlexAlign="start">
+        <md-card-content class="primary-background dark-header border-yellow">
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="3"></div>
+            <div fxFlex="7">
+              Date:
+            </div>
+            <div fxFlex="23">
+              {{ allDates?.juryDecisionDate }}
+            </div>
+            <div fxFlex="30">
+              {{ 'FINAL_TRANSCRIPT.DECISION_OF_SCHOOL_BOARD' | translate }}:
+            </div>
+            <div fxFlex="20">
+              <md-select *ngIf="!transcriptDetail?.juryDecisionForFinalTranscript || transcriptDetail?.juryDecisionForFinalTranscript === 'initial'; else displayJuryDecision"
+                [(ngModel)]="juryDecision" class="selection-base-margin" placeholder="{{ 'FINAL_TRANSCRIPT.STATUS' | translate}}">
+                <md-option *ngFor="let status of resultStatusArray" [value]="status">
+                  {{ 'FINAL_TRANSCRIPT.CERTIFICATION_STATUS.' + status.toUpperCase() | translate}}
+                </md-option>
+              </md-select>
+              <ng-template #displayJuryDecision>
+                <span class="status" [style.color]="transcriptDetail?.juryDecisionForFinalTranscript === 'pass' ? 'greenyellow' : transcriptDetail?.juryDecisionForFinalTranscript === 'retaking' ? '#ffd740' : 'red'">
+                  {{ 'FINAL_TRANSCRIPT.CERTIFICATION_STATUS.' + transcriptDetail?.juryDecisionForFinalTranscript.toUpperCase() | translate
+                  }}
+                </span>
+              </ng-template>
+            </div>
+            <div fxFlex="3"></div>
+            <div fxFlex="9">
+              <button *ngIf="!transcriptDetail?.juryDecisionForFinalTranscript || transcriptDetail?.juryDecisionForFinalTranscript === 'initial'"
+                md-button md-raised-button [color]="juryValidateDisable() ? 'grey' : 'green'" [disabled]="juryValidateDisable()"
+                type="button" (click)="swalBeforeJuryDescision(transcriptDetail.certificationStatus, juryDecision)">
+                {{'VALIDATE'| translate}}
+              </button>
+            </div>
+            <div fxFlex="5"></div>
+          </div>
+          <div *ngIf="juryDecision === 'retaking'" fxLayout="row" fxLayoutWrap="wrap" style="margin-top: 20px;">
+            <div fxFlex="3"></div>
+            <div fxFlex="47">
+              <ol type="1">
+                <li style="margin-left: -20px !important;" *ngFor="let juryTest of jurySelectTests">
+                  {{ juryTest.name }}
+                </li>
+              </ol>
+            </div>
+            <div fxFlex="46">
+              <md-select *ngIf="finalRetakeTests.length > 0" class="selection-base" [(ngModel)]="jurySelectTests" multiple color="accent"
+                [placeholder]="'DASHBOARD.TEST' | translate">
+                <md-option color="accent" *ngFor="let test of finalRetakeTests" [value]="test">{{test.name}}</md-option>
+              </md-select>
+            </div>
+            <div fxFlex="4"></div>
+          </div>
+        </md-card-content>
+      </md-card>
+    </md-card-content>
+    <!-- Student Decision Card -->
+    <md-card-content *ngIf="getAcadDisplayBlock()">
+      <md-card fxFlex fxFlexAlign="start">
+        <md-card-content class="primary-background dark-header border-yellow">
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="3"></div>
+            <div fxFlex="7">
+              Date:
+            </div>
+            <div fxFlex="23">
+              {{ allDates?.studentDecisionDate }}
+            </div>
+            <div fxFlex="30">
+              {{ 'FINAL_TRANSCRIPT.DECISION_OF_STUDENT' | translate }}:
+            </div>
+            <div fxFlex="20">
+              <md-select *ngIf="transcriptDetail && !transcriptDetail.studentDecision" class="selection-base-margin" placeholder="{{ 'SELECT' | translate}}"
+                (change)="studentRetakeDecisionState($event.value)" [(ngModel)]="studentRetakeDecision">
+                <md-option *ngFor="let decision of studentRetakeDecisionArray" [value]="decision">
+                  {{ 'FINAL_TRANSCRIPT.RETAKE_DECISION.' + decision.toUpperCase() | translate}}
+                </md-option>
+              </md-select>
+              <span *ngIf="transcriptDetail?.studentDecision" class="status" [style.color]="transcriptDetail?.studentDecision === 'retaking' ? '#ffd740' : 'red'">
+                {{ 'FINAL_TRANSCRIPT.CERTIFICATION_STATUS.' + transcriptDetail?.studentDecision?.toUpperCase() | translate }}
+              </span>
+            </div>
+            <div fxFlex="3"></div>
+            <div fxFlex="9">
+              <button color="green" *ngIf="!transcriptDetail?.studentDecision && showSchoolDecisionControl" md-button md-raised-button
+                [color]="studentDesCondition() ? 'grey' : 'green'" [disabled]="studentDesCondition()" type="button" (click)="alertSubmitStudentDescision()">
+                {{'VALIDATE'| translate}}
+              </button>
+            </div>
+            <div fxFlex="5"></div>
+          </div>
+          <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top: 20px;" *ngIf="showSchoolDecisionControl">
+            <div fxFlex="3"></div>
+            <div fxFlex="47">
+              <ol type="1">
+                <li style="margin-left: -20px !important;" *ngFor="let test of studentSelectTests">
+                  {{ test.name }}
+                </li>
+              </ol>
+            </div>
+            <div fxFlex="46">
+              <md-select *ngIf="displayStudentTest && !transcriptDetail?.studentDecision" class="selection-base" [(ngModel)]="studentSelectTests"
+                multiple color="accent" [placeholder]="'DASHBOARD.TEST' | translate">
+                <md-option color="accent" *ngFor="let test of jurySelectTests" [value]="test">{{test.name}}</md-option>
+              </md-select>
+            </div>
+            <div fxFlex="4"></div>
+          </div>
+        </md-card-content>
+      </md-card>
+    </md-card-content>
+    <!-- Retake Test Result Card -->
+    
+     <!-- Will Display Previous State Due to Change in FLow of Final Transcrpt -->
+     <!-- transcriptDetail?.afterFinalRetakeDecision -->
+    <md-card-content *ngIf="transcriptDetail?.afterFinalRetakeDecision && ( isAdminOrCertifierAdmin || transcriptDetail?.hasJuryFinallyDecided )">
+      <md-card fxFlex fxFlexAlign="start">
+        <md-card-content class="primary-background dark-header border-yellow">
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="3"></div>
+            <div fxFlex="7">
+              Date:
+            </div>
+            <div fxFlex="23">
+              {{ allDates?.afterFinalRetakeDecisionGeneratedOn }}
+            </div>
+            <div fxFlex="30">
+              {{ 'FINAL_TRANSCRIPT.FINAL_RESULT' | translate }}:
+            </div>
+            <div fxFlex="20" style="margin-top: -5px;">
+                <md-select *ngIf="!transcriptDetail.hasJuryFinallyDecided && isAdminOrCertifierAdmin" class="selection-base" [(ngModel)]="juryFinalDecision" color="accent"
+                    [placeholder]="'SELECT' | translate">
+                    <md-option color="accent" *ngFor="let decision of juryFinalDecisionArray" [value]="decision">
+                      {{'FINAL_TRANSCRIPT.CERTIFICATION_STATUS.' + decision.toUpperCase() | translate}}
+                    </md-option>
+                </md-select>
+                <span *ngIf="transcriptDetail?.afterFinalRetakeDecision && transcriptDetail?.hasJuryFinallyDecided" class="status"
+                [style.color]="returnColorOnState(transcriptDetail?.afterFinalRetakeDecision?.toUpperCase())">
+                  {{ 'FINAL_TRANSCRIPT.CERTIFICATION_STATUS.' + transcriptDetail?.afterFinalRetakeDecision?.toUpperCase() | translate }}
+                </span>
+            </div>
+            <div fxFlex="3"></div>
+            <div fxFlex="9">
+              <button color="green" *ngIf="!transcriptDetail.hasJuryFinallyDecided && isAdminOrCertifierAdmin" md-button md-raised-button
+              type="button" (click)="submitFinalJuryDecision()">{{'VALIDATE'| translate}}
+              </button>
+            </div>
+            <div fxFlex="5"></div>
+          </div>
+        </md-card-content>
+      </md-card>
+    </md-card-content>
+  </md-card>
+</div>
+<div *ngIf="!isPreviousCourse && checkIfPDFIsAvailable()" fxLayout fxLayoutAlign="end" fxLayoutGap="5px" fxLayoutGap.xs="0" style="width: 85%">
+  <button md-button md-raised-button color="accent" type="button" (click)="downloadPDFResult()">
+    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="#000000" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,10.84 21.79,9.69 21.39,8.61L19.79,10.21C19.93,10.8 20,11.4 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.6,4 13.2,4.07 13.79,4.21L15.4,2.6C14.31,2.21 13.16,2 12,2M19,2L15,6V7.5L12.45,10.05C12.3,10 12.15,10 12,10A2,2 0 0,0 10,12A2,2 0 0,0 12,14A2,2 0 0,0 14,12C14,11.85 14,11.7 13.95,11.55L16.5,9H18L22,5H19V2M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12H16A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8V6Z"
+      />
+    </svg>
+    {{ 'FinalTranscript.title' | translate }}
+  </button>
+</div>
+<!-- <div *ngIf="checkIfPDFIsAvailable()" fxLayout="row" fxLayoutAlign="end end">
+  <div fxFlex="70" fxFlexAlign="center">
+    <button md-button md-raised-button color="accent" type="button" (click)="downloadPDFResult()">
+      <i class="fa fa-file-pdf-o" style="font-size: 16px; padding-left: 10px;" aria-hidden="true"></i>
+      {{ 'FinalTranscript.title' | translate }}
+    </button>
+  </div>
+</div> -->
+<ng-template #NoFinalTranscript>
+  <div style="font-size: 18px;text-align:center;margin-top: 22px;">{{ 'FINAL_TRANSCRIPT.EMPTYMESSAGE' | translate }}</div>
+</ng-template>

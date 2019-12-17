@@ -1,0 +1,249 @@
+<md-card>
+    <md-card-content>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="100" fxFlex.lt-md="100">
+                <a href="javascript:void(0);" class="text-xl mr-2" style="margin-left: 0.4%;"> {{'TOOLS_HISTORY.TitleName' | translate}} </a>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutWrap="wrap" class="addTaskButton taskListNgSelect">
+            <div fxFlex="100" fxFlex.lt-md="100">
+                <div fxFlex="25" fxFlex.lt-md="25">
+                    <div class="select-input-container" fxFlex="90">
+                        <ng-select style="margin-top: 3px;" (typed)="ChangeSchoolFilterTyped($event)" [(ngModel)]="searchSchoolText" fxFlex="100"
+                            (data)="ChangeSchoolFilter($event)" [multiple]="false" [items]="schoolsLists" [placeholder]="'TOOLS_HISTORY.School' | translate"></ng-select>
+                    </div>
+                </div>
+                <div fxFlex="25" fxFlex.lt-md="25">
+                    <div class="select-input-container" fxFlex="90">
+                        <ng-template [ngIf]="showRNCPList === true">
+                            <ng-select style="margin-top: 3px;" [(ngModel)]="searchTitleText" fxFlex="100" (data)="ChangeTitleFilter($event)" [multiple]="false"
+                                [items]="titleLists" [placeholder]="'TOOLS_HISTORY.Title' | translate"></ng-select>
+                        </ng-template>
+                    </div>
+                </div>
+                <div fxFlex="25" fxFlex.lt-md="25">
+                    <div class="select-input-container" fxFlex="90">
+                        <ng-template [ngIf]="showRNCPList === true && showTestList === true">
+                            <ng-select style="margin-top: 3px;" [(ngModel)]="searchTestText" fxFlex="100" (data)="ChangeTestFilter($event)" [multiple]="false"
+                                [items]="testLists" [placeholder]="'TOOLS_HISTORY.Test' | translate"></ng-select>
+                        </ng-template>
+                    </div>
+                </div>
+
+                <div fxFlex="25" fxFlex.lt-md="25">
+                    <div fxLayout="row" fxLayoutAlign="end center">
+                        <div dividerColor="accent" fxFlex="47">
+                            <button fxFlex style="margin-left: 5px;width: 100%;height: 38px;" md-raised-button type="button" class="btnSearch" color="primary"
+                                (click)="searchHistory(true, true)">
+                                {{'TOOLS_HISTORY.TODAY' | translate}}
+                            </button>
+                        </div>
+                        <div dividerColor="accent" fxFlex="2"></div>
+                        <div dividerColor="accent" fxFlex="50">
+                            <button fxFlex style="margin-left: 5px;width: 100%;height: 38px;" md-raised-button type="button" class="btnSearch" color="primary"
+                                (click)="searchHistory(true)">
+                                <md-icon>search</md-icon>
+                                {{'USERS.SEARCH' | translate}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutWrap="wrap" class="addTaskButton taskListNgSelect">
+            <div fxFlex="100" fxFlex.lt-md="100">
+                <div fxFlex="25" fxFlex.lt-md="25">
+                    <div class="select-input-container" fxFlex="90">
+                        <ng-select style="margin-top: 3px;" [(ngModel)]="searchUserTypeText" fxFlex="100" (data)="ChangeUserTypeFilter($event)" [multiple]="false"
+                            [items]="userTypeLists" [placeholder]="'Customer.AddSchool.userType.title' | translate"></ng-select>
+                    </div>
+                </div>
+                <div fxFlex="25" fxFlex.lt-md="25">
+                    <div class="select-input-container" fxFlex="90">
+                        <ng-select style="margin-top: 3px;" [disabled]="usersList.length < 1" [(ngModel)]="searchUserText" fxFlex="100" (data)="ChangeUserFilter($event)"
+                            [multiple]="false" [items]="usersList" [placeholder]="'USER' | translate"></ng-select>
+                    </div>
+                </div>
+                <div fxFlex="25" fxFlex.lt-md="25">
+                    <div fxLayout="row" fxLayoutAlign="space-between none">
+                    <!-- <div class="select-input-container" fxFlex="90">
+                    </div> -->
+                    <md-input-container dividerColor="accent" fxFlex="40" style="margin-top: -1.6%;">
+                        <input mdInput type="text" [mdDatepicker]="toDate" readonly [placeholder]="'TOOLS_HISTORY.De' | translate" [(ngModel)]="searchFromDate">
+                        <button  mdSuffix [mdDatepickerToggle]="toDate" class="white-datepicker-button" 
+                        style="background-color: grey !important;"></button>
+                    </md-input-container>
+                    <md-datepicker #toDate [touchUi]="true"></md-datepicker>
+
+                    
+                    <md-input-container dividerColor="accent" fxFlex="40" style="margin-top: -1.6%;">
+                        <input mdInput type="text" [min]="searchFromDate" [mdDatepicker]="endDate" readonly [placeholder]="'TOOLS_HISTORY.A' | translate" [(ngModel)]="searchToDate">
+                        <button  mdSuffix [mdDatepickerToggle]="endDate" class="white-datepicker-button" 
+                        style="background-color: grey !important;"></button>
+                    </md-input-container>
+                    <md-datepicker #endDate [touchUi]="true"></md-datepicker>
+                    </div>
+                </div>
+                <div fxFlex="25" fxFlex.lt-md="25">
+                    <div fxLayout="row" fxLayoutAlign="end center">
+                        <div dividerColor="accent" fxFlex="50">
+                            <button fxFlex style="margin-left: 5px;width: 100%;height: 38px;" md-raised-button type="button" class="btnSearch" color="primary"
+                                (click)="resetSearch()">
+                                <md-icon>restore</md-icon>
+                                {{ 'DOCTEST.RESET' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutWrap="wrap" class="addTaskButton taskListNgSelect">
+            <div fxFlex="100" fxFlex.lt-md="100">
+                <div fxFlex="25" fxFlex.lt-md="25">
+                    <div class="select-input-container" fxFlex="90">
+                        <ng-select style="margin-top: 3px;" [(ngModel)]="searchNotificationRefText" fxFlex="100" (data)="ChangeNotificationRefListsFilter($event)"
+                            [multiple]="false" [items]="notificationRefLists" [placeholder]="'TOOLS_HISTORY.Notif_Ref' | translate"></ng-select>
+                    </div>
+                </div>
+                <div fxFlex="25" fxFlex.lt-md="25">
+                    <md-input-container dividerColor="accent" fxFlex="90">
+                        <input mdInput [(ngModel)]="searchSubjectText" maxlength="30" placeholder="{{ 'TOOLS_HISTORY.Subject' | translate }}" type="text"
+                            (keyup)="searchSubjectFilter($event)">
+                    </md-input-container>
+                </div>
+                <div fxFlex="25" fxFlex.lt-md="25">
+                </div>
+                <div fxFlex="25" fxFlex.lt-md="25">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+    </md-card-content>
+</md-card>
+<div class="hideScroller">
+
+    <ngx-datatable class="material rncp-table" [rows]="historyList" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
+        [rowHeight]="50" [scrollbarH]="false" [scrollbarV]="false" [reorderable]="reorderable" [externalPaging]="true"
+        [count]="page.totalElements" [limit]="page.size" (page)="changePage($event)" (sort)="sortPage($event)"
+        [offset]="page.pageNumber" [messages]="{emptyMessage: 'NoDataToDisplay' | translate }"
+        [sorts]="[{prop: 'sentDate', dir: 'asc'},{prop: 'notificationReference', dir: 'asc'},{prop: 'notificationSubject', dir: 'asc'},
+        {prop: 'RNCPTitleId.0.shortName', dir: 'asc'},{prop: 'schoolId.0.shortName', dir: 'asc'},{prop: 'to.0.lastName', dir: 'asc'},
+        {prop: 'subjectId.subjectName', dir: 'asc'},{prop: 'testId.name', dir: 'asc'}, {prop: 'from.lastName', dir: 'asc'}]"
+        [externalSorting]="true" [selectionType]="'single'" (activate)="onActivate($event)"
+        [cssClasses]="ngxDtCssClasses">
+        <ngx-datatable-column [flexGrow]="1.5" name="sentDate" prop="sentDate" [sortable]="true" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                <span mdTooltip="{{'TOOLS_HISTORY.Date' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important" (click)="sort()">
+                    {{'TOOLS_HISTORY.Date' | translate}} </span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row?.sentDate | date: 'dd/MM/yyyy'}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [flexGrow]="1.5" name="notificationReference" prop="notificationReference" [sortable]="true" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                <span mdTooltip="{{'TOOLS_HISTORY.Notif_Ref' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important"
+                    (click)="sort()"> {{'TOOLS_HISTORY.Notif_Ref' | translate}} </span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row?.notificationReference}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [flexGrow]="4" name="notificationSubject" prop="notificationSubject" [sortable]="true" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                <span mdTooltip="{{'TOOLS_HISTORY.Notif_Subject' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important"
+                    (click)="sort()"> {{'TOOLS_HISTORY.Notif_Subject' | translate}} </span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <div class="text-trail-container">
+                    {{row?.notificationSubject}}
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [flexGrow]="2" name="Title" prop="RNCPTitleId.0.shortName" [sortable]="true" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                <span mdTooltip="{{'TOOLS_HISTORY.Title' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important" (click)="sort()">
+                    {{'TOOLS_HISTORY.Title' | translate}} </span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span *ngFor="let title of row.RNCPTitleId;let i=index;">
+                    {{title?.shortName}} {{row.RNCPTitleId && row.RNCPTitleId.length !== (i+1) ? ",":""}}
+                </span>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [flexGrow]="2" name="schoolId.0.shortName" prop="schoolId.0.shortName" [sortable]="true" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                <span mdTooltip="{{'TOOLS_HISTORY.School' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important"
+                    (click)="sort()"> {{'TOOLS_HISTORY.School' | translate}} </span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span *ngFor="let school of row.schoolId;let i=index;">
+                    {{school?.shortName}} {{row.schoolId && row.schoolId.length !== (i+1) ? ",":""}}
+                </span>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [flexGrow]="2" name="from.lastName" prop="from.lastName" [sortable]="true" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                <span mdTooltip="{{'TOOLS_HISTORY.De' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important" (click)="sort()">
+                    {{'TOOLS_HISTORY.De' | translate}} </span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row?.from?.lastName}} {{row?.from?.firstName}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [flexGrow]="2" name="to.0.lastName" prop="to.0.lastName" [sortable]="true" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                <span mdTooltip="{{'TOOLS_HISTORY.A' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important" (click)="sort()">
+                    {{'TOOLS_HISTORY.A' | translate}} </span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span *ngFor="let user of row.to;let i=index;">
+                    {{user?.lastName}} {{user?.firstName}} {{row.to && row.to.length !== (i+1) ? ",":""}}
+                </span>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [flexGrow]="4" name="subjectId.subjectName" prop="subjectId.subjectName" [sortable]="true" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                <span mdTooltip="{{'TOOLS_HISTORY.Subject' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important"
+                    (click)="sort()"> {{'TOOLS_HISTORY.Subject' | translate}} </span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{row?.subjectId?.subjectName}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [flexGrow]="2" name="testId.name" prop="testId.name" [sortable]="true" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+                <span mdTooltip="{{'TOOLS_HISTORY.Test' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important" (click)="sort()">
+                    {{'TOOLS_HISTORY.Test' | translate}} </span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row?.testId?.name}}
+            </ng-template>
+        </ngx-datatable-column>
+
+
+        <ngx-datatable-column [flexGrow]="1.5" name="Actions" [sortable]="false" [cellClass]="'text-center'" [resizeable]="false">
+            <ng-template let-column="column" ngx-datatable-header-template>
+                <span mdTooltip="{{'TOOLS_HISTORY.Action' | translate}}" mdTooltipPosition="above">
+                    {{'TOOLS_HISTORY.Action' | translate}}
+                </span>
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+
+                <button md-icon-button md-button-sm md-raised-button class="grid-button" *ngIf="row" (click)="viewdialog(row)">
+                    <span mdTooltip="{{'TOOLS_DOCTEST.Action_Buttons.View' | translate}}" mdTooltipPosition="above">
+                        <i class="fa fa-eye" style="vertical-align: sub;font-size: 22px;color:white;"></i>
+                    </span>
+                </button>
+                <button mdTooltip="{{'MailBox.emailDetails.forward' | translate}}" mdTooltipPosition="above" md-icon-button md-button-sm
+                    md-raised-button class="grid-button" *ngIf="row" (click)="forwardTask(row)">
+
+                    <md-icon>send</md-icon>
+
+                </button>
+            </ng-template>
+        </ngx-datatable-column>
+
+
+    </ngx-datatable>
+</div>

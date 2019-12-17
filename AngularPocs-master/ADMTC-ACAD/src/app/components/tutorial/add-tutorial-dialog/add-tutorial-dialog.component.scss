@@ -1,0 +1,37 @@
+.ql-container .ql-editor {
+    height: 68px !important;
+}
+
+.ql-container .ql-editor {
+    height: 140px !important;
+}
+
+.key-svg {
+    width: 27px;
+    transform: translateY(4px);
+    height: 27px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.tutorial-quills {
+    padding: 2px !important;
+}
+
+:host /deep/ {
+    .description-quill .ql-container .ql-editor {
+        height: 50px !important;
+    }
+    
+    .message-quill .ql-container .ql-editor {
+        height: 106px !important;
+    }
+
+    .tutorial-quills .ql-toolbar.ql-snow .ql-formats {
+         margin-right: 0px !important;
+    }
+
+    .tutorial-quills .ql-toolbar.ql-snow {
+        text-align: center;
+    }
+}

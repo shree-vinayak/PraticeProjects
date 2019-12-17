@@ -1,0 +1,63 @@
+<div fxLayout="row wrap" fxLayoutWrap="wrap">
+    <h3> {{'MENTOREVALUATION.TITLE' | translate}}</h3>
+</div>
+<div style="margin-top:15px;"></div>
+<div fxLayout="row wrap" fxLayoutWrap="wrap">
+    <div fxFlex.gt-sm="100%" fxFlex="100">
+        <form [formGroup]="questionnaireForm" *ngIf="questionList.length > 0" (submit)="submitQuestionnaire()">
+
+            <md-card *ngFor="let question of selectedQuestionnaire.questions; let i = index ">
+                <md-card-content>
+                    <div fxLayout="row" fxLayoutWrap="wrap" class="questionnaire-answer">
+                        <div fxFlex="100" class="flex_3" fxFlex.lt-md="100">
+                            <div class="px-1" *ngIf="question.answerType == 'Numeric'">
+                                <label for="{{question.question}}"><b>{{i + 1}}) {{question.question}}</b></label>
+                                <md-input-container dividerColor="accent" style="width: 100%">
+                                    <input mdInput placeholder="Answer..." type="number" [formControl]="questionnaireForm.controls['question'+i]" [(ngModel)]="questionList[i].answer">
+                                </md-input-container>
+                            </div>
+                            <div class="px-1" *ngIf="question.answerType == 'Date'">
+                                <label for="{{question.question}}"><b>{{i + 1}}) {{question.question}}</b></label>
+                                <md-input-container dividerColor="accent" style="width: 100%">
+                                    <input mdInput type="text" [mdDatepicker]="dateOfBirth" placeholder="DD/MM/YYYY" [formControl]="questionnaireForm.controls['question'+i]" [(ngModel)]="questionList[i].answer">
+                                    <button mdSuffix [mdDatepickerToggle]="dateOfBirth" class="white-datepicker-button" style="background-color: grey !important;"></button>
+                                </md-input-container>
+                                <md-datepicker #dateOfBirth [touchUi]="true"></md-datepicker>
+                            </div>
+                            <div class="px-1" *ngIf="question.answerType == 'Text'">
+                                <label for="{{question.question}}"><b>{{i + 1}}) {{question.question}}</b></label>
+                                <md-input-container dividerColor="accent" style="width: 100%">
+                                    <input mdInput placeholder="Answer..." type="text" [formControl]="questionnaireForm.controls['question'+i]" [(ngModel)]="questionList[i].answer">
+                                </md-input-container>
+                            </div>
+                            <div class="px-1" *ngIf="question.answerType == 'SingleOption'">
+                                <label for="{{question.question}}"><b>{{i + 1}}) {{question.question}}</b></label>
+                                <br>
+                                <md-radio-group style="float:left !important;" [formControl]="questionnaireForm.controls['question'+i]" [(ngModel)]="questionList[i].answer">
+                                    <md-radio-button *ngFor="let option of question.options;" value="{{option}}" class="rdmark">{{ option | translate }}</md-radio-button>
+                                </md-radio-group>
+                            </div>
+                            <div class="px-1" *ngIf="question.answerType == 'MultipleOptions'" style="margin-bottom: 10px;">
+                                <label for="{{question.question}}"><b>{{i + 1}}) {{question.question}}</b></label>
+                                <br>
+                                <md-checkbox name="{{option}}" class="mt-1" *ngFor="let option of question.options; let index = index;" color="accent" align="start" [formControl]="questionnaireForm.controls['question'+i]" [(ngModel)]="questionList[i].answer[option]" value="true"> {{option}}</md-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                </md-card-content>
+            </md-card>
+
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="60" fxFlex.lt-md="60">&nbsp;</div>
+                <div fxFlex="40" fxFlex.lt-md="60" style="text-align: right;">
+                    <button md-raised-button md-button-sm color="green" class="mr-1" type="button" (click)="cancel()">{{ 'MENTOREVALUATION.QUESTIONNAIRE.CANCEL' | translate }}</button>
+                    <!-- <button md-raised-button md-button-sm color="accent" class="mr-1" type="submit" [disabled]="!questionnaireForm.valid" >{{ 'MENTOREVALUATION.QUESTIONNAIRE.SUBMIT' | translate }}</button> -->
+                    <button md-raised-button md-button-sm color="accent" class="mr-1" type="submit">{{ 'MENTOREVALUATION.QUESTIONNAIRE.SUBMIT' | translate }}</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

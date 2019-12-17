@@ -1,0 +1,164 @@
+.compose-mail .mat-input-container {
+    width: 100%;
+}
+
+.compose-mail .mat-input-container textarea {
+    resize: vertical;
+}
+
+snack-bar-container {
+    background-color: #F44336 !important;
+}
+
+.mail-selected-res-list .mat-chip {
+    margin-bottom: 5px !important;
+}
+
+.mail-selected-res-list .mat-chip .fa {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.mat-dialog-container .mat-card-actions.compose-mail-actions {
+    text-align: left;
+}
+.mat-dialog-container{
+    overflow-x: hidden;
+}
+.mat-dialog-container .compose-mail-actions .mat-button {
+    min-width: initial;
+    padding: 10px;
+    font-size: 1.5rem;
+    line-height: 20px;
+    margin-right: 0.33333rem;
+}
+
+.mat-dialog-container .compose-mail-actions .btn-close {
+    float: right;
+    font-size: 1.5rem;
+    font-family: cursive;
+    color: gray;
+    transition-property: background;
+    transition-duration: .3s;
+    transition-timing-function: linear;
+    cursor: pointer;
+}
+
+.mat-dialog-container .compose-mail-actions .btn-close:hover,
+.mat-dialog-container .compose-mail-actions .btn-close:active,
+.mat-dialog-container .compose-mail-actions .btn-close:focus {
+    color: #212121;
+}
+
+.file-upload {
+    cursor: pointer;
+    min-width: initial;
+    padding: 10px;
+    font-size: 1.5rem;
+    line-height: 20px;
+    margin-right: 0.33333rem;
+}
+
+.file-upload input {
+    display: none;
+}
+
+// .file-section {
+//     margin-top: 20px;
+//     margin-left: 10px;
+// }
+
+/* File Uploader Styles  */
+
+.uploader input {
+    display: none;
+}
+
+.uploader {
+    -webkit-align-items: center;
+    align-items: center;
+    background-color: #efefef;
+    background-color: rgba(0, 0, 0, 0.02);
+    display: -webkit-flex;
+    display: flex;
+    height: 50px;
+    -webkit-justify-content: center;
+    justify-content: center;
+    outline: 3px dashed #ccc;
+    outline-offset: 5px;
+    position: relative;
+    width: 50px;
+}
+
+.uploader img,
+.uploader .icon {
+    pointer-events: none;
+}
+
+.uploader,
+.uploader .icon {
+    -webkit-transition: all 100ms ease-in;
+    -moz-transition: all 100ms ease-in;
+    -ms-transition: all 100ms ease-in;
+    -o-transition: all 100ms ease-in;
+    transition: all 100ms ease-in;
+}
+
+.uploader .icon {
+    color: #eee;
+    color: rgba(0, 0, 0, 0.2);
+    font-size: 5em;
+}
+
+.uploader img {
+    left: 50%;
+    opacity: 0;
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    top: 50%;
+    -webkit-transition: all 300ms ease-in;
+    -moz-transition: all 300ms ease-in;
+    -ms-transition: all 300ms ease-in;
+    -o-transition: all 300ms ease-in;
+    transition: all 300ms ease-in;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.uploader img.loaded {
+    opacity: 1;
+}
+
+.fa-icon {
+    font-size: 30px;
+}
+
+.fileInfo{
+    width: fit-content !important;
+    margin: 5px !important;
+    display: inline-block !important;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    box-shadow: inset 1px 1px 0 rgba(0,0,0,.1), inset 0 -1px 0 rgba(0,0,0,.07)
+}
+
+.attachmentRemove {
+    margin-left: 114%;
+    font-size: 15px;
+    color: red;
+    margin-top: -7px;
+    cursor: pointer;
+}
+
+th {
+    padding: 10px !important;
+}
+
+td {
+    padding: 10px !important;
+}

@@ -1,0 +1,5 @@
+<md-input-container dividerColor="accent" style="margin-left:3px">
+  <input mdInput type="text" placeholder="{{ 'Search.search' | translate }}" [(ngModel)]="SchoolListSearchItem" name="SchoolListSearchItem"
+    (keyup)="searchSchoolList($event)">
+</md-input-container>
+<!-- <app-student-card *ngFor="let student of studentList; let i = index" [attr.data-index]="i" [studentEmit]="student" (click)="emitStudent(student)"></app-student-card> -->

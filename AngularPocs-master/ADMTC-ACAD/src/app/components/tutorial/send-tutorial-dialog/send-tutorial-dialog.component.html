@@ -1,0 +1,92 @@
+<div>
+  <div fxLayout="row">
+    <div fxFlex="90" fxFlex.lt-md="90">
+      <h6>
+        <svg class="key-svg" viewBox="0 0 24 24">
+          <path fill="#000000" d="M22,18V22H18V19H15V16H12L9.74,13.74C9.19,13.91 8.61,14 8,14A6,6 0 0,1 2,8A6,6 0 0,1 8,2A6,6 0 0,1 14,8C14,8.61 13.91,9.19 13.74,9.74L22,18M7,5A2,2 0 0,0 5,7A2,2 0 0,0 7,9A2,2 0 0,0 9,7A2,2 0 0,0 7,5Z" />
+        </svg>
+        <span> {{ 'TUTORIAL_MENU.SEND' | translate }} </span>
+        <span [innerHTML]="getTutotialTitleTranslated(selectedTutorial?.title)"> </span>
+      </h6>
+    </div>
+
+    <div fxFlex="10" fxFlex.lt-md="10">
+      <a class="close_icon">
+        <i style="float: right;margin-top: 4px;" class="material-icons" (click)="closeDialog()">close</i>
+      </a>
+    </div>
+  </div>
+  <br>
+  <div class="tutorial-quills">
+    <form [formGroup]="form">
+
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100">
+          <ng-select formControlName="rncpId" style="margin-top:2px;" fxFlex="100" [multiple]="true" [items]="rncpList"
+            [placeholder]="'CrossCorrection.Select_RNCP_Title.title' | translate"  [disabled]="disableRncp"
+            (selected)="debounceUserSearch()" (removed)="debounceUserSearch()" ></ng-select>
+        </div>
+      </div>
+
+      <!-- School Selection Block -->
+      <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px;">
+        <div fxFlex="100" fxFlex.lt-md="100">
+          <ng-select formControlName="schoolId" style="margin-top:2px;" fxFlex="100" [multiple]="true" [items]="schoolList"
+            [placeholder]="'SEND_QUESTIONNAIRE.SELECTSCHOOL' | translate" [disabled]="isAcadDir"
+            (selected)="debounceUserSearch()"  (removed)="debounceUserSearch()"></ng-select>
+        </div>
+      </div>
+      
+      <!-- Recipient Type Selection Block -->
+      <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px; ">
+        <div fxFlex="100" fxFlex.lt-md="100">
+          <span>{{'TASK.ADDEDITTASK.USER' | translate}}</span>
+          <md-slide-toggle formControlName="recipientType" (change)="toggleRecipientSelection()"></md-slide-toggle>
+          <span>{{'TASK.ADDEDITTASK.CATEGORYOFUSERS' | translate}}</span>
+        </div>
+      </div>
+
+      <!-- User Type Selection Block -->
+      <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px;" *ngIf="form.get('recipientType').value">
+        <div fxFlex="100" fxFlex.lt-md="100">
+          <ng-select formControlName="userTypeId" style="margin-top:2px;" fxFlex="100" [multiple]="true" [items]="userTypes"
+            [placeholder]="'USERS.SELECTUSERTYPE' | translate"></ng-select>
+        </div>
+        <div fxFlex="100" fxFlex.lt-md="100">
+          <small class="mat-text-warn" *ngIf="form.controls['userTypeId'].hasError('required') && (form.controls['userTypeId'].touched)">
+            {{'SEND_QUESTIONNAIRE.USERTYPE' | translate}}*</small>
+        </div>
+      </div>
+
+      <!-- User Selection Block -->
+      <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px;" *ngIf="!form.get('recipientType').value">
+        <div fxFlex="100" fxFlex.lt-md="100">
+          <ng-select formControlName="userId" style="margin-top:2px;" fxFlex="100" [multiple]="true" [items]="userList"
+            [placeholder]="'USERS.ADDEDITUSER.SELECTUSER' | translate"></ng-select>
+        </div>
+        <div fxFlex="100" fxFlex.lt-md="100">
+          <small class="mat-text-warn" *ngIf="form.controls['userId'].hasError('required') && (form.controls['userId'].touched)">
+            {{'SEND_QUESTIONNAIRE.USERREQ' | translate}}*</small>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:20px;margin-bottom:10px" >
+        <div fxFlex="100" fxFlex.lt-md="100">
+          <md-input-container color="accent" style="width: 100%">
+            <input mdInput tabindex="1" formControlName="subject" type="text" [placeholder]="'TUTORIAL_MENU.PLACEHOLDER.SUBJECT'| translate" />
+          </md-input-container>
+        </div>
+      </div>
+
+      <quill-editor class="message-quill" [placeholder]="'TUTORIAL_MENU.PLACEHOLDER.Message' | translate"
+        formControlName="message"></quill-editor>
+
+    </form>
+  </div>
+  <br>
+  <div style="float: right;">
+    <button md-raised-button color="primary" (click)="closeDialog()">{{'CLOSE' | translate}}</button>
+    <button md-raised-button color="accent" [disabled]="!form.valid" (click)="confirmSend()" name="single-click">{{'SUBMIT'
+      | translate}}</button>
+  </div>
+</div>

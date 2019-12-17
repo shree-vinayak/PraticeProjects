@@ -1,0 +1,82 @@
+<div class="mt-16">
+  <!-- Search Text -->
+  <md-input-container dividerColor="accent" class="ml-10">
+    <input mdInput type="text" placeholder="{{ 'Search.search' | translate }}">
+  </md-input-container>
+
+  <!-- Add Student Button -->
+  <button md-raised-button (click)="openCreateStudentPopup()" color="primary" class="btn-add-contact" class="add-student-button">
+    <i class="fa fa-plus" aria-hidden="true"></i> {{ 'Customer.AddStudent' | translate }}
+  </button>
+
+   <!-- Add Student Button -->
+   <button *ngIf="selectedStudent.length" md-raised-button (click)="openJobDescriptionNotification()" color="accent" class="btn-add-contact" class="add-student-button">
+    <i class="fa fa-plus" aria-hidden="true"></i> {{ 'Customer.JobDescriptionForm' | translate }}
+  </button>
+
+  <!-- Student List -->
+  <ngx-datatable
+      class="material rncp-table"
+      [rows]="studentList"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [reorderable]="reorderable"
+      [cssClasses]="ngxDtCssClasses"
+      [sorts]="[{prop: 'studentName', dir: 'asc'}]"
+      [selectionType]="'checkbox'"
+      (select)='onStudentSelected($event)'>
+      <ngx-datatable-column [width]="48" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true">
+        </ngx-datatable-column>
+    <ngx-datatable-column name="name" prop="studentName" [sortable]="true">
+      <ng-template ngx-datatable-header-template let-sort="sortFn">
+         {{'NAME' | translate}}
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <a (click)="sendMentorEvaluation(row)"> {{row && row['firstName'] ? row['firstName'] : ''}}  {{row && row['lastName'] ? row['lastName'] : ''}}</a>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="RNCPTitle">
+      <ng-template ngx-datatable-header-template let-sort="sortFn">
+        {{'RNCPTITLE' | translate}}
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row && row['rncpTitle'] && row['rncpTitle']['shortName'] ? row['rncpTitle']['shortName'] : ''}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Class">
+      <ng-template ngx-datatable-header-template let-sort="sortFn">
+        {{'USERS.ADDEDITUSER.CLASS' | translate}}
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{ row && row['currentClass'] && row['currentClass']['name'] ? row['currentClass']['name'] : ''}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="NotificationStatus">
+      <ng-template ngx-datatable-header-template let-sort="sortFn">
+        {{'Job Description' | translate}}
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template >
+        <!-- <span *ngIf="row['notification_status']" style="color:green"><i class="fa fa-check" aria-hidden="true"></i></span>
+        <span *ngIf="!row['notification_status']" >-</span> -->
+        {{row['notification_status']}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Class">
+      <ng-template ngx-datatable-header-template>
+        {{'STUDENT.ACTIONS' | translate}}
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <i style="font-size:25px;cursor: pointer;color:black" title="Click to Send Mail" (click)="sendMail(row)" color="black" class="fa fa-envelope" aria-hidden="true"></i>
+          &nbsp;&nbsp;&nbsp;
+          <i *ngIf="row['status'] == 'active'"  style="font-size:25px;cursor: pointer;color:green" title="Click to De-Activate" (click)="deActivateStudent(row)" color="green"  class="fa fa-check-circle" aria-hidden="true"></i>
+          <i *ngIf="row['status'] == 'deactivated' || row['status'] == 'pending'"  style="font-size:25px;cursor: pointer;color:black" title="Click to De-Activate" (click)="deActivateStudent(row)" color="green"  class="fa fa-check-circle" aria-hidden="true"></i>
+          &nbsp;&nbsp;&nbsp;
+          <i style="font-size:25px;cursor: pointer;color:black" title="Click to Edit" (click)="sendMentorEvaluation(row)" color="black"  class="add-student-button" class="fa fa-pencil" aria-hidden="true"></i>
+          &nbsp;&nbsp;&nbsp;
+          <!-- <i style="font-size:25px;cursor: pointer;color:black" title="Click to Notify" (click)="openJobDescriptionNotification(row)" color="black"  class="add-student-button" class="fa fa-bell" aria-hidden="true"></i> -->
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>

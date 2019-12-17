@@ -1,0 +1,324 @@
+<div fxLayout="row wrap">
+    <div fxFlex="50">
+        <form>
+            <div fxLayout="row wrap">
+                <div fxFlex="50">
+                    <div class="px-1 select-input-container" [formGroup]="RNCPform" style="width: 100%;">
+                        <!-- <md-select fxFlex="80" placeholder="{{ 'PARAMETERS-RNCP.TEST.RNCP-SELECT' | translate }}" [(ngModel)]="selectedRNCP" (change)="getExpertise()"
+                        style="margin-left: -8px;">
+                        <md-option *ngFor="let rncp of rncpTitles" [value]="rncp._id">{{ rncp.shortName }}</md-option>
+                    </md-select> -->
+                        <md-input-container fxFlex="90">
+                            <input type="text" placeholder="{{'PARAMETERS-RNCP.TEST.RNCP-SELECT' | translate}}" mdInput #myControl formControlName="text"
+                                [mdAutocomplete]="auto">
+                            <md-autocomplete #auto="mdAutocomplete">
+                                <md-option *ngFor="let list of filteredOptions |  async" [value]="list.shortName" (click)="OnSelectRNCPTitle(list)">
+                                    {{ list.shortName }}
+                                </md-option>
+                            </md-autocomplete>
+                        </md-input-container>
+                        <div fxFlex="10"></div>
+                        <md-input-container fxFlex="90">
+                            <input type="text" [placeholder]="'PARAMETERS-RNCP.CLASSES.CLASS' | translate" mdInput #myControl formControlName="classText"
+                                [mdAutocomplete]="autoClass">
+                            <md-autocomplete #autoClass="mdAutocomplete">
+                                <md-option *ngFor="let class of filteredClasses |  async" [value]="class.name" (click)="OnSelectClass(class)">
+                                    {{ class.name }}
+                                </md-option>
+                            </md-autocomplete>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div fxFlex="50">
+                    <h5 style="float: right;">{{ 'PARAMETERS-RNCP.TEST.ConditionsTitleTxt' | translate }}</h5>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div fxFlex="50">
+        <div fxFlex style="height: 35px;text-align: right;margin-right: 8px;">
+            <button style="margin-right: 15px;" md-raised-button color="accent" (click)="downloadPDF()">
+                <i class="fa fa-file-pdf-o mr-1"></i>PDF</button>
+            <button style="margin-right: 15px;" md-raised-button color="accent" (click)="save(form.value)">
+                <md-icon>save</md-icon>{{ 'PARAMETERS-RNCP.TEST.SAVE-SCORE' | translate }}</button>
+        </div>
+    </div>
+</div>
+<div fxLayout="row wrap" *ngIf="selectedClass">
+    <div fxFlex="50">
+        <div fxLayout="row wrap">
+            <div [fxFlex]="!form?.value?.length ? 20 : 30">
+                <div style="margin-top: 10px;margin-left: 8px;">
+                    <span style="font-size: 11px;color: #ccc">{{'PARAMETERS-RNCP.EXPERTISE.Marks.title' | translate}}</span>
+                    <md-slide-toggle style="margin-top:5px; " [(ngModel)]="expertiseMarkPointStatus" labelPosition="after" [checked]="expertiseMarkPointStatus"
+                        (change)="toggleexpertiseMarkPointStatus($event)" name="expertiseMarkPointStatus"></md-slide-toggle>
+                    <span style="font-size: 11px;color: #ccc">{{'PARAMETERS-RNCP.EXPERTISE.Points.title' | translate}}</span>
+                </div>
+            </div>
+            <div [fxFlex]="!form?.value?.length ? 15 : 20" fxLayoutAlign="end">
+                <md-input-container color="accent" style="width:100%" *ngIf="expertiseMarkPointStatus">
+                    <input mdInput [(ngModel)]="expertiseMaxPoints" [placeholder]="'PARAMETERS-RNCP.EXPERTISE.MAXPOINT.title' | translate" type="number"
+                        required pattern="[0-9][0-9]*" />
+                </md-input-container>
+            </div>
+
+            <div  [fxFlex]="!form?.value?.length ? 65 : 50" fxLayoutAlign="end">
+                <button *ngIf="!form?.value?.length" md-raised-button color="accent" class="add-section-btn" type="button" (click)="duplicateConditionDialog()">
+                    {{'PARAMETERS-RNCP.DUPLICATE_CONDITION_CLASS' | translate}}</button>
+                <button md-raised-button color="accent" class="add-section-btn" type="button" (click)="addNewExpertiseDialog()">
+                    <md-icon>add</md-icon>{{'PARAMETERS-RNCP.EXPERTISE.ADDEXPERTISE' | translate}}</button>
+            </div>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="addSubject(form.value)">
+            <button #formSubmitBtton type="submit" style="display: none"></button>
+            <md-card class="border-yellow" *ngFor="let expertise of form['controls'];let expertiseIndex=index" [formGroupName]="expertiseIndex">
+                <md-card-content style="padding-bottom: 0px;">
+                    <div fxLayout="row wrap">
+                        <div fxFlex="40">
+                            <md-input-container color="accent" style="width:100%">
+                                <input mdInput formControlName="blockOfExperise" [readonly]="form.value[expertiseIndex].isSpecialization" [placeholder]=" blockOfExpertisePlaceholder[expertiseIndex] | translate "
+                                    type="text" required/>
+                            </md-input-container>
+                        </div>
+                        <div fxFlex="23">
+                            <div style="text-align: center;">
+                                <span style="font-size: 11px;margin-top: -3px !important;display: block;margin-bottom: 5px;color: #ccc">{{'PARAMETERS-RNCP.EXPERTISE.FINALSCORE.title'
+                                    | translate}}</span>
+                                <md-slide-toggle labelPosition="after" [checked]="form.value[expertiseIndex].countForTitleFinalScore" (change)="toggleFinalScore($event,expertiseIndex)"
+                                    name="countForTitleFinalScore"></md-slide-toggle>
+                            </div>
+                        </div>
+                        <div fxFlex="2" *ngIf="expertiseMarkPointStatus">&nbsp;</div>
+                        <div fxFlex="15" *ngIf="expertiseMarkPointStatus">
+                            <md-input-container color="accent" style="width:100%" *ngIf="expertiseMarkPointStatus">
+                                <input mdInput formControlName="maxPoints" min="0" [max]="expertiseMarkPointStatus ? expertiseMaxPoints : null" [placeholder]="'PARAMETERS-RNCP.EXPERTISE.MAXPOINT.title' | translate"
+                                    type="number" required pattern="[0-9][0-9]*" />
+                            </md-input-container>
+                        </div>
+                        <div fxFlex="3">&nbsp;</div>
+                        <div fxFlex="10">
+                            <md-input-container color="accent" style="width:100%">
+                                <input mdInput formControlName="minScore" min="0" [max]="expertiseMarkPointStatus ? expertiseMaxPoints : null" [placeholder]="'PARAMETERS-RNCP.EXPERTISE.MINSCORE.title' | translate"
+                                    type="number" required pattern="[0-9][0-9]*" />
+                            </md-input-container>
+                        </div>
+                        <div fxFlex="3">&nbsp;</div>
+                        <div fxFlex="10">
+                            <md-input-container color="accent" style="width:100%">
+                                <input mdInput #c (change)="c.value = makeValueAbsolute(c.value)" formControlName="expertiseCredits" [placeholder]="'PARAMETERS-RNCP.TEST.CREDITS' | translate" type="number"
+                                />
+                            </md-input-container>
+                        </div>
+                        <div fxFlex="10">
+                            <div fxFlex="100" style="text-align: right;">
+                                <button color="accent" md-icon-button md-raised-button type="button" (click)="removeExpertise(expertiseIndex)">
+                                    <md-icon>close</md-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div fxLayout="row wrap">
+                        <div fxFlex="100">
+                            <md-input-container dividerColor="accent" style="width: 100%">
+                                <textarea mdInput formControlName="description" mdInput id="icon_prefix2" [placeholder]="'PARAMETERS-RNCP.EXPERTISE.DESCRIPTION.title' | translate" class="materialize-textarea"></textarea>
+                            </md-input-container>
+                        </div>
+                    </div> -->
+                    <div class="">
+                        <div fxLayout="row wrap">
+                            <button md-raised-button color="primary" class="add-section-btn" type="button" (click)="addNewSubject(expertiseIndex)">
+                                <md-icon>add</md-icon>{{'PARAMETERS-RNCP.TEST.ADDSUBJECT' | translate}}</button>
+                        </div>
+                        <div fxLayout="row wrap">
+                            <div fxFlex formGroupName="subject">
+                                <md-card class="background-primary" *ngFor="let subject of expertise.controls['subject']['controls'];let subjectIndex=index"
+                                    [formGroupName]="subjectIndex">
+                                    <md-card-content>
+
+                                        <div fxLayout="row wrap">
+                                            <div fxFlex="30">
+                                                <md-input-container color="accent">
+                                                    <input mdInput formControlName="subjectName" [placeholder]="'PARAMETERS-RNCP.TEST.SUBJECTNAME' | translate" type="text" required/>
+                                                </md-input-container>
+                                            </div>
+                                            <div fxFlex="5">&nbsp;</div>
+                                            <div fxFlex="15">
+                                                <md-input-container color="accent" *ngIf="!expertiseMarkPointStatus">
+                                                    <input mdInput formControlName="coefficient" [placeholder]="'PARAMETERS-RNCP.TEST.COEFFICIENT' | translate" type="number"
+                                                        required pattern="[0-9][0-9]*" />
+                                                </md-input-container>
+                                                <md-input-container color="accent" style="width:100%" *ngIf="expertiseMarkPointStatus">
+                                                    <input mdInput formControlName="maxPoints" [placeholder]="'PARAMETERS-RNCP.EXPERTISE.MAXPOINT.title' | translate" type="number"
+                                                        required pattern="[0-9][0-9]*" />
+                                                </md-input-container>
+                                            </div>
+                                            <div fxFlex="5">&nbsp;</div>
+                                            <div fxFlex="15">
+                                                <md-input-container color="accent">
+                                                    <input mdInput formControlName="minimumScoreForCertification" [placeholder]="'PARAMETERS-RNCP.TEST.MINIMUMSCORE' | translate"
+                                                        type="number" required pattern="[0-9][0-9]*" />
+                                                </md-input-container>
+                                            </div>
+                                            <div fxFlex="5">&nbsp;</div>
+                                            <div fxFlex="12">
+                                                <md-input-container color="accent">
+                                                    <input mdInput #i (change)="i.value = makeValueAbsolute(i.value)" formControlName="credits" [placeholder]="'PARAMETERS-RNCP.TEST.CREDITS' | translate"
+                                                        type="number" />
+                                                </md-input-container>
+                                            </div>
+                                            <div fxFlex="3">&nbsp;</div>
+                                            <div fxFlex="9.5">
+                                                <div fxFlex="100" style="text-align: right;">
+                                                    <button md-icon-button md-raised-button type="button" (click)="removeSubject(expertiseIndex,subjectIndex)">
+                                                        <md-icon>close</md-icon>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button md-raised-button type="button" class="add-section-btn" (click)="AddTest(expertiseIndex,subjectIndex)">
+                                            <md-icon>add</md-icon>{{'PARAMETERS-RNCP.TEST.ADDTEST' | translate}}</button>
+
+                                        <div formGroupName="subjectTest">
+                                            <md-card *ngFor="let test of subject.controls['subjectTest']['controls'];let testIndex = index;" [formGroupName]="testIndex">
+                                                <md-card-content>
+                                                    <div fxLayout="row wrap">
+                                                        <div fxFlex="29">
+                                                            <md-input-container color="accent" style="width:100%;">
+                                                                <input mdInput (blur)="removeSlash($event,expertiseIndex,subjectIndex,testIndex)" formControlName="evaluation" [placeholder]="'PARAMETERS-RNCP.TEST.TESTNAME' | translate"
+                                                                    type="text" required />
+                                                            </md-input-container>
+                                                        </div>
+                                                        <div fxFlex="29">
+                                                            <div class="px-1 select-input-container" style="margin-top: -1px;">
+                                                                <md-select fxFlex="100" formControlName="type" placeholder="{{ 'PARAMETERS-RNCP.TEST.EVALUATIONTYPE' | translate }} *">
+                                                                    <md-option *ngFor="let type of TestType" [value]="type.value">{{'PARAMETERS-RNCP.TEST.TYPE.'
+                                                                        + type.key | translate}}</md-option>
+                                                                </md-select>
+                                                            </div>
+                                                        </div>
+                                                        <div fxFlex="8" style="text-align: center">
+                                                            <div mdTooltip="{{'PARAMETERS-RNCP.TEST.PARALLEL_INTAKE' | translate}}"
+                                                            mdTooltipPosition="above">{{ 'PARAMETERS-RNCP.TEST.PI' | translate }}</div>
+                                                            <md-slide-toggle (change)="onchangeTest(expertiseIndex , subjectIndex, testIndex)" color="accent" formControlName="parallelIntake"></md-slide-toggle>
+                                                        </div>
+                                                        <div fxFlex="15">
+                                                                <!-- [required]="test?.value?.parallelIntake" [disable]="!test?.value?.parallelIntake"-->
+                                                            <md-input-container style="width: 65%;" color="accent">
+                                                                <input mdInput [readonly]="!test?.value?.parallelIntake" formControlName="autoMark"  [placeholder]="'PARAMETERS-RNCP.TEST.AUTO_MARK' | translate" type="number"
+                                                                [required]="test?.value?.parallelIntake" />
+                                                                </md-input-container>/ 20
+                                                        </div>
+                                                        <div fxFlex="10">
+                                                            <md-input-container color="accent">
+                                                                <input mdInput formControlName="weight" [placeholder]="'PARAMETERS-RNCP.TEST.WEIGHT' | translate" type="text" maxlength="5"
+                                                                    required />
+                                                            </md-input-container>
+                                                        </div>
+                                                        <div fxFlex="9">
+                                                            <div fxFlex="100" style="text-align: right;">
+                                                                <button color="primary" md-icon-button md-raised-button type="button" (click)="removeTask(expertiseIndex,subjectIndex,testIndex)">
+                                                                    <md-icon>close</md-icon>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </md-card-content>
+                                            </md-card>
+                                        </div>
+                                    </md-card-content>
+                                </md-card>
+                            </div>
+                        </div>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </form>
+    </div>
+    <div fxFlex="50">
+        <md-card>
+            <md-card-content>
+                <div [fxFlex]="expanded ? '100' : '100'" class="document-view mat-grey-50 pa-1">
+                    <div class="ql-editor document-parent">
+                        <div #pagesElement style="overflow: auto;">
+                            <div class="document" [ngStyle]="block" [ngClass]="orientation-portrait">
+                                <div class="pa-1" style="height:93%">
+                                    <div class="doc-rncp-title">
+                                        <span>{{'PARAMETERS-RNCP.TEST.ConditionsTitleTxt' | translate}}</span>
+                                    </div>
+                                    <div class="doc-rncp-title">
+                                        <span>{{selectedRNCPDetails?.shortName}} - {{selectedClass.name}} - {{selectedRNCPDetails?.longName}}</span>
+                                    </div>
+                                    <div class="doc-grid">
+
+                                        <table width="100%" class="doc-table">
+                                            <tbody>
+                                                <tr class="section" style="border: 2px solid #000;">
+                                                    <td class="text-center font-weight-bold" [width]="'40%'">&nbsp;</td>
+                                                    <td class="text-center font-weight-bold" [width]="'20%'">{{'PARAMETERS-RNCP.PDF.CountForFinal'
+                                                        | translate}} </td>
+                                                    <td class="text-center font-weight-bold" [width]="'20%'">
+                                                        <span *ngIf="expertiseMarkPointStatus">{{'PARAMETERS-RNCP.PDF.NumberOfPointsMax'
+                                                            | translate}} </span>&nbsp;
+                                                    </td>
+                                                    <td class="text-center font-weight-bold" [width]="'20%'">{{'PARAMETERS-RNCP.PDF.MinScore'
+                                                        | translate}} </td>
+                                                </tr>
+                                                <ng-template ngFor let-section let-sectionIndex="index" [ngForOf]="form.value">
+                                                    <tr class="sub-section" style="border: 2px solid #000;">
+                                                        <td class="font-weight-bold">
+                                                            <b> {{section.blockOfExperise}}</b>
+                                                        </td>
+                                                        <td class="text-center font-weight-bold">
+                                                            <span *ngIf="section.countForTitleFinalScore">&#10004;</span>
+                                                        </td>
+                                                        <td class="text-center font-weight-bold">
+                                                            <span *ngIf="expertiseMarkPointStatus">{{section.maxPoints}}</span>&nbsp;
+                                                        </td>
+                                                        <td class="text-center font-weight-bold">{{section.minScore}}</td>
+                                                    </tr>
+                                                    <tr class="sub-section" style="border: 1px solid #000;border-left: 2px solid #000;border-right: 2px solid #000">
+                                                        <td class="">{{'PARAMETERS-RNCP.PDF.Subject&Test' | translate}}</td>
+                                                        <td class="text-center">{{'PARAMETERS-RNCP.PDF.Coef' | translate}}
+                                                        </td>
+                                                        <td class="text-center">{{'PARAMETERS-RNCP.PDF.Weight' | translate}}
+                                                        </td>
+                                                        <td class="text-center">{{'PARAMETERS-RNCP.PDF.MinScore' | translate}}
+                                                        </td>
+                                                    </tr>
+                                                    <ng-template ngFor let-subject let-subjectIndex="index" [ngForOf]="section.subject">
+                                                        <tr class="sub-section comment-section" style="border-top: 1px solid #000;border-left: 2px solid #000;border-right: 2px solid #000">
+                                                            <td class="text-left"> {{subject.subjectName}}</td>
+                                                            <td class="text-center">{{subject.coefficient}}</td>
+                                                            <td class="text-center">{{ expertiseMarkPointStatus && subject?.maxPoints
+                                                                ? subject?.maxPoints : '&nbsp;' }}</td>
+                                                            <td class="text-center">{{subject.minimumScoreForCertification}}</td>
+                                                        </tr>
+                                                        <tr class="sub-section comment-section" *ngFor="let subSection of subject.subjectTest" style="border-left: 2px solid #000;border-right: 2px solid #000">
+                                                            <td align="right"> {{subSection.evaluation}}</td>
+                                                            <td class="text-center">{{'PARAMETERS-RNCP.TEST.TYPE.'+subSection.type
+                                                                | translate}}</td>
+                                                            <td class="text-center">
+                                                                <span *ngIf="subSection.weight">{{subSection.weight}}%</span>
+                                                            </td>
+                                                            <td class="">&nbsp;</td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </ng-template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <div *ngIf="docFooterText" style="text-align: center;">{{docFooterText}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>
+
+
+<div *ngIf="loading" class="overlay-loading">Loading&#ffd740;</div>

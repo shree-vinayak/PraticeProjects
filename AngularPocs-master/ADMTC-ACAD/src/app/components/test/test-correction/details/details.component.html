@@ -1,0 +1,228 @@
+<div fxLayout="row wrap">
+    <div fxFlex="100">
+    <form [formGroup]="form" (ngSubmit)="submit(form.value)">
+        <div fxLayout="column wrap">
+            <md-card fxFlex class="dark-header" *ngIf="testDetails">
+                <md-card-title><span class="text-xl" [innerHTML]="testDetails.correctionGrid.header.text"></span></md-card-title>
+                <hr>
+                <md-card-content>
+	            	<div fxLayout="row" fxLayoutWrap="wrap" class="mt-1">
+				        <div fxFlex="50" fxFlex.lt-md="100" *ngFor="let field of testDetails.correctionGrid.header.fields; let i = index ">
+				          <div class="px-1">
+				          	<div *ngIf="field.type != 'other'">
+				          		<div *ngIf="field.type == 'dateRange' || field.type == 'dateFixed'">
+				          			{{field.value}} : {{today | date: 'dd/MM/yyyy'}}
+				          		</div>
+				          		<div *ngIf="field.type == 'titleName'">
+				          			{{field.value}} : {{rncpTitle}}
+				          		</div>
+				          		<div *ngIf="field.type == 'currentSchoolYear'">
+				          			{{field.value}} : {{currentSchoolYear}}
+				          		</div>
+				          		<div *ngIf="field.type == 'eventName' || field.type == 'status'">
+				          			<md-input-container dividerColor="accent" style="width: 100%">
+						              <input mdInput [placeholder]="field.value" type="{{field.dataType}}" [formControl]="form.controls['header'+i]" [(ngModel)]="testCorrect.correctionGrid.header.fields[i].value">
+						            </md-input-container>
+				          		</div>
+				          	</div>
+				            <md-input-container dividerColor="accent" style="width: 100%" *ngIf="field.type == 'other'">
+				              <input mdInput [placeholder]="field.value" type="{{field.dataType}}" [formControl]="form.controls['header'+i]" [(ngModel)]="testCorrect.correctionGrid.header.fields[i].value">
+				            </md-input-container>
+				          </div>
+				        </div>
+			        </div>
+					<div fxLayout="row wrap" *ngIf="testDetails.groupTest">
+						<div fxFlex="50">
+					        <md-card class="primary-background dark-header">
+					            <md-card-title>
+					                <div fxLayout="row wrap" fxLayoutAlign="start center">
+					                    <div fxFlex class="text-xl">
+					                        {{'TESTCORRECTIONS.LISTOFSTUDENTS' | translate}}
+					                    </div>
+					                </div>
+					            </md-card-title>
+					            <hr>
+					            <md-card-content class="pa-0 dark-text rncptitleCard scroll-y">
+					                <ngx-datatable
+									    class="material rncp-table"
+									    [rows]="correction"
+									    [columnMode]="'force'"
+									    [headerHeight]="50"
+									    [footerHeight]="50"
+									    [rowHeight]="'auto'"
+									    [columnMode]="'force'"
+									    [externalSorting]="true"
+									    (sort)="sortPage($event)"
+									    [cssClasses]= "ngxDtCssClasses">
+									    <ngx-datatable-column name="Name">
+									        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+									            {{row['name']}}
+									        </ng-template>
+									    </ngx-datatable-column>
+									    <ngx-datatable-column name="Score">
+									        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+									            {{row['score']}}
+									        </ng-template>
+									    </ngx-datatable-column>
+									    <ngx-datatable-column name="Action">
+									        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+									            <button md-icon-button md-button-sm md-raised-button class="grid-button">
+										          <md-icon>delete</md-icon>
+										        </button>
+									        </ng-template>
+									    </ngx-datatable-column>
+									</ngx-datatable>
+								</md-card-content>
+					        </md-card>
+			   			</div>
+
+			   		 	<div fxFlex="50">
+					        <md-card class="primary-background dark-header">
+					            <md-card-title>
+					            <div class="card-margin">
+					            	<div fxLayout="row wrap">
+					            		<div fxFlex class="text-xl">
+					                		<label class="mr-1">Preparation Center</label> Some text
+					                	</div>
+					               </div>
+					            </div>
+					            <div class="card-margin">
+					                <div fxLayout="row wrap">
+					                	<div fxFlex class="text-xl">
+					                		<label class="mr-1">Date of test</label> 01-01-2017
+					                	</div>
+					                </div>
+					            </div>
+					           </md-card-title>
+					            <hr>
+					            <md-card-content class="pa-0 dark-text rncptitleCard">
+
+								</md-card-content>
+					        </md-card>
+			   			</div>
+		   		 	</div>
+		   		</md-card-content>
+		   	</md-card>
+		   	<md-card fxFlex class="primary-background dark-header"  *ngIf="testDetails">
+                <md-card-title><span class="text-xl"> {{'TESTCORRECTIONS.GROUP.TITLE' | translate}}</span></md-card-title>
+                <hr>
+	            <md-card-content class="pa-0 dark-text rncptitleCard" *ngFor="let section of testDetails.correctionGrid.correction.sections; let i = index ">
+	                <ngx-datatable
+					    class="material rncp-table"
+					    [rows]="section.subSections"
+					    [headerHeight]="50"
+					    [footerHeight]="50"
+					    [rowHeight]="'auto'"
+					    [columnMode]="'force'"
+					    [externalSorting]="true"
+					    (sort)="sortPage($event)"
+					    [cssClasses]= "ngxDtCssClasses"
+					    [columnMode]="'force'"
+					    id="{{i}}">
+					    <ngx-datatable-column [width]="600" *ngIf="section.subSections[0].title">
+						    <ng-template ngx-datatable-header-template>
+					            <span fxFlex
+        	                        [innerHTML]="section.title"></span>
+					        </ng-template>
+					        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+					            <span fxFlex
+        	                        [innerHTML]="row['title']"></span>
+					        </ng-template>
+					    </ngx-datatable-column>
+					    <ngx-datatable-column [width]="600" *ngIf="testDetails.correctionGrid.correction.commentArea">
+					    	<ng-template ngx-datatable-header-template>
+					            {{testDetails.correctionGrid.correction.commentsHeader}}
+					        </ng-template>
+					        <ng-template let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+					            <md-input-container color="accent" style="width: 100%">
+							      <textarea mdInput [formControl]="form.controls['comment'+i+row.$$index]" [(ngModel)]="testCorrect.correctionGrid.correction.sections[i].subSections[row.$$index].comments"></textarea>
+							    </md-input-container>
+					        </ng-template>
+					    </ngx-datatable-column>
+					    <ngx-datatable-column [width]="200" *ngIf="section.subSections[0].maximumRating">
+					    	<ng-template ngx-datatable-header-template >
+					            {{'TESTCORRECTIONS.POINTS' | translate}}
+							</ng-template>
+					        <ng-template style="text-align: right;" let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+								<div class="px-1 select-input-container" style="text-align: right;">
+									<md-input-container class="{{row['title']}}" dividerColor="accent">
+							        	<input maxlength="4" size="4" [(ngModel)]="listServiceFeature[i+'_'+row.$$index]" class="{{row['title']}}" (blur)="blurEvent($event,row['maximumRating'],i,form.value,row.$$index)" mdInput pattern="[0-9]*" max="10" type="text" name="{{i}}" [formControl]="form.controls['subSection'+i+row.$$index]" />
+							        </md-input-container>
+							            / {{row['maximumRating']}}
+						        </div>
+					        </ng-template>
+					    </ngx-datatable-column>
+					</ngx-datatable>
+					<md-card-content class="rncptitleCard">
+						<div fxFlex="43"></div>
+						<div fxFlex="44" class="px-1 select-input-container" style="text-align: right; color: white;">
+							<md-input-container style="width: 100%" dividerColor="accent">
+								<textarea [formControl]="form.controls['comment'+i]" mdInput [placeholder]="'TESTCORRECTIONS.COMMENTS' | translate" [(ngModel)]="testCorrect.correctionGrid.correction.sections[i].comments"></textarea>
+							</md-input-container>
+						</div>
+						<div fxFlex="13" class="px-1 select-input-container" style="color: white; text-align: right;">
+							<md-input-container  dividerColor="accent">
+								<input maxlength="4" size="4" [formControl]="form.controls['total'+i]" mdInput [placeholder]="'TESTCORRECTIONS.TOTAL' | translate" type="text" readonly="" [(ngModel)]="testCorrect.correctionGrid.correction.sections[i].rating">
+							</md-input-container>/ {{section.maximumRating}}
+						</div>
+					</md-card-content>
+				</md-card-content>
+				<md-card-title class="dark-text rncptitleCard">
+					<div class="px-1 select-input-container" style="text-align: right; color: white;">
+						<span>{{'TESTCORRECTIONS.GRANDTOTAL' | translate}}:</span> {{testCorrect.correctionGrid.correction.total}} / {{testDetails.maxScore}}
+					</div>
+					<div class="px-1 select-input-container" style="text-align: right; color: white; padding-top: 10px;">
+						<span>{{'TESTCORRECTIONS.ADDITIONALTOTAL' | translate}}:</span> {{testCorrect.correctionGrid.correction.additionalTotal}} / {{testDetails.correctionGrid.correction.totalZone.additionalMaxScore}}
+					</div>
+				</md-card-title>
+	        </md-card>
+   		 	<md-card class="primary-background dark-header" *ngIf="testDetails">
+	            <md-card-title *ngIf="testDetails.correctionGrid.footer">
+	           		<div fxLayout="row wrap" fxLayoutAlign="start center">
+	                    <div fxFlex class="text-xl" [innerHTML]="testDetails.correctionGrid.footer.text">
+	                       <!--  {{testDetails.correctionGrid.footer.text}}      -->
+	                    </div>
+	                </div>
+	            </md-card-title>
+	            <hr>
+	            <md-card-content class="rncptitleCard" *ngIf="testDetails.correctionGrid.footer">
+	            	<div fxFlex="50" fxFlex.lt-md="100" *ngFor="let field of testDetails.correctionGrid.footer.fields; let i = index ">
+				        <div class="px-1">
+				            <!-- <md-input-container dividerColor="accent" style="width: 100%" *ngIf="field.value == 'Signature'"> -->
+				              <!-- <input mdInput [placeholder]="field.value" type="checkbox" [formControl]="form.controls['footer'+i]" [(ngModel)]="testCorrect.correctionGrid.footer.fields[i].value"> Signature -->
+				              <md-checkbox name="Signature"
+	                                     class="mt-1"
+	                                     *ngIf="field.value == 'Signature'"
+	                                     color="accent"
+	                                     [checked]="testCorrect.correctionGrid.footer.fields[i].value"
+	                                     align="start"
+	                                     [formControl]="form.controls['footer'+i]"
+	                                     [(ngModel)]="testCorrect.correctionGrid.footer.fields[i].value">
+	                          {{field.value}}
+	                        </md-checkbox>
+				            <!-- </md-input-container> -->
+				            <md-input-container dividerColor="accent" style="width: 100%" *ngIf="field.value != 'Signature'">
+				              <input mdInput [placeholder]="field.value" type="{{field.dataType}}" [formControl]="form.controls['footer'+i]" [(ngModel)]="testCorrect.correctionGrid.footer.fields[i].value">
+				            </md-input-container>
+				        </div>
+				    </div>
+				</md-card-content>
+		    </md-card>
+		    <md-card class="primary-background dark-header">
+		    	<md-card-title>
+			   		<button [routerLink]="['/test-correction']" md-raised-button color="accent" style="vertical-align: middle;"
+	    	           	md-button>{{'TESTCORRECTIONS.SUBMIT.CANCEL' | translate}}</button>
+	    	        <span style="float: right;">
+				    	<button [routerLink]="['/test-correction']" md-raised-button color="accent" style="vertical-align: middle;"
+		    	            md-button>{{'TESTCORRECTIONS.SUBMIT.PREVIOUS' | translate}}</button>
+		    	        <button type="submit" md-raised-button color="accent" style="vertical-align: middle;"
+		    	            md-button>{{'TESTCORRECTIONS.SUBMIT.RETURN' | translate}}</button>
+		    	        <button [routerLink]="['/test-correction']" md-raised-button color="accent" style="vertical-align: middle;"
+		    	            md-button>{{'TESTCORRECTIONS.SUBMIT.NEXT' | translate}}</button>
+		    	    </span>
+    	        </md-card-title>
+		    </md-card>
+   		</div>
+   	</form>
+	</div>
+</div>

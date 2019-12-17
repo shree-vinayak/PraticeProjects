@@ -1,0 +1,12 @@
+<div style="text-align: center">
+  <h2> {{'MENTOREVALUATION.TITLE' | translate}} </h2>
+  <br>
+  <md-card>
+    <quill-editor #editor [(ngModel)]="notificaitonText"></quill-editor>
+  </md-card>
+  <br>
+  <div style="float: right;">
+    <button md-raised-button color="primary" (click)="closeDialog(false)">{{'CLOSE' | translate}}</button>
+    <button md-raised-button color="accent" (click)="sendMentorEvaluation()" name="single-click">{{'SUBMIT' | translate}}</button>
+  </div>
+</div>

@@ -1,0 +1,277 @@
+﻿<div fxLayout="column" fxLayoutWrap="wrap">
+    <div fxFlex="100">
+        <form [formGroup]="form" (ngSubmit)="save(form.value)">
+            <a class="close_icon">
+                <i class="material-icons" style="float:right;margin-right: 0px" (click)="cancel()">close</i>
+            </a>
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex fxLayoutAlign="none start">
+                    <md-icon>account_balance</md-icon>
+                    <label style="margin-left: 10px;" class="DialogTitle" *ngIf="!isSchoolEdit">{{'NEW_SCHOOL.ADD_SCHOOL'
+                        | translate}}</label>
+                    <label style="margin-left: 10px;" class="DialogTitle" *ngIf="isSchoolEdit">{{'NEW_SCHOOL.EDIT_SCHOOL'
+                        | translate}}</label>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="!isSchoolEdit">
+                <div fxFlex="100" fxFlex.lt-md="100" fxFlexAlign="end">
+                    <!-- <div class="px-1 select-input-container"> -->
+                    <md-radio-group style="float: left !important" formControlName="operationRoleType">
+                        <md-radio-button (change)="changeSelection($event)" *ngFor="let selection of CertifierSelection | orderBy : 'selection.view'"
+                            [value]='selection.value' [checked]='selection.selected'>
+                            {{ 'USERS.' + selection.view | translate }}
+                        </md-radio-button>
+                    </md-radio-group>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="60">
+                    <div fxLayout="column" fxLayoutWrap="wrap">
+
+                        <div fxLayout="row" fxLayoutWrap="wrap">
+
+                            <md-input-container fxFlex class="full-width">
+                                <input matInput formControlName="shortName" [placeholder]="'NEW_SCHOOL.SCHOOL_SHORT_NAME' | translate">
+                            </md-input-container>
+
+                        </div>
+                        <div fxLayout="row" fxLayoutWrap="wrap">
+
+                            <md-input-container fxFlex class="full-width">
+                                <input matInput formControlName="longName" [placeholder]="'NEW_SCHOOL.SCHOOL_LONG_NAME' | translate">
+                            </md-input-container>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div fxFlex="10">&nbsp;</div>
+                <!-- <div fxFlex="30" *ngIf ="isSchoolCertifier">
+                    <div fxLayout="column" fxLayoutWrap="wrap">
+                        <div id="logo-box">
+                            <img *ngIf="logoFilePath" [src]="logoFilePath" alt="certifier logo" class="certi-logo">
+                            <input type="file" style="display:none" (change)="onFileChange($event)" #fileInput>
+                            <button type="button" style="margin-left: 10px;display:block;float:right" md-raised-button color="primary" (click)="fileInput.click()">
+                                + File
+                            </button>
+                        </div>
+                        <span style="display:block">{{schoolLogoName}}</span>
+                    </div>
+                </div> -->
+                <!-- <div fxFlex="30" *ngIf ="isSchoolEdit">
+                    <div fxLayout="column" fxLayoutWrap="wrap">
+                        <div id="logo-box">
+                            <img [src]="schoolLogoFile ? existingFilePath:'http://13.228.183.123/api/'+existingFilePath " alt="certifier logo" class="certi-logo">
+                            <input type="file" style="display:none" (change)="onFileChangeInEdit($event)" #fileInput>
+                            <button type="button" style="margin-left: 10px;display:block;float:right" md-raised-button color="primary" (click)="fileInput.click()">
+                                + File
+                            </button>
+                        </div>
+                        <span style="display:block">{{schoolLogoNameInEdit}}</span>
+                    </div>
+                </div> -->
+
+            </div>
+
+
+
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <md-input-container fxFlex class="full-width">
+                    <input matInput formControlName="address1" [placeholder]="'STUDENT.ADDRESS1.title' | translate">
+                </md-input-container>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <md-input-container fxFlex class="full-width">
+                    <input matInput formControlName="address2" [placeholder]="'STUDENT.ADDRESS2.title' | translate">
+                </md-input-container>
+            </div>
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="40">
+                    <md-input-container fxFlex class="full-width">
+                        <input mdInput formControlName="postalCode" [placeholder]="'STUDENT.ZIPCODE.title' | translate"
+                            [maxlength]="5" min="0" [minlength]="5" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                            type="tel">
+                    </md-input-container>
+                </div>
+                <div fxFlex="10">&nbsp;</div>
+                <div fxFlex="50">
+                    <md-input-container fxFlex class="full-width">
+                        <input mdInput formControlName="city" [placeholder]="'STUDENT.CITY.title' | translate"
+                            maxlength="200" type="text">
+                    </md-input-container>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="40">
+                    <md-select color="accent" formControlName="region" style="width: 100%;" [placeholder]="'STUDENT.REGION.title' | translate">
+                        <!-- <md-option *ngFor="let country of countryList" [value]="country.id">
+                            {{ 'COUNTRY.' + country.countryName | translate}}
+                        </md-option> -->
+                    </md-select>
+                </div>
+                <div fxFlex="10">&nbsp;</div>
+                <div fxFlex="50">
+                    <md-input-container fxFlex class="full-width">
+                        <input mdInput formControlName="retakeCenter" [placeholder]="'STUDENT.Retake_Center.title' | translate"
+                            maxlength="200" type="text">
+                    </md-input-container>
+                </div>
+            </div>
+            
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="40">
+                    <md-select color="accent" formControlName="country" style="width: 100%;" [placeholder]="'STUDENT.COUNTRY.title' | translate">
+                        <md-option *ngFor="let country of countryList" [value]="country.id">
+                            {{ 'COUNTRY.' + country.countryName | translate}}
+                        </md-option>
+                    </md-select>
+                </div>
+                <div fxFlex="10">&nbsp;</div>
+                <div fxFlex="50">
+                    <md-input-container fxFlex class="full-width">
+                        <input mdInput formControlName="schoolRef" [placeholder]="'STUDENT.SCHOOLREF' | translate"
+                            maxlength="200" type="text">
+                    </md-input-container>
+                </div>
+            </div>
+
+
+
+            <div fxLayout="row" fxLayoutWarp="wrap" style="display: block;" *ngIf="isSchoolEdit">
+                <div fxFlex="100" fxLayout="column" fxLayoutWarp="wrap">
+                    <div fxFlex="100" fxLayout="row" fxLayoutAlign="start start">
+                        <label> {{ 'NEW_SCHOOL.RNCP_CR' | translate }} </label>
+                    </div>
+                    <div fxFlex="100" fxLayout="row" fxLayoutAlign="start end">
+                        <ng-select appendTo="body" fxFlex="60" formControlName="assignedCertifier" (data)="changeCertifier($event)"
+                            [disabled]="true" [multiple]="true" [items]="CertifierList | orderBy: 'CertifierList.text'"
+                            placeholder="{{ 'USERS.ADDEDITUSER.SELECTRNCPTITLE' | translate }}*">
+                            <ng-template ng-option-tmp let-item="item">
+                                {{ item.text }}
+                            </ng-template>
+                        </ng-select>
+                        <div fxFlex="40" fxLayoutAlign="end end">
+                            <button *ngIf="!isAddRncp" md-raised-button type="button" color="primary" (click)="isAddRncp=!isAddRncp">
+                                {{ 'NEW_SCHOOL.ADD_RNCP' | translate }} +
+                            </button>
+                            <button *ngIf="isAddRncp" md-raised-button color="warn" type="button" (click)="cancelAddRNCPTitle()">
+                                {{'CANCEL' | translate}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="isAddRncp">
+                <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutGap="25px" style="margin-top: 20px !important">
+                    <div fxFlex="calc(60%-25px)" fxFlexAlign="end">
+                        <md-input-container [class]="certifierFormSubmit && form?.controls['codeRncp']?.invalid ? 'full-width mat-input-invalid' : 'full-width'">
+                            <input matInput class="full-width" formControlName="codeRncp" type="text" [maxlength]="5"
+                                [placeholder]="'NEW_SCHOOL.CODE_RNCP' | translate">
+                        </md-input-container>
+                        <small *ngIf="form?.controls['codeRncp']?.hasError('pattern') && form?.controls['codeRncp']?.touched"
+                            class="mat-text-warn"> {{ 'NEW_SCHOOL.CODEERROR' | translate }}</small>
+                    </div>
+                    <div fxFlex="calc(40%-25px)">
+                        <md-input-container [class]="certifierFormSubmit && form?.controls['shortNameRncp']?.invalid ? 'full-width mat-input-invalid' : 'full-width'">
+                            <input matInput formControlName="shortNameRncp" [placeholder]="'NEW_SCHOOL.SHORT_RNCP_NAME' | translate">
+                        </md-input-container>
+                    </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <md-input-container [class]="certifierFormSubmit && form?.controls['longNameRncp']?.invalid ? 'full-width mat-input-invalid' : 'full-width'">
+                        <input matInput formControlName="longNameRncp" [placeholder]="'NEW_SCHOOL.LONG_RNCP_NAME' | translate">
+                    </md-input-container>
+                </div>
+
+                <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutGap="25px" fxLayoutAlign="none end">
+                    <md-select [class]="(certifierFormSubmit || submitted) && form?.get('rncpLevel')?.invalid ? 'ng-touched' : ''"
+                        fxFlex="calc(60%-25px)" [placeholder]="'NEW_SCHOOL.RNCP_LEVEL' | translate" formControlName="rncpLevel">
+                        <md-option *ngFor="let rncp of rncpLevel" [value]="rncp.value">
+                            {{ rncp.viewValue }}
+                        </md-option>
+                    </md-select>
+                    <div fxFlex="calc(40% - 25px)" fxLayoutAlign="end" *ngIf="isSchoolEdit">
+                        <button md-raised-button color="primary" type="button" (click)="addCertifier()">
+                            {{'USERS.ADDEDITUSER.SUBMIT' | translate}}
+                        </button>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="100">
+                        <md-select [class]="submitted && form?.get('admtcDirResponsible')?.invalid ? 'ng-touched' : ''"
+                            [placeholder]="'NEW_SCHOOL.ADMTC_DIR_IN_CHARGE' | translate" formControlName="admtcDirResponsible"
+                            style="width: 100%;">
+                            <md-option *ngFor="let dir of admtcDirList" [value]="dir._id">
+                                {{ getNameOfDir(dir) }}
+                            </md-option>
+                        </md-select>
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutWarp="wrap" *ngIf="isRncpAutoComplete">
+                <div fxFlex="100" fxLayout="column" FxLayoutAlign="end" fxLayoutWarp="wrap">
+                    <div fxFlex="100" fxLayout="row" fxLayoutAlign="start end">
+                        <label [class]="submitted && this.RNCPTitles.length <=0 ? 'invalidDropDown' : ''"> {{
+                            'NEW_SCHOOL.RNCP_PC' | translate }} </label>
+                    </div>
+                    <div fxFlex="100" fxLayout="row">
+                        <ng-select fxFlex="47.5" [class]="submitted && this.RNCPTitles.length <=0 ? 'invalidDropDown' : ''"
+                            formControlName="assignedRncpTitles" (selected)="changeRNCP($event)" (removed)="rncpRemoveEvent($event)"
+                            [multiple]="true" [items]="RNCPTitleList | orderBy: 'RNCPTitleList.text'" placeholder="{{ 'USERS.ADDEDITUSER.SELECTRNCPTITLE' | translate }}*"></ng-select>
+                        <div fxFlex="5"></div>
+                        <md-select class="select-spec" fxFlex="47.5" formControlName="specializations" [placeholder]="'NEW_SCHOOL.Select_Specializations'| translate"
+                            multiple style="width: 60%">
+                            <md-option *ngFor="let spec of specializations" [value]="spec" [disabled]="disableCheckSpecializations(spec)">{{spec.name}}{{
+                                ' - ' }}{{getRNCPofSpec(spec._id)}}</md-option>
+                        </md-select>
+                    </div>
+                </div>
+            </div>
+            <!-- <div fxLayout="row" fxLayoutWarp="wrap" *ngIf="isRncpAutoComplete">
+                <div fxFlex="100" fxLayout="row">
+                    <md-select formControlName="specializations" [placeholder]="'NEW_SCHOOL.Select_Specializations'| translate" multiple style="width: 60%">
+                      <md-option *ngFor="let spec of specializations" [value]="spec">{{spec.name}}</md-option>
+                    </md-select>
+                  </div>
+            </div> -->
+            <!--
+            <div fxLayout="row" fxLayoutWarp="wrap" *ngIf="isRncpAutoComplete">
+                <p> {{ 'NEW_SCHOOL.RNCP_PC' | translate }} </p>
+                <ng-select fxFlex="60" formControlName="assignedRncpTitles" (data)="changeRNCP($event)" [multiple]="true" [items]="RNCPTitleList | orderBy: 'RNCPTitleList.text'"
+                    placeholder="{{ 'USERS.ADDEDITUSER.SELECTRNCPTITLE' | translate }}*"></ng-select>
+            </div> -->
+
+
+            <!-- <div fxFlex="30" class=" addRncp add_company_btn" *ngIf="isCertifier">
+                <div>
+                    <div class="px-1">
+                        <button md-raised-button color="primary" (click)="addNewRncp()" type="button">
+                                            {{'NEW_SCHOOL.ADD_RNCP' | translate}} +
+                        </button>
+                    </div>
+                </div>
+            </div> -->
+
+            <br />
+            <div fxLayout="row" fxLayoutWarp="wrap" fxLayoutGap="25px">
+                <div fxFlex fxLayoutAlign="end center">
+                    <button md-raised-button color="warn" type="button" (click)="cancel()">
+                        {{'CANCEL' | translate}}
+                    </button>
+                    <button style="margin-left: 10px" md-raised-button color="primary">
+                        {{'USERS.ADDEDITUSER.SUBMIT' | translate}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

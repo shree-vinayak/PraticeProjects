@@ -1,0 +1,21 @@
+<div class="job-dialog">
+  <i class="fa fa-question-circle" aria-hidden="true" style="font-size: 72px;"></i><br>
+  <p class="textjob-dialog">
+    {{'JOBDESCRIPTIONFORM.S1.TEXT'| translate}}
+  </p>
+  <div class="button-group">
+    <div style="display: inline-block;">
+      <button md-raised-button color="primary" type="button" (click)="notifyNow()">{{'JOBDESCRIPTIONFORM.S1.NOW'| translate}}</button>
+    </div>
+    <!-- <div style="display: inline-block;">
+      <input mdInput [mdDatepicker]="picker" placeholder="Choose a date" style="display: none;" [min]="minDate()">
+      <md-datepicker touchUi="true" #picker (selectedChanged)="updateCalcs($event)"></md-datepicker>
+      <button md-raised-button color="primary" (click)="picker.open(); ">{{'JOBDESCRIPTIONFORM.S1.LATER'| translate}}
+        <md-icon>date_range</md-icon>
+      </button>
+    </div> -->
+    <!-- <div style="display: inline-block;">
+        <button md-raised-button color="primary" type="button" (click)="notifyNowWithoutNotification()">{{'JOBDESCRIPTIONFORM.S1.DONTSENDNOW'| translate}}</button>
+      </div> -->
+  </div>
+</div>

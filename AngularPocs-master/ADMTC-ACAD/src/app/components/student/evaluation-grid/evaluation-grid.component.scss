@@ -1,0 +1,229 @@
+.scroll-y {
+  height: 200px;
+  overflow-y: auto;
+}
+
+:host /deep/ .primary-background {
+  background-color: #607d8b;
+}
+:host /deep/ .TitleText p {
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 20px;
+}
+
+:host /deep/ span {
+  h5 {
+    margin: 10px;
+  }
+
+  p {
+    margin: 0px;
+  }
+}
+
+main {
+  overflow-y: auto;
+}
+
+:host /deep/ .studentScore {
+  text-align: center !important;
+}
+:host /deep/ .studentDoc {
+  text-align: center !important;
+}
+md-card.dark-header {
+  .mat-card-title {
+    margin-bottom: 0;
+    padding-bottom: 16px;
+    background-color: #212121;
+  }
+}
+
+.mat-card-title {
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+  font-size: 13px !important;
+}
+
+.container_two {
+  padding: 15px 15px 5px 15px;
+}
+
+.flex_3 {
+  flex: 3 !important;
+  width: 33% !important;
+
+}
+
+.flex_3 .px-1 {
+  padding-left: 0 !important
+}
+
+.mat-input-wrapper {
+
+  margin-bottom: 5px !important;
+}
+
+.datatable-header .datatable-header-cell {
+  padding: 3px !important;
+}
+
+.yellow-border {
+  border: 2px solid #ffd740;
+  margin-bottom:5px !important;
+}
+:host /deep/ .yellow-border datatable-footer{
+  display: none !important;
+}
+
+.total_number div {
+  display: inline-block;
+  margin-top: 0 !important;
+  vertical-align: top !important;
+  padding-top: 0 !important
+}
+
+.total_number {
+  text-align: right;
+  margin: 0 !important;
+}
+
+.mat-card-content {
+  padding-top: 7px !important;
+  padding-bottom: 7px !important
+}
+
+.ql-align-center {
+  margin: 8px 0 0 0 !important;
+  font-size: 13px;
+}
+
+.table_container .mat-input-wrapper {
+  margin: 5px 0 !important;
+}
+
+#form_container {
+  display: block !important
+}
+
+.title_pd0 {
+  padding-bottom: 14px !important;
+  padding-top: 14px !important;
+}
+
+
+
+/*Test correction CSS START*/
+.full-width {
+  width: 100%;
+}
+
+md-radio-group{
+  float: left !important;
+}
+
+
+
+.form-title {
+  padding-bottom: 6px;
+  /*border-bottom: 1px solid rgba(0, 0, 0, 0.2);*/
+  margin:0px;
+  font-size: 15px;
+  font-weight:600;
+}
+.mat-input-wrapper{
+  margin: 5px 0 !important;
+}
+
+.form-sub-title {
+  margin: 12px 0 6px;
+  font-size: 13px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+
+.mt-18 {
+  margin-top: 18px;
+}
+
+.p0{
+  padding: 0!important;
+}
+
+.job-description{
+  font-size: 20px;
+  font-weight: 600;
+  text-align:center;
+  //margin: 12px 0;
+}
+.job-description .row{
+  margin-right: 0px !important;
+ }
+
+ .job-description{
+    .row{
+  margin-right: 0px !important;
+ }
+}
+
+.border-yellow{
+  border: 2px solid #ffd740;
+}
+.border-yellow md-card-content{
+  padding-bottom: 0px !important;
+  padding-top: 5px !important;
+}
+
+
+.form-group {
+  margin-bottom: 1rem;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.col-form-label {
+  padding-top: calc(.5rem - 1px * 2);
+  padding-bottom: calc(.5rem - 1px * 2);
+  margin-bottom: 0;
+}
+
+.form-control-plaintext {
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  margin-bottom: 0;
+  line-height: 1.25;
+  border: solid transparent;
+  border-width: 1px 0;
+}
+
+@media (min-width: 576px) {
+  .col-sm-2 {
+    -ms-flex: 0 0 40%;
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+
+  .col-sm-10 {
+    -ms-flex: 0 0 60%;
+    flex: 0 0 60%;
+    max-width: 60%;
+  }
+}
+
+
+.mat-checkbox-inner-container{
+  margin-right: 8px!important;
+}
+
+.cdark-header{
+  height:650px;
+  overflow-y: auto;
+}

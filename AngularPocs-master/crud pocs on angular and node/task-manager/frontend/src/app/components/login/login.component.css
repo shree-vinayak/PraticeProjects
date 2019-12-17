@@ -1,0 +1,18 @@
+.align-left {
+    width: 25%;
+    text-align: left;
+}
+
+.loginForm {
+    width: 60%;
+    margin: 0 auto;
+    padding: 70px 30px;
+}
+
+.btn-dark {
+    margin-right: 10px;
+}
+
+.formField {
+    padding-bottom: 15px;
+}

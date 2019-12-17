@@ -1,0 +1,247 @@
+.ngx-datatable.ngx-dt-maillist {
+    margin: 0;
+
+    .datatable-header {
+        background-color: #212121;
+        span {
+            cursor: pointer;
+        }
+        .datatable-header-inner{
+            .datatable-header-cell {
+                padding-left: 15px !important;
+            }
+        }
+    }
+
+    .datatable-checkbox {
+        padding: 0px;
+    }
+}
+
+.datatable-body-cell {
+    padding: 15px !important;
+    cursor: pointer;
+}
+.e-mailSubject
+{     white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    width: 80% !important;
+    font-size: 16pt;
+}
+.datatable-body-cell-label {
+    .mailSubject {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+.unreadNotify {
+    color: white;
+    margin-left: 10px;
+    background-color: red;
+    padding: 3px 8px 3px 8px;
+    border-radius: 50%;
+}
+
+.demo {
+    background-color: #009846;
+}
+
+.unread input[type='checkbox'] {
+    &:before {
+        border-color: red !important;
+    }
+    &:after {
+        background-color: red !important;
+    }
+    &:checked {
+        &:before {
+            border-color: white !important;
+        }
+    }
+}
+
+.attachment {
+    width: 100%;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07)
+}
+
+.mail-type-list-wrapper{
+    border-bottom: 1px solid grey;
+    margin-bottom: 5px;
+
+    .mat-list {
+        padding: 0px;
+
+        .mat-list-item{
+            border-left: 8px solid;
+            transition-property: background;
+            transition-duration: .3s;
+            transition-timing-function: linear;            
+            cursor: pointer;
+
+            &.mail-type-inbox {
+                border-left-color: #009846;
+            }
+
+            &.mail-type-sent {
+                border-left-color: #846573;
+            }
+
+            &.mail-type-important {
+                border-left-color: #E51A4B;
+            }
+
+            &.mail-type-draft {
+                border-left-color: #FFED00;
+            }
+
+            &.mail-type-trash {
+                border-left-color: #D9DADA;
+            }
+
+            & .fa {
+                margin-right: 15px;
+            }
+
+            &.active,
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: #212121;
+            }
+        }
+    }
+}
+
+.fileInfo{
+    width: fit-content !important;
+    margin: 5px !important;
+    display: inline-block !important;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    box-shadow: inset 1px 1px 0 rgba(0,0,0,.1), inset 0 -1px 0 rgba(0,0,0,.07)
+}
+
+.mail-controls {
+    margin: 8px 10px;
+    
+    .mat-button {
+        padding: 8px;
+        width: 30px;
+        min-width: initial;
+        background-color: lightgray;
+        color: #212121;
+        line-height: 14px;
+        margin-right: 5px;
+    }
+
+    .reply-btn {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}
+
+.mail-search {
+    text-align: right;
+}
+
+.fontMini {
+    width: 40px;
+}
+
+.view-message-section {
+    background: white;
+    width: 100%;
+    color: black;
+    padding: 20px;
+    height: 100%;
+}
+
+.selected-row-table {
+    background: lightgray !important;
+    color: black;
+}
+
+.mat-card-actions.compose-mail-actions {
+    text-align: left;
+}
+
+.compose-mail-actions{
+    .mat-button {
+        min-width: initial;
+        padding: 10px;
+        font-size: 25px;
+        line-height: 20px;
+        margin-right: 0.33333rem;
+    }
+
+    .btn-close {
+        float: right;
+        font-size: 30px;
+        font-family: cursive;
+        color: gray;
+        transition-property: background;
+        transition-duration: .3s;
+        transition-timing-function: linear;
+        cursor: pointer;
+    }
+
+    .mat-card-actions {
+        width: 100%;
+    }
+
+    .btn-close:hover,
+    .btn-close:active,
+    .btn-close:focus {
+        color: #212121;
+    }
+
+} 
+
+span.emailsubject {
+    font-size: 16pt;
+}
+
+.message-body {
+    margin-top: 15px;
+    background: #eaf0f5;
+    min-height: 150px;
+}
+
+.message-content {
+    margin-left: 10px;
+    margin-top: 10px
+}
+
+.compose-mail.mat-card-content {
+    width: 100%;
+}
+
+
+p.ViewMailCloseBtn {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.leftspace {
+    margin-left: 10px;
+}
+
+th {
+    padding: 10px !important;
+}
+
+td {
+    padding: 10px !important;
+}
+
+
+

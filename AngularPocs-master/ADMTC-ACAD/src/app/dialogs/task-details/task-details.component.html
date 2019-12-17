@@ -1,0 +1,204 @@
+<form>
+  <div fxLayout="column" fxLayoutAlign="start" style="width: 100%; height: 100%;">
+    <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px;">
+      <div class="pa-1">
+        <div fxLayout="row wrap" fxLayoutAlign="start center">
+          <div fxFlex>
+            <span style="vertical-align: -webkit-baseline-middle;float: left">
+              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="#000000 " d="M19,19H5V5H15V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V11H19M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z" />
+              </svg>
+            </span>
+
+            <p *ngIf="isStudeDetailRevisTask; else addTsk" class="text-xl issuance-details-task">
+              {{ 'CERTIFICATE_ISSUANCE.CERTIFICATE_REVISION_FOR' | translate }} {{ task?.studentId ?
+              civiltyCount(task?.studentId?.sex)
+              + ' ' + task?.studentId?.firstName + ' ' + task?.studentId?.lastName : ''}}
+            </p>
+            <ng-template #addTsk>
+              <span class="text-xl" style="margin-left: 5px;">{{ task?.description.length > 25 ?
+                (task?.description.slice(0,24) + '...') : task?.description
+                }}</span></ng-template>
+          </div>
+          <button md-icon-button (click)="closeDialog(true)">
+            <md-icon>close</md-icon>
+          </button>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <br>
+    <div fxLayout="row wrap">
+      <div fxFlex="30">
+        <label> {{'DASHBOARD.DUEDATE' | translate}} </label>
+      </div>
+      <div fxFlex="70">
+        : &nbsp;&nbsp; {{ task?.dueDate | date: 'dd/MM/yyyy' }}
+      </div>
+    </div>
+    <div fxLayout="row wrap">
+      <div fxFlex="30">
+        <label> {{'DASHBOARD.ASSIGNEDTO' | translate}} </label>
+      </div>:
+      <div fxFlex="69" style="padding-left: 10px;">
+        <span *ngIf="isStudeDetailRevisTask; else addTskUser">
+          {{task?.userSelection?.userId ? task?.userSelection?.userId?.firstName + ' ' +
+          task?.userSelection?.userId?.lastName : '' }}
+        </span>
+        <ng-template #addTskUser>
+          <span>{{task?.userSelection?.selectionType !== 'user' ? task.userSelection.userTypeId ?
+            getTranslateADMTCSTAFFKEY(task.userSelection.userTypeId.name):
+            '' : task?.userSelection?.firstName + ' ' + task?.userSelection?.lastName }}</span>
+        </ng-template>
+      </div>
+    </div>
+    <div fxLayout="row wrap">
+      <div fxFlex="30">
+        <label> {{'DASHBOARD.TASK' | translate}} </label>
+      </div>:
+      <div fxFlex="69" style="padding-left: 10px;">
+        <span *ngIf="isStudeDetailRevisTask; else addTskDesp">
+          {{ 'CERTIFICATE_ISSUANCE.CERTIFICATE_REVISION_FOR' | translate }} {{ task?.studentId ?
+          civiltyCount(task?.studentId?.sex)
+          + ' ' + task?.studentId?.firstName + ' ' + task?.studentId?.lastName : ''}}
+        </span>
+        <ng-template #addTskDesp>{{ task?.description }}</ng-template>
+      </div>
+    </div>
+    <div fxLayout="row wrap">
+      <div fxFlex="30">
+        <label>
+          <span *ngIf="isStudeDetailRevisTask; else addTskSub">
+            {{'DASHBOARD.DESCRIPTION' | translate}}
+          </span>
+          <ng-template #addTskSub>
+            <span> {{'DASHBOARD.SUBJECT/TEST' | translate}} </span>
+          </ng-template>
+        </label>
+      </div>:
+      <div fxFlex="69" style="padding-left: 10px;">
+        {{ isStudeDetailRevisTask ? task?.taskSummary ? task?.taskSummary : '' :testName }}
+      </div>
+    </div>
+    <div fxLayout="row wrap">
+      <div fxFlex="30">
+        <label> {{'DASHBOARD.PRIORITY' | translate}} </label>
+      </div>
+      <div fxFlex="70">
+        : &nbsp;&nbsp; {{ task?.priority }}
+      </div>
+    </div>
+
+    <div fxLayout="row wrap" *ngIf="documentExpected && documentExpected.length > 0">
+      <div fxFlex="30">
+        <label> {{'TASK.FORDOCUPLOADTASK' | translate}} </label>
+      </div>
+      <div fxFlex="70">
+        : &nbsp;&nbsp;
+      </div>
+    </div>
+
+    <div fxLayout="row wrap" *ngFor="let doc of documentExpected; let i = index">
+        <div fxFlex="73">
+          <div style="margin-top: 10px">
+              {{ doc.name }}
+          </div>
+        </div>
+        <div fxFlex="27">
+          <i *ngIf="doc?.documentId" class="fa fa-check-circle check-icon" aria-hidden="true"></i>
+          <div class="photo-upload" style="text-align: right">
+            <input #uploadExpextedDoc style="display: none;" type="file" ng2FileSelect [uploader]="uploader" disableMultipart="true" />
+            <button [disabled]="isDetailsReadOnly" style="margin-top:5px" (click)="openUploadWindow(i)"
+              fxFlexAlign="end" md-raised-button md-button-sm color="primary" type="button">
+              <md-icon>add</md-icon>
+              {{'DOCUMENT.FILE' | translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+
+    <div fxLayout="row wrap" style="margin-top: 5px;">
+      <div fxFlex>
+        <hr />
+      </div>
+    </div>
+    <div fxLayout="row wrap" *ngIf="isAssignByLoginUser && task?.taskStatus === 'Done'">
+      <div fxFlex="100">
+        <div fxLayout="column wrap">
+          <div fxLayout="row wrap">
+            <div fxFlex="100">
+              <label>
+                {{task?.userSelection?.selectionType !== 'user' ? task.userSelection.userTypeId ?
+                getTranslateADMTCSTAFFKEY(task.userSelection.userTypeId.name):
+                '' : task?.userSelection?.userId?.firstName + ' ' + task?.userSelection?.userId?.lastName }}
+              </label>
+            </div>
+          </div>
+          <div fxLayout="row wrap">
+            <div fxFlex="30">
+              <label> {{ 'TASK.TASKDETAILS.DATE' | translate }} </label>
+            </div>
+            <div fxFlex="70">
+              : &nbsp;&nbsp; {{ task?.createdAt | date: 'dd/MM/yyyy' }}
+            </div>
+          </div>
+
+          <div fxLayout="row wrap">
+            <div fxFlex="30">
+              <label> {{ 'TASK.TASKDETAILS.STATUS' | translate }} </label>
+            </div>
+            <div fxFlex="70">
+              : &nbsp;&nbsp; {{ task?.status }}
+            </div>
+          </div>
+
+          <div fxLayout="row wrap">
+            <div fxFlex="30">
+              <label> {{ 'TASK.TASKDETAILS.ACTIONTAKEN' | translate }} </label>
+            </div>
+            <div fxFlex="70">
+              : &nbsp;&nbsp; {{ task?.actionTaken }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row wrap">
+      <div fxFlex>
+        <hr />
+      </div>
+    </div>
+    <div fxLayout="row wrap" style="margin-top: 10px;">
+      <div fxFlex=100 fxLayoutAlign="center center">
+        <span>{{ 'TASK.TASKDETAILS.PENDING' | translate }}</span>
+        <mat-slide-toggle [disabled]="isDetailsReadOnly || hasAllDocUploaded()" [(ngModel)]="isTaskDone" [ngModelOptions]="{standalone: true}">
+          {{ 'TASK.TASKDETAILS.ACHIEVED' | translate }}
+        </mat-slide-toggle>
+      </div>
+    </div>
+    <div class="taskDetailsText" fxLayout="row wrap" style="margin-top: 10px;" *ngIf="!isAssignByLoginUser || task?.taskStatus !== 'Done'">
+      <div fxFlex=100>
+        <md-input-container style="width: 100%">
+          <textarea [disabled]="isDetailsReadOnly" [(ngModel)]="actionTaken" [ngModelOptions]="{standalone: true}"
+            placeholder="{{ 'TASK.TASKDETAILS.ACTIONTAKEN' | translate }}" mdInput></textarea>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="taskDetailsText" fxLayout="row wrap" style="margin-top: 10px;" *ngIf="isAssignByLoginUser && task?.taskStatus === 'Done'">
+      <div fxFlex=100>
+        <md-input-container style="width: 100%">
+          <textarea [disabled]="isDetailsReadOnly" [(ngModel)]="comment" [ngModelOptions]="{standalone: true}"
+            placeholder="{{ 'TASK.TASKDETAILS.COMMENTS' | translate }}" mdInput></textarea>
+        </md-input-container>
+      </div>
+    </div>
+    <div fxLayout="row wrap" style="margin-top: 10px;">
+      <div fxFlex=100 fxLayoutAlign="end end" fxLayoutGap="20px">
+        <button [disabled]="isDetailsReadOnly" md-raised-button color="primary" (click)="updateTask()">{{'STUDENT.SAVE'
+          |
+          translate}}</button>
+        <button md-raised-button color="warn" (click)="closeDialog(true)">{{'CANCEL' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,256 @@
+<md-card *ngIf='isAutorized'>
+    <md-card-content>
+      <div fxLayout="row" fxLayoutWrap="wrap" class="taskListNgSelect">
+
+        <div fxFlex="78" fxFlex.lt-md="100">
+          <div fxFlex="50" fxFlex.lt-md="28" *ngIf="checkIsDirectorSalesAdmin">
+              <div style="width:25%;float:left;">
+                  <ng-select style="margin-top: 3px;" [(ngModel)]="userTypeBind" fxFlex="68" (data)="ChangeUserTitle($event)" [multiple]="false" [items]="userTypes" [placeholder]="'USERS.SELECTUSERTYPE' | translate"></ng-select>
+              </div>
+          </div>
+          <div fxFlex="50" fxFlex.lt-md="28">
+
+              <div style="width:25%;float:left;">
+                  <span *ngIf="checkIsDirectorSalesAdmin" style="margin-left:5px;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <md-input-container>
+                      <input style="width: 250px;" [(ngModel)]="searchText" mdInput maxlength="30" placeholder="{{ 'IDEAS.SEARCHTEXT' | translate }}" type="text" (keyup)="searchSuggestionListKeyup($event)" />
+                  </md-input-container>
+              </div>
+              <div dividerColor="accent" style="float:left;">
+                  <button fxFlex style="margin-left: 5px;width: 100%;height: 38px;" md-raised-button type="button" class="btnSearch" color="primary" (click)="searchSuggestionList(true)">
+                      <md-icon>search</md-icon>
+                      {{'USERS.SEARCH' | translate}}
+                  </button>
+              </div>
+              <div dividerColor="accent" style="float:left;">
+                  <button [disabled]="!isSearching" fxFlex style="margin-left: 10px;width: 100%;height: 38px;" md-raised-button type="button" class="btnSearch" color="primary" (click)="resetSearch()">
+                  <md-icon>restore</md-icon>
+                  Reset
+                  </button>
+              </div>
+           </div>
+
+        </div>
+        <div fxFlex="22" fxFlex.lt-md="100" style="overflow: hidden;">
+            <div style="float:right;text-align:right;">
+                <button style="float: right;" fxFlex md-raised-button color="accent" class="btnSearch" (click)="addNewAcademicSuggestion()">
+                  <md-icon >markunread_mailbox</md-icon>   {{'ADDIDEABTNTEXT'| translate}}
+                </button>
+            </div>
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>
+
+<!-- <md-card>
+    <md-card-content>
+        <div fxLayout="row" class="ideaListNgSelect" fxLayoutAlign="space-around center">
+            <div class="toolbar-ideas" *ngIf='isAutorized'>
+                <div style="width:25%;float:left;" *ngIf="checkIsDirectorSalesAdmin">
+                    <ng-select style="margin-top: 3px;" [(ngModel)]="userTypeBind" fxFlex="68" (data)="ChangeUserTitle($event)" [multiple]="false" [items]="userTypes" [placeholder]="'USERS.SELECTUSERTYPE' | translate"></ng-select>
+                </div>
+                <div style="width:25%;float:left;text-align:center;">
+                    <md-input-container>
+                        <input style="width: 250px;" [(ngModel)]="searchText" mdInput maxlength="30" placeholder="{{ 'IDEAS.SEARCHTEXT' | translate }}" type="text" (keyup)="searchSuggestionList($event)" />
+                    </md-input-container>
+                </div>
+                <div dividerColor="accent" style="width:25%;float:left;">
+                    <button [disabled]="!isSearching" fxFlex style="margin-left: 5px;width: 100%;height: 38px;" md-raised-button type="button" class="btnSearch" color="primary" (click)="resetSearch()">
+                    <md-icon>restore</md-icon>
+                    Reset
+                    </button>
+                </div>
+                <div style="width:50%;float:left;text-align:right;" *ngIf="!checkIsDirectorSalesAdmin">
+                    <button style="float: right;" fxFlex md-raised-button color="accent" class="btnSearch" (click)="addNewAcademicSuggestion()">
+                        <md-icon> add </md-icon>    {{'ADDIDEABTNTEXT'| translate}}
+                    </button>
+                </div>
+                <div style="width:25%;float:left;text-align:right;" *ngIf="checkIsDirectorSalesAdmin">
+                    <button style="float: right;" fxFlex md-raised-button color="accent" class="btnSearch" (click)="addNewAcademicSuggestion()">
+                        <md-icon> add </md-icon>    {{'ADDIDEABTNTEXT'| translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </md-card-content>
+</md-card> -->
+
+
+
+<div #pagesElement style="overflow: auto;" *ngIf='isAutorized'>
+    <!-- <ngx-datatable class="material suggestion-table" [rows]="oneThousandIdeas" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [columnMode]="'force'" [reorderable]="reorderable" [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+        [limit]="page.size" (page)="changePage($event)" [externalSorting]="true" [messages]="{emptyMessage: 'NoDataToDisplay' | translate }" (sort)="sortPage($event)" [sorts]="[{prop: 'user', dir: 'asc'},{prop: 'userType', dir: 'asc'},{prop: 'category', dir: 'asc'},{prop: 'suggestion', dir: 'asc'},{prop: 'date', dir: 'asc'}]" [cssClasses]="ngxDtCssClasses">
+
+        <ngx-datatable-column [width]="150" prop="date">
+            <ng-template ngx-datatable-header-template>
+                {{'IDEAS.DATE' | translate}}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row['createdAt'] | date:'dd-MM-y'}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="150" prop="user">
+            <ng-template ngx-datatable-header-template>
+                {{'IDEAS.USER' | translate}}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{ row['user']?row['user']['firstName']:'-' }}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="200" prop="userType">
+            <ng-template ngx-datatable-header-template>
+                {{'IDEAS.USERTYPE' | translate}}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span *ngFor="let types of row?.user?.types">
+              {{ utilityService.getTranslateADMTCSTAFFKEY(types.name) }}
+            </span>
+                <span *ngIf="row?.user?.types?.length == 0"> - </span>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="150">
+            <ng-template ngx-datatable-header-template>
+                {{'IDEAS.SCHOOL' | translate}}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row['school']?row['school']:'-'}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="200" prop="category">
+            <ng-template ngx-datatable-header-template>
+                {{'IDEAS.CATEGORY' | translate}}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row['category'] | translate}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="displayCheckbox ? 500 : 580" prop="suggestion">
+            <ng-template ngx-datatable-header-template>
+                {{'IDEAS.SUGGESTION' | translate }}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row['suggestion'] | slice:0:100}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="120">
+            <ng-template ngx-datatable-header-template>
+                Point
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                {{row['points'].length }}
+
+                <a *ngIf="displayCheckbox"><i style="font-size: 20px;" class="material-icons like-icon" *ngIf="row['points'].length === 0" (click)="clickOnLike(row['_id'])">plus_one</i></a>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column [width]="displayCheckbox ? 230 : 150" [flexGrow]="15" [sortable]="false" [cellClass]="'text-center'">
+            <ng-template ngx-datatable-header-template>
+                {{'IDEAS.ACTIONS' | translate}}
+            </ng-template>
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <button [disabled]="row.user?._id !== currentUser._id" md-icon-button md-button-sm md-raised-button class="grid-button" (click)="goToDetails(row)">
+                    <md-icon [mdTooltip]="'IDEAS.DETAILS'| translate">details</md-icon>
+                </button>
+                <button *ngIf="displayCheckbox" md-icon-button md-button-sm md-raised-button class="grid-button">
+                    <md-icon [mdTooltip]="'IDEAS.REPLY'| translate" (click)="openReplyDialog(row)" >reply</md-icon>
+                </button>
+                <button *ngIf="displayCheckbox" md-icon-button md-button-sm md-raised-button class="grid-button">
+                    <md-icon [mdTooltip]="'IDEAS.SHARE'| translate"(click)="OpenShareDialog(row,'foward-mail')">share</md-icon>
+                </button>
+                <button [disabled]="row.user?._id !== currentUser._id" md-icon-button md-button-sm md-raised-button class="grid-button" (click)="deleteIdea(row._id)">
+                    <md-icon [mdTooltip]="'IDEAS.SHARE'| translate">close</md-icon>
+                </button>
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable> -->
+
+
+
+    <ngx-datatable class="material rncp-table" [rows]="oneThousandIdeas" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
+    [rowHeight]="50" [scrollbarH]="true" [scrollbarV]="true" [reorderable]="reorderable" [externalPaging]="true" [count]="page.totalElements"
+    [offset]="page.pageNumber" [limit]="" (page)="changePage($event)" [messages]="{emptyMessage: 'NoDataToDisplay' | translate }" [sorts]="[{prop: 'createdAt', dir: 'asc'},{prop: 'user.lastName', dir: 'asc'},{prop: 'user.entity.school.shortName', dir: 'asc'},{prop: 'user.types[0].name', dir: 'asc'},{prop: 'category', dir: 'asc'},{prop: 'points_count', dir: 'asc'}]" [externalSorting]="true" (sort)="sortPage($event)" [selectionType]="'single'"
+    (activate)="onActivate($event)" [cssClasses]="ngxDtCssClasses">
+    <!--(activate)="onSelect($event)" for grid hover event-->
+    <ngx-datatable-column [flexGrow]="1.5" name="createdAt" prop="createdAt" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span mdTooltip=" {{'IDEAS.DATE' | translate}}" mdTooltipPosition="above" style="margin-left: -15px !important" (click)="sort()">  {{'IDEAS.DATE' | translate}} </span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <span style="margin-left: -8px !important">   {{row['createdAt'] | date:'dd-MM-y'}} </span>
+      </ng-template>
+    </ngx-datatable-column>
+     <ngx-datatable-column [flexGrow]="2" name="user.lastName" prop="user.lastName" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span mdTooltip=" {{'IDEAS.USER' | translate}}" mdTooltipPosition="above" style="margin-left: -16px !important" (click)="sort()"> {{'IDEAS.USER' | translate}}</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{ row['user']?row['user']['firstName']:'' }}  {{ row['user']?row['user']['lastName']:"" }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="user.types[0].name" prop="user.types[0].name" [flexGrow]="2" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span mdTooltip="{{'IDEAS.USERTYPE' | translate}}" mdTooltipPosition="above"> {{'IDEAS.USERTYPE' | translate}}</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <span *ngFor="let types of row?.user?.types">
+          {{ utilityService.getTranslateADMTCSTAFFKEY(types.name) }}
+        </span>
+            <span *ngIf="row?.user?.types?.length == 0"> - </span>
+      </ng-template>
+    </ngx-datatable-column>
+   <ngx-datatable-column name="user.entity.school.shortName" prop="user.entity.school.shortName" [flexGrow]="2" [sortable]="true" [resizeable]="false" >
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span mdTooltip=" {{'IDEAS.SCHOOL' | translate}}" mdTooltipPosition="above"> {{'IDEAS.SCHOOL' | translate}}</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['user'] && row['user']['entity']['school'] ? row['user']['entity']['school']['shortName']:'-'}}
+      </ng-template>
+    </ngx-datatable-column>
+     <ngx-datatable-column [flexGrow]="2" name="category" prop="category" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span mdTooltip=" {{'IDEAS.CATEGORY' | translate}}" mdTooltipPosition="above">  {{'IDEAS.CATEGORY' | translate}} </span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+         {{row['category'] | translate}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="7" name="suggestion" prop="suggestion" [sortable]="false" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span style="margin-left: -15px !important"  mdTooltip=" {{'IDEAS.SUGGESTION' | translate }}" mdTooltipPosition="above">  {{'IDEAS.SUGGESTION' | translate }}</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <span style="margin-left: -8px !important">   {{row['suggestion'] | slice:0:100}}</span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [flexGrow]="1" prop="points_count" name="points_count" [sortable]="true" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span style="margin-left: -18px  !important" (click)="sort()" mdTooltip="Point" mdTooltipPosition="above"> Point</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{row['points'].length }}
+        <a *ngIf="displayCheckbox"><i style="font-size: 20px;" class="material-icons like-icon" *ngIf="row['points'].length === 0" (click)="clickOnLike(row['_id'])">plus_one</i></a>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column [flexGrow]="2" prop="test" name="test" [sortable]="false" [resizeable]="false">
+      <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+        <span (click)="sort()" mdTooltip=" {{'IDEAS.ACTIONS' | translate}}" mdTooltipPosition="above"> {{'IDEAS.ACTIONS' | translate}}</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+
+        <button [disabled]="row.user?._id !== currentUser._id" md-icon-button md-button-sm md-raised-button class="grid-button" (click)="goToDetails(row)">
+            <md-icon [mdTooltip]="'IDEAS.DETAILS'| translate">details</md-icon>
+        </button>
+        <button *ngIf="displayCheckbox && checkIsDirectorSalesAdmin" md-icon-button md-button-sm md-raised-button class="grid-button">
+            <md-icon [mdTooltip]="'IDEAS.REPLY'| translate" (click)="openReplyDialog(row)" >reply</md-icon>
+        </button>
+        <button *ngIf="displayCheckbox && checkIsDirectorSalesAdmin" md-icon-button md-button-sm md-raised-button class="grid-button">
+            <md-icon [mdTooltip]="'IDEAS.SHARE'| translate"(click)="OpenShareDialog(row,'foward-mail')">share</md-icon>
+        </button>
+        <button [disabled]="row.user?._id !== currentUser._id && !checkIsDirectorSalesAdmin" md-icon-button md-button-sm md-raised-button class="grid-button" (click)="deleteIdea(row._id)">
+            <md-icon [mdTooltip]="'IDEAS.SHARE'| translate">close</md-icon>
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+
+  </ngx-datatable>
+</div>

@@ -1,0 +1,690 @@
+<md-card>
+    <md-card-content>
+        <div>
+            <!-- <a class="me {{checkIsActive('general')}}" md-button [routerLink]="['general']">
+                <span>{{'SETTINGS.TITLES.GENERAL' | translate}}</span>
+            </a> -->
+
+
+            <!-- <a class="me {{checkIsActive('admtc-papaer-header')}}" md-button [routerLink]="['admtc-papaer-header']">
+
+                <span>{{'SETTINGS.TITLES.ADMTCPAPAERHEADER' | translate}}</span>
+            </a>
+
+            <a class="me {{checkIsActive('admtc-papaer-footer')}}" md-button [routerLink]="['admtc-papaer-footer']">
+                
+
+                <span>{{'SETTINGS.TITLES.ADMTCPAPAER' | translate}}</span>
+            </a>
+
+            <a class="me {{checkIsActive('ideas-categories')}}" md-button [routerLink]="['ideas-categories']">
+
+                <span>{{'SETTINGS.TITLES.1001IDEASCATEGORIES' | translate}}</span>
+            </a>
+
+
+            <a class="me {{checkIsActive('school-board')}}" md-button [routerLink]="['school-board']">
+
+                <span>{{'SETTINGS.TITLES.SCHOOLSBOARDRESULTS' | translate}}</span>
+            </a>
+
+            <a class="me {{checkIsActive('invoice')}}" md-button [routerLink]="['invoice']">
+
+                <span>{{'SETTINGS.TITLES.INVOICE' | translate}}</span>
+            </a>
+
+            <a class="me {{checkIsActive('student-status')}}" md-button [routerLink]="['student-status']">
+
+                <span>{{'SETTINGS.TITLES.STUDENTSTATUSES' | translate}}</span>
+            </a>
+
+            <a class="me {{checkIsActive('contract-default')}}" md-button [routerLink]="['contract-default']">
+
+                <span>{{'SETTINGS.TITLES.CONTRACTDEFAULTS' | translate}}</span>
+            </a>
+
+            <a class="me {{checkIsActive('cncp-information')}}" md-button [routerLink]="['cncp-information']">
+
+                <span>{{'SETTINGS.TITLES.CNCPINFORMATION' | translate}}</span>
+            </a> 
+            <a class="me {{checkIsActive('usertypes')}}" md-button [routerLink]="['usertypes']">
+
+                <span>{{'SETTINGS.TITLES.USERTYPEMANAGMENT' | translate}}</span>
+            </a>
+
+            <a class="me {{checkIsActive('scholer-season')}}" md-button [routerLink]="['scholer-season']">
+
+                <span> {{ 'SETTINGS.TITLES.SCHOLERSEASON' | translate }} </span>
+            </a>
+
+            <a class="me {{checkIsActive('calender-steps')}}" md-button [routerLink]="['calender-steps']">
+                <span> {{ 'SETTINGS.TITLES.CALENDARSTEPS' | translate }} </span>
+            </a> -->
+
+            <md-button-toggle-group [(ngModel)]="activatedTag" (change)="changeRoute()" style="background-color: #212121; border: 1px solid #607d8b;"
+                #group="mdButtonToggleGroup">
+                <md-button-toggle value="usertypes">
+                    <span>{{'SETTINGS.TITLES.USERTYPEMANAGMENT' | translate}}</span>
+                </md-button-toggle>
+
+                <md-button-toggle value="scholer-season">
+                    <span>{{ 'SETTINGS.TITLES.SCHOLERSEASON' | translate }}</span>
+                </md-button-toggle>
+
+                <md-button-toggle value="calender-steps">
+                    <span>{{ 'SETTINGS.TITLES.CALENDARSTEPS' | translate }}</span>
+                </md-button-toggle>
+            </md-button-toggle-group>
+
+        </div>
+        <!-- <div fxLayout="row" fxLayoutWrap="wrap"> -->
+        <router-outlet></router-outlet>
+        <!-- </div> -->
+
+        <!--<div>
+            <a md-button (click)="ChangeTab(1)">
+                <span>{{'SETTINGS.TITLES.GENERAL' | translate}}</span>
+            </a>
+
+
+            <a md-button (click)="ChangeTab(2)">
+
+                <span>{{'SETTINGS.TITLES.ADMTCPAPAERHEADER' | translate}}</span>
+            </a>
+
+            <a md-button (click)="ChangeTab(3)">
+                routerLink="admtc-acad"
+
+                <span>{{'SETTINGS.TITLES.ADMTCPAPAER' | translate}}</span>
+            </a>
+
+            <a md-button (click)="ChangeTab(4)">
+
+                <span>{{'SETTINGS.TITLES.1001IDEASCATEGORIES' | translate}}</span>
+            </a>
+
+
+            <a md-button (click)="ChangeTab(5)">
+
+                <span>{{'SETTINGS.TITLES.SCHOOLSBOARDRESULTS' | translate}}</span>
+            </a>
+
+            <a md-button (click)="ChangeTab(6)">
+
+                <span>{{'SETTINGS.TITLES.INVOICE' | translate}}</span>
+            </a>
+
+            <a md-button (click)="ChangeTab(7)">
+
+                <span>{{'SETTINGS.TITLES.STUDENTSTATUSES' | translate}}</span>
+            </a>
+
+            <a md-button (click)="ChangeTab(8)">
+
+                <span>{{'SETTINGS.TITLES.CONTRACTDEFAULTS' | translate}}</span>
+            </a>
+
+            <a md-button (click)="ChangeTab(9)">
+
+                <span>{{'SETTINGS.TITLES.CNCPINFORMATION' | translate}}</span>
+            </a>
+
+        </div>-->
+        <!--<div fxLayout="row" fxLayoutWrap="wrap">
+            <div fxFlex="60">
+                <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="tabflage == 1">
+                    <div fxFlex="100">
+                        <div class="address-container">
+                            <div style="margin-top:10px">
+                                <span>{{'SETTINGS.TITLES.GENERAL' | translate}}</span>
+                            </div>
+                            <div class="panel-body" style="border:1px solid;">
+                                <div fxLayout="row" fxLayoutWrap="wrap">
+                                    <div fxFlex="100" fxFlex.lt-md="100">
+                                        <div class="px-1 select-input-container">
+                                            <md-input-container color="accent" style="width: 100%">
+                                                <input mdInput type="text" [placeholder]="'SETTINGS.GENERAL.SCHOOLYEAR' | translate" />
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" fxLayoutWrap="wrap">
+                                    <div fxFlex="100" fxFlex.lt-md="100">
+                                        <div class="px-1 select-input-container">
+                                            <md-input-container color="accent" style="width: 100%">
+                                                <input mdInput type="text" [placeholder]="'SETTINGS.GENERAL.IMAPSERVER' | translate" />
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" fxLayoutWrap="wrap">
+                                    <div fxFlex="100" fxFlex.lt-md="100">
+                                        <div class="px-1 select-input-container">
+                                            <md-input-container color="accent" style="width: 100%">
+                                                <input mdInput type="text" [placeholder]="'SETTINGS.GENERAL.IMAPPART' | translate" />
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" fxLayoutWrap="wrap">
+                                    <div fxFlex="100" fxFlex.lt-md="100">
+                                        <div class="px-1 select-input-container">
+                                            <p style="display:inline-block;margin-top: 9px;font-size:13px">Send automatic notification every days</p>
+                                            <md-input-container color="accent" style="width: 100%">
+                                                <input mdInput type="number" />
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="tabflage == 2">
+                    <div fxFlex="100">
+                        <div class="address-container">
+                            <div style="margin-top:10px">
+                                <span>{{'SETTINGS.TITLES.ADMTCPAPAERHEADER' | translate}}</span>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-body" style="border:1px solid;">
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="100" fxFlex.lt-md="100">
+                                            <div class="px-1 select-input-container">
+                                                <ckeditor [(ngModel)]="ckeditorContent"
+                                                          [config]="{uiColor: '#99000'}"
+                                                          [readonly]="false"
+                                                          (change)="onChange($event)"
+                                                          (ready)="onReady($event)"
+                                                          (focus)="onFocus($event)"
+                                                          (blur)="onBlur($event)"
+                                                          debounce="500">
+                                                </ckeditor>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="tabflage == 3">
+                    <div fxFlex="100">
+                        <div class="address-container">
+                            <div style="margin-top:10px">
+                                <span>{{'SETTINGS.TITLES.ADMTCPAPAER' | translate}}</span>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-body" style="border:1px solid;">
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="100" fxFlex.lt-md="100">
+                                            <div class="px-1 select-input-container">
+                                                <ckeditor [(ngModel)]="ckeditorContent"
+                                                          [config]="{uiColor: '#99000'}"
+                                                          [readonly]="false"
+                                                          (change)="onChange($event)"
+                                                          (ready)="onReady($event)"
+                                                          (focus)="onFocus($event)"
+                                                          (blur)="onBlur($event)"
+                                                          debounce="500">
+                                                </ckeditor>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="tabflage == 4">
+                    <div fxFlex="100">
+                        <form id="frmIdeaaCategory" [formGroup]="form">
+                            <div class="address-container">
+                                <div style="margin-top:10px">
+                                    <span>1001 ideas categories</span>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-body" style="border:1px solid;">
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+                                            <div fxFlex="100" fxFlex.lt-md="100">
+                                                <div class="px-1 select-input-container">
+                                                    <md-input-container color="accent" style="width: 90%">
+                                                        <input mdInput type="text" formControlName="categoryName" [placeholder]="'SETTINGS.1001IDEASCATEGORIES.CATEGORYNAME' | translate" />
+                                                    </md-input-container>
+                                                    <div class="px-1 select-input-container">
+
+                                                        <a (click)="addIdeasCategory()" class="btn-floating btn-large waves-effect waves-light red add-btn"><i class="material-icons">add</i></a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+                                            <div fxFlex="100" fxFlex.lt-md="100">
+                                                <div class="px-1 select-input-container">
+                                                    <div *ngFor="let idea of ideasCategoryList" class="box">
+                                                        {{idea.categoryName}}
+                                                        <a (click)="deleteIdeaCategory(idea._id)" class="btn-floating btn-large waves-effect waves-light red add-btn right"><i class="material-icons">delete</i></a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="tabflage == 5">
+                    <div fxFlex="100">
+                        <form id="frmIdeaaCategory" [formGroup]="form">
+                            <div class="address-container">
+                                <div style="margin-top:10px">
+                                    <span>{{'SETTINGS.TITLES.SCHOOLSBOARDRESULTS' | translate}}</span>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-body" style="border:1px solid;">
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+                                            <div fxFlex="100" fxFlex.lt-md="100">
+                                                <div class="px-1 select-input-container">
+                                                    <md-input-container color="accent" style="width: 90%">
+                                                        <input mdInput type="text" formControlName="schoolBoardCategoryName" [placeholder]="'SETTINGS.1001IDEASCATEGORIES.CATEGORYNAME' | translate" />
+                                                    </md-input-container>
+                                                    <a (click)="addSchoolBoardCategory()" class="btn-floating btn-large waves-effect waves-light red add-btn right"><i class="material-icons">add</i></a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div fxLayout="row" fxLayoutWrap="wrap">
+                                            <div fxFlex="100" fxFlex.lt-md="100">
+                                                <div class="px-1 select-input-container">
+                                                    <div *ngFor="let schoolboard of schoolBoardCategoryList" class="box">
+                                                        {{schoolboard.schoolBoardCategoryName}}
+                                                        <a (click)="deleteSchoolBoardCategory(schoolboard._id)" class="btn-floating btn-large waves-effect waves-light red add-btn right"><i class="material-icons">delete</i></a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="tabflage == 6">
+                    <div fxFlex="100">
+                        <div class="address-container">
+                            <div style="margin-top:10px">
+                                <span>{{'SETTINGS.TITLES.INVOICE' | translate}}</span>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-body" style="border:1px solid;">
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="100" fxFlex.lt-md="100">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 50%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.INVOICE.VATTAXRATE' | translate" />
+                                                </md-input-container> %
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="100" fxFlex.lt-md="100">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <textarea mdInput id="icon_prefix2" [placeholder]="'SETTINGS.INVOICE.INVOICEADDRESS' | translate" class="materialize-textarea"></textarea>
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="100" fxFlex.lt-md="100">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="number" [placeholder]="'SETTINGS.INVOICE.INVOICESEQUENCENUMBER' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <p style="margin-left:5px;"><span>{{'SETTINGS.INVOICE.BANKACCOUNTDETAILSFORTRANSFAR' | translate}}</span></p>
+
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="100" fxFlex.lt-md="100">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.INVOICE.ACCOUNTHOLDER' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="100" fxFlex.lt-md="100">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.INVOICE.DOMICILATION' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="100" fxFlex.lt-md="100">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.INVOICE.IBAN' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="100" fxFlex.lt-md="100">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.INVOICE.BICCODE' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="tabflage == 7">
+                    <div fxFlex="100">
+                        <div class="address-container">
+                            <div style="margin-top:10px">
+                                <span>{{'SETTINGS.TITLES.STUDENTSTATUSES' | translate}}</span>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-body" style="border:1px solid;">
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="100" fxFlex.lt-md="100">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 50%">
+                                                    <input mdInput type="text"  formControlName="statusName" [placeholder]="'SETTINGS.STUDENTSTATUSES.STATUSNAME' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="100" fxFlex.lt-md="100">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <textarea mdInput id="icon_prefix2" formControlName="statusDescription" [placeholder]="'SETTINGS.STUDENTSTATUSES.STATUSDESCRIPTION' | translate" class="materialize-textarea"></textarea>
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a (click)="addStudentStatusCategory()" class="btn-floating btn-large waves-effect waves-light red add-btn right"><i class="material-icons">add</i></a>
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="100" fxFlex.lt-md="100">
+                                            <div class="px-1 select-input-container">
+                                                <div *ngFor="let studentStatus of studentStatusList" class="box">
+                                                    {{studentStatus.statusName}}
+                                                    {{studentStatus.statusDescription}}
+                                                    <a (click)="deleteStudentStatusCategory(studentStatus._id)" class="btn-floating btn-large waves-effect waves-light red add-btn right"><i class="material-icons">delete</i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="tabflage == 8">
+                    <div fxFlex="100">
+                        <div class="address-container">
+                            <div style="margin-top:10px">
+                                <span>{{'SETTINGS.TITLES.CONTRACTDEFAULTS' | translate}}</span>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-body" style="border:1px solid;">
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="50" fxFlex.lt-md="50">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.CONTRACTDETAILS.STUDENTFESS' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                        <div fxFlex="50" fxFlex.lt-md="50">
+                                            <div class="px-1 select-input-container">
+                                                <md-select color="accent" style="width: 100%" [placeholder]="'SETTINGS.CONTRACTDETAILS.CURRENCY' | translate">
+                                                    <md-option *ngFor="let currency of currencyList" [value]="currency.value">
+                                                        {{ currency.view }}
+                                                    </md-option>
+                                                </md-select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="100" fxFlex.lt-md="100">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 50%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.CONTRACTDETAILS.STANDARDSHAREOFCERTIFIER' | translate" />
+                                                </md-input-container>%
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="tabflage == 9">
+                    <div fxFlex="100">
+                        <div class="address-container">
+                            <div style="margin-top:10px">
+                                <span>{{'SETTINGS.TITLES.CONTRACTDEFAULTS' | translate}}</span>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-body" style="border:1px solid;">
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="50" fxFlex.lt-md="50">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.CNCPINFORMATION.FUNCTION' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                        <div fxFlex="50" fxFlex.lt-md="50">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.CNCPINFORMATION.ADDRESSLINE1' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="50" fxFlex.lt-md="50">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.CNCPINFORMATION.FIRSTNAME' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                        <div fxFlex="50" fxFlex.lt-md="50">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.CNCPINFORMATION.ADDRESSLINE2' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="50" fxFlex.lt-md="50">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.CNCPINFORMATION.FAMILYNAME' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                        <div fxFlex="50" fxFlex.lt-md="50">
+                                            <div fxFlex="50" fxFlex.lt-md="50">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.CNCPINFORMATION.ZIPCODE' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                            <div fxFlex="50" fxFlex.lt-md="50">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.CNCPINFORMATION.CITY' | translate" />
+                                                </md-input-container>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="50" fxFlex.lt-md="50">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.CNCPINFORMATION.PHONENUMBER' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                        <div fxFlex="50" fxFlex.lt-md="50">
+                                            <div class="px-1 select-input-container">
+                                                <md-select color="accent" style="width: 100%" [placeholder]="'USERS.COUNTRY' | translate">
+                                                    <md-option *ngFor="let country of countryList" [value]="country.id">
+                                                        {{ country.countryName }}
+                                                    </md-option>
+                                                </md-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="50" fxFlex.lt-md="50">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.CNCPINFORMATION.MOBILENUMBER' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                        <div fxFlex="50" fxFlex.lt-md="50">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.CNCPINFORMATION.WEBSITEURL' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+
+                                        <div fxFlex="50" fxFlex.lt-md="50">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" [placeholder]="'SETTINGS.CNCPINFORMATION.GENERALEMAIL' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div fxFlex="40">
+
+            </div>
+        </div>-->
+
+
+    </md-card-content>
+</md-card>
+
+
+<style>
+    .menu-active {
+        background: #212121;
+    }
+
+    .address-container .panel-default {
+        position: relative;
+    }
+
+    .address-container .panel-default:nth-child(2) {
+        margin-top: 20px;
+    }
+
+    .address-container .panel-heading {
+        display: inline-block;
+        position: absolute;
+        background-color: #ddd;
+        top: -9px;
+        left: 11px;
+        padding: 2px 14px;
+        font-size: 12px;
+    }
+
+    .address-container .panel-body {
+        border: 1px solid #ddd !important;
+        padding-top: 15px;
+    }
+
+    .cdk-focused,
+    .cdk-mouse-focused {
+        background-color: rgba(0, 0, 0, .12);
+    }
+
+    .add-btn {
+        width: 25px;
+        height: 25px;
+        background-color: #ffd740;
+        display: inline-block;
+        border-radius: 50%;
+        top: 4px;
+        vertical-align: middle;
+        margin-left: 3px;
+        box-shadow: 1px 2px 4px #9e9d9d;
+    }
+
+    .box {
+        padding: 5px;
+        border: 1px solid;
+        margin-top: 5px;
+    }
+</style>

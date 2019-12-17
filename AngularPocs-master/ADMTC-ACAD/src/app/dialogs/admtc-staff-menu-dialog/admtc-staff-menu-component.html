@@ -1,0 +1,183 @@
+<div *ngIf="userModel == undefined && modify ">
+    <!-- <md-spinner></md-spinner> -->
+    <md-progress-bar mode="indeterminate"></md-progress-bar>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="addRegisterdUser()" *ngIf="modify === false || modify === true && userModel">
+    <!--*ngIf="modify === false || modify === true && userModel"-->
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100">
+            <div class="px-1 select-input-co ntainer">
+                <md-select style="width: 100%" (change)="changeUserEntities()" [placeholder]="'USERS.ADDEDITUSER.ENTITIES' | translate" formControlName="entityValue">
+                    <md-option *ngFor="let entities of userEntities" [value]="entities.value">
+                        {{ entities.view.toUpperCase() }}
+                    </md-option>
+                </md-select>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="isACADEMIC">
+        <div fxFlex="100" fxFlex.lt-md="100">
+            <div class="px-1 select-input-container">
+                <md-radio-group [disabled]="isGroupOfSchool" style="float: left !important" formControlName="operationRoleType">
+                    <md-radio-button (change)="changeSelection($event)" *ngFor="let selection of CertifierSelection | orderBy : 'selection.view'" [value]='selection.value'>
+                        {{ 'USERS.' + selection.view | translate }}
+                    </md-radio-button>
+                </md-radio-group>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="isACADEMIC">
+        <div fxFlex="100" fxFlex.lt-md="100">
+            <div class="px-1 select-input-container">
+                <md-input-container *ngIf="!isGroupOfSchool" fxFlex="100">
+                    <input type="text" placeholder="{{'USERS.ADDEDITUSER.SELECTSCHOOL' | translate}}" mdInput #myControl formControlName="school" [mdAutocomplete]="auto">
+                    <md-autocomplete #auto="mdAutocomplete">
+                        <md-option *ngFor="let list of filteredOptions |  async" [value]="list.shortName.toUpperCase()" (click)="changeSchool(list)">
+                            {{ list.shortName.toUpperCase() }}
+                        </md-option>
+                    </md-autocomplete>
+                </md-input-container>
+
+                <ng-select class="multi-list-length group-of-school-list" formControlName="school" (data)="changeSchoolList($event)" [multiple]="true" [items]="schoolListforSelect" style="margin-bottom: 10px;" *ngIf="isGroupOfSchool" fxFlex="100"  placeholder="{{ 'USERS.ADDEDITUSER.SELECTSCHOOL' | translate }}*"></ng-select>
+
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100">
+            <div class="px-1">
+                <ng-select class="multi-list-length" formControlName="types" (data)="changeTypes($event)" [multiple]="true" [items]="userTypes" [disabled]="isGroupOfSchool" placeholder="{{ 'USERS.ADDEDITUSER.SELECTUSERTYPE' | translate }}*"></ng-select>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top: 10px" *ngIf="!isSalesManagmentOrAdmin && ( form.get('entityValue').value !== 'company' )">
+        <div fxFlex="100" fxFlex.lt-md="100">
+            <div class="px-1" [class]="(form.get('assignedRncpTitles').value.length < 1) && invalidFormSubmitted && !isGroupOfSchool ? 'border-red' : ''">
+                <ng-select class="multi-list-length" [ngClass]="checkIfCertifierAdmin()" *ngIf="!isGroupOfSchool" formControlName="assignedRncpTitles" (data)="changeRNCP($event)" [multiple]="true" [items]="RNCPTitleList | orderBy: 'RNCPTitleList.text'" placeholder="{{ 'USERS.ADDEDITUSER.SELECTRNCPTITLE' | translate }}*"></ng-select>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100">
+            <div class="px-1 select-input-container" style="width: fit-content; width: -moz-fit-content; margin-top: 10px;">
+                <label>
+                    <div style="margin-top: 4.5px;">{{'USERS.ADDEDITUSER.CIVILITY.TITLE'| translate}}</div>
+                </label>
+                <md-radio-group style='padding-left: 20px' name="civility" fxLayout="row" formControlName="sex" #sex>
+                    <md-radio-button *ngFor="let sex of sexType;let idx= index" [value]="sex.value" style="margin-right: 5px">
+                        {{sex.view | translate}}
+                    </md-radio-button>
+                </md-radio-group>
+            </div>
+        </div>
+    </div>
+
+    <div class="col_s6" fxLayoutWrap="wrap">
+        <div>
+            <div class="px-1">
+                <md-input-container style="width: 100%">
+                    <input class="title-case-input" mdInput formControlName="firstName" maxlength="30" #firstname [placeholder]="'USERS.ADDEDITUSER.FIRSTNAME' | translate"
+                    type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*" (blur)="changeControlValue(form.get('firstName'), true)" />
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+    <div class="col_s6" fxLayoutWrap="wrap">
+        <div>
+            <div class="px-1">
+                <md-input-container style="width: 100%">
+                    <input class="title-case-input" mdInput formControlName="lastName" maxlength="30" #lastname [placeholder]="'USERS.ADDEDITUSER.LASTNAME' | translate"
+                    type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*"  (blur)="changeControlValue(form.get('lastName'), false)">
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div>
+        <div>
+            <div class="px-1">
+                <md-input-container style="width: 100%">
+                    <input mdInput formControlName="position" #mobilePhone [placeholder]="'USERS.ADDEDITUSER.POSITION' | translate" type="text">
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <div class="px-1">
+                <md-input-container style="width: 100%">
+                    <input mdInput formControlName="email" maxlength="200" #email [placeholder]="'USERS.ADDEDITUSER.EMAIL' | translate" type="email">
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div class="px-1">
+                <md-input-container style="width: 100%">
+                    <input mdInput formControlName="officePhone" maxlength="10" [placeholder]="'USERS.ADDEDITUSER.OFFICEPHONE' | translate" type="text" pattern="^(0|\+[0-9]{1,5})?(( ?){1})?([0-9]*$)$">
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="(!isACADEMIC && !isADMTC && !isGroupOfSchool)" class="col_s12" fxLayoutWrap="wrap">
+        <div>
+            <div class="px-1">
+                <md-input-container style="width:90%">
+                    <input type="text" placeholder="{{'USERS.ADDEDITUSER.COMPANY' | translate}}" mdInput
+                        formControlName="company" [mdAutocomplete]="auto1">
+                    <md-autocomplete #auto1="mdAutocomplete">
+                        <md-option *ngFor="let company of companies | async" [value]="company.companyName" (click)="onCompanyClick(company)">
+                        {{ company.companyName }}
+                        </md-option>
+                    </md-autocomplete>
+                </md-input-container>
+            </div>
+            <small style="margin-left: 15px;" *ngIf="form.get('company').invalid && invalidFormSubmitted" class="mat-text-warn"> {{'USERS.ADDEDITUSER.COMPANY_MISSING' | translate}}</small>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <div class="px-1">
+                <md-input-container style="width: 100%">
+                    <input mdInput formControlName="directLine" maxlength="10" #directLine [placeholder]="'USERS.ADDEDITUSER.DIRECTLINE' | translate" type="text" pattern="^(0|\+[0-9]{1,5})?(( ?){1})?([0-9]*$)$">
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div class="px-1">
+                <md-input-container style="width: 100%">
+                    <input mdInput formControlName="portablePhone" maxlength="10" #portablePhone [placeholder]="'USERS.ADDEDITUSER.PORTABLEPHONE' | translate" type="text" pattern="^(0|\+[0-9]{1,5})?(( ?){1})?([0-9]*$)$">
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+    <div class="col_s12" fxLayoutWrap="wrap">
+        <div>
+            <div class="px-1 pull-right">
+                <button md-raised-button color="warn" type="button" (click)="cancel(false)">{{'CANCEL' | translate}}</button>
+                <!--// (click)="addRegisterdUser()" -->
+                <button md-raised-button color="primary">
+                    {{'USERS.ADDEDITUSER.SUBMIT' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+<div *ngIf="loading" class="overlay-loading">Loading&#ffd740;</div>

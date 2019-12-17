@@ -1,0 +1,49 @@
+.compose-mail .mat-input-container {
+  width: 100%;
+}
+
+.compose-mail .mat-input-container textarea {
+  resize: vertical;  
+}
+
+snack-bar-container {
+    background-color: #F44336 !important;
+}
+
+.mail-selected-res-list .mat-chip {
+  margin-bottom: 5px !important;  
+}
+
+.mail-selected-res-list .mat-chip .fa {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.mat-dialog-container .mat-card-actions.compose-mail-actions {
+  text-align: left;
+}
+
+.mat-dialog-container .compose-mail-actions .mat-button {
+  min-width: initial;
+  padding: 10px;
+  font-size: 1.5rem;
+  line-height: 20px;
+  margin-right: 0.33333rem;
+}
+
+.mat-dialog-container .compose-mail-actions .btn-close {
+  float: right;
+  font-size: 1.5rem;
+  font-family: cursive;
+  color: gray;
+  transition-property: background;
+  transition-duration: .3s;
+  transition-timing-function: linear;
+  cursor: pointer;
+}
+
+.mat-dialog-container .compose-mail-actions .btn-close:hover,
+.mat-dialog-container .compose-mail-actions .btn-close:active,
+.mat-dialog-container .compose-mail-actions .btn-close:focus {
+    color: #212121;
+}

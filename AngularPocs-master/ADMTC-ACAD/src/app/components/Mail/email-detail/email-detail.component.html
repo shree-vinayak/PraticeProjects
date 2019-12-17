@@ -1,0 +1,34 @@
+<div>
+  <form>
+
+    <md-card-actions class="compose-mail-actions mb-1">
+      <button md-button [title]=" 'MailBox.emailDetails.reply' | translate " (click)="onReplyMail()"><i class="fa fa-reply"></i></button>
+      <button md-button [title]=" 'MailBox.emailDetails.reply_all' | translate " (click)="onReplytoAllMail()"><i class="fa fa-reply-all"></i></button>
+      <button md-button [title]=" 'MailBox.emailDetails.forward' | translate " (click)="onForwardMail()"><i class="fa fa-mail-forward"></i></button>
+      <button md-button [title]=" 'MailBox.emailDetails.delete' | translate " (click)="onDeleteMail()"><i class="fa fa-trash"></i></button>
+      <div class="btn-close" (click)="closeDialog()">X</div>
+    </md-card-actions>
+
+      <md-card-content class="compose-mail">
+
+          <div fxLayout="row" fxLayoutWrap="wrap">
+              <span class="emailsubject">  {{subject}}  </span>
+          </div>
+
+          <div fxLayout="row" fxLayoutWrap="wrap">
+              <label style="margin-top:10px">{{ 'dashboardMessage.FROM' | translate }} : </label>
+              <span style="margin-top: 10px;">  {{senderName}}  </span>
+          </div>
+
+          <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:5px">
+              <label>{{ 'dashboardMessage.TO' | translate }} : </label>
+              <span> {{receipientName}} </span>
+          </div>
+
+          <div fxLayout="row" fxLayoutWrap="wrap" class="message-body">
+              <span class="message-content" innerHTML={{message}}> </span>
+          </div>
+
+      </md-card-content>
+  </form>
+</div>

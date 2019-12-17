@@ -1,0 +1,20 @@
+<div flex="row" fxLayoutWrap="wrap" style="width:100%">
+  <div fxFlex="80">
+    <md-input-container dividerColor="accent">
+      <input mdInput type="text" placeholder="{{ 'Search.search' | translate }}" [(ngModel)]="searchStudentString" name="searchStudentString"
+        (keyup)="searchStudentList($event)">
+    </md-input-container>
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex="25" fxFlex.lt-md="25" class="studentCardScroll">
+    <app-student-card *ngFor="let singleStudent of studentList; let i = index" [attr.data-index]="i" [student]="singleStudent"
+      [changedStudent]=" i === changedStudent.index ? changedStudent.student : '' " [isActive]=" singleStudent._id === activeId ? true : false "
+      (click)="emitStudent(singleStudent,i)"></app-student-card>
+  </div>
+  <div fxFlex="73" fxFlex.lt-md="73" style="margin-left: 1%">
+    <app-student-details2 *ngIf="activateDetails" style="float:left" [isMentor]="utilityService.checkUserIsMentor()" [studentWithIndex]="studentIdWithIndex"
+      (updateStudent)="studentChanged($event)"></app-student-details2>
+  </div>
+</div>

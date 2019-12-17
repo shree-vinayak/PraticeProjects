@@ -1,0 +1,167 @@
+<div>
+  <form [formGroup]="addSchform"  (ngSubmit)="save()">
+     
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+      <md-card-content fxFlex class="schMrg">
+        <md-card-title>{{ 'Customer.AddSchool.Title' | translate }}</md-card-title>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" fxFlex>
+            <md-input-container style="width: 100%">
+              <input mdInput placeholder="{{ 'Customer.AddSchool.schShortName.title' | translate }}" [formControl]="addSchform.controls['schShortName']">
+            </md-input-container>
+            <small *ngIf="addSchform.controls['schShortName'].hasError('required') && addSchform.controls['schShortName'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.schShortName.validation1' | translate }}</small>
+            <small *ngIf="addSchform.controls['schShortName'].hasError('minlength') && addSchform.controls['schShortName'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.schShortName.validation2' | translate }}</small>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" fxFlex>
+            <md-input-container style="width: 100%">
+              <input mdInput placeholder="{{ 'Customer.AddSchool.schLongName.title' | translate }}" [formControl]="addSchform.controls['schLongName']">
+            </md-input-container>
+            <small *ngIf="addSchform.controls['schLongName'].hasError('required') && addSchform.controls['schLongName'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.schLongName.validation1' | translate }}</small>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" fxFlex>
+            <md-input-container style="width: 100%">
+              <input mdInput placeholder="{{ 'Customer.AddSchool.Address.title' | translate }}" [formControl]="addSchform.controls['Address']">
+            </md-input-container>
+            <small *ngIf="addSchform.controls['Address'].hasError('required') && addSchform.controls['Address'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.Address.validation1' | translate }}</small>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" fxFlex=40>
+            <md-input-container style="width: 100%">
+              <input mdInput placeholder="{{ 'Customer.AddSchool.City.title' | translate }}" [mdAutocomplete]="tdcity"  [formControl]="addSchform.controls['City']" >
+            </md-input-container>
+            <small *ngIf="addSchform.controls['City'].hasError('required') && addSchform.controls['City'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.City.validation1' | translate }}</small>
+             <md-autocomplete #tdcity="mdAutocomplete">
+              <md-option *ngFor="let item of items| async" [value]='item.cityName'>
+                <span>{{ item.postcode }}</span>
+              </md-option>  
+            </md-autocomplete>
+          </div>
+        </div>        
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" fxFlex>       
+            <md-input-container>
+            <input mdInput placeholder="{{ 'Customer.AddSchool.Country.title' | translate }}" [mdAutocomplete]="auto" [formControl]="addSchform.controls['Country']">
+          </md-input-container>
+
+          <md-autocomplete #auto="mdAutocomplete">
+            <md-option *ngFor="let state of filteredStates | async" [value]="state">
+              {{ state }}
+            </md-option>
+          </md-autocomplete>
+            <small *ngIf="addSchform.controls['Country'].hasError('required') && addSchform.controls['Country'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.Country.validation1' | translate }}</small>
+          </div>
+        </div>
+         
+      </md-card-content>
+      <md-card-content fxFlex class="schMrg">
+
+        <md-card-title>{{ 'Customer.AddSchool.SchoolTitle.title' | translate }}</md-card-title>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" fxFlex>
+            <md-radio-group [formControl]="addSchform.controls['Title']">
+              <md-radio-button value="mr" class="rdmark">{{ 'Mr' | translate }}</md-radio-button>
+              <md-radio-button value="mrs" class="rdmark">{{ 'Mrs' | translate }}</md-radio-button>
+              <md-radio-button value="ms" class="rdmark">{{ 'Ms' | translate }}</md-radio-button>
+            </md-radio-group>
+           
+            <small *ngIf="addSchform.controls['Title'].hasError('required') && addSchform.controls['Title'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.SchoolTitle.validation1' | translate }}</small>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" fxFlex>
+            <md-input-container style="width: 100%">
+              <input mdInput placeholder="{{ 'Customer.AddSchool.firstName.title' | translate }}" [formControl]="addSchform.controls['firstName']" type="text" pattern="[a-zA-Z ]*">
+            </md-input-container>
+            <small *ngIf="addSchform.controls['firstName'].hasError('required') && addSchform.controls['firstName'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.firstName.validation1' | translate }}</small>
+            <small *ngIf="addSchform.controls['firstName'].hasError('pattern') && addSchform.controls['firstName'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.firstName.validation2' | translate }}</small>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" fxFlex>
+            <md-input-container style="width: 100%">
+              <input mdInput placeholder="{{ 'Customer.AddSchool.lastName.title' | translate }}" [formControl]="addSchform.controls['lastName']" type="text" pattern="[a-zA-Z ]*">
+            </md-input-container>
+            <small *ngIf="addSchform.controls['lastName'].hasError('required') && addSchform.controls['lastName'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.lastName.validation1' | translate }}</small>
+            <small *ngIf="addSchform.controls['lastName'].hasError('pattern') && addSchform.controls['lastName'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.lastName.validation2' | translate }}</small>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" fxFlex>
+            <md-input-container style="width: 100%">
+              <input mdInput placeholder="{{ 'Customer.AddSchool.phoneNumber.title' | translate }}" [formControl]="addSchform.controls['phoneNumber']" pattern="[0-9 ]*">
+            </md-input-container>
+            <small *ngIf="addSchform.controls['phoneNumber'].hasError('required') && addSchform.controls['phoneNumber'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.phoneNumber.validation1' | translate }}</small>
+            <small *ngIf="addSchform.controls['phoneNumber'].hasError('maxlength') && addSchform.controls['phoneNumber'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.phoneNumber.validation2' | translate }}</small>
+            <small *ngIf="addSchform.controls['phoneNumber'].errors?.phone && addSchform.controls['phoneNumber'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.phoneNumber.validation3' | translate }}</small>
+            <small *ngIf="addSchform.controls['phoneNumber'].hasError('pattern') && addSchform.controls['phoneNumber'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.phoneNumber.validation4' | translate }}</small>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" fxFlex>
+            <md-input-container style="width: 100%">
+              <input mdInput placeholder="{{ 'Customer.AddSchool.mobileNumber.title' | translate }}" [formControl]="addSchform.controls['mobileNumber']" pattern="[0-9 ]*">
+            </md-input-container>
+            <small *ngIf="addSchform.controls['mobileNumber'].hasError('required') && addSchform.controls['mobileNumber'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.mobileNumber.validation1' | translate }}</small>
+            <small *ngIf="addSchform.controls['mobileNumber'].hasError('maxlength') && addSchform.controls['mobileNumber'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.mobileNumber.validation2' | translate }}</small>
+            <small *ngIf="addSchform.controls['mobileNumber'].errors?.phone && addSchform.controls['mobileNumber'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.mobileNumber.validation3' | translate }}</small>
+            <small *ngIf="addSchform.controls['mobileNumber'].hasError('pattern') && addSchform.controls['mobileNumber'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.mobileNumber.validation4' | translate }}</small>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" fxFlex>
+            <md-input-container style="width: 100%">
+              <input mdInput placeholder="{{ 'Customer.AddSchool.directLinePh.title' | translate }}" [formControl]="addSchform.controls['directLinePh']" pattern="[0-9 ]*">
+            </md-input-container>
+            <small *ngIf="addSchform.controls['directLinePh'].hasError('required') && addSchform.controls['directLinePh'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.directLinePh.validation1' | translate }}</small>
+            <small *ngIf="addSchform.controls['directLinePh'].hasError('maxlength') && addSchform.controls['directLinePh'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.directLinePh.validation2' | translate }}</small>
+            <small *ngIf="addSchform.controls['directLinePh'].errors?.phone && addSchform.controls['directLinePh'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.directLinePh.validation3' | translate }}</small>
+            <small *ngIf="addSchform.controls['directLinePh'].hasError('pattern') && addSchform.controls['directLinePh'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.directLinePh.validation4' | translate }}</small>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" fxFlex>
+            <md-input-container style="width: 100%">
+              <input mdInput placeholder="{{ 'Customer.AddSchool.email.title' | translate }}" [formControl]="addSchform.controls['email']">
+            </md-input-container>
+            <small *ngIf="addSchform.controls['email'].hasError('required') && addSchform.controls['email'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.email.validation1' | translate }}</small>
+            <small *ngIf="addSchform.controls['email'].errors?.email && addSchform.controls['email'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.email.validation2' | translate }}</small>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" fxFlex>
+            <md-input-container style="width: 100%">
+              <input mdInput placeholder="{{ 'Customer.AddSchool.Position.title' | translate }}" [formControl]="addSchform.controls['Position']" type='text'>
+            </md-input-container>
+            <small *ngIf="addSchform.controls['Position'].hasError('required') && addSchform.controls['Position'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.Position.validation1' | translate }}</small>
+          </div>
+        </div>
+        
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <div class="mb-1" fxFlex>
+          <md-select multiple placeholder="{{ 'Customer.AddSchool.userType.title' | translate }}" [formControl]="addSchform.controls['userType']" style="width: 100%">
+          <md-option *ngFor="let item of listUt" [value] ="item._id" [disabled]="item.disabled">
+           {{ item.name | translate }}
+          </md-option>
+         </md-select>
+        </div>
+            <small *ngIf="addSchform.controls['userType'].hasError('required') && addSchform.controls['userType'].touched" class="mat-text-warn"> {{ 'Customer.AddSchool.userType.validation1' | translate }}</small>
+        </div>
+        <div class="pb-1">
+            <button md-raised-button md-button-sm class="mr-1" (click)="cancel()" type="button">{{ 'Customer.AddSchool.cancle' | translate }}</button>
+          <button md-raised-button md-button-sm color="primary" class="mr-1" [disabled]="!addSchform.valid" type="submit"  >{{ 'Customer.AddSchool.submit' | translate }}</button>
+        </div>
+      </md-card-content>
+    </div>
+
+  </form>
+  <small *ngIf="errorMessage" class="mat-text-warn"> {{errorMessage}}</small>
+   
+</div>

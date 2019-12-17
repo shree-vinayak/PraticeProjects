@@ -1,0 +1,43 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="60">
+        <div fxLayout="row" fxLayoutWrap="wrap" >
+            <div fxFlex="100">
+                <div class="address-container">
+                    <div class="px-1" style="margin-top:10px">
+                        <span>{{'SETTINGS.TITLES.ADMTCPAPAERHEADER' | translate}}</span>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1 select-input-container">
+                                        <ckeditor 
+                                                  [config]="{uiColor: '#99000'}"
+                                                  [readonly]="false"
+                                                  debounce="500">
+                                            <!--(change)="onChange($event)"
+                                            (ready)="onReady($event)"
+                                            (focus)="onFocus($event)"
+                                            (blur)="onBlur($event)"-->
+                                        </ckeditor>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col_s12" fxLayoutWrap="wrap" style="margin-top:5px;">
+            <div>
+                <div class="px-1 pull-right">
+                    <button md-raised-button color="primary">
+
+                        {{'USERS.ADDEDITUSER.SUBMIT' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,154 @@
+<form [formGroup]="form" (ngSubmit)="addUser(form.value)">
+  <div style="text-align: center;border-bottom: 1px solid #ccc; margin-bottom: 20px;">
+    <h4 style="margin-top: 0;"> {{ 'Customer.AddStudent' | translate }}</h4>
+  </div>
+
+  <!-- Select RNCP Title -->
+  <div fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container">
+        <md-select color="accent" formControlName="rncpTitle" #rncpTitle [placeholder]="'USERS.ADDEDITUSER.SELECTRNCPTITLE' | translate" style="width: 100%" (change)="changeRNCPTitles($event)">
+          <md-option *ngFor="let rncptitle of RNCPTitles" [value]="rncptitle._id">
+            {{ rncptitle.shortName }}
+          </md-option>
+        </md-select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Select Class -->
+  <div *ngIf="selectedSchoolRNCPTitle===true" fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 select-input-container">
+        <md-select color="accent" formControlName="currentClass" #currentClass [placeholder]="'USERS.ADDEDITUSER.CLASS' | translate" style="width: 100%">
+          <md-option *ngFor="let class of classType" [value]="class._id">
+            {{ class.name }}
+          </md-option>
+        </md-select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Company -->
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1">
+        <md-select color="accent" style="width: 100%" formControlName="companies" #companies [placeholder]="'USERS.ADDEDITUSER.COMPANY' | translate">
+          <md-option *ngFor="let company of companylist" [value]="company.companyName">
+            {{ company.companyName }}
+          </md-option>
+          <md-option [value]="">
+            <span (click)="addNewCompany()" style="margin-right:10px;">{{'USERS.ADDEDITUSER.ADDNEWCOMPANY' | translate}}</span><i class="fa fa-plus"></i>
+          </md-option>
+        </md-select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Name -->
+  <div fxLayout="row" fxLayoutWrap="wrap">
+    <div fxFlex="50" fxFlex.lt-md="50">
+      <div class="px-1 select-input-container">
+        <md-input-container color="accent" style="width: 100%">
+          <input mdInput formControlName="firstName" maxlength="30" #firstName [placeholder]="'USERS.ADDEDITUSER.FIRSTNAME' | translate" type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*" />
+        </md-input-container>
+      </div>
+    </div>
+    <div fxFlex="50" fxFlex.lt-md="50">
+      <div class="px-1 select-input-container">
+        <md-input-container color="accent" style="width: 100%">
+          <input mdInput formControlName="lastName" #lastName maxlength="30" [placeholder]="'USERS.ADDEDITUSER.LASTNAME' | translate" type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*" />
+        </md-input-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="sex-container" fxLayout="row" fxLayoutWrap="wrap">
+    <div class="pa-1" fxFlex="100" fxFlex.lt-md="100">
+      <md-radio-group name="correctorType" fxLayout="row" formControlName="sex" #sex>
+        <md-radio-button *ngFor="let sex of sexType;let idx= index" [value]="sex.value" style="margin-right: 5px">
+          {{sex.view | translate}}
+        </md-radio-button>
+      </md-radio-group>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1">
+        <md-input-container color="accent" style="width: 100%">
+          <input mdInput formControlName="email" maxlength="200" #email [placeholder]="'USERS.ADDEDITUSER.EMAIL' | translate" type="email">
+        </md-input-container>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1">
+        <md-input-container dividerColor="accent" style="width: 100%">
+          <input mdInput type="text" [min]="minDate()" [max]="maxDate" [mdDatepicker]="dateOfBirth" [formControl]="form.controls['dateOfBirth']" [placeholder]="'USERS.ADDEDITUSER.DATEOFBIRTH' | translate">
+          <button mdSuffix [mdDatepickerToggle]="dateOfBirth" class="white-datepicker-button" style="background-color: grey !important;"></button>
+        </md-input-container>
+        <md-datepicker #dateOfBirth [touchUi]="true"></md-datepicker>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1">
+        <md-input-container color="accent" style="width: 100%">
+          <input mdInput formControlName="placeOfBirth" maxlength="50" #placeOfBirth [placeholder]="'USERS.ADDEDITUSER.PLACEOFBIRTH' | translate" type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*">
+        </md-input-container>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1">
+        <md-input-container color="accent" style="width: 100%">
+          <input mdInput formControlName="nationality" maxlength="30" #nationality [placeholder]="'USERS.ADDEDITUSER.NATIONALITY' | translate" type="text" pattern="[a-zA-ZÀ-Ÿà-ÿ-'][-a-zA-ZÀ-Ÿà-ÿ-'\s]*">
+        </md-input-container>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutWrap="wrap" class="margin-adjust">
+    <div fxFlex="100" fxFlex.lt-md="100">
+      <div class="px-1 pull-right">
+        <button md-raised-button color="warn" type="button" (click)="cancel()">{{'CANCEL' | translate}}</button>
+        <button md-raised-button color="primary" type="submit">
+          {{'USERS.ADDEDITUSER.SUBMIT' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+<style>
+.resume-label {
+  font-size: 12px;
+  color: #151313;
+  padding-left: 16px;
+  display: inline-block;
+}
+
+.resume-px {
+  display: inline-block !important;
+}
+
+.resume-px div {
+  display: inline-block !important;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.pa-1 {
+  padding: 0 1rem !important;
+}
+
+.btn-delete {
+  font-size: 13px;
+  margin-bottom: 8px;
+  padding: 0;
+  line-height: 35px;
+  min-width: 45px;
+}
+
+</style>

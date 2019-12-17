@@ -1,0 +1,78 @@
+<md-card>
+  <md-card-content>
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxFlex="19" fxFlex.lt-md="19">
+        <div class="px-1 select-input-container">
+          <md-select color="accent" (change)="getRncpAssoClass( rncptitleId )" fxFlex="90" fxFlex.lt-md="90" [placeholder]="'USERS.SELECTRNCPTITLE' | translate"
+            style="width: 100%" [(ngModel)]="rncptitleId">
+            <md-option *ngFor="let rncptitle of RNCPTitles" [value]="rncptitle._id">
+              {{ rncptitle.shortName }}
+            </md-option>
+          </md-select>
+        </div>
+      </div>
+
+      <div fxFlex="19" fxFlex.lt-md="19">
+        <div class="px-1 select-input-container">
+          <md-select color="accent" [(ngModel)]="classId" fxFlex="90" fxFlex.lt-md="90" style="width: 100%" [placeholder]="'STUDENT.CLASSES.title' | translate">
+          <!-- <md-select color="accent" [(ngModel)]="classId" fxFlex="90" fxFlex.lt-md="90" style="width: 100%" [placeholder]="'STUDENT.CLASSES.title' | translate" (change)="onSelectClass(class._id)"> -->
+            <md-option *ngFor="let class of allClasses" [value]="class._id">
+              {{ class.name }}
+            </md-option>
+          </md-select>
+        </div>
+      </div>
+      <div fxFlex="13" fxFlex.lt-md="13" fxFlexAlign="end end">
+        <md-input-container fxFlex="100" dividerColor="accent">
+          <input [(ngModel)]="filterSearchText" mdInput maxlength="30" [placeholder]="'USERS.SEARCH' | translate" type="text">
+        </md-input-container>
+      </div>
+
+      <div fxFlex="11" fxFlex.lt-md="11" fxFlexAlign="end end">
+        <button style="margin-left: 5px;" fxFlex class="btnHeight" md-raised-button type="button" color="primary" (click)="getstudentList(customerId, false, true)">
+          <md-icon>search</md-icon>
+          {{'USERS.SEARCH' | translate}}
+        </button>
+      </div>
+
+      <div fxFlex="7" fxFlex.lt-md="7" fxFlexAlign="end end">
+        <button fxFlex class="btnHeight" (click)="resetSearch()" style="margin-left: 5px;" md-raised-button type="button" color="primary">
+          <md-icon>restore</md-icon>
+          Reset
+        </button>
+      </div>
+
+      <div fxFlex="2" fxFlex.lt-md="2"></div>
+
+      <div fxFlex="14.5" fxFlex.lt-md="14.5" class="tooltip-custom" xFlexAlign="end end">
+        <button *ngIf="studentUnregisteredStudent && !utilityService.checkUserIsAdminOrDirectorOfCertifier()" fxFlex class="btnHeight"
+          (click)="triggerMailToUnregisteredStudents()" [mdTooltip]="'STUDENT.EMAILTOSTUDENTS.TEXT' | translate" mdTooltipPosition="after"
+          md-raised-button type="button" color="accent">
+          {{ 'STUDENT.EMAILTOSTUDENTS.BUTTON' | translate }}
+          <md-icon>send</md-icon>
+        </button>
+      </div>
+      <div fxFlex="0.5" fxFlex.lt-md="0.5"></div>
+      <div fxFlex="14" fxFlex.lt-md="14" fxFlexAlign="end end" *ngIf="!utilityService.isJustProbCorrector()">
+        <button md-raised-button fxFlex class="btnHeight" color="accent" (click)="openCreateStudentPopup()" *ngIf="!utilityService.checkUserIsAdminOrDirectorOfCertifier()">
+          <md-icon>school</md-icon> {{ 'Customer.AddStudent' | translate }}
+        </button>
+      </div>
+    </div>
+    <!-- 
+    <div fxLayout="row" fxLayoutWrap="wrap" > -->
+
+    <!-- </div>   -->
+  </md-card-content>
+</md-card>
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex="25" fxFlex.lt-md="25" style="overflow-x: hidden;overflow-y: auto ;height:71vh;">
+    <app-student-card *ngFor="let singleStudent of studentList; let i = index" [attr.data-index]="i" [student]="singleStudent"
+      [changedStudent]=" i === changedStudent.index ? changedStudent.student : '' " [isActive]=" singleStudent._id === activeId ? true : false "
+      (click)="emitStudent(singleStudent,i)"></app-student-card>
+  </div>
+  <div fxFlex="73" fxFlex.lt-md="73" style="margin-left: 1%">
+    <app-student-details2 *ngIf="activateDetails" style="float:left" [studentWithIndex]="studentIdWithIndex" (updateStudent)="studentChanged($event)"></app-student-details2>
+  </div>
+</div>

@@ -1,0 +1,134 @@
+$smallScreen: 1450px;
+
+:host /deep/ {
+    .admtcStaffComponent ng-select select-dropdown>div .options {
+        background-color: rgba(0, 0, 0, 0.5)
+    }
+    .admtcStaffComponent .ui-select-placeholder {
+        color: #dddddd;
+        float: left;
+        font-weight: 700;
+        font-size: 14px;
+        margin-left: -12px;
+    }
+    .admtcStaffComponent .form-control:focus {
+        box-shadow: #424242;
+        border-left-color: #424242 !important;
+        border-right-color: #424242 !important;
+        border-top: none !important;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(0, 0, 0, .6);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(0, 0, 0, .6);
+    }
+    .admtcStaffComponent .btn {
+        background-color: #424242 !important;
+        border-left-color: #424242 !important;
+        border-right-color: #424242 !important;
+        border-top: none !important;
+    }
+    .admtcStaffComponent .ui-select-match-text {
+        color: white;
+        margin-left: -12px;
+    }
+    .admtcStaffComponent input {
+        color: white !important;
+        background-color: #424242 !important;
+        border-left-color: #424242 !important;
+        border-right-color: #424242 !important;
+        border-top: none !important;
+    }
+    .admtcStaffComponent {
+        input {
+            background-color: #424242 !important;
+        }
+    }
+
+    .no-scroll .datatable-body {
+        overflow-x: hidden;
+    }
+}
+
+.tags {
+    background-color: #ffd740;
+    color: black;
+    padding: 3px 5px 3px 5px;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+
+.btnSearch {
+    height: 37px;
+}
+
+.app-dark .mat-raised-button .mat-primary {
+    flex: none !important;
+}
+
+.admtcStaffComponent ng-select select-dropdown>div .options {
+    background-color: rgba(0, 0, 0, 0.5)
+}
+
+.admtcStaffComponent .btn {
+    background-color: gray;
+}
+
+.admtcStaffComponent input {
+    background-color: gray;
+}
+
+.admtcStaffComponent {
+    input {
+        background-color: gray;
+    }
+}
+
+.addUser {
+    // color: white;
+}
+.addButton{
+    max-width: 53% !important;
+}
+.addButtonParent{
+    max-width: 32.7% !important;
+}
+.searchButton{
+    padding-left: 3px !important;
+    max-width: 60% !important;
+}
+
+.registration-icon {
+    font-size:25px;
+    cursor: pointer;
+    text-align: center;
+}
+.icon-align{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    text-align: center;
+}
+
+.buttonFlex {
+    display: flex;
+    justify-content: center;
+    margin: 0px -5px;
+    @media screen and (max-width: $smallScreen) {
+        margin: 0px -11px;
+      }
+}
+
+.custom-margin {
+    margin: 0px 2px;
+    @media screen and (max-width: $smallScreen) {
+        margin: 0px 0px;
+      }
+}
+
+.filter-status {
+    font-size:25px;
+    cursor: pointer;
+    float:right
+}
+.status-filter-icon {
+    margin-left: 3px;
+    transform: translateY(3px);
+    float: right;
+}

@@ -1,0 +1,18 @@
+<div class="job-dialog">
+  <i class="fa fa-question-circle" aria-hidden="true" style="font-size: 72px;"></i><br><br><br><br><br>
+  <p class="text">
+    {{'TESTCORRECTIONS.GROUP.SAVESUCCESSTEXT'| translate}}
+  </p>
+  <div class="button-group">
+    <div style="display: inline-block;">
+      <button md-raised-button color="primary" type="button" (click)="notifyNow()">{{'TESTCORRECTIONS.GROUP.SAVESUCCESSNOW'| translate}}</button>
+    </div>
+    <div style="display: inline-block;">
+      <input mdInput [mdDatepicker]="picker" placeholder="Choose a date" style="display: none;" [min]="minDate()">
+      <md-datepicker touchUi="true" #picker (selectedChanged)="updateCalcs($event)"></md-datepicker>
+      <button md-raised-button color="primary" (click)="picker.open(); ">{{'TESTCORRECTIONS.GROUP.SAVESUCCESSLATER'| translate}}
+        <md-icon>date_range</md-icon>
+      </button>
+    </div>
+  </div>
+</div>

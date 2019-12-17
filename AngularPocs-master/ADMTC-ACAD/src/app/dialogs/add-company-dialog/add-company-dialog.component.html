@@ -1,0 +1,241 @@
+﻿<form id="frmAddCompany" [formGroup]="form" (ngSubmit)="addCompany()" style="overflow:auto;">
+    <!--max-height:590px;-->
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="50" fxFlex.lt-md="50">
+            <div class="select-input-container">
+                <!-- <div class="address-container" style="padding-bottom:20px;padding-top:10px;"> -->
+                <!-- <div class="panel panel-default"> -->
+                <!-- <div class="panel-heading"> -->
+                <span style="margin-left:15px;font-size:20px;">{{'USERS.ADDEDITUSER.COMPANY' | translate }}</span>
+                <!-- </div> -->
+                <!-- <div class="panel-body" style="border:1px solid;padding-bottom:10px;"> -->
+                <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:25px;">
+                    <div fxFlex="100" fxFlex.lt-md="50">
+                        <div class="px-1 select-input-container">
+                            <md-input-container color="accent" style="width: 100%">
+                                <input mdInput formControlName="companyName" type="text" [placeholder]="'USERS.COMPANYNAME' | translate" />
+                            </md-input-container>
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="100" fxFlex.lt-md="50">
+                        <div class="px-1 select-input-container">
+                            <md-input-container color="accent" style="width: 100%">
+                                <input mdInput type="text" class="abc" formControlName="brand" [placeholder]="'USERS.BRAND' | translate" />
+                            </md-input-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="100" fxFlex.lt-md="100">
+                        <div class="px-1 select-input-container">
+                            <md-input-container color="accent" style="width: 100%">
+                                <input mdInput type="text" formControlName="typeOfCompany" [placeholder]="'USERS.TYPEOFCOMPANY' | translate" />
+                            </md-input-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="100" fxFlex.lt-md="100">
+                        <div class="px-1 select-input-container">
+                            <md-input-container color="accent" style="width: 100%">
+                                <input mdInput type="text" formControlName="noRC" [placeholder]="'USERS.NORC' | translate" />
+                            </md-input-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="100" fxFlex.lt-md="100">
+                        <div class="px-1 select-input-container">
+                            <md-input-container color="accent" style="width: 100%">
+                                <input mdInput type="text" formControlName="capital" [placeholder]="'USERS.CAPITAL' | translate" />
+                            </md-input-container>
+                        </div>
+                    </div>
+                    <!-- <div fxFlex="50" fxFlex.lt-md="50">
+                                    <div class="px-1 select-input-container">
+                                        <md-select color="accent" formControlName="capitalType" style="width: 100%" [placeholder]="'USERS.CURRENCY' | translate">
+                                            <md-option *ngFor="let capitaltype of capitalTypes" [value]="capitaltype.value">
+                                                {{ capitaltype.view }}
+                                            </md-option>
+                                        </md-select>
+                                    </div>
+                                </div>-->
+                </div>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="100" fxFlex.lt-md="100">
+                        <div class="px-1 select-input-container">
+                            <md-input-container color="accent" style="width: 100%">
+                                <input mdInput type="number" formControlName="noOfEmployeeInFrance" #class [placeholder]="'USERS.NOOFEXMPLOYEE' | translate" />
+                            </md-input-container>
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="100" fxFlex.lt-md="100">
+                        <div class="px-1 select-input-container">
+                            <md-input-container color="accent" style="width: 100%">
+                                <textarea mdInput id="icon_prefix2" formControlName="activity" [placeholder]="'USERS.ACTIVITY' | translate" class="materialize-textarea"></textarea>
+                            </md-input-container>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1 select-input-container">
+                                        <p style="display:inline-block;margin-top: 9px;font-size:13px">{{'USERS.ADDEDITUSER.PAYROLL' | translate}}</p>
+                                        <md-radio-group name="payroll" fxLayout="row" formControlName="payroll" class="custom_radio_btn">
+                                            <md-radio-button *ngFor="let t of payroll;" [value]="t.value" style="margin-right: 5px">
+                                                {{t.view | translate}}
+                                            </md-radio-button>
+                                        </md-radio-group>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                <!-- <div fxLayout="row" fxLayoutWrap="wrap">
+                                <div fxFlex="100" fxFlex.lt-md="100">
+                                    <div class="px-1 select-input-container">
+                                        <p style="display:inline-block;margin-top: 9px;font-size:13px">{{'USERS.ADDEDITUSER.TEXLEARNING' | translate}}</p>
+                                        <md-radio-group name="taxLearning" fxLayout="row" formControlName="taxLearning" class="custom_radio_btn">
+                                            <md-radio-button *ngFor="let t of tax;" [value]="t.value" style="margin-right: 5px">
+                                                {{t.view | translate}}
+                                            </md-radio-button>
+                                        </md-radio-group>
+                                    </div>
+                                </div>
+                            </div> -->
+
+
+                <!-- </div> -->
+                <!-- </div> -->
+                <!-- </div> -->
+            </div>
+        </div>
+        <div fxFlex="50" fxFlex.lt-md="50">
+            <div class="select-input-container">
+                <!-- <div class="address-container" style="padding-bottom:20px;padding-top:10px;"> -->
+                <!-- <div class="panel panel-default"> -->
+                <!-- <div class="panel-heading"> -->
+                <span style="margin-left:30px;font-size:20px;">{{ 'USERS.ADDRESS' | translate }}</span>
+                <!-- </div>       class="panel-body"  -->
+                <div style="padding-bottom:10px;height:352px;overflow:scroll;margin-top:15px;">
+                    <div class="px-1 select-input-container">
+                        <div formArrayName="addresses" class="address-container" style="padding-bottom:20px;padding-top:10px;">
+                            <!--let address of form.get('addresses').controls;  class="panel panel-default"-->
+                            <div *ngFor="let control of getAddressesArray().controls; let i=index" style="padding-bottom:20px;">
+                                <!-- <div class="panel-heading">
+                                            <span>{{ 'USERS.ADDRESS' | translate }} {{i + 1}}</span>
+                                        </div> -->
+                                <div [formGroupName]="i">
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="100" fxFlex.lt-md="100">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" formControlName="AddressLine1" [placeholder]="'USERS.ADDRESSLINE1' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="100" fxFlex.lt-md="100">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" formControlName="AddressLine2" [placeholder]="'USERS.ADDRESSLINE2' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="35" fxFlex.lt-md="35">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" maxlength="5" formControlName="ZipCode" [placeholder]="'USERS.ZIPCODE' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                        <div fxFlex="65" fxFlex.lt-md="65">
+                                            <div class="px-1 select-input-container">
+                                                <md-input-container color="accent" style="width: 100%">
+                                                    <input mdInput type="text" formControlName="City" [placeholder]="'USERS.CITY' | translate" />
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxFlex="80" fxFlex.lt-md="50">
+                                            <div class="px-1 select-input-container">
+                                                <!-- <md-select color="accent" formControlName="Country" style="width: 100%">
+                                                    <md-option *ngFor="let country of countryList" [value]="country.id">
+                                                        {{ country.countryName }}
+                                                    </md-option>
+                                                </md-select> -->
+
+                                                <md-input-container>
+                                                    <input type="text" [placeholder]="'USERS.COUNTRY' | translate" mdInput [(ngModel)]="CountrySearchString" [mdAutocomplete]="auto" formControlName="Country" (keyup)="searchCountryList($event)">
+                                                    <md-autocomplete #auto="mdAutocomplete">
+                                                        <!-- (click)="changeSchool(list)" -->
+                                                        <md-option *ngFor="let country of countryList" (click)="selectedCountry(country,i)" [value]="country.countryName ">
+                                                            {{ country.countryName }}
+                                                        </md-option>
+                                                    </md-autocomplete>
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div fxLayout="row" fxLayoutWrap="wrap" style="text-align:right">
+
+                                    <div  fxFlex="49" fxFlex.lt-md="50" style="margin-top: 4px">
+
+                                  </div>
+                                  <div fxFlex="50" fxFlex.lt-md="50" style="margin-top: 4px" >
+                                      <div class="px-1 select-input-container"  *ngIf="getAddressesArray()['controls'].length > 1">
+                                          {{'USERS.REMOVELOCATION' | translate}}
+                                          <a (click)="removeAddress(i)" class="btn-floating btn-large waves-effect waves-light red add-btn" style="background-color: red;">
+                                              <i class="material-icons" aria-hidden="true">
+                                                remove
+                                              </i>
+                                            </a>
+                                      </div>
+                                      <div  class="px-1 select-input-container" *ngIf="getAddressesArray()['controls'].length <= 1">
+                                          {{'USERS.ADDLOCATION' | translate}}
+                                          <a (click)="addAddress()" class="btn-floating btn-large waves-effect waves-light red add-btn" >
+                                            <i class="material-icons">add</i></a>
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- </div> -->
+
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="100" fxFlex.lt-md="100">
+                    <div class="px-1 select-input-container" style="float:right; margin-right:15px;">
+                        <button md-raised-button color="red" type="button" (click)="cancelForm()">{{'CANCEL' | translate}}</button>
+                        <button md-raised-button type="submit" [disabled]="afterSubmit" [color]="afterSubmit ? 'grey' : 'green'">{{'USERS.ADDEDITUSER.SUBMIT' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+<style>
+    .mat-dialog-container {
+        padding: 0 !important;
+    }
+
+    .btn_right {
+        text-align: right;
+    }
+</style>

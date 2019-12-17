@@ -1,0 +1,73 @@
+.add-btn {
+    width: 25px;
+    height: 25px;
+    background-color: #ffd740;
+    display: inline-block;
+    border-radius: 50%;
+    top: 4px;
+    vertical-align: middle;
+    margin-left: 3px;
+    box-shadow: 1px 2px 4px #9e9d9d;
+}
+
+.custom_radio_btn {
+    display: inline-block !important;
+    float: right;
+}
+
+.address-container .panel-default {
+    position: relative;
+}
+
+.address-container .panel-default:nth-child(2) {
+    margin-top: 20px;
+}
+
+.address-container .panel-heading {
+    display: inline-block;
+    position: absolute;
+    background-color: #ddd;
+    top: -9px;
+    left: 11px;
+    padding: 2px 14px;
+    font-size: 12px;
+}
+
+.address-container .panel-body {
+    border: 1px solid #ddd !important;
+    padding-top: 15px;
+}
+
+#cdk-overlay-2 .mat-dialog-container {
+    padding: 10px 24px !important;
+}
+
+
+:host /deep/ .mat-input-wrapper {
+    margin: 10px 0 !important;
+}
+
+.remove-btn {
+    position: absolute;
+    right: -6px;
+    top: -12px;
+    background-color: #ddd;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    text-align: center;
+    line-height: 24px;
+    border-radius: 50%;
+}
+
+.remove-btn i {
+    font-size: 16px;
+    line-height: 21px;
+    font-weight: 600;
+    padding-left: 2px;
+}
+
+.big_text  {            text-align: center;
+    font-size: 25px !important;
+    padding: 22px 24px 34px 24px;
+    color: #607d8b;}

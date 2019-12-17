@@ -1,0 +1,72 @@
+<form [formGroup]="form" (ngSubmit)="continue()">
+
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100" class="px-1">
+            <h5> {{'PARAMETERS-RNCP.CLASSES.TITLE' | translate}} {{RNCPSHORT}} </h5>
+        </div>
+    </div>
+    <div class="px-1 select-input-container" *ngIf="ShowRncpTitlesDP">
+        <md-select formControlName="rncpTitle" placeholder="{{'PARAMETERS-RNCP.CLASSES.RNCP-SELECT' | translate}}" [(ngModel)]="RNCPtitleId" style="width: 100%">
+            <md-option *ngFor="let rncp of rncpTitles" [value]="rncp._id">{{ rncp.shortName }}</md-option>
+          </md-select>
+    </div>
+    <div class="px-1 select-input-container">
+        <md-input-container color="accent" style="width: 100%">
+            <input mdInput formControlName="name" type="text" #class placeholder="{{'PARAMETERS-RNCP.CLASSES.CLASS' | translate}}" (change)="checkExistClass($event)" (blur)="checkExistClass($event)" (paste)="checkExistClass($event)"/>
+        </md-input-container>
+        <small style="color: red" *ngIf="classAlreadyExist">{{'PARAMETERS-RNCP.CLASSES.MESSAGE.ALREADYERR' | translate}}</small>
+    </div>
+    <div class="px-1 select-input-container">
+        <md-input-container color="accent" style="width: 100%">
+            <textarea mdInput formControlName="description" #description placeholder="{{'PARAMETERS-RNCP.CLASSES.DESC' | translate}} "></textarea>
+        </md-input-container>
+    </div>
+
+
+
+
+    <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxFlex="100" fxFlex.lt-md="100" class="px-1">
+            <h5> {{'Certificate Paramater' | translate}} {{RNCPSHORT}} </h5>
+        </div>
+    </div>
+    <div class="px-1 select-input-container">
+        <md-input-container color="accent" fxFlex="100">
+            <input readonly mdInput type="text" [mdDatepicker]="dateOfIssuance" placeholder="{{'Date of Certificate Issuance' | translate}}" formControlName="dateOfCertificateIssuance" >
+            <button mdSuffix [mdDatepickerToggle]="dateOfIssuance" class="white-datepicker-button" style="background-color: grey !important;"></button>
+        </md-input-container>
+        <md-datepicker #dateOfIssuance [touchUi]="true"></md-datepicker>
+    </div>
+    <div class="px-1 select-input-container" >
+        <input #uploadCertificateBackground style="display: none" type="file" accept=".png,.jpg,.jpeg" ng2FileSelect [uploader]="uploaderCertificateBackground" disableMultipart="true" />
+        <md-input-container color="accent" fxFlex="92">
+            <input readonly mdInput formControlName="certificateImageName" type="text" #class placeholder="{{'Certificate Background Image' | translate}}"/>
+        </md-input-container>
+        <div fxFlex="8" (click)="uploadCertificate()">        
+            <svg class="upload-icon" viewBox="0 0 24 24">
+                <path fill="#555555" d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" />
+            </svg>
+        </div>
+    </div>
+    <div class="px-1 select-input-container">
+        <md-input-container color="accent" fxFlex="100">
+            <input  mdInput formControlName="certifiateSignatoryName" type="text" #class placeholder="{{'Certificate Signatory' | translate}}" />
+        </md-input-container>
+    </div>
+    <div class="px-1 select-input-container">
+        <input #uploadSignatorySignature style="display: none" type="file" ng2FileSelect [uploader]="uploaderSignatorySignature" disableMultipart="true" />
+        <md-input-container color="accent" fxFlex="92">
+            <input readonly mdInput formControlName="signatoryImageName" type="text" #class placeholder="{{'Signature of the Signatory' | translate}}" />
+        </md-input-container>
+        <div fxFlex="8" (click)="uploadSignature()">        
+            <svg class="upload-icon" viewBox="0 0 24 24">
+                <path fill="#555555" d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" />
+            </svg>
+        </div>
+    </div>
+
+    <div class="px-1 select-input-container pull-right">
+        <button md-raised-button color="warn" type="button" (click)="cancel()">{{'CANCEL' | translate}}</button>
+        <button md-raised-button color="primary" type="submit">{{'USERS.ADDEDITUSER.SUBMIT' | translate}}</button>
+    </div>
+</form>

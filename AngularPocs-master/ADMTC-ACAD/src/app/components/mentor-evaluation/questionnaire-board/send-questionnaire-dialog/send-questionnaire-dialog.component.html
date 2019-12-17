@@ -1,0 +1,253 @@
+<div fxLayout="column wrap" fxLayoutAlign="start" style="width: 100%; height: 100%;">
+  <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px;">
+    <div class="pa-1">
+      <div fxLayout="row wrap" fxLayoutAlign="start center">
+        <md-icon>list</md-icon>
+        <h3 fxFlex>
+          <span class="text-questionnaire">
+            {{ 'SEND_QUESTIONNAIRE.TITLE' | translate}}
+          </span>
+        </h3>
+        <button md-icon-button (click)="closeDialog()">
+          <md-icon>close</md-icon>
+        </button>
+      </div>
+    </div>
+    <hr>
+  </div>
+
+  <md-tab-group headerPosition="center" class="mb-1 viewTemplate" md-stretch-tabs>
+    <md-tab>
+      
+    
+      <div fxLayout="row" fxLayoutWrap="wrap" fxFlex="100">
+        <div fxFlex.gt-sm="100%" fxFlex="100">
+          <form [formGroup]="form">
+            
+            <!-- questionaire -->
+            <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:20px; ">
+              <div fxFlex="100" fxFlex.lt-md="100">
+                <md-input-container fxFlex="100">
+                  <input type="text" placeholder="Select Questionnaire" mdInput [formControl]="form.controls['questionaire']"
+                    [mdAutocomplete]="ques">
+                  <md-autocomplete #ques="mdAutocomplete">
+                    <md-option (click)="onSelectQues(list)" [value]="list?.questionnaireTemplate?.questionnaireName" *ngFor="let list of questionnaireList">
+                      {{list?.questionnaireTemplate?.questionnaireName}}
+                    </md-option>
+                  </md-autocomplete>
+                </md-input-container>
+              </div>
+              <div fxFlex="100" fxFlex.lt-md="100">
+                <small class="mat-text-warn" *ngIf="form.controls['questionaire'].hasError('required') && (form.controls['questionaire'].touched)">
+                  {{'CrossCorrection.Select_RNCP_Title.validation1' | translate}}</small>
+              </div>
+            </div>
+
+            <!-- Recipient heading -->
+            <!-- <div class="head-text">
+              <p>{{ 'SEND_QUESTIONNAIRE.RECIPIENT'| translate }}</p>
+              <hr class="head-hr">
+            </div> -->
+            
+            <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:20px; ">
+              <div fxLayout="column">
+                <!-- rncp -->
+                <div fxFlex="50" fxFlex.lt-md="50">
+                  <md-input-container fxFlex="100">
+                    <input type="text" placeholder="{{'CrossCorrection.Select_RNCP_Title.title' | translate}}" mdInput [formControl]="form.controls['title']"
+                      [mdAutocomplete]="autoTitle">
+                    <md-autocomplete #autoTitle="mdAutocomplete">
+                      <md-option (click)="onSelectRncp(list)" [value]="list?.shortName" *ngFor="let list of rncpList">
+                        {{list?.shortName}}
+                      </md-option>
+                    </md-autocomplete>
+                  </md-input-container>
+                </div>
+                <div fxFlex="50" fxFlex.lt-md="50">
+                  <small class="mat-text-warn" *ngIf="form.controls['title'].hasError('required') && (form.controls['title'].touched)">
+                    {{'CrossCorrection.Select_RNCP_Title.validation1' | translate}}</small>
+                </div>
+              </div>
+              <div fxLayout="column" style="margin-left: 15px;">
+                <div fxFlex="50" fxFlex.lt-md="50">
+                  <md-input-container fxFlex="100">
+                    <input type="text" placeholder="{{'SEND_QUESTIONNAIRE.SELECTSCHOOL' | translate}}" mdInput [mdAutocomplete]="autoSchool"
+                      [formControl]="form.controls['school']">
+                    <md-autocomplete #autoSchool="mdAutocomplete">
+                      <md-option (click)="onSelectSchool(list)" [value]="list?.shortName" *ngFor="let list of schoolList">
+                        {{list?.shortName}}
+                      </md-option>
+                    </md-autocomplete>
+                  </md-input-container>
+                </div>
+                <div fxFlex="50" fxFlex.lt-md="50">
+                  <small class="mat-text-warn" *ngIf="form.controls['school'].hasError('required') && (form.controls['school'].touched)">
+                    {{'CrossCorrection.Select_a_Class.validation1' | translate}}</small>
+                </div>
+              </div>
+            </div>
+
+           
+            
+
+            <!-- school -->
+            <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px; ">
+              <div fxLayout="column">
+                <!-- scholar season -->
+                <div fxFlex="50" fxFlex.lt-md="50">
+                  <md-input-container fxFlex="100">
+                    <input type="text" placeholder="Select scholarseason" mdInput [mdAutocomplete]="autoScholar" [formControl]="form.controls['scholarseason']">
+                    <md-autocomplete #autoScholar="mdAutocomplete">
+                      <md-option (click)="onSelectScholarSeason(list)" [value]="list?.scholarseason" *ngFor="let list of scholarSeasonsList">
+                        {{list?.scholarseason}}
+                      </md-option>
+                    </md-autocomplete>
+                  </md-input-container>
+                </div>
+                <div fxFlex="50" fxFlex.lt-md="50">
+                  <small class="mat-text-warn" *ngIf="form.controls['scholarseason'].hasError('required') && (form.controls['scholarseason'].touched)">
+                    {{'CrossCorrection.Select_a_Class.validation1' | translate}}</small>
+                </div>
+              </div>
+              <div fxLayout="column" style="margin-left: 15px;">
+                  <div fxFlex="50" fxFlex.lt-md="50">
+                    <md-input-container fxFlex="100">
+                      <input type="text" placeholder="select class" mdInput [mdAutocomplete]="autoClass" [formControl]="form.controls['class']">
+                      <md-autocomplete #autoClass="mdAutocomplete">
+                        <md-option (click)="onSelectClass(list)" [value]="list?.name" *ngFor="let list of classList">
+                          {{list?.name}}
+                        </md-option>
+                      </md-autocomplete>
+                    </md-input-container>
+                  </div>
+                  <div fxFlex="50" fxFlex.lt-md="50">
+                    <small class="mat-text-warn" *ngIf="form.controls['class'].hasError('required') && (form.controls['class'].touched)">
+                      {{'CrossCorrection.Select_a_Class.validation1' | translate}}</small>
+                  </div>
+                </div>
+            
+            </div>
+
+            <!-- class -->
+            <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px; ">
+             
+            </div>
+
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxFlex="100" fxFlex.lt-md="100">
+                  <div class="select-input-container">
+                    <span>{{'TASK.ADDEDITTASK.USER' | translate}}</span>
+                  <md-slide-toggle [formControl]="form.controls['isUser']" (click)="toggleUsergroup()"></md-slide-toggle>
+                
+                    <span>{{'TASK.ADDEDITTASK.CATEGORYOFUSERS' | translate}}</span>
+                    <!-- <pre>{{ form.getValue('isuserGroup') }}</pre> -->
+                  </div>
+                </div>
+              </div>
+
+                <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px;" *ngIf="!form.value.isUser">
+                  <div fxFlex="100" fxFlex.lt-md="100">
+                    <md-input-container fxFlex="100">
+                      <input type="text" placeholder="{{'TASK.ADDEDITTASK.USER' | translate}}" mdInput [mdAutocomplete]="userList" [formControl]="form.controls['user']">
+                      <md-autocomplete #userList="mdAutocomplete" >
+                        <md-option (click)="onSelectUsers(user)" [value]="user?.lastName +' '+user?.firstName" *ngFor="let user of users" >
+                           {{ user?.lastName }} {{ user.firstName }}
+                        </md-option>
+                      </md-autocomplete>
+                    </md-input-container>
+                  </div>
+                  <div fxFlex="100" fxFlex.lt-md="100">
+                    <small class="mat-text-warn" *ngIf="form.controls['user'].hasError('required') && (form.controls['user'].touched)">
+                      {{'CrossCorrection.Select_the_Test.validation1' | translate}}</small>
+                  </div>
+                </div>
+                
+                  <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px;" *ngIf="form.value.isUser">
+                    <div fxFlex="100" fxFlex.lt-md="100">
+                      <md-input-container fxFlex="100">
+                       <!-- tran -->
+                        <input type="text" placeholder="{{'TASK.ADDEDITTASK.CATEGORYOFUSERS' | translate}}" mdInput [mdAutocomplete]="userGroup"  [formControl]="form.controls['userGroup']">
+                      <md-autocomplete #userGroup="mdAutocomplete" >
+                        <md-option (click)="onSelectUsersGroup(group)" [value]="group?.name" *ngFor="let group of userGroupList">
+                          {{group?.name}}
+                        </md-option>
+                      </md-autocomplete>
+                      </md-input-container>
+                    </div>
+                    <div fxFlex="100" fxFlex.lt-md="100">
+                      <small class="mat-text-warn" *ngIf="form.controls['userGroup'].hasError('required') && (form.controls['userGroup'].touched)">
+                        {{'CrossCorrection.Select_the_Test.validation1' | translate}}</small>
+                    </div>
+                  </div>
+
+
+            <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px; ">
+            <div fxFlex="50" fxFlex.lt-md="50">
+              <div class="select-input-container">
+                <md-input-container color="accent" style="width: 100%">
+                  <input mdInput type="text" [mdDatepicker]="dueDate" [formControl]="form.controls['date']" [placeholder]="'TASK.ADDEDITTASK.DUEDATE' | translate"
+                    (keydown.space)="$event.preventDefault()" [min]="minDate">
+                  <button mdSuffix [mdDatepickerToggle]="dueDate" class="white-datepicker-button" style="background-color: grey !important;"></button>
+                  <!--<input mdInput type="text" formControlName="dueDate" [placeholder]="'TASK.DUEDATE' | translate" />-->
+                </md-input-container>
+                <md-datepicker #dueDate [touchUi]="true"></md-datepicker>
+              </div>
+            </div>
+            </div>
+
+            <!-- <div class="head-text">
+              <p>{{ 'SEND_QUESTIONNAIRE.VALIDATOR'| translate }}</p>
+              <hr class="head-hr">
+            </div> -->
+           
+            <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px; ">
+              <div fxFlex="30" fxFlex.lt-md="30">
+                    <md-input-container fxFlex="100">
+                      <input type="text" placeholder="{{ 'SEND_QUESTIONNAIRE.ENTITY'| translate }}" mdInput [mdAutocomplete]="selectEntity">
+                      <md-autocomplete #selectEntity="mdAutocomplete">
+                        <md-option (click)="getUserTypeByEntity(entity.value, true); onSelectEntity()" [value]="entity?.view" *ngFor="let entity of userEntities">
+                          {{entity?.view}}
+                        </md-option>
+                      </md-autocomplete>
+                    </md-input-container>
+              </div>
+              <div fxFlex="40" fxFlex.lt-md="40" *ngIf="validatorType" style="margin-left: 20px">
+                <md-input-container fxFlex="100">
+                  <input type="text" placeholder="{{ 'SEND_QUESTIONNAIRE.USERTYPE'| translate }}" mdInput [mdAutocomplete]="selectTypeVal">
+                  <!-- tran -->
+                  <md-autocomplete  #selectTypeVal="mdAutocomplete">
+                    <md-option [value]="type.name" *ngFor="let type of validatorUserType" (click)="onSelectValidatorUsertype(type)">
+                      {{type?.name}}
+                    </md-option>
+                  </md-autocomplete>
+                </md-input-container>
+              </div>
+
+            </div>
+
+
+            <!-- admtc academic company -->
+            <div fxLayout="row" fxLayoutWrap="wrap" style="margin-top:10px; ">
+              <md-input-container fxFlex="100">
+                <input type="text" placeholder="{{ 'SEND_QUESTIONNAIRE.VALIDAION'| translate }}" mdInput [mdAutocomplete]="selectValidate" [formControl]="form.controls['validationType']">
+                <md-autocomplete #selectValidate>
+                  <!-- tran -->
+                  <md-option *ngFor="let reject of rejectType" [value]="reject?.view" (click)="onValidate(reject)">
+                    {{reject?.view}}
+                  </md-option>
+                </md-autocomplete>
+              </md-input-container>
+              </div>
+          </form>
+
+        </div>
+      </div>
+    </md-tab>
+
+  </md-tab-group>
+
+  <div fxLayout="row wrap" fxLayoutAlign="end end" fxLayoutGap="5px" fxFlexAlign="end" style="width: 100%">
+    <button md-raised-button color="red" (click)="closeDialog()">{{"CrossCorrection.Cancel" | translate}}</button>
+    <button md-raised-button color="primary" (click)="sendQuestionnaire()" [disabled]="!form.valid" >{{"CrossCorrection.Enter" | translate}}</button>
+  </div>
+</div>

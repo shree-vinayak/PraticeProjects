@@ -1,0 +1,147 @@
+<form>
+  <div fxLayout="column" fxLayoutAlign="start" style="width: 100%; height: 100%;">
+    <div style="margin-left: -24px; margin-right: -24px; margin-top: -24px;">
+      <div class="pa-1">
+        <div fxLayout="row wrap" fxLayoutAlign="start center">
+          <div fxFlex>
+            <span style="vertical-align: -webkit-baseline-middle;">
+              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="#000000 " d="M19,19H5V5H15V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V11H19M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"
+                />
+              </svg>
+            </span>
+            <!-- task?.description.length > 15 ? (task?.description.slice(0,14) + '...') : -->
+            <span class="text-xl"> {{ 'TEST.AUTOTASK.' + task?.description.toUpperCase() | translate }} </span>
+          </div>
+          <button md-icon-button (click)="closeDialog(false)">
+            <md-icon>close</md-icon>
+          </button>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <br>
+    <div fxLayout="row wrap">
+      <div fxFlex="30">
+        <label> {{'DASHBOARD.DUEDATE' | translate}} </label>
+      </div>
+      <div fxFlex="70">
+        : &nbsp;&nbsp; {{ task?.dueDate | date: 'dd/MM/yyyy' }}
+      </div>
+    </div>
+    <div fxLayout="row wrap">
+      <div fxFlex="30">
+        <label> {{'DASHBOARD.ASSIGNEDTO' | translate}} </label>
+      </div>
+      <div fxFlex="70">
+        : &nbsp;&nbsp; {{task.userSelection?.selectionType !== 'user' ? task.userSelection?.userTypeId ? utility.getTranslateADMTCSTAFFKEY(task.userSelection?.userTypeId?.name)
+        : '' : task?.userSelection?.firstName + ' ' + task?.userSelection?.lastName }}
+      </div>
+    </div>
+    <div fxLayout="row wrap">
+      <div fxFlex="30">
+        <label> {{'DASHBOARD.TASK' | translate}} </label>
+      </div>
+      <div fxFlex="70">
+        : &nbsp;&nbsp; {{ task?.description }}
+      </div>
+    </div>
+    <div fxLayout="row wrap">
+      <div fxFlex="30">
+        <label> {{'DASHBOARD.SUBJECT/TEST' | translate}} </label>
+      </div>
+      <div fxFlex="70">
+        : &nbsp;&nbsp; {{ testName }}
+      </div>
+    </div>
+    <div fxLayout="row wrap">
+      <div fxFlex="30">
+        <label> {{'DASHBOARD.PRIORITY' | translate}} </label>
+      </div>
+      <div fxFlex="70">
+        : &nbsp;&nbsp; {{ task?.priority }}
+      </div>
+    </div>
+    <div fxLayout="row wrap">
+      <div fxFlex>
+        <hr />
+      </div>
+    </div>
+    <div fxLayout="row wrap" *ngIf="isAssignByLoginUser && task?.taskStatus === 'Done'">
+      <div fxFlex="100">
+        <div fxLayout="column wrap">
+          <div fxLayout="row wrap">
+            <div fxFlex="100">
+              <label>
+                  {{task?.userSelection?.selectionType === 'user' ? task?.userSelection?.userId?.firstName + ' ' + task?.userSelection?.userId?.lastName :
+                      task.userSelection?.userTypeId ? utility.getTranslateADMTCSTAFFKEY(task.userSelection?.userTypeId?.name) : '' }}
+              </label>
+            </div>
+          </div>
+          <div fxLayout="row wrap">
+            <div fxFlex="30">
+              <label> {{ 'TASK.TASKDETAILS.DATE' | translate }} </label>
+            </div>
+            <div fxFlex="70">
+              : &nbsp;&nbsp; {{ task?.createdAt | date: 'dd/MM/yyyy' }}
+            </div>
+          </div>
+
+          <div fxLayout="row wrap">
+            <div fxFlex="30">
+              <label> {{ 'TASK.TASKDETAILS.STATUS' | translate }} </label>
+            </div>
+            <div fxFlex="70">
+              : &nbsp;&nbsp; {{ task?.status }}
+            </div>
+          </div>
+
+          <div fxLayout="row wrap">
+            <div fxFlex="30">
+              <label> {{ 'TASK.TASKDETAILS.ACTIONTAKEN' | translate }} </label>
+            </div>
+            <div fxFlex="70">
+              : &nbsp;&nbsp; {{ task?.actionTaken }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row wrap">
+      <div fxFlex>
+        <hr />
+      </div>
+    </div>
+    <div fxLayout="row wrap" style="margin-top: 10px;">
+      <div fxFlex=100 fxLayoutAlign="center center">
+        <span>{{ 'TASK.TASKDETAILS.PENDING' | translate }}</span>
+        <mat-slide-toggle [disabled]="isDetailsReadOnly" [(ngModel)]="isTaskDone" [ngModelOptions]="{standalone: true}">
+          {{ 'TASK.TASKDETAILS.ACHIEVED' | translate }}
+        </mat-slide-toggle>
+      </div>
+    </div>
+    <div class="taskDetailsText" fxLayout="row wrap" style="margin-top: 10px;" *ngIf="!isAssignByLoginUser || task?.taskStatus !== 'Done'">
+      <div fxFlex=100>
+        <md-input-container style="width: 100%">
+          <textarea [disabled]="isDetailsReadOnly" [(ngModel)]="actionTaken" [ngModelOptions]="{standalone: true}" placeholder="{{ 'TASK.TASKDETAILS.ACTIONTAKEN' | translate }}"
+            mdInput></textarea>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="taskDetailsText" fxLayout="row wrap" style="margin-top: 10px;" *ngIf="isAssignByLoginUser && task?.taskStatus === 'Done'">
+      <div fxFlex=100>
+        <md-input-container style="width: 100%">
+          <textarea [disabled]="isDetailsReadOnly" [(ngModel)]="comment" [ngModelOptions]="{standalone: true}" placeholder="{{ 'TASK.TASKDETAILS.COMMENTS' | translate }}"
+            mdInput></textarea>
+        </md-input-container>
+      </div>
+    </div>
+    <div fxLayout="row wrap" style="margin-top: 10px;">
+      <div fxFlex=100 fxLayoutAlign="end end" fxLayoutGap="10px">
+        <button [disabled]="isDetailsReadOnly" md-raised-button color="primary" (click)="updateTask()">{{'STUDENT.SAVE' | translate}}</button>
+        <button [disabled]="isDetailsReadOnly" md-raised-button color="primary" (click)="createUser()">{{'CrossCorrection.Create_User' | translate}}</button>
+        <button md-raised-button color="warn" (click)="closeDialog(false)">{{'CANCEL' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</form>

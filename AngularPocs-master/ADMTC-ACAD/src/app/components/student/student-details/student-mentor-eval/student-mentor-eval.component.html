@@ -1,0 +1,42 @@
+<div style="text-align:center;margin-top: 10px;">
+    <div class="job-button">
+        <button class="jobButton">
+         <span style="float: left;">
+           <p class="para">{{ 'STUDENT.SENTTOMENTOR' | translate }}</p>
+          </span>
+          <i *ngIf="sentToMentor" class="fa fa-check icons" style="color:green" aria-hidden="true"></i>
+          <i *ngIf="!sentToMentor" class="fa fa-times icons" style="color:red" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="job-button">
+        <button class="jobButton">
+           <span style="float: left;">
+             <p class="para">{{ 'STUDENT.VALIDATEBYMENTOR' | translate }}</p>
+            </span>
+            <i *ngIf="validatedByMentor" class="fa fa-check icons" style="color:green"  aria-hidden="true"></i>
+            <i *ngIf="!validatedByMentor" class="fa fa-times icons" style="color:red"  aria-hidden="true"></i>
+          </button>
+    </div>
+
+    <div class="job-button">
+        <button class="jobButton">
+   <span style="float: left;">
+     <p class="para">{{ 'STUDENT.VALIDATEBYACADEMICDPT' | translate }}</p>
+    </span>
+    <i *ngIf="validatedByAcademic" class="fa fa-check icons" style="color:green"  aria-hidden="true"></i>
+    <i *ngIf="!validatedByAcademic" class="fa fa-times icons" style="color:red"  aria-hidden="true"></i>
+  </button>
+    </div>
+</div>
+
+<div *ngIf="student.mentorEvaluationId">
+    <app-mentor-eval-form (emitStatustoDetails)="updateStudentDetails($event)" [mentorEvalID]="studentMentorEvalID"></app-mentor-eval-form>
+</div>
+
+<div *ngIf="!student.mentorEvaluationId">
+  <br>
+  <div style=" font-size: 20px;font-weight: 600; text-align:center;">{{ 'MENTOREVALUATION.TITLE' | translate }}</div>
+  <br>
+  <div style=" font-size: 18px;text-align:center;">{{ 'MENTOREVALUATION.TEXT'  | translate }}</div>
+
+</div>

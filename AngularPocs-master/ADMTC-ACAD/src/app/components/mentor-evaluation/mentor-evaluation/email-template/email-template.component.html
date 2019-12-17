@@ -1,0 +1,105 @@
+<div fxLayout="row" fxLayoutWrap="wrap" style="margin: 10px;">
+  <div fxFlex.gt-sm="70%" fxFlex="100">
+    <md-card>
+      <md-card-content>
+        <div fxLayout="row" fxLayoutWrap="wrap" fxFlex="100">
+          <div fxFlex.gt-sm="70%" fxFlex="100">
+            <md-card>
+              <form [formGroup]="templateForm">
+                <md-card-content>
+                  <h5>{{'MENTOREVALUATION.EMAILTEMPLATE.TITLE' | translate}}</h5>
+                  <div fxLayout="row" fxLayoutWrap="wrap">
+                    <md-input-container style="width: 100%">
+                      <input mdInput placeholder="{{'MENTOREVALUATION.EMAILTEMPLATE.FILENAME.title' | translate}}" [formControl]="templateForm.controls['filename']"
+                        type="search" pattern="[a-zA-Z ÆÐƎƏƐƔĲŊŒẞÞǷȜæðǝəɛɣĳŋœĸſßþƿȝĄƁÇĐƊĘĦĮƘŁØƠŞȘŢȚŦŲƯY̨Ƴąɓçđɗęħįƙłøơşșţțŧųưy̨ƴÁÀÂÄǍĂĀÃÅǺĄÆǼǢƁĆĊĈČÇĎḌĐƊÐÉÈĖÊËĚĔĒĘẸƎƏƐĠĜǦĞĢƔáàâäǎăāãåǻąæǽǣɓćċĉčçďḍđɗðéèėêëěĕēęẹǝəɛġĝǧğģɣĤḤĦIÍÌİÎÏǏĬĪĨĮỊĲĴĶƘĹĻŁĽĿʼNŃN̈ŇÑŅŊÓÒÔÖǑŎŌÕŐỌØǾƠŒĥḥħıíìiîïǐĭīĩįịĳĵķƙĸĺļłľŀŉńn̈ňñņŋóòôöǒŏōõőọøǿơœŔŘŖŚŜŠŞȘṢẞŤŢṬŦÞÚÙÛÜǓŬŪŨŰŮŲỤƯẂẀŴẄǷÝỲŶŸȲỸƳŹŻŽẒŕřŗſśŝšşșṣßťţṭŧþúùûüǔŭūũűůųụưẃẁŵẅƿýỳŷÿȳỹƴźżžẓ ]*">
+                    </md-input-container>
+                    <small *ngIf="templateForm.controls['filename'].hasError('required') && (templateForm.controls['filename'].touched || formSubmit)"
+                      class="mat-text-warn"> {{'MENTOREVALUATION.EMAILTEMPLATE.FILENAME.validation1' | translate}}</small>
+                    <small *ngIf="templateForm.controls['filename'].hasError('maxlength') && (templateForm.controls['filename'].touched || formSubmit)"
+                      class="mat-text-warn">{{ 'MENTOREVALUATION.EMAILTEMPLATE.FILENAME.validation2' | translate}}</small>
+                    <small *ngIf="templateForm.controls['filename'].hasError('pattern') && (templateForm.controls['filename'].touched || formSubmit)"
+                      class="mat-text-warn">{{ 'MENTOREVALUATION.EMAILTEMPLATE.FILENAME.validation3' | translate}}</small>
+
+                  </div>
+                  <div fxLayout="row" fxLayoutWrap="wrap">
+                    <md-input-container style="width: 100%">
+                      <input mdInput placeholder="{{'MENTOREVALUATION.EMAILTEMPLATE.SUBJECT.title' | translate}}"
+                      [(ngModel)]="composeMailSubject"
+                      [formControl]="templateForm.controls['subject']"
+                        pattern="[a-zA-Z ÆÐƎƏƐƔĲŊŒẞÞǷȜæðǝəɛɣĳŋœĸſßþƿȝĄƁÇĐƊĘĦĮƘŁØƠŞȘŢȚŦŲƯY̨Ƴąɓçđɗęħįƙłøơşșţțŧųưy̨ƴÁÀÂÄǍĂĀÃÅǺĄÆǼǢƁĆĊĈČÇĎḌĐƊÐÉÈĖÊËĚĔĒĘẸƎƏƐĠĜǦĞĢƔáàâäǎăāãåǻąæǽǣɓćċĉčçďḍđɗðéèėêëěĕēęẹǝəɛġĝǧğģɣĤḤĦIÍÌİÎÏǏĬĪĨĮỊĲĴĶƘĹĻŁĽĿʼNŃN̈ŇÑŅŊÓÒÔÖǑŎŌÕŐỌØǾƠŒĥḥħıíìiîïǐĭīĩįịĳĵķƙĸĺļłľŀŉńn̈ňñņŋóòôöǒŏōõőọøǿơœŔŘŖŚŜŠŞȘṢẞŤŢṬŦÞÚÙÛÜǓŬŪŨŰŮŲỤƯẂẀŴẄǷÝỲŶŸȲỸƳŹŻŽẒŕřŗſśŝšşșṣßťţṭŧþúùûüǔŭūũűůųụưẃẁŵẅƿýỳŷÿȳỹƴźżžẓ ]*">
+                    </md-input-container>
+                    <small *ngIf="templateForm.controls['subject'].hasError('required') && (templateForm.controls['subject'].touched || formSubmit)"
+                      class="mat-text-warn"> {{'MENTOREVALUATION.EMAILTEMPLATE.SUBJECT.validation1' | translate}}</small>
+                    <small *ngIf="templateForm.controls['subject'].hasError('maxlength') && (templateForm.controls['subject'].touched || formSubmit)"
+                      class="mat-text-warn">{{ 'MENTOREVALUATION.EMAILTEMPLATE.SUBJECT.validation2' | translate}}</small>
+                    <small *ngIf="templateForm.controls['subject'].hasError('pattern') && (templateForm.controls['subject'].touched || formSubmit)"
+                      class="mat-text-warn">{{ 'MENTOREVALUATION.EMAILTEMPLATE.SUBJECT.validation3' | translate}}</small>
+                  </div>
+                  <div fxLayout="row" fxLayoutWrap="wrap" style="background:white;color: black;">
+                    <quill-editor (onSelectionChanged)="textChanged($event)" [(ngModel)]="composeMailMessage" [formControl]="templateForm.controls['message']"></quill-editor>
+                  </div>
+                  <div fxLayout="row" fxLayoutWrap="wrap" style="float: right;margin-top: 20px;">
+                    <button md-raised-button md-button-sm [disabled]="isReadOnly" color="red" class="mr-1" type="button" (click)="revert()">{{ 'MENTOREVALUATION.EMAILTEMPLATE.CANCEL' | translate }}</button>
+                    <button md-raised-button md-button-sm [disabled]="isReadOnly" color="green" class="mr-1" type="submit" (click)="sendTemplate()">{{ 'MENTOREVALUATION.EMAILTEMPLATE.SAVE' | translate }}</button>
+                  </div>
+                </md-card-content>
+              </form>
+            </md-card>
+          </div>
+          <div fxFlex.gt-sm="30%" fxFlex="100">
+            <md-card>
+              <md-card-content>
+                <h5 class="available-variable-header" style="margin-bottom: 10px;">{{'MENTOREVALUATION.EMAILTEMPLATE.VERIABLES' | translate}}</h5>
+                <div class="available-variable" style="text-align: center;">
+                  <ul style="text-align: left;">
+                    <li *ngFor="let item of availableVeriable" style="cursor: pointer" style="margin-bottom: 5px;cursor: pointer" (click)="addVeriable(item)">
+                      {{item}}
+                    </li>
+                  </ul>
+                </div>
+              </md-card-content>
+            </md-card>
+          </div>
+        </div>
+      </md-card-content>
+    </md-card>
+  </div>
+  <div fxFlex.gt-sm="30%" fxFlex="100">
+    <md-card>
+      <md-card-content>
+        <h5>{{'MENTOREVALUATION.EMAILTEMPLATE.TEMPLATEMANAGEMENT' | translate}}</h5>
+        <ngx-datatable [rows]="templateList" [sorts]="[{prop: 'name', dir: 'asc'}]" #table class='material Message-class' [columnMode]="'flex'"
+          [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="10">
+          <ngx-datatable-column name="Date" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+              <span (click)="sort()">{{ 'MENTOREVALUATION.EMAILTEMPLATE.NAME' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <span style="cursor: pointer;" (click)="onSelectMessage(row)" *ngIf="row.name">{{row.name }}</span>
+            </ng-template>
+          </ngx-datatable-column>
+
+
+
+          <ngx-datatable-column name="subject" [resizeable]="false" [sortable]="true" [flexGrow]="2">
+            <ng-template let-column="column" ngx-datatable-header-template let-sort="sortFn">
+              <span (click)="sort()">{{ 'MENTOREVALUATION.EMAILTEMPLATE.ACTIONS' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <button md-icon-button class="ml-xs overflow-visible" (click)="viewEyeTemplate(row)">
+                <md-icon>visibility</md-icon>
+              </button>
+              <button md-icon-button class="ml-xs overflow-visible" (click)="viewTemplate(row)">
+                <md-icon>edit</md-icon>
+              </button>
+              <button md-icon-button class="ml-xs overflow-visible" (click)="deleteTemplate(row)">
+                <md-icon>delete</md-icon>
+              </button>
+
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

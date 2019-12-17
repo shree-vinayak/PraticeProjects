@@ -1,0 +1,319 @@
+
+
+<div #pagesElement>
+  <div fxLayout="row" class="problematicPdf" fxLayoutAlign="center">
+      <label style=" font-size: 20px;font-weight: 600; text-align:center;"> {{ 'PROBLEMATICFORM.TITLE' | translate }}</label>
+    </div>
+    
+<div *ngIf="isCardsVisible"  style="text-align:center;margin-top: 10px;"> 
+<div *ngFor="let card of cardStatusAndText" class="prob-button">
+  <button [class]=" 'probButton' + ' ' + card.clazz" *ngIf="card.isVisible">
+    <span style="float: left;">
+      <p class="para" [ngClass]="{ 'textColorWhite' : card.clazz === 'redBG' }" >{{ card.textKey | translate }}</p>
+    </span>
+   <span class="pdfImageCard1">
+    <i *ngIf="!card.isChecked"  class="fa fa-times icons" style="color:red"></i>
+   <i *ngIf="card.isChecked"  class="fa fa-check icons" style="color:green"></i>
+  </span>
+    <img *ngIf="!card.isChecked" class="pdfImageCancelCard" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAkACQDASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAAAAgFBwECCQb/xAAxEAABAwIFAgMHBAMAAAAAAAABAgMEBREABgcSITFBCBMyFBUiM1FTsSMmQoFDccL/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8ArLO+bNQ8kayS6tW5bjVabWdqQVGM9H3HahCb8snsOoPJsoE4bzSXUek6j5dROp5DE5oATISlXWwv/pJtwruOtjcA1a03pGo+XjCqKEtTmQVQ5qU3Wws/lJ4unoeD1AISP926LahmxVCqkQlJKSVMy2Sf63tqAB55BA6KHAdFFqCElSiEpAuSTYAfXCf+I3XNdadk5XybJUmlD4Jk9pRBknu2gj/H2J/lyOnqitZfEHMznl6PRsusSaVEkMAVNSlALdUfU0ggn9P6ngqBsQBcGU8OOhvvwxs05yigUgELhwHRzKt0cWPt36A+q3I223B67QhGrp07hmCujinbz7H76DqnvJ2p27dp+X1235+nFsGGTShKUhKQAkCwAHAGDAC1BCSpaglIFySbADCVeKTVGkZzqLFDoMeLJiUx4qNVAup1diChpX2+eT0UUgjgAmV8SGuC605Jyrk+TtpSSWps1s8ySDYtoP2/qR6v9erHhx0N9+GLmrOMYikcOQoKxb2o9nFj7fcD+XB9PCgoZhmflyrUqdUaUoWLU5lifHUGpLYUCCUm29tVrXHBF+cdAtI9RqPqLlxEymFDExgBEuAVDfHV247oPZQ4PI6ggY1X01o+omWzT56BHmspJhTG0/FHXbjjug2AKe46WIBCSE5s0X1DsLwqrEN+QVMymif63Nqt25BB6EcB0WwYrXIGseVM15aYqUiqQqVKJ8t+JLkJbU24ACbXtuTzwr8EEYMBWbekGUj4i3IZhuGminCsew7h5PnF0p27bfL77b9eOnGGTbAShISAkAcAdBgwYDfFaa95No+a9P6q9VWCZVMjOyoshuwcbUlJNrkH4TYAj8EA4MGAh9GtLcnxtN6G/IokOoSZ0ZuY8/OZQ8vetCSQCRwkdAPySTgwYMB//9k=">
+    <img *ngIf="card.isChecked" class="pdfImageCard" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAeCAYAAABAFGxuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAANPSURBVFhH7ZhLKLRRGMfPjPstY0HJAgsbCwtlpWw0C4lkIVFIlERY2SBZ2Uw2VmSvbChlwcKGnaJs3CK5h9zv/L/zP9+ZaY53ZgzjMxbfr97G+54z7/l5znmecxobJOIXYtefv47/YoF4eHgQ9/f3+u4vYRe7vb0VLpdL9PX1iYuLC/1UwsUfLk5OTiCFkJiYiLi4OHR0dODy8lK1hU3s4OAA7e3tSEhIYFVQF+W6urqUXFimcnd3V/T394uxsTE1lW7e3t6EjKJ4enr6+alkpOrq6hAdHe2JFK/IyEjU1NRgc3MTUvDnppKDra2tobq6GlFRUYZUTEyMer61taV7/9Aao9Tq6ipKSkpUZLyleN/c3IydnR3Vz80/F+NgS0tLcDqdiIiIMKSSkpJUAjA732MRu7q6wtnZmb4LDUqtrKyguLjYIsVs7Onpwfn5ue5tYogdHx+jt7cXVVVVahGGwsvLCxYXF1FUVGSRSklJUVKyoOreVjxizJaWlhb1n/BF5eXl2Nvb062fg1Kzs7PIy8uD3W43pJKTkzE4OIjr62vd2zdKjOFsa2tDfHy85wXMHKa1r/kPxPPzM6anp5GbmwubzWZIZWRkQG4/uLm50b39o8QY0u7ubkOMF+UaGhpwdHSkOn8EpaamppCTk2ORSk9Px+joaFBSxDOVp6enaq+KjY01Xsh7pjPbAyFPB5iYmEB2drZFKjMzE7LKqz7BYln8XGfv5VgA+dxfBnHAkZERZGVl+ZQaHx/H4+Oj7h0chhjhtFGCMt4DULa1tVWVE2/kXofh4WGkpqYaUvybi39yclJN8WexiJHDw0M0NTVZIsfdv7Oz05Pmd3d3GBoaQlpamtHPLTUzM/MlKeJTjDByjY2Nln2NCUK5/f19DAwMwOFwGO2Uys/PV+WCZeOr+BUj8niiiq0vuYKCAlWTvJ+7IzU3NxeSFAkoRlhka2trLZvv+4tFubCwEAsLCyFLkQ/FCCNXWVnpV45S3A+Xl5fx+vqqvxUaQYkRnpUqKios+x5ly8rKsL6+bhxbQiVoMcKDXmlpqSdy/OSe+t1S5FNiHHxjY0NFjmep+vp6bG9vf7sU+dJvF1JOzM/PC3kiFXJjFjIbdcv38Ut/VBHiD+3R9D9TI7ixAAAAAElFTkSuQmCC"> 
+  </button>
+</div>
+</div>
+
+
+
+<div  class="problematic" fxLayoutAlign="center">
+  <label class="problematic-title"> {{ 'PROBLEMATICFORM.TITLE' | translate }}</label>
+</div>
+
+<div  class="pdfdivclass" *ngIf="formModel.showForm">
+  <button style="float: right !important;transform: translate(5px, 0px);" md-button md-raised-button color="accent" type="button"
+    (click)="downloadPDF()">
+    <i class="fa fa-file-pdf-o" style="font-size: 16px; padding-left: 10px;" aria-hidden="true"></i>
+    PDF
+  </button>
+</div>
+
+
+<form [ngStyle]="{'pointer-events': isPreviousCourse ? 'none' : 'all'}" [formGroup]="ProblematicForm" class="problematic-form" (ngSubmit)="sendProblematic()" *ngIf="formModel.showForm; else NoProblematic">
+<div fxLayout="column"  fxLayoutWrap="wrap" style="margin-top: 20px !important;" fxLayoutAlign="center">
+  <div fxFlex>
+    <div fxLayout="row" fxLayoutAlign="center">
+      <md-card fxFlex="70" fxFlexAlign="center">
+        <md-card-content class="primary-background dark-header" style="text-align: left;">
+          <div>
+            <!-- Stduent And Company Details -->
+            <md-card class="primary-background dark-header border-yellow">
+              <md-card-content>
+                <div fxLayout="column" fxLayoutWrap="wrap" fxLayoutGap="-15px">
+                  <div fxFlex="100" fxLayout="row" style="margin-top: 15px !important;">
+                    <div fxFlex="50" fxFlexAlign="start">
+                      <label class="title-labe-prob"> {{ 'JOBDESCRIPTIONFORM.STUDENT' | translate | titlecase}} : </label>
+                      <span class="title-labe-prob"> &nbsp;&nbsp;{{ getCivility(student?.sex) }} {{ student?.firstName }} {{ student?.lastName }}</span>
+                    </div>
+                    <div fxFlex="50" fxFlexAlign="start" *ngIf="!student?.rncpTitle?.isMPI">
+                      <label class="title-labe-prob"> {{ 'JOBDESCRIPTIONFORM.COMPANY' | translate | titlecase}} : </label>
+                      <span  class="title-labe-prob"> &nbsp;&nbsp;{{ student?.companies[0]?.company?.companyName }}</span>
+                    </div>
+                  </div>
+                  <div fxFlex="100" fxLayout="row">
+                    <div fxFlex="50" fxFlexAlign="start">
+                      <label class="title-labe-prob"> {{ 'JOBDESCRIPTIONFORM.SCHOOL' | translate | titlecase }} : </label>
+                      <span  class="title-labe-prob"> &nbsp;&nbsp;{{ student?.school?.shortName }}</span>
+                    </div>
+                    <div fxFlex="50" fxFlexAlign="start" *ngIf="!student?.rncpTitle?.isMPI">
+                      <label class="title-labe-prob"> {{ 'JOBDESCRIPTIONFORM.MENTOR' | translate | titlecase }} : </label>
+                      <span  class="title-labe-prob"> &nbsp;&nbsp;{{ getCivility(student?.companies[0]?.mentors?.sex) }} {{ student?.companies[0]?.mentors?.firstName
+                        }} {{ student?.companies[0]?.mentors?.lastName }}</span>
+                    </div>
+                  </div>
+                  <div fxFlex="100" fxLayout="row">
+                    <div fxFlex="50" fxFlexAlign="start">
+                      <label class="title-labe-prob"> {{ 'JOBDESCRIPTIONFORM.TITIE' | translate }} : </label>
+                      <span  class="title-labe-prob"> &nbsp;&nbsp;{{ student?.rncpTitle?.shortName }}</span>
+                    </div>
+                    <div fxFlex="50" fxFlexAlign="start">
+                      <label class="title-labe-prob"> {{ 'JOBDESCRIPTIONFORM.CLASS' | translate | titlecase }} : </label>
+                      <span  class="title-labe-prob"> &nbsp;&nbsp;{{ student?.currentClass?.name }}</span>
+                    </div>
+                  </div>
+                </div>
+              </md-card-content>
+            </md-card>
+
+            <!-- Problematic Question 1 -->
+            <md-card class="primary-background dark-header border-yellow">
+              <md-card-content>
+                <div class="form-title">
+                  {{ student?.rncpTitle?.customProblematicForm ? 
+                        ('STUDENT.PROBLEMATIC.CUSTOM_QUESTIONS.' + student?.rncpTitle?.customProblematicForm + '.QUESTION_1' | translate) :
+                        ('STUDENT.PROBLEMATIC.QUESTION_1' | translate)
+                  }} <i>{{ student?.rncpTitle?.isMPI ? ('STUDENT.PROBLEMATIC.MAXIMUM_LINES' | translate) : '' }}</i>
+                </div>
+                <div formGroupName="question1">
+                  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                    <div fxFlex="20">
+                      <div class="form-title">{{ 'ADMTCSTAFFKEY.STUDENT' | translate | titlecase }}</div>
+                    </div>
+                    <div fxFlex="80">
+                      <md-input-container class="full-width">
+                        <textarea rows="30" #answer class="hidePdf"  [readonly]="!formModel.enableAnswer" formControlName="answer" mdInput [placeholder]=" ' '| translate | titlecase ">
+                          </textarea>
+                        <span class="pdfDomDisplay" >{{answer.value}}</span>
+                         </md-input-container>      
+                    </div>
+                  </div>
+                  <div formArrayName="comments">
+                    <div *ngFor="let commentForm of ProblematicForm.controls.question1.controls.comments.controls;let i=index" [formGroupName]="i"
+                      fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                      <div fxFlex="20">
+                        <div class="form-title">{{ 'PROBLEMATICFORM.CERTIFIER' | translate }}</div>
+                        <div class="comments-date">{{ getTranslatedDate(ProblematicForm.value.question1.comments[i].date) }}</div>
+                      </div>
+                      <div fxFlex="80">
+                        <md-input-container class="full-width">
+                          <textarea rows="3" #comment1  class="hidePdf" [readonly]="((!formModel.enableComment) ||  ( (i + 1) !== ProblematicForm.controls.question1.controls.comments.controls.length)) && !formModel.enableAllComments"
+                            formControlName="comment" mdInput [placeholder]="'COMMENTS'| translate | titlecase ">
+                            </textarea>     
+                            <span class="pdfDomDisplay">{{comment1.value}}</span>                 
+                          </md-input-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </md-card-content>
+            </md-card>
+
+            <!-- Problematic Question 2 -->
+            <md-card class="primary-background dark-header border-yellow">
+              <md-card-content>
+                <div class="form-title">
+                    {{ student?.rncpTitle?.customProblematicForm ? 
+                      ('STUDENT.PROBLEMATIC.CUSTOM_QUESTIONS.' + student?.rncpTitle?.customProblematicForm + '.QUESTION_2' | translate) :
+                      ('STUDENT.PROBLEMATIC.QUESTION_2' | translate)}}
+                      <i>{{ student?.rncpTitle?.isMPI ? ('STUDENT.PROBLEMATIC.MAXIMUM_LINES' | translate) : '' }}</i>
+                </div>
+                <div formGroupName="question2">
+                  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                    <div fxFlex="20">
+                      <div class="form-title">{{ 'ADMTCSTAFFKEY.STUDENT' | translate | titlecase }}</div>
+                    </div>
+                    <div fxFlex="80">
+                      <md-input-container class="full-width">
+                        <textarea rows="30" #answer2  class="hidePdf" [readonly]="!formModel.enableAnswer" formControlName="answer" mdInput [placeholder]=" '' |  translate | titlecase ">
+                          </textarea>
+                          <span class="pdfDomDisplay">{{answer2.value}}</span>
+                        </md-input-container>
+                    </div>
+                  </div>
+                  <div formArrayName="comments">
+                    <div *ngFor="let commentForm of ProblematicForm.controls.question2.controls.comments.controls;let i=index" [formGroupName]="i"
+                      fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                      <div fxFlex="20">
+                        <div class="form-title">{{ 'PROBLEMATICFORM.CERTIFIER' | translate }}</div>
+                        <div class="comments-date">{{ getTranslatedDate(ProblematicForm.value.question2.comments[i].date) }}</div>
+                      </div>
+                      <div fxFlex="80">
+                        <md-input-container class="full-width">
+                          <textarea rows="3" #comment2 class="hidePdf" [readonly]="((!formModel.enableComment) || ( (i + 1) !== ProblematicForm.controls.question2.controls.comments.controls.length)) && !formModel.enableAllComments"
+                            formControlName="comment" mdInput [placeholder]="'COMMENTS'| translate | titlecase ">
+                          </textarea>
+                          <span class="pdfDomDisplay">{{comment2.value}}</span>
+                          </md-input-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </md-card-content>
+            </md-card>
+
+            <!-- Problematic Question 3 -->
+            <md-card class="primary-background dark-header border-yellow">
+              <md-card-content>
+                <div class="form-title">
+                  {{ student?.rncpTitle?.customProblematicForm ? 
+                      ('STUDENT.PROBLEMATIC.CUSTOM_QUESTIONS.' + student?.rncpTitle?.customProblematicForm + '.QUESTION_3' | translate) :
+                      ('STUDENT.PROBLEMATIC.QUESTION_3' | translate)
+                  }}
+                  <i>{{ student?.rncpTitle?.isMPI ? ('STUDENT.PROBLEMATIC.MAXIMUM_LINES' | translate) : '' }}</i>
+                </div>
+                <div formGroupName="question3">
+                  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                    <div fxFlex="20">
+                      
+                      <div class="form-title">{{ 'ADMTCSTAFFKEY.STUDENT' | translate | titlecase }}</div>
+                    </div>
+                    <div fxFlex="80">
+                      <md-input-container class="full-width show-border">
+                        <textarea rows="30"  #answer3  class="hidePdf" [readonly]="!formModel.enableAnswer" formControlName="answer" mdInput [placeholder]=" '' | translate | titlecase ">
+                          </textarea>
+                          <span class="pdfDomDisplay">{{answer3.value}}</span>
+                        </md-input-container>
+                        <div class="full-width hide-border">
+                            <textarea rows="3" #answer3 class="hidePdf" [readonly]="!formModel.enableAnswer" formControlName="answer" mdInput [placeholder]=" '' |  translate | titlecase ">
+                              </textarea>
+                            <span class="pdfDomDisplay">{{answer3.value}}</span>
+                          </div>
+                    </div>
+                  </div>
+                  <div formArrayName="comments">
+                    <div *ngFor="let commentForm of ProblematicForm.controls.question3.controls.comments.controls;let i=index" [formGroupName]="i"
+                      fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                      <div fxFlex="20">
+                        <div class="form-title">{{ 'PROBLEMATICFORM.CERTIFIER' | translate }}</div>
+                        <div class="comments-date">{{ getTranslatedDate(ProblematicForm.value.question3.comments[i].date) }}</div>
+                      </div>
+                      <div fxFlex="80">
+                        <md-input-container class="full-width">
+                          <textarea rows="3" #comment3 [readonly]="((!formModel.enableComment) || ( (i + 1) !== ProblematicForm.controls.question3.controls.comments.controls.length)) && !formModel.enableAllComments"
+                            formControlName="comment" mdInput class="hidePdf" [placeholder]="'COMMENTS'| translate | titlecase ">
+                          </textarea>   
+                          <span class="pdfDomDisplay">{{comment3.value}}</span>            
+                          </md-input-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </md-card-content>
+            </md-card>
+
+            
+
+            <!-- Cetifier Comments -->
+            <md-card class="primary-background dark-header border-yellow">
+              <md-card-content>
+                <div formArrayName="generalComments" fxLayout="column" fxLayoutWrap="wrap" fxLayoutGap="10px">
+                  <div fxFlex="100" class="title-labe-prob" fxFlexAlign="start">
+                    <label>{{ 'PROBLEMATICFORM.COMMENT' | translate }}</label>
+                  </div>
+                  <div *ngFor="let generalComment of ProblematicForm.controls.generalComments.controls;let i=index" [formGroupName]="i" 
+                    fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                    <div fxFlex="20">
+                      <div class="form-title">{{ 'PROBLEMATICFORM.CERTIFIER' | translate }}</div>
+                      <div class="generalComments-date" style="margin-bottom: -45px;">{{ getTranslatedDate(ProblematicForm.value.generalComments[i].date) }}</div>
+                    </div>
+                    <div fxFlex="80">
+                      <md-input-container class="full-width">
+                        <textarea rows="3" #certiferComments [readonly]="((!formModel.enableComment) || ( (i + 1) !== ProblematicForm.controls.generalComments.controls.length)) && !formModel.enableAllComments"
+                          formControlName="comment" mdInput [placeholder]="'COMMENTS'| translate | titlecase "></textarea>
+                      </md-input-container>
+                      <span class="pdfDomDisplay">{{certiferComments.value}}</span>
+                    </div>
+                  </div>
+                </div>
+              </md-card-content>
+            </md-card>
+
+            <!-- Signatures And Buttons -->
+            <md-card class="primary-background dark-header border-yellow problematic-signatures" style="padding-top: 10px; padding-bottom: 10px;">
+              <md-card-content>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div fxFlex="33" class="title-labe-prob" fxLayoutAlign="start center">
+                      <!-- (change)="signatureClicked(ProblematicForm.get('signatureOfTheStudent').value)" -->
+                      <img class="pdfCheckBox" *ngIf="ProblematicForm.get('signatureOfTheStudent').value" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAeCAYAAABAFGxuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAANPSURBVFhH7ZhLKLRRGMfPjPstY0HJAgsbCwtlpWw0C4lkIVFIlERY2SBZ2Uw2VmSvbChlwcKGnaJs3CK5h9zv/L/zP9+ZaY53ZgzjMxbfr97G+54z7/l5znmecxobJOIXYtefv47/YoF4eHgQ9/f3+u4vYRe7vb0VLpdL9PX1iYuLC/1UwsUfLk5OTiCFkJiYiLi4OHR0dODy8lK1hU3s4OAA7e3tSEhIYFVQF+W6urqUXFimcnd3V/T394uxsTE1lW7e3t6EjKJ4enr6+alkpOrq6hAdHe2JFK/IyEjU1NRgc3MTUvDnppKDra2tobq6GlFRUYZUTEyMer61taV7/9Aao9Tq6ipKSkpUZLyleN/c3IydnR3Vz80/F+NgS0tLcDqdiIiIMKSSkpJUAjA732MRu7q6wtnZmb4LDUqtrKyguLjYIsVs7Onpwfn5ue5tYogdHx+jt7cXVVVVahGGwsvLCxYXF1FUVGSRSklJUVKyoOreVjxizJaWlhb1n/BF5eXl2Nvb062fg1Kzs7PIy8uD3W43pJKTkzE4OIjr62vd2zdKjOFsa2tDfHy85wXMHKa1r/kPxPPzM6anp5GbmwubzWZIZWRkQG4/uLm50b39o8QY0u7ubkOMF+UaGhpwdHSkOn8EpaamppCTk2ORSk9Px+joaFBSxDOVp6enaq+KjY01Xsh7pjPbAyFPB5iYmEB2drZFKjMzE7LKqz7BYln8XGfv5VgA+dxfBnHAkZERZGVl+ZQaHx/H4+Oj7h0chhjhtFGCMt4DULa1tVWVE2/kXofh4WGkpqYaUvybi39yclJN8WexiJHDw0M0NTVZIsfdv7Oz05Pmd3d3GBoaQlpamtHPLTUzM/MlKeJTjDByjY2Nln2NCUK5/f19DAwMwOFwGO2Uys/PV+WCZeOr+BUj8niiiq0vuYKCAlWTvJ+7IzU3NxeSFAkoRlhka2trLZvv+4tFubCwEAsLCyFLkQ/FCCNXWVnpV45S3A+Xl5fx+vqqvxUaQYkRnpUqKios+x5ly8rKsL6+bhxbQiVoMcKDXmlpqSdy/OSe+t1S5FNiHHxjY0NFjmep+vp6bG9vf7sU+dJvF1JOzM/PC3kiFXJjFjIbdcv38Ut/VBHiD+3R9D9TI7ixAAAAAElFTkSuQmCC">
+                    <img class="pdfCheckBox" *ngIf="!ProblematicForm.get('signatureOfTheStudent').value" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAkACQDASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAAAAgFBwECCQb/xAAxEAABAwIFAgMHBAMAAAAAAAABAgMEBREABgcSITFBCBMyFBUiM1FTsSMmQoFDccL/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8ArLO+bNQ8kayS6tW5bjVabWdqQVGM9H3HahCb8snsOoPJsoE4bzSXUek6j5dROp5DE5oATISlXWwv/pJtwruOtjcA1a03pGo+XjCqKEtTmQVQ5qU3Wws/lJ4unoeD1AISP926LahmxVCqkQlJKSVMy2Sf63tqAB55BA6KHAdFFqCElSiEpAuSTYAfXCf+I3XNdadk5XybJUmlD4Jk9pRBknu2gj/H2J/lyOnqitZfEHMznl6PRsusSaVEkMAVNSlALdUfU0ggn9P6ngqBsQBcGU8OOhvvwxs05yigUgELhwHRzKt0cWPt36A+q3I223B67QhGrp07hmCujinbz7H76DqnvJ2p27dp+X1235+nFsGGTShKUhKQAkCwAHAGDAC1BCSpaglIFySbADCVeKTVGkZzqLFDoMeLJiUx4qNVAup1diChpX2+eT0UUgjgAmV8SGuC605Jyrk+TtpSSWps1s8ySDYtoP2/qR6v9erHhx0N9+GLmrOMYikcOQoKxb2o9nFj7fcD+XB9PCgoZhmflyrUqdUaUoWLU5lifHUGpLYUCCUm29tVrXHBF+cdAtI9RqPqLlxEymFDExgBEuAVDfHV247oPZQ4PI6ggY1X01o+omWzT56BHmspJhTG0/FHXbjjug2AKe46WIBCSE5s0X1DsLwqrEN+QVMymif63Nqt25BB6EcB0WwYrXIGseVM15aYqUiqQqVKJ8t+JLkJbU24ACbXtuTzwr8EEYMBWbekGUj4i3IZhuGminCsew7h5PnF0p27bfL77b9eOnGGTbAShISAkAcAdBgwYDfFaa95No+a9P6q9VWCZVMjOyoshuwcbUlJNrkH4TYAj8EA4MGAh9GtLcnxtN6G/IokOoSZ0ZuY8/OZQ8vetCSQCRwkdAPySTgwYMB//9k=">
+                    <md-checkbox formControlName="signatureOfTheStudent" color="accent" signature [disabled]="!formModel.enableStudentSign">
+                      {{ 'PROBLEMATICFORM.SIGNBYSTUDENT' | translate }}
+                    </md-checkbox>         
+                    </div>
+
+                    <div fxFlex="33" class="title-labe-prob" fxLayoutAlign="start center">
+                        <!-- (change)="signatureClicked(ProblematicForm.get('signatureOfTheAcadDir').value)" -->
+                    <img class="pdfCheckBox" *ngIf="ProblematicForm.get('signatureOfTheAcadDir').value" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAeCAYAAABAFGxuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAANPSURBVFhH7ZhLKLRRGMfPjPstY0HJAgsbCwtlpWw0C4lkIVFIlERY2SBZ2Uw2VmSvbChlwcKGnaJs3CK5h9zv/L/zP9+ZaY53ZgzjMxbfr97G+54z7/l5znmecxobJOIXYtefv47/YoF4eHgQ9/f3+u4vYRe7vb0VLpdL9PX1iYuLC/1UwsUfLk5OTiCFkJiYiLi4OHR0dODy8lK1hU3s4OAA7e3tSEhIYFVQF+W6urqUXFimcnd3V/T394uxsTE1lW7e3t6EjKJ4enr6+alkpOrq6hAdHe2JFK/IyEjU1NRgc3MTUvDnppKDra2tobq6GlFRUYZUTEyMer61taV7/9Aao9Tq6ipKSkpUZLyleN/c3IydnR3Vz80/F+NgS0tLcDqdiIiIMKSSkpJUAjA732MRu7q6wtnZmb4LDUqtrKyguLjYIsVs7Onpwfn5ue5tYogdHx+jt7cXVVVVahGGwsvLCxYXF1FUVGSRSklJUVKyoOreVjxizJaWlhb1n/BF5eXl2Nvb062fg1Kzs7PIy8uD3W43pJKTkzE4OIjr62vd2zdKjOFsa2tDfHy85wXMHKa1r/kPxPPzM6anp5GbmwubzWZIZWRkQG4/uLm50b39o8QY0u7ubkOMF+UaGhpwdHSkOn8EpaamppCTk2ORSk9Px+joaFBSxDOVp6enaq+KjY01Xsh7pjPbAyFPB5iYmEB2drZFKjMzE7LKqz7BYln8XGfv5VgA+dxfBnHAkZERZGVl+ZQaHx/H4+Oj7h0chhjhtFGCMt4DULa1tVWVE2/kXofh4WGkpqYaUvybi39yclJN8WexiJHDw0M0NTVZIsfdv7Oz05Pmd3d3GBoaQlpamtHPLTUzM/MlKeJTjDByjY2Nln2NCUK5/f19DAwMwOFwGO2Uys/PV+WCZeOr+BUj8niiiq0vuYKCAlWTvJ+7IzU3NxeSFAkoRlhka2trLZvv+4tFubCwEAsLCyFLkQ/FCCNXWVnpV45S3A+Xl5fx+vqqvxUaQYkRnpUqKios+x5ly8rKsL6+bhxbQiVoMcKDXmlpqSdy/OSe+t1S5FNiHHxjY0NFjmep+vp6bG9vf7sU+dJvF1JOzM/PC3kiFXJjFjIbdcv38Ut/VBHiD+3R9D9TI7ixAAAAAElFTkSuQmCC">
+                    <img class="pdfCheckBox" *ngIf="!ProblematicForm.get('signatureOfTheAcadDir').value"  src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAkACQDASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAAAAgFBwECCQb/xAAxEAABAwIFAgMHBAMAAAAAAAABAgMEBREABgcSITFBCBMyFBUiM1FTsSMmQoFDccL/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8ArLO+bNQ8kayS6tW5bjVabWdqQVGM9H3HahCb8snsOoPJsoE4bzSXUek6j5dROp5DE5oATISlXWwv/pJtwruOtjcA1a03pGo+XjCqKEtTmQVQ5qU3Wws/lJ4unoeD1AISP926LahmxVCqkQlJKSVMy2Sf63tqAB55BA6KHAdFFqCElSiEpAuSTYAfXCf+I3XNdadk5XybJUmlD4Jk9pRBknu2gj/H2J/lyOnqitZfEHMznl6PRsusSaVEkMAVNSlALdUfU0ggn9P6ngqBsQBcGU8OOhvvwxs05yigUgELhwHRzKt0cWPt36A+q3I223B67QhGrp07hmCujinbz7H76DqnvJ2p27dp+X1235+nFsGGTShKUhKQAkCwAHAGDAC1BCSpaglIFySbADCVeKTVGkZzqLFDoMeLJiUx4qNVAup1diChpX2+eT0UUgjgAmV8SGuC605Jyrk+TtpSSWps1s8ySDYtoP2/qR6v9erHhx0N9+GLmrOMYikcOQoKxb2o9nFj7fcD+XB9PCgoZhmflyrUqdUaUoWLU5lifHUGpLYUCCUm29tVrXHBF+cdAtI9RqPqLlxEymFDExgBEuAVDfHV247oPZQ4PI6ggY1X01o+omWzT56BHmspJhTG0/FHXbjjug2AKe46WIBCSE5s0X1DsLwqrEN+QVMymif63Nqt25BB6EcB0WwYrXIGseVM15aYqUiqQqVKJ8t+JLkJbU24ACbXtuTzwr8EEYMBWbekGUj4i3IZhuGminCsew7h5PnF0p27bfL77b9eOnGGTbAShISAkAcAdBgwYDfFaa95No+a9P6q9VWCZVMjOyoshuwcbUlJNrkH4TYAj8EA4MGAh9GtLcnxtN6G/IokOoSZ0ZuY8/OZQ8vetCSQCRwkdAPySTgwYMB//9k=">
+                    <md-checkbox  color="accent"  signature style="margin-left:10px;" formControlName="signatureOfTheAcadDir" [disabled]="!formModel.enableAcadDirSign">
+                      {{ 'PROBLEMATICFORM.SIGNBYACAD' | translate }}
+                    </md-checkbox>
+                   </div>
+                    <div fxFlex="33" class="title-labe-prob" fxLayoutAlign="start center">
+                        <img class="pdfCheckBox" *ngIf="ProblematicForm.get('signatureOfTheCertifier').value" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAeCAYAAABAFGxuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAANPSURBVFhH7ZhLKLRRGMfPjPstY0HJAgsbCwtlpWw0C4lkIVFIlERY2SBZ2Uw2VmSvbChlwcKGnaJs3CK5h9zv/L/zP9+ZaY53ZgzjMxbfr97G+54z7/l5znmecxobJOIXYtefv47/YoF4eHgQ9/f3+u4vYRe7vb0VLpdL9PX1iYuLC/1UwsUfLk5OTiCFkJiYiLi4OHR0dODy8lK1hU3s4OAA7e3tSEhIYFVQF+W6urqUXFimcnd3V/T394uxsTE1lW7e3t6EjKJ4enr6+alkpOrq6hAdHe2JFK/IyEjU1NRgc3MTUvDnppKDra2tobq6GlFRUYZUTEyMer61taV7/9Aao9Tq6ipKSkpUZLyleN/c3IydnR3Vz80/F+NgS0tLcDqdiIiIMKSSkpJUAjA732MRu7q6wtnZmb4LDUqtrKyguLjYIsVs7Onpwfn5ue5tYogdHx+jt7cXVVVVahGGwsvLCxYXF1FUVGSRSklJUVKyoOreVjxizJaWlhb1n/BF5eXl2Nvb062fg1Kzs7PIy8uD3W43pJKTkzE4OIjr62vd2zdKjOFsa2tDfHy85wXMHKa1r/kPxPPzM6anp5GbmwubzWZIZWRkQG4/uLm50b39o8QY0u7ubkOMF+UaGhpwdHSkOn8EpaamppCTk2ORSk9Px+joaFBSxDOVp6enaq+KjY01Xsh7pjPbAyFPB5iYmEB2drZFKjMzE7LKqz7BYln8XGfv5VgA+dxfBnHAkZERZGVl+ZQaHx/H4+Oj7h0chhjhtFGCMt4DULa1tVWVE2/kXofh4WGkpqYaUvybi39yclJN8WexiJHDw0M0NTVZIsfdv7Oz05Pmd3d3GBoaQlpamtHPLTUzM/MlKeJTjDByjY2Nln2NCUK5/f19DAwMwOFwGO2Uys/PV+WCZeOr+BUj8niiiq0vuYKCAlWTvJ+7IzU3NxeSFAkoRlhka2trLZvv+4tFubCwEAsLCyFLkQ/FCCNXWVnpV45S3A+Xl5fx+vqqvxUaQYkRnpUqKios+x5ly8rKsL6+bhxbQiVoMcKDXmlpqSdy/OSe+t1S5FNiHHxjY0NFjmep+vp6bG9vf7sU+dJvF1JOzM/PC3kiFXJjFjIbdcv38Ut/VBHiD+3R9D9TI7ixAAAAAElFTkSuQmCC">
+                        <img class="pdfCheckBox" *ngIf="!ProblematicForm.get('signatureOfTheCertifier').value"  src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAkACQDASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAAAAgFBwECCQb/xAAxEAABAwIFAgMHBAMAAAAAAAABAgMEBREABgcSITFBCBMyFBUiM1FTsSMmQoFDccL/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8ArLO+bNQ8kayS6tW5bjVabWdqQVGM9H3HahCb8snsOoPJsoE4bzSXUek6j5dROp5DE5oATISlXWwv/pJtwruOtjcA1a03pGo+XjCqKEtTmQVQ5qU3Wws/lJ4unoeD1AISP926LahmxVCqkQlJKSVMy2Sf63tqAB55BA6KHAdFFqCElSiEpAuSTYAfXCf+I3XNdadk5XybJUmlD4Jk9pRBknu2gj/H2J/lyOnqitZfEHMznl6PRsusSaVEkMAVNSlALdUfU0ggn9P6ngqBsQBcGU8OOhvvwxs05yigUgELhwHRzKt0cWPt36A+q3I223B67QhGrp07hmCujinbz7H76DqnvJ2p27dp+X1235+nFsGGTShKUhKQAkCwAHAGDAC1BCSpaglIFySbADCVeKTVGkZzqLFDoMeLJiUx4qNVAup1diChpX2+eT0UUgjgAmV8SGuC605Jyrk+TtpSSWps1s8ySDYtoP2/qR6v9erHhx0N9+GLmrOMYikcOQoKxb2o9nFj7fcD+XB9PCgoZhmflyrUqdUaUoWLU5lifHUGpLYUCCUm29tVrXHBF+cdAtI9RqPqLlxEymFDExgBEuAVDfHV247oPZQ4PI6ggY1X01o+omWzT56BHmspJhTG0/FHXbjjug2AKe46WIBCSE5s0X1DsLwqrEN+QVMymif63Nqt25BB6EcB0WwYrXIGseVM15aYqUiqQqVKJ8t+JLkJbU24ACbXtuTzwr8EEYMBWbekGUj4i3IZhuGminCsew7h5PnF0p27bfL77b9eOnGGTbAShISAkAcAdBgwYDfFaa95No+a9P6q9VWCZVMjOyoshuwcbUlJNrkH4TYAj8EA4MGAh9GtLcnxtN6G/IokOoSZ0ZuY8/OZQ8vetCSQCRwkdAPySTgwYMB//9k=">
+                        <!-- (change)="signatureClicked(ProblematicForm.get('signatureOfTheCertifier').value)" -->
+                    <md-checkbox  color="accent" signature style="margin-left:10px;" formControlName="signatureOfTheCertifier" [disabled]="!formModel.enableCertifierSign">
+                      {{ 'PROBLEMATICFORM.SIGNBYCERTI' | translate }}
+                    </md-checkbox>
+                  </div>
+                </div>
+              </md-card-content>
+            </md-card>
+          </div>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center" *ngIf="!isPreviousCourse">
+        <div fxFlex="70" fxLayoutAlign="end center" *ngIf="formModel.showSaveButton || formModel.showSendButton">
+            <button *ngIf="formModel.showSaveButton" md-raised-button color="accent" type="button" (click)="studentSaveProblematic()">
+              <md-icon>save</md-icon>
+              &nbsp;{{ 'PROBLEMATICFORM.SAVEBTN' | translate }}
+            </button>
+            <!--  -->
+            <button  *ngIf="formModel.showSendButton" style="margin-left: 10px;" [disabled]="!(ProblematicForm.valid && (ProblematicForm.get('signatureOfTheStudent').value === true))" md-raised-button color="accent" type="submit">
+              <md-icon>send</md-icon>
+              &nbsp;{{ 'PROBLEMATICFORM.SENDBTN' | translate }}
+            </button>
+          </div>
+          <div fxFlex="70" fxLayoutAlign="end center" *ngIf="formModel.showValidateButton">
+            <button md-raised-button *ngIf="!formModel.hideReject"   color="accent" [disabled]="!(ProblematicForm.get(signatureOf).value === true)" type="button" (click)="AcadValidate(false)">
+              {{ 'PROBLEMATICFORM.REJECT' | translate }}&nbsp;
+              <md-icon style="color: red;">close</md-icon>
+            </button>
+            <button style="margin-left: 10px;" [disabled]="!(ProblematicForm.get(signatureOf).value === true)" md-raised-button color="accent" type="button" (click)="AcadValidate(true)">
+              {{ 'PROBLEMATICFORM.VALID' | translate }}&nbsp;
+              <md-icon style="color: green;">done</md-icon>
+            </button>
+          </div>
+      </div>
+  </div>
+</div>
+</form>
+</div>
+<ng-template #NoProblematic>
+  <div *ngIf="isCardsVisible"  style="font-size: 18px;text-align:center;margin-top: 22px;">{{ 'PROBLEMATICFORM.EmptyMessage' | translate }}</div>
+</ng-template>
+<!-- <div *ngFor="let status of cardStatus"  >
+<button style="margin-left: 10px;" md-raised-button color="accent" type="button" (click)="statusCardUpdate(status)">
+  {{ status }}&nbsp;
+  <md-icon style="color: green;">done</md-icon>
+</button>
+</div> -->

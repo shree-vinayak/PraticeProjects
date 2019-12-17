@@ -1,0 +1,604 @@
+<div style="text-align:center;margin-top: 10px;">
+  <div class="emp-button">
+    <button class="empButton">
+      <span style="float: left;">
+        <p class="para">{{ 'EMPLOYABILITY_SURVEY.TABLE.SENTTOSTUDENT' | translate }}</p>
+      </span>
+      <i *ngIf="employabilitySurveyId" class="fa fa-check icons" style="color:green" aria-hidden="true"></i>
+      <i *ngIf="!employabilitySurveyId" class="fa fa-times icons" style="color:red" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="emp-button">
+    <!-- <button class="empButton">
+      <span style="float: left;">
+        <p class="para">{{ 'EMPLOYABILITY_SURVEY.TABLE.COMPLETEDBYSTUDENT' | translate }}</p>
+      </span>
+      <i *ngIf="survey?.surveyStatus === 'completedByStudent'; else cross" class="fa fa-check icons" style="color:green" aria-hidden="true"></i>
+     <ng-template #cross>
+        <i class="fa fa-times icons" style="color:red" aria-hidden="true"></i>
+     </ng-template>
+    </button> -->
+
+ <!-- uncomment this for employabilitySurvey-verified by acadir and delete above code -->
+    <button class="empButton">
+      <span style="float: left;">
+        <p class="para">{{ 'EMPLOYABILITY_SURVEY.TABLE.COMPLETEDBYSTUDENT' | translate }}</p>
+      </span>
+      <i *ngIf="survey?.surveyStatus === 'completedByStudent' || survey?.surveyStatus === 'validatedByAcadDir' || survey?.surveyStatus === 'rejectedByAcadDir' else cross" class="fa fa-check icons"
+        style="color:green" aria-hidden="true"></i>
+      <ng-template #cross>
+        <i class="fa fa-times icons" style="color:red" aria-hidden="true"></i>
+      </ng-template>
+    </button>
+
+  </div>
+
+    <div class="emp-button"  *ngIf="survey?.surveyStatus == 'rejectedByAcadDir'">
+      <button class="empButton-reject">
+        <span style="float: left; ">
+          <p class="para" style="color: #fff">{{'EMPLOYABILITY_SURVEY.REJECTED_BY_ACADIR' | translate}}</p>
+        </span>
+      </button>
+    </div>
+  <!-- uncomment for acadir validation -->
+    <div class="emp-button" *ngIf="survey?.surveyStatus !== 'rejectedByAcadDir'" >
+      <button class="empButton">
+        <span style="float: left;">
+          <p class="para">{{ 'EMPLOYABILITY_SURVEY.TABLE.VERIFIRDBYACADIR' | translate }}</p>
+        </span>
+        <i *ngIf="survey?.surveyStatus == 'validatedByAcadDir'" class="fa fa-check icons" style="color:green" aria-hidden="true"></i>
+        <i *ngIf="survey?.surveyStatus !== 'validatedByAcadDir'" class="fa fa-times icons" style="color:red" aria-hidden="true"></i>
+      </button>
+    </div>
+
+</div>
+
+
+<div class="row wrap" style="max-width:70vw" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+  <div fxFlex="70">
+    <div class="emp-survey-title">{{ 'EMPLOYABILITY_SURVEY.FORM.TITLE' | translate }}{{ survey?.rncpId?.longName.toUpperCase() }}</div>
+  </div>
+</div>
+
+<div [ngStyle]="{'pointer-events': isPreviousCourse ? 'none' : 'all'}" class="row wrap" style="max-width:70vw" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+  <div fxFlex="70">
+    <md-card-content style="text-align: left;">
+      <md-card class="primary-background dark-header border-yellow" id="cardOneTitle">
+        <md-card-content>
+          <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+            <div fxFlex="50">
+              <div class="form-title">{{ 'JOBDESCRIPTIONFORM.STUDENT' | translate }} :
+                <span class="title-labe-jobdesc">
+                  {{ survey && survey?.studentId ? utilityService.computeCivility(survey?.studentId?.sex,translate.currentLang.toUpperCase())
+                  +" "+ survey?.studentId?.firstName + " "+survey?.studentId?.lastName :'' }}
+                </span>
+              </div>
+            </div>
+            <div fxFlex="50">
+              <div class="form-title">{{ 'JOBDESCRIPTIONFORM.SCHOOL' | translate }} :
+                <span class="title-labe-jobdesc">
+                  <!-- {{ jobDescription && jobDescription.studentId && jobDescription.studentId['school']['longName'] ? jobDescription.studentId['school']['longName'] : '' }} -->
+                  {{ survey && survey?.schoolId && survey?.schoolId?.shortName ? survey?.schoolId?.shortName : '' }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+            <div fxFlex="50">
+              <div class="form-title">{{ 'JOBDESCRIPTIONFORM.TITIE' | translate }} :
+                <span class="title-labe-jobdesc">
+                  {{ survey && survey?.rncpId &&survey?.rncpId?.longName ? survey?.rncpId?.longName : '' }}
+                </span>
+              </div>
+            </div>
+            <div fxFlex="50">
+              <div class="form-title" id="paddingLeftAlignment">{{ 'JOBDESCRIPTIONFORM.CLASS' | translate }} :
+                <span class="title-labe-jobdesc">
+                  {{ survey && survey?.classId && survey?.classId?.name ? survey?.classId?.name: '' }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </md-card-content>
+      </md-card>
+
+      <md-card class="primary-background dark-header border-yellow" id="cardOneTitle">
+        <md-card-content>
+          <p [innerHTML]="'EMPLOYABILITY_SURVEY.FORM.DIRECTIONS' | translate | safeHtml">
+          </p>
+        </md-card-content>
+      </md-card>
+
+      <form #f="ngForm" *ngIf="survey">
+          <md-card class="primary-background dark-header border-yellow" id="cardOneTitle">
+            <md-card-content>
+              <!-- <form #f="ngForm" (ngSubmit)="onSubmit(f)"> -->
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                <label style="font-size: 20px;">{{'EMPLOYABILITY_SURVEY.FORM.CONTACT_BLOCK.TITLE' | translate}}</label>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'USERLISTTABLE.FNAME' | translate }}*</label>
+                <md-input-container fxFlex="40">
+                  <input mdInput readOnly [(ngModel)]="survey.firstName" type="text" name="firstName" ngModel required (change)="survey.firstName=survey.firstName.trim()">
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['firstName']?.errors?.required" class="mat-text-warn"> {{ 'USERLISTTABLE.FNAME' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'USERLISTTABLE.LNAME' | translate }}*</label>
+                <md-input-container fxFlex="40">
+                  <input mdInput readOnly [(ngModel)]="survey.lastName" type="text" name="lastName" ngModel required (change)="survey.lastName=survey.lastName.trim()">
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['lastName']?.errors?.required" class="mat-text-warn"> {{ 'USERLISTTABLE.LNAME' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.POSTAL_ADDRESS' | translate }}*</label>
+                <md-input-container fxFlex="40">
+                  <textarea mdInput [(ngModel)]="survey.postalAddress" type="text" name="postalAddress" (change)="survey.postalAddress=survey.postalAddress.trim()"
+                    ngModel required></textarea>
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['postalAddress']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.POSTAL_ADDRESS' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.ZIPCODE' | translate }}*</label>
+                <md-input-container fxFlex="40">
+                  <input mdInput limit-to="5" [(ngModel)]="survey.postalCode" type="number" name="postalCode" ngModel required maxlength="5">
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['postalCode']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.ZIPCODE' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'USERS.CITY' | translate }}*</label>
+                <md-input-container fxFlex="40">
+                  <input mdInput [(ngModel)]="survey.city" type="text" name="city" ngModel required (change)="survey.city=survey.city.trim()">
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['city']?.errors?.required" class="mat-text-warn"> {{ 'USERS.CITY' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.MOBILE' | translate }}*</label>
+                <md-input-container fxFlex="40">
+                  <input mdInput limit-to="10" [(ngModel)]="survey.cellPhone" type="number" name="cellPhone" ngModel required maxlength="10">
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['cellPhone']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.MOBILE' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.PHONE' | translate }}</label>
+                <md-input-container fxFlex="40">
+                  <input mdInput limit-to="10" [(ngModel)]="survey.phone" type="number" name="phone" ngModel maxlength="10">
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['phone']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.PHONE' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTACT_BLOCK.PERSONAL_EMAIL' | translate }}*</label>
+                <md-input-container fxFlex="40">
+                  <input mdInput [(ngModel)]="survey.personalMail" type="text" name="personalMail" ngModel email required (change)="survey.personalMail=survey.personalMail.trim()">
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['personalMail']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.CONTACT_BLOCK.PERSONAL_EMAIL' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTACT_BLOCK.PROFESSIONAL_EMAIL' | translate }}</label>
+                <md-input-container fxFlex="40">
+                  <input mdInput [(ngModel)]="survey.professionalMail" type="email" name="professionalMail" ngModel [email]="survey.professionalMail.length>0">
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['professionalMail']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.CONTACT_BLOCK.PROFESSIONAL_EMAIL' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+            </md-card-content>
+          </md-card>
+
+          <!-- 222222222222222222222222222222222222222222222222222222222222222222 -->
+
+
+          <md-card class="primary-background dark-header border-yellow" id="cardOneTitle">
+            <md-card-content>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                <label style="font-size: 20px;">{{'EMPLOYABILITY_SURVEY.FORM.PARENT_BLOCK.TITLE' | translate}}</label>
+              </div>
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                <p [innerHTML]="'EMPLOYABILITY_SURVEY.FORM.PARENT_BLOCK.DIRECTIONS' | translate | safeHtml">
+                </p>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.PARENT_BLOCK.LAST_NAME_N_FIRST_NAME' | translate }}*</label>
+                <md-input-container fxFlex="40">
+                  <input mdInput [(ngModel)]="survey.parent_surnameAndFirstName" type="text" name="parent_surnameAndFirstName" ngModel required
+                    (change)="survey.parent_surnameAndFirstName=survey.parent_surnameAndFirstName.trim()">
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['parent_surnameAndFirstName']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.PARENT_BLOCK.LAST_NAME_N_FIRST_NAME' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.PARENT_BLOCK.COMPLETE_MAILING_ADD' | translate }}*</label>
+                <md-input-container fxFlex="40">
+                  <textarea mdInput [(ngModel)]="survey.parent_completeMailingAddress" type="text" name="parent_completeMailingAddress" ngModel
+                    required (change)="survey.parent_completeMailingAddress=survey.parent_completeMailingAddress.trim()"></textarea>
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['parent_completeMailingAddress']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.PARENT_BLOCK.COMPLETE_MAILING_ADD' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.MOBILE' | translate }}*</label>
+                <md-input-container fxFlex="40">
+                  <input mdInput limit-to="10" [(ngModel)]="survey.parent_cellPhone" type="number" name="parent_cellPhone" ngModel required
+                    maxlength="10">
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['parent_cellPhone']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.MOBILE' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.PHONE' | translate }}</label>
+                <md-input-container fxFlex="40">
+                  <input mdInput limit-to="10" [(ngModel)]="survey.parent_phone" type="number" name="parent_phone" ngModel maxlength="10">
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['parent_phone']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.PHONE' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTACT_BLOCK.PERSONAL_EMAIL' | translate }}*</label>
+                <md-input-container fxFlex="40">
+                  <input mdInput [(ngModel)]="survey.parent_personalMail" type="email" name="parent_personalMail" ngModel email required>
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['parent_personalMail']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.CONTACT_BLOCK.PERSONAL_EMAIL' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTACT_BLOCK.PROFESSIONAL_EMAIL' | translate }}</label>
+                <md-input-container fxFlex="40">
+                  <input mdInput [(ngModel)]="survey.parent_professionalMail" type="email" name="parent_professionalMail" ngModel [email]="survey.parent_professionalMail.length>0">
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['parent_professionalMail']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.CONTACT_BLOCK.PROFESSIONAL_EMAIL' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="15" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTACT_BLOCK.PROFESSION' | translate }}</label>
+                <md-input-container fxFlex="40">
+                  <input mdInput [(ngModel)]="survey.parent_profession" type="text" name="parent_profession" ngModel (change)="survey.parent_profession=survey.parent_profession.trim()">
+                </md-input-container>
+                <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['parent_profession']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.CONTACT_BLOCK.PROFESSION' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+              </div>
+
+            </md-card-content>
+          </md-card>
+
+          <!-- 33333333333333333333333333333333333333333333333 -->
+
+          <!-- <md-card class="primary-background dark-header border-yellow" id="cardOneTitle">
+            <md-card-content>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                <label style="font-size: 20px;" [innerHTML]="getTitleForExperienceBlock('EMPLOYABILITY_SURVEY.FORM.EXP_BLOCK.TITLE')"></label>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="25" style="align-self: center">{{ getTitleForExperienceBlock('EMPLOYABILITY_SURVEY.FORM.EXP_BLOCK.LAST_DIPLOMA')}}*</label>
+                <md-input-container fxFlex="30">
+                  <input mdInput [(ngModel)]="survey.experience_lastDiploma" type="text" name="experience_lastDiploma" ngModel required (change)="survey.experience_lastDiploma=survey.experience_lastDiploma.trim()">
+                </md-input-container>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="25" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.EXP_BLOCK.Q_graduate' | translate }}*</label>
+                <md-radio-group name="experience_graduated" [(ngModel)]="survey.experience_graduated" ngModel required required>
+                  <md-radio-button value="YES">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.BOOLEAN.YES' | translate}}</md-radio-button>
+                  <md-radio-button value="NO">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.BOOLEAN.NO' | translate}}</md-radio-button>
+                </md-radio-group>
+              </div>
+
+              <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                <label fxFlex="25" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.EXP_BLOCK.Q_professional_experience' | translate }}*</label>
+                <md-radio-group name="experience_marketingExperience" [(ngModel)]="survey.experience_marketingExperience" ngModel required>
+                  <md-radio-button value="YES">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.BOOLEAN.YES' | translate}}</md-radio-button>
+                  <md-radio-button value="NO">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.BOOLEAN.NO' | translate}}</md-radio-button>
+                </md-radio-group>
+              </div> -->
+
+          <!-- If Experience in Marketing -->
+          <!-- <ng-template [ngIf]="survey.experience_marketingExperience === 'YES'" style="padding-left: 10px;">
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                  <label fxFlex="25" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.EXP_BLOCK.Q_professional_experience_yes_months' | translate }}</label>
+                  <md-input-container fxFlex="30">
+                    <input mdInput [(ngModel)]="survey.experience_marketingExperienceYes_experienceInMonths" type="number" name="experience_marketingExperienceYes_experienceInMonths"
+                      ngModel>
+                  </md-input-container>
+                </div>
+
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                  <label fxFlex="25" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.EXP_BLOCK.Q_professional_experience_yes_position' | translate }}</label>
+                  <md-input-container fxFlex="30">
+                    <input mdInput [(ngModel)]="survey.experience_marketingExperienceYes_positionOccupied" type="text" name="experience_marketingExperienceYes_positionOccupied"
+                      ngModel (change)="survey.experience_marketingExperienceYes_positionOccupied=survey.experience_marketingExperienceYes_positionOccupied.trim()">
+                  </md-input-container>
+                </div>
+
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                  <label fxFlex="25" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.EXP_BLOCK.Q_professional_experience_yes_status' | translate }}</label>
+                  <md-radio-group name="experience_marketingExperienceYes_jobStatus" [(ngModel)]="survey.experience_marketingExperienceYes_jobStatus"
+                    ngModel>
+                    <md-radio-button value="ROTATING">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_STATUS.ROTATING' | translate}}</md-radio-button>
+                    <md-radio-button value="TRAINEE">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_STATUS.TRAINEE' | translate}}</md-radio-button>
+                    <md-radio-button value="EMP_CONTRACT">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_STATUS.EMP_CONTRACT' | translate}}</md-radio-button>
+                    <md-radio-button value="AUTO_ENTREPRENEUR">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_STATUS.AUTO_ENTREPRENEUR' | translate}}</md-radio-button>
+                  </md-radio-group>
+                </div>
+
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                  <label fxFlex="25" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.EXP_BLOCK.Q_professional_experience_yes_activity' | translate }}</label>
+                  <md-input-container fxFlex="30">
+                    <input mdInput [(ngModel)]="survey.experience_marketingExperienceYes_practicingActivity" type="text" name="experience_marketingExperienceYes_practicingActivity"
+                      ngModel (change)="survey.experience_marketingExperienceYes_practicingActivity=survey.experience_marketingExperienceYes_practicingActivity.trim()">
+                  </md-input-container>
+                </div>
+              </ng-template>
+
+
+            </md-card-content>
+          </md-card> -->
+            <md-card class="primary-background dark-header border-yellow" id="cardOneTitle">
+              <md-card-content>
+
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                  <label style="font-size: 20px;" [innerHTML]="'EMPLOYABILITY_SURVEY.FORM.SITUATION_BLOCK.TITLE' | translate"></label>
+                </div>
+
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                  <label fxFlex="25" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.SITUATION_BLOCK.Q_JOB_SITUATION' | translate }}*</label>
+                  <md-select fxFlex="30" [(ngModel)]="survey.currentSituation_currentJob" name="currentSituation_currentJob" ngModel required
+                    (change)="selectJobStatus($event.value)">
+                    <md-option *ngIf="survey?.rncpId?.employabilitySurvey?.isRMO" value="INITIAL_TRAINING">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_SITUATIONS.' + jobSituation[0].key | translate}}</md-option>
+                    <md-option *ngIf="survey?.rncpId?.employabilitySurvey?.isRMO" value="LEARNING">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_SITUATIONS.' + jobSituation[1].key | translate}}</md-option>
+                    <md-option *ngIf="survey?.rncpId?.employabilitySurvey?.isRMO" value="PRO_CONTRACT">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_SITUATIONS.' + jobSituation[2].key | translate}}</md-option>
+                    <md-option value="JOB_SEARCH">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_SITUATIONS.' + jobSituation[3].key | translate}}</md-option>
+                    <md-option value="INTERIM">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_SITUATIONS.' + jobSituation[4].key | translate}}</md-option>
+                    <md-option value="CSD">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_SITUATIONS.' + jobSituation[5].key | translate}}</md-option>
+                    <md-option value="CDI">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_SITUATIONS.' + jobSituation[6].key | translate}}</md-option>
+                    <md-option value="AUTO_ENTREPRENEUR">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_SITUATIONS.' + jobSituation[7].key | translate}}</md-option>
+                    <md-option value="BUSINESS_CREATION">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_SITUATIONS.' + jobSituation[8].key | translate}}</md-option>
+                    <md-option value="CIVIC_SERVICE">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_SITUATIONS.' + jobSituation[9].key | translate}}</md-option>
+                    <md-option value="OTHER">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_SITUATIONS.' + jobSituation[10].key | translate}}</md-option>
+                  </md-select>
+                  <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['currentSituation_currentJob']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.SITUATION_BLOCK.Q_JOB_SITUATION' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+                  <div fxFlex="5"></div>
+
+                  <!-- If Selected Option from Dropdown is "OTHER" -->
+                  <ng-template [ngIf]="survey.currentSituation_currentJob === 'OTHER'">
+                    <md-input-container fxFlex="25">
+                      <input mdInput [(ngModel)]="survey.currentSituation_comments" type="text" name="currentSituation_comments" [placeholder]="'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.JOB_SITUATIONS.OTHER' | translate"
+                        ngModel (change)="survey.currentSituation_comments=survey.currentSituation_comments.trim()">
+                    </md-input-container>
+                  </ng-template>
+                </div>
+
+              </md-card-content>
+            </md-card>
+          <!-- // Only For DMOE Titles -->
+          <ng-template [ngIf]="showProfActivityAndContractBlock">
+            <md-card class="primary-background dark-header border-yellow" id="cardOneTitle">
+              <md-card-content>
+
+                <ng-template [ngIf]="survey?.rncpId?.employabilitySurvey?.isDMOE">
+
+                  <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                    <label style="font-size: 20px;" [innerHTML]="'DMOE.TITLE' | translate"></label>
+                  </div>
+
+                  <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                    <label style="align-self: center">{{'EMPLOYABILITY_SURVEY.FORM.PROFESSIONAL_ACTIVITY_BLOCK.TITLE_HELD' | translate}}</label>
+                    <md-input-container fxFlex="30">
+                      <input mdInput type="text" [(ngModel)]="survey.titleOfPositionHeld" name="titleOfPositionHeld" [required]="showProfActivityAndContractBlock">
+                    </md-input-container>
+                    <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['titleOfPositionHeld']?.errors?.required" class="mat-text-warn"> {{'EMPLOYABILITY_SURVEY.FORM.PROFESSIONAL_ACTIVITY_BLOCK.TITLE_HELD' | translate}}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+                  </div>
+
+                  <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                    <label style="font-size: 20px;" [innerHTML]="'DMOE.DIRECTIONS_TITLE' | translate"></label>
+                  </div>
+
+                  <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                    <label style="font-size: 20px;">{{'DMOE.DIRECTIONS' | translate}} {{' '}} {{'DMOE.WARNING' | translate}}</label>
+                  </div>
+
+                  <div *ngFor="let qB of questionBlock; index as q">
+                    <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                      <ng-template [ngIf]="survey?.rncpId?.employabilitySurvey?.isDMOE">
+
+                        <label fxFlex="75" style="align-self: center">{{ 'DMOE.Q' + (q+1) | translate }}*</label>
+                        <md-radio-group [name]="'DMOE_Q' + (q+1)" [(ngModel)]="survey['DMOE_Q' + (q+1)]" ngModel [required]="survey?.rncpId?.employabilitySurvey?.isDMOE">
+                          <md-radio-button value="YES">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.BOOLEAN.YES' | translate}}</md-radio-button>
+                          <md-radio-button value="NO">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.BOOLEAN.NO' | translate}}</md-radio-button>
+                        </md-radio-group>
+
+                      </ng-template>
+                    </div>
+                  </div>
+
+                </ng-template>
+
+                <ng-template [ngIf]="survey?.rncpId?.employabilitySurvey?.isRMO">
+
+                  <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                    <label style="font-size: 20px;" [innerHTML]="'RMO.TITLE' | translate"></label>
+                  </div>
+
+                  <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                    <label fxFlex="60" style="align-self: center">{{'EMPLOYABILITY_SURVEY.FORM.PROFESSIONAL_ACTIVITY_BLOCK.TITLE_HELD' | translate}}*</label>
+                    <md-input-container fxFlex="30">
+                      <input mdInput type="text" [(ngModel)]="survey.titleOfPositionHeld" name="titleOfPositionHeld" [required]="showProfActivityAndContractBlock">
+                    </md-input-container>
+                    <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['titleOfPositionHeld']?.errors?.required" class="mat-text-warn">{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+                  </div>
+
+
+                  <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                    <label style="font-size: 20px;" [innerHTML]="'RMO.DIRECTIONS_TITLE' | translate"></label>
+                  </div>
+
+                  <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                    <label style="font-size: 20px;">{{'RMO.DIRECTIONS' | translate }} {{' '}} {{'RMO.WARNING' | translate}}</label>
+                  </div>
+
+                  <div *ngFor="let qB of questionBlock; index as q">
+                    <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+
+                      <label fxFlex="75" style="align-self: center">{{ 'RMO.Q' + (q+1) | translate }}*</label>
+                      <md-radio-group [name]="'RMO_Q' + (q+1)" [(ngModel)]="survey['RMO_Q' + (q+1)]" ngModel [required]="survey?.rncpId?.employabilitySurvey?.isRMO">
+                        <md-radio-button value="YES">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.BOOLEAN.YES' | translate}}</md-radio-button>
+                        <md-radio-button value="NO">{{ 'EMPLOYABILITY_SURVEY.FORM.FORM_OPTIONS.BOOLEAN.NO' | translate}}</md-radio-button>
+                      </md-radio-group>
+                      <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['RMO_Q' + (q+1)]?.errors?.required" class="mat-text-warn">{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+
+                    </div>
+                  </div>
+
+                </ng-template>
+
+              </md-card-content>
+            </md-card>
+          </ng-template>
+
+          <ng-template [ngIf]="showProfActivityAndContractBlock">
+            <md-card class="primary-background dark-header border-yellow" id="cardOneTitle">
+              <md-card-content>
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                  <label style="font-size: 20px;" [innerHTML]="'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.TITLE' | translate"></label>
+                </div>
+
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                  <label fxFlex="25" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.START_DATE' | translate }}*</label>
+                  <md-input-container fxFlex="30">
+                    <input mdInput type="text" [(ngModel)]="survey.contract_startDate" name="contract_startDate" [mdDatepicker]="conStartDate"
+                      [required]="showProfActivityAndContractBlock" [placeholder]="'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.START_DATE' | translate">
+                    <button mdSuffix [mdDatepickerToggle]="conStartDate" class="white-datepicker-button"></button>
+                  </md-input-container>
+                  <md-datepicker #conStartDate [touchUi]="true"></md-datepicker>
+                  <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['contract_startDate']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.START_DATE' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+                </div>
+
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                  <label fxFlex="25" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.END_DATE' | translate }}</label>
+                  <!-- <span *ngIf="survey?.currentSituation_currentJob === 'INTERIM' || survey?.currentSituation_currentJob === 'CSD'">*</span> -->
+                  <md-input-container fxFlex="30">
+                    <input mdInput type="text" [(ngModel)]="survey.contract_endDate" name="contract_endDate" [mdDatepicker]="conEndDate"
+                      [placeholder]="'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.END_DATE' | translate">
+                    <button mdSuffix [mdDatepickerToggle]="conEndDate" class="white-datepicker-button"></button>
+                  </md-input-container>
+                  <md-datepicker #conEndDate [touchUi]="true"></md-datepicker>
+                  <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['contract_endDate']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.END_DATE' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+                </div>
+
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                  <label fxFlex="25" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.STATUS' | translate }}*</label>
+                  <md-radio-group [(ngModel)]="survey.contract_status" name="contract_status" [required]="showProfActivityAndContractBlock">
+                    <md-radio-button value="executives">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.JOB_STATUS.EXECUTIVES' | translate}}</md-radio-button>
+                    <md-radio-button value="non_executives">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.JOB_STATUS.NON_EXECUTIVES' | translate}}</md-radio-button>
+                  </md-radio-group>
+                  <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['contract_status']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.STATUS' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+                </div>
+
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                  <label fxFlex="25" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.GROSS_SALARY' | translate }}</label>
+                  <md-input-container fxFlex="30">
+                    <input mdInput type="number" [(ngModel)]="survey.contract_grossSalary" name="contract_grossSalary" min='0'>
+                  </md-input-container>
+                  <label style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.CURRENCY_POSTFIX' | translate }}</label>
+                </div>
+
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                  <label fxFlex="25" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.COMISSION' | translate }}</label>
+                  <md-input-container fxFlex="30">
+                    <input mdInput type="number" [(ngModel)]="survey.contract_comissionAnually" name="contract_comissionAnually" min='0'>
+                  </md-input-container>
+                  <label fxFlex="6.5" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.COMISSION_ANNUAL' | translate }}</label>
+                  <md-input-container fxFlex="5">
+                    <input mdInput type="number" [(ngModel)]="survey.contract_comissionInEuros" name="contract_comissionInEuros" min='0'>
+                  </md-input-container>
+                  <label style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.CURRENCY_POSTFIX' | translate }}</label>
+                </div>
+
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                  <label fxFlex="25" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.COMPANY_NAME' | translate }}*</label>
+                  <md-input-container fxFlex="30">
+                    <input mdInput type="text" [(ngModel)]="survey.contract_companyName" name="contract_companyName" [required]="showProfActivityAndContractBlock">
+                  </md-input-container>
+                  <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['contract_companyName']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.COMPANY_NAME' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+                </div>
+
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                  <label fxFlex="25" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.BUSINESS_SECTOR' | translate }}*</label>
+                  <md-input-container fxFlex="30">
+                    <input mdInput type="text" [(ngModel)]="survey.contract_companyBusinessSector" name="contract_companyBusinessSector" [required]="showProfActivityAndContractBlock">
+                  </md-input-container>
+                  <small fxFlex style="align-self: center" *ngIf="isOnceSaved && f.form.controls['contract_companyBusinessSector']?.errors?.required" class="mat-text-warn"> {{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.BUSINESS_SECTOR' | translate }}{{' '}}{{'EMPLOYABILITY_SURVEY.FORM.REQUIRED_FIELD' | translate}}</small>
+                </div>
+
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="5px" fxLayoutGap.xs="0">
+                  <label fxFlex="25" style="align-self: center">{{ 'EMPLOYABILITY_SURVEY.FORM.CONTRACT_BLOCK.COMPANY_WEBSITE' | translate }}</label>
+                  <md-input-container fxFlex="30">
+                    <input mdInput type="text" [(ngModel)]="survey.contract_companyWebsite" name="contract_companyWebsite">
+                  </md-input-container>
+                </div>
+
+              </md-card-content>
+            </md-card>
+          </ng-template>
+  <!-- uncomment for acadir validation -->
+
+        <!-- red-card -->
+            <md-card class="primary-background dark-header border-red" *ngFor="let reason of survey?.rejectionDetails; let i = index">
+
+              <md-card-content>
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                  <label style="font-size: 20px;" [innerHTML]=""></label>
+                </div>
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                  <span>{{'EMPLOYABILITY_SURVEY.FORM.FAILURE_TITLE.PART1' | translate}}
+                     </span>
+
+                </div>
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                  <span *ngIf="i == 1">
+                    {{'EMPLOYABILITY_SURVEY.FORM.FAILURE_TITLE.SECOND_TIME' | translate}}
+                  </span>
+                  <span *ngIf="i == 2">
+                    {{'EMPLOYABILITY_SURVEY.FORM.FAILURE_TITLE.THIRD_TIME' | translate}}
+                  </span>
+                   &nbsp;{{'EMPLOYABILITY_SURVEY.FORM.FAILURE_TITLE.AT' | translate}} &nbsp;{{reason.date | date:'dd/MM/yyyy'}},
+                       {{'EMPLOYABILITY_SURVEY.FORM.FAILURE_TITLE.PART2' | translate}}
+                </div>
+
+                <div fxLayout fxLayout.xs="column" fxLayoutAlign="start" fxLayoutGap="20px" fxLayoutGap.xs="0">
+                </div>
+                <span>{{reason.reason}}</span>
+              </md-card-content>
+            </md-card>
+
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="end" fxLayoutGap="5px" fxLayoutGap.xs="0" style="padding-right: 6px;"
+        *ngIf="!isPreviousCourse && !isAcadDir && !(survey?.surveyStatus === 'validatedByAcadDir' || survey?.surveyStatus === 'completedByStudent')">
+          <button md-raised-button color="accent"  (click)="onSubmit(f, 'save')"
+            md-button style="margin-right: 5px;">{{ 'TEST.SAVE' | translate }}</button>
+          <button md-raised-button color="accent" [disabled]="f.invalid" (click)="submitSwal(f, 'submit')"
+            md-button>{{ 'EMPLOYABILITY_SURVEY.SUBMIT' | translate }}</button>
+        </div>
+  <!-- uncomment for acadir validation -->
+
+        <!-- reject validate buttons -->
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="end" fxLayoutGap="5px" fxLayoutGap.xs="0" style="padding-right: 6px;"
+        *ngIf="!isPreviousCourse &&  (isAcadAdmin || isAcadDir) && survey?.surveyStatus === 'completedByStudent'" >
+          <button md-raised-button color="red" type="button" (click)="rejectSurvey()" md-button [disabled]="rejectDisabled" >{{'EMPLOYABILITY_SURVEY.REJECT' | translate }}</button>
+
+        <button md-raised-button color="accent" type="button" md-button style="margin-right: 5px;" (click)="validateSurvey()">{{'EMPLOYABILITY_SURVEY.VALIDATE' | translate }}</button>
+        </div>
+
+      </form>
+    </md-card-content>
+  </div>
+</div>
